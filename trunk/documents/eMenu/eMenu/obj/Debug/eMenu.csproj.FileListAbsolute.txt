@@ -1,0 +1,5 @@
+H:\Giao Trinh\DH KHTN\LuanVan\localserver\eMenu\eMenu\bin\eMenu.dll
+H:\Giao Trinh\DH KHTN\LuanVan\localserver\eMenu\eMenu\bin\eMenu.pdb
+H:\Giao Trinh\DH KHTN\LuanVan\localserver\eMenu\eMenu\obj\Debug\ResolveAssemblyReference.cache
+H:\Giao Trinh\DH KHTN\LuanVan\localserver\eMenu\eMenu\obj\Debug\eMenu.dll
+H:\Giao Trinh\DH KHTN\LuanVan\localserver\eMenu\eMenu\obj\Debug\eMenu.pdb
