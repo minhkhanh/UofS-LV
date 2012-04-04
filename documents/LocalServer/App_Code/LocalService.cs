@@ -17,4 +17,10 @@ public class LocalService : ILocalService
     {
         return "Hello eMenu";
     }
+
+
+    public List<BanResult> LayDanhSachBan()
+    {
+        return new List<BanResult>();
+    }
 }
