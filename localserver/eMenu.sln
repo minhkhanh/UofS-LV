@@ -4,15 +4,16 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "LocalServer", "LocalServer\", "{0041EBE8-70B8-4FC8-AA3D-9D1BFF25A7FF}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{FC5C9D07-62DA-415B-978B-720A17E266B5}|LocalServerDTO.dll;{F5D08408-1042-4157-89F7-7AF68CE11AF2}|LocalServerBUS.dll;{22F60DA8-6695-4145-B671-831F7FD20FC2}|LocalServerDAO.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/LocalServer"
-		Debug.AspNetCompiler.PhysicalPath = "..\LocalServer\"
+		Debug.AspNetCompiler.PhysicalPath = "LocalServer\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\LocalServer\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/LocalServer"
-		Release.AspNetCompiler.PhysicalPath = "..\LocalServer\"
+		Release.AspNetCompiler.PhysicalPath = "LocalServer\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\LocalServer\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
@@ -22,13 +23,34 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "LocalServer", "LocalServer\
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalServerDTO", "LocalServerDTO\LocalServerDTO.csproj", "{FC5C9D07-62DA-415B-978B-720A17E266B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalServerDAO", "LocalServerDAO\LocalServerDAO.csproj", "{22F60DA8-6695-4145-B671-831F7FD20FC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalServerBUS", "LocalServerBUS\LocalServerBUS.csproj", "{F5D08408-1042-4157-89F7-7AF68CE11AF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{0041EBE8-70B8-4FC8-AA3D-9D1BFF25A7FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0041EBE8-70B8-4FC8-AA3D-9D1BFF25A7FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0041EBE8-70B8-4FC8-AA3D-9D1BFF25A7FF}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{0041EBE8-70B8-4FC8-AA3D-9D1BFF25A7FF}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{FC5C9D07-62DA-415B-978B-720A17E266B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC5C9D07-62DA-415B-978B-720A17E266B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC5C9D07-62DA-415B-978B-720A17E266B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC5C9D07-62DA-415B-978B-720A17E266B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22F60DA8-6695-4145-B671-831F7FD20FC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22F60DA8-6695-4145-B671-831F7FD20FC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22F60DA8-6695-4145-B671-831F7FD20FC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22F60DA8-6695-4145-B671-831F7FD20FC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5D08408-1042-4157-89F7-7AF68CE11AF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5D08408-1042-4157-89F7-7AF68CE11AF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5D08408-1042-4157-89F7-7AF68CE11AF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5D08408-1042-4157-89F7-7AF68CE11AF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
