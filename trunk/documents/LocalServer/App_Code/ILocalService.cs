@@ -15,4 +15,8 @@ public interface ILocalService
     [WebInvoke(Method = "GET", UriTemplate = "test")]
     [OperationContract]
     string Test();
+
+    [WebInvoke(Method = "GET", UriTemplate = "layDanhSachBan")]
+    [OperationContract]
+    List<BanResult> LayDanhSachBan();
 }
