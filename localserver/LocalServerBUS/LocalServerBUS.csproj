@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BanBUS.cs" />
+    <Compile Include="FooBUS.cs" />
+    <Compile Include="MonAnBUS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThucDonDienTuBUS.cs" />
   </ItemGroup>

@@ -14,6 +14,7 @@ public interface ILocalService
     [WebInvoke(Method = "GET", UriTemplate = "cong?a={a}&b={b}")]
     [OperationContract]
     int PhepCong(int a, int b);
+
     [WebInvoke(Method = "GET", UriTemplate = "test")]
     [OperationContract]
     string Test();
@@ -21,4 +22,12 @@ public interface ILocalService
     [WebInvoke(Method = "GET", UriTemplate = "layDanhSachBan")]
     [OperationContract]
     List<Ban> LayDanhSachBan();
+
+    [WebInvoke(Method = "GET", UriTemplate = "layDanhSachMonAn")]
+    [OperationContract]
+    List<MonAn> LayDanhSachMonAn();
+
+    [WebInvoke(Method = "GET", UriTemplate = "layDanhSachFoo")]
+    [OperationContract]
+    List<Foo> LayDanhSachFoo();
 }

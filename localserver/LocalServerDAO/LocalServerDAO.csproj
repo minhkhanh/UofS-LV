@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BanDAO.cs" />
+    <Compile Include="FooDAO.cs" />
+    <Compile Include="MonAnDAO.cs" />
     <Compile Include="ThucDonDienTu.cs" />
     <Compile Include="ThucDonDienTuDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
