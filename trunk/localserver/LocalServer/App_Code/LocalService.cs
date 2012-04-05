@@ -43,4 +43,32 @@ public class LocalService : ILocalService
         }
         return listBan;
     }
+
+    public List<MonAn> LayDanhSachMonAn()
+    {
+        var listMonAn = new List<MonAn>();
+        try
+        {
+            listMonAn = MonAnBUS.LayDanhSachMonAn();
+        }
+        catch (Exception e)
+        {
+            Console.Error.WriteLine(e.Message);
+        }
+        return listMonAn;
+    }
+
+    public List<Foo> LayDanhSachFoo()
+    {
+        var listMonAn = new List<Foo>();
+        try
+        {
+            listMonAn = FooBUS.LayDanhSachFoo();
+        }
+        catch (Exception e)
+        {
+            Console.Error.WriteLine(e.Message);
+        }
+        return listMonAn;
+    }
 }

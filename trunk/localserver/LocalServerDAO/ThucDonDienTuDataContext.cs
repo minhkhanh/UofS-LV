@@ -18,5 +18,6 @@ namespace LocalServerDAO
         }
 
         public Table<Ban> Bans;
+        public Table<MonAn> MonAns;
     }
 }

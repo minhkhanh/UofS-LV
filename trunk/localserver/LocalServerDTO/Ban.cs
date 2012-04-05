@@ -37,7 +37,8 @@ namespace LocalServerDTO
         public bool TinhTrang { get; set; }
 
         [DataMember(Name = "MaBanChinh")]
-        [Column(Name = "MaBanChinh")] public int? _maBanChinh;
+        [Column(Name = "MaBanChinh")] 
+        public int? _maBanChinh;
 
         private EntityRef<Ban> _banChinh = new EntityRef<Ban>();
         [Association(Name = "Ban_Ban_FK1", IsForeignKey = true, Storage = "_banChinh", ThisKey = "_maBanChinh")]
