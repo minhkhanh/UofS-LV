@@ -1,7 +1,7 @@
-USE MASTER
+USE master
 GO
 IF EXISTS(SELECT * FROM SYS.DATABASES WHERE NAME='ThucDonDienTu')
-DROP DATABASE ThucDonDienTu
+	DROP DATABASE ThucDonDienTu
 GO
 CREATE DATABASE ThucDonDienTu
 GO
@@ -12,8 +12,8 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ChiTi
     DROP TABLE [dbo].[ChiTietDanhMucDaNgonNgu]
 GO
 CREATE TABLE [dbo].[ChiTietDanhMucDaNgonNgu] (
-[MaDanhMuc] smallint  NOT NULL  
-, [MaNgonNgu] smallint  NOT NULL  
+[MaDanhMuc] int  NOT NULL  
+, [MaNgonNgu] int  NOT NULL  
 , [TenDanhMuc] nvarchar(50)  NULL  
 , [MoTaDanhMuc] nvarchar(500)  NULL  
 )
@@ -30,8 +30,8 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ChiTi
     DROP TABLE [dbo].[ChiTietDonViTinhDaNgonNgu]
 GO
 CREATE TABLE [dbo].[ChiTietDonViTinhDaNgonNgu] (
-[MaDonViTinh] smallint  NOT NULL  
-, [MaNgonNgu] smallint  NOT NULL  
+[MaDonViTinh] int  NOT NULL  
+, [MaNgonNgu] int  NOT NULL  
 , [TenDonViTinh] nvarchar(50)  NULL  
 )
 GO
@@ -47,14 +47,14 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[MonAn
     DROP TABLE [dbo].[MonAn]
 GO
 CREATE TABLE [dbo].[MonAn] (
-[MaMonAn] smallint identity  NOT NULL  
+[MaMonAn] int identity  NOT NULL  
 , [HinhAnh] nvarchar(50)  NULL  
 , [DiemDanhGia] real  NULL  
-, [SoLuotDanhGia] smallint  NULL  
-, [MaDonViTinhMacDinh] smallint  NULL  
-, [MaDanhMuc] smallint  NULL  
+, [SoLuotDanhGia] int  NULL  
+, [MaDonViTinhMacDinh] int  NULL  
+, [MaDanhMuc] int  NULL  
 , [NgungBan] bit  NULL  
-, [MaDonViTinh] smallint  NULL  
+, [MaDonViTinh] int  NULL  
 )
 GO
 
@@ -68,12 +68,12 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ChiTi
     DROP TABLE [dbo].[ChiTietOrder]
 GO
 CREATE TABLE [dbo].[ChiTietOrder] (
-[MaChiTietOrder] smallint identity  NOT NULL  
-, [MaOrder] smallint  NULL  
-, [SoLuong] smallint  NULL  
-, [MaMonAn] smallint  NULL  
+[MaChiTietOrder] int identity  NOT NULL  
+, [MaOrder] int  NULL  
+, [SoLuong] int  NULL  
+, [MaMonAn] int  NULL  
 , [GhiChu] nvarchar(50)  NULL  
-, [MaBoPhanCheBien] smallint  NULL  
+, [MaBoPhanCheBien] int  NULL  
 )
 GO
 
@@ -87,7 +87,7 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TiGia
     DROP TABLE [dbo].[TiGia]
 GO
 CREATE TABLE [dbo].[TiGia] (
-[MaTiGia] smallint identity  NOT NULL  
+[MaTiGia] int identity  NOT NULL  
 , [KiHieu] nvarchar(50)  NULL  
 , [GiaTri] real  NULL  
 , [ThoiDiemCapNhat] smalldatetime  NULL  
@@ -104,8 +104,8 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[DanhM
     DROP TABLE [dbo].[DanhMuc]
 GO
 CREATE TABLE [dbo].[DanhMuc] (
-[MaDanhMuc] smallint identity  NOT NULL  
-, [MaDanhMucCha] smallint  NULL  
+[MaDanhMuc] int identity  NOT NULL  
+, [MaDanhMucCha] int  NULL  
 )
 GO
 
@@ -119,14 +119,14 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ChiTi
     DROP TABLE [dbo].[ChiTietHoaDon]
 GO
 CREATE TABLE [dbo].[ChiTietHoaDon] (
-[MaChiTietHoaDon] smallint identity  NOT NULL  
-, [MaHoaDon] smallint  NULL  
-, [SoLuong] smallint  NULL  
+[MaChiTietHoaDon] int identity  NOT NULL  
+, [MaHoaDon] int  NULL  
+, [SoLuong] int  NULL  
 , [DonGiaLuuTru] real  NULL  
-, [MaMonAn] smallint  NULL  
+, [MaMonAn] int  NULL  
 , [ThanhTien] real  NULL  
 , [GiaTriKhuyenMaiLuuTru] real  NULL  
-, [MaKhuyenMai] smallint  NULL  
+, [MaKhuyenMai] int  NULL  
 )
 GO
 
@@ -140,9 +140,9 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ChiTi
     DROP TABLE [dbo].[ChiTietHuyOrder]
 GO
 CREATE TABLE [dbo].[ChiTietHuyOrder] (
-[MaChiTietOrder] smallint identity  NOT NULL  
-, [SoLuongYeuCau] smallint  NULL  
-, [SoLuongChoPhep] smallint  NULL  
+[MaChiTietOrder] int identity  NOT NULL  
+, [SoLuongYeuCau] int  NULL  
+, [SoLuongChoPhep] int  NULL  
 , [TinhTrangHuy] bit  NULL  
 )
 GO
@@ -157,8 +157,8 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ChiTi
     DROP TABLE [dbo].[ChiTietMonLienQuan]
 GO
 CREATE TABLE [dbo].[ChiTietMonLienQuan] (
-[MaMonAn] smallint  NOT NULL  
-, [MaMonAnLienQuan] smallint  NOT NULL  
+[MaMonAn] int  NOT NULL  
+, [MaMonAnLienQuan] int  NOT NULL  
 )
 GO
 
@@ -173,7 +173,7 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Khuye
     DROP TABLE [dbo].[KhuyenMai]
 GO
 CREATE TABLE [dbo].[KhuyenMai] (
-[MaKhuyenMai] smallint identity  NOT NULL  
+[MaKhuyenMai] int identity  NOT NULL  
 , [TenKhuyenMai] nvarchar(50)  NULL  
 , [MoTaKhuyenMai] nvarchar(500)  NULL  
 , [GiaGiam] real  NULL  
@@ -194,7 +194,7 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PhuTh
     DROP TABLE [dbo].[PhuThu]
 GO
 CREATE TABLE [dbo].[PhuThu] (
-[MaPhuThu] smallint identity  NOT NULL  
+[MaPhuThu] int identity  NOT NULL  
 , [TenPhuThu] nvarchar(50)  NULL  
 , [MoTaPhuThu] nvarchar(500)  NULL  
 , [GiaTang] real  NULL  
@@ -215,7 +215,7 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[DonVi
     DROP TABLE [dbo].[DonViTinh]
 GO
 CREATE TABLE [dbo].[DonViTinh] (
-[MaDonViTinh] smallint identity  NOT NULL  
+[MaDonViTinh] int identity  NOT NULL  
 )
 GO
 
@@ -229,8 +229,8 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ChiTi
     DROP TABLE [dbo].[ChiTietMonAnDonViTinh]
 GO
 CREATE TABLE [dbo].[ChiTietMonAnDonViTinh] (
-[MaMonAn] smallint  NOT NULL  
-, [MaDonViTinh] smallint  NOT NULL  
+[MaMonAn] int  NOT NULL  
+, [MaDonViTinh] int  NOT NULL  
 , [DonGia] real  NULL  
 )
 GO
@@ -246,7 +246,7 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Khuye
     DROP TABLE [dbo].[KhuyenMaiHoaDon]
 GO
 CREATE TABLE [dbo].[KhuyenMaiHoaDon] (
-[MaKhuyenMai] smallint  NOT NULL  
+[MaKhuyenMai] int  NOT NULL  
 , [MucGiaApDung] real  NULL  
 )
 GO
@@ -261,8 +261,8 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ChiTi
     DROP TABLE [dbo].[ChiTietDanhMucBoPhanCheBien]
 GO
 CREATE TABLE [dbo].[ChiTietDanhMucBoPhanCheBien] (
-[MaDanhMuc] smallint  NOT NULL  
-, [MaBoPhanCheBien] smallint  NOT NULL  
+[MaDanhMuc] int  NOT NULL  
+, [MaBoPhanCheBien] int  NOT NULL  
 )
 GO
 
@@ -277,7 +277,7 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[KhuVu
     DROP TABLE [dbo].[KhuVuc]
 GO
 CREATE TABLE [dbo].[KhuVuc] (
-[MaKhuVuc] smallint identity  NOT NULL  
+[MaKhuVuc] int identity  NOT NULL  
 , [TenKhuVuc] nvarchar(50)  NULL  
 , [MoTa] nvarchar(500)  NULL  
 )
@@ -293,8 +293,8 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Khuye
     DROP TABLE [dbo].[KhuyenMaiDanhMuc]
 GO
 CREATE TABLE [dbo].[KhuyenMaiDanhMuc] (
-[MaKhuyenMai] smallint  NOT NULL  
-, [MaDanhMuc] smallint  NULL  
+[MaKhuyenMai] int  NOT NULL  
+, [MaDanhMuc] int  NULL  
 )
 GO
 
@@ -308,13 +308,13 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TaiKh
     DROP TABLE [dbo].[TaiKhoan]
 GO
 CREATE TABLE [dbo].[TaiKhoan] (
-[MaTaiKhoan] smallint identity  NOT NULL  
+[MaTaiKhoan] int identity  NOT NULL  
 , [TenTaiKhoan] nvarchar(50)  NULL  
 , [MatKhau] nvarchar(50)  NULL  
 , [ThongTinDinhDanh] nvarchar(500)  NULL  
 , [Avatar] nvarchar(50)  NULL  
 , [Active] bit  NULL  
-, [MaNhomTaiKhoan] smallint  NULL  
+, [MaNhomTaiKhoan] int  NULL  
 )
 GO
 
@@ -328,8 +328,8 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Khuye
     DROP TABLE [dbo].[KhuyenMaiKhuVuc]
 GO
 CREATE TABLE [dbo].[KhuyenMaiKhuVuc] (
-[MaKhuyenMai] smallint  NOT NULL  
-, [MaKhuVuc] smallint  NULL  
+[MaKhuyenMai] int  NOT NULL  
+, [MaKhuVuc] int  NULL  
 )
 GO
 
@@ -343,13 +343,13 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Ban]'
     DROP TABLE [dbo].[Ban]
 GO
 CREATE TABLE [dbo].[Ban] (
-[MaBan] smallint identity  NOT NULL  
-, [MaKhuVuc] smallint  NULL  
+[MaBan] int identity  NOT NULL  
+, [MaKhuVuc] int  NULL  
 , [TenBan] nvarchar(50)  NULL  
 , [GhiChu] nvarchar(500)  NULL  
 , [Active] bit  NULL  
 , [TinhTrang] bit  NULL  
-, [MaBanChinh] smallint  NULL  
+, [MaBanChinh] int  NULL  
 )
 GO
 
@@ -363,7 +363,7 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[NgonN
     DROP TABLE [dbo].[NgonNgu]
 GO
 CREATE TABLE [dbo].[NgonNgu] (
-[MaNgonNgu] smallint identity  NOT NULL  
+[MaNgonNgu] int identity  NOT NULL  
 , [TenNgonNgu] nvarchar(50)  NULL  
 )
 GO
@@ -378,8 +378,8 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Khuye
     DROP TABLE [dbo].[KhuyenMaiMon]
 GO
 CREATE TABLE [dbo].[KhuyenMaiMon] (
-[MaKhuyenMai] smallint  NOT NULL  
-, [MaMonAn] smallint  NULL  
+[MaKhuyenMai] int  NOT NULL  
+, [MaMonAn] int  NULL  
 )
 GO
 
@@ -393,7 +393,7 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[NhomT
     DROP TABLE [dbo].[NhomTaiKhoan]
 GO
 CREATE TABLE [dbo].[NhomTaiKhoan] (
-[MaNhomTaiKhoan] smallint identity  NOT NULL  
+[MaNhomTaiKhoan] int identity  NOT NULL  
 , [TenNhom] nvarchar(50)  NULL  
 , [MoTaNhom] nvarchar(50)  NULL  
 )
@@ -409,8 +409,8 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ChiTi
     DROP TABLE [dbo].[ChiTietMonAnDaNgonNgu]
 GO
 CREATE TABLE [dbo].[ChiTietMonAnDaNgonNgu] (
-[MaMonAn] smallint  NOT NULL  
-, [MaNgonNgu] smallint  NOT NULL  
+[MaMonAn] int  NOT NULL  
+, [MaNgonNgu] int  NOT NULL  
 , [TenMonAn] nvarchar(50)  NULL  
 , [MoTaMonAn] nvarchar(500)  NULL  
 )
@@ -427,13 +427,13 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[HoaDo
     DROP TABLE [dbo].[HoaDon]
 GO
 CREATE TABLE [dbo].[HoaDon] (
-[MaHoaDon] smallint identity  NOT NULL  
+[MaHoaDon] int identity  NOT NULL  
 , [ThoiDiemLap] smalldatetime  NULL  
-, [MaTaiKhoan] smallint  NULL  
+, [MaTaiKhoan] int  NULL  
 , [TongTien] real  NULL  
-, [MaBanChinh] smallint  NULL  
+, [MaBanChinh] int  NULL  
 , [MoTaBanGhep] nvarchar(500)  NULL  
-, [MaPhuThu] smallint  NULL  
+, [MaPhuThu] int  NULL  
 )
 GO
 
@@ -447,9 +447,9 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Order
     DROP TABLE [dbo].[Order]
 GO
 CREATE TABLE [dbo].[Order] (
-[MaOrder] smallint identity  NOT NULL  
-, [MaTaiKhoan] smallint  NULL  
-, [MaBan] smallint  NULL  
+[MaOrder] int identity  NOT NULL  
+, [MaTaiKhoan] int  NULL  
+, [MaBan] int  NULL  
 )
 GO
 
@@ -463,8 +463,8 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PhuTh
     DROP TABLE [dbo].[PhuThuKhuVuc]
 GO
 CREATE TABLE [dbo].[PhuThuKhuVuc] (
-[MaPhuThu] smallint identity  NOT NULL  
-, [MaKhuVuc] smallint  NULL  
+[MaPhuThu] int identity  NOT NULL  
+, [MaKhuVuc] int  NULL  
 )
 GO
 
@@ -478,10 +478,10 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[BoPha
     DROP TABLE [dbo].[BoPhanCheBien]
 GO
 CREATE TABLE [dbo].[BoPhanCheBien] (
-[MaBoPhanCheBien] smallint identity  NOT NULL  
+[MaBoPhanCheBien] int identity  NOT NULL  
 , [TenBoPhan] nvarchar(50)  NULL  
 , [MoTa] nvarchar(500)  NULL  
-, [MaTaiKhoan] smallint  NULL  
+, [MaTaiKhoan] int  NULL  
 )
 GO
 
