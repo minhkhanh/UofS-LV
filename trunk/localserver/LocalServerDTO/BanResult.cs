@@ -10,6 +10,6 @@ namespace LocalServerDTO
     [DataContract]
     public class BanResult
     {
-
+        
     }
 }
