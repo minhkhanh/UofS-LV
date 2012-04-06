@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BanDAO.cs" />
     <Compile Include="FooDAO.cs" />
+    <Compile Include="KhuVucDAO.cs" />
     <Compile Include="MonAnDAO.cs" />
     <Compile Include="ThucDonDienTu.cs" />
     <Compile Include="ThucDonDienTuDataContext.cs" />

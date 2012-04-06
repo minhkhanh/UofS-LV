@@ -19,9 +19,17 @@ public interface ILocalService
     [OperationContract]
     string Test();
 
+    [WebInvoke(Method = "GET", UriTemplate = "layDanhSachKhuVuc")]
+    [OperationContract]
+    List<KhuVuc> LayDanhKhuVuc();
+
     [WebInvoke(Method = "GET", UriTemplate = "layDanhSachBan")]
     [OperationContract]
     List<Ban> LayDanhSachBan();
+
+    [WebInvoke(Method = "GET", UriTemplate = "layDanhSachBanTheoKhuVuc?maKhuVuc={maKhuVuc}")]
+    [OperationContract]
+    List<Ban> LayDanhSachBanTheoKhuVuc(int maKhuVuc);
 
     [WebInvoke(Method = "GET", UriTemplate = "layDanhSachMonAn")]
     [OperationContract]
