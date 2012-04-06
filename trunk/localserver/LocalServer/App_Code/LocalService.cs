@@ -29,6 +29,11 @@ public class LocalService : ILocalService
         return "Hello eMenu";
     }
 
+    public List<KhuVuc> LayDanhKhuVuc()
+    {
+        return KhuVucBUS.LayDanhSachKhuVuc();
+    }
+
 
     public List<Ban> LayDanhSachBan()
     {
@@ -42,6 +47,19 @@ public class LocalService : ILocalService
             Console.Error.WriteLine(e.Message);
         }
         return listBan;
+    }
+
+    public List<Ban> LayDanhSachBanTheoKhuVuc(int maKhuVuc)
+    {
+        try
+        {
+            return BanBUS.LayDanhSachBan(maKhuVuc);
+        }
+        catch (Exception e)
+        {
+            Console.Error.WriteLine(e.Message);
+        }
+        return null;        
     }
 
     public List<MonAn> LayDanhSachMonAn()

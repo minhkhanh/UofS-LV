@@ -16,9 +16,15 @@ namespace LocalServerDTO
         [Column(IsPrimaryKey = true, IsDbGenerated = true, Name = "MaBan")]
         public int MaBan { get; set; }
 
-        [DataMember]
-        [Column( Name = "MaKhuVuc")]
-        public int MaKhuVuc { get; set; }
+        [DataMember(Name = "MaKhuVuc")] [Column(Name = "MaKhuVuc")] private int? _maKhuVuc;
+        private EntityRef<KhuVuc> _khuVuc = new EntityRef<KhuVuc>();
+
+        [Association(Name = "KhuVuc_Ban_FK1", IsForeignKey = true, Storage = "_khuVuc", ThisKey = "_maKhuVuc")]
+        public KhuVuc KhuVuc
+        {
+            get { return _khuVuc.Entity; }
+            set { _khuVuc.Entity = value; }
+        }
 
         [DataMember]
         [Column(Name = "TenBan")]
@@ -38,7 +44,7 @@ namespace LocalServerDTO
 
         [DataMember(Name = "MaBanChinh")]
         [Column(Name = "MaBanChinh")] 
-        public int? _maBanChinh;
+        private int? _maBanChinh;
 
         private EntityRef<Ban> _banChinh = new EntityRef<Ban>();
         [Association(Name = "Ban_Ban_FK1", IsForeignKey = true, Storage = "_banChinh", ThisKey = "_maBanChinh")]
