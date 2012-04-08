@@ -18,5 +18,10 @@ namespace LocalServerBUS
         {
             return BanDAO.LayDanhSachBan(maKhuVuc);
         }
+
+        public static bool TachBan(int maBan)
+        {
+            return BanDAO.TachBan(maBan);
+        }
     }
 }

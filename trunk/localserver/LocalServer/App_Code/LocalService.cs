@@ -62,6 +62,19 @@ public class LocalService : ILocalService
         return null;        
     }
 
+    public bool TachBan(int maBan)
+    {
+        try
+        {
+            return BanBUS.TachBan(maBan);
+        }
+        catch (Exception e)
+        {
+            Console.Error.WriteLine(e.Message);
+        }
+        return false;
+    }
+
     public List<MonAn> LayDanhSachMonAn()
     {
         var listMonAn = new List<MonAn>();

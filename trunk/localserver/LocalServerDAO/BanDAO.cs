@@ -23,5 +23,24 @@ namespace LocalServerDAO
             }
             return null;
         }
+
+        public static bool TachBan(int maBan)
+        {
+            //lấy về đối tượng cần tách
+            var temp = ThucDonDienTu.DataContext.Bans.Where(b => b.MaBan == maBan);
+            if (temp.Count() == 0) return false;
+            Ban banChinh = temp.First();
+
+            //lấy danh sách các bàn trong nhóm
+            var dsBan = ThucDonDienTu.DataContext.Bans.Where(b => b.BanChinh == banChinh);
+            foreach (var ban in dsBan)
+            {
+                ban.BanChinh = null;
+            }
+
+            //cập nhật csdl
+            ThucDonDienTu.DataContext.SubmitChanges();
+            return true;
+        }
     }
 }
