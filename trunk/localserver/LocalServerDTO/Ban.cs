@@ -16,7 +16,9 @@ namespace LocalServerDTO
         [Column(IsPrimaryKey = true, IsDbGenerated = true, Name = "MaBan")]
         public int MaBan { get; set; }
 
-        [DataMember(Name = "MaKhuVuc")] [Column(Name = "MaKhuVuc")] private int? _maKhuVuc;
+        [DataMember(Name = "MaKhuVuc")] 
+        [Column(Name = "MaKhuVuc")] 
+        private int? _maKhuVuc;
         private EntityRef<KhuVuc> _khuVuc = new EntityRef<KhuVuc>();
 
         [Association(Name = "KhuVuc_Ban_FK1", IsForeignKey = true, Storage = "_khuVuc", ThisKey = "_maKhuVuc")]

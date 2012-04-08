@@ -20,5 +20,7 @@ namespace LocalServerDAO
         public Table<Ban> Bans;
         public Table<KhuVuc> KhuVucs;
         public Table<MonAn> MonAns;
+        public Table<DanhMuc> DanhMucs;
+        public Table<DonViTinh> DonViTinhs;
     }
 }

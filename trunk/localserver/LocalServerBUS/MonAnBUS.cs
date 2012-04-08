@@ -13,5 +13,15 @@ namespace LocalServerBUS
         {
             return MonAnDAO.LayDanhSachMonAn();
         }
+
+        public static List<MonAn> LayDanhSachMonAnTheoDanhMuc(int maDanhMuc)
+        {
+            return MonAnDAO.LayDanhSachMonAnTheoDanhMuc(maDanhMuc);
+        }
+
+        public static MonAn LayMonAn(int maMonAn)
+        {
+            return MonAnDAO.LayMonAn(maMonAn);
+        }
     }
 }
