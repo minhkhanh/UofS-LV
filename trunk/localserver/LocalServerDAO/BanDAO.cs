@@ -42,5 +42,32 @@ namespace LocalServerDAO
             ThucDonDienTu.DataContext.SubmitChanges();
             return true;
         }
+
+        public static bool GhepBan(RequestGhepBan request)
+        {
+            //lấy về đối tượng bàn chính
+            var temp = ThucDonDienTu.DataContext.Bans.Where(b => b.MaBan == request.MaBanChinh);
+            if (temp.Count() == 0) return false;
+            Ban banChinh = temp.First();
+            if (banChinh.BanChinh != null) return false;
+
+            //lay cac doi tuong ban phu
+            foreach (var ban in request.MaBanPhuList)
+            {
+                int ban1 = ban;
+                var tmp = ThucDonDienTu.DataContext.Bans.Where(b => b.MaBan == ban1);
+                if (temp.Count() == 0) return false;
+                Ban banTmp = tmp.First();
+                if (banTmp.BanChinh != null && banTmp.BanChinh != banChinh) return false;
+                //chec nhom ban da cap
+                var dsBan = ThucDonDienTu.DataContext.Bans.Where(b => b.BanChinh == banTmp);
+                if (dsBan.Count() != 0) return false;
+                //cap nhat gia tri ban chinh
+                banTmp.BanChinh = banChinh;
+            }
+
+            ThucDonDienTu.DataContext.SubmitChanges();
+            return true;
+        }
     }
 }

@@ -41,6 +41,15 @@ public interface ILocalService
     [OperationContract]
     bool TachBan(int maBan);
 
+    /// <summary>
+    /// Ghép bàn lại với nhau
+    /// </summary>
+    /// <param name="request">Có bàn chính và danh sách các bàn phụ</param>
+    /// <returns>Thành công hai ko</returns>
+    [WebInvoke(Method = "POST", UriTemplate = "ghepBan")]
+    [OperationContract]
+    bool GhepBan(RequestGhepBan request);
+
     [WebInvoke(Method = "GET", UriTemplate = "layDanhSachMonAn")]
     [OperationContract]
     List<MonAn> LayDanhSachMonAn();
