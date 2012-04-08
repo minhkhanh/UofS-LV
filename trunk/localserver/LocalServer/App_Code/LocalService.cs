@@ -49,6 +49,32 @@ public class LocalService : ILocalService
         return listBan;
     }
 
+    public List<Ban> LayDanhSachBanChinh()
+    {
+        try
+        {
+            return BanBUS.LayDanhSachBanChinh();
+        }
+        catch (Exception e)
+        {
+            Console.Error.WriteLine(e.Message);
+        }
+        return null;
+    }
+
+    public List<Ban> LayDanhSachBanThuocBanChinh(int maBanChinh)
+    {
+        try
+        {
+            return BanBUS.LayDanhSachBanThuocBanChinh(maBanChinh);
+        }
+        catch (Exception e)
+        {
+            Console.Error.WriteLine(e.Message);
+        }
+        return null;
+    }
+
     public List<Ban> LayDanhSachBanTheoKhuVuc(int maKhuVuc)
     {
         try
