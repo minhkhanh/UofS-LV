@@ -69,5 +69,18 @@ namespace LocalServerDAO
             ThucDonDienTu.DataContext.SubmitChanges();
             return true;
         }
+
+        public static List<Ban> LayDanhSachBanChinh()
+        {
+            return ThucDonDienTu.DataContext.Bans.Where(b => b.BanChinh == null).ToList();
+        }
+
+        public static List<Ban> LayDanhSachBanThuocBanChinh(int maBanChinh)
+        {
+            var temp = ThucDonDienTu.DataContext.Bans.Where(b => b.MaBan == maBanChinh);
+            if (temp.Count() == 0) return null;
+            Ban banChinh = temp.First();
+            return ThucDonDienTu.DataContext.Bans.Where(b => b.BanChinh == banChinh).ToList();
+        }
     }
 }

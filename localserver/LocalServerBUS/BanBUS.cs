@@ -29,5 +29,15 @@ namespace LocalServerBUS
             if (request.MaBanPhuList.Count() == 0) return false;
             return BanDAO.GhepBan(request);
         }
+
+        public static List<Ban> LayDanhSachBanChinh()
+        {
+            return BanDAO.LayDanhSachBanChinh();
+        }
+
+        public static List<Ban> LayDanhSachBanThuocBanChinh(int maBanChinh)
+        {
+            return BanDAO.LayDanhSachBanThuocBanChinh(maBanChinh);
+        }
     }
 }
