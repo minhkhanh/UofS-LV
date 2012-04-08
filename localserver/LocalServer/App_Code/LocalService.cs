@@ -128,6 +128,35 @@ public class LocalService : ILocalService
         return listMonAn;
     }
 
+    public List<MonAn> LayDanhSachMonAnTheoDanhMuc(int maDanhMuc)
+    {
+        var listMonAn = new List<MonAn>();
+        try
+        {
+            listMonAn = MonAnBUS.LayDanhSachMonAnTheoDanhMuc(maDanhMuc);
+        }
+        catch (Exception e)
+        {
+            Console.Error.WriteLine(e.Message);
+        }
+        return listMonAn;
+
+    }
+
+    public MonAn LayMonAn(int maMonAn)
+    {
+        var monAn = new MonAn();
+        try
+        {
+            monAn = MonAnBUS.LayMonAn(maMonAn);
+        }
+        catch (Exception e)
+        {
+            Console.Error.WriteLine(e.Message);
+        }
+        return monAn;
+    }
+
     public List<Foo> LayDanhSachFoo()
     {
         var listMonAn = new List<Foo>();
@@ -140,5 +169,19 @@ public class LocalService : ILocalService
             Console.Error.WriteLine(e.Message);
         }
         return listMonAn;
+    }
+
+    public List<DanhMuc> LayDanhSachDanhMuc()
+    {
+        var listDanhMuc = new List<DanhMuc>();
+        try
+        {
+            listDanhMuc = DanhMucBUS.LayDanhSachDanhMuc();
+        }
+        catch (Exception e)
+        {
+            Console.Error.WriteLine(e.Message);
+        }
+        return listDanhMuc;
     }
 }

@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BanDAO.cs" />
+    <Compile Include="DanhMucDAO.cs" />
     <Compile Include="FooDAO.cs" />
     <Compile Include="KhuVucDAO.cs" />
     <Compile Include="MonAnDAO.cs" />

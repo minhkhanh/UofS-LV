@@ -13,15 +13,15 @@ namespace LocalServerDTO
     public class KhuVuc
     {
         [DataMember]
-        [Column(IsPrimaryKey = true, IsDbGenerated = true)]
+        [Column(IsPrimaryKey = true, IsDbGenerated = true, Name = "MaKhuVuc")]
         public int MaKhuVuc { get; set; }
 
         [DataMember]
-        [Column]
+        [Column(Name = "TenKhuVuc")]
         public string TenKhuVuc { get; set; }
 
         [DataMember]
-        [Column]
+        [Column(Name = "MoTa")]
         public string MoTa { get; set; }
     }
 }
