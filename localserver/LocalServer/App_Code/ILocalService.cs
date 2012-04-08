@@ -31,6 +31,16 @@ public interface ILocalService
     [OperationContract]
     List<Ban> LayDanhSachBanTheoKhuVuc(int maKhuVuc);
 
+
+    /// <summary>
+    /// Tách bàn đã ghép ra thành các bàn rời nhau
+    /// </summary>
+    /// <param name="maBan">Mã bàn cha đại diện cho nhóm bàn</param>
+    /// <returns>Tách thành công hoặc thất bại.</returns>
+    [WebInvoke(Method = "GET", UriTemplate = "tachBan?maBan={maBan}")]
+    [OperationContract]
+    bool TachBan(int maBan);
+
     [WebInvoke(Method = "GET", UriTemplate = "layDanhSachMonAn")]
     [OperationContract]
     List<MonAn> LayDanhSachMonAn();
