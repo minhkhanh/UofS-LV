@@ -23,5 +23,11 @@ namespace LocalServerBUS
         {
             return BanDAO.TachBan(maBan);
         }
+
+        public static bool GhepBan(RequestGhepBan request)
+        {
+            if (request.MaBanPhuList.Count() == 0) return false;
+            return BanDAO.GhepBan(request);
+        }
     }
 }

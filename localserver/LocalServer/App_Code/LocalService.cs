@@ -75,6 +75,19 @@ public class LocalService : ILocalService
         return false;
     }
 
+    public bool GhepBan(RequestGhepBan request)
+    {
+        try
+        {
+            return BanBUS.GhepBan(request);
+        }
+        catch (Exception e)
+        {
+            Console.Error.WriteLine(e.Message);
+        }
+        return false;        
+    }
+
     public List<MonAn> LayDanhSachMonAn()
     {
         var listMonAn = new List<MonAn>();
