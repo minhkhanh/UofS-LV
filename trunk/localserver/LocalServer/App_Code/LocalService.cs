@@ -184,4 +184,32 @@ public class LocalService : ILocalService
         }
         return listDanhMuc;
     }
+
+    public ChiTietDanhMucDaNgonNgu LayChiTietDanhMucDaNgonNgu(int maDanhMuc, int maNgonNgu)
+    {
+        var ct = new ChiTietDanhMucDaNgonNgu();
+        try
+        {
+            ct = ChiTietDanhMucDaNgonNguBUS.LayChiTietDanhMucDaNgonNgu(maDanhMuc, maNgonNgu);
+        }
+        catch (Exception e)
+        {
+            Console.Error.WriteLine(e.Message);
+        }
+        return ct;
+    }
+
+    public ChiTietDonViTinhDaNgonNgu LayChiTietDonViTinhDaNgonNgu(int maDonViTinh, int maNgonNgu)
+    {
+        var ct = new ChiTietDonViTinhDaNgonNgu();
+        try
+        {
+            ct = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(maDonViTinh, maNgonNgu);
+        }
+        catch (Exception e)
+        {
+            Console.Error.WriteLine(e.Message);
+        }
+        return ct;
+    }
 }
