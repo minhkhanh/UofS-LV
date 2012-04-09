@@ -213,6 +213,20 @@ public class LocalService : ILocalService
         return ct;
     }
 
+    public ChiTietMonAnDaNgonNgu LayChiTietMonAnDaNgonNgu(int maMonAn, int maNgonNgu)
+    {
+        var ct = new ChiTietMonAnDaNgonNgu();
+        try
+        {
+            ct = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(maMonAn, maNgonNgu);
+        }
+        catch (Exception e)
+        {
+            Console.Error.WriteLine(e.Message);
+        }
+        return ct;
+    }
+
     public int LayChiTietMonAnDonViTinhDonGia(int maMonAn, int maDonViTinh)
     {
         int donGia = -1;

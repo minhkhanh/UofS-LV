@@ -45,6 +45,7 @@
     <Compile Include="Ban.cs" />
     <Compile Include="ChiTietDanhMucDaNgonNgu.cs" />
     <Compile Include="ChiTietDonViTinhDaNgonNgu.cs" />
+    <Compile Include="ChiTietMonAnDaNgonNgu.cs" />
     <Compile Include="ChiTietMonAnDonViTinh.cs" />
     <Compile Include="DanhMuc.cs" />
     <Compile Include="DonViTinh.cs" />

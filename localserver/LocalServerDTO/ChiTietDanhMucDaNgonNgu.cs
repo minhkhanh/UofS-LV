@@ -13,7 +13,7 @@ namespace LocalServerDTO
     public class ChiTietDanhMucDaNgonNgu
     {
         [DataMember(Name = "MaDanhMuc")]
-        [Column(IsPrimaryKey = true, IsDbGenerated = true, Name = "MaDanhMuc")]
+        [Column(IsPrimaryKey = true,  Name = "MaDanhMuc")]
         private int? _maDanhMuc;
 
         private EntityRef<DanhMuc> _danhMuc = new EntityRef<DanhMuc>();
@@ -26,7 +26,7 @@ namespace LocalServerDTO
         }
 
         [DataMember(Name = "MaNgonNgu")]
-        [Column(IsPrimaryKey = true, IsDbGenerated = true, Name = "MaNgonNgu")]
+        [Column(IsPrimaryKey = true,  Name = "MaNgonNgu")]
         private int? _maNgonNgu;
 
         private EntityRef<NgonNgu> _ngonNgu = new EntityRef<NgonNgu>();
