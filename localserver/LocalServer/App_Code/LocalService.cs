@@ -212,4 +212,18 @@ public class LocalService : ILocalService
         }
         return ct;
     }
+
+    public int LayChiTietMonAnDonViTinhDonGia(int maMonAn, int maDonViTinh)
+    {
+        int donGia = -1;
+        try
+        {
+            donGia = ChiTietMonAnDonViTinhBUS.LayDonGia(maMonAn, maDonViTinh);
+        }
+        catch (Exception e)
+        {
+            Console.Error.WriteLine(e.Message);
+        }
+        return donGia;
+    }
 }

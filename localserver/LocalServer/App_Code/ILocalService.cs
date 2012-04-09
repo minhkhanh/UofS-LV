@@ -82,6 +82,10 @@ public interface ILocalService
     [OperationContract]
     ChiTietDonViTinhDaNgonNgu LayChiTietDonViTinhDaNgonNgu(int maDonViTinh, int maNgonNgu);
 
+    [WebInvoke(Method = "GET", UriTemplate = "layChiTietMonAnDonViTinhDonGia?maMonAn={maMonAn}&maDonViTinh={maDonViTinh}")]
+    [OperationContract]
+    int LayChiTietMonAnDonViTinhDonGia(int maMonAn, int maDonViTinh);
+
     // Testing purpose
     [WebInvoke(Method = "GET", UriTemplate = "layDanhSachFoo")]
     [OperationContract]
