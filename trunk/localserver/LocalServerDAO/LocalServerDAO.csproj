@@ -44,6 +44,7 @@
     <Compile Include="BanDAO.cs" />
     <Compile Include="ChiTietDanhMucDaNgonNguDAO.cs" />
     <Compile Include="ChiTietDonViTinhDaNgonNgu.cs" />
+    <Compile Include="ChiTietMonAnDaNgonNguDAO.cs" />
     <Compile Include="ChiTietMonAnDonViTinhDAO.cs" />
     <Compile Include="DanhMucDAO.cs" />
     <Compile Include="FooDAO.cs" />
