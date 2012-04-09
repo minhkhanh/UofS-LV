@@ -58,17 +58,17 @@ namespace LocalServerDTO
         [Column(Name = "NgungBan")]
         public bool NgungBan { get; set; }
 
-        [DataMember(Name = "MaDonViTinh")]
-        [Column(Name = "MaDonViTinh")]
-        private int? _maDonViTinh;
+        //[DataMember(Name = "MaDonViTinh")]
+        //[Column(Name = "MaDonViTinh")]
+        //private int? _maDonViTinh;
 
-        private EntityRef<DonViTinh> _donViTinh = new EntityRef<DonViTinh>();
-        [Association(Name = "DonViTinh_MonAn_FK1", IsForeignKey = true, Storage = "_donViTinh", ThisKey = "_maDonViTinh")]
-        public DonViTinh DonViTinh
-        {
-            get { return _donViTinh.Entity; }
-            set { _donViTinh.Entity = value; }
-        }
+        //private EntityRef<DonViTinh> _donViTinh = new EntityRef<DonViTinh>();
+        //[Association(Name = "DonViTinh_MonAn_FK1", IsForeignKey = true, Storage = "_donViTinh", ThisKey = "_maDonViTinh")]
+        //public DonViTinh DonViTinh
+        //{
+        //    get { return _donViTinh.Entity; }
+        //    set { _donViTinh.Entity = value; }
+        //}
 
 
 
