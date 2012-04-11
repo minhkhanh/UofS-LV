@@ -43,16 +43,32 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ban.cs" />
+    <Compile Include="BoPhanCheBien.cs" />
+    <Compile Include="ChiTietDanhMucBoPhanCheBien.cs" />
     <Compile Include="ChiTietDanhMucDaNgonNgu.cs" />
     <Compile Include="ChiTietDonViTinhDaNgonNgu.cs" />
+    <Compile Include="ChiTietHoaDon.cs" />
+    <Compile Include="ChiTietHuyOrder.cs" />
     <Compile Include="ChiTietMonAnDaNgonNgu.cs" />
     <Compile Include="ChiTietMonAnDonViTinh.cs" />
+    <Compile Include="ChiTietMonLienQuan.cs" />
+    <Compile Include="ChiTietOrder.cs" />
     <Compile Include="DanhMuc.cs" />
     <Compile Include="DonViTinh.cs" />
     <Compile Include="Foo.cs" />
+    <Compile Include="HoaDon.cs" />
     <Compile Include="KhuVuc.cs" />
+    <Compile Include="KhuyenMai.cs" />
+    <Compile Include="KhuyenMaiDanhMuc.cs" />
+    <Compile Include="KhuyenMaiHoaDon.cs" />
+    <Compile Include="KhuyenMaiKhuVuc.cs" />
+    <Compile Include="KhuyenMaiMon.cs" />
     <Compile Include="MonAn.cs" />
     <Compile Include="NgonNgu.cs" />
+    <Compile Include="NhomTaiKhoan.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="PhuThu.cs" />
+    <Compile Include="PhuThuKhuVuc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -60,6 +76,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="RequestGhepBan.cs" />
+    <Compile Include="TaiKhoan.cs" />
+    <Compile Include="TiGia.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
