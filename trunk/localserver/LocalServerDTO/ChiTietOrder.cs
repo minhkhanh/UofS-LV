@@ -46,8 +46,19 @@ namespace LocalServerDTO
 
         [DataMember]
         [Column(Name = "GhiChu")]
-        public int GhiChu { get; set; }
+        public string GhiChu { get; set; }
 
+        [DataMember(Name = "MaBoPhanCheBien")]
+        [Column(Name = "MaBoPhanCheBien")]
+        private int? _maBoPhanCheBien;
+        private EntityRef<BoPhanCheBien> _boPhanCheBien = new EntityRef<BoPhanCheBien>();
+
+        [Association(Name = "BoPhanCheBien_ChiTietOrder_FK1", IsForeignKey = true, Storage = "_boPhanCheBien", ThisKey = "_maBoPhanCheBien")]
+        public BoPhanCheBien BoPhanCheBien
+        {
+            get { return _boPhanCheBien.Entity; }
+            set { _boPhanCheBien.Entity = value; }
+        }
 
     }
 }
