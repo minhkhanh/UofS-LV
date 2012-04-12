@@ -7,11 +7,11 @@ using LocalServerDTO;
 
 namespace LocalServerBUS
 {
-    public class ChiTietMonAnDonViTinhBUS
+    public class TiGiaBUS
     {
-        public static float LayDonGia(int maMonAn, int maDonViTinh)
+        public static List<TiGia> LayDanhSachTiGia()
         {
-            return ChiTietMonAnDonViTinhDAO.LayDonGia(maMonAn, maDonViTinh);
+            return TiGiaDAO.LayDanhSachTiGia();
         }
     }
 }

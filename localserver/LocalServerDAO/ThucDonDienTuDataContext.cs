@@ -22,6 +22,7 @@ namespace LocalServerDAO
         public Table<MonAn> MonAns;
         public Table<DanhMuc> DanhMucs;
         public Table<DonViTinh> DonViTinhs;
+
         public Table<ChiTietDanhMucDaNgonNgu> ChiTietDanhMucDaNgonNgus;
         public Table<ChiTietDonViTinhDaNgonNgu> ChiTietDonViTinhDaNgonNgus;
         public Table<ChiTietMonAnDaNgonNgu> ChiTietMonAnDaNgonNgus;
@@ -32,5 +33,13 @@ namespace LocalServerDAO
 
         public Table<KhuyenMai> KhuyenMais;
         public Table<PhuThu> PhuThus;
+        public Table<TiGia> TiGias;
+
+        public Table<HoaDon> HoaDons;
+        public Table<Order> Orders;
+
+        public Table<BoPhanCheBien> BoPhanCheBiens;
+
+        public Table<NgonNgu> NgonNgus;
     }
 }
