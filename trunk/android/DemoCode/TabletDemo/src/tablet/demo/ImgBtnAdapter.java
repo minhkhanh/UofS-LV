@@ -1,52 +1,67 @@
 package tablet.demo;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 
 public class ImgBtnAdapter extends BaseAdapter {
-	Context mContext = null;
-	int mCount = 0;
+	Context context = null;
+	SampleDTO[] data = new SampleDTO[0];
 	
-	public ImgBtnAdapter(int count, Context context) {
-		mContext = context;
-		mCount = count;
+	public ImgBtnAdapter(SampleDTO[] _data, Context _context) {
+		context = _context;
+		data = _data;
 	}
 
 	@Override
 	public int getCount() {
-		return mCount;
+		return data.length;
 	}
 
 	@Override
-	public Object getItem(int arg0) {
-		return arg0;
+	public Object getItem(int pos) {
+		if (pos < 0 || pos >= data.length) {
+			return null;
+		}
+		
+		return data[pos];
 	}
 
 	@Override
-	public long getItemId(int arg0) {
-		return arg0;
+	public long getItemId(int pos) {
+		if (pos < 0 || pos >= data.length) {
+			return -1;
+		}
+		
+		return data[pos].getId();
 	}
 
 	@Override
 	public View getView(int pos, View convertView, ViewGroup parent) {
-		ImageButton imgBtn = null;
+		Button btn = null;
+		//ImageButton imgBtn = null;
 		
 		if (convertView == null) {
-			imgBtn = new ImageButton(mContext);
-			imgBtn.setLayoutParams(new GridView.LayoutParams(GridView.LayoutParams.WRAP_CONTENT, GridView.LayoutParams.WRAP_CONTENT));
+			btn = new Button(context);
+			btn.setLayoutParams(new GridView.LayoutParams(GridView.LayoutParams.MATCH_PARENT, GridView.LayoutParams.WRAP_CONTENT));
+			//btn.setImageResource(R.drawable.image_button);
+			//btn.setBackgroundColor(100);
+			Resources res = context.getResources();
+			Drawable drawable = res.getDrawable(R.drawable.green_square);
+			btn.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null);
+			btn.setText(data[pos].getName());
 		} else {
-			imgBtn = (ImageButton) convertView;
-		}
-
-		imgBtn.setImageResource(R.drawable.image_button);
-		imgBtn.setBackgroundColor(0);
+			btn = (Button) convertView;
+		}		
 		
-		return imgBtn;
+		return btn;
 	}
 
 }
