@@ -519,7 +519,7 @@ REFERENCES [dbo].[NgonNgu] (
 GO
 
 ALTER TABLE [dbo].[MonAn] WITH CHECK ADD CONSTRAINT [DonViTinh_MonAn_FK1] FOREIGN KEY (
-[MaDonViTinh]
+[MaDonViTinhMacDinh]
 )
 REFERENCES [dbo].[DonViTinh] (
 [MaDonViTinh]
