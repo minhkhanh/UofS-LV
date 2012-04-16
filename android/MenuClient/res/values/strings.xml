@@ -3,5 +3,6 @@
 
     <string name="hello">Hello World, MenuClientActivity!</string>
     <string name="app_name">MenuClient</string>
+    <string name="table_list_caption">Chọn bàn</string>
 
 </resources>
