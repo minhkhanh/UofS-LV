@@ -1,5 +1,6 @@
-package client.menu;
+package client.menu.activity;
 
+import client.menu.R;
 import android.app.Activity;
 import android.os.Bundle;
 

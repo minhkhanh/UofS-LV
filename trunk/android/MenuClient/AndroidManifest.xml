@@ -10,14 +10,18 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:name=".MenuClientActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
+            android:name=".activity.TableListActivity"
+            android:label="@string/table_list_caption" ><intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.MenuClientActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity android:name=".activity.MainMenuActivity"></activity>
     </application>
 
 </manifest>
