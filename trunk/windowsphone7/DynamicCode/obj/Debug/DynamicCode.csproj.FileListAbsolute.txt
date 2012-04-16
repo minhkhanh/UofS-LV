@@ -1,0 +1,84 @@
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\ApplicationIcon.png
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\Background.png
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\DynamicCode.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\DynamicCode.pdb
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\AppManifest.xaml
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\DynamicCode.xap
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\obj\Debug\ResolveAssemblyReference.cache
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\obj\Debug\DynamicCode.g.resources
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\obj\Debug\DynamicCode.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\obj\Debug\DynamicCode.pdb
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\obj\Debug\XapCacheFile.xml
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\Microsoft.Expression.Drawing.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\Microsoft.Expression.Drawing.xml
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\Microsoft.Expression.Interactions.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\System.Windows.Interactivity.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\Microsoft.Expression.Interactions.xml
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\System.Windows.Interactivity.xml
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\de\System.Windows.Interactivity.resources.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\en\System.Windows.Interactivity.resources.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\es\System.Windows.Interactivity.resources.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\fr\System.Windows.Interactivity.resources.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\it\System.Windows.Interactivity.resources.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\ja\System.Windows.Interactivity.resources.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\ko\System.Windows.Interactivity.resources.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\Bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\obj\Debug\App.g.i.cs
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\obj\Debug\BanChinhNH.g.i.cs
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\obj\Debug\BanNH.g.i.cs
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\obj\Debug\GhepBanNH.g.i.cs
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\obj\Debug\KhuVucNH.g.i.cs
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\obj\Debug\Order.g.i.cs
+D:\BAI TAP LAP TRINH\WinPhone7\DynamicCode\obj\Debug\ServerConnect\LayDuLieuTuServer.g.i.cs
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\obj\Debug\ResolveAssemblyReference.cache
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\obj\Debug\App.g.i.cs
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\obj\Debug\BanChinhNH.g.i.cs
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\obj\Debug\BanNH.g.i.cs
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\obj\Debug\GhepBanNH.g.i.cs
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\obj\Debug\KhuVucNH.g.i.cs
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\obj\Debug\Order.g.i.cs
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\obj\Debug\ServerConnect\LayDuLieuTuServer.g.i.cs
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\obj\Debug\DynamicCode.g.resources
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\obj\Debug\DynamicCode.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\obj\Debug\DynamicCode.pdb
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\ApplicationIcon.png
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\Background.png
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\DynamicCode.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\DynamicCode.pdb
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\AppManifest.xaml
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\DynamicCode.xap
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\Microsoft.Expression.Drawing.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\Microsoft.Expression.Interactions.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\System.Windows.Interactivity.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\Microsoft.Expression.Drawing.xml
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\Microsoft.Expression.Interactions.xml
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\System.Windows.Interactivity.xml
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\de\System.Windows.Interactivity.resources.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\en\System.Windows.Interactivity.resources.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\es\System.Windows.Interactivity.resources.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\fr\System.Windows.Interactivity.resources.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\it\System.Windows.Interactivity.resources.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\ja\System.Windows.Interactivity.resources.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\ko\System.Windows.Interactivity.resources.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\Bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+F:\KHTN\Luan Van\LuyenMobile\DynamicCode 16-4\DynamicCode\obj\Debug\XapCacheFile.xml
