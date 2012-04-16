@@ -42,10 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BanBUS.cs" />
+    <Compile Include="BoPhanCheBienBUS.cs" />
+    <Compile Include="ChiTietDanhMucBoPhanCheBienBUS.cs" />
     <Compile Include="ChiTietDanhMucDaNgonNguBUS.cs" />
     <Compile Include="ChiTietDonViTinhDaNgonNguBUS.cs" />
+    <Compile Include="ChiTietHuyOrderBUS.cs" />
     <Compile Include="ChiTietMonAnDaNgonNguBUS.cs" />
     <Compile Include="ChiTietMonAnDonViTinhBUS.cs" />
+    <Compile Include="ChiTietMonLienQuanBUS.cs" />
+    <Compile Include="ChiTietOrderBUS.cs" />
     <Compile Include="DanhMucBUS.cs" />
     <Compile Include="DonViTinhBUS.cs" />
     <Compile Include="FooBUS.cs" />
@@ -54,6 +59,7 @@
     <Compile Include="MonAnBUS.cs" />
     <Compile Include="NgonNguBUS.cs" />
     <Compile Include="NhomTaiKhoanBUS.cs" />
+    <Compile Include="OrderBUS.cs" />
     <Compile Include="PhuThuBUS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TaiKhoanBUS.cs" />

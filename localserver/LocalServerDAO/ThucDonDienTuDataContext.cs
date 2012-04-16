@@ -28,6 +28,8 @@ namespace LocalServerDAO
         public Table<ChiTietMonAnDaNgonNgu> ChiTietMonAnDaNgonNgus;
         public Table<ChiTietMonAnDonViTinh> ChiTietMonAnDonViTinhs;
 
+        public Table<ChiTietMonLienQuan> ChiTietMonLienQuans;
+
         public Table<NhomTaiKhoan> NhomTaiKhoans;
         public Table<TaiKhoan> TaiKhoans;
 
@@ -37,8 +39,10 @@ namespace LocalServerDAO
 
         public Table<HoaDon> HoaDons;
         public Table<Order> Orders;
+        public Table<ChiTietOrder> ChiTietOrders;
 
         public Table<BoPhanCheBien> BoPhanCheBiens;
+        public Table<ChiTietDanhMucBoPhanCheBien> ChiTietDanhMucBoPhanCheBiens;
 
         public Table<NgonNgu> NgonNgus;
     }

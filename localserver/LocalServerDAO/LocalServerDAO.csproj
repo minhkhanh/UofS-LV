@@ -42,10 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BanDAO.cs" />
+    <Compile Include="BoPhanCheBienDAO.cs" />
+    <Compile Include="ChiTietDanhMucBoPhanCheBienDAO.cs" />
     <Compile Include="ChiTietDanhMucDaNgonNguDAO.cs" />
     <Compile Include="ChiTietDonViTinhDaNgonNgu.cs" />
+    <Compile Include="ChiTietHuyOrderDAO.cs" />
     <Compile Include="ChiTietMonAnDaNgonNguDAO.cs" />
     <Compile Include="ChiTietMonAnDonViTinhDAO.cs" />
+    <Compile Include="ChiTietMonLienQuanDAO.cs" />
+    <Compile Include="ChiTietOrderDAO.cs" />
     <Compile Include="DanhMucDAO.cs" />
     <Compile Include="DonViTinhDAO.cs" />
     <Compile Include="FooDAO.cs" />
@@ -54,6 +59,7 @@
     <Compile Include="MonAnDAO.cs" />
     <Compile Include="NgonNguDAO.cs" />
     <Compile Include="NhomTaiKhoanDAO.cs" />
+    <Compile Include="OrderDAO.cs" />
     <Compile Include="PhuThuDAO.cs" />
     <Compile Include="TaiKhoanDAO.cs" />
     <Compile Include="ThucDonDienTu.cs" />

@@ -95,20 +95,66 @@ namespace LocalServerWeb
         [OperationContract]
         ChiTietMonAnDaNgonNgu LayChiTietMonAnDaNgonNgu(int maMonAn, int maNgonNgu);
 
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachChiTietMonAnDaNgonNgu")]
+        [OperationContract]
+        List<ChiTietMonAnDaNgonNgu> LayDanhSachChiTietMonAnDaNgonNgu();
+
         [WebInvoke(Method = "GET", UriTemplate = "layChiTietMonAnDonViTinhDonGia?maMonAn={maMonAn}&maDonViTinh={maDonViTinh}")]
         [OperationContract]
         float LayChiTietMonAnDonViTinhDonGia(int maMonAn, int maDonViTinh);
+
+        [WebInvoke(Method = "GET", UriTemplate = "layChiTietMonAnDonViTinh?maMonAn={maMonAn}&maDonViTinh={maDonViTinh}")]
+        [OperationContract]
+        ChiTietMonAnDonViTinh LayChiTietMonAnDonViTinh(int maMonAn, int maDonViTinh);
+
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachChiTietMonAnDonViTinh")]
+        [OperationContract]
+        List<ChiTietMonAnDonViTinh> LayDanhSachChiTietMonAnDonViTinh();
 
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachNgonNgu")]
         [OperationContract]
         List<NgonNgu> LayDanhSachNgonNgu();
 
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachNhomTaiKhoan")]
+        [OperationContract]
+        List<NhomTaiKhoan> LayDanhSachNhomTaiKhoan();
+
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachTaiKhoan")]
+        [OperationContract]
+        List<TaiKhoan> LayDanhSachTaiKhoan();
+
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachTiGia")]
+        [OperationContract]
+        List<TiGia> LayDanhSachTiGia();
+
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachPhuThu")]
+        [OperationContract]
+        List<PhuThu> LayDanhSachPhuThu();
+
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachKhuyenMai")]
+        [OperationContract]
+        List<KhuyenMai> LayDanhSachKhuyenMai();
+
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachBoPhanCheBien")]
+        [OperationContract]
+        List<BoPhanCheBien> LayDanhSachBoPhanCheBien();
+
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachChiTietMonLienQuan")]
+        [OperationContract]
+        List<ChiTietMonLienQuan> LayDanhSachChiTietMonLienQuan();
+
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachChiTietMonLienQuanTheoMaMon?maMonAn={maMonAn}")]
+        [OperationContract]
+        List<ChiTietMonLienQuan> LayDanhSachChiTietMonLienQuanTheoMaMon(int maMonAn);
 
 
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachOrder")]
+        [OperationContract]
+        List<Order> LayDanhSachOrder();
 
-
-
-
+        [WebInvoke(Method = "GET", UriTemplate = "layOrder?maOrder={maOrder}")]
+        [OperationContract]
+        Order LayOrder(int maOrder);
 
 
 
