@@ -23,7 +23,7 @@ namespace LocalServerDTO
 
         [DataMember]
         [Column(Name = "DiemDanhGia")]
-        public int DiemDanhGia { get; set; }
+        public float DiemDanhGia { get; set; }
 
         [DataMember]
         [Column(Name = "SoLuotDanhGia")]
