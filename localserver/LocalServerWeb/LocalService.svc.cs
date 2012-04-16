@@ -159,6 +159,7 @@ namespace LocalServerWeb
             return monAn;
         }
 
+        // for testing purpose
         public List<Foo> LayDanhSachFoo()
         {
             var listMonAn = new List<Foo>();
@@ -201,6 +202,20 @@ namespace LocalServerWeb
             return ct;
         }
 
+        public List<ChiTietDanhMucDaNgonNgu> LayDanhSachChiTietDanhMucDaNgonNgu()
+        {
+            var listChiTietDanhMucDaNgonNgu = new List<ChiTietDanhMucDaNgonNgu>();
+            try
+            {
+                listChiTietDanhMucDaNgonNgu = ChiTietDanhMucDaNgonNguBUS.LayDanhSachChiTietDanhMucDaNgonNgu();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listChiTietDanhMucDaNgonNgu;
+        }
+
         public ChiTietDonViTinhDaNgonNgu LayChiTietDonViTinhDaNgonNgu(int maDonViTinh, int maNgonNgu)
         {
             var ct = new ChiTietDonViTinhDaNgonNgu();
@@ -213,6 +228,20 @@ namespace LocalServerWeb
                 Console.Error.WriteLine(e.Message);
             }
             return ct;
+        }
+
+        public List<ChiTietDonViTinhDaNgonNgu> LayDanhSachChiTietDonViTinhDaNgonNgu()
+        {
+            var listChiTietDonViTinhDaNgonNgu = new List<ChiTietDonViTinhDaNgonNgu>();
+            try
+            {
+                listChiTietDonViTinhDaNgonNgu = ChiTietDonViTinhDaNgonNguBUS.LayDanhSachChiTietDonViTinhDaNgonNgu();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listChiTietDonViTinhDaNgonNgu;
         }
 
         public ChiTietMonAnDaNgonNgu LayChiTietMonAnDaNgonNgu(int maMonAn, int maNgonNgu)
@@ -229,6 +258,22 @@ namespace LocalServerWeb
             return ct;
         }
 
+        public List<ChiTietMonAnDaNgonNgu> LayDanhSachChiTietMonAnDaNgonNgu()
+        {
+            var listChiTietMonAnDaNgonNgu = new List<ChiTietMonAnDaNgonNgu>();
+            try
+            {
+                listChiTietMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayDanhSachChiTietMonAnDaNgonNgu();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listChiTietMonAnDaNgonNgu;
+        }
+
+
+
         public float LayChiTietMonAnDonViTinhDonGia(int maMonAn, int maDonViTinh)
         {
             float donGia = -1;
@@ -242,5 +287,119 @@ namespace LocalServerWeb
             }
             return donGia;
         }
+
+        public ChiTietMonAnDonViTinh LayChiTietMonAnDonViTinh(int maMonAn, int maDonViTinh)
+        {
+            var ct = new ChiTietMonAnDonViTinh();
+            try
+            {
+                ct = ChiTietMonAnDonViTinhBUS.LayChiTietMonAnDonViTinh(maMonAn, maDonViTinh);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return ct;
+        }
+
+        public List<ChiTietMonAnDonViTinh> LayDanhSachChiTietMonAnDonViTinh()
+        {
+            var listChiTietMonAnDonViTinh = new List<ChiTietMonAnDonViTinh>();
+            try
+            {
+                listChiTietMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayDanhSachChiTietMonAnDonViTinh();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listChiTietMonAnDonViTinh;
+        }
+
+        public List<NgonNgu> LayDanhSachNgonNgu()
+        {
+            var listNgonNgu = new List<NgonNgu>();
+            try
+            {
+                listNgonNgu = NgonNguBUS.LayDanhSachNgonNgu();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listNgonNgu;
+        }
+
+        public List<TiGia> LayDanhSachTiGia()
+        {
+            var listTiGia = new List<TiGia>();
+            try
+            {
+                listTiGia = TiGiaBUS.LayDanhSachTiGia();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listTiGia;
+        }
+
+        public List<NhomTaiKhoan> LayDanhSachNhomTaiKhoan()
+        {
+            var listNhomTaiKhoan = new List<NhomTaiKhoan>();
+            try
+            {
+                listNhomTaiKhoan = NhomTaiKhoanBUS.LayDanhSachNhomTaiKhoan();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listNhomTaiKhoan;
+        }
+
+        public List<TaiKhoan> LayDanhSachTaiKhoan()
+        {
+            var listTaiKhoan = new List<TaiKhoan>();
+            try
+            {
+                listTaiKhoan = TaiKhoanBUS.LayDanhSachTaiKhoan();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listTaiKhoan;
+        }
+
+        public List<PhuThu> LayDanhSachPhuThu()
+        {
+            var listPhuThu = new List<PhuThu>();
+            try
+            {
+                listPhuThu = PhuThuBUS.LayDanhSachPhuThu();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listPhuThu;
+        }
+
+        public List<KhuyenMai> LayDanhSachKhuyenMai()
+        {
+            var listKhuyenMai = new List<KhuyenMai>();
+            try
+            {
+                listKhuyenMai = KhuyenMaiBUS.LayDanhSachKhuyenMai();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listKhuyenMai;
+        }
+
+
     }
 }

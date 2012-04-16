@@ -52,6 +52,7 @@
     <Compile Include="KhuVucDAO.cs" />
     <Compile Include="KhuyenMaiDAO.cs" />
     <Compile Include="MonAnDAO.cs" />
+    <Compile Include="NgonNguDAO.cs" />
     <Compile Include="NhomTaiKhoanDAO.cs" />
     <Compile Include="PhuThuDAO.cs" />
     <Compile Include="TaiKhoanDAO.cs" />
