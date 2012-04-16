@@ -18,5 +18,10 @@ namespace LocalServerDAO
             }
             return null;
         }
+
+        public static List<ChiTietMonAnDaNgonNgu> LayDanhSachChiTietMonAnDaNgonNgu()
+        {
+            return ThucDonDienTu.DataContext.ChiTietMonAnDaNgonNgus.ToList();
+        }
     }
 }

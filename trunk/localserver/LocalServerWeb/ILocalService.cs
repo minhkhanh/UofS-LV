@@ -79,9 +79,17 @@ namespace LocalServerWeb
         [OperationContract]
         ChiTietDanhMucDaNgonNgu LayChiTietDanhMucDaNgonNgu(int maDanhMuc, int maNgonNgu);
 
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachChiTietDanhMucDaNgonNgu")]
+        [OperationContract]
+        List<ChiTietDanhMucDaNgonNgu> LayDanhSachChiTietDanhMucDaNgonNgu();
+
         [WebInvoke(Method = "GET", UriTemplate = "layChiTietDonViTinhDaNgonNgu?maDonViTinh={maDonViTinh}&maNgonNgu={maNgonNgu}")]
         [OperationContract]
         ChiTietDonViTinhDaNgonNgu LayChiTietDonViTinhDaNgonNgu(int maDonViTinh, int maNgonNgu);
+
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachChiTietDonViTinhDaNgonNgu")]
+        [OperationContract]
+        List<ChiTietDonViTinhDaNgonNgu> LayDanhSachChiTietDonViTinhDaNgonNgu();
 
         [WebInvoke(Method = "GET", UriTemplate = "layChiTietMonAnDaNgonNgu?maMonAn={maMonAn}&maNgonNgu={maNgonNgu}")]
         [OperationContract]
@@ -90,6 +98,21 @@ namespace LocalServerWeb
         [WebInvoke(Method = "GET", UriTemplate = "layChiTietMonAnDonViTinhDonGia?maMonAn={maMonAn}&maDonViTinh={maDonViTinh}")]
         [OperationContract]
         float LayChiTietMonAnDonViTinhDonGia(int maMonAn, int maDonViTinh);
+
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachNgonNgu")]
+        [OperationContract]
+        List<NgonNgu> LayDanhSachNgonNgu();
+
+
+
+
+
+
+
+
+
+
+
 
         // Testing purpose
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachFoo")]

@@ -52,6 +52,7 @@
     <Compile Include="KhuVucBUS.cs" />
     <Compile Include="KhuyenMaiBUS.cs" />
     <Compile Include="MonAnBUS.cs" />
+    <Compile Include="NgonNguBUS.cs" />
     <Compile Include="NhomTaiKhoanBUS.cs" />
     <Compile Include="PhuThuBUS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
