@@ -400,6 +400,75 @@ namespace LocalServerWeb
             return listKhuyenMai;
         }
 
+        public List<BoPhanCheBien> LayDanhSachBoPhanCheBien()
+        {
+            var listBoPhanCheBien = new List<BoPhanCheBien>();
+            try
+            {
+                listBoPhanCheBien = BoPhanCheBienBUS.LayDanhSachBoPhanCheBien();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listBoPhanCheBien;
+        }
+
+        public List<ChiTietMonLienQuan> LayDanhSachChiTietMonLienQuan()
+        {
+            var listChiTietMonLienQuan = new List<ChiTietMonLienQuan>();
+            try
+            {
+                listChiTietMonLienQuan = ChiTietMonLienQuanBUS.LayDanhSachChiTietMonLienQuan();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listChiTietMonLienQuan;
+        }
+
+        public List<ChiTietMonLienQuan> LayDanhSachChiTietMonLienQuanTheoMaMon(int maMonAn)
+        {
+            var listChiTietMonLienQuan = new List<ChiTietMonLienQuan>();
+            try
+            {
+                listChiTietMonLienQuan = ChiTietMonLienQuanBUS.LayDanhSachChiTietMonLienQuan(maMonAn);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listChiTietMonLienQuan;
+        }
+
+        public List<Order> LayDanhSachOrder()
+        {
+            var listOrder = new List<Order>();
+            try
+            {
+                listOrder = OrderBUS.LayDanhSachOrder();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listOrder;
+        }
+
+        public Order LayOrder(int maOrder)
+        {
+            var Order = new Order();
+            try
+            {
+                Order = OrderBUS.LayOrder(maOrder);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return Order;
+        }
 
     }
 }
