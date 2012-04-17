@@ -14,7 +14,7 @@ namespace LocalServerWeb.Controllers
         {
             ViewData["Message"] = "Welcome to ASP.NET MVC!";
 
-            FillCode.FillLanguage(ViewData);
+            SharedCode.FillCommonData2View(ViewData);
 
             return View();
         }
