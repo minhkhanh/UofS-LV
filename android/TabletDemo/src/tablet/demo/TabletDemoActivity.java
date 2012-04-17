@@ -1,5 +1,8 @@
 package tablet.demo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.database.DataSetObserver;
 import android.os.Bundle;
@@ -10,10 +13,14 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class TabletDemoActivity extends Activity {
@@ -23,10 +30,47 @@ public class TabletDemoActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        populateButtons(new int[]{1, 2, 10, 20, 4, 8, 40, 80});
+        SampleDTO[] dtoArr = new SampleDTO[10];
+        for (int i = 0; i < 10; ++i) {
+        	dtoArr[i] = new SampleDTO();
+        	dtoArr[i].setId(i);
+        	dtoArr[i].setName("item " + i);
+        }
+        
+        loadSpinner(dtoArr);
+        
     }
     
-    private void populateButtons(int[] arrNum) {
+    private void loadSpinner(SampleDTO[] dtoArr) {
+    	Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+    	ArrayList<SampleDTO> spinnerArr = new ArrayList<SampleDTO>();
+    	
+    	for (int i = 0; i < dtoArr.length; ++i) {
+    		spinnerArr.add(dtoArr[i]);	
+    	}
+    	ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, spinnerArr);
+    	
+    	spinner.setAdapter(adapter);
+    	spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+//				Toast.makeText(TabletDemoActivity.this, ((SampleDTO)arg0.getSelectedItem()).getName(),
+//						Toast.LENGTH_SHORT).show();
+				
+				SampleDTO dto = (SampleDTO)arg0.getSelectedItem();
+				GridView grid = (GridView) findViewById(R.id.gridView1);
+				populateItems(dto.getId(), grid);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				Toast.makeText(TabletDemoActivity.this, "nothing selected",
+						Toast.LENGTH_SHORT).show();
+			}
+		});
+    	/*
     	LinearLayout layBtnPan = (LinearLayout) findViewById(R.id.layBtnPan);
     	for (int i = 0; i < arrNum.length; ++i) {
     		Button btn = new Button(this);
@@ -50,11 +94,19 @@ public class TabletDemoActivity extends Activity {
     		btn.setText("Button " + arrNum[i]);
     		btn.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
     		layBtnPan.addView(btn);
-    	}
+    		
+    	}*/
     }
     
-    private void populateItems(SampleDTO[] data, GridView grid) {
-    	//Log.d("mylog", "populateButton " + count);
+    private void populateItems(int count, GridView grid) {
+    	SampleDTO[] data = new SampleDTO[count];
+		
+		for (int i = 0; i < data.length; ++i) {
+			data[i] = new SampleDTO();
+			data[i].setId(i);
+			data[i].setName("Bàn " + i);
+		}
+		
     	grid.setAdapter(new ImgBtnAdapter(data, this));
     	grid.setOnItemClickListener(new OnItemClickListener() {
     		@Override
