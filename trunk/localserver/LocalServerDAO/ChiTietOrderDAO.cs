@@ -19,10 +19,31 @@ namespace LocalServerDAO
             return null;
         }
 
-        public static bool ThemChiTietOrder(ChiTietOrder _chiTietOrder)
+        public static ChiTietOrder ThemChiTietOrder(ChiTietOrder _chiTietOrder)
+        {
+            ThucDonDienTu.DataContext.ChiTietOrders.InsertOnSubmit(_chiTietOrder);
+            try
+            {
+                ThucDonDienTu.DataContext.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                _chiTietOrder = null;
+            }
+
+            return _chiTietOrder;
+        }
+
+        public static bool SuaChiTietOrder(ChiTietOrder _chiTietOrder)
         {
             bool result = false;
-            ThucDonDienTu.DataContext.ChiTietOrders.InsertOnSubmit(_chiTietOrder);
+            var temp = ThucDonDienTu.DataContext.ChiTietOrders.Where(c => c.MaChiTietOrder == _chiTietOrder.MaChiTietOrder);
+            if (temp.Count() > 0)
+            {
+                ChiTietOrder ct = temp.First();
+                ct = _chiTietOrder;
+            }
+
             try
             {
                 ThucDonDienTu.DataContext.SubmitChanges();

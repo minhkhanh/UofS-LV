@@ -156,9 +156,37 @@ namespace LocalServerWeb
         [OperationContract]
         Order LayOrder(int maOrder);
 
+        [WebInvoke(Method = "GET", UriTemplate = "layChiTietOrder?maChiTietOrder={maChiTietOrder}")]
+        [OperationContract]
+        ChiTietOrder LayChiTietOrder(int maChiTietOrder);
 
+        [WebInvoke(Method = "GET", UriTemplate = "layChiTietHuyOrder?maChiTietHuyOrder={maChiTietHuyOrder}")]
+        [OperationContract]
+        ChiTietHuyOrder LayChiTietHuyOrder(int maChiTietHuyOrder);
 
+        [WebInvoke(Method = "POST", UriTemplate = "themOrder")]
+        [OperationContract]
+        Order ThemOrder(Order _order);
 
+        [WebInvoke(Method = "POST", UriTemplate = "themChiTietOrder")]
+        [OperationContract]
+        ChiTietOrder ThemChiTietOrder(ChiTietOrder _chiTietOrder);
+
+        [WebInvoke(Method = "POST", UriTemplate = "themChiTietHuyOrder")]
+        [OperationContract]
+        ChiTietHuyOrder ThemChiTietHuyOrder(ChiTietHuyOrder _chiTietHuyOrder);
+
+        [WebInvoke(Method = "PUT", UriTemplate = "suaOrder")]
+        [OperationContract]
+        bool SuaOrder(Order _order);
+
+        [WebInvoke(Method = "PUT", UriTemplate = "suaChiTietOrder")]
+        [OperationContract]
+        bool SuaChiTietOrder(ChiTietOrder _chiTietOrder);
+
+        [WebInvoke(Method = "PUT", UriTemplate = "suaChiTietHuyOrder")]
+        [OperationContract]
+        bool SuaChiTietHuyOrder(ChiTietHuyOrder _chiTietHuyOrder);
 
         // Testing purpose
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachFoo")]

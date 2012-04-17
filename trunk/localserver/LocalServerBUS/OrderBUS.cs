@@ -19,9 +19,14 @@ namespace LocalServerBUS
             return OrderDAO.LayOrder(maOrder);
         }
 
-        public static bool ThemOrder(Order _order)
+        public static Order ThemOrder(Order _order)
         {
             return OrderBUS.ThemOrder(_order);
+        }
+
+        public static bool SuaOrder(Order _order)
+        {
+            return OrderDAO.SuaOrder(_order);
         }
     }
 }
