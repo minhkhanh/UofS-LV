@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="hello">Hello World, MenuClientActivity!</string>
-    <string name="app_name">MenuClient</string>
-    <string name="table_list_caption">Chọn bàn</string>
-
-</resources>
