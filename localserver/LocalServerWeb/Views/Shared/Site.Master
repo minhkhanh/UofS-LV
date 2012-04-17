@@ -91,172 +91,18 @@
     <div id="templatemo_slider_wrapper">
 
 	    <div id="templatemo_slider">
-    
-    	    <div id="latest_product_slider">
-    
-                <div id="SlideItMoo_outer">	
-                    <div id="SlideItMoo_inner">			
-                        <div id="SlideItMoo_items">
-                            <div class="SlideItMoo_element">
-                                    <a href="#">
-                                    <img src="../../Images/templatemo_product_01.png" alt="product 1" /></a>
-                           
-                            </div>	
-                            <div class="SlideItMoo_element">
-                                    <a href="#">
-                                    <img src="../../Images/templatemo_product_02.png" alt="product 2" /></a>
-                
-                            </div>
-                            <div class="SlideItMoo_element">
-                                    <a href="#">
-                                    <img src="../../Images/templatemo_product_03.png" alt="product 3" /></a>
-                
-                            </div>
-                            <div class="SlideItMoo_element">
-                                    <a href="#">
-                                    <img src="../../Images/templatemo_product_04.png" alt="product 4" /></a>
-                
-                            </div>
-                            <div class="SlideItMoo_element">
-                                    <a href="#">
-                                    <img src="../../Images/templatemo_product_05.png" alt="product 5" /></a>
-                
-                            </div>
-                            <div class="SlideItMoo_element">
-                                    <a href="#">
-                                    <img src="../../Images/templatemo_product_06.png" alt="product 6" /></a>
-                
-                            </div>
-                            <div class="SlideItMoo_element">
-                                    <a href="#">
-                                    <img src="../../Images/templatemo_product_07.png" alt="product 7" /></a>
-                            </div>
-                            <div class="SlideItMoo_element">
-                                    <a href="#">
-                                    <img src="../../Images/templatemo_product_08.png" alt="product 8" /></a>
-                            </div>
-                        </div>			
-                    </div>
-                </div>
-    	
-            </div> <!-- end of latest_product_slider -->
-    
+            <% Html.RenderPartial("LatestSlider"); %>
         </div> <!-- end of templatemo_slider -->
 
     </div> <!-- end of templatemo_slider_wrapper -->
 
     <div id="templatemo_content_wrapper">
+        <asp:ContentPlaceHolder ID="LeftSidebar" runat="server">
+        </asp:ContentPlaceHolder>   
+    
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
 
-	    <div id="templatmeo_sidebar">
-    	
-        
-            <div class="sidebar_section">
-                <h2>Search Any Item</h2>
-       		    <div class="sidebar_section_content">
-                
-                    <form action="#" method="get">
-                        <input type="text" value="Enter a keyword..." name="q" size="10" id="searchfield" title="searchfield" onfocus="clearText(this)" onblur="clearText(this)" />
-                        <input type="submit" name="Search" value="Search" alt="Search" id="searchbutton" title="Search" />
-                    </form>    
-                
-                    <div class="cleaner"></div>
-                </div>
-             
-            </div>
-        
-    	    <div class="sidebar_section">
-       		
-                <h2>Categories</h2>
-       	
-       		    <div class="sidebar_section_content">
-                    
-                    <ul class="categories_list">
-                        <li><a href="#">Lorem ipsum dolor</a></li>
-                        <li><a href="#">Phasellus eget lorem</a></li>
-                        <li><a href="#">Sed sit amet sem</a></li>
-                        <li><a href="#">Cras eget est vel</a></li>
-                        <li><a href="#">Quisque in ligula</a></li>
-                        <li><a href="#">Donec a massa dui</a></li>
-                        <li><a href="#">Aenean facilisis</a></li>
-                        <li><a href="#">Etiam vitae consequat</a></li>
-                        <li><a href="#">Aliquam sollicitudin</a></li>
-                        <li><a href="#">Nunc fermentum</a></li>
-                        <li><a href="#">Quisque in ligula</a></li>
-                        <li><a href="#">Donec a massa dui</a></li>
-                        <li><a href="#">Aenean facilisis</a></li>
-                        <li><a href="#">Etiam vitae consequat</a></li>
-                        <li><a href="#">Aliquam sollicitudin</a></li>
-                        <li><a href="#">Nunc fermentum</a></li>
-                    </ul>
-                </div>
-             
-            </div>
-
-	    </div> <!-- end of templatemo_slider -->         
-    
-        <div id="templatemo_content">
-    
-    	    <div class="content_section">
-        
-        	    <h2>Welcome to the Shoe Store</h2>
-            
-                <p>Free CSS Templates are provided by <a href="http://www.templatemo.com" target="_parent">TemplateMo.com</a> for everyone. Feel free to download, edit and use this template for your websites. Credit goes to <a href="http://www.vectorvaco.com" target="_blank">Free Vectors</a> for vector graphics used in this layout.</p>
-            
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et quam vitae ipsum vulputate varius vitae semper nunc. Quisque eget elit quis augue pharetra feugiat. <a href="#">Suspendisse</a> turpis arcu, dignissim ac laoreet a, <a href="#">condimentum</a> in massa.</p>
-            
-          </div>
-        
-            <div class="content_section">
-        
-        	    <h2>New Products</h2>
-                    
-        	    <div class="product_box margin_r40">
-                
-                    <div class="image_wrapper"><a href="http://www.templatemo.com/page/1" target="_parent"><img src="../../Images/templatemo_image_01.jpg" alt="product" /></a></div>
-                  <h3>Phasellus eget lorem</h3>
-                    <p>Nullam scelerisque odio ante, in facilisis mauris. Sed justo quam, sollicitudin vitae.</p>
-                    <p class="price">Price: $250</p>
-                    <a href="#">Detail</a> | <a href="#">Buy Now</a>
-            
-         	     </div>
-                    
-                        <div class="product_box">
-                    
-                    <div class="image_wrapper"><a href="http://www.templatemo.com/page/2" target="_parent"><img src="../../Images/templatemo_image_02.jpg" alt="product" /></a></div>
-                    <h3>Aenean magna felis</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dictum ultricies purus.</p>
-                    <p class="price">Price: $350</p>
-                    <a href="#">Detail</a> | <a href="#">Buy Now</a>
-                      
-                        </div>
-                    
-                        <div class="cleaner"></div>
-                    
-                        <div class="product_box margin_r40">
-                    
-                    <div class="image_wrapper"><a href="http://www.templatemo.com/page/3" target="_parent"><img src="../../Images/templatemo_image_03.jpg" alt="product" /></a></div>
-                    <h3>Vestibulum eu lacus mauris</h3>
-                    <p>Donec a tortor erat. Ut arcu quam, congue non vulputate non, placerat vel nibh.</p>
-                    <p class="price">Price: $450</p>
-                    <a href="#">Detail</a> | <a href="#">Buy Now</a>
-    
-                        </div>
-                    
-                        <div class="product_box">
-                    
-                    <div class="image_wrapper"><a href="http://www.templatemo.com/page/4" target="_parent"><img src="../../Images/templatemo_image_04.jpg" alt="product" /></a></div>
-                    <h3>Phasellus vitae alique</h3>
-                    <p>Aliquam mollis, ligula id condimentum imperdiet, tellus eros elementum orci. </p>
-                    <p class="price">Price: $550</p>
-                    <a href="#">Detail</a> | <a href="#">Buy Now</a>
-                      
-                        </div>
-                    
-				    <div class="cleaner"></div>
-        
-            </div>
-    
-        </div> <!-- end of templatemo_content -->
 
 	    <div class="cleaner"></div>
     
@@ -281,7 +127,7 @@
 <%--    </div>--%>
 
     <div id="main">
-        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+<%--        <asp:ContentPlaceHolder ID="MainContent" runat="server" />--%>
 
         <div id="footer">
         </div>

@@ -70,7 +70,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Codes\FillCode.cs" />
+    <Compile Include="Codes\SharedCode.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -119,6 +119,8 @@
     <Content Include="Scripts\mootools-1.2.1-core.js" />
     <Content Include="Scripts\slideitmoo-1.1.js" />
     <Content Include="Views\Shared\LanguageUserControl.ascx" />
+    <Content Include="Views\Shared\LatestSlider.ascx" />
+    <Content Include="Views\Shared\LeftSidebar.ascx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
