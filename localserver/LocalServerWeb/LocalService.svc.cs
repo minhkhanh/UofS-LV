@@ -470,5 +470,111 @@ namespace LocalServerWeb
             return Order;
         }
 
+        public ChiTietOrder LayChiTietOrder(int maChiTietOrder)
+        {
+            var ChiTietOrder = new ChiTietOrder();
+            try
+            {
+                ChiTietOrder = ChiTietOrderBUS.LayChiTietOrder(maChiTietOrder);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return ChiTietOrder;
+        }
+
+        public ChiTietHuyOrder LayChiTietHuyOrder(int maChiTietHuyOrder)
+        {
+            var ChiTietHuyOrder = new ChiTietHuyOrder();
+            try
+            {
+                ChiTietHuyOrder = ChiTietHuyOrderBUS.LayChiTietHuyOrder(maChiTietHuyOrder);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return ChiTietHuyOrder;
+        }
+
+        public Order ThemOrder(Order _order)
+        {
+            try
+            {
+                return OrderBUS.ThemOrder(_order);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return null;         
+        }
+
+        public ChiTietOrder ThemChiTietOrder(ChiTietOrder _ChiTietOrder)
+        {
+            try
+            {
+                return ChiTietOrderBUS.ThemChiTietOrder(_ChiTietOrder);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return null;
+        }
+
+        public ChiTietHuyOrder ThemChiTietHuyOrder(ChiTietHuyOrder _chiTietHuyOrder)
+        {
+            try
+            {
+                return ChiTietHuyOrderBUS.ThemChiTietHuyOrder(_chiTietHuyOrder);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return null;
+        }
+
+        public bool SuaOrder(Order _order)
+        {
+            try
+            {
+                return OrderBUS.SuaOrder(_order);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return false;
+        }
+
+        public bool SuaChiTietOrder(ChiTietOrder _chiTietOrder)
+        {
+            try
+            {
+                return ChiTietOrderBUS.SuaChiTietOrder(_chiTietOrder);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return false;
+        }
+
+        public bool SuaChiTietHuyOrder(ChiTietHuyOrder _chiTietHuyOrder)
+        {
+            try
+            {
+                return ChiTietHuyOrderBUS.SuaChiTietHuyOrder(_chiTietHuyOrder);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return false;
+        }
+
     }
 }
