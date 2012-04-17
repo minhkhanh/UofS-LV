@@ -4,14 +4,14 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:id="@+id/layBtnPan"
+    <Spinner
+        android:id="@+id/spinner1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="horizontal" >
+        android:prompt="@string/app_name" >
 
-    </LinearLayout>
+        <!-- Preview: listitem=@android:layout/simple_spinner_item -->
+    </Spinner>
 
     <GridView
         android:id="@+id/gridView1"

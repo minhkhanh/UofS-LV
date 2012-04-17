@@ -21,4 +21,9 @@ public class SampleDTO {
 		this.name = name;
 	}
 	
+	@Override
+	public String toString() {
+		return getName();
+	}
+	
 }
