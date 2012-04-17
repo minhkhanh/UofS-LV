@@ -50,6 +50,18 @@ img { margin: 0px; padding: 0px; border: none; }
 
 /* menu */
 
+#templatemo_top_wrapper {
+	width: 100%;
+	height: 25px;
+	margin: 0 auto;	
+}
+
+#templatemo_language {
+	width: 940px;	
+	height: 25px;
+	margin: 0 auto;    
+}
+
 #templatemo_menu_wrapper {
 	width: 100%;
 	height: 55px;
