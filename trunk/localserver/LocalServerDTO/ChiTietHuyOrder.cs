@@ -13,11 +13,11 @@ namespace LocalServerDTO
     public class ChiTietHuyOrder
     {
         [DataMember(Name = "MaChiTietOrder")]
-        [Column(Name = "MaChiTietOrder")]
+        [Column(IsPrimaryKey = true, Name = "MaChiTietOrder")]
         private int? _maChiTietOrder;
         private EntityRef<ChiTietOrder> _chiTietOrder = new EntityRef<ChiTietOrder>();
 
-        [Association(Name = "ChiTietOrder_ChiTietHuyOrder_FK1", IsForeignKey = true, Storage = "_chiTietOrder", ThisKey = "_maChiTietOrder")]
+        [Association(Name = "ChiTietOrder_ChiTietHuyOrder_FK1", IsForeignKey = true, Storage = "_chiTietOrder", ThisKey = "_maChiTietOrder", OtherKey="MaChiTietOrder")]
         public ChiTietOrder ChiTietOrder
         {
             get { return _chiTietOrder.Entity; }
