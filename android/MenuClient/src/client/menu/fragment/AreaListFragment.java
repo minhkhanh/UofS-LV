@@ -48,14 +48,11 @@ public class AreaListFragment extends ListFragment {
 				&& detailsFrame.getVisibility() == View.VISIBLE;
 
 		if (savedInstanceState != null) {
-			// Restore last state for checked position.
 			selIndex = savedInstanceState.getInt("selIndex", 0);
 		}
 
 		if (isDualPane) {
-			// In dual-pane mode, the list view highlights the selected item.
 			getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-			// Make sure our UI is in the correct state.
 			showDetails(selIndex);
 		}
 	}
@@ -66,20 +63,14 @@ public class AreaListFragment extends ListFragment {
 		KhuVucDTO khuVuc = (KhuVucDTO) getListAdapter().getItem(index);
 		
 		if (isDualPane) {
-			// We can display everything in-place with fragments, so update
-			// the list to highlight the selected item and show the data.
 			getListView().setItemChecked(index, true);		
 			
-			// Check what fragment is currently shown, replace if needed.
 			TableGridFragment tableGrid = (TableGridFragment) getFragmentManager()
 					.findFragmentById(R.id.TableGridPlaceHolder);
 
 			if (tableGrid == null || tableGrid.getKhuVuc() != khuVuc) {
-				// Make new fragment to show this selection.
 				tableGrid = TableGridFragment.newInstance(khuVuc);
 
-				// Execute a transaction, replacing any existing fragment
-				// with this one inside the frame.
 				FragmentTransaction ft = getFragmentManager()
 						.beginTransaction();
 				ft.replace(R.id.TableGridPlaceHolder, tableGrid);
