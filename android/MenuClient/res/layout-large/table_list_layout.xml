@@ -10,5 +10,12 @@
         android:layout_height="match_parent" android:layout_weight="0.5">
 
     </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/TableGridPlaceHolder"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" android:layout_weight="1">
+
+    </FrameLayout>
 
 </LinearLayout>
