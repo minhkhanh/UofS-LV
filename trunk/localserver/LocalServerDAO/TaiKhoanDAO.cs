@@ -34,5 +34,16 @@ namespace LocalServerDAO
             }
             return null;
         }
+
+        public static TaiKhoan LayTaiKhoanTheoTenTaiKhoan(string tenKhaiKhoan)
+        {
+            var temp = ThucDonDienTu.DataContext.TaiKhoans.Where(t => t.TenTaiKhoan == tenKhaiKhoan);
+            if (temp.Count() > 0)
+            {
+                TaiKhoan tk = temp.First();
+                return tk;
+            }
+            return null;
+        }
     }
 }

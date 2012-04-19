@@ -23,5 +23,14 @@ namespace LocalServerBUS
         {
             return TaiKhoanDAO.LayTaiKhoan(maTaiKhoan);
         }
+
+        public static TaiKhoan KiemTraTaiKhoan(string tenKhaiKhoan, string matKhau)
+        {
+            if (String.IsNullOrEmpty(tenKhaiKhoan)) throw new ArgumentException("Value cannot be null or empty.", "tenKhaiKhoan");
+            if (String.IsNullOrEmpty(matKhau)) throw new ArgumentException("Value cannot be null or empty.", "matKhau");
+            TaiKhoan taiKhoan = TaiKhoanDAO.LayTaiKhoanTheoTenTaiKhoan(tenKhaiKhoan);
+            if (taiKhoan == null || taiKhoan.MatKhau!=tenKhaiKhoan || !taiKhoan.Active) return null;
+            return taiKhoan;
+        }
     }
 }
