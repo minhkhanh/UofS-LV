@@ -7,29 +7,8 @@
    <%-- <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />--%>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="../../Content/templatemo_style.css" type="text/css" rel="stylesheet"/>
-    <script language="javascript" type="text/javascript" src="../../Scripts/mootools-1.2.1-core.js"></script>
-    <script language="javascript" type="text/javascript" src="../../Scripts/mootools-1.2-more.js"></script>
-    <script language="javascript" type="text/javascript" src="../../Scripts/slideitmoo-1.1.js"></script>
-    <script language="javascript" type="text/javascript">
-	    window.addEvents({
-		    'domready': function(){
-			    /* thumbnails example , div containers */
-			    new SlideItMoo({
-						    overallContainer: 'SlideItMoo_outer',
-						    elementScrolled: 'SlideItMoo_inner',
-						    thumbsContainer: 'SlideItMoo_items',		
-						    itemsVisible: 6,
-						    elemsSlide: 2,
-						    duration: 160,
-						    itemsSelector: '.SlideItMoo_element',
-						    itemWidth: 140,
-						    showControls:1 });
-		    }});
-        function clearText(field) {
-            if (field.defaultValue == field.value) field.value = '';
-            else if (field.value == '') field.value = field.defaultValue;
-        }
-    </script>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
 </head>
 
 <body>
