@@ -12,5 +12,9 @@ namespace LocalServerBUS
         {
             return NgonNguDAO.LayDanhSachNgonNgu();
         }
+        public static NgonNgu LayNgonNguTheoMa(int maNgonNgu)
+        {
+            return NgonNguDAO.LayNgonNguTheoMa(maNgonNgu);
+        }
     }
 }
