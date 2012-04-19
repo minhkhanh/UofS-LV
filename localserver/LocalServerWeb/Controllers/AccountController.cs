@@ -7,13 +7,14 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
+using LocalServerWeb.Codes;
 using LocalServerWeb.Models;
 
 namespace LocalServerWeb.Controllers
 {
 
     [HandleError]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
 
         public IFormsAuthenticationService FormsService { get; set; }

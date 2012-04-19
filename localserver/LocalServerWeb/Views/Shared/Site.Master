@@ -14,7 +14,12 @@
 <body>
     <%--<div class="page">--%>
     <div id="templatemo_top_wrapper">
-        <div id="templatemo_language"><% Html.RenderPartial("LanguageUserControl"); %></div> 
+        <div id="templatemo_top">
+            <div id="language_bar"><% Html.RenderPartial("LanguageUserControl"); %></div> 
+            <div id="logindisplay">
+                <% Html.RenderPartial("LogOnUserControl"); %>
+            </div> 
+        </div>
     </div>
     <div id="templatemo_menu_wrapper">
 
@@ -57,7 +62,7 @@
                 <div id="site_title">
             
                     <h1><a href="http://www.templatemo.com" target="_parent">
-                        <img src="images/templatemo_logo.png" alt="Site Title" />
+                        <img src="../../images/templatemo_logo.png" alt="Site Title" />
                         <span>free css template</span>
                     </a></h1>
                 
