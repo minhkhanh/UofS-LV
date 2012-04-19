@@ -3,6 +3,33 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Home Page
 </asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="HeadContent" runat="server">
+    <script language="javascript" type="text/javascript" src="../../Scripts/mootools-1.2.1-core.js"></script>
+    <script language="javascript" type="text/javascript" src="../../Scripts/mootools-1.2-more.js"></script>
+    <script language="javascript" type="text/javascript" src="../../Scripts/slideitmoo-1.1.js"></script>
+    <script language="javascript" type="text/javascript">
+        window.addEvents({
+            'domready': function () {
+                /* thumbnails example , div containers */
+                new SlideItMoo({
+                    overallContainer: 'SlideItMoo_outer',
+                    elementScrolled: 'SlideItMoo_inner',
+                    thumbsContainer: 'SlideItMoo_items',
+                    itemsVisible: 6,
+                    elemsSlide: 2,
+                    duration: 160,
+                    itemsSelector: '.SlideItMoo_element',
+                    itemWidth: 140,
+                    showControls: 1
+                });
+            } 
+        });
+        function clearText(field) {
+            if (field.defaultValue == field.value) field.value = '';
+            else if (field.value == '') field.value = field.defaultValue;
+        }
+    </script>
+</asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="LeftSidebar" runat="server">
     <% Html.RenderPartial("LeftSidebar"); %>
 </asp:Content>
