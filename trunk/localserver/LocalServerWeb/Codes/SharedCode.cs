@@ -37,7 +37,7 @@ namespace LocalServerWeb.Codes
 
         public static void StoreCommonData2Section(HttpContextBase httpContext)
         {
-            StoreLanguage(httpContext);
+            //StoreLanguage(httpContext);
         }
 
         private static void StoreLanguage(HttpContextBase httpContext)

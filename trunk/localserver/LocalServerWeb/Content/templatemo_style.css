@@ -12,7 +12,7 @@ body {
     background: #67d2f4  url(../Images/templatemo_body_top.png) top repeat-x;
 }
 
-a:link, a:visited { color: #0683ab; text-decoration: none; font-weight: normal; } 
+a:link, a:visited { color: #0683ab_; text-decoration: none; font-weight: normal; } 
 a:active, a:hover { color: #CC0066; text-decoration: underline; }
 
 .button_01 a {
@@ -56,10 +56,18 @@ img { margin: 0px; padding: 0px; border: none; }
 	margin: 0 auto;	
 }
 
-#templatemo_language {
+#templatemo_top {
 	width: 940px;	
 	height: 25px;
 	margin: 0 auto;    
+} 
+
+#templatemo_top #language_bar {
+    float: left;
+}
+
+#templatemo_top #logindisplay {
+    float: right;
 }
 
 #templatemo_menu_wrapper {
