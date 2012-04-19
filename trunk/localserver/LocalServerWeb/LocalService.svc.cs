@@ -8,6 +8,7 @@ using System.ServiceModel.Activation;
 using System.Text;
 using LocalServerBUS;
 using LocalServerDTO;
+using LocalServerWeb.Codes;
 
 namespace LocalServerWeb
 {
@@ -16,8 +17,7 @@ namespace LocalServerWeb
     {
         public LocalService()
         {
-            string strConn = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
-            ThucDonDienTuBUS.KhoiTao(strConn);
+            SharedCode.KhoiTaoCSDL();
         }
 
         public int PhepCong(int a, int b)

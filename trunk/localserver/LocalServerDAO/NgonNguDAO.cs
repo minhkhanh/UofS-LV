@@ -10,7 +10,16 @@ namespace LocalServerDAO
     {
         public static List<NgonNgu> LayDanhSachNgonNgu()
         {
+            //return ThucDonDienTu.DataContext.GetTable<NgonNgu>().ToList();
             return ThucDonDienTu.DataContext.NgonNgus.ToList();
+        }
+
+        public static NgonNgu LayNgonNguTheoMa(int maNgonNgu)
+        {
+            //lấy về đối tượng 
+            var temp = ThucDonDienTu.DataContext.NgonNgus.Where(b => b.MaNgonNgu == maNgonNgu);
+            if (temp.Count() == 0) return null;
+            return temp.First();
         }
     }
 }
