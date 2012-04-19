@@ -9,6 +9,7 @@ using System.Text;
 using LocalServerBUS;
 using LocalServerDTO;
 using LocalServerWeb.Codes;
+using System.IO;
 
 namespace LocalServerWeb
 {
@@ -574,6 +575,16 @@ namespace LocalServerWeb
                 Console.Error.WriteLine(e.Message);
             }
             return false;
+        }
+
+        public Stream GetPicture(string path)
+        {
+            return PictureBUS.GetPicture(path);
+        }
+
+        public bool AddPicture(string path, Stream content)
+        {
+            return PictureBUS.AddPicture(path, content);
         }
 
     }

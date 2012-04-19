@@ -6,24 +6,21 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using LocalServerDTO;
+using System.IO;
 
 namespace LocalServerWeb
 {
     [ServiceContract]
     public interface ILocalService
     {
-        [WebInvoke(Method = "GET", UriTemplate = "cong?a={a}&b={b}")]
-        [OperationContract]
-        int PhepCong(int a, int b);
-
-        [WebInvoke(Method = "GET", UriTemplate = "test")]
-        [OperationContract]
-        string Test();
-
+        
+        // Khu Vuc
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachKhuVuc")]
         [OperationContract]
         List<KhuVuc> LayDanhKhuVuc();
 
+
+        // Ban
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachBan")]
         [OperationContract]
         List<Ban> LayDanhSachBan();
@@ -59,10 +56,12 @@ namespace LocalServerWeb
         [OperationContract]
         bool GhepBan(RequestGhepBan request);
 
+
+        // Mon An
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachMonAn")]
         [OperationContract]
         List<MonAn> LayDanhSachMonAn();
-
+  
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachMonAnTheoDanhMuc?maDanhMuc={maDanhMuc}")]
         [OperationContract]
         List<MonAn> LayDanhSachMonAnTheoDanhMuc(int maDanhMuc);
@@ -71,10 +70,14 @@ namespace LocalServerWeb
         [OperationContract]
         MonAn LayMonAn(int maMonAn);
 
+
+        // Danh Muc
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachDanhMuc")]
         [OperationContract]
         List<DanhMuc> LayDanhSachDanhMuc();
 
+
+        // Chi Tiet Danh Muc Da Ngon Ngu
         [WebInvoke(Method = "GET", UriTemplate = "layChiTietDanhMucDaNgonNgu?maDanhMuc={maDanhMuc}&maNgonNgu={maNgonNgu}")]
         [OperationContract]
         ChiTietDanhMucDaNgonNgu LayChiTietDanhMucDaNgonNgu(int maDanhMuc, int maNgonNgu);
@@ -83,6 +86,8 @@ namespace LocalServerWeb
         [OperationContract]
         List<ChiTietDanhMucDaNgonNgu> LayDanhSachChiTietDanhMucDaNgonNgu();
 
+
+        // Chi Tiet Don Vi Tinh Da Ngon Ngu
         [WebInvoke(Method = "GET", UriTemplate = "layChiTietDonViTinhDaNgonNgu?maDonViTinh={maDonViTinh}&maNgonNgu={maNgonNgu}")]
         [OperationContract]
         ChiTietDonViTinhDaNgonNgu LayChiTietDonViTinhDaNgonNgu(int maDonViTinh, int maNgonNgu);
@@ -91,6 +96,8 @@ namespace LocalServerWeb
         [OperationContract]
         List<ChiTietDonViTinhDaNgonNgu> LayDanhSachChiTietDonViTinhDaNgonNgu();
 
+
+        // Chi Tiet Mon An Da Ngon Ngu
         [WebInvoke(Method = "GET", UriTemplate = "layChiTietMonAnDaNgonNgu?maMonAn={maMonAn}&maNgonNgu={maNgonNgu}")]
         [OperationContract]
         ChiTietMonAnDaNgonNgu LayChiTietMonAnDaNgonNgu(int maMonAn, int maNgonNgu);
@@ -99,6 +106,8 @@ namespace LocalServerWeb
         [OperationContract]
         List<ChiTietMonAnDaNgonNgu> LayDanhSachChiTietMonAnDaNgonNgu();
 
+
+        // Chi Tiet Mon An Don Vi Tinh
         [WebInvoke(Method = "GET", UriTemplate = "layChiTietMonAnDonViTinhDonGia?maMonAn={maMonAn}&maDonViTinh={maDonViTinh}")]
         [OperationContract]
         float LayChiTietMonAnDonViTinhDonGia(int maMonAn, int maDonViTinh);
@@ -111,34 +120,50 @@ namespace LocalServerWeb
         [OperationContract]
         List<ChiTietMonAnDonViTinh> LayDanhSachChiTietMonAnDonViTinh();
 
+
+        // Ngon Ngu
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachNgonNgu")]
         [OperationContract]
         List<NgonNgu> LayDanhSachNgonNgu();
 
+
+        // Nhom Tai Khoan
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachNhomTaiKhoan")]
         [OperationContract]
         List<NhomTaiKhoan> LayDanhSachNhomTaiKhoan();
 
+
+        // Tai Khoan
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachTaiKhoan")]
         [OperationContract]
         List<TaiKhoan> LayDanhSachTaiKhoan();
 
+
+        // Ti Gia
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachTiGia")]
         [OperationContract]
         List<TiGia> LayDanhSachTiGia();
 
+
+        // Phu Thu
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachPhuThu")]
         [OperationContract]
         List<PhuThu> LayDanhSachPhuThu();
 
+
+        // Khuyen Mais
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachKhuyenMai")]
         [OperationContract]
         List<KhuyenMai> LayDanhSachKhuyenMai();
 
+
+        // Bo Phan Che Bien
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachBoPhanCheBien")]
         [OperationContract]
         List<BoPhanCheBien> LayDanhSachBoPhanCheBien();
 
+
+        // Chi Tiet Mon Lien Quan
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachChiTietMonLienQuan")]
         [OperationContract]
         List<ChiTietMonLienQuan> LayDanhSachChiTietMonLienQuan();
@@ -148,6 +173,7 @@ namespace LocalServerWeb
         List<ChiTietMonLienQuan> LayDanhSachChiTietMonLienQuanTheoMaMon(int maMonAn);
 
 
+        // Order
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachOrder")]
         [OperationContract]
         List<Order> LayDanhSachOrder();
@@ -156,41 +182,65 @@ namespace LocalServerWeb
         [OperationContract]
         Order LayOrder(int maOrder);
 
-        [WebInvoke(Method = "GET", UriTemplate = "layChiTietOrder?maChiTietOrder={maChiTietOrder}")]
-        [OperationContract]
-        ChiTietOrder LayChiTietOrder(int maChiTietOrder);
-
-        [WebInvoke(Method = "GET", UriTemplate = "layChiTietHuyOrder?maChiTietHuyOrder={maChiTietHuyOrder}")]
-        [OperationContract]
-        ChiTietHuyOrder LayChiTietHuyOrder(int maChiTietHuyOrder);
-
         [WebInvoke(Method = "POST", UriTemplate = "themOrder")]
         [OperationContract]
         Order ThemOrder(Order _order);
-
-        [WebInvoke(Method = "POST", UriTemplate = "themChiTietOrder")]
-        [OperationContract]
-        ChiTietOrder ThemChiTietOrder(ChiTietOrder _chiTietOrder);
-
-        [WebInvoke(Method = "POST", UriTemplate = "themChiTietHuyOrder")]
-        [OperationContract]
-        ChiTietHuyOrder ThemChiTietHuyOrder(ChiTietHuyOrder _chiTietHuyOrder);
 
         [WebInvoke(Method = "PUT", UriTemplate = "suaOrder")]
         [OperationContract]
         bool SuaOrder(Order _order);
 
+
+        // Chi Tiet Order
+        [WebInvoke(Method = "GET", UriTemplate = "layChiTietOrder?maChiTietOrder={maChiTietOrder}")]
+        [OperationContract]
+        ChiTietOrder LayChiTietOrder(int maChiTietOrder);
+
+        [WebInvoke(Method = "POST", UriTemplate = "themChiTietOrder")]
+        [OperationContract]
+        ChiTietOrder ThemChiTietOrder(ChiTietOrder _chiTietOrder);
+
         [WebInvoke(Method = "PUT", UriTemplate = "suaChiTietOrder")]
         [OperationContract]
         bool SuaChiTietOrder(ChiTietOrder _chiTietOrder);
+
+
+        // Chi Tiet Huy Order
+        [WebInvoke(Method = "GET", UriTemplate = "layChiTietHuyOrder?maChiTietHuyOrder={maChiTietHuyOrder}")]
+        [OperationContract]
+        ChiTietHuyOrder LayChiTietHuyOrder(int maChiTietHuyOrder);
+
+        [WebInvoke(Method = "POST", UriTemplate = "themChiTietHuyOrder")]
+        [OperationContract]
+        ChiTietHuyOrder ThemChiTietHuyOrder(ChiTietHuyOrder _chiTietHuyOrder);
 
         [WebInvoke(Method = "PUT", UriTemplate = "suaChiTietHuyOrder")]
         [OperationContract]
         bool SuaChiTietHuyOrder(ChiTietHuyOrder _chiTietHuyOrder);
 
+        
+        // Picture 
+        [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "getPicture?path={path}")]
+        Stream GetPicture(string path);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "addPicture?path={path}")]
+        bool AddPicture(string path, Stream content);
+
+
+
         // Testing purpose
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachFoo")]
         [OperationContract]
         List<Foo> LayDanhSachFoo();
+
+        [WebInvoke(Method = "GET", UriTemplate = "cong?a={a}&b={b}")]
+        [OperationContract]
+        int PhepCong(int a, int b);
+
+        [WebInvoke(Method = "GET", UriTemplate = "test")]
+        [OperationContract]
+        string Test();
     }
 }
