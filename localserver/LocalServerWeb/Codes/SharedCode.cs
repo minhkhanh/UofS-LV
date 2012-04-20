@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using LocalServerBUS;
+using LocalServerDTO;
 
 namespace LocalServerWeb.Codes
 {
@@ -19,12 +22,14 @@ namespace LocalServerWeb.Codes
         {
             var listLanguage = NgonNguBUS.LayDanhSachNgonNgu();
             SelectList listNgonNgu;
-            if (listLanguage.Count == 0) listNgonNgu = new SelectList(listLanguage, "MaNgonNgu", "TenNgonNgu");
+            if (listLanguage.Count == 0) listNgonNgu = new SelectList(listLanguage, "KiHieu", "TenNgonNgu");
             else
             {
-                int maNgonNgu = listLanguage[0].MaNgonNgu;
-                if (httpContext.Session != null && httpContext.Session["maNgonNgu"] != null) maNgonNgu = (int)httpContext.Session["maNgonNgu"];
-                listNgonNgu = new SelectList(listLanguage, "MaNgonNgu", "TenNgonNgu", maNgonNgu);
+                string kiHieuDangChon = listLanguage[0].KiHieu;
+                if (httpContext.Session != null && httpContext.Session["ngonNgu"] != null) 
+                    kiHieuDangChon = ((NgonNgu)httpContext.Session["ngonNgu"]).KiHieu;
+                else if (httpContext.Session != null) httpContext.Session["ngonNgu"] = listLanguage[0];
+                listNgonNgu = new SelectList(listLanguage, "KiHieu", "TenNgonNgu", kiHieuDangChon);
             }
 
             viewData["listNgonNgu"] = listNgonNgu;
@@ -40,21 +45,30 @@ namespace LocalServerWeb.Codes
             //StoreLanguage(httpContext);
         }
 
-        private static void StoreLanguage(HttpContextBase httpContext)
+        public static void LoadUserCulture(HttpContextBase httpContext)
         {
-            if (httpContext.Request["maNgonNgu"]!=null)
-            {
-                try
-                {
-                    int maNgonNgu = int.Parse(httpContext.Request["maNgonNgu"]);
-                    var ngonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
-                    if (ngonNgu != null && httpContext.Session != null) httpContext.Session["maNgonNgu"] = maNgonNgu;
-                }
-                catch (Exception ex)
-                {
-                    Console.Out.WriteLine("Error: " + ex.StackTrace);
-                }                
-            }
+            if (httpContext.Session == null || httpContext.Session["ngonNgu"]==null) return;
+            NgonNgu ngonNgu = (NgonNgu)httpContext.Session["ngonNgu"];
+            var ci = new CultureInfo(ngonNgu.KiHieu);
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(ci.Name);
+            Thread.CurrentThread.CurrentUICulture = ci;
         }
+
+        //private static void StoreLanguage(HttpContextBase httpContext)
+        //{
+        //    if (httpContext.Request["maNgonNgu"]!=null)
+        //    {
+        //        try
+        //        {
+        //            int maNgonNgu = int.Parse(httpContext.Request["maNgonNgu"]);
+        //            var ngonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
+        //            if (ngonNgu != null && httpContext.Session != null) httpContext.Session["maNgonNgu"] = maNgonNgu;
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            Console.Out.WriteLine("Error: " + ex.StackTrace);
+        //        }                
+        //    }
+        //}
     }
 }

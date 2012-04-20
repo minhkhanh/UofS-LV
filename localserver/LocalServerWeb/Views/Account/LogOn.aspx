@@ -1,4 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<LocalServerWeb.Models.LogOnModel>" %>
+<%@ Import Namespace="LocalServerWeb.Resources.Models" %>
+<%@ Import Namespace="LocalServerWeb.Resources.Views.Account" %>
 
 <asp:Content ID="loginTitle" ContentPlaceHolderID="TitleContent" runat="server">
     Đăng nhập
@@ -52,46 +54,43 @@
 --%>
     
     <fieldset>
-        <legend>Thông tin đăng nhập</legend>
+        <legend><%:AccountString.LoginInfo %></legend>
         <table width="500px" border="1" cellspacing="0" cellpadding="5" align="center">
 	        <tr bgcolor="#666666">
-		        <td class="bgColorMain"><strong><font color="#FFFFFF">ĐĂNG NHẬP</font></strong>
+		        <td class="bgColorMain"><strong><font color="#FFFFFF"><%:AccountString.Login %></font></strong>
 		        </td>
 	        </tr>
 	        <tr>
 		        <td valign="top">
-			        <form id="frmDangNhap" name="frmDangNhap" method="post" action="/Account/Logon"
-				        onsubmit="return checkValidationLogin();">
+                    <% Html.BeginForm("LogOn", "Account", FormMethod.Post); %>
                         <input type="hidden" name="returnUrl" value="<%: ViewData["returnUrl"] %>"/>
 				        <table width="100%">
 					        <tr>
-						        <td colspan="2"><strong>Thông tin đăng nhập</strong>
+						        <td colspan="2"><strong><%:AccountString.LoginInfo %></strong>
 						        </td>
 					        </tr>
+                            <tr>
+                                <td colspan="2" align="center"><font color="#FF0000">
+                                    <%: Html.ValidationMessageFor(m => m.UserName) %>
+                                    <%: Html.ValidationMessageFor(m => m.Password) %>
+                                </font></td>
+                            </tr>
 					        <tr>
-						        <td><label for="tenDangNhap">Tên đăng nhập</label></td>
-						        <td><input type="text" name="tenDangNhap" style="width: 100%" value="<%: ViewData["tenTaiKhoan"] %>"
-							        onkeyup="checkValidationLoginObj('tenDangNhap')" /></td>
+						        <td><%: AccountModelString.UserName %></td>
+						        <td><%: Html.TextBoxFor(m => m.UserName, new { style = "width: 100%" })%></td>
 					        </tr>
 					        <tr>
-						        <td><label for="matKhau">Mật khẩu</label></td>
-						        <td><input type="password" name="matKhau" style="width: 100%"
-							        onkeyup="checkValidationLoginObj('matKhau')" /></td>
+						        <td><%: AccountModelString.Password %></td>
+						        <td><%: Html.PasswordFor(m => m.Password, new { style = "width: 100%" })%></td>
 					        </tr>
 					        <tr>
 						        <td></td>
 						        <td align="center"><input type="submit" name="dangNhap"
-							        value="Đăng nhập" /></td>
+							        value="<%: AccountString.Login %>" /></td>
 					        </tr>
-					        <% if (ViewData["loginFalse"] != null && (bool)ViewData["loginFalse"]==true)
-                { %>
-						        <tr>
-							        <td colspan="2"><font color="#FF0000">Tên đăng nhập
-									        không tồn tại hoặc mật khẩu không đúng</font></td>
-						        </tr>
-					        <% } %>
 				        </table>
-			        </form></td>
+			        <% Html.EndForm();%>
+                </td>
 	        </tr>
         </table>
     </fieldset>
