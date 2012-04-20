@@ -21,11 +21,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/main_menu_caption" android:onClick="onClick"/>
-
+
     <Button
-        android:id="@+id/SplitTable"
+        android:id="@+id/SplitTableBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/split_table_caption" android:onClick="onClick"/>
+        android:onClick="onClick"
+        android:text="@string/split_table_caption" />
 
 </LinearLayout>

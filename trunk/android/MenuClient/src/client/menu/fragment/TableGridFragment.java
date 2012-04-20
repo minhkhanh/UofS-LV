@@ -1,6 +1,8 @@
 package client.menu.fragment;
 
+import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -67,10 +69,20 @@ public class TableGridFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int pos,
 					long id) {
-				
+				FragmentTransaction ft = getFragmentManager()
+						.beginTransaction();
+				Fragment prev = getFragmentManager()
+						.findFragmentByTag("dialog");
+				if (prev != null) {
+					ft.remove(prev);
+				}
+				// ft.addToBackStack(null);
+
+				DialogFragment newFragment = TableDialogFragment.newInstance();
+				newFragment.show(ft, "dialog");
 			}
 		});
-		
+
 		return grid;
 	}
 }

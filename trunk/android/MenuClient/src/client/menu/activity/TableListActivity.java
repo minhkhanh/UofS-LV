@@ -12,7 +12,7 @@ public class TableListActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.two_fragment_layout);
+		setContentView(R.layout.layout_two_fragment);
 
 		FragmentManager fm = getFragmentManager();
 		AreaListFragment f = (AreaListFragment) fm
