@@ -3,6 +3,8 @@ package client.menu.dto;
 import java.io.Serializable;
 
 public class ChiTietMonAnDaNgonNguDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	int maMonAn;
 	int maNgonNgu;
 	String tenMonAn;

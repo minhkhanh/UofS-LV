@@ -3,19 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal" >
-
-    <FrameLayout
-        android:id="@+id/CategoryListPlaceHolder"
-        android:layout_width="0dp"
-        android:layout_height="match_parent" android:layout_weight="0.5">
 
+    <FrameLayout
+        android:id="@+id/LeftPaneHolder"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5" >
     </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/DishListPlaceHolder"
-        android:layout_width="0dp"
-        android:layout_height="match_parent" android:layout_weight="1">
 
+    <FrameLayout
+        android:id="@+id/RightPaneHolder"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
     </FrameLayout>
 
 </LinearLayout>

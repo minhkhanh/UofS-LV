@@ -3,6 +3,7 @@ package client.menu.dto;
 import java.io.Serializable;
 
 public class DanhMucDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	int maDanhMuc;
 	int maDanhMucCha;
 	

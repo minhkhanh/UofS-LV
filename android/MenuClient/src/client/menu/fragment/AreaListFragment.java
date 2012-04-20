@@ -46,7 +46,7 @@ public class AreaListFragment extends ListFragment {
 				android.R.layout.simple_list_item_activated_1, fakeData(10)));
 
 		View detailsFrame = getActivity().findViewById(
-				R.id.TableGridPlaceHolder);
+				R.id.RightPaneHolder);
 		isDualPane = detailsFrame != null
 				&& detailsFrame.getVisibility() == View.VISIBLE;
 
@@ -71,14 +71,14 @@ public class AreaListFragment extends ListFragment {
 			getListView().setItemChecked(index, true);		
 			
 			TableGridFragment tableGrid = (TableGridFragment) getFragmentManager()
-					.findFragmentById(R.id.TableGridPlaceHolder);
+					.findFragmentById(R.id.RightPaneHolder);
 
 			if (tableGrid == null || tableGrid.getKhuVuc() != khuVuc) {
 				tableGrid = TableGridFragment.newInstance(khuVuc);
 
 				FragmentTransaction ft = getFragmentManager()
 						.beginTransaction();
-				ft.replace(R.id.TableGridPlaceHolder, tableGrid);
+				ft.replace(R.id.RightPaneHolder, tableGrid);
 				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 				ft.commit();
 			}
@@ -87,7 +87,7 @@ public class AreaListFragment extends ListFragment {
 			TableGridFragment tableGrid = TableGridFragment.newInstance(khuVuc);
 			
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
-			ft.replace(R.id.AreaListPlaceHolder, tableGrid);
+			ft.replace(R.id.LeftPaneHolder, tableGrid);
 			ft.addToBackStack(null);
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 			ft.commit();

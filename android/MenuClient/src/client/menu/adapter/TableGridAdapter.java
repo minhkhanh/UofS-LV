@@ -9,11 +9,11 @@ import android.widget.TextView;
 import client.menu.R;
 import client.menu.dto.BanDTO;
 
-public class TableItemAdapter extends ArrayAdapter<BanDTO> {
+public class TableGridAdapter extends ArrayAdapter<BanDTO> {
 
 	Activity context;
 
-	public TableItemAdapter(Activity context, BanDTO[] data) {
+	public TableGridAdapter(Activity context, BanDTO[] data) {
 		super(context, R.layout.table_grid_item, data);
 		this.context = context;
 	}
