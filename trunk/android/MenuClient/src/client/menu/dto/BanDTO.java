@@ -3,6 +3,9 @@ package client.menu.dto;
 import java.io.Serializable;
 
 public class BanDTO implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	int maBan;
 	int maKhuVuc;
 	String tenBan;

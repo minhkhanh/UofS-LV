@@ -2,8 +2,10 @@ package client.menu.fragment;
 
 import android.app.ListFragment;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import client.menu.adapter.MonAnDtoAdapter;
+import android.util.Log;
+import android.view.View;
+import android.widget.ListView;
+import client.menu.adapter.DishListAdapter;
 import client.menu.dto.DanhMucDTO;
 import client.menu.dto.MonAnDTO;
 
@@ -50,7 +52,11 @@ public class DishListFragment extends ListFragment {
 					.getSerializable("danhMuc");
 		}
 
-		setListAdapter(new MonAnDtoAdapter(getActivity(), android.R.id.text1,
-				fakeData(danhMuc)));
+		setListAdapter(new DishListAdapter(getActivity(), fakeData(danhMuc)));
+	}
+	
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		Log.d("mylog", "item click");
 	}
 }

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.util.Log;
 import client.menu.R;
 import client.menu.fragment.AreaListFragment;
 
@@ -13,19 +12,17 @@ public class TableListActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.table_list_layout);
+		setContentView(R.layout.two_fragment_layout);
 
 		FragmentManager fm = getFragmentManager();
 		AreaListFragment f = (AreaListFragment) fm
 				.findFragmentByTag("AreaListFragment");
 		if (f == null) {
 			FragmentTransaction ft = fm.beginTransaction();
-			ft.replace(R.id.AreaListPlaceHolder, new AreaListFragment(),
+			ft.replace(R.id.LeftPaneHolder, new AreaListFragment(),
 					"AreaListFragment");
 			ft.commit();
 		}
-
-		Log.d("mylog", "TableListActivity.onCreate");
 	}
 
 	@Override

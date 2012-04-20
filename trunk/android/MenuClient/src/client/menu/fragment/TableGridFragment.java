@@ -10,8 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
-import android.widget.Toast;
-import client.menu.adapter.TableItemAdapter;
+import client.menu.adapter.TableGridAdapter;
 import client.menu.dto.BanDTO;
 import client.menu.dto.KhuVucDTO;
 
@@ -63,13 +62,12 @@ public class TableGridFragment extends Fragment {
 		grid.setGravity(Gravity.CENTER);
 		grid.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
 		grid.setNumColumns(GridView.AUTO_FIT);
-		grid.setAdapter(new TableItemAdapter(getActivity(), fakeData(khuVuc)));
+		grid.setAdapter(new TableGridAdapter(getActivity(), fakeData(khuVuc)));
 		grid.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int pos,
 					long id) {
-				Toast.makeText(getActivity(), "" + pos, Toast.LENGTH_SHORT)
-						.show();
+				
 			}
 		});
 		

@@ -18,7 +18,6 @@ public class CategoryListFragment extends ListFragment {
 		for (int i = 0; i < khuVucArray.length; ++i) {
 			khuVucArray[i] = new DanhMucDTO();
 			khuVucArray[i].setMaDanhMuc(i);
-			// khuVucArray[i].set("Khu vực " + i);
 		}
 
 		return khuVucArray;
@@ -43,7 +42,7 @@ public class CategoryListFragment extends ListFragment {
 				android.R.layout.simple_list_item_activated_1, fakeData(10)));
 
 		View dishList = getActivity()
-				.findViewById(R.id.DishListPlaceHolder);
+				.findViewById(R.id.RightPaneHolder);
 		isDualPane = dishList != null
 				&& dishList.getVisibility() == View.VISIBLE;
 
@@ -66,14 +65,14 @@ public class CategoryListFragment extends ListFragment {
 			getListView().setItemChecked(index, true);
 
 			DishListFragment dishList = (DishListFragment) getFragmentManager()
-					.findFragmentById(R.id.DishListPlaceHolder);
+					.findFragmentById(R.id.RightPaneHolder);
 
 			if (dishList == null || dishList.getDanhMuc() != danhMuc) {
 				dishList = DishListFragment.newInstance(danhMuc);
 
 				FragmentTransaction ft = getFragmentManager()
 						.beginTransaction();
-				ft.replace(R.id.DishListPlaceHolder, dishList);
+				ft.replace(R.id.RightPaneHolder, dishList);
 				ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 				ft.commit();
 			}
@@ -82,7 +81,7 @@ public class CategoryListFragment extends ListFragment {
 			DishListFragment dishList = DishListFragment.newInstance(danhMuc);
 
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
-			ft.replace(R.id.CategoryListPlaceHolder, dishList);
+			ft.replace(R.id.LeftPaneHolder, dishList);
 			ft.addToBackStack(null);
 			ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 			ft.commit();
