@@ -1,7 +1,8 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
+<%@ Import Namespace="LocalServerWeb.Resources.Views.Home" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    Home Page
+    <%: HomeString.TitleHome %>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="HeadContent" runat="server">
     <script language="javascript" type="text/javascript" src="../../Scripts/mootools-1.2.1-core.js"></script>

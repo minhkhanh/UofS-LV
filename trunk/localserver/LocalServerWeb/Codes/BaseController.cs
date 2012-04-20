@@ -16,7 +16,14 @@ namespace LocalServerWeb.Codes
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             base.OnActionExecuted(filterContext);
+            //SharedCode.FillCommonData2View(ViewData, HttpContext);
+        }
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {            
+            base.OnActionExecuting(filterContext);
             SharedCode.FillCommonData2View(ViewData, HttpContext);
+            SharedCode.LoadUserCulture(HttpContext);            
         }
     }
 }

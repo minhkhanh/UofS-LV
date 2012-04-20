@@ -21,5 +21,13 @@ namespace LocalServerDAO
             if (temp.Count() == 0) return null;
             return temp.First();
         }
+
+        public static NgonNgu LayNgonNguTheoKiHieu(string kiHieu)
+        {
+            //lấy về đối tượng 
+            var temp = ThucDonDienTu.DataContext.NgonNgus.Where(b => b.KiHieu == kiHieu);
+            if (temp.Count() == 0) return null;
+            return temp.First();
+        }
     }
 }

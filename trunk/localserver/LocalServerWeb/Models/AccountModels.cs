@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using LocalServerWeb.Resources.Models;
+using LocalServerWeb.Resources.Views.Shared;
 
 namespace LocalServerWeb.Models
 {
@@ -34,13 +36,11 @@ namespace LocalServerWeb.Models
 
     public class LogOnModel
     {
-        [Required]
-        [DisplayName("Tài khoản")]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(AccountModelString))]        
         public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [DisplayName("Mật khẩu")]
         public string Password { get; set; }
 
         //[DisplayName("Remember me?")]

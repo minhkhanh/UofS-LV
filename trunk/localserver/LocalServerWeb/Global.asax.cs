@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.ServiceModel.Activation;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using LocalServerDTO;
+using LocalServerWeb.Codes;
 
 namespace LocalServerWeb
 {
@@ -33,5 +37,15 @@ namespace LocalServerWeb
 
             RegisterRoutes(RouteTable.Routes);
         }
+
+        protected void Application_PreRequestHandlerExecute(object sender, EventArgs e)
+        {
+            if (Context.Session == null || Context.Session["ngonNgu"] == null) return;
+            NgonNgu ngonNgu = (NgonNgu)Context.Session["ngonNgu"];
+            var ci = new CultureInfo(ngonNgu.KiHieu);
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(ci.Name);
+            Thread.CurrentThread.CurrentUICulture = ci;
+        }
+
     }
 }
