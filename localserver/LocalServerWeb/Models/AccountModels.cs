@@ -35,16 +35,16 @@ namespace LocalServerWeb.Models
     public class LogOnModel
     {
         [Required]
-        [DisplayName("User name")]
+        [DisplayName("Tài khoản")]
         public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [DisplayName("Password")]
+        [DisplayName("Mật khẩu")]
         public string Password { get; set; }
 
-        [DisplayName("Remember me?")]
-        public bool RememberMe { get; set; }
+        //[DisplayName("Remember me?")]
+        //public bool RememberMe { get; set; }
     }
 
     [PropertiesMustMatch("Password", "ConfirmPassword", ErrorMessage = "The password and confirmation password do not match.")]
