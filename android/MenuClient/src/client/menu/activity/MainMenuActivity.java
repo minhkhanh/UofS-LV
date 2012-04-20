@@ -11,7 +11,7 @@ public class MainMenuActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.two_fragment_layout);
+		setContentView(R.layout.layout_two_fragment);
 
 		FragmentManager fm = getFragmentManager();
 		CategoryListFragment f = (CategoryListFragment) fm

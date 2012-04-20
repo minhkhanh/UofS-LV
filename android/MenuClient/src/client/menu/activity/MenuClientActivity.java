@@ -11,7 +11,7 @@ public class MenuClientActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.layout_main);
 	}
 
 	public void onClick(View v) {
@@ -21,7 +21,7 @@ public class MenuClientActivity extends Activity {
 		} else if (v == findViewById(R.id.MainMenuBtn)) {
 			Intent intent = new Intent(this, MainMenuActivity.class);
 			startActivity(intent);
-		} else if (v == findViewById(R.id.SplitTable)) {
+		} else if (v == findViewById(R.id.SplitTableBtn)) {
 			Intent intent = new Intent(this, SplitTableActivity.class);
 			startActivity(intent);
 		}
