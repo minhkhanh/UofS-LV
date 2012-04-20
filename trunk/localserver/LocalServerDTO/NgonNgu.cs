@@ -19,5 +19,9 @@ namespace LocalServerDTO
         [DataMember]
         [Column(Name = "TenNgonNgu")]
         public string TenNgonNgu { get; set; }
+
+        [DataMember]
+        [Column(Name = "KiHieu")]
+        public string KiHieu { get; set; }
     }
 }
