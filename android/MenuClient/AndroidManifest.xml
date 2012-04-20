@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".activity.MainMenuActivity" android:label="@string/main_menu_caption"></activity>
         <activity android:name=".activity.TableListActivity"></activity>
+        <activity android:label="@string/split_table_caption" android:name=".activity.SplitTableActivity"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package client.menu.fragment;
 
+import client.menu.R;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,5 +20,13 @@ public class TableDialogFragment extends DialogFragment {
 		super.onCreate(savedInstanceState);
 
 		setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Holo_Dialog);
+	}
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View layout = inflater.inflate(R.layout.layout_two_fragment, container);		
+		
+		return layout;
 	}
 }

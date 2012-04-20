@@ -14,7 +14,7 @@ public class TableGridAdapter extends ArrayAdapter<BanDTO> {
 	Activity context;
 
 	public TableGridAdapter(Activity context, BanDTO[] data) {
-		super(context, R.layout.table_grid_item, data);
+		super(context, R.layout.item_table_grid, data);
 		this.context = context;
 	}
 
@@ -24,7 +24,7 @@ public class TableGridAdapter extends ArrayAdapter<BanDTO> {
 
 		if (gridItem == null) {
 			LayoutInflater inflater = context.getLayoutInflater();
-			gridItem = inflater.inflate(R.layout.table_grid_item, null);
+			gridItem = inflater.inflate(R.layout.item_table_grid, null);
 		}
 
 		TextView tableCaption = (TextView) gridItem.findViewById(R.id.TableCaption);
