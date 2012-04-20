@@ -19,4 +19,8 @@ public class DanhMucDTO implements Serializable {
 		this.maDanhMucCha = maDanhMucCha;
 	}	
 	
+	@Override
+	public String toString() {
+		return getMaDanhMuc() + "";
+	}
 }
