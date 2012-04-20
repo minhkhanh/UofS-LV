@@ -34,6 +34,7 @@ namespace LocalServerWeb.Controllers
 
         public ActionResult LogOn()
         {
+            if (Request.UrlReferrer != null) ViewData["returnUrl"] = Request.UrlReferrer.ToString();
             return View();
         }
 
@@ -44,7 +45,7 @@ namespace LocalServerWeb.Controllers
             {
                 if (MembershipService.ValidateUser(model.UserName, model.Password))
                 {
-                    FormsService.SignIn(model.UserName, model.RememberMe);
+                    //FormsService.SignIn(model.UserName, model.RememberMe);
                     if (!String.IsNullOrEmpty(returnUrl))
                     {
                         return Redirect(returnUrl);

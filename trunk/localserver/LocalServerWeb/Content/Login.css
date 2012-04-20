@@ -1,0 +1,17 @@
+﻿.imageButt {
+	cursor:pointer;
+}
+.imgCheckError {
+	background:url(../Images/error.gif) right top no-repeat;
+	height:16px;
+	width:16px;
+}
+.imgCheckOk {
+	background:url(../Images/check.gif) right top no-repeat;
+	height:16px;
+	width:16px;
+}
+.bgColorMain{
+	background-color:#00716B;
+	color:#000;
+}
