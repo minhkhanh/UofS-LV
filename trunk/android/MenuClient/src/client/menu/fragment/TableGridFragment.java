@@ -2,6 +2,7 @@ package client.menu.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,8 +48,10 @@ public class TableGridFragment extends Fragment {
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);		
 		outState.putSerializable("khuVuc", khuVuc);
+		
+		Log.d("mylog", "TableGridFragment.onSaveInstanceState");
 	}
-
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -69,6 +72,7 @@ public class TableGridFragment extends Fragment {
 			}
 		});
 
+		Log.d("mylog", "TableGridFragment.onCreateView");
 		return grid;
 	}
 }

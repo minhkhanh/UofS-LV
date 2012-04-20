@@ -5,6 +5,7 @@ import client.menu.dto.KhuVucDTO;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -13,8 +14,8 @@ public class AreaListFragment extends ListFragment {
 	boolean isDualPane;
 	int selIndex;
 
-	private static KhuVucDTO[] fakeData() {
-		KhuVucDTO[] khuVucArray = new KhuVucDTO[5];
+	private static KhuVucDTO[] fakeData(int count) {
+		KhuVucDTO[] khuVucArray = new KhuVucDTO[count];
 		for (int i = 0; i < khuVucArray.length; ++i) {
 			khuVucArray[i] = new KhuVucDTO();
 			khuVucArray[i].setMaKhuVuc(i);
@@ -28,6 +29,8 @@ public class AreaListFragment extends ListFragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("selIndex", selIndex);
+        
+        Log.d("mylog", "AreaListFragment.onSaveInstanceState");
     }
 
     @Override
@@ -40,7 +43,7 @@ public class AreaListFragment extends ListFragment {
 		super.onActivityCreated(savedInstanceState);
 
 		setListAdapter(new ArrayAdapter<KhuVucDTO>(getActivity(),
-				android.R.layout.simple_list_item_activated_1, fakeData()));
+				android.R.layout.simple_list_item_activated_1, fakeData(10)));
 
 		View detailsFrame = getActivity().findViewById(
 				R.id.TableGridPlaceHolder);
@@ -55,6 +58,8 @@ public class AreaListFragment extends ListFragment {
 			getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 			showDetails(selIndex);
 		}
+		
+		Log.d("mylog", "AreaListFragment.onActivityCreated");
 	}
 
 	void showDetails(int index) {
