@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class DishListAdapter extends ArrayAdapter<MonAnDTO> {
 
 	public DishListAdapter(Context context, MonAnDTO[] objects) {
-		super(context, R.layout.dish_row, objects);
+		super(context, R.layout.row_dish_list, objects);
 	}
 
 	@Override
@@ -21,7 +21,7 @@ public class DishListAdapter extends ArrayAdapter<MonAnDTO> {
 		LayoutInflater inflater = (LayoutInflater) getContext()
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-		View row = inflater.inflate(R.layout.dish_row, null);
+		View row = inflater.inflate(R.layout.row_dish_list, null);
 		ImageView dishImage = (ImageView) row.findViewById(R.id.AnhMonAn);
 		TextView dishRate = (TextView) row.findViewById(R.id.DanhGiaMonAn);
 

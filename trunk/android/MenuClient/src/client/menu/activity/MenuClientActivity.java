@@ -21,6 +21,9 @@ public class MenuClientActivity extends Activity {
 		} else if (v == findViewById(R.id.MainMenuBtn)) {
 			Intent intent = new Intent(this, MainMenuActivity.class);
 			startActivity(intent);
+		} else if (v == findViewById(R.id.SplitTable)) {
+			Intent intent = new Intent(this, SplitTableActivity.class);
+			startActivity(intent);
 		}
 	}
 }
