@@ -29,4 +29,9 @@
         android:onClick="onClick"
         android:text="@string/split_table_caption" />
 
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>
