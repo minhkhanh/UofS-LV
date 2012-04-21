@@ -540,7 +540,6 @@ namespace LocalServerWeb
 
         public bool SuaOrder(Order _order)
         {
-            Order a = _order;
             try
             {
                 return OrderBUS.SuaOrder(_order);
