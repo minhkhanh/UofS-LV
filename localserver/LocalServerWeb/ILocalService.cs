@@ -242,5 +242,8 @@ namespace LocalServerWeb
         [WebInvoke(Method = "GET", UriTemplate = "test")]
         [OperationContract]
         string Test();
+
+        [WebInvoke(Method = "POST", UriTemplate = "addText")]
+        string AddText(string str);
     }
 }
