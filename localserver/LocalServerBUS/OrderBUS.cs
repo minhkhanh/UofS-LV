@@ -21,7 +21,7 @@ namespace LocalServerBUS
 
         public static Order ThemOrder(Order _order)
         {
-            return OrderBUS.ThemOrder(_order);
+            return OrderDAO.ThemOrder(_order);
         }
 
         public static bool SuaOrder(Order _order)

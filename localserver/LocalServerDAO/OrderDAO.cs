@@ -47,7 +47,8 @@ namespace LocalServerDAO
             if (temp.Count() > 0)
             {
                 Order or = temp.First();
-                or = _order;
+                or._maBan = _order._maBan;
+                or._maTaiKhoan = _order._maTaiKhoan;
             }
 
             try
