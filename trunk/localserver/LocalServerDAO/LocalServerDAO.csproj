@@ -48,6 +48,7 @@
     <Compile Include="ChiTietDanhMucBoPhanCheBienDAO.cs" />
     <Compile Include="ChiTietDanhMucDaNgonNguDAO.cs" />
     <Compile Include="ChiTietDonViTinhDaNgonNgu.cs" />
+    <Compile Include="ChiTietHoaDonDAO.cs" />
     <Compile Include="ChiTietHuyOrderDAO.cs" />
     <Compile Include="ChiTietMonAnDaNgonNguDAO.cs" />
     <Compile Include="ChiTietMonAnDonViTinhDAO.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="DanhMucDAO.cs" />
     <Compile Include="DonViTinhDAO.cs" />
     <Compile Include="FooDAO.cs" />
+    <Compile Include="HoaDonDAO.cs" />
     <Compile Include="KhuVucDAO.cs" />
     <Compile Include="KhuyenMaiDAO.cs" />
     <Compile Include="MonAnDAO.cs" />

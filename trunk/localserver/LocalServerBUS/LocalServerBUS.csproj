@@ -46,6 +46,7 @@
     <Compile Include="ChiTietDanhMucBoPhanCheBienBUS.cs" />
     <Compile Include="ChiTietDanhMucDaNgonNguBUS.cs" />
     <Compile Include="ChiTietDonViTinhDaNgonNguBUS.cs" />
+    <Compile Include="ChiTietHoaDonBUS.cs" />
     <Compile Include="ChiTietHuyOrderBUS.cs" />
     <Compile Include="ChiTietMonAnDaNgonNguBUS.cs" />
     <Compile Include="ChiTietMonAnDonViTinhBUS.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="DanhMucBUS.cs" />
     <Compile Include="DonViTinhBUS.cs" />
     <Compile Include="FooBUS.cs" />
+    <Compile Include="HoaDonBUS.cs" />
     <Compile Include="KhuVucBUS.cs" />
     <Compile Include="KhuyenMaiBUS.cs" />
     <Compile Include="MonAnBUS.cs" />

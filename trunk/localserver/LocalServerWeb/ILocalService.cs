@@ -212,11 +212,38 @@ namespace LocalServerWeb
 
         [WebInvoke(Method = "POST", UriTemplate = "themChiTietHuyOrder")]
         [OperationContract]
-        ChiTietHuyOrder ThemChiTietHuyOrder(ChiTietHuyOrder _chiTietHuyOrder);
+        bool ThemChiTietHuyOrder(ChiTietHuyOrder _chiTietHuyOrder);
 
         [WebInvoke(Method = "PUT", UriTemplate = "suaChiTietHuyOrder")]
         [OperationContract]
         bool SuaChiTietHuyOrder(ChiTietHuyOrder _chiTietHuyOrder);
+
+        // Hoa Don
+        [WebInvoke(Method = "GET", UriTemplate = "layHoaDon?maHoaDon={maHoaDon}")]
+        [OperationContract]
+        HoaDon LayHoaDon(int maHoaDon);
+
+        [WebInvoke(Method = "POST", UriTemplate = "themHoaDon")]
+        [OperationContract]
+        HoaDon ThemHoaDon(HoaDon _hoaDon);
+
+        [WebInvoke(Method = "PUT", UriTemplate = "suaHoaDon")]
+        [OperationContract]
+        bool SuaHoaDon(HoaDon _hoaDon);
+
+
+        // Chi Tiet Hoa Don
+        [WebInvoke(Method = "GET", UriTemplate = "layChiTietHoaDon?maChiTietHoaDon={maChiTietHoaDon}")]
+        [OperationContract]
+        ChiTietHoaDon LayChiTietHoaDon(int maChiTietHoaDon);
+
+        [WebInvoke(Method = "POST", UriTemplate = "themChiTietHoaDon")]
+        [OperationContract]
+        ChiTietHoaDon ThemChiTietHoaDon(ChiTietHoaDon _chiTietHoaDon);
+
+        [WebInvoke(Method = "PUT", UriTemplate = "suaChiTietHoaDon")]
+        [OperationContract]
+        bool SuaChiTietHoaDon(ChiTietHoaDon _chiTietHoaDon);
 
         
         // Picture 

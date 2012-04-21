@@ -19,30 +19,34 @@ namespace LocalServerDAO
             return null;
         }
 
-        public static ChiTietHuyOrder ThemChiTietHuyOrder(ChiTietHuyOrder _chiTietHuyOrder)
+        public static bool ThemChiTietHuyOrder(ChiTietHuyOrder _chiTietHuyOrder)
         {
+            bool result = false;
             ThucDonDienTu.DataContext.ChiTietHuyOrders.InsertOnSubmit(_chiTietHuyOrder);
             try
             {
                 ThucDonDienTu.DataContext.SubmitChanges();
-
+                result = true;
             }
             catch (Exception e)
             {
-                _chiTietHuyOrder = null;
+                result = false;
             }
 
-            return _chiTietHuyOrder;
+            return result;
         }
 
         public static bool SuaChiTietHuyOrder(ChiTietHuyOrder _chiTietHuyOrder)
         {
             bool result = false;
-            var temp = ThucDonDienTu.DataContext.ChiTietHuyOrders.Where(c => c.ChiTietOrder.MaChiTietOrder == _chiTietHuyOrder.ChiTietOrder.MaChiTietOrder);
+            var temp = ThucDonDienTu.DataContext.ChiTietHuyOrders.Where(c => c.ChiTietOrder.MaChiTietOrder == _chiTietHuyOrder._maChiTietOrder);
             if (temp.Count() > 0)
             {
-                ChiTietHuyOrder or = temp.First();
-                or = _chiTietHuyOrder;
+                ChiTietHuyOrder ct = temp.First();
+                ct._maChiTietOrder = _chiTietHuyOrder._maChiTietOrder;
+                ct.SoLuongChoPhep = _chiTietHuyOrder.SoLuongChoPhep;
+                ct.SoLuongYeuCau = _chiTietHuyOrder.SoLuongYeuCau;
+                ct.TinhTrangHuy = _chiTietHuyOrder.TinhTrangHuy;
             }
 
             try
