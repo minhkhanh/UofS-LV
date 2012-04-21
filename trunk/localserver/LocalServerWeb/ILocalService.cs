@@ -10,7 +10,7 @@ using System.IO;
 
 namespace LocalServerWeb
 {
-    [ServiceContract]
+    [ServiceContract(Namespace="")]
     public interface ILocalService
     {
         
