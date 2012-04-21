@@ -61,6 +61,15 @@ namespace LocalServerWeb.Resources.Models {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login was unsuccessful. Please correct the errors and try again..
+        /// </summary>
+        public static string LoginError {
+            get {
+                return ResourceManager.GetString("LoginError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string Password {
@@ -70,7 +79,7 @@ namespace LocalServerWeb.Resources.Models {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The {0} field xxx is required.
+        ///   Looks up a localized string similar to The {0} field is required.
         /// </summary>
         public static string Required {
             get {

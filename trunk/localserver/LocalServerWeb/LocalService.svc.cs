@@ -587,9 +587,9 @@ namespace LocalServerWeb
             return PictureBUS.AddPicture(path, content);
         }
 
-        public string AddText(string str)
+        public string AddText()
         {
-            return str + "123";
+            return "123";
         }
 
     }

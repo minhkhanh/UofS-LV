@@ -244,6 +244,6 @@ namespace LocalServerWeb
         string Test();
 
         [WebInvoke(Method = "POST", UriTemplate = "addText")]
-        string AddText(string str);
+        string AddText();
     }
 }

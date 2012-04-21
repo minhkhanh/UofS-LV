@@ -40,11 +40,8 @@ namespace LocalServerWeb
 
         protected void Application_PreRequestHandlerExecute(object sender, EventArgs e)
         {
-            if (Context.Session == null || Context.Session["ngonNgu"] == null) return;
-            NgonNgu ngonNgu = (NgonNgu)Context.Session["ngonNgu"];
-            var ci = new CultureInfo(ngonNgu.KiHieu);
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(ci.Name);
-            Thread.CurrentThread.CurrentUICulture = ci;
+            HttpSessionStateBase session = new HttpSessionStateWrapper(Context.Session);
+            SharedCode.LoadUserCulture(session);
         }
 
     }

@@ -45,30 +45,14 @@ namespace LocalServerWeb.Codes
             //StoreLanguage(httpContext);
         }
 
-        public static void LoadUserCulture(HttpContextBase httpContext)
+        public static void LoadUserCulture(HttpSessionStateBase session)
         {
-            if (httpContext.Session == null || httpContext.Session["ngonNgu"]==null) return;
-            NgonNgu ngonNgu = (NgonNgu)httpContext.Session["ngonNgu"];
+            if (session == null || session["ngonNgu"] == null) return;
+            NgonNgu ngonNgu = (NgonNgu)session["ngonNgu"];
             var ci = new CultureInfo(ngonNgu.KiHieu);
             Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(ci.Name);
             Thread.CurrentThread.CurrentUICulture = ci;
         }
-
-        //private static void StoreLanguage(HttpContextBase httpContext)
-        //{
-        //    if (httpContext.Request["maNgonNgu"]!=null)
-        //    {
-        //        try
-        //        {
-        //            int maNgonNgu = int.Parse(httpContext.Request["maNgonNgu"]);
-        //            var ngonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
-        //            if (ngonNgu != null && httpContext.Session != null) httpContext.Session["maNgonNgu"] = maNgonNgu;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            Console.Out.WriteLine("Error: " + ex.StackTrace);
-        //        }                
-        //    }
-        //}
+        
     }
 }

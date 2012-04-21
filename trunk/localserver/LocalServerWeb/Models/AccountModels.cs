@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using LocalServerWeb.Codes;
 using LocalServerWeb.Resources.Models;
 using LocalServerWeb.Resources.Views.Shared;
 
@@ -36,15 +37,14 @@ namespace LocalServerWeb.Models
 
     public class LogOnModel
     {
-        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(AccountModelString))]        
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(AccountModelString))]
+        [LocalizedDisplayName("UserName", NameResourceType = typeof(AccountModelString))]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(AccountModelString))]
+        [LocalizedDisplayName("Password", NameResourceType = typeof(AccountModelString))]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-
-        //[DisplayName("Remember me?")]
-        //public bool RememberMe { get; set; }
     }
 
     [PropertiesMustMatch("Password", "ConfirmPassword", ErrorMessage = "The password and confirmation password do not match.")]
