@@ -30,10 +30,10 @@
 						        </td>
 					        </tr>
                             <tr>
-                                <td colspan="2" align="center"><font color="#FF0000">
-                                    <%: Html.ValidationSummary(true, AccountModelString.LoginError) %><br/>
-                                    <%: Html.ValidationMessageFor(m => m.UserName) %><br/>
-                                    <%: Html.ValidationMessageFor(m => m.Password) %>
+                                <td colspan="2" align="left"><font color="#FF0000">
+                                    <%: Html.ValidationSummary(false) %>
+                                    <%--<%: Html.ValidationMessageFor(m => m.UserName) %><br/>
+                                    <%: Html.ValidationMessageFor(m => m.Password) %>--%>
                                 </font></td>
                             </tr>
 					        <tr>

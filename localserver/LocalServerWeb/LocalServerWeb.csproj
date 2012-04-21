@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="Codes\BaseController.cs" />
     <Compile Include="Codes\LocalizedDisplayNameAttribute.cs" />
+    <Compile Include="Codes\MyMembershipProvider.cs" />
     <Compile Include="Codes\SharedCode.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

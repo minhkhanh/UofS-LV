@@ -120,4 +120,13 @@
   <data name="Language" xml:space="preserve">
     <value>Ngôn ngữ</value>
   </data>
+  <data name="LogOff" xml:space="preserve">
+    <value>Đăng xuất</value>
+  </data>
+  <data name="LogOn" xml:space="preserve">
+    <value>Đăng nhập</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Xin chào</value>
+  </data>
 </root>
