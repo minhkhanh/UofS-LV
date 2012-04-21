@@ -51,6 +51,9 @@ public class MenuClientActivity extends Activity {
 
 		String[] data = new String[] { "vi", "en", "ja" };
 
+		spinner.setAdapter(new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_activated_1, data));
+		
 		if (selLang != null) {
 			for (int i = 0; i < data.length; ++i) {
 				if (data[i].equals(selLang) && i != 0) {
@@ -59,9 +62,6 @@ public class MenuClientActivity extends Activity {
 				}
 			}
 		}
-
-		spinner.setAdapter(new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_activated_1, data));
 
 		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
