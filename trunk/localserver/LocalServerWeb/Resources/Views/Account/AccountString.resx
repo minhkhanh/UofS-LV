@@ -123,4 +123,7 @@
   <data name="LoginInfo" xml:space="preserve">
     <value>Login infomation</value>
   </data>
+  <data name="UsernamePasswordIncorrect" xml:space="preserve">
+    <value>The user name or password provided is incorrect</value>
+  </data>
 </root>
