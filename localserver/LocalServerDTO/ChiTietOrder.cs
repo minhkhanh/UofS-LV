@@ -18,7 +18,7 @@ namespace LocalServerDTO
 
         [DataMember(Name = "MaOrder")]
         [Column(Name = "MaOrder")]
-        private int? _maOrder;
+        public int? _maOrder;
         private EntityRef<Order> _order = new EntityRef<Order>();
 
         [Association(Name = "Order_ChiTietOrder_FK1", IsForeignKey = true, Storage = "_order", ThisKey = "_maOrder")]
@@ -34,7 +34,7 @@ namespace LocalServerDTO
 
         [DataMember(Name = "MaMonAn")]
         [Column(IsPrimaryKey = true, Name = "MaMonAn")]
-        private int? _maMonAn;
+        public int? _maMonAn;
         private EntityRef<MonAn> _monAn = new EntityRef<MonAn>();
 
         [Association(Name = "MonAn_ChiTietOrder_FK1", IsForeignKey = true, Storage = "_monAn", ThisKey = "_maMonAn")]
@@ -50,7 +50,7 @@ namespace LocalServerDTO
 
         [DataMember(Name = "MaBoPhanCheBien")]
         [Column(Name = "MaBoPhanCheBien")]
-        private int? _maBoPhanCheBien;
+        public int? _maBoPhanCheBien;
         private EntityRef<BoPhanCheBien> _boPhanCheBien = new EntityRef<BoPhanCheBien>();
 
         [Association(Name = "BoPhanCheBien_ChiTietOrder_FK1", IsForeignKey = true, Storage = "_boPhanCheBien", ThisKey = "_maBoPhanCheBien")]

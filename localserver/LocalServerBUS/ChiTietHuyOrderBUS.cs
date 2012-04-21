@@ -14,7 +14,7 @@ namespace LocalServerBUS
             return ChiTietHuyOrderDAO.LayChiTietHuyOrder(maChiTietOrder);
         }
 
-        public static ChiTietHuyOrder ThemChiTietHuyOrder(ChiTietHuyOrder _chiTietHuyOrder)
+        public static bool ThemChiTietHuyOrder(ChiTietHuyOrder _chiTietHuyOrder)
         {
             return ChiTietHuyOrderDAO.ThemChiTietHuyOrder(_chiTietHuyOrder);
         }

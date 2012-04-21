@@ -401,6 +401,7 @@ namespace LocalServerWeb
             return listKhuyenMai;
         }
 
+        // Bo Phan Che Bien
         public List<BoPhanCheBien> LayDanhSachBoPhanCheBien()
         {
             var listBoPhanCheBien = new List<BoPhanCheBien>();
@@ -415,6 +416,7 @@ namespace LocalServerWeb
             return listBoPhanCheBien;
         }
 
+        // Chi Tiet Mon Lien Quan
         public List<ChiTietMonLienQuan> LayDanhSachChiTietMonLienQuan()
         {
             var listChiTietMonLienQuan = new List<ChiTietMonLienQuan>();
@@ -443,6 +445,9 @@ namespace LocalServerWeb
             return listChiTietMonLienQuan;
         }
 
+        
+
+        // Order
         public List<Order> LayDanhSachOrder()
         {
             var listOrder = new List<Order>();
@@ -471,65 +476,12 @@ namespace LocalServerWeb
             return Order;
         }
 
-        public ChiTietOrder LayChiTietOrder(int maChiTietOrder)
-        {
-            var ChiTietOrder = new ChiTietOrder();
-            try
-            {
-                ChiTietOrder = ChiTietOrderBUS.LayChiTietOrder(maChiTietOrder);
-            }
-            catch (Exception e)
-            {
-                Console.Error.WriteLine(e.Message);
-            }
-            return ChiTietOrder;
-        }
-
-        public ChiTietHuyOrder LayChiTietHuyOrder(int maChiTietHuyOrder)
-        {
-            var ChiTietHuyOrder = new ChiTietHuyOrder();
-            try
-            {
-                ChiTietHuyOrder = ChiTietHuyOrderBUS.LayChiTietHuyOrder(maChiTietHuyOrder);
-            }
-            catch (Exception e)
-            {
-                Console.Error.WriteLine(e.Message);
-            }
-            return ChiTietHuyOrder;
-        }
 
         public Order ThemOrder(Order _order)
         {
             try
             {
                 return OrderBUS.ThemOrder(_order);
-            }
-            catch (Exception e)
-            {
-                Console.Error.WriteLine(e.Message);
-            }
-            return null;         
-        }
-
-        public ChiTietOrder ThemChiTietOrder(ChiTietOrder _ChiTietOrder)
-        {
-            try
-            {
-                return ChiTietOrderBUS.ThemChiTietOrder(_ChiTietOrder);
-            }
-            catch (Exception e)
-            {
-                Console.Error.WriteLine(e.Message);
-            }
-            return null;
-        }
-
-        public ChiTietHuyOrder ThemChiTietHuyOrder(ChiTietHuyOrder _chiTietHuyOrder)
-        {
-            try
-            {
-                return ChiTietHuyOrderBUS.ThemChiTietHuyOrder(_chiTietHuyOrder);
             }
             catch (Exception e)
             {
@@ -551,11 +503,68 @@ namespace LocalServerWeb
             return false;
         }
 
+        // Chi Tiet Order
+        public ChiTietOrder LayChiTietOrder(int maChiTietOrder)
+        {
+            var ChiTietOrder = new ChiTietOrder();
+            try
+            {
+                ChiTietOrder = ChiTietOrderBUS.LayChiTietOrder(maChiTietOrder);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return ChiTietOrder;
+        }
+
+        public ChiTietOrder ThemChiTietOrder(ChiTietOrder _ChiTietOrder)
+        {
+            try
+            {
+                return ChiTietOrderBUS.ThemChiTietOrder(_ChiTietOrder);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return null;
+        }
+
         public bool SuaChiTietOrder(ChiTietOrder _chiTietOrder)
         {
             try
             {
                 return ChiTietOrderBUS.SuaChiTietOrder(_chiTietOrder);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return false;
+        }
+
+
+        // Chi Tiet Huy Order
+        public ChiTietHuyOrder LayChiTietHuyOrder(int maChiTietHuyOrder)
+        {
+            var ChiTietHuyOrder = new ChiTietHuyOrder();
+            try
+            {
+                ChiTietHuyOrder = ChiTietHuyOrderBUS.LayChiTietHuyOrder(maChiTietHuyOrder);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return ChiTietHuyOrder;
+        }
+
+        public bool ThemChiTietHuyOrder(ChiTietHuyOrder _chiTietHuyOrder)
+        {
+            try
+            {
+                return ChiTietHuyOrderBUS.ThemChiTietHuyOrder(_chiTietHuyOrder);
             }
             catch (Exception e)
             {
@@ -577,6 +586,92 @@ namespace LocalServerWeb
             return false;
         }
 
+        // Hoa Don
+        public HoaDon LayHoaDon(int maHoaDon)
+        {
+            var hoaDon = new HoaDon();
+            try
+            {
+                hoaDon = HoaDonBUS.LayHoaDon(maHoaDon);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return hoaDon;
+        }
+
+        public HoaDon ThemHoaDon(HoaDon _hoaDon)
+        {
+            try
+            {
+                return HoaDonBUS.ThemHoaDon(_hoaDon);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return null;
+        }
+
+        public bool SuaHoaDon(HoaDon _hoaDon)
+        {
+            try
+            {
+                return HoaDonBUS.SuaHoaDon(_hoaDon);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return false;
+        }
+
+        
+        // Chi Tiet Hoa Don
+        public ChiTietHoaDon LayChiTietHoaDon(int maChiTietHoaDon)
+        {
+            var ChiTietHoaDon = new ChiTietHoaDon();
+            try
+            {
+                ChiTietHoaDon = ChiTietHoaDonBUS.LayChiTietHoaDon(maChiTietHoaDon);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return ChiTietHoaDon;
+        }
+
+        public ChiTietHoaDon ThemChiTietHoaDon(ChiTietHoaDon _chiTietHoaDon)
+        {
+            try
+            {
+                return ChiTietHoaDonBUS.ThemChiTietHoaDon(_chiTietHoaDon);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return null;
+        }
+
+        public bool SuaChiTietHoaDon(ChiTietHoaDon _chiTietHoaDon)
+        {
+            try
+            {
+                return ChiTietHoaDonBUS.SuaChiTietHoaDon(_chiTietHoaDon);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return false;
+        }
+
+
+
+        // Picture
         public Stream GetPicture(string path)
         {
             return PictureBUS.GetPicture(path);
@@ -587,6 +682,8 @@ namespace LocalServerWeb
             return PictureBUS.AddPicture(path, content);
         }
 
+
+        // Test
         public string AddText()
         {
             return "123";

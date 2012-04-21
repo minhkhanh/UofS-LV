@@ -38,6 +38,7 @@ namespace LocalServerDAO
         public Table<TiGia> TiGias;
 
         public Table<HoaDon> HoaDons;
+        public Table<ChiTietHoaDon> ChiTietHoaDons;
         public Table<Order> Orders;
         public Table<ChiTietOrder> ChiTietOrders;
         public Table<ChiTietHuyOrder> ChiTietHuyOrders;

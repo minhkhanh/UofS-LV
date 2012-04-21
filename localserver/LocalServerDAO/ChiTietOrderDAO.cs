@@ -41,7 +41,11 @@ namespace LocalServerDAO
             if (temp.Count() > 0)
             {
                 ChiTietOrder ct = temp.First();
-                ct = _chiTietOrder;
+                ct._maBoPhanCheBien = _chiTietOrder._maBoPhanCheBien;
+                ct._maMonAn = _chiTietOrder._maMonAn;
+                ct._maOrder = _chiTietOrder._maOrder;
+                ct.GhiChu = _chiTietOrder.GhiChu;
+                ct.SoLuong = _chiTietOrder.SoLuong;
             }
 
             try
