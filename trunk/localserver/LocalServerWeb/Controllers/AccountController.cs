@@ -13,6 +13,7 @@ using LocalServerBUS;
 using LocalServerDTO;
 using LocalServerWeb.Codes;
 using LocalServerWeb.Models;
+using LocalServerWeb.Resources.Views.Account;
 
 namespace LocalServerWeb.Controllers
 {
@@ -52,7 +53,7 @@ namespace LocalServerWeb.Controllers
         public ActionResult LogOn(LogOnModel model, string returnUrl)
         {
             if (ModelState.IsValid)
-            {                
+            {
                 TaiKhoan taiKhoan = TaiKhoanBUS.KiemTraTaiKhoan(model.UserName, MD5Hash(model.Password));
                 if (taiKhoan!=null)
                 {
@@ -68,7 +69,7 @@ namespace LocalServerWeb.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                    ModelState.AddModelError("", AccountString.UsernamePasswordIncorrect);
                 }
             }
 
@@ -82,8 +83,8 @@ namespace LocalServerWeb.Controllers
 
         public ActionResult LogOff()
         {
-            FormsService.SignOut();
-
+            if (Session["taiKhoan"] != null) Session.Remove("taiKhoan");
+            if (Request.UrlReferrer != null) return Redirect(Request.UrlReferrer.ToString());
             return RedirectToAction("Index", "Home");
         }
 

@@ -40,9 +40,19 @@ namespace LocalServerWeb
 
         protected void Application_PreRequestHandlerExecute(object sender, EventArgs e)
         {
-            HttpSessionStateBase session = new HttpSessionStateWrapper(Context.Session);
-            SharedCode.LoadUserCulture(session);
+            if (Context.Session!=null)
+            {
+                HttpSessionStateBase session = new HttpSessionStateWrapper(Context.Session);
+                SharedCode.LoadUserCulture(session);                
+            }
         }
 
+        protected void Session_Start(object sender, EventArgs e)
+        {
+            if (Session["nguoiDungOnline"]!=null)
+            {
+                
+            }
+        }
     }
 }

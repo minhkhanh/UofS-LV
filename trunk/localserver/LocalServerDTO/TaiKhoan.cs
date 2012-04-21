@@ -27,8 +27,16 @@ namespace LocalServerDTO
         public string MatKhau { get; set; }
 
         [DataMember]
-        [Column(Name = "ThongTinDinhDanh")]
-        public string ThongTinDinhDanh { get; set; }
+        [Column(Name = "HoTen")]
+        public string HoTen { get; set; }
+
+        [DataMember]
+        [Column(Name = "NgaySinh")]
+        public DateTime NgaySinh { get; set; }
+
+        [DataMember]
+        [Column(Name = "CMND")]
+        public string CMND { get; set; }
 
         [DataMember]
         [Column(Name = "Avatar")]
