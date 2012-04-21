@@ -23,7 +23,7 @@ namespace LocalServerWeb.Codes
         {            
             base.OnActionExecuting(filterContext);
             SharedCode.FillCommonData2View(ViewData, HttpContext);
-            SharedCode.LoadUserCulture(HttpContext);            
+            SharedCode.LoadUserCulture(HttpContext.Session);            
         }
     }
 }

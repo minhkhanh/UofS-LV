@@ -13,46 +13,6 @@
 </asp:Content>
 
 <asp:Content ID="loginContent" ContentPlaceHolderID="MainContent" runat="server">
-<%--    <h2>Đăng nhập</h2>
-    <p>
-        Xin hãy nhập vào tên đăng nhập và mật khẩu. <%: Html.ActionLink("Đăng ký", "Register")%> nếu không có tài khoản.
-    </p>
-
-    <% using (Html.BeginForm()) { %>
-        <%: Html.ValidationSummary(true, "Đăng nhập thất bại. Xin hãy kiểm tra và thử lại.")%>
-        <div>
-            <fieldset>
-                <legend>Thông tin tài khoản</legend>
-                
-                <div class="editor-label">
-                    <%: Html.LabelFor(m => m.UserName) %>
-                </div>
-                <div class="editor-field">
-                    <%: Html.TextBoxFor(m => m.UserName) %>
-                    <%: Html.ValidationMessageFor(m => m.UserName) %>
-                </div>
-                
-                <div class="editor-label">
-                    <%: Html.LabelFor(m => m.Password) %>
-                </div>
-                <div class="editor-field">
-                    <%: Html.PasswordFor(m => m.Password) %>
-                    <%: Html.ValidationMessageFor(m => m.Password) %>
-                </div>
-                
-                <div class="editor-label">
-                    <%: Html.CheckBoxFor(m => m.RememberMe) %>
-                    <%: Html.LabelFor(m => m.RememberMe) %>
-                </div>
-                
-                <p>
-                    <input type="submit" value="Đăng nhập" />
-                </p>
-            </fieldset>
-        </div>
-    <% } %>
---%>
-    
     <fieldset>
         <legend><%:AccountString.LoginInfo %></legend>
         <table width="500px" border="1" cellspacing="0" cellpadding="5" align="center">
@@ -71,16 +31,17 @@
 					        </tr>
                             <tr>
                                 <td colspan="2" align="center"><font color="#FF0000">
-                                    <%: Html.ValidationMessageFor(m => m.UserName) %>
+                                    <%: Html.ValidationSummary(true, AccountModelString.LoginError) %><br/>
+                                    <%: Html.ValidationMessageFor(m => m.UserName) %><br/>
                                     <%: Html.ValidationMessageFor(m => m.Password) %>
                                 </font></td>
                             </tr>
 					        <tr>
-						        <td><%: AccountModelString.UserName %></td>
+						        <td><%: Html.LabelFor(m => m.UserName) %></td>
 						        <td><%: Html.TextBoxFor(m => m.UserName, new { style = "width: 100%" })%></td>
 					        </tr>
 					        <tr>
-						        <td><%: AccountModelString.Password %></td>
+						        <td><%: Html.LabelFor(m => m.Password) %></td>
 						        <td><%: Html.PasswordFor(m => m.Password, new { style = "width: 100%" })%></td>
 					        </tr>
 					        <tr>

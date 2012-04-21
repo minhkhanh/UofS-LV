@@ -29,7 +29,7 @@ namespace LocalServerBUS
             if (String.IsNullOrEmpty(tenKhaiKhoan)) throw new ArgumentException("Value cannot be null or empty.", "tenKhaiKhoan");
             if (String.IsNullOrEmpty(matKhau)) throw new ArgumentException("Value cannot be null or empty.", "matKhau");
             TaiKhoan taiKhoan = TaiKhoanDAO.LayTaiKhoanTheoTenTaiKhoan(tenKhaiKhoan);
-            if (taiKhoan == null || taiKhoan.MatKhau!=tenKhaiKhoan || !taiKhoan.Active) return null;
+            if (taiKhoan == null || taiKhoan.MatKhau != matKhau || !taiKhoan.Active) return null;
             return taiKhoan;
         }
     }

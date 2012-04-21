@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Security.Principal;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
+using LocalServerBUS;
+using LocalServerDTO;
 using LocalServerWeb.Codes;
 using LocalServerWeb.Models;
 
@@ -16,6 +20,10 @@ namespace LocalServerWeb.Controllers
     [HandleError]
     public class AccountController : BaseController
     {
+        public static string MD5Hash(string value)
+        {
+            return Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(value)));
+        }
 
         public IFormsAuthenticationService FormsService { get; set; }
         public IMembershipService MembershipService { get; set; }
@@ -35,6 +43,8 @@ namespace LocalServerWeb.Controllers
         public ActionResult LogOn()
         {
             if (Request.UrlReferrer != null) ViewData["returnUrl"] = Request.UrlReferrer.ToString();
+            if (Session["taiKhoan"] != null)
+                if (Request.UrlReferrer != null) return Redirect(Request.UrlReferrer.ToString());
             return View();
         }
 
@@ -42,10 +52,11 @@ namespace LocalServerWeb.Controllers
         public ActionResult LogOn(LogOnModel model, string returnUrl)
         {
             if (ModelState.IsValid)
-            {
-                if (MembershipService.ValidateUser(model.UserName, model.Password))
+            {                
+                TaiKhoan taiKhoan = TaiKhoanBUS.KiemTraTaiKhoan(model.UserName, MD5Hash(model.Password));
+                if (taiKhoan!=null)
                 {
-                    //FormsService.SignIn(model.UserName, model.RememberMe);
+                    Session["taiKhoan"] = taiKhoan;
                     if (!String.IsNullOrEmpty(returnUrl))
                     {
                         return Redirect(returnUrl);
