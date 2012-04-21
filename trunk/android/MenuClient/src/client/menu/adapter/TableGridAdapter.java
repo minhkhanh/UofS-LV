@@ -1,5 +1,7 @@
 package client.menu.adapter;
 
+import java.util.HashMap;
+
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,13 +23,20 @@ public class TableGridAdapter extends ArrayAdapter<BanDTO> {
 	@Override
 	public View getView(int pos, View convertView, ViewGroup parent) {
 		View gridItem = convertView;
-
+		HashMap<String, View> map = null;
+		
 		if (gridItem == null) {
 			LayoutInflater inflater = context.getLayoutInflater();
 			gridItem = inflater.inflate(R.layout.item_table_grid, null);
+			
+			map = new HashMap<String, View>();
+			map.put("tableCaption", gridItem.findViewById(R.id.TableCaption));
+			gridItem.setTag(map);
+		} else {
+			map = (HashMap<String, View>) gridItem.getTag();
 		}
 
-		TextView tableCaption = (TextView) gridItem.findViewById(R.id.TableCaption);
+		TextView tableCaption = (TextView) map.get("tableCaption");
 		tableCaption.setText(getItem(pos).getTenBan());
 
 		return gridItem;

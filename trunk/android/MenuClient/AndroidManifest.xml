@@ -18,9 +18,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainMenuActivity" android:label="@string/main_menu_caption"></activity>
-        <activity android:name=".activity.TableListActivity"></activity>
-        <activity android:label="@string/split_table_caption" android:name=".activity.SplitTableActivity"></activity>
+        <activity
+            android:name=".activity.MainMenuActivity"
+            android:label="@string/main_menu_caption" >
+        </activity>
+        <activity android:name=".activity.TableListActivity" android:label="@string/table_list_caption">
+        </activity>
+        <activity
+            android:name=".activity.SplitTableActivity"
+            android:label="@string/split_table_caption" >
+        </activity>
     </application>
 
 </manifest>
