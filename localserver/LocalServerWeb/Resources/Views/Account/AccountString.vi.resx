@@ -123,4 +123,7 @@
   <data name="LoginInfo" xml:space="preserve">
     <value>Thông tin đăng nhập</value>
   </data>
+  <data name="UsernamePasswordIncorrect" xml:space="preserve">
+    <value>Tài khoản hoặc mật khẩu không đúng</value>
+  </data>
 </root>

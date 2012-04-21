@@ -77,5 +77,14 @@ namespace LocalServerWeb.Resources.Views.Account {
                 return ResourceManager.GetString("LoginInfo", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The user name or password provided is incorrect.
+        /// </summary>
+        public static string UsernamePasswordIncorrect {
+            get {
+                return ResourceManager.GetString("UsernamePasswordIncorrect", resourceCulture);
+            }
+        }
     }
 }
