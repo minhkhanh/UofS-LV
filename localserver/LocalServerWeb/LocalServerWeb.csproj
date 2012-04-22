@@ -75,7 +75,8 @@
     <Compile Include="Codes\MyMembershipProvider.cs" />
     <Compile Include="Codes\SharedCode.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AdminHomeController.cs" />
+    <Compile Include="Controllers\AdminFoodController.cs" />
+    <Compile Include="Controllers\AdminUserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -288,7 +289,9 @@
     <Content Include="Scripts\mootools-1.2-more.js" />
     <Content Include="Scripts\mootools-1.2.1-core.js" />
     <Content Include="Scripts\slideitmoo-1.1.js" />
-    <Content Include="Views\AdminHome\Index.aspx" />
+    <Content Include="Views\AdminFood\Index.aspx" />
+    <Content Include="Views\AdminUser\Index.aspx" />
+    <Content Include="Views\Shared\AdminMainMenu.ascx" />
     <Content Include="Views\Shared\LanguageUserControl.ascx" />
     <Content Include="Views\Shared\LatestSlider.ascx" />
     <Content Include="Views\Shared\LeftSidebar.ascx" />

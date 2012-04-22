@@ -54,5 +54,10 @@ namespace LocalServerWeb.Codes
             Thread.CurrentThread.CurrentUICulture = ci;
         }
         
+        public static void FillAdminMainMenu(ViewDataDictionary viewData, int iMenuMain, int iMenuSub)
+        {
+            viewData["menuMainId"] = iMenuMain;
+            viewData["menuSubId"] = iMenuSub;
+        }
     }
 }
