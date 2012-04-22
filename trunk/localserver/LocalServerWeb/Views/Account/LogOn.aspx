@@ -9,7 +9,7 @@
 <asp:Content ID="head" ContentPlaceHolderID="HeadContent" runat="server">
     <script language="javascript" type="text/javascript" src="../../Scripts/MD5.js"></script>
     <script language="javascript" type="text/javascript" src="../../Scripts/Login.js"></script>
-    <link href="../../Content/Login.css" type="text/css" rel="stylesheet"/>
+    <link href="../../Content/sitecss/Login.css" type="text/css" rel="stylesheet"/>
 </asp:Content>
 
 <asp:Content ID="loginContent" ContentPlaceHolderID="MainContent" runat="server">

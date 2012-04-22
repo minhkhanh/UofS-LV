@@ -2,12 +2,12 @@
 	cursor:pointer;
 }
 .imgCheckError {
-	background:url(../Images/error.gif) right top no-repeat;
+	background:url(../../Images/siteimages/error.gif) right top no-repeat;
 	height:16px;
 	width:16px;
 }
 .imgCheckOk {
-	background:url(../Images/check.gif) right top no-repeat;
+	background:url(../../Images/siteimages/check.gif) right top no-repeat;
 	height:16px;
 	width:16px;
 }
