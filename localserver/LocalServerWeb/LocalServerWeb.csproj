@@ -75,6 +75,7 @@
     <Compile Include="Codes\MyMembershipProvider.cs" />
     <Compile Include="Codes\SharedCode.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminHomeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -126,6 +127,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SharedString.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Shared\Admin.Master.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Shared\Admin.Master.designer.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\admincss\datePicker.css" />
@@ -135,6 +143,107 @@
     <Content Include="Content\sitecss\Login.css" />
     <Content Include="Content\sitecss\templatemo_style.css" />
     <Content Include="Global.asax" />
+    <Content Include="Images\adminimages\forms\bg_related_act.gif" />
+    <Content Include="Images\adminimages\forms\bubble_inner.gif" />
+    <Content Include="Images\adminimages\forms\bubble_left.gif" />
+    <Content Include="Images\adminimages\forms\bubble_right.gif" />
+    <Content Include="Images\adminimages\forms\choose-file.gif" />
+    <Content Include="Images\adminimages\forms\error_left.gif" />
+    <Content Include="Images\adminimages\forms\error_right.gif" />
+    <Content Include="Images\adminimages\forms\form_inp.gif" />
+    <Content Include="Images\adminimages\forms\form_inp_error.gif" />
+    <Content Include="Images\adminimages\forms\form_reset.gif" />
+    <Content Include="Images\adminimages\forms\form_select.gif" />
+    <Content Include="Images\adminimages\forms\form_select_small.gif" />
+    <Content Include="Images\adminimages\forms\form_submit.gif" />
+    <Content Include="Images\adminimages\forms\form_textarea.gif" />
+    <Content Include="Images\adminimages\forms\header_related_act.gif" />
+    <Content Include="Images\adminimages\forms\icon_calendar.jpg" />
+    <Content Include="Images\adminimages\forms\icon_edit.gif" />
+    <Content Include="Images\adminimages\forms\icon_list_arrow.gif" />
+    <Content Include="Images\adminimages\forms\icon_minus.gif" />
+    <Content Include="Images\adminimages\forms\icon_plus.gif" />
+    <Content Include="Images\adminimages\forms\lines_dotted_short.gif" />
+    <Content Include="Images\adminimages\forms\step_1.gif" />
+    <Content Include="Images\adminimages\forms\step_dark_left.gif" />
+    <Content Include="Images\adminimages\forms\step_dark_right.gif" />
+    <Content Include="Images\adminimages\forms\step_dark_round.gif" />
+    <Content Include="Images\adminimages\forms\step_light_left.gif" />
+    <Content Include="Images\adminimages\forms\step_light_right.gif" />
+    <Content Include="Images\adminimages\forms\step_light_round.gif" />
+    <Content Include="Images\adminimages\forms\upload_file.gif" />
+    <Content Include="Images\adminimages\login\icon_back_login.gif" />
+    <Content Include="Images\adminimages\login\inp_login.gif" />
+    <Content Include="Images\adminimages\login\loginbox_bg.png" />
+    <Content Include="Images\adminimages\login\login_bg.jpg" />
+    <Content Include="Images\adminimages\login\submit_login.gif" />
+    <Content Include="Images\adminimages\shared\blank.gif" />
+    <Content Include="Images\adminimages\shared\border_bit.jpg" />
+    <Content Include="Images\adminimages\shared\cal_th_repeat.jpg" />
+    <Content Include="Images\adminimages\shared\cal_top_bg.jpg" />
+    <Content Include="Images\adminimages\shared\cal_top_repeat.jpg" />
+    <Content Include="Images\adminimages\shared\checkbox.gif" />
+    <Content Include="Images\adminimages\shared\content_repeat.jpg" />
+    <Content Include="Images\adminimages\shared\corner_bottom_left.jpg" />
+    <Content Include="Images\adminimages\shared\corner_bottom_right.jpg" />
+    <Content Include="Images\adminimages\shared\corner_top_left.jpg" />
+    <Content Include="Images\adminimages\shared\corner_top_right.jpg" />
+    <Content Include="Images\adminimages\shared\icon_idlogo.jpg" />
+    <Content Include="Images\adminimages\shared\logo.png" />
+    <Content Include="Images\adminimages\shared\nav\account_drop_bg.gif" />
+    <Content Include="Images\adminimages\shared\nav\account_line.gif" />
+    <Content Include="Images\adminimages\shared\nav\back_0.gif" />
+    <Content Include="Images\adminimages\shared\nav\back_1x.gif" />
+    <Content Include="Images\adminimages\shared\nav\Copy of pro_line_1.gif" />
+    <Content Include="Images\adminimages\shared\nav\divider.jpg" />
+    <Content Include="Images\adminimages\shared\nav\icon_acc_inbox.gif" />
+    <Content Include="Images\adminimages\shared\nav\icon_acc_personal.gif" />
+    <Content Include="Images\adminimages\shared\nav\icon_acc_projects.gif" />
+    <Content Include="Images\adminimages\shared\nav\icon_acc_settings.gif" />
+    <Content Include="Images\adminimages\shared\nav\icon_acc_stats.gif" />
+    <Content Include="Images\adminimages\shared\nav\nav_logout.gif" />
+    <Content Include="Images\adminimages\shared\nav\nav_myaccount.gif" />
+    <Content Include="Images\adminimages\shared\nav\pro_line_0x.gif" />
+    <Content Include="Images\adminimages\shared\nav\pro_line_1.gif" />
+    <Content Include="Images\adminimages\shared\nav\pro_line_2.gif" />
+    <Content Include="Images\adminimages\shared\nav\repeat.jpg" />
+    <Content Include="Images\adminimages\shared\side_shadowleft.jpg" />
+    <Content Include="Images\adminimages\shared\side_shadowright.jpg" />
+    <Content Include="Images\adminimages\shared\top_bg.jpg" />
+    <Content Include="Images\adminimages\shared\top_search_btn.gif" />
+    <Content Include="Images\adminimages\shared\top_search_inp.gif" />
+    <Content Include="Images\adminimages\shared\top_search_select.gif" />
+    <Content Include="Images\adminimages\shared\year_next.gif" />
+    <Content Include="Images\adminimages\shared\year_prev.gif" />
+    <Content Include="Images\adminimages\table\actions_slider_bg.gif" />
+    <Content Include="Images\adminimages\table\action_delete.gif" />
+    <Content Include="Images\adminimages\table\action_edit.gif" />
+    <Content Include="Images\adminimages\table\content_round_repeat.jpg" />
+    <Content Include="Images\adminimages\table\content_round_top.jpg" />
+    <Content Include="Images\adminimages\table\dropdown_actions.gif" />
+    <Content Include="Images\adminimages\table\icon_close_blue.gif" />
+    <Content Include="Images\adminimages\table\icon_close_green.gif" />
+    <Content Include="Images\adminimages\table\icon_close_red.gif" />
+    <Content Include="Images\adminimages\table\icon_close_yellow.gif" />
+    <Content Include="Images\adminimages\table\message_blue.gif" />
+    <Content Include="Images\adminimages\table\message_green.gif" />
+    <Content Include="Images\adminimages\table\message_red.gif" />
+    <Content Include="Images\adminimages\table\message_yellow.gif" />
+    <Content Include="Images\adminimages\table\paging_far_left.gif" />
+    <Content Include="Images\adminimages\table\paging_far_right.gif" />
+    <Content Include="Images\adminimages\table\paging_left.gif" />
+    <Content Include="Images\adminimages\table\paging_right.gif" />
+    <Content Include="Images\adminimages\table\select_number_rows.gif" />
+    <Content Include="Images\adminimages\table\table_header.jpg" />
+    <Content Include="Images\adminimages\table\table_header_checkbox.jpg" />
+    <Content Include="Images\adminimages\table\table_header_options.jpg" />
+    <Content Include="Images\adminimages\table\table_header_repeat.jpg" />
+    <Content Include="Images\adminimages\table\table_icon_1.gif" />
+    <Content Include="Images\adminimages\table\table_icon_2.gif" />
+    <Content Include="Images\adminimages\table\table_icon_3.gif" />
+    <Content Include="Images\adminimages\table\table_icon_4.gif" />
+    <Content Include="Images\adminimages\table\table_icon_5.gif" />
+    <Content Include="Images\adminimages\table\table_sort_arrow.gif" />
     <Content Include="Images\siteimages\check.gif" />
     <Content Include="Images\siteimages\error.gif" />
     <Content Include="Images\siteimages\slideitmoo_back.png" />
@@ -158,11 +267,28 @@
     <Content Include="Images\siteimages\templatemo_slider.jpg" />
     <Content Include="Images\siteimages\templatmeo_header.jpg" />
     <Content Include="LocalService.svc" />
+    <Content Include="Scripts\jquery\Copy of custom_jquery.js" />
+    <Content Include="Scripts\jquery\custom_jquery.js" />
+    <Content Include="Scripts\jquery\date.js" />
+    <Content Include="Scripts\jquery\jquery-1.4.1.min.js" />
+    <Content Include="Scripts\jquery\jquery.bind.js" />
+    <Content Include="Scripts\jquery\jquery.datePicker.js" />
+    <Content Include="Scripts\jquery\jquery.dimensions.js" />
+    <Content Include="Scripts\jquery\jquery.filestyle.js" />
+    <Content Include="Scripts\jquery\jquery.pngFix.pack.js" />
+    <Content Include="Scripts\jquery\jquery.selectbox-0.5.js" />
+    <Content Include="Scripts\jquery\jquery.selectbox-0.5_style_2.js" />
+    <Content Include="Scripts\jquery\jquery.selectbox-0.5_style_3.js" />
+    <Content Include="Scripts\jquery\jquery.tooltip.js" />
+    <Content Include="Scripts\jquery\jquery.usermode.js" />
+    <Content Include="Scripts\jquery\ui.checkbox.js" />
+    <Content Include="Scripts\jquery\ui.core.js" />
     <Content Include="Scripts\Login.js" />
     <Content Include="Scripts\MD5.js" />
     <Content Include="Scripts\mootools-1.2-more.js" />
     <Content Include="Scripts\mootools-1.2.1-core.js" />
     <Content Include="Scripts\slideitmoo-1.1.js" />
+    <Content Include="Views\AdminHome\Index.aspx" />
     <Content Include="Views\Shared\LanguageUserControl.ascx" />
     <Content Include="Views\Shared\LatestSlider.ascx" />
     <Content Include="Views\Shared\LeftSidebar.ascx" />
@@ -245,6 +371,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SharedString.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Admin.Master" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
