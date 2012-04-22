@@ -53,7 +53,7 @@
                     
         	<div class="product_box margin_r40">
                 
-                <div class="image_wrapper"><a href="http://www.templatemo.com/page/1" target="_parent"><img src="../../Images/templatemo_image_01.jpg" alt="product" /></a></div>
+                <div class="image_wrapper"><a href="http://www.templatemo.com/page/1" target="_parent"><img src="../../Images/siteimages/templatemo_image_01.jpg" alt="product" /></a></div>
                 <h3>Phasellus eget lorem</h3>
                 <p>Nullam scelerisque odio ante, in facilisis mauris. Sed justo quam, sollicitudin vitae.</p>
                 <p class="price">Price: $250</p>
@@ -63,7 +63,7 @@
                     
                     <div class="product_box">
                     
-                <div class="image_wrapper"><a href="http://www.templatemo.com/page/2" target="_parent"><img src="../../Images/templatemo_image_02.jpg" alt="product" /></a></div>
+                <div class="image_wrapper"><a href="http://www.templatemo.com/page/2" target="_parent"><img src="../../Images/siteimages/templatemo_image_02.jpg" alt="product" /></a></div>
                 <h3>Aenean magna felis</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dictum ultricies purus.</p>
                 <p class="price">Price: $350</p>
@@ -75,7 +75,7 @@
                     
                     <div class="product_box margin_r40">
                     
-                <div class="image_wrapper"><a href="http://www.templatemo.com/page/3" target="_parent"><img src="../../Images/templatemo_image_03.jpg" alt="product" /></a></div>
+                <div class="image_wrapper"><a href="http://www.templatemo.com/page/3" target="_parent"><img src="../../Images/siteimages/templatemo_image_03.jpg" alt="product" /></a></div>
                 <h3>Vestibulum eu lacus mauris</h3>
                 <p>Donec a tortor erat. Ut arcu quam, congue non vulputate non, placerat vel nibh.</p>
                 <p class="price">Price: $450</p>
@@ -85,7 +85,7 @@
                     
                     <div class="product_box">
                     
-                <div class="image_wrapper"><a href="http://www.templatemo.com/page/4" target="_parent"><img src="../../Images/templatemo_image_04.jpg" alt="product" /></a></div>
+                <div class="image_wrapper"><a href="http://www.templatemo.com/page/4" target="_parent"><img src="../../Images/siteimages/templatemo_image_04.jpg" alt="product" /></a></div>
                 <h3>Phasellus vitae alique</h3>
                 <p>Aliquam mollis, ligula id condimentum imperdiet, tellus eros elementum orci. </p>
                 <p class="price">Price: $550</p>

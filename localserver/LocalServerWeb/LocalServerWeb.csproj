@@ -128,39 +128,35 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Login.css" />
-    <Content Include="Content\templatemo_style.css" />
+    <Content Include="Content\admincss\datePicker.css" />
+    <Content Include="Content\admincss\pro_dropline.css" />
+    <Content Include="Content\admincss\pro_dropline_ie.css" />
+    <Content Include="Content\admincss\screen.css" />
+    <Content Include="Content\sitecss\Login.css" />
+    <Content Include="Content\sitecss\templatemo_style.css" />
     <Content Include="Global.asax" />
-    <Content Include="Images\check.gif" />
-    <Content Include="Images\error.gif" />
-    <Content Include="Images\slideitmoo_back.png" />
-    <Content Include="Images\slideitmoo_forward.png" />
-    <Content Include="Images\templatemo_body_top.png" />
-    <Content Include="Images\templatemo_button.png" />
-    <Content Include="Images\templatemo_button_hover.png" />
-    <Content Include="Images\templatemo_content_bottom.png" />
-    <Content Include="Images\templatemo_content_middle.png" />
-    <Content Include="Images\templatemo_content_top.jpg" />
-    <Content Include="Images\templatemo_image_01.jpg" />
-    <Content Include="Images\templatemo_image_02.jpg" />
-    <Content Include="Images\templatemo_image_03.jpg" />
-    <Content Include="Images\templatemo_image_04.jpg" />
-    <Content Include="Images\templatemo_list.png" />
-    <Content Include="Images\templatemo_logo.png" />
-    <Content Include="Images\templatemo_menu.png" />
-    <Content Include="Images\templatemo_menu_divider.png" />
-    <Content Include="Images\templatemo_product_01.png" />
-    <Content Include="Images\templatemo_product_02.png" />
-    <Content Include="Images\templatemo_product_03.png" />
-    <Content Include="Images\templatemo_product_04.png" />
-    <Content Include="Images\templatemo_product_05.png" />
-    <Content Include="Images\templatemo_product_06.png" />
-    <Content Include="Images\templatemo_product_07.png" />
-    <Content Include="Images\templatemo_product_08.png" />
-    <Content Include="Images\templatemo_sidebar.jpg" />
-    <Content Include="Images\templatemo_sidebar_header.png" />
-    <Content Include="Images\templatemo_slider.jpg" />
-    <Content Include="Images\templatmeo_header.jpg" />
+    <Content Include="Images\siteimages\check.gif" />
+    <Content Include="Images\siteimages\error.gif" />
+    <Content Include="Images\siteimages\slideitmoo_back.png" />
+    <Content Include="Images\siteimages\slideitmoo_forward.png" />
+    <Content Include="Images\siteimages\templatemo_body_top.png" />
+    <Content Include="Images\siteimages\templatemo_button.png" />
+    <Content Include="Images\siteimages\templatemo_button_hover.png" />
+    <Content Include="Images\siteimages\templatemo_content_bottom.png" />
+    <Content Include="Images\siteimages\templatemo_content_middle.png" />
+    <Content Include="Images\siteimages\templatemo_content_top.jpg" />
+    <Content Include="Images\siteimages\templatemo_image_01.jpg" />
+    <Content Include="Images\siteimages\templatemo_image_02.jpg" />
+    <Content Include="Images\siteimages\templatemo_image_03.jpg" />
+    <Content Include="Images\siteimages\templatemo_image_04.jpg" />
+    <Content Include="Images\siteimages\templatemo_list.png" />
+    <Content Include="Images\siteimages\templatemo_logo.png" />
+    <Content Include="Images\siteimages\templatemo_menu.png" />
+    <Content Include="Images\siteimages\templatemo_menu_divider.png" />
+    <Content Include="Images\siteimages\templatemo_sidebar.jpg" />
+    <Content Include="Images\siteimages\templatemo_sidebar_header.png" />
+    <Content Include="Images\siteimages\templatemo_slider.jpg" />
+    <Content Include="Images\siteimages\templatmeo_header.jpg" />
     <Content Include="LocalService.svc" />
     <Content Include="Scripts\Login.js" />
     <Content Include="Scripts\MD5.js" />
@@ -179,7 +175,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\sitecss\Site.css" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
