@@ -518,11 +518,11 @@ namespace LocalServerWeb
             return ChiTietOrder;
         }
 
-        public ChiTietOrder ThemChiTietOrder(ChiTietOrder _ChiTietOrder)
+        public ChiTietOrder ThemChiTietOrder(ChiTietOrder _chiTietOrder)
         {
             try
             {
-                return ChiTietOrderBUS.ThemChiTietOrder(_ChiTietOrder);
+                return ChiTietOrderBUS.ThemChiTietOrder(_chiTietOrder);
             }
             catch (Exception e)
             {

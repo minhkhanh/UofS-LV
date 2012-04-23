@@ -8,7 +8,7 @@ using System.Data.Linq.Mapping;
 
 namespace LocalServerDTO
 {
-    [DataContract(Name = "ChiTietsOrder", Namespace = "")]
+    [DataContract(Name = "ChiTietOrder", Namespace = "")]
     [Table(Name = "ChiTietOrder")]
     public class ChiTietOrder
     {
