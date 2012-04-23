@@ -1,14 +1,15 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
+<%@ Import Namespace="LocalServerWeb.Resources.Views.Shared" %>
 
-		<!--  start nav -->
+<!--  start nav -->
 		<div class="nav">
 		<div class="table">
 		
 
-		<ul <%: ((int)ViewData["menuMainId"] == 0)?"class=current":"class=select" %> ><li><a href="#nogo"><b>Dashboard</b></a>
+		<ul <%: ((int)ViewData["menuMainId"] == 0)?"class=current":"class=select" %> ><li><a href="#nogo"><b><%:SharedString.AccountManager %></b></a>
         <div class='select_sub <%: ((int)ViewData["menuMainId"] == 0)?"show":"" %> '>
 			<ul class="sub">
-				<li <%: ((int)ViewData["menuSubId"] == 0 && (int)ViewData["menuMainId"] == 0)?"class=sub_show":"" %> ><a href="#nogo">Dashboard Details 1</a></li>
+				<li <%: ((int)ViewData["menuSubId"] == 0 && (int)ViewData["menuMainId"] == 0)?"class=sub_show":"" %> ><a href="#nogo"><%:SharedString.AccountManagerList %></a></li>
 				<li <%: ((int)ViewData["menuSubId"] == 1 && (int)ViewData["menuMainId"] == 0)?"class=sub_show":"" %> ><a href="#nogo">Dashboard Details 2</a></li>
 				<li <%: ((int)ViewData["menuSubId"] == 2 && (int)ViewData["menuMainId"] == 0)?"class=sub_show":"" %> ><a href="#nogo">Dashboard Details 3</a></li>
 			</ul>

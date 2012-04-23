@@ -219,7 +219,9 @@
 
 	<!--  start page-heading -->
 	<div id="page-heading">
-		<h1>Add product</h1>
+		<h1>
+            <asp:ContentPlaceHolder ID="PageHeadingContent" runat="server"/>
+        </h1>
 	</div>
 	<!-- end page-heading -->
 

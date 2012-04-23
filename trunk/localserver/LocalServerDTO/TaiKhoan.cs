@@ -35,6 +35,10 @@ namespace LocalServerDTO
         public DateTime NgaySinh { get; set; }
 
         [DataMember]
+        [Column(Name = "GioiTinh")]
+        public int GioiTinh { get; set; }
+
+        [DataMember]
         [Column(Name = "CMND")]
         public string CMND { get; set; }
 

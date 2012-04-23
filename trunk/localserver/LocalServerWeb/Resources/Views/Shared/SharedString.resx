@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountManager" xml:space="preserve">
+    <value>Account Manager</value>
+  </data>
+  <data name="AccountManagerList" xml:space="preserve">
+    <value>List of account</value>
+  </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
   </data>
