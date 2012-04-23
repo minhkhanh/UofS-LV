@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LocalServerWeb.Resources.Views.Shared {
+namespace LocalServerWeb.Resources.Views.AdminUser {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace LocalServerWeb.Resources.Views.Shared {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class SharedString {
+    public class AdminUserString {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SharedString() {
+        internal AdminUserString() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace LocalServerWeb.Resources.Views.Shared {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LocalServerWeb.Resources.Views.Shared.SharedString", typeof(SharedString).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LocalServerWeb.Resources.Views.AdminUser.AdminUserString", typeof(AdminUserString).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,92 @@ namespace LocalServerWeb.Resources.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Account Manager.
+        ///   Looks up a localized string similar to Account list.
         /// </summary>
-        public static string AccountManager {
+        public static string AccountList {
             get {
-                return ResourceManager.GetString("AccountManager", resourceCulture);
+                return ResourceManager.GetString("AccountList", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to List of account.
+        ///   Looks up a localized string similar to BOD.
         /// </summary>
-        public static string AccountManagerList {
+        public static string BOD {
             get {
-                return ResourceManager.GetString("AccountManagerList", resourceCulture);
+                return ResourceManager.GetString("BOD", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Language.
+        ///   Looks up a localized string similar to Gender.
         /// </summary>
-        public static string Language {
+        public static string Gender {
             get {
-                return ResourceManager.GetString("Language", resourceCulture);
+                return ResourceManager.GetString("Gender", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Log Off.
+        ///   Looks up a localized string similar to Group.
         /// </summary>
-        public static string LogOff {
+        public static string Group {
             get {
-                return ResourceManager.GetString("LogOff", resourceCulture);
+                return ResourceManager.GetString("Group", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Log On.
+        ///   Looks up a localized string similar to Name.
         /// </summary>
-        public static string LogOn {
+        public static string Name {
             get {
-                return ResourceManager.GetString("LogOn", resourceCulture);
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welcome.
+        ///   Looks up a localized string similar to Account list is empty..
         /// </summary>
-        public static string Welcome {
+        public static string NoData {
             get {
-                return ResourceManager.GetString("Welcome", resourceCulture);
+                return ResourceManager.GetString("NoData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Options.
+        /// </summary>
+        public static string Options {
+            get {
+                return ResourceManager.GetString("Options", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Social Identity.
+        /// </summary>
+        public static string SocialID {
+            get {
+                return ResourceManager.GetString("SocialID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string Status {
+            get {
+                return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username.
+        /// </summary>
+        public static string Username {
+            get {
+                return ResourceManager.GetString("Username", resourceCulture);
             }
         }
     }

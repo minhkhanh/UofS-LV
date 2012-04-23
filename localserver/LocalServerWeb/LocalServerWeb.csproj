@@ -108,6 +108,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Resources\Views\AdminUser\AdminUserString.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminUserString.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\AdminUser\AdminUserString.vi.Designer.cs">
+      <DependentUpon>AdminUserString.vi.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\Views\Home\HomeString.vi.Designer.cs">
       <DependentUpon>HomeString.vi.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -357,6 +367,14 @@
     <EmbeddedResource Include="Resources\Views\Account\AccountString.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AccountString.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminUser\AdminUserString.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminUserString.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminUser\AdminUserString.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminUserString.vi.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Home\HomeString.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
