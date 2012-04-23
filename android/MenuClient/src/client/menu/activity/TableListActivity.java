@@ -12,6 +12,7 @@ public class TableListActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		setContentView(R.layout.layout_two_fragment);
 
 		FragmentManager fm = getFragmentManager();
@@ -23,10 +24,5 @@ public class TableListActivity extends Activity {
 					"AreaListFragment");
 			ft.commit();
 		}
-	}
-
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
 	}
 }
