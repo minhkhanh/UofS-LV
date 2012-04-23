@@ -313,6 +313,7 @@ CREATE TABLE [dbo].[TaiKhoan] (
 , [MatKhau] nvarchar(50)  NULL  
 , [HoTen] nvarchar(50)  NULL  
 , [NgaySinh] date  NULL  
+, [GioiTinh] int  NULL  
 , [CMND] nvarchar(50)  NULL  
 , [Avatar] nvarchar(50)  NULL  
 , [Active] bit  NULL  
