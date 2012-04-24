@@ -120,14 +120,35 @@
   <data name="AccountList" xml:space="preserve">
     <value>Danh sách tài khoản</value>
   </data>
+  <data name="Active" xml:space="preserve">
+    <value>Hoạt động</value>
+  </data>
   <data name="BOD" xml:space="preserve">
     <value>Ngày sinh</value>
+  </data>
+  <data name="Deactive" xml:space="preserve">
+    <value>Khóa</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Xóa nếu được</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Sửa thông tin</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>Nữ</value>
   </data>
   <data name="Gender" xml:space="preserve">
     <value>Giới tính</value>
   </data>
   <data name="Group" xml:space="preserve">
     <value>Nhóm</value>
+  </data>
+  <data name="Lock" xml:space="preserve">
+    <value>Khóa / Gỡ khóa tài khoản</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Nam</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Họ tên</value>
@@ -136,13 +157,16 @@
     <value>Hiện không có tài khoản nào.</value>
   </data>
   <data name="Options" xml:space="preserve">
-    <value>Các tùy chọn</value>
+    <value>Tùy chọn</value>
   </data>
   <data name="SocialID" xml:space="preserve">
     <value>CMND</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>Trạng thái</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Quản lý tài khoản</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Tài khoản</value>
