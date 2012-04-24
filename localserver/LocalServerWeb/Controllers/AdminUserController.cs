@@ -9,7 +9,7 @@ using LocalServerWeb.Codes;
 
 namespace LocalServerWeb.Controllers
 {
-    public class AdminUserController : Controller
+    public class AdminUserController : BaseController
     {
         //
         // GET: /AdminUser/
@@ -18,8 +18,14 @@ namespace LocalServerWeb.Controllers
         {
             SharedCode.FillAdminMainMenu(ViewData, 0, 0);
             ViewData["listTaiKhoan"] = TaiKhoanBUS.LayDanhSachTaiKhoan();
+            ViewData["listNhomTaiKhoan"] = NhomTaiKhoanBUS.LayDanhSachNhomTaiKhoan();
             return View();
         }
 
+        [HttpPost]
+        public ActionResult ChangeGroupUser()
+        {
+            return new EmptyResult();
+        }
     }
 }
