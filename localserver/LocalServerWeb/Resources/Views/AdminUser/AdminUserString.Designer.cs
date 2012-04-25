@@ -79,6 +79,15 @@ namespace LocalServerWeb.Resources.Views.AdminUser {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add user.
+        /// </summary>
+        public static string AddUser {
+            get {
+                return ResourceManager.GetString("AddUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to BOD.
         /// </summary>
         public static string BOD {
@@ -93,6 +102,15 @@ namespace LocalServerWeb.Resources.Views.AdminUser {
         public static string ChangeYourself {
             get {
                 return ResourceManager.GetString("ChangeYourself", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm Password.
+        /// </summary>
+        public static string ConfirmPassword {
+            get {
+                return ResourceManager.GetString("ConfirmPassword", resourceCulture);
             }
         }
         
@@ -219,6 +237,15 @@ namespace LocalServerWeb.Resources.Views.AdminUser {
         public static string Options {
             get {
                 return ResourceManager.GetString("Options", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
             }
         }
         

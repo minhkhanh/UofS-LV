@@ -79,6 +79,15 @@ namespace LocalServerWeb.Resources.Views.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new user.
+        /// </summary>
+        public static string AdminAddUser {
+            get {
+                return ResourceManager.GetString("AdminAddUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Admin home.
         /// </summary>
         public static string AdminHome {

@@ -47,27 +47,27 @@ namespace LocalServerWeb.Models
         public string Password { get; set; }
     }
 
-    [PropertiesMustMatch("Password", "ConfirmPassword", ErrorMessage = "The password and confirmation password do not match.")]
-    public class RegisterModel
+    [PropertiesMustMatch("Password", "ConfirmPassword", ErrorMessageResourceName = "PasswordNotMatch", ErrorMessageResourceType = typeof(AccountModelString))]
+    public class AddUserModel
     {
-        [Required]
-        [DisplayName("User name")]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(AccountModelString))]
+        [LocalizedDisplayName("UserName", NameResourceType = typeof(AccountModelString))]
         public string UserName { get; set; }
 
-        [Required]
-        [DataType(DataType.EmailAddress)]
-        [DisplayName("Email address")]
-        public string Email { get; set; }
+        //[Required]
+        //[DataType(DataType.EmailAddress)]
+        //[LocalizedDisplayName("Email address")]
+        //public string Email { get; set; }
 
-        [Required]
-        [ValidatePasswordLength]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(AccountModelString))]
+        [StringLength(50, ErrorMessageResourceName = "PasswordLength", ErrorMessageResourceType = typeof(AccountModelString), MinimumLength = 5)]
         [DataType(DataType.Password)]
-        [DisplayName("Password")]
+        [LocalizedDisplayName("Password", NameResourceType = typeof(AccountModelString))]
         public string Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(AccountModelString))]
         [DataType(DataType.Password)]
-        [DisplayName("Confirm password")]
+        [LocalizedDisplayName("ConfirmPassword", NameResourceType = typeof(AccountModelString))]
         public string ConfirmPassword { get; set; }
     }
     #endregion

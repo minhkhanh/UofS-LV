@@ -23,7 +23,7 @@
 		<div class='select_sub <%: ((int)ViewData["menuMainId"] == 1)?"show":"" %> '>
 			<ul class="sub">
 				<li <%: ((int)ViewData["menuSubId"] == 0 && (int)ViewData["menuMainId"] == 1)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.AccountManagerList, "Index", "AdminUser") %>"></li>
-				<li <%: ((int)ViewData["menuSubId"] == 1 && (int)ViewData["menuMainId"] == 1)?"class=sub_show":"" %> ><a href="#nogo">Add product</a></li>
+				<li <%: ((int)ViewData["menuSubId"] == 1 && (int)ViewData["menuMainId"] == 1)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.AdminAddUser, "AddUser", "AdminUser") %></li>
 				<li <%: ((int)ViewData["menuSubId"] == 2 && (int)ViewData["menuMainId"] == 1)?"class=sub_show":"" %> ><a href="#nogo">Delete products</a></li>
 			</ul>
 		</div>

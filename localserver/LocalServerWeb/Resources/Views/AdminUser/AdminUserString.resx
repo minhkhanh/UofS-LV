@@ -123,11 +123,17 @@
   <data name="Active" xml:space="preserve">
     <value>Active</value>
   </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>Add user</value>
+  </data>
   <data name="BOD" xml:space="preserve">
     <value>BOD</value>
   </data>
   <data name="ChangeYourself" xml:space="preserve">
     <value>You can'nt change your info by yourself.</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
   </data>
   <data name="Deactive" xml:space="preserve">
     <value>Deactive</value>
@@ -170,6 +176,9 @@
   </data>
   <data name="Options" xml:space="preserve">
     <value>Options</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
   </data>
   <data name="SocialID" xml:space="preserve">
     <value>Social Identity</value>

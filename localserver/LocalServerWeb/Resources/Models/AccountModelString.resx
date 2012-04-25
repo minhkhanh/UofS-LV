@@ -117,11 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
   <data name="LoginError" xml:space="preserve">
     <value>Login was unsuccessful. Please correct the errors and try again.</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="PasswordLength" xml:space="preserve">
+    <value>The password must have 5-50 charater.</value>
+  </data>
+  <data name="PasswordNotMatch" xml:space="preserve">
+    <value>The password and confirmation password do not match</value>
   </data>
   <data name="Required" xml:space="preserve">
     <value>The {0} field is required</value>
