@@ -18,5 +18,15 @@ namespace LocalServerBUS
         {
             return DanhMucDAO.LayDanhMuc(maDanhMuc);
         }
+
+        public static List<DanhMuc> LayDanhSachDanhMucTheoDanhMucCha(int maDanhMucCha)
+        {
+            return DanhMucDAO.LayDanhSachDanhMucTheoDanhMucCha(maDanhMucCha);
+        }
+
+        public static List<DanhMuc> LayDanhSachDanhMucCha()
+        {
+            return DanhMucDAO.LayDanhSachDanhMucCha();
+        }
     }
 }
