@@ -13,6 +13,7 @@
     <h2>Food</h2>
     <% Html.RenderPartial("FoodCategoryLinks"); %>
     <% Html.RenderPartial("FoodCategorySidebar"); %>
+    <% Html.RenderPartial("FoodDetail"); %>
     
 </asp:Content>
 

@@ -34,6 +34,21 @@ namespace LocalServerDAO
             return _chiTietOrder;
         }
 
+        public static List<ChiTietOrder> ThemNhieuChiTietOrder(List<ChiTietOrder> _listChiTietOrder)
+        {
+            ThucDonDienTu.DataContext.ChiTietOrders.InsertAllOnSubmit(_listChiTietOrder);
+            try
+            {
+                ThucDonDienTu.DataContext.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                _listChiTietOrder = null;
+            }
+
+            return _listChiTietOrder;
+        }
+
         public static bool SuaChiTietOrder(ChiTietOrder _chiTietOrder)
         {
             bool result = false;
@@ -60,7 +75,6 @@ namespace LocalServerDAO
 
             return result;
         }
-
 
     }
 }

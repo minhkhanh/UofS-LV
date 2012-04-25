@@ -34,5 +34,10 @@ namespace LocalServerDAO
         {
             return ThucDonDienTu.DataContext.ChiTietMonAnDonViTinhs.ToList();
         }
+
+        public static List<ChiTietMonAnDonViTinh> LayDanhSachChiTietMonAnDonViTinhTheoMonAn(int maMonAn)
+        {
+            return ThucDonDienTu.DataContext.ChiTietMonAnDonViTinhs.Where(c => c.MonAn.MaMonAn == maMonAn).ToList();
+        }
     }
 }

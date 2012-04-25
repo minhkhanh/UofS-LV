@@ -200,6 +200,10 @@ namespace LocalServerWeb
         [OperationContract]
         ChiTietOrder ThemChiTietOrder(ChiTietOrder _chiTietOrder);
 
+        [WebInvoke(Method = "POST", UriTemplate = "themNhieuChiTietOrder")]
+        [OperationContract]
+        List<ChiTietOrder> ThemNhieuChiTietOrder(List<ChiTietOrder> _listChiTietOrder);
+
         [WebInvoke(Method = "PUT", UriTemplate = "suaChiTietOrder")]
         [OperationContract]
         bool SuaChiTietOrder(ChiTietOrder _chiTietOrder);

@@ -6,14 +6,15 @@
    {
        FoodCategorySidebarViewModel viewModel = (FoodCategorySidebarViewModel)ViewData["foodCategorySidebarViewModel"];
        %>
-       <%: Html.ActionLink(viewModel.ParentName, "Category", "FoodCategory", viewModel.ParentId, "") %>
+       <%: Html.ActionLink(viewModel.ParentName, "Category", "FoodCategory", new { id = viewModel.ParentId }, "")%>
+       <br />
    
    <%
        for (int i = 0; i < viewModel.Names.Count; ++i)
        {
             %>
-            <%: Html.ActionLink(viewModel.Names[i], "Category", "FoodCategory", viewModel.Ids[i], "") %>
-            
+            <%: Html.ActionLink(viewModel.Names[i], "Category", "FoodCategory", new { id = viewModel.Ids[i] }, "")%>
+            <br />
             <%
        }
        
