@@ -45,5 +45,45 @@ namespace LocalServerDAO
             }
             return null;
         }
+
+        public static bool CapNhatTaiKhoan(TaiKhoan taiKhoan)
+        {
+            try
+            {
+                var objTaiKhoan = LayTaiKhoan(taiKhoan.MaTaiKhoan);
+                objTaiKhoan.GioiTinh = taiKhoan.GioiTinh;
+                objTaiKhoan.HoTen = taiKhoan.HoTen;
+                objTaiKhoan.MatKhau = taiKhoan.MatKhau;
+                objTaiKhoan.NgaySinh = taiKhoan.NgaySinh;
+                objTaiKhoan.NhomTaiKhoan = taiKhoan.NhomTaiKhoan;
+                objTaiKhoan.TenTaiKhoan = taiKhoan.TenTaiKhoan;
+                objTaiKhoan.Active = taiKhoan.Active;
+                objTaiKhoan.Avatar = taiKhoan.Avatar;
+                objTaiKhoan.CMND = taiKhoan.CMND;
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {                
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
+
+        public static bool XoaTaiKhoan(TaiKhoan taiKhoan)
+        {
+            try
+            {
+                var objTaiKhoan = LayTaiKhoan(taiKhoan.MaTaiKhoan);
+                ThucDonDienTu.DataContext.TaiKhoans.DeleteOnSubmit(taiKhoan);
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
     }
 }

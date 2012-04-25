@@ -60,5 +60,20 @@ namespace LocalServerWeb.Codes
             viewData["menuMainId"] = iMenuMain;
             viewData["menuSubId"] = iMenuSub;
         }
+
+        public static bool IsUserLogin(HttpSessionStateBase session)
+        {
+            if (session == null || session["taiKhoan"] == null) return false;
+            return true;
+        }
+        public static bool IsAdminLogin(HttpSessionStateBase session)
+        {
+            if (!IsUserLogin(session) || ((TaiKhoan) session["taiKhoan"]).NhomTaiKhoan.TenNhom!="Admin") return false;
+            return true;
+        }
+        public static TaiKhoan GetTaiKhoan(HttpSessionStateBase session)
+        {
+            return session["taiKhoan"] as TaiKhoan;
+        }
     }
 }

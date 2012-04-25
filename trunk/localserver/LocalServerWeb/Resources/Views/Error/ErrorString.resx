@@ -117,70 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AccountList" xml:space="preserve">
-    <value>Account list</value>
-  </data>
-  <data name="Active" xml:space="preserve">
-    <value>Active</value>
-  </data>
-  <data name="BOD" xml:space="preserve">
-    <value>BOD</value>
-  </data>
-  <data name="ChangeYourself" xml:space="preserve">
-    <value>You can'nt change your info by yourself.</value>
-  </data>
-  <data name="Deactive" xml:space="preserve">
-    <value>Deactive</value>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="DeleteError" xml:space="preserve">
-    <value>Can't delete this account.</value>
-  </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="Error" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="Female" xml:space="preserve">
-    <value>Female</value>
-  </data>
-  <data name="Gender" xml:space="preserve">
-    <value>Gender</value>
-  </data>
-  <data name="Group" xml:space="preserve">
-    <value>Group</value>
-  </data>
-  <data name="InputWrong" xml:space="preserve">
-    <value>Your input is wrong.</value>
-  </data>
-  <data name="Lock" xml:space="preserve">
-    <value>Lock/Unlock</value>
-  </data>
-  <data name="Male" xml:space="preserve">
-    <value>Male</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="NoData" xml:space="preserve">
-    <value>Account list is empty.</value>
-  </data>
-  <data name="Options" xml:space="preserve">
-    <value>Options</value>
-  </data>
-  <data name="SocialID" xml:space="preserve">
-    <value>Social Identity</value>
-  </data>
-  <data name="Status" xml:space="preserve">
-    <value>Status</value>
+  <data name="AuthenticationFailen" xml:space="preserve">
+    <value>You do'nt femit acces to here.</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Account manager</value>
-  </data>
-  <data name="Username" xml:space="preserve">
-    <value>Username</value>
+    <value>Error</value>
   </data>
 </root>

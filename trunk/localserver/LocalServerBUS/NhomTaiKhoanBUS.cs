@@ -14,5 +14,10 @@ namespace LocalServerBUS
             return NhomTaiKhoanDAO.LayDanhSachNhomTaiKhoan();
 
         }
+
+        public static NhomTaiKhoan LayNhomTaiKhoanTheoMa(int nhomTaiKhoan)
+        {
+            return NhomTaiKhoanDAO.LayNhomTaiKhoanTheoMa(nhomTaiKhoan);
+        }
     }
 }

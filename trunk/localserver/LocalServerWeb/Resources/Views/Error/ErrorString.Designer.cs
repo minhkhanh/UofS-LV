@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LocalServerWeb.Resources.Views.Shared {
+namespace LocalServerWeb.Resources.Views.Error {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace LocalServerWeb.Resources.Views.Shared {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class SharedString {
+    public class ErrorString {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SharedString() {
+        internal ErrorString() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace LocalServerWeb.Resources.Views.Shared {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LocalServerWeb.Resources.Views.Shared.SharedString", typeof(SharedString).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LocalServerWeb.Resources.Views.Error.ErrorString", typeof(ErrorString).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,74 +61,20 @@ namespace LocalServerWeb.Resources.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Account Manager.
+        ///   Looks up a localized string similar to You do&apos;nt femit acces to here..
         /// </summary>
-        public static string AccountManager {
+        public static string AuthenticationFailen {
             get {
-                return ResourceManager.GetString("AccountManager", resourceCulture);
+                return ResourceManager.GetString("AuthenticationFailen", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to List of account.
+        ///   Looks up a localized string similar to Error.
         /// </summary>
-        public static string AccountManagerList {
+        public static string Title {
             get {
-                return ResourceManager.GetString("AccountManagerList", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Admin home.
-        /// </summary>
-        public static string AdminHome {
-            get {
-                return ResourceManager.GetString("AdminHome", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ThucDonDienTu - Resturent ManagerTử.
-        /// </summary>
-        public static string Footer {
-            get {
-                return ResourceManager.GetString("Footer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Language.
-        /// </summary>
-        public static string Language {
-            get {
-                return ResourceManager.GetString("Language", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Log Off.
-        /// </summary>
-        public static string LogOff {
-            get {
-                return ResourceManager.GetString("LogOff", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Log On.
-        /// </summary>
-        public static string LogOn {
-            get {
-                return ResourceManager.GetString("LogOn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Welcome.
-        /// </summary>
-        public static string Welcome {
-            get {
-                return ResourceManager.GetString("Welcome", resourceCulture);
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }

@@ -58,6 +58,10 @@ namespace LocalServerWeb.Controllers
                 if (taiKhoan!=null)
                 {
                     Session["taiKhoan"] = taiKhoan;
+                    if (SharedCode.IsAdminLogin(Session))
+                    {
+                        return RedirectToAction("Index", "AdminHome");
+                    }
                     if (!String.IsNullOrEmpty(returnUrl))
                     {
                         return Redirect(returnUrl);

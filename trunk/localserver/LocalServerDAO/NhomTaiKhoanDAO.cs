@@ -13,5 +13,13 @@ namespace LocalServerDAO
             return ThucDonDienTu.DataContext.NhomTaiKhoans.ToList();
 
         }
+
+        public static NhomTaiKhoan LayNhomTaiKhoanTheoMa(int nhomTaiKhoan)
+        {
+            var temp = ThucDonDienTu.DataContext.NhomTaiKhoans.Where(b => b.MaNhomTaiKhoan == nhomTaiKhoan);
+            if (temp.Count() == 0)
+                return null;
+            return temp.First();
+        }
     }
 }

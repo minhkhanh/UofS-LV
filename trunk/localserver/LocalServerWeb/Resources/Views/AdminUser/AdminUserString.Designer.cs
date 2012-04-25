@@ -88,6 +88,15 @@ namespace LocalServerWeb.Resources.Views.AdminUser {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can&apos;nt change your info by yourself..
+        /// </summary>
+        public static string ChangeYourself {
+            get {
+                return ResourceManager.GetString("ChangeYourself", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deactive.
         /// </summary>
         public static string Deactive {
@@ -106,11 +115,29 @@ namespace LocalServerWeb.Resources.Views.AdminUser {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t delete this account..
+        /// </summary>
+        public static string DeleteError {
+            get {
+                return ResourceManager.GetString("DeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
             }
         }
         
@@ -138,6 +165,15 @@ namespace LocalServerWeb.Resources.Views.AdminUser {
         public static string Group {
             get {
                 return ResourceManager.GetString("Group", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your input is wrong..
+        /// </summary>
+        public static string InputWrong {
+            get {
+                return ResourceManager.GetString("InputWrong", resourceCulture);
             }
         }
         
