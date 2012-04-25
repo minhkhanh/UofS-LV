@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
-<%@Import Namespace = LocalServerWeb.ViewModels %>
+<%@ Import Namespace = "LocalServerWeb.ViewModels" %>
 
 <div id="food_category_link">
 <% if (ViewData["foodCategoryLinksViewModel"] != null)
@@ -9,11 +9,15 @@
        {
            string actionName = (viewModel.IsCategories[i] == true) ? "Category" : "Food";
            %>
-
+           
            <%: Html.ActionLink(viewModel.Names[i], actionName, "FoodCategory", new {id = viewModel.Ids[i]}, "") %>
-           <% if(i <viewModel.Names.Count -1)
-                %>
-                <%:Html.DisplayText(" / ") %>
+           <% if (i < viewModel.Names.Count - 1)
+              {
+                    %> &nbsp; / &nbsp;
+                    <%
+              } %>
+           
+ 
      <%}
          
    }

@@ -61,6 +61,15 @@ namespace LocalServerWeb.Resources.Views.FoodCategory {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Index.
+        /// </summary>
+        public static string Index {
+            get {
+                return ResourceManager.GetString("Index", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Food Category.
         /// </summary>
         public static string Title {

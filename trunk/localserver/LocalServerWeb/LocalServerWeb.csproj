@@ -173,6 +173,7 @@
       <DependentUpon>SharedString.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\FoodCategoryLinksViewModel.cs" />
+    <Compile Include="ViewModels\FoodCategorySidebarViewModel.cs" />
     <Compile Include="Views\Shared\Admin.Master.cs">
       <DependentUpon>Admin.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -344,6 +345,8 @@
     <Content Include="Views\Shared\AdminMainMenu.ascx" />
     <Content Include="Views\Shared\FoodCategoryLinks.ascx" />
     <Content Include="Views\Shared\FoodCategorySidebar.ascx" />
+    <Content Include="Views\Shared\FoodDetail.ascx" />
+    <Content Include="Views\Shared\FoodGallery.ascx" />
     <Content Include="Views\Shared\LanguageUserControl.ascx" />
     <Content Include="Views\Shared\LatestSlider.ascx" />
     <Content Include="Views\Shared\LeftSidebar.ascx" />

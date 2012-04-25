@@ -23,5 +23,21 @@ namespace LocalServerDAO
             }
             return null;
         }
+
+        public static List<DanhMuc> LayDanhSachDanhMucTheoDanhMucCha(int maDanhMucCha)
+        {
+            var temp = ThucDonDienTu.DataContext.DanhMucs.Where(d => d.MaDanhMuc == maDanhMucCha);
+            if (temp.Count() > 0)
+            {
+                DanhMuc danhMucCha = temp.First();
+                return ThucDonDienTu.DataContext.DanhMucs.Where(c => c.DanhMucCha == danhMucCha).ToList();
+            }
+            return null;
+        }
+
+        public static List<DanhMuc> LayDanhSachDanhMucCha()
+        {
+            return ThucDonDienTu.DataContext.DanhMucs.Where(d => d.DanhMucCha == null).ToList();
+        }
     }
 }

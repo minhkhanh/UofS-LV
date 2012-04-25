@@ -6,11 +6,11 @@ using LocalServerDTO;
 
 namespace LocalServerWeb.ViewModels
 {
-    public class FoodCategoryLinksViewModel
+    public class FoodCategorySidebarViewModel
     {
+        public string ParentName { get; set; }
+        public int ParentId { get; set; }
         public List<string> Names { get; set; }
         public List<int> Ids { get; set; }
-        public List<bool> IsCategories { get; set; }
-
     }
 }
