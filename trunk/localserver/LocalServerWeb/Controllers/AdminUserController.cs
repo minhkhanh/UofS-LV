@@ -11,7 +11,7 @@ using LocalServerDTO;
 
 namespace LocalServerWeb.Controllers
 {
-    public class AdminUserController : AdminBaseController
+    public class AdminUserController : BaseController
     {
         //
         // GET: /AdminUser/
@@ -104,6 +104,12 @@ namespace LocalServerWeb.Controllers
             TaiKhoanBUS.CapNhatTaiKhoan(objTaiKhoan);
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult AddUser()
+        {
+            SharedCode.FillAdminMainMenu(ViewData, 1, 1);
+            return View();
         }
     }
 }

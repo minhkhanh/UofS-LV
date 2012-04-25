@@ -123,11 +123,17 @@
   <data name="Active" xml:space="preserve">
     <value>Hoạt động</value>
   </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>Thêm tài khoản</value>
+  </data>
   <data name="BOD" xml:space="preserve">
     <value>Ngày sinh</value>
   </data>
   <data name="ChangeYourself" xml:space="preserve">
     <value>Bạn không thể thay đổi thông tin tài khoản của chính bạn.</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Xác nhận mật khẩu</value>
   </data>
   <data name="Deactive" xml:space="preserve">
     <value>Khóa</value>
@@ -170,6 +176,9 @@
   </data>
   <data name="Options" xml:space="preserve">
     <value>Tùy chọn</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Mật khẩu</value>
   </data>
   <data name="SocialID" xml:space="preserve">
     <value>CMND</value>

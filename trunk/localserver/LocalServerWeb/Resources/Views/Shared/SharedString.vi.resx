@@ -123,6 +123,9 @@
   <data name="AccountManagerList" xml:space="preserve">
     <value>Danh sách tài khoản</value>
   </data>
+  <data name="AdminAddUser" xml:space="preserve">
+    <value>Thêm tài khoản mới</value>
+  </data>
   <data name="AdminHome" xml:space="preserve">
     <value>Trang chủ</value>
   </data>

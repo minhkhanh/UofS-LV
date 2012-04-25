@@ -337,6 +337,7 @@
     <Content Include="Scripts\slideitmoo-1.1.js" />
     <Content Include="Views\AdminFood\Index.aspx" />
     <Content Include="Views\AdminHome\Index.aspx" />
+    <Content Include="Views\AdminUser\AddUser.aspx" />
     <Content Include="Views\AdminUser\Index.aspx" />
     <Content Include="Views\Error\Index.aspx" />
     <Content Include="Views\FoodCategory\Category.aspx" />

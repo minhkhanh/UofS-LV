@@ -117,11 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Mật khẩu xác nhận</value>
+  </data>
   <data name="LoginError" xml:space="preserve">
     <value>Login không thành công. Xin kiểm tra lại.</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Mật khẩu</value>
+  </data>
+  <data name="PasswordLength" xml:space="preserve">
+    <value>Mật khẩu cần có độ dài 5-50 ký tự</value>
+  </data>
+  <data name="PasswordNotMatch" xml:space="preserve">
+    <value>Mật khẩu và xác nhận lại không giống nhau</value>
   </data>
   <data name="Required" xml:space="preserve">
     <value>Trường {0} là bắt buộc</value>
