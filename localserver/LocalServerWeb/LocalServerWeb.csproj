@@ -77,6 +77,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminFoodController.cs" />
     <Compile Include="Controllers\AdminUserController.cs" />
+    <Compile Include="Controllers\FoodCategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -118,6 +119,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Resources\Views\FoodCategory\FoodCategoryString.vi.Designer.cs">
+      <DependentUpon>FoodCategoryString.vi.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\FoodCategory\FoodCategoryString.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FoodCategoryString.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Views\Home\HomeString.vi.Designer.cs">
       <DependentUpon>HomeString.vi.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -138,6 +149,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SharedString.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\FoodCategoryLinksViewModel.cs" />
     <Compile Include="Views\Shared\Admin.Master.cs">
       <DependentUpon>Admin.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -301,7 +313,12 @@
     <Content Include="Scripts\slideitmoo-1.1.js" />
     <Content Include="Views\AdminFood\Index.aspx" />
     <Content Include="Views\AdminUser\Index.aspx" />
+    <Content Include="Views\FoodCategory\Category.aspx" />
+    <Content Include="Views\FoodCategory\Food.aspx" />
+    <Content Include="Views\FoodCategory\Index.aspx" />
     <Content Include="Views\Shared\AdminMainMenu.ascx" />
+    <Content Include="Views\Shared\FoodCategoryLinks.ascx" />
+    <Content Include="Views\Shared\FoodCategorySidebar.ascx" />
     <Content Include="Views\Shared\LanguageUserControl.ascx" />
     <Content Include="Views\Shared\LatestSlider.ascx" />
     <Content Include="Views\Shared\LeftSidebar.ascx" />
@@ -375,6 +392,14 @@
     <EmbeddedResource Include="Resources\Views\AdminUser\AdminUserString.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AdminUserString.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\FoodCategory\FoodCategoryString.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FoodCategoryString.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\FoodCategory\FoodCategoryString.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FoodCategoryString.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Home\HomeString.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
