@@ -30,6 +30,9 @@ namespace LocalServerWeb.Controllers
             FoodCategorySidebarViewModel foodCategorySidebarViewModel = GetFoodCategorySidebarViewModel(id, true);
             ViewData["foodCategorySidebarViewModel"] = foodCategorySidebarViewModel;
 
+            List<FoodGalleryItemViewModel> foodGalleryItemViewModels = GetFoodGalleryItemViewModels(id);
+            ViewData["foodGalleryItemViewModels"] = foodGalleryItemViewModels;
+
             return View(id);
         }
 
@@ -59,6 +62,7 @@ namespace LocalServerWeb.Controllers
 
                 return viewModel;
             }
+            
 
             int maDanhMuc = id;
             int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
@@ -161,6 +165,117 @@ namespace LocalServerWeb.Controllers
             return viewModel;
         }
 
+        private List<FoodGalleryItemViewModel> GetFoodGalleryItemViewModels(int id)
+        {
+            List<FoodGalleryItemViewModel> viewModels = new List<FoodGalleryItemViewModel>();
+            List<DanhMuc> dsDanhMuc;
+            List<MonAn> dsMonAn = new List<MonAn>();
+
+            int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
+
+            try
+            {
+                if (id == 0)
+                {
+                    dsMonAn = MonAnBUS.LayDanhSachMonAn();
+                }
+                else
+                {
+                    dsDanhMuc = DanhMucBUS.LayDanhSachDanhMucConChauDanhMucCha(id);
+                    if (dsDanhMuc != null)
+                        for (int i = 0; i < dsDanhMuc.Count; ++i)
+                            dsMonAn.AddRange(MonAnBUS.LayDanhSachMonAnTheoDanhMuc(dsDanhMuc[i].MaDanhMuc));
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+            
+
+            if (dsMonAn != null)
+            {
+                for (int i = 0; i < dsMonAn.Count; ++i)
+                {
+                    try
+                    {
+                        MonAn monAn = dsMonAn[i];
+                        ChiTietMonAnDonViTinh ctMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayChiTietMonAnDonViTinh(monAn.MaMonAn, monAn.DonViTinhMacDinh.MaDonViTinh);
+                        ChiTietMonAnDaNgonNgu ctMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(monAn.MaMonAn, maNgonNgu);
+                        ChiTietDonViTinhDaNgonNgu ctDonViTinhDaNgonNgu = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(monAn.DonViTinhMacDinh.MaDonViTinh, maNgonNgu);
+
+                        FoodGalleryItemViewModel viewModel = new FoodGalleryItemViewModel();
+                        viewModel.HinhAnh = monAn.HinhAnh;
+                        viewModel.MaMonAn = monAn.MaMonAn;
+                        viewModel.TenMonAn = ctMonAnDaNgonNgu.TenMonAn;
+                        viewModel.DonGia = ctMonAnDonViTinh.DonGia;
+                        viewModel.TenDonViTinhMacDinh = ctDonViTinhDaNgonNgu.TenDonViTinh;
+
+                        viewModels.Add(viewModel);  
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+                           
+                }
+            }
+
+            return viewModels;
+        }
+
+        private FoodDetailViewModel GetFoodDetailViewModel(int id)
+        {
+            FoodDetailViewModel viewModel = null;
+            int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
+
+            try
+            {
+                viewModel = new FoodDetailViewModel();
+                MonAn monAn = MonAnBUS.LayMonAn(id);
+                ChiTietMonAnDaNgonNgu ctMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(monAn.MaMonAn, maNgonNgu);
+
+                ChiTietMonAnDonViTinh ctMonAnDonViTinhMacDinh = ChiTietMonAnDonViTinhBUS.LayChiTietMonAnDonViTinh(monAn.MaMonAn, monAn.DonViTinhMacDinh.MaDonViTinh);               
+                ChiTietDonViTinhDaNgonNgu ctDonViTinhDaNgonNguMacDinh = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(monAn.DonViTinhMacDinh.MaDonViTinh, maNgonNgu);
+
+                DanhMuc danhMuc = monAn.DanhMuc;
+                ChiTietDanhMucDaNgonNgu ctDanhMucDaNgonNgu = ChiTietDanhMucDaNgonNguBUS.LayChiTietDanhMucDaNgonNgu(danhMuc.MaDanhMuc, maNgonNgu);
+
+                viewModel.HinhAnh = monAn.HinhAnh;
+                viewModel.MaMonAn = monAn.MaMonAn;
+                viewModel.TenMonAn = ctMonAnDaNgonNgu.TenMonAn;
+                viewModel.MoTaMonAn = ctMonAnDaNgonNgu.MoTaMonAn;
+
+                viewModel.SoLuotDanhGia = monAn.SoLuotDanhGia;
+                viewModel.DiemDanhGia = monAn.DiemDanhGia;
+
+                viewModel.DonGiaMacDinh = ctMonAnDonViTinhMacDinh.DonGia;
+                viewModel.TenDonViTinhMacDinh = ctDonViTinhDaNgonNguMacDinh.TenDonViTinh;
+
+                viewModel.listTenDonViTinh = new List<string>();
+                viewModel.listDonGia = new List<float>();
+
+                List<ChiTietMonAnDonViTinh> listCTMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayDanhSachChiTietMonAnDonViTinhTheoMonAn(monAn.MaMonAn);
+                if (listCTMonAnDonViTinh != null)
+                {
+                    for (int i = 0; i < listCTMonAnDonViTinh.Count; ++i)
+                    {
+                        viewModel.listDonGia.Add(listCTMonAnDonViTinh[i].DonGia);
+                        ChiTietDonViTinhDaNgonNgu ctDonViTinhDaNgonNgu = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(listCTMonAnDonViTinh[i].DonViTinh.MaDonViTinh, maNgonNgu);
+                        viewModel.listTenDonViTinh.Add(ctDonViTinhDaNgonNgu.TenDonViTinh);
+                    }
+                }
+
+                
+            }
+            catch (Exception e)
+            {
+                viewModel = null;
+            }
+
+
+            return viewModel;
+        }
 
     }
 }

@@ -14,6 +14,7 @@
     <h2>Category</h2>
     <% Html.RenderPartial("FoodCategoryLinks"); %>
     <% Html.RenderPartial("FoodCategorySidebar"); %>
+    <% Html.RenderPartial("FoodGallery"); %>
 
 </asp:Content>
 

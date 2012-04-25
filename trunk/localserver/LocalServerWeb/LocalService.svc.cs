@@ -531,6 +531,19 @@ namespace LocalServerWeb
             return null;
         }
 
+        public List<ChiTietOrder> ThemNhieuChiTietOrder(List<ChiTietOrder> _listChiTietOrder)
+        {
+            try
+            {
+                return ChiTietOrderBUS.ThemNhieuChiTietOrder(_listChiTietOrder);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return null;
+        }
+
         public bool SuaChiTietOrder(ChiTietOrder _chiTietOrder)
         {
             try

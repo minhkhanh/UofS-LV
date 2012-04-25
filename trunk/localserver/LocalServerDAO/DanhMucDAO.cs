@@ -39,5 +39,7 @@ namespace LocalServerDAO
         {
             return ThucDonDienTu.DataContext.DanhMucs.Where(d => d.DanhMucCha == null).ToList();
         }
+
+        
     }
 }

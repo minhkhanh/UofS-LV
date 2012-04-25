@@ -19,6 +19,11 @@ namespace LocalServerBUS
             return ChiTietOrderDAO.ThemChiTietOrder(_chiTietOrder);
         }
 
+        public static List<ChiTietOrder> ThemNhieuChiTietOrder(List<ChiTietOrder> _listChiTietOrder)
+        {
+            return ChiTietOrderDAO.ThemNhieuChiTietOrder(_listChiTietOrder);
+        }
+
         public static bool SuaChiTietOrder(ChiTietOrder _chiTietOrder)
         {
             return ChiTietOrderDAO.SuaChiTietOrder(_chiTietOrder);
