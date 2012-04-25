@@ -30,6 +30,7 @@ namespace LocalServerWeb.Codes
                     kiHieuDangChon = ((NgonNgu)httpContext.Session["ngonNgu"]).KiHieu;
                 else if (httpContext.Session != null) httpContext.Session["ngonNgu"] = listLanguage[0];
                 listNgonNgu = new SelectList(listLanguage, "KiHieu", "TenNgonNgu", kiHieuDangChon);
+                
             }
 
             viewData["listNgonNgu"] = listNgonNgu;
