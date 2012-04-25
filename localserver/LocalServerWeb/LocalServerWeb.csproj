@@ -70,13 +70,16 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Codes\AdminBaseController.cs" />
     <Compile Include="Codes\BaseController.cs" />
     <Compile Include="Codes\LocalizedDisplayNameAttribute.cs" />
     <Compile Include="Codes\MyMembershipProvider.cs" />
     <Compile Include="Codes\SharedCode.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminFoodController.cs" />
+    <Compile Include="Controllers\AdminHomeController.cs" />
     <Compile Include="Controllers\AdminUserController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FoodCategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LanguageController.cs" />
@@ -109,6 +112,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Resources\Views\AdminHome\AdminHomeString.Designer.cs">
+      <DependentUpon>AdminHomeString.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\AdminHome\AdminHomeString.vi.Designer.cs">
+      <DependentUpon>AdminHomeString.vi.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\Views\AdminUser\AdminUserString.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -116,6 +129,16 @@
     </Compile>
     <Compile Include="Resources\Views\AdminUser\AdminUserString.vi.Designer.cs">
       <DependentUpon>AdminUserString.vi.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Error\ErrorString.Designer.cs">
+      <DependentUpon>ErrorString.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Error\ErrorString.vi.Designer.cs">
+      <DependentUpon>ErrorString.vi.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -312,7 +335,9 @@
     <Content Include="Scripts\mootools-1.2.1-core.js" />
     <Content Include="Scripts\slideitmoo-1.1.js" />
     <Content Include="Views\AdminFood\Index.aspx" />
+    <Content Include="Views\AdminHome\Index.aspx" />
     <Content Include="Views\AdminUser\Index.aspx" />
+    <Content Include="Views\Error\Index.aspx" />
     <Content Include="Views\FoodCategory\Category.aspx" />
     <Content Include="Views\FoodCategory\Food.aspx" />
     <Content Include="Views\FoodCategory\Index.aspx" />
@@ -385,6 +410,14 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AccountString.vi.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminHome\AdminHomeString.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminHomeString.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminHome\AdminHomeString.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminHomeString.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\AdminUser\AdminUserString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AdminUserString.Designer.cs</LastGenOutput>
@@ -392,6 +425,14 @@
     <EmbeddedResource Include="Resources\Views\AdminUser\AdminUserString.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AdminUserString.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Error\ErrorString.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorString.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Error\ErrorString.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorString.vi.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\FoodCategory\FoodCategoryString.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

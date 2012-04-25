@@ -32,5 +32,15 @@ namespace LocalServerBUS
             if (taiKhoan == null || taiKhoan.MatKhau != matKhau || !taiKhoan.Active) return null;
             return taiKhoan;
         }
+
+        public static bool CapNhatTaiKhoan(TaiKhoan taiKhoan)
+        {
+            return TaiKhoanDAO.CapNhatTaiKhoan(taiKhoan);
+        }
+
+        public static bool XoaTaiKhoan(TaiKhoan taiKhoan)
+        {
+            return TaiKhoanDAO.XoaTaiKhoan(taiKhoan);
+        }
     }
 }

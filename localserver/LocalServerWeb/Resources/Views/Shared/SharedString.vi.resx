@@ -123,8 +123,11 @@
   <data name="AccountManagerList" xml:space="preserve">
     <value>Danh sách tài khoản</value>
   </data>
+  <data name="AdminHome" xml:space="preserve">
+    <value>Trang chủ</value>
+  </data>
   <data name="Footer" xml:space="preserve">
-    <value>ThucDonDienTu - Resturent Manager</value>
+    <value>Hệ thống luận văn - Thực Đơn Điện</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Ngôn ngữ</value>
