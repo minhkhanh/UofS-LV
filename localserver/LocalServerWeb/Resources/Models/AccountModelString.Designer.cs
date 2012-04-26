@@ -106,7 +106,7 @@ namespace LocalServerWeb.Resources.Models {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The {0} field is required.
+        ///   Looks up a localized string similar to This field is required.
         /// </summary>
         public static string Required {
             get {

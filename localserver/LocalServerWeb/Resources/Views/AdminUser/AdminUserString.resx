@@ -180,6 +180,18 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="PasswordLength" xml:space="preserve">
+    <value>The password must have 5-50 charater.</value>
+  </data>
+  <data name="PasswordNotMatch" xml:space="preserve">
+    <value>The password and confirmation password do not match</value>
+  </data>
+  <data name="Picture" xml:space="preserve">
+    <value>Picture</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>This field is required</value>
+  </data>
   <data name="SocialID" xml:space="preserve">
     <value>Social Identity</value>
   </data>

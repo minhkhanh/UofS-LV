@@ -133,7 +133,7 @@
     <value>Mật khẩu và xác nhận lại không giống nhau</value>
   </data>
   <data name="Required" xml:space="preserve">
-    <value>Trường {0} là bắt buộc</value>
+    <value>Trường này là bắt buộc</value>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>Tài khoản</value>

@@ -85,5 +85,20 @@ namespace LocalServerDAO
             }
             return false;
         }
+
+        public static bool ThemTaiKhoan(TaiKhoan taiKhoan)
+        {
+            try
+            {
+                ThucDonDienTu.DataContext.TaiKhoans.InsertOnSubmit(taiKhoan);
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
     }
 }

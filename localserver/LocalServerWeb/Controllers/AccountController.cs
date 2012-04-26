@@ -21,11 +21,6 @@ namespace LocalServerWeb.Controllers
     [HandleError]
     public class AccountController : BaseController
     {
-        public static string MD5Hash(string value)
-        {
-            return Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(value)));
-        }
-
         public IFormsAuthenticationService FormsService { get; set; }
         public IMembershipService MembershipService { get; set; }
 
@@ -54,7 +49,7 @@ namespace LocalServerWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                TaiKhoan taiKhoan = TaiKhoanBUS.KiemTraTaiKhoan(model.UserName, MD5Hash(model.Password));
+                TaiKhoan taiKhoan = TaiKhoanBUS.KiemTraTaiKhoan(model.UserName, SharedCode.MD5Hash(model.Password));
                 if (taiKhoan!=null)
                 {
                     Session["taiKhoan"] = taiKhoan;
@@ -166,6 +161,5 @@ namespace LocalServerWeb.Controllers
         {
             return View();
         }
-
     }
 }

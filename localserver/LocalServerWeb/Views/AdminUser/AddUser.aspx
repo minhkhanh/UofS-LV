@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 <%@ Import Namespace="System.Globalization" %>
+<%@ Import Namespace="LocalServerDTO" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.AdminUser" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
@@ -7,29 +8,54 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
+    <% Html.BeginForm("AddUser", "AdminUser", FormMethod.Post); %>
 		<!-- start id-form -->
 		<table border="0" cellpadding="0" cellspacing="0"  id="id-form">
 		<tr>
 			<th valign="top"><%:AdminUserString.Username %>:</th>
-			<td><input type="text" class="inp-form" /></td>
-			<td></td>
+			<td><input type="text" class="inp-form<%:(((Dictionary<string, string>) TempData["checkDic"]).ContainsKey("tenTaiKhoan") && ((Dictionary<string, string>) TempData["checkDic"])["tenTaiKhoan"]!=null) ? "-error" : ""%>" name="tenTaiKhoan" 
+            value="<%:TempData["tenTaiKhoan"] ?? ""%>"/></td>
+			<td>
+            <% if (((Dictionary<string, string>)TempData["checkDic"]).ContainsKey("tenTaiKhoan") && ((Dictionary<string, string>)TempData["checkDic"])["tenTaiKhoan"] != null)
+               { %>
+            <div class="error-left"></div>
+			<div class="error-inner"><%:((Dictionary<string, string>)TempData["checkDic"])["tenTaiKhoan"]%></div>
+            <% } %>
+            </td>
 		</tr>
 		<tr>
 			<th valign="top"><%:AdminUserString.Password %>:</th>
-			<td><input type="text" class="inp-form-error" /></td>
+			<td><input type="password" class="inp-form<%:(((Dictionary<string, string>) TempData["checkDic"]).ContainsKey("matKhau") && ((Dictionary<string, string>) TempData["checkDic"])["matKhau"]!=null) ? "-error" : ""%>" name="matKhau" /></td>
 			<td>
-			<div class="error-left"></div>
-			<div class="error-inner">This field is required.</div>
-			</td>
+            <% if (((Dictionary<string, string>)TempData["checkDic"]).ContainsKey("matKhau") && ((Dictionary<string, string>)TempData["checkDic"])["matKhau"] != null)
+               { %>
+            <div class="error-left"></div>
+			<div class="error-inner"><%:((Dictionary<string, string>)TempData["checkDic"])["matKhau"]%></div>
+            <% } %>
+            </td>
 		</tr>
 		<tr>
 			<th valign="top"><%:AdminUserString.ConfirmPassword %>:</th>
-			<td><input type="text" class="inp-form-error" /></td>
+			<td><input type="password" class="inp-form<%:(((Dictionary<string, string>) TempData["checkDic"]).ContainsKey("xacNhanMatKhau") && ((Dictionary<string, string>) TempData["checkDic"])["xacNhanMatKhau"]!=null) ? "-error" : ""%>" name="xacNhanMatKhau" /></td>
 			<td>
-			<div class="error-left"></div>
-			<div class="error-inner">This field is required.</div>
-			</td>
+            <% if (((Dictionary<string, string>)TempData["checkDic"]).ContainsKey("xacNhanMatKhau") && ((Dictionary<string, string>)TempData["checkDic"])["xacNhanMatKhau"] != null)
+               { %>
+            <div class="error-left"></div>
+			<div class="error-inner"><%:((Dictionary<string, string>)TempData["checkDic"])["xacNhanMatKhau"]%></div>
+            <% } %>
+            </td>
+		</tr>
+		<tr>
+			<th valign="top"><%:AdminUserString.Name %>:</th>
+			<td><input type="text" class="inp-form<%:(((Dictionary<string, string>) TempData["checkDic"]).ContainsKey("hoTen") && ((Dictionary<string, string>) TempData["checkDic"])["hoTen"]!=null) ? "-error" : ""%>" name="hoTen" 
+            value="<%:TempData["hoTen"] ?? ""%>" /></td>
+			<td>
+            <% if (((Dictionary<string, string>)TempData["checkDic"]).ContainsKey("hoTen") && ((Dictionary<string, string>)TempData["checkDic"])["hoTen"] != null)
+               { %>
+            <div class="error-left"></div>
+			<div class="error-inner"><%:((Dictionary<string, string>)TempData["checkDic"])["hoTen"]%></div>
+            <% } %>
+            </td>
 		</tr>
 		<tr>
 		<th valign="top"><%:AdminUserString.BOD %>:</th>
@@ -38,46 +64,12 @@
 			<table border="0" cellpadding="0" cellspacing="0">
 			<tr  valign="top">
 				<td>
-				<form id="chooseDateForm" action="#">
 				
-				<select id="d" class="styledselect-day">
-					<option value="">dd</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="10">10</option>
-					<option value="11">11</option>
-					<option value="12">12</option>
-					<option value="13">13</option>
-					<option value="14">14</option>
-					<option value="15">15</option>
-					<option value="16">16</option>
-					<option value="17">17</option>
-					<option value="18">18</option>
-					<option value="19">19</option>
-					<option value="20">20</option>
-					<option value="21">21</option>
-					<option value="22">22</option>
-					<option value="23">23</option>
-					<option value="24">24</option>
-					<option value="25">25</option>
-					<option value="26">26</option>
-					<option value="27">27</option>
-					<option value="28">28</option>
-					<option value="29">29</option>
-					<option value="30">30</option>
-					<option value="31">31</option>
+				<select id="d" class="styledselect-day" name="day">
 				</select>
-                </form>
 				</td>
 				<td>
-					<select id="m" class="styledselect-month">
+					<select id="m" class="styledselect-month" name="month">
 						<% var dd = new DateTime(1, 1, 1);
                            for (int i = 1; i <= 12; i++)
                            {
@@ -90,7 +82,7 @@
 					</select>
 				</td>
 				<td>
-					<select  id="y"  class="styledselect-year">
+					<select  id="y"  class="styledselect-year" name="year">
                         <% for (int i = 2005; i >= 1950; i--) { %>
                            <option <%:(i==1990)?"selected=true":"" %> value="<%:i %>"><%:i %></option>
                         <% } %>						
@@ -107,12 +99,9 @@
 		<tr>
 		<th valign="top"><%:AdminUserString.Gender %>:</th>
 		<td>	
-		<select  class="styledselect_form_1">
-			<option value="">All</option>
-			<option value="">Products</option>
-			<option value="">Categories</option>
-			<option value="">Clients</option>
-			<option value="">News</option>
+		<select class="gioiTinh" name="gioiTinh">
+			<option value="0"><%:AdminUserString.Male %></option>
+			<option value="1"><%:AdminUserString.Female %></option>
 		</select>
 		</td>
 		<td></td>
@@ -121,58 +110,50 @@
 		<tr>
 		<th valign="top"><%:AdminUserString.Group %>:</th>
 		<td>	
-		<select  class="styledselect_form_1">
-			<option value="">All</option>
-			<option value="">Products</option>
-			<option value="">Categories</option>
-			<option value="">Clients</option>
-			<option value="">News</option>
-		</select>
+            <%= Html.DropDownList("nhomTaiKhoan", new SelectList(ViewData["listNhomTaiKhoan"] as List<NhomTaiKhoan>, "MaNhomTaiKhoan", "TenNhom", (ViewData["listNhomTaiKhoan"]as List<NhomTaiKhoan>).First().MaNhomTaiKhoan), new { Class = "nhomTaiKhoan" })%>
 		</td>
 		<td></td>
 		</tr> 
 
 		<tr>
 			<th valign="top"><%:AdminUserString.SocialID %>:</th>
-			<td><input type="text" class="inp-form-error" /></td>
+			<td><input type="text" class="inp-form<%:(((Dictionary<string, string>) TempData["checkDic"]).ContainsKey("cmnd") && ((Dictionary<string, string>) TempData["checkDic"])["cmnd"]!=null) ? "-error" : ""%>" name="cmnd" 
+            value="<%:TempData["cmnd"] ?? ""%>" /></td>
 			<td>
-			<div class="error-left"></div>
-			<div class="error-inner">This field is required.</div>
-			</td>
+            <% if (((Dictionary<string, string>)TempData["checkDic"]).ContainsKey("cmnd") )
+               { %>
+            <div class="error-left"></div>
+			<div class="error-inner"><%:((Dictionary<string, string>) TempData["checkDic"])["cmnd"] %></div>
+            <% } %>
+            </td>
 		</tr>
 
 	<tr>
-		<th valign="top">Description:</th>
-		<td><textarea rows="" cols="" class="form-textarea"></textarea></td>
-		<td></td>
-	</tr>
-	<tr>
-	<th>Image 1:</th>
-	<td><input type="file" class="file_1" /></td>
+	<th><%:AdminUserString.Picture %>:</th>
+	<td><input type="file" class="file_1" name="picture" /></td>
 	<td>
-	<div class="bubble-left"></div>
-	<div class="bubble-inner">JPEG, GIF 5MB max per image</div>
-	<div class="bubble-right"></div>
 	</td>
 	</tr>
+
 	<tr>
 		<th>&nbsp;</th>
 		<td valign="top">
-			<input type="button" value="" class="form-submit" />
+			<input type="submit" value="" class="form-submit" />
 			<input type="reset" value="" class="form-reset"  />
 		</td>
 		<td></td>
 	</tr>
 	</table>
 	<!-- end id-form  -->
-
+    <% Html.EndForm(); %>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
     <script src="../../Scripts/jquery/jquery.selectbox-0.5.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.styledselect_form_1').selectbox({ inputClass: "styledselect_form_1" });
+            $('.gioiTinh').selectbox({ inputClass: "gioiTinh" });
+            $('.nhomTaiKhoan').selectbox({ inputClass: "nhomTaiKhoan" });
         });
     </script>    
 <!--  date picker script -->
@@ -219,18 +200,38 @@
             $('#y option[value=' + (selectedDate.getFullYear()) + ']').attr('selected', 'selected');
         }
         // listen for when the selects are changed and update the picker
-        $('#d, #m, #y')
-	.bind(
-		'change',
-		function () {
-		    var d = new Date(
-						$('#y').val(),
-						$('#m').val() - 1,
-						$('#d').val()
+        $('#d, #y')
+            .bind(
+            'change',
+            function () {
+                var d = new Date(
+                    $('#y').val(),
+                    $('#m').val() - 1,
+                    $('#d').val()
 					);
-		    $('#date-pick').dpSetSelected(d.asString());
-		}
-	);
+                $('#date-pick').dpSetSelected(d.asString());
+            });
+        $('#m')
+            .bind(
+            'change',
+            function () {
+                var oldDay = $('#d').val();
+                $('#d').find('option').remove();
+                var day = daysInMonth($('#m').val(), $('#y').val());
+                if (oldDay > day) oldDay = day;
+                console.log("day: " + day);
+                for (var i = 1; i <= day; i++) {
+                    $('#d').find('option').end().append("<option value='" + i + "'" + ">" + i + "</option");
+                }
+                $('#d').val(oldDay);
+                var d = new Date(
+                    $('#y').val(),
+                    $('#m').val() - 1,
+                    $('#d').val()
+					);
+                $('#date-pick').dpSetSelected(d.asString());
+            }
+	    );
 
         // default the position of the selects to today
         var today = new Date();
@@ -239,10 +240,29 @@
         // and update the datePicker to reflect it...
         $('#d').trigger('change');
     });
-    function initYear(objYear) {
-        
+    function daysInMonth(month, year) {
+        return new Date(year, month, 0).getDate();
     }
-</script>
+    $(document).ready(function () {
+        <% if (TempData["year"]!=null) { %>
+        $('#y').val( <%:(int) TempData["year"]%> ); 
+        <% } %>
+        
+        <% if (TempData["month"]!=null) { %>
+        $('#m').val( <%:(int) TempData["month"]%> ); 
+        <% } %>        
+        
+        $('#d').find('option').remove();
+        var day = daysInMonth($('#m').val(), $('#y').val());
+        for (var i = 1; i <= day; i++) {
+            $('#d').find('option').end().append("<option value='" + i + "'" + ">" + i + "</option");
+        }
+        $('#d').val(1);
+        <% if (TempData["day"]!=null) { %>
+        $('#d').val( <%:(int) TempData["day"]%> ); 
+        <% } %>          
+    });    
+//</script>
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="PageHeadingContent" runat="server">
