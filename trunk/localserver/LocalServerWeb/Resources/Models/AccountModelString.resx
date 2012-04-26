@@ -133,7 +133,7 @@
     <value>The password and confirmation password do not match</value>
   </data>
   <data name="Required" xml:space="preserve">
-    <value>The {0} field is required</value>
+    <value>This field is required</value>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>User name</value>

@@ -180,6 +180,18 @@
   <data name="Password" xml:space="preserve">
     <value>Mật khẩu</value>
   </data>
+  <data name="PasswordLength" xml:space="preserve">
+    <value>Mật khẩu cần có độ dài 5-50 ký tự</value>
+  </data>
+  <data name="PasswordNotMatch" xml:space="preserve">
+    <value>Mật khẩu và xác nhận lại không giống nhau</value>
+  </data>
+  <data name="Picture" xml:space="preserve">
+    <value>Ảnh</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>Trường này là bắt buộc</value>
+  </data>
   <data name="SocialID" xml:space="preserve">
     <value>CMND</value>
   </data>

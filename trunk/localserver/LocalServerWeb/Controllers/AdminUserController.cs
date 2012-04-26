@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using LocalServerBUS;
@@ -109,7 +110,99 @@ namespace LocalServerWeb.Controllers
         public ActionResult AddUser()
         {
             SharedCode.FillAdminMainMenu(ViewData, 1, 1);
+            ViewData["listNhomTaiKhoan"] = NhomTaiKhoanBUS.LayDanhSachNhomTaiKhoan();
+            if (TempData["checkDic"] == null)
+            {
+                TempData.Clear();
+                TempData["checkDic"] = new Dictionary<string, string>();
+            }                
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddUser(string tenTaiKhoan, string matKhau, string xacNhanMatKhau, string hoTen, int day, int month, int year, int gioiTinh, int nhomTaiKhoan, string cmnd, object picture)
+        {
+            TempData["tenTaiKhoan"] = tenTaiKhoan;
+            TempData["hoTen"] = hoTen;
+            TempData["day"] = day;
+            TempData["month"] = month;
+            TempData["year"] = year;
+            TempData["gioiTinh"] = gioiTinh;
+            TempData["nhomTaiKhoan"] = nhomTaiKhoan;
+            TempData["cmnd"] = cmnd;
+
+            var checkDic = new Dictionary<string, string>();
+            //HashSet<string> checkHash = new HashSet<string>();
+
+            bool bCheckOk = true;
+            var regexTenTaiKhoan = new Regex("[a-zA-Z0-9]{5,50}");
+            if (tenTaiKhoan == null || !regexTenTaiKhoan.IsMatch(tenTaiKhoan))
+            {
+                bCheckOk = false;
+                checkDic.Add("tenTaiKhoan", AdminUserString.Required);
+            }
+            var regexMatKhau = new Regex("^.{5,50}$");
+            if (matKhau == null)
+            {
+                bCheckOk = false;
+                checkDic.Add("matKhau", AdminUserString.Required);
+            } else if (!regexMatKhau.IsMatch(matKhau))
+            {
+                bCheckOk = false;
+                checkDic.Add("matKhau", AdminUserString.PasswordLength);
+            } else if (matKhau!=xacNhanMatKhau)
+            {
+                bCheckOk = false;
+                checkDic.Add("xacNhanMatKhau", AdminUserString.PasswordNotMatch);                
+            }
+            var regexHoTen = new Regex("^.{5,50}$");
+            if (hoTen == null || !regexHoTen.IsMatch(hoTen))
+            {
+                bCheckOk = false;
+                checkDic.Add("hoTen", AdminUserString.Required);
+            }
+            var regexCmnd = new Regex("[0-9]{9,10}");
+            if (cmnd == null || !regexCmnd.IsMatch(cmnd))
+            {
+                bCheckOk = false;
+                checkDic.Add("cmnd", AdminUserString.Required);
+            }
+            DateTime date = DateTime.Now;
+            try
+            {
+                date = new DateTime(year, month, day);
+            }
+            catch (Exception)
+            {
+                bCheckOk = false;
+                checkDic.Add("dateTime", AdminUserString.Required);
+            }            
+            if (bCheckOk)
+            {
+                try
+                {
+                    var taiKhoan = new TaiKhoan
+                                            {
+                                                Active = true,
+                                                Avatar = null,
+                                                CMND = cmnd,
+                                                GioiTinh = gioiTinh,
+                                                HoTen = hoTen,
+                                                MatKhau = SharedCode.MD5Hash(matKhau),
+                                                NgaySinh = date,
+                                                NhomTaiKhoan = NhomTaiKhoanBUS.LayNhomTaiKhoanTheoMa(nhomTaiKhoan),
+                                                TenTaiKhoan = tenTaiKhoan
+                                            };
+                    if (TaiKhoanBUS.ThemTaiKhoan(taiKhoan))
+                        return RedirectToAction("Index", "AdminUser");
+                }
+                catch (Exception e)
+                {
+                    Console.Out.WriteLine(e.StackTrace);
+                }                
+            }
+            TempData["checkDic"] = checkDic;
+            return RedirectToAction("AddUser");
         }
     }
 }

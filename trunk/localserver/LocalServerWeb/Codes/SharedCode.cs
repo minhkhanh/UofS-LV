@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
@@ -18,6 +20,12 @@ namespace LocalServerWeb.Codes
             string strConn = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
             ThucDonDienTuBUS.KhoiTao(strConn);
         }
+
+        public static string MD5Hash(string value)
+        {
+            return Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(value)));
+        }
+
         private static void FillLanguage(ViewDataDictionary viewData, HttpContextBase httpContext)
         {
             var listLanguage = NgonNguBUS.LayDanhSachNgonNgu();

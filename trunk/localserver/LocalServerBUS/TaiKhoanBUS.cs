@@ -42,5 +42,10 @@ namespace LocalServerBUS
         {
             return TaiKhoanDAO.XoaTaiKhoan(taiKhoan);
         }
+
+        public static bool ThemTaiKhoan(TaiKhoan taiKhoan)
+        {
+            return TaiKhoanDAO.ThemTaiKhoan(taiKhoan);
+        }
     }
 }
