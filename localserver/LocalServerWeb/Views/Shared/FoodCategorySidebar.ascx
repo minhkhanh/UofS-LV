@@ -6,22 +6,25 @@
    {
        FoodCategorySidebarViewModel viewModel = (FoodCategorySidebarViewModel)ViewData["foodCategorySidebarViewModel"];
        %>
+       <ul class="nice-menu">
+       <li class="blue">
        <%: Html.ActionLink(viewModel.ParentName, "Category", "FoodCategory", new { id = viewModel.ParentId }, "")%>
-       <br />
+       </li>
    
    <%
        for (int i = 0; i < viewModel.Names.Count; ++i)
        {
             %>
+            <li class="orange" id="child">
             <%: Html.ActionLink(viewModel.Names[i], "Category", "FoodCategory", new { id = viewModel.Ids[i] }, "")%>
-            <br />
+            </li>
             <%
        }
        
    }
      
      %>
-
+     </ul>
 
 </div>
 
