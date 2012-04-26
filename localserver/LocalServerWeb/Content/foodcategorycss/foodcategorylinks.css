@@ -3,7 +3,6 @@
 			overflow: hidden; 
 			font: 18px Helvetica, Arial, Sans-Serif;
 			border: 1px solid black;
-			border-left: none;
 			border-right: none;
 		}
 		.breadcrumb li { 
