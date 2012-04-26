@@ -179,16 +179,22 @@ namespace LocalServerWeb.Controllers
 
             try
             {
+                // If this is Index, get all MonAn from database
+                // Need to shuffle this
                 if (id == 0)
                 {
                     dsMonAn = MonAnBUS.LayDanhSachMonAn();
                 }
                 else
                 {
+                    // If this is a parent category, get all MonAn which are in descendant DanhMuc of this category
                     dsDanhMuc = DanhMucBUS.LayDanhSachDanhMucConChauDanhMucCha(id);
                     if (dsDanhMuc != null)
                         for (int i = 0; i < dsDanhMuc.Count; ++i)
                             dsMonAn.AddRange(MonAnBUS.LayDanhSachMonAnTheoDanhMuc(dsDanhMuc[i].MaDanhMuc));
+                    
+                    // Maybe this category contain MonAn, get all MonAn in it
+                    dsMonAn.AddRange(MonAnBUS.LayDanhSachMonAnTheoDanhMuc(id));
                 }
             }
             catch (Exception e)

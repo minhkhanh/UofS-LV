@@ -2,6 +2,7 @@
   list-style: none;
   margin-top: 30px;
   width: 300px;
+  border: 1px solid black;
 }
 
 @-moz-keyframes expand {  
