@@ -44,6 +44,9 @@ namespace LocalServerWeb.Controllers
             FoodCategorySidebarViewModel foodCategorySidebarViewModel = GetFoodCategorySidebarViewModel(id, false);
             ViewData["foodCategorySidebarViewModel"] = foodCategorySidebarViewModel;
 
+            FoodDetailViewModel foodDetailViewModel = GetFoodDetailViewModel(id);
+            ViewData["foodDetailViewModel"] = foodDetailViewModel;
+
             return View(id);
         }
 
@@ -165,6 +168,7 @@ namespace LocalServerWeb.Controllers
             return viewModel;
         }
 
+        // Get a list of ViewModel for displaying Food Gallery (many Food items), get by MaDanhMuc
         private List<FoodGalleryItemViewModel> GetFoodGalleryItemViewModels(int id)
         {
             List<FoodGalleryItemViewModel> viewModels = new List<FoodGalleryItemViewModel>();
@@ -200,16 +204,8 @@ namespace LocalServerWeb.Controllers
                     try
                     {
                         MonAn monAn = dsMonAn[i];
-                        ChiTietMonAnDonViTinh ctMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayChiTietMonAnDonViTinh(monAn.MaMonAn, monAn.DonViTinhMacDinh.MaDonViTinh);
-                        ChiTietMonAnDaNgonNgu ctMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(monAn.MaMonAn, maNgonNgu);
-                        ChiTietDonViTinhDaNgonNgu ctDonViTinhDaNgonNgu = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(monAn.DonViTinhMacDinh.MaDonViTinh, maNgonNgu);
 
-                        FoodGalleryItemViewModel viewModel = new FoodGalleryItemViewModel();
-                        viewModel.HinhAnh = monAn.HinhAnh;
-                        viewModel.MaMonAn = monAn.MaMonAn;
-                        viewModel.TenMonAn = ctMonAnDaNgonNgu.TenMonAn;
-                        viewModel.DonGia = ctMonAnDonViTinh.DonGia;
-                        viewModel.TenDonViTinhMacDinh = ctDonViTinhDaNgonNgu.TenDonViTinh;
+                        FoodGalleryItemViewModel viewModel = GetFoodGalleryItemViewModel(monAn, maNgonNgu);
 
                         viewModels.Add(viewModel);  
                     }
@@ -224,6 +220,7 @@ namespace LocalServerWeb.Controllers
             return viewModels;
         }
 
+        // Get ViewModel for displaying Food Detail, get by Ma Mon An
         private FoodDetailViewModel GetFoodDetailViewModel(int id)
         {
             FoodDetailViewModel viewModel = null;
@@ -266,6 +263,26 @@ namespace LocalServerWeb.Controllers
                     }
                 }
 
+                viewModel.listMonLienQuan = new List<FoodGalleryItemViewModel>();
+
+                List<ChiTietMonLienQuan> listCTMonLienQuan = ChiTietMonLienQuanBUS.LayDanhSachChiTietMonLienQuan(monAn.MaMonAn);
+                if (listCTMonLienQuan != null)
+                {
+                    for (int i = 0; i < listCTMonLienQuan.Count; ++i)
+                    {
+                        try
+                        {
+                            FoodGalleryItemViewModel monLienQuan = GetFoodGalleryItemViewModel(monAn, maNgonNgu);
+
+                            viewModel.listMonLienQuan.Add(monLienQuan);
+                        }
+                        catch (Exception e)
+                        {
+
+                        }
+                    }
+                }
+
                 
             }
             catch (Exception e)
@@ -273,6 +290,23 @@ namespace LocalServerWeb.Controllers
                 viewModel = null;
             }
 
+
+            return viewModel;
+        }
+
+        // Get ViewModel for displaying Food Gallery Item, get by MonAn
+        private FoodGalleryItemViewModel GetFoodGalleryItemViewModel(MonAn monAn, int maNgonNgu)
+        {
+            ChiTietMonAnDonViTinh ctMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayChiTietMonAnDonViTinh(monAn.MaMonAn, monAn.DonViTinhMacDinh.MaDonViTinh);
+            ChiTietMonAnDaNgonNgu ctMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(monAn.MaMonAn, maNgonNgu);
+            ChiTietDonViTinhDaNgonNgu ctDonViTinhDaNgonNgu = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(monAn.DonViTinhMacDinh.MaDonViTinh, maNgonNgu);
+
+            FoodGalleryItemViewModel viewModel = new FoodGalleryItemViewModel();
+            viewModel.HinhAnh = monAn.HinhAnh;
+            viewModel.MaMonAn = monAn.MaMonAn;
+            viewModel.TenMonAn = ctMonAnDaNgonNgu.TenMonAn;
+            viewModel.DonGia = ctMonAnDonViTinh.DonGia;
+            viewModel.TenDonViTinhMacDinh = ctDonViTinhDaNgonNgu.TenDonViTinh;
 
             return viewModel;
         }

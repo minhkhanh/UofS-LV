@@ -24,6 +24,6 @@ namespace LocalServerWeb.ViewModels
         public float DiemDanhGia { get; set; }
         public int SoLuotDanhGia { get; set; }
 
-        public List<FoodGalleryItemViewModel> FoodGalleryItems { get; set; }
+        public List<FoodGalleryItemViewModel> listMonLienQuan { get; set; }
     }
 }

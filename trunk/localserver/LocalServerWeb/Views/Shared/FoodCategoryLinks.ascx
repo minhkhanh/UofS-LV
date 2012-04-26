@@ -5,22 +5,26 @@
 <% if (ViewData["foodCategoryLinksViewModel"] != null)
    {
        FoodCategoryLinksViewModel viewModel = (FoodCategoryLinksViewModel)ViewData["foodCategoryLinksViewModel"];
+       %>
+       <ul class="breadcrumb">
+
+       <%
        for (int i = 0; i < viewModel.Names.Count; ++i)
        {
            string actionName = (viewModel.IsCategories[i] == true) ? "Category" : "Food";
            %>
-           
-           <%: Html.ActionLink(viewModel.Names[i], actionName, "FoodCategory", new {id = viewModel.Ids[i]}, "") %>
-           <% if (i < viewModel.Names.Count - 1)
-              {
-                    %> &nbsp; / &nbsp;
-                    <%
-              } %>
-           
- 
+            <li>
+               <%: Html.ActionLink(viewModel.Names[i], actionName, "FoodCategory", new {id = viewModel.Ids[i]}, "") %>
+            </li>
+            <% if (viewModel.IsCategories[viewModel.Names.Count-1] == true)
+               {
+                %>
+                <a href="#"></a>
+                <%
+               } %>
      <%}
          
    }
      %>
-
+     </ul>
 </div>

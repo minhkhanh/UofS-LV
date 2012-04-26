@@ -189,6 +189,8 @@
     <Content Include="Content\admincss\pro_dropline.css" />
     <Content Include="Content\admincss\pro_dropline_ie.css" />
     <Content Include="Content\admincss\screen.css" />
+    <Content Include="Content\foodcategorycss\foodcategorylinks.css" />
+    <Content Include="Content\foodcategorycss\foodcategorysidebar.css" />
     <Content Include="Content\sitecss\Login.css" />
     <Content Include="Content\sitecss\templatemo_style.css" />
     <Content Include="Global.asax" />
@@ -388,6 +390,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\foodcategoryimages\foodcategorysidebarimages\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LocalServerBUS\LocalServerBUS.csproj">
