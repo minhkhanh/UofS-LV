@@ -1,0 +1,11 @@
+﻿div#food_gallery_item
+{
+    width:200px;
+    height:200px;
+    background-color:Lime;
+}
+
+div#food_gallery_item img
+{
+    padding-left: 10px;  
+}
