@@ -16,28 +16,20 @@ namespace LocalServerWeb
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class LocalService : ILocalService
     {
+        // Khoi Tao CSDL
         public LocalService()
         {
             SharedCode.KhoiTaoCSDL();
         }
 
-        public int PhepCong(int a, int b)
-        {
-            return a + b;
-        }
-
-
-        public string Test()
-        {
-            return "Hello eMenu";
-        }
-
+        // Khu Vuc
         public List<KhuVuc> LayDanhKhuVuc()
         {
             return KhuVucBUS.LayDanhSachKhuVuc();
         }
 
-
+        
+        // Ban
         public List<Ban> LayDanhSachBan()
         {
             var listBan = new List<Ban>();
@@ -50,6 +42,20 @@ namespace LocalServerWeb
                 Console.Error.WriteLine(e.Message);
             }
             return listBan;
+        }
+
+        public Ban LayBan(int maBan)
+        {
+            var ban = new Ban();
+            try
+            {
+                ban = BanBUS.LayBan(maBan);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return ban;
         }
 
         public List<Ban> LayDanhSachBanChinh()
@@ -117,6 +123,8 @@ namespace LocalServerWeb
             return false;
         }
 
+
+        // Mon An
         public List<MonAn> LayDanhSachMonAn()
         {
             var listMonAn = new List<MonAn>();
@@ -159,22 +167,8 @@ namespace LocalServerWeb
             }
             return monAn;
         }
-
-        // for testing purpose
-        public List<Foo> LayDanhSachFoo()
-        {
-            var listMonAn = new List<Foo>();
-            try
-            {
-                listMonAn = FooBUS.LayDanhSachFoo();
-            }
-            catch (Exception e)
-            {
-                Console.Error.WriteLine(e.Message);
-            }
-            return listMonAn;
-        }
-
+        
+        // Danh Muc
         public List<DanhMuc> LayDanhSachDanhMuc()
         {
             var listDanhMuc = new List<DanhMuc>();
@@ -189,6 +183,8 @@ namespace LocalServerWeb
             return listDanhMuc;
         }
 
+
+        // Chi Tiet Danh Muc Da Ngon Ngu
         public ChiTietDanhMucDaNgonNgu LayChiTietDanhMucDaNgonNgu(int maDanhMuc, int maNgonNgu)
         {
             var ct = new ChiTietDanhMucDaNgonNgu();
@@ -217,6 +213,7 @@ namespace LocalServerWeb
             return listChiTietDanhMucDaNgonNgu;
         }
 
+        // Chi Tiet Don Vi Tinh Da Ngon Ngu
         public ChiTietDonViTinhDaNgonNgu LayChiTietDonViTinhDaNgonNgu(int maDonViTinh, int maNgonNgu)
         {
             var ct = new ChiTietDonViTinhDaNgonNgu();
@@ -245,6 +242,8 @@ namespace LocalServerWeb
             return listChiTietDonViTinhDaNgonNgu;
         }
 
+
+        // Chi Tiet Mon An Da Ngon Ngu
         public ChiTietMonAnDaNgonNgu LayChiTietMonAnDaNgonNgu(int maMonAn, int maNgonNgu)
         {
             var ct = new ChiTietMonAnDaNgonNgu();
@@ -274,7 +273,7 @@ namespace LocalServerWeb
         }
 
 
-
+        // Chi Tiet Mon An Don Vi Tinh
         public float LayChiTietMonAnDonViTinhDonGia(int maMonAn, int maDonViTinh)
         {
             float donGia = -1;
@@ -317,6 +316,8 @@ namespace LocalServerWeb
             return listChiTietMonAnDonViTinh;
         }
 
+
+        // Ngon Ngu
         public List<NgonNgu> LayDanhSachNgonNgu()
         {
             var listNgonNgu = new List<NgonNgu>();
@@ -331,6 +332,8 @@ namespace LocalServerWeb
             return listNgonNgu;
         }
 
+
+        // Ti Gia
         public List<TiGia> LayDanhSachTiGia()
         {
             var listTiGia = new List<TiGia>();
@@ -345,6 +348,9 @@ namespace LocalServerWeb
             return listTiGia;
         }
 
+
+
+        // Nhom Tai Khoan
         public List<NhomTaiKhoan> LayDanhSachNhomTaiKhoan()
         {
             var listNhomTaiKhoan = new List<NhomTaiKhoan>();
@@ -359,6 +365,8 @@ namespace LocalServerWeb
             return listNhomTaiKhoan;
         }
 
+
+        // Tai Khoan
         public List<TaiKhoan> LayDanhSachTaiKhoan()
         {
             var listTaiKhoan = new List<TaiKhoan>();
@@ -373,6 +381,9 @@ namespace LocalServerWeb
             return listTaiKhoan;
         }
 
+
+
+        // Phu Thu
         public List<PhuThu> LayDanhSachPhuThu()
         {
             var listPhuThu = new List<PhuThu>();
@@ -387,6 +398,37 @@ namespace LocalServerWeb
             return listPhuThu;
         }
 
+
+        // Phu Thu Khu Vuc
+        public List<PhuThuKhuVuc> LayDanhSachPhuThuKhuVuc()
+        {
+            var listPhuThuKhuVuc = new List<PhuThuKhuVuc>();
+            try
+            {
+                listPhuThuKhuVuc = PhuThuKhuVucBUS.LayDanhSachPhuThuKhuVuc();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listPhuThuKhuVuc;
+        }
+
+        public List<PhuThuKhuVuc> LayDanhSachPhuThuKhuVucTheoMa(int maPhuThu)
+        {
+            var listPhuThuKhuVuc = new List<PhuThuKhuVuc>();
+            try
+            {
+                listPhuThuKhuVuc = PhuThuKhuVucBUS.LayDanhSachPhuThuKhuVucTheoMa(maPhuThu);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listPhuThuKhuVuc;
+        }
+
+        // Khuyen Mai
         public List<KhuyenMai> LayDanhSachKhuyenMai()
         {
             var listKhuyenMai = new List<KhuyenMai>();
@@ -400,6 +442,124 @@ namespace LocalServerWeb
             }
             return listKhuyenMai;
         }
+
+        // Khuyen Mai Khu Vuc
+        public List<KhuyenMaiKhuVuc> LayDanhSachKhuyenMaiKhuVuc()
+        {
+            var listKhuyenMaiKhuVuc = new List<KhuyenMaiKhuVuc>();
+            try
+            {
+                listKhuyenMaiKhuVuc = KhuyenMaiKhuVucBUS.LayDanhSachKhuyenMaiKhuVuc();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listKhuyenMaiKhuVuc;
+        }
+
+        public List<KhuyenMaiKhuVuc> LayDanhSachKhuyenMaiKhuVucTheoMa(int maKhuyenMai)
+        {
+            var listKhuyenMaiKhuVuc = new List<KhuyenMaiKhuVuc>();
+            try
+            {
+                listKhuyenMaiKhuVuc = KhuyenMaiKhuVucBUS.LayDanhSachKhuyenMaiKhuVucTheoMa(maKhuyenMai);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listKhuyenMaiKhuVuc;
+        }
+
+
+        // Khuyen Mai Danh Muc
+        public List<KhuyenMaiDanhMuc> LayDanhSachKhuyenMaiDanhMuc()
+        {
+            var listKhuyenMaiDanhMuc = new List<KhuyenMaiDanhMuc>();
+            try
+            {
+                listKhuyenMaiDanhMuc = KhuyenMaiDanhMucBUS.LayDanhSachKhuyenMaiDanhMuc();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listKhuyenMaiDanhMuc;
+        }
+
+        public List<KhuyenMaiDanhMuc> LayDanhSachKhuyenMaiDanhMucTheoMa(int maKhuyenMai)
+        {
+            var listKhuyenMaiDanhMuc = new List<KhuyenMaiDanhMuc>();
+            try
+            {
+                listKhuyenMaiDanhMuc = KhuyenMaiDanhMucBUS.LayDanhSachKhuyenMaiDanhMucTheoMa(maKhuyenMai);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listKhuyenMaiDanhMuc;
+        }
+
+        // Khuyen Mai Mon
+        public List<KhuyenMaiMon> LayDanhSachKhuyenMaiMon()
+        {
+            var listKhuyenMaiMon = new List<KhuyenMaiMon>();
+            try
+            {
+                listKhuyenMaiMon = KhuyenMaiMonBUS.LayDanhSachKhuyenMaiMon();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listKhuyenMaiMon;
+        }
+
+        public List<KhuyenMaiMon> LayDanhSachKhuyenMaiMonTheoMa(int maKhuyenMai)
+        {
+            var listKhuyenMaiMon = new List<KhuyenMaiMon>();
+            try
+            {
+                listKhuyenMaiMon = KhuyenMaiMonBUS.LayDanhSachKhuyenMaiMonTheoMa(maKhuyenMai);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listKhuyenMaiMon;
+        }
+
+        // Khuyen Mai Hoa Don
+        public List<KhuyenMaiHoaDon> LayDanhSachKhuyenMaiHoaDon()
+        {
+            var listKhuyenMaiHoaDon = new List<KhuyenMaiHoaDon>();
+            try
+            {
+                listKhuyenMaiHoaDon = KhuyenMaiHoaDonBUS.LayDanhSachKhuyenMaiHoaDon();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listKhuyenMaiHoaDon;
+        }
+
+        public List<KhuyenMaiHoaDon> LayDanhSachKhuyenMaiHoaDonTheoMa(int maKhuyenMai)
+        {
+            var listKhuyenMaiHoaDon = new List<KhuyenMaiHoaDon>();
+            try
+            {
+                listKhuyenMaiHoaDon = KhuyenMaiHoaDonBUS.LayDanhSachKhuyenMaiHoaDonTheoMa(maKhuyenMai);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listKhuyenMaiHoaDon;
+        }
+
 
         // Bo Phan Che Bien
         public List<BoPhanCheBien> LayDanhSachBoPhanCheBien()
@@ -696,10 +856,35 @@ namespace LocalServerWeb
         }
 
 
-        // Test
+        // Testing purpose
         public string AddText()
         {
             return "123";
+        }
+
+        public int PhepCong(int a, int b)
+        {
+            return a + b;
+        }
+
+
+        public string Test()
+        {
+            return "Hello eMenu";
+        }
+
+        public List<Foo> LayDanhSachFoo()
+        {
+            var listMonAn = new List<Foo>();
+            try
+            {
+                listMonAn = FooBUS.LayDanhSachFoo();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listMonAn;
         }
 
     }

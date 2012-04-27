@@ -58,11 +58,16 @@
     <Compile Include="HoaDonBUS.cs" />
     <Compile Include="KhuVucBUS.cs" />
     <Compile Include="KhuyenMaiBUS.cs" />
+    <Compile Include="KhuyenMaiDanhMucBUS.cs" />
+    <Compile Include="KhuyenMaiHoaDonBUS.cs" />
+    <Compile Include="KhuyenMaiKhuVucBUS.cs" />
+    <Compile Include="KhuyenMaiMonBUS.cs" />
     <Compile Include="MonAnBUS.cs" />
     <Compile Include="NgonNguBUS.cs" />
     <Compile Include="NhomTaiKhoanBUS.cs" />
     <Compile Include="OrderBUS.cs" />
     <Compile Include="PhuThuBUS.cs" />
+    <Compile Include="PhuThuKhuVucBUS.cs" />
     <Compile Include="PictureBUS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TaiKhoanBUS.cs" />

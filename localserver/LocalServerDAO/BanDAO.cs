@@ -83,5 +83,16 @@ namespace LocalServerDAO
             Ban banChinh = temp.First();
             return ThucDonDienTu.DataContext.Bans.Where(b => b.BanChinh == banChinh).ToList();
         }
+
+        public static Ban LayBan(int maBan)
+        {
+            var temp = ThucDonDienTu.DataContext.Bans.Where(b => b.MaBan == maBan);
+            if (temp.Count() > 0)
+            {
+                Ban ban = temp.First();
+                return ban;
+            }
+            return null;
+        }
     }
 }

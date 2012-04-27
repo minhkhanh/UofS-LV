@@ -28,7 +28,7 @@ namespace LocalServerDTO
 
 
         [DataMember(Name = "MaKhuVuc")]
-        [Column(Name = "MaKhuVuc")]
+        [Column(IsPrimaryKey = true, Name = "MaKhuVuc")]
         private int? _maKhuVuc;
         private EntityRef<KhuVuc> _khuVuc = new EntityRef<KhuVuc>();
 
