@@ -191,6 +191,9 @@
     <Content Include="Content\admincss\screen.css" />
     <Content Include="Content\foodcategorycss\foodcategorylinks.css" />
     <Content Include="Content\foodcategorycss\foodcategorysidebar.css" />
+    <Content Include="Content\foodcategorycss\foodgallery.css" />
+    <Content Include="Content\foodcategorycss\foodgalleryitem.css" />
+    <Content Include="Content\foodcategorycss\foodrelate.css" />
     <Content Include="Content\sitecss\Login.css" />
     <Content Include="Content\sitecss\templatemo_style.css" />
     <Content Include="Global.asax" />
@@ -352,6 +355,8 @@
     <Content Include="Views\Shared\FoodCategorySidebar.ascx" />
     <Content Include="Views\Shared\FoodDetail.ascx" />
     <Content Include="Views\Shared\FoodGallery.ascx" />
+    <Content Include="Views\Shared\FoodGalleryItem.ascx" />
+    <Content Include="Views\Shared\FoodRelate.ascx" />
     <Content Include="Views\Shared\LanguageUserControl.ascx" />
     <Content Include="Views\Shared\LatestSlider.ascx" />
     <Content Include="Views\Shared\LeftSidebar.ascx" />

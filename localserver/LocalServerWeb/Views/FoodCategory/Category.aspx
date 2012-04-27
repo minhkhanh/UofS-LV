@@ -8,6 +8,8 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
 <link rel="stylesheet" href="../../Content/foodcategorycss/foodcategorylinks.css" type="text/css" />
 <link rel="stylesheet" href="../../Content/foodcategorycss/foodcategorysidebar.css" type="text/css" />
+<link rel="stylesheet" href="../../Content/foodcategorycss/foodgalleryitem.css" type="text/css" />
+<link rel="stylesheet" href="../../Content/foodcategorycss/foodgallery.css" type="text/css" />
 </asp:Content>
 
 
