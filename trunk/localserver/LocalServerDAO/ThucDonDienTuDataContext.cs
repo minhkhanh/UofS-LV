@@ -34,7 +34,14 @@ namespace LocalServerDAO
         public Table<TaiKhoan> TaiKhoans;
 
         public Table<KhuyenMai> KhuyenMais;
+        public Table<KhuyenMaiDanhMuc> KhuyenMaiDanhMucs;
+        public Table<KhuyenMaiHoaDon> KhuyenMaiHoaDons;
+        public Table<KhuyenMaiMon> KhuyenMaiMons;
+        public Table<KhuyenMaiKhuVuc> KhuyenMaiKhuVucs;
+
         public Table<PhuThu> PhuThus;
+        public Table<PhuThuKhuVuc> PhuThuKhuVucs;
+
         public Table<TiGia> TiGias;
 
         public Table<HoaDon> HoaDons;

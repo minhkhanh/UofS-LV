@@ -14,7 +14,7 @@ namespace LocalServerDTO
     public class PhuThuKhuVuc
     {
         [DataMember(Name = "MaKhuVuc")]
-        [Column(Name = "MaKhuVuc")]
+        [Column(IsPrimaryKey = true, Name = "MaKhuVuc")]
         private int? _maKhuVuc;
         private EntityRef<KhuVuc> _khuVuc = new EntityRef<KhuVuc>();
 
@@ -26,7 +26,7 @@ namespace LocalServerDTO
         }
 
         [DataMember(Name = "MaPhuThu")]
-        [Column(Name = "MaPhuThu")]
+        [Column(IsPrimaryKey = true, Name = "MaPhuThu")]
         private int? _maPhuThu;
         private EntityRef<PhuThu> _phuThu = new EntityRef<PhuThu>();
 

@@ -59,12 +59,17 @@
     <Compile Include="FooDAO.cs" />
     <Compile Include="HoaDonDAO.cs" />
     <Compile Include="KhuVucDAO.cs" />
+    <Compile Include="KhuyenMaiDanhMucDAO.cs" />
     <Compile Include="KhuyenMaiDAO.cs" />
+    <Compile Include="KhuyenMaiHoaDonDAO.cs" />
+    <Compile Include="KhuyenMaiKhuVucDAO.cs" />
+    <Compile Include="KhuyenMaiMonDAO.cs" />
     <Compile Include="MonAnDAO.cs" />
     <Compile Include="NgonNguDAO.cs" />
     <Compile Include="NhomTaiKhoanDAO.cs" />
     <Compile Include="OrderDAO.cs" />
     <Compile Include="PhuThuDAO.cs" />
+    <Compile Include="PhuThuKhuVucDAO.cs" />
     <Compile Include="PictureDAO.cs" />
     <Compile Include="TaiKhoanDAO.cs" />
     <Compile Include="ThucDonDienTu.cs" />
