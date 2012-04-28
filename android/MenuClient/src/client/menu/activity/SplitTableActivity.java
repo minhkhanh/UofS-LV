@@ -29,7 +29,6 @@ public class SplitTableActivity extends Activity {
 				if (prev != null) {
 					ft.remove(prev);
 				}
-//				ft.addToBackStack(null);
 
 				DialogFragment newFragment = TableDialogFragment.newInstance();
 				newFragment.show(ft, "dialog");

@@ -1,4 +1,4 @@
-package client.menu.dto;
+package client.menu.db.dto;
 
 import java.io.Serializable;
 
@@ -13,6 +13,7 @@ public class BanDTO implements Serializable {
 	boolean active;
 	String tinhTrang;
 	int maBanChinh;
+	
 	public int getMaBan() {
 		return maBan;
 	}

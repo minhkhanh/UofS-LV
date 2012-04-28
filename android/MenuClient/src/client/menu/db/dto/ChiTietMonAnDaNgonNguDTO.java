@@ -1,4 +1,4 @@
-package client.menu.dto;
+package client.menu.db.dto;
 
 import java.io.Serializable;
 

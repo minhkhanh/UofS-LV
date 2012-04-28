@@ -6,8 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import client.menu.adapter.DishListAdapter;
-import client.menu.dto.DanhMucDTO;
-import client.menu.dto.MonAnDTO;
+import client.menu.db.dto.DanhMucDTO;
+import client.menu.db.dto.MonAnDTO;
 
 public class DishListFragment extends ListFragment {
 	DanhMucDTO danhMuc = null;

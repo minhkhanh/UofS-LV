@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import client.menu.R;
-import client.menu.dto.DanhMucDTO;
+import client.menu.db.dto.DanhMucDTO;
 
 public class CategoryListFragment extends ListFragment {
 	boolean isDualPane;

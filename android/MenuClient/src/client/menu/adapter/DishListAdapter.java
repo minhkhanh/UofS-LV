@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import client.menu.R;
-import client.menu.dto.MonAnDTO;
+import client.menu.db.dto.MonAnDTO;
 
 public class DishListAdapter extends ArrayAdapter<MonAnDTO> {
 	
