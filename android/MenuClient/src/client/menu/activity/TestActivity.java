@@ -57,7 +57,7 @@ public class TestActivity extends Activity {
 
     private void onClick(View v) {
         if (v.getId() == R.id.testAddBtn) {
-
+            
         }
     }
 }
