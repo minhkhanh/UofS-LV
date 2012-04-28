@@ -20,7 +20,7 @@ public final class MonAnContract {
     
     public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "("
             + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + COL_SID + " INTEGER NOT NULL, "
+            + COL_SID + " INTEGER NOT NULL UNIQUE, "
             + COL_AVATAR + " TEXT, "
             + COL_RATE + " REAL NOT NULL DEFAULT (0), "
             + COL_RATE_COUNT + " INTEGER NOT NULL DEFAULT (0), "
