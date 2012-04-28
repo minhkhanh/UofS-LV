@@ -33,6 +33,8 @@
             android:configChanges="locale"
             android:label="@string/split_table_caption" >
         </activity>
+        <provider android:name=".db.provider.MenuClientContentProvider" android:authorities="client.menu.db.provider"></provider>
+        <activity android:name=".activity.TestActivity"></activity>
     </application>
 
 </manifest>

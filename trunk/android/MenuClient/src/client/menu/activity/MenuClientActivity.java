@@ -65,6 +65,9 @@ public class MenuClientActivity extends Activity {
 		} else if (v == findViewById(R.id.SplitTableBtn)) {
 			Intent intent = new Intent(this, SplitTableActivity.class);
 			startActivity(intent);
+		} else if (v.getId() == R.id.testBtn) {
+		    Intent intent = new Intent(this, TestActivity.class);
+            startActivity(intent);
 		}
 	}
 }

@@ -1,7 +1,7 @@
 package client.menu.fragment;
 
 import client.menu.R;
-import client.menu.dto.KhuVucDTO;
+import client.menu.db.dto.KhuVucDTO;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.os.Bundle;

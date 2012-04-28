@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import client.menu.R;
-import client.menu.dto.BanDTO;
+import client.menu.db.dto.BanDTO;
 
 public class TableGridAdapter extends ArrayAdapter<BanDTO> {
 
