@@ -50,5 +50,22 @@ namespace LocalServerBUS
             }
             return dsDanhMuc;
         }
+
+        private static List<DanhMuc> LayDanhSachDanhMucLevelThapNhat()
+        {
+            return DanhMucDAO.LayDanhSachDanhMucLevelThapNhat();
+        }
+
+        public static List<DanhMuc> LayDanhSachDanhMucLevelThapNhatTheoNgonNgu(NgonNgu ngonNgu)
+        {
+            var temp = LayDanhSachDanhMucLevelThapNhat();
+            foreach (var danhMuc in temp)
+            {
+                danhMuc.TenDanhMuc =
+                    ChiTietDanhMucDaNgonNguBUS.LayChiTietDanhMucDaNgonNgu(danhMuc.MaDanhMuc, ngonNgu.MaNgonNgu).
+                        TenDanhMuc;
+            }
+            return temp.ToList();
+        }
     }
 }

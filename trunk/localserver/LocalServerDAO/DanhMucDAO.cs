@@ -40,6 +40,13 @@ namespace LocalServerDAO
             return ThucDonDienTu.DataContext.DanhMucs.Where(d => d.DanhMucCha == null).ToList();
         }
 
-        
+
+        public static List<DanhMuc> LayDanhSachDanhMucLevelThapNhat()
+        {
+            var temp =
+                ThucDonDienTu.DataContext.DanhMucs.Where(
+                    d => !ThucDonDienTu.DataContext.DanhMucs.Where(c => c.DanhMucCha == d).Any());
+            return temp.ToList();
+        }
     }
 }

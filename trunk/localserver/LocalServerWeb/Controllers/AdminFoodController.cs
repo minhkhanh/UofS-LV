@@ -22,7 +22,7 @@ namespace LocalServerWeb.Controllers
         public ActionResult AddFood()
         {
             SharedCode.FillAdminMainMenu(ViewData, 2, 1);
-            ViewData["listNhomTaiKhoan"] = NhomTaiKhoanBUS.LayDanhSachNhomTaiKhoan();
+            ViewData["listDanhMuc"] = DanhMucBUS.LayDanhSachDanhMucLevelThapNhatTheoNgonNgu(SharedCode.GetCurrentLanguage(Session));
             if (TempData["checkDic"] == null)
             {
                 TempData.Clear();
