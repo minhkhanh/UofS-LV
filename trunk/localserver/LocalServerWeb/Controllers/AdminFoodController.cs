@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using LocalServerBUS;
 using LocalServerWeb.Codes;
 
 namespace LocalServerWeb.Controllers
@@ -14,9 +15,20 @@ namespace LocalServerWeb.Controllers
 
         public ActionResult Index()
         {
-            SharedCode.FillAdminMainMenu(ViewData, 1, 1);
+            SharedCode.FillAdminMainMenu(ViewData, 2, 0);
             return View();
         }
 
+        public ActionResult AddFood()
+        {
+            SharedCode.FillAdminMainMenu(ViewData, 2, 1);
+            ViewData["listNhomTaiKhoan"] = NhomTaiKhoanBUS.LayDanhSachNhomTaiKhoan();
+            if (TempData["checkDic"] == null)
+            {
+                TempData.Clear();
+                TempData["checkDic"] = new Dictionary<string, string>();
+            }
+            return View();
+        }
     }
 }

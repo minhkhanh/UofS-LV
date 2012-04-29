@@ -83,5 +83,9 @@ namespace LocalServerWeb.Codes
         {
             return session["taiKhoan"] as TaiKhoan;
         }
+        public static NgonNgu GetCurrentLanguage(HttpSessionStateBase session)
+        {
+            return session["ngonNgu"] as NgonNgu;
+        }
     }
 }
