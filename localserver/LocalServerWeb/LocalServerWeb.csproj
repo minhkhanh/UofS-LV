@@ -112,6 +112,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Resources\Views\AdminFood\AdminFoodString.Designer.cs">
+      <DependentUpon>AdminFoodString.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\AdminFood\AdminFoodString.vi.Designer.cs">
+      <DependentUpon>AdminFoodString.vi.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\Views\AdminHome\AdminHomeString.Designer.cs">
       <DependentUpon>AdminHomeString.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -342,6 +352,7 @@
     <Content Include="Scripts\mootools-1.2-more.js" />
     <Content Include="Scripts\mootools-1.2.1-core.js" />
     <Content Include="Scripts\slideitmoo-1.1.js" />
+    <Content Include="Views\AdminFood\AddFood.aspx" />
     <Content Include="Views\AdminFood\Index.aspx" />
     <Content Include="Views\AdminHome\Index.aspx" />
     <Content Include="Views\AdminUser\AddUser.aspx" />
@@ -423,6 +434,14 @@
     <EmbeddedResource Include="Resources\Views\Account\AccountString.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AccountString.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminFood\AdminFoodString.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminFoodString.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminFood\AdminFoodString.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminFoodString.vi.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\AdminHome\AdminHomeString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

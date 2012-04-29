@@ -97,6 +97,33 @@ namespace LocalServerWeb.Resources.Views.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Food Manager.
+        /// </summary>
+        public static string FoodManager {
+            get {
+                return ResourceManager.GetString("FoodManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new food.
+        /// </summary>
+        public static string FoodManagerAddFood {
+            get {
+                return ResourceManager.GetString("FoodManagerAddFood", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List of food.
+        /// </summary>
+        public static string FoodManagerList {
+            get {
+                return ResourceManager.GetString("FoodManagerList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ThucDonDienTu - Resturent ManagerTử.
         /// </summary>
         public static string Footer {

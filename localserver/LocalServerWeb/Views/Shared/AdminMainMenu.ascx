@@ -32,11 +32,11 @@
 		
 		<div class="nav-divider">&nbsp;</div>
 		
-		<ul <%: ((int)ViewData["menuMainId"] == 2)?"class=current":"class=select" %> ><li><a href="#nogo"><b>Categories</b></a>
+		<ul <%: ((int)ViewData["menuMainId"] == 2)?"class=current":"class=select" %> ><li><a href="#nogo"><b><%:SharedString.FoodManager %></b></a>
 		<div class='select_sub <%: ((int)ViewData["menuMainId"] == 2)?"show":"" %> '>
 			<ul class="sub">
-				<li <%: ((int)ViewData["menuSubId"] == 0 && (int)ViewData["menuMainId"] == 2)?"class=sub_show":"" %> ><a href="#nogo">Categories Details 1</a></li>
-				<li <%: ((int)ViewData["menuSubId"] == 1 && (int)ViewData["menuMainId"] == 2)?"class=sub_show":"" %> ><a href="#nogo">Categories Details 2</a></li>
+				<li <%: ((int)ViewData["menuSubId"] == 0 && (int)ViewData["menuMainId"] == 2)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.FoodManagerList, "Index", "AdminFood") %></li>
+				<li <%: ((int)ViewData["menuSubId"] == 1 && (int)ViewData["menuMainId"] == 2)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.FoodManagerAddFood, "AddFood", "AdminFood") %></li>
 				<li <%: ((int)ViewData["menuSubId"] == 2 && (int)ViewData["menuMainId"] == 2)?"class=sub_show":"" %> ><a href="#nogo">Categories Details 3</a></li>
 			</ul>
 		</div>

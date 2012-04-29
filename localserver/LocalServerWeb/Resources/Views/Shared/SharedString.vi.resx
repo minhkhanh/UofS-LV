@@ -129,6 +129,15 @@
   <data name="AdminHome" xml:space="preserve">
     <value>Trang chủ</value>
   </data>
+  <data name="FoodManager" xml:space="preserve">
+    <value>Quản lý món ăn</value>
+  </data>
+  <data name="FoodManagerAddFood" xml:space="preserve">
+    <value>Thêm món ăn mới</value>
+  </data>
+  <data name="FoodManagerList" xml:space="preserve">
+    <value>Danh sách món ăn</value>
+  </data>
   <data name="Footer" xml:space="preserve">
     <value>Hệ thống luận văn - Thực Đơn Điện</value>
   </data>
