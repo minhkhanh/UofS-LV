@@ -34,5 +34,34 @@ namespace LocalServerDAO
             }
             return null;
         }
+
+        public static bool ThemMonAn(MonAn monAn)
+        {
+            try
+            {
+                ThucDonDienTu.DataContext.MonAns.InsertOnSubmit(monAn);
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
+
+        public static bool CapNhapMonAn(MonAn monAn)
+        {
+            try
+            {                
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
     }
 }

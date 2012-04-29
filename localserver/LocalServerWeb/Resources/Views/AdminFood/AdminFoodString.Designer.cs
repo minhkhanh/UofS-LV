@@ -88,6 +88,15 @@ namespace LocalServerWeb.Resources.Views.AdminFood {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The best image have 100x100 pixel..
+        /// </summary>
+        public static string PictureSize {
+            get {
+                return ResourceManager.GetString("PictureSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Food manager.
         /// </summary>
         public static string Title {

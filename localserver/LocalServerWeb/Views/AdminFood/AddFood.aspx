@@ -6,11 +6,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	<%:AdminFoodString.Title %>
 </asp:Content>
-
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <% Html.BeginForm("AddUser", "AdminUser", FormMethod.Post); %>
+<asp:Content ID="Content5" ContentPlaceHolderID="MainContent" runat="server">
+    <div id="edit-common-data">
+    <% Html.BeginForm("AddFood", "AdminFood", FormMethod.Post, new { enctype = "multipart/form-data" }); %>
 		<!-- start id-form -->
-		<table border="0" cellpadding="0" cellspacing="0"  id="id-form">
+		<table border="0" cellpadding="0" cellspacing="0"  id="Table1">
 <%--		<tr>
 			<th valign="top"><%:AdminFoodString.Username %>:</th>
 			<td><input type="text" class="inp-form<%:(((Dictionary<string, string>) TempData["checkDic"]).ContainsKey("tenTaiKhoan") && ((Dictionary<string, string>) TempData["checkDic"])["tenTaiKhoan"]!=null) ? "-error" : ""%>" name="tenTaiKhoan" 
@@ -34,14 +34,14 @@
 
 	<tr>
 	<th><%:AdminFoodString.Picture %>:</th>
-	<td><input type="file" class="file_1" name="picture" /></td>
+	<td><input type="file" class="file_1" name="uploadFile" accept="image/*" /></td>
 	<td>
 	</td>
 	</tr>
 
 	<tr>
 	<th></th>
-	<td><%: %></td>
+	<td><%:AdminFoodString.PictureSize %></td>
 	<td>
 	</td>
 	</tr>
@@ -57,6 +57,7 @@
 	</table>
 	<!-- end id-form  -->
     <% Html.EndForm(); %>
+    </div>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
