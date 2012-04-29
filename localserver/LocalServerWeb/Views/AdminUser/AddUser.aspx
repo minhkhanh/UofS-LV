@@ -193,12 +193,12 @@
 		}
 	);
 
-        var updateSelects = function (selectedDate) {
+        var updateSelects = function(selectedDate) {
             var selectedDate = new Date(selectedDate);
             $('#d option[value=' + selectedDate.getDate() + ']').attr('selected', 'selected');
             $('#m option[value=' + (selectedDate.getMonth() + 1) + ']').attr('selected', 'selected');
             $('#y option[value=' + (selectedDate.getFullYear()) + ']').attr('selected', 'selected');
-        }
+        };
         // listen for when the selects are changed and update the picker
         $('#d, #y')
             .bind(
@@ -263,6 +263,18 @@
         <% } %>          
     });    
 //</script>
+<!--  styled file upload script --> 
+<script src="../../Scripts/jquery/jquery.filestyle.js" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8">
+    $(function () {
+        $("input.file_1").filestyle({
+            image: "../../Images/adminimages/forms/choose-file.gif",
+            imageheight: 21,
+            imagewidth: 78,
+            width: 310
+        });
+    });
+</script>
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="PageHeadingContent" runat="server">
