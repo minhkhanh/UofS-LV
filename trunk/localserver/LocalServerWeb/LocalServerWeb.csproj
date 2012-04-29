@@ -354,6 +354,7 @@
     <Content Include="Scripts\slideitmoo-1.1.js" />
     <Content Include="Views\AdminFood\AddFood.aspx" />
     <Content Include="Views\AdminFood\Index.aspx" />
+    <Content Include="Views\AdminFood\ViewDetailFood.aspx" />
     <Content Include="Views\AdminHome\Index.aspx" />
     <Content Include="Views\AdminUser\AddUser.aspx" />
     <Content Include="Views\AdminUser\Index.aspx" />
@@ -407,6 +408,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\foodcategoryimages\foodcategorysidebarimages\" />
+    <Folder Include="Uploads\FoodImages\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LocalServerBUS\LocalServerBUS.csproj">
