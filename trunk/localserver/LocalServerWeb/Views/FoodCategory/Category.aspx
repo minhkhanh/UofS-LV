@@ -1,5 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<PagedList<FoodGalleryItemViewModel>>" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.FoodCategory" %>
+<%@ Import Namespace="LocalServerWeb.ViewModels"%>
+<%@ Import Namespace="Webdiyer.WebControls.Mvc"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	<%:FoodCategoryString.Title%>
@@ -10,6 +12,17 @@
 <link rel="stylesheet" href="../../Content/foodcategorycss/foodcategorysidebar.css" type="text/css" />
 <link rel="stylesheet" href="../../Content/foodcategorycss/foodgalleryitem.css" type="text/css" />
 <link rel="stylesheet" href="../../Content/foodcategorycss/foodgallery.css" type="text/css" />
+
+<style type="text/css">    
+    .pages { color:red;font-weight:bold; font-size:11px;}
+    .pages  .item{padding: 1px 6px;font-size: 13px;} /*numeric pager items*/
+    .pages .cpb {color:red;padding: 1px 6px;font-size: 13px;} /*current pager item*/
+    .pages a { text-decoration:none;padding: 0 5px; border: 1px solid #ddd;
+               margin:0 2px; color:#000;font-weight:normal;}
+    .pages a:hover { background-color: #E61636; color:#fff;
+                     border:1px solid #E61636; text-decoration:none;font-weight:normal;}
+</style>
+
 </asp:Content>
 
 
@@ -18,7 +31,12 @@
     <h2>Category</h2>
     <% Html.RenderPartial("FoodCategoryLinks"); %>
     <% Html.RenderPartial("FoodCategorySidebar"); %>
-    <% Html.RenderPartial("FoodGallery"); %>
+    <% Html.RenderPartial("FoodGallery", Model); %>
+
+    <%= Html.Pager(Model, new PagerOptions { PageIndexParameterName = "id", 
+    CurrentPagerItemWrapperFormatString = "<span class=\"cpb\">{0}</span>", 
+    NumericPagerItemWrapperFormatString = "<span class=\"item\">{0}</span>", 
+    CssClass = "pages", SeparatorHtml = "" })%>
 
 </asp:Content>
 

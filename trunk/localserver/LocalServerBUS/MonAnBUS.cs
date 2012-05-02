@@ -9,6 +9,7 @@ namespace LocalServerBUS
 {
     public class MonAnBUS
     {
+
         public static List<MonAn> LayDanhSachMonAn()
         {
             return MonAnDAO.LayDanhSachMonAn();
