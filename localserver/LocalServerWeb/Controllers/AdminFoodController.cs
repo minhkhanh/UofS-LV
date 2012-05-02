@@ -33,7 +33,7 @@ namespace LocalServerWeb.Controllers
         {
             TempData["listDanhMuc"] = listDanhMuc;
             var danhMuc = DanhMucBUS.LayDanhMuc(listDanhMuc);
-            string strAppPath = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.ApplicationPath);
+            
             if (uploadFile==null || uploadFile.ContentLength == 0 || danhMuc==null)
             {
                 return RedirectToAction("AddFood");
@@ -63,15 +63,23 @@ namespace LocalServerWeb.Controllers
                 return RedirectToAction("Index");
             }
             SharedCode.FillAdminMainMenu(ViewData, 2, -1);
-            var danhSachDanhMuc = DanhMucBUS.LayDanhSachDanhMucLevelThapNhatTheoNgonNgu(SharedCode.GetCurrentLanguage(Session));
-            //            
-            ViewData["listDanhMuc"] = new SelectList(danhSachDanhMuc, "MaDanhMuc", "TenDanhMuc", 5);
-            //ViewData["maDanhMuc"] = monAn.DanhMuc.MaDanhMuc.ToString();
-            
+            ViewData["listDanhMuc"] = DanhMucBUS.LayDanhSachDanhMucLevelThapNhatTheoNgonNgu(SharedCode.GetCurrentLanguage(Session));
+            ViewData["monAn"] = monAn;
+
+            var listDonViTinh = ChiTietMonAnDonViTinhBUS.LayDanhSachChiTietMonAnDonViTinhTheoMonAn(monAn.MaMonAn);
+            foreach (var donViTinh in listDonViTinh)
+            {
+                donViTinh.TenDonViTinh =
+                    ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(donViTinh.DonViTinh.MaDonViTinh,
+                                                                              SharedCode.GetCurrentLanguage(Session).
+                                                                                  MaNgonNgu).TenDonViTinh;
+            }
+            ViewData["listChiTienMonAnDonViTinh"] = listDonViTinh;
 
             return View();
         }
 
+        [HttpPost]
         public ActionResult UpdateCategory(int listDanhMuc, int maMonAn)
         {
             var danhMuc = DanhMucBUS.LayDanhMuc(listDanhMuc);
@@ -82,6 +90,29 @@ namespace LocalServerWeb.Controllers
                 MonAnBUS.CapNhatMonAn(monAn);
             }
             return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn});
+        }
+
+        public ActionResult UpdateImageFood(int maMonAn, HttpPostedFileBase uploadFile)
+        {            
+            try
+            {
+                var monAn = MonAnBUS.LayMonAn(maMonAn);
+                if (uploadFile == null || uploadFile.ContentLength == 0 || monAn == null) throw new Exception("Input wrong!");
+                string fileName = Guid.NewGuid() + Path.GetFileName(uploadFile.FileName);
+                string filePath = Path.Combine(HttpContext.Server.MapPath("../Uploads/FoodImages"), fileName);
+                string oldFilePath = Path.Combine(HttpContext.Server.MapPath("/"), monAn.HinhAnh);
+                monAn.HinhAnh = "Uploads/FoodImages/" + fileName;
+                if (MonAnBUS.CapNhatMonAn(monAn))
+                {
+                    uploadFile.SaveAs(filePath);
+                    if (System.IO.File.Exists(oldFilePath)) System.IO.File.Delete(oldFilePath);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
         }
     }
 }
