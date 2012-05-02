@@ -1,9 +1,14 @@
 ﻿div#food_gallery_item
 {
-    width:200px;
-    height:200px;
+    width:145px;
+    height:145px;
     background-color:Lime;
 }
+
+div#food_gallery_item table
+{
+    margin: 0px auto;
+}   
 
 div#food_gallery_item img
 {

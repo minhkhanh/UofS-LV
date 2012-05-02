@@ -286,7 +286,7 @@ namespace LocalServerWeb.Controllers
                     {
                         try
                         {
-                            FoodGalleryItemViewModel monLienQuan = GetFoodGalleryItemViewModel(monAn, maNgonNgu);
+                            FoodGalleryItemViewModel monLienQuan = GetFoodGalleryItemViewModel(listCTMonLienQuan[i].MonAnLienQuan, maNgonNgu);
 
                             viewModel.listMonLienQuan.Add(monLienQuan);
                         }

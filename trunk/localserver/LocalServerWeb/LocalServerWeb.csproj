@@ -335,6 +335,7 @@
     <Content Include="Images\siteimages\templatemo_slider.jpg" />
     <Content Include="Images\siteimages\templatmeo_header.jpg" />
     <Content Include="LocalService.svc" />
+    <Content Include="Scripts\foodcategory\slider.js" />
     <Content Include="Scripts\jquery\Copy of custom_jquery.js" />
     <Content Include="Scripts\jquery\custom_jquery.js" />
     <Content Include="Scripts\jquery\date.js" />
@@ -412,7 +413,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\foodcategoryimages\foodcategorysidebarimages\" />
+    <Folder Include="Images\foodcategory\foodrelate\" />
     <Folder Include="Uploads\FoodImages\" />
   </ItemGroup>
   <ItemGroup>
