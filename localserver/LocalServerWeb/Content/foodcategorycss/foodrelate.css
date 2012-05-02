@@ -1,4 +1,89 @@
 ﻿div#food_relate
 {
-    
+    width: 800px;
+    margin: 10px auto;
+}
+
+div#food_relate * {
+	margin: 0;
+	padding: 0;
+}
+
+div#food_relate #intro {
+    padding-bottom: 10px;
+}
+
+div#food_relate #slider {
+    width: 800px;
+    margin: 0 auto;
+    position: relative;
+	border: 10px solid #ccc;
+}
+
+div#food_relate .scroll {
+	overflow: hidden;
+	width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+div#food_relate .scrollContainer {
+	position: relative;
+}
+
+div#food_relate .scrollContainer div.panel {
+    padding: 10px;
+    width: 274px;
+	height: 190px;
+}
+
+div#food_relate #left-shadow {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 12px;
+	bottom: 0;
+	background: url(../../Images/foodcategory/foodrelate/leftshadow.png) repeat-y;
+}
+
+div#food_relate #right-shadow {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 12px;
+	bottom: 0;
+	background: url(../../Images/foodcategory/foodrelate/rightshadow.png) repeat-y;
+}
+
+div#food_relate .inside {
+	padding: 10px;
+	
+}
+
+div#food_relate a {
+	color: #999;
+	text-decoration: none;
+	border-bottom: 1px dotted #ccc;
+}
+
+div#food_relate a:hover {
+	border-bottom: 1px solid #999;
+}
+
+div#food_relate .scrollButtons {
+    position: absolute;
+    top: 70px;
+    cursor: pointer;
+}
+
+div#food_relate .scrollButtons.left {
+    left: -45px;
+}
+
+div#food_relate .scrollButtons.right {
+    right: -45px;
+}
+
+div#food_relate .hide {
+    display: none;
 }
