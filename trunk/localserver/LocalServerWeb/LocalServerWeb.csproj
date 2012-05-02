@@ -366,6 +366,7 @@
     <Content Include="Views\FoodCategory\Food.aspx" />
     <Content Include="Views\FoodCategory\Index.aspx" />
     <Content Include="Views\Shared\AdminMainMenu.ascx" />
+    <Content Include="Views\Shared\AjaxCategory.ascx" />
     <Content Include="Views\Shared\FoodCategoryLinks.ascx" />
     <Content Include="Views\Shared\FoodCategorySidebar.ascx" />
     <Content Include="Views\Shared\FoodDetail.ascx" />

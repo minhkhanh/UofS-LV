@@ -29,6 +29,17 @@ namespace LocalServerWeb
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
 
+            // Custom map route for Paging /FoodCategory/Category/1?page=2
+            //routes.MapRoute(
+            //    "Paging",
+            //    "{controller}/{action}/{id}",
+            //    new
+            //    {
+            //        controller = "FoodCategory",
+            //        action = "Category",
+            //        id = UrlParameter.Optional,
+            //    });
+
         }
 
         protected void Application_Start()

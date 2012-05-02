@@ -20,14 +20,10 @@ namespace LocalServerWeb.Controllers
 
         public ActionResult Index(int id, string cat)
         {
-            //PagedList<MonAn> model = MonAnBUS.LayDanhSachMonAn2().ToPagedList(id ?? 1, 1);
-            
-            return Redirect("/FoodCategory/Category/0");
-            
-
+            return Redirect("/FoodCategory/Category/0");          
         }
 
-        public ActionResult Category(int id, string cat)
+        public ActionResult Category(int id, string page)
         {
             FoodCategoryLinksViewModel foodCategoryLinksViewModel = GetFoodCategoryLinksViewModel(id, true);
             ViewData["foodCategoryLinksViewModel"] = foodCategoryLinksViewModel;
@@ -39,8 +35,12 @@ namespace LocalServerWeb.Controllers
             //ViewData["foodGalleryItemViewModels"] = foodGalleryItemViewModels;
             //return View(id);
 
-            int _cat = int.Parse(cat);
-            PagedList<FoodGalleryItemViewModel> model = GetFoodGalleryItemViewModels(_cat).AsQueryable().ToPagedList(id, 2);
+            int _page = 1;
+            int.TryParse(page, out _page);
+            PagedList<FoodGalleryItemViewModel> model = GetFoodGalleryItemViewModels(id).AsQueryable().ToPagedList(_page, 2);
+            // Using ajax
+            if (Request.IsAjaxRequest())
+                return PartialView("AjaxCategory", model);
             return View(model);
         }
 

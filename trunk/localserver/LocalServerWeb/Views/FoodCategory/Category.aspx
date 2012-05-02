@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="../../Content/foodcategorycss/foodcategorysidebar.css" type="text/css" />
 <link rel="stylesheet" href="../../Content/foodcategorycss/foodgalleryitem.css" type="text/css" />
 <link rel="stylesheet" href="../../Content/foodcategorycss/foodgallery.css" type="text/css" />
+<script type="text/javascript" src="../../Scripts/jquery/jquery-1.4.1.min.js"></script>
 
 <style type="text/css">    
     .pages { color:red;font-weight:bold; font-size:11px;}
@@ -29,14 +30,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
     <h2>Category</h2>
-    <% Html.RenderPartial("FoodCategoryLinks"); %>
-    <% Html.RenderPartial("FoodCategorySidebar"); %>
-    <% Html.RenderPartial("FoodGallery", Model); %>
 
-    <%= Html.Pager(Model, new PagerOptions { PageIndexParameterName = "id", 
-    CurrentPagerItemWrapperFormatString = "<span class=\"cpb\">{0}</span>", 
-    NumericPagerItemWrapperFormatString = "<span class=\"item\">{0}</span>", 
-    CssClass = "pages", SeparatorHtml = "" })%>
+    <%Html.RenderPartial("AjaxCategory", Model); %>
 
 </asp:Content>
 

@@ -13,9 +13,25 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
     <h2>Food</h2>
-    <% Html.RenderPartial("FoodCategoryLinks"); %>
-    <% Html.RenderPartial("FoodCategorySidebar"); %>
-    <% Html.RenderPartial("FoodDetail"); %>
+
+    
+
+    <table width="100%">
+        <tr>
+            <td colspan="2">
+                Links
+                <% Html.RenderPartial("FoodCategoryLinks"); %>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <% Html.RenderPartial("FoodCategorySidebar"); %>
+            </td>
+            <td>
+                <% Html.RenderPartial("FoodDetail"); %>
+            </td>
+        </tr>
+    </table>
     
 </asp:Content>
 
