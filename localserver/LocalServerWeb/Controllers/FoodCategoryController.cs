@@ -8,6 +8,7 @@ using LocalServerWeb.ViewModels;
 using LocalServerDTO;
 using LocalServerBUS;
 using LocalServerWeb.Resources.Views.FoodCategory;
+using Webdiyer.WebControls.Mvc;
 
 namespace LocalServerWeb.Controllers
 {
@@ -17,12 +18,16 @@ namespace LocalServerWeb.Controllers
         // URL: /FoodCategory
         // **************************************
 
-        public ActionResult Index()
+        public ActionResult Index(int id, string cat)
         {
+            //PagedList<MonAn> model = MonAnBUS.LayDanhSachMonAn2().ToPagedList(id ?? 1, 1);
+            
             return Redirect("/FoodCategory/Category/0");
+            
+
         }
 
-        public ActionResult Category(int id)
+        public ActionResult Category(int id, string cat)
         {
             FoodCategoryLinksViewModel foodCategoryLinksViewModel = GetFoodCategoryLinksViewModel(id, true);
             ViewData["foodCategoryLinksViewModel"] = foodCategoryLinksViewModel;
@@ -30,10 +35,13 @@ namespace LocalServerWeb.Controllers
             FoodCategorySidebarViewModel foodCategorySidebarViewModel = GetFoodCategorySidebarViewModel(id, true);
             ViewData["foodCategorySidebarViewModel"] = foodCategorySidebarViewModel;
 
-            List<FoodGalleryItemViewModel> foodGalleryItemViewModels = GetFoodGalleryItemViewModels(id);
-            ViewData["foodGalleryItemViewModels"] = foodGalleryItemViewModels;
+            //List<FoodGalleryItemViewModel> foodGalleryItemViewModels = GetFoodGalleryItemViewModels(id);
+            //ViewData["foodGalleryItemViewModels"] = foodGalleryItemViewModels;
+            //return View(id);
 
-            return View(id);
+            int _cat = int.Parse(cat);
+            PagedList<FoodGalleryItemViewModel> model = GetFoodGalleryItemViewModels(_cat).AsQueryable().ToPagedList(id, 2);
+            return View(model);
         }
 
         public ActionResult Food(int id)

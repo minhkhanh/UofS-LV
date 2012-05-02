@@ -1,18 +1,20 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<PagedList<FoodGalleryItemViewModel>>" %>
 <%@ Import Namespace = "LocalServerWeb.ViewModels" %>
+<%@ Import Namespace="Webdiyer.WebControls.Mvc"%>
+
 
 <div id = "food_gallery">
-<% if (ViewData["foodGalleryItemViewModels"] != null)
+<% if (Model != null)
    {
        int numCol = 4;
        int numRow = 10;
-       List<FoodGalleryItemViewModel> viewModels = ViewData["foodGalleryItemViewModels"] as List<FoodGalleryItemViewModel>;
-       if (viewModels.Count > 0)
+
+       if (Model.Count > 0)
        {
            %>
            <table>
            <%
-           for (int i = 0; i < viewModels.Count; ++i)
+           for (int i = 0; i < Model.Count; ++i)
            {
                 if(i % numCol == 0)
                 {
@@ -21,9 +23,9 @@
                     <%
                 }
                 %>
-                <td> <% Html.RenderPartial("FoodGalleryItem", viewModels[i]); %> </td>
+                <td> <% Html.RenderPartial("FoodGalleryItem", Model[i]); %> </td>
 
-                <% if (i % numCol == numCol-1 || i == viewModels.Count - 1)
+                <% if (i % numCol == numCol-1 || i == Model.Count - 1)
                     {
                         %>
                         </tr>

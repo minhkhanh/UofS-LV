@@ -8,9 +8,10 @@ namespace LocalServerDAO
 {
     public class MonAnDAO
     {
+
         public static List<MonAn> LayDanhSachMonAn()
         {
-            return ThucDonDienTu.DataContext.MonAns.ToList();        
+            return ThucDonDienTu.DataContext.MonAns.ToList();       
         }
 
         public static List<MonAn> LayDanhSachMonAnTheoDanhMuc(int maDanhMuc)
