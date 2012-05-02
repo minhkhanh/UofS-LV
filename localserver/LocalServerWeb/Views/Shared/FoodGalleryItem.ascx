@@ -12,7 +12,7 @@
 
         <tr>
         <td>
-            <%: Model.TenMonAn %>
+            <%: Html.ActionLink(Model.TenMonAn, "Food", "FoodCategory", new {id=Model.MaMonAn}, "") %>
         </td>
         </tr>
 
@@ -21,11 +21,6 @@
             <%: Model.DonGia.ToString() %>
             &nbsp;/&nbsp;
             <%: Model.TenDonViTinhMacDinh %>
-        </td>
-        </tr>
-        <tr>
-        <td>
-            <%: Html.ActionLink(FoodCategoryString.Detail, "Food", "FoodCategory", new {id=Model.MaMonAn}, "") %>
         </td>
         </tr>
     </table>
