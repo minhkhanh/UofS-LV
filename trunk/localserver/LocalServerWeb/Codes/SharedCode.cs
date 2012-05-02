@@ -87,5 +87,13 @@ namespace LocalServerWeb.Codes
         {
             return session["ngonNgu"] as NgonNgu;
         }
+        public static string GetHostApplicationAddress(HttpRequest request)
+        {
+            if (request!=null)
+            {
+                return string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, request.ApplicationPath);
+            }
+            return "";
+        }
     }
 }

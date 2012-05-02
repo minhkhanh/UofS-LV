@@ -41,5 +41,7 @@ namespace LocalServerDTO
         [DataMember]
         [Column(Name = "DonGia")]
         public float DonGia { get; set; }
+
+        public string TenDonViTinh { get; set; }
     }
 }
