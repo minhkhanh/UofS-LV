@@ -1,8 +1,10 @@
 package client.menu.db.contract;
 
+import client.menu.db.provider.MenuClientContentProvider;
+import android.net.Uri;
 import android.provider.BaseColumns;
 
-public class DanhMucDaNgonNguContract {
+public class DanhMucDaNgonNguContract implements BaseColumns {
     public static final String TABLE_NAME = "ChiTietDanhMucDaNgonNgu";
 
     public static final String COL_CATEGORY_ID = "MaDanhMuc";
@@ -11,11 +13,16 @@ public class DanhMucDaNgonNguContract {
     public static final String COL_CATEGORY_DESCRIPTION = "MoTaDanhMuc";
 
     public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + " ("
-            + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COL_CATEGORY_ID + " INTEGER REFERENCES "
             + DanhMucContract.TABLE_NAME + "(" + DanhMucContract.COL_SID + "),"
             + COL_LANGUAGE_ID + " INTEGER REFERENCES "
             + NgonNguContract.TABLE_NAME + "(" + NgonNguContract.COL_SID + "),"
             + COL_CATEGORY_NAME + " TEXT," + COL_CATEGORY_DESCRIPTION
             + " TEXT);";
+    
+    public static final Uri URI_TABLE = Uri.parse(MenuClientContentProvider.SCHEME
+            + MenuClientContentProvider.AUTHORITY + "/" + TABLE_NAME);
+    public static final Uri URI_ROW = Uri.parse(MenuClientContentProvider.SCHEME
+            + MenuClientContentProvider.AUTHORITY + "/" + TABLE_NAME + "/#");
 }
