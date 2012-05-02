@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import client.menu.R;
 import client.menu.db.contract.NgonNguContract;
 import client.menu.util.AppSettings;
+import client.menu.util.C;
 import client.menu.util.Utilitiy;
 
 public class MenuClientActivity extends Activity implements LoaderCallbacks<Cursor>,
@@ -46,8 +47,6 @@ public class MenuClientActivity extends Activity implements LoaderCallbacks<Curs
         mSpinner.setOnItemSelectedListener(this);
 
         getLoaderManager().initLoader(LOADER_ID_LANGUAGE_LIST, null, this);
-
-        Log.d("mt", "onCreate");
     }
 
     public void onClick(View v) {
@@ -77,7 +76,7 @@ public class MenuClientActivity extends Activity implements LoaderCallbacks<Curs
 
                 return loader;
         }
-        
+
         return null;
     }
 
@@ -103,14 +102,15 @@ public class MenuClientActivity extends Activity implements LoaderCallbacks<Curs
     public void onItemSelected(AdapterView<?> arg0, View arg1, int pos, long id) {
         if (arg0 == mSpinner) {
             Cursor cursor = ((SimpleCursorAdapter) arg0.getAdapter()).getCursor();
-            cursor.moveToPosition(pos);
+            if (cursor.moveToPosition(pos)) {
+                String lang = cursor.getString(cursor
+                        .getColumnIndex(NgonNguContract.COL_ABBREVIATE));
 
-            String lang = cursor.getString(cursor
-                    .getColumnIndex(NgonNguContract.COL_DISPLAY_NAME));
-
-            if (AppSettings.appLocale.getLanguage().equals(lang) == false) {
-                AppSettings.appLocale.setLanguage(lang);
-                Utilitiy.restartActivity(MenuClientActivity.this);
+//                Log.d(C.TAG, lang + " : " + AppSettings.appLocale.getLanguage());
+                if (!AppSettings.appLocale.getLanguage().equals(lang)) {
+                    AppSettings.appLocale.setLanguage(lang);
+                    Utilitiy.restartActivity(MenuClientActivity.this);
+                }
             }
         }
     }

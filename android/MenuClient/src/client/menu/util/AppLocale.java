@@ -7,30 +7,22 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 
 public class AppLocale {
-	private Locale[] locales = new Locale[] { new Locale("vi"),
-			new Locale("en"), new Locale("ja") };
-	
-	private String language = "vi";
+
+	private String mLanguage = "vi";
 
 	public String getLanguage() {
-		return language;
+		return mLanguage;
 	}
 
-	public void setLanguage(String currLang) {
-		this.language = currLang;
-	}
-
-	public Locale[] getLocales() {
-		return locales;
+	public void setLanguage(String language) {
+		this.mLanguage = language;
 	}
 
 	public boolean applyLanguage(Context context) {
-		return applyLanguage(language, context);
+		return applyLanguage(mLanguage, context);
 	}
 
 	public boolean applyLanguage(String lang, Context context) {
-		// Log.d("apply: currLang", currLang);
-		// Log.d("apply: langCode", langCode);
 		Resources res = context.getResources();
 		Configuration conf = res.getConfiguration();
 
