@@ -1,8 +1,5 @@
 package client.menu.activity;
 
-import client.menu.R;
-import client.menu.db.contract.MonAnContract;
-import client.menu.db.provider.MenuClientContentProvider;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
@@ -10,9 +7,10 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.BaseColumns;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import client.menu.R;
+import client.menu.db.contract.MonAnContract;
 
 public class TestActivity extends Activity {
     SimpleCursorAdapter adapter;
@@ -53,11 +51,5 @@ public class TestActivity extends Activity {
             }
         });
 
-    }
-
-    private void onClick(View v) {
-        if (v.getId() == R.id.testAddBtn) {
-            
-        }
     }
 }

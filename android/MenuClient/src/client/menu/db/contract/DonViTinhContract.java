@@ -1,12 +1,19 @@
 package client.menu.db.contract;
 
+import client.menu.db.provider.MenuClientContentProvider;
+import android.net.Uri;
 import android.provider.BaseColumns;
 
-public final class DonViTinhContract {
+public final class DonViTinhContract implements BaseColumns {
     public static final String TABLE_NAME = "DonViTinh";
     public static final String COL_SID = "MaDonViTinh";
 
     public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "("
-            + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COL_SID + " INTEGER NOT NULL UNIQUE" + ");";
+    
+    public static final Uri URI_TABLE = Uri.parse(MenuClientContentProvider.SCHEME
+            + MenuClientContentProvider.AUTHORITY + "/" + TABLE_NAME);
+    public static final Uri URI_ROW = Uri.parse(MenuClientContentProvider.SCHEME
+            + MenuClientContentProvider.AUTHORITY + "/" + TABLE_NAME + "/#");
 }

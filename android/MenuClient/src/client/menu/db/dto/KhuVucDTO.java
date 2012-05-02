@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public class KhuVucDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	int maKhuVuc;
+	int mId;
+    int maKhuVuc;
 	String tenKhuVuc;
 	String moTa;
 	
@@ -26,6 +27,12 @@ public class KhuVucDTO implements Serializable {
 	public void setMoTa(String moTa) {
 		this.moTa = moTa;
 	}
+    public int getId() {
+        return mId;
+    }
+    public void setId(int id) {
+        mId = id;
+    }
 	
 	@Override
 	public String toString() {

@@ -14,6 +14,7 @@ import client.menu.db.contract.KhuVucContract;
 import client.menu.db.contract.MonAnContract;
 import client.menu.db.contract.MonAnDaNgonNguContract;
 import client.menu.db.contract.NgonNguContract;
+import client.menu.util.C;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     
@@ -39,11 +40,13 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         
         db.execSQL(KhuVucContract.SQL_CREATE);
         db.execSQL(BanContract.SQL_CREATE);
+        
+        Log.d(C.TAG, "MyDatabaseHelper.onCreate");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.d("dbHelper", "onUpgrade");
+        Log.d(C.TAG, "MyDatabaseHelper.onUpgrade");
     }
 
 }
