@@ -39,5 +39,34 @@ namespace LocalServerDAO
         {
             return ThucDonDienTu.DataContext.ChiTietMonAnDonViTinhs.Where(c => c.MonAn.MaMonAn == maMonAn).ToList();
         }
+
+        public static bool CapNhat(ChiTietMonAnDonViTinh chiTietMonAnDonViTinh)
+        {
+            try
+            {
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);                
+            }
+            return false;
+        }
+
+        public static bool Xoa(ChiTietMonAnDonViTinh chiTietMonAnDonViTinh)
+        {
+            try
+            {
+                ThucDonDienTu.DataContext.ChiTietMonAnDonViTinhs.DeleteOnSubmit(chiTietMonAnDonViTinh);
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
     }
 }
