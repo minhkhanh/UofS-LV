@@ -70,6 +70,15 @@ namespace LocalServerWeb.Resources.Views.AdminFood {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Unit.
+        /// </summary>
+        public static string AddUnit {
+            get {
+                return ResourceManager.GetString("AddUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Category.
         /// </summary>
         public static string Category {

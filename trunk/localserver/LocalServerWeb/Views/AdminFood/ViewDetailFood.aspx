@@ -67,18 +67,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <% foreach (var chiTienMonAnDonViTinh in ViewData["listChiTienMonAnDonViTinh"] as List<ChiTietMonAnDonViTinh>) { %>                                          
-    	                <tr>
+                    <% int iCount = 0; %>
+                    <% foreach (var chiTienMonAnDonViTinh in ViewData["listChiTienMonAnDonViTinh"] as List<ChiTietMonAnDonViTinh>) { %>                                                            
+    	                <tr>                                                     
         	                <td><%:chiTienMonAnDonViTinh.TenDonViTinh %></td>
-                            <td><input value="<%:chiTienMonAnDonViTinh.DonGia %>"/></td>
-                            <td><%:Html.ActionLink(" ", "LockUnlock", "AdminUser", new {  }, new { tilte = AdminFoodString.Save, Class = "icon-1 info-tooltip" })%>
-                                <%:Html.ActionLink(" ", "LockUnlock", "AdminUser", new {  }, new { tilte = AdminFoodString.Delete, Class = "icon-2 info-tooltip" })%>
+                            <td><input value="<%:chiTienMonAnDonViTinh.DonGia %>" name="gia" id="gia_input_<%:++iCount %>"/></td>
+                            <td>
+                                <% Html.BeginForm("EditPrice", "AdminFood", FormMethod.Post, new { id = "form_editPrice_" + (iCount)}); %>  
+                                <input name="maMonAn" type="hidden" value="<%:Request.QueryString["maMonAn"] %>"/>
+                                <input name="maDonViTinh" type="hidden" value="<%:chiTienMonAnDonViTinh.DonViTinh.MaDonViTinh %>"/>
+                                <input type="hidden" name="gia" value="-1" id="gia_submit"/>
+                                <a title="<%:AdminFoodString.Save %>" class="icon-1 info-tooltip" onclick="editPrice('#form_editPrice_<%:iCount %>', '#gia_input_<%:iCount %>');"></a>		
+                                <%:Html.ActionLink(" ", "DeleteUnit", "AdminFood", new { maMonAn = Request.QueryString["maMonAn"], maDonViTinh = chiTienMonAnDonViTinh.DonViTinh.MaDonViTinh }, new { tilte = AdminFoodString.Delete, Class = "icon-2 info-tooltip" })%>
+                                <% Html.EndForm(); %>
                             </td>
-                        </tr>
+                        </tr>                    
                     <%} %>
                     </tbody>
                 </table>
-
+                <input type="button" value="<%:AdminFoodString.AddUnit %>" style="float: right;margin-right: 50px;"/>
 			    <%--<div id="unit_content">                
                     <div class="unit">
                         <div class="unit_name"></div>
@@ -99,6 +106,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('.listDanhMuc').selectbox({ inputClass: "listDanhMuc", debug: true });
+            $('input:button').button();
         });
     </script>    
 <!--  styled file upload script --> 
@@ -144,6 +152,14 @@
             left: 5
         });
     });
+</script>
+<script type="text/javascript">
+    function editPrice(formContent, elementInput) {
+        var tmp = $(elementInput).val();
+        var a = $(formContent).find('#gia_submit').val();
+        $(formContent).find('#gia_submit').val($(elementInput).val());
+        $(formContent).submit();
+    }
 </script>
 </asp:Content>
 

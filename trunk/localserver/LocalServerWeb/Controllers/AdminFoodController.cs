@@ -80,16 +80,28 @@ namespace LocalServerWeb.Controllers
         }
 
         [HttpPost]
+        public ActionResult EditPrice(int maMonAn, int maDonViTinh, int gia)
+        {            
+            var monAn = MonAnBUS.LayMonAn(maMonAn);
+            if (monAn == null || gia <= 0) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
+            var chiTietMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayChiTietMonAnDonViTinh(monAn.MaMonAn, maDonViTinh);
+            if (chiTietMonAnDonViTinh == null) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
+            chiTietMonAnDonViTinh.DonGia = gia;
+            ChiTietMonAnDonViTinhBUS.CapNhat(chiTietMonAnDonViTinh);
+            return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn});
+        }
+
+        [HttpPost]
         public ActionResult UpdateCategory(int listDanhMuc, int maMonAn)
         {
             var danhMuc = DanhMucBUS.LayDanhMuc(listDanhMuc);
             var monAn = MonAnBUS.LayMonAn(maMonAn);
-            if (danhMuc!=null && monAn!=null)
+            if (danhMuc != null && monAn != null)
             {
                 monAn.DanhMuc = danhMuc;
                 MonAnBUS.CapNhatMonAn(monAn);
             }
-            return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn});
+            return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
         }
 
         public ActionResult UpdateImageFood(int maMonAn, HttpPostedFileBase uploadFile)
@@ -112,6 +124,16 @@ namespace LocalServerWeb.Controllers
             {
                 Console.Out.WriteLine(e.StackTrace);
             }
+            return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
+        }
+
+        public ActionResult DeleteUnit(int maMonAn, int maDonViTinh)
+        {
+            var monAn = MonAnBUS.LayMonAn(maMonAn);
+            if (monAn == null) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
+            var chiTietMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayChiTietMonAnDonViTinh(monAn.MaMonAn, maDonViTinh);
+            if (chiTietMonAnDonViTinh == null) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
+            ChiTietMonAnDonViTinhBUS.Xoa(chiTietMonAnDonViTinh);
             return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
         }
     }
