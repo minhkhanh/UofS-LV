@@ -71,7 +71,7 @@ CREATE TABLE [dbo].[ChiTietOrder] (
 , [MaOrder] int  NULL  
 , [SoLuong] int  NULL  
 , [MaMonAn] int  NULL  
-, [GhiChu] nvarchar(50)  NULL  
+, [GhiChu] nvarchar(200)  NULL  
 , [MaBoPhanCheBien] int  NULL  
 )
 GO
