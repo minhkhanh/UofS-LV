@@ -85,7 +85,25 @@
                     <%} %>
                     </tbody>
                 </table>
-                <input type="button" value="<%:AdminFoodString.AddUnit %>" style="float: right;margin-right: 50px;"/>
+                <input type="button" value="<%:AdminFoodString.AddUnit %>" style="float: right;margin-right: 50px;" id="buttAddUnit"/>
+<%--                <div id="dialog-form-add-unit" title="<%:AdminFoodString.AddUnit %>">
+	                <% Html.BeginForm("AddUnitPrice", "AdminFood", FormMethod.Post, new { id = "form_add_unit"}); %>
+                    <fieldset>
+		                <label for="name"><%:AdminFoodString.Unit %></label>
+                        <select name="listDanhMuc" class="listDanhMuc" onchange="submit();">
+                        <% var listDonViTinh = ViewData["listDonViTinh"] as List<DonViTinh>;
+                            for (int i=0; i<listDonViTinh.Count; ++i)
+                            {
+                                var donViTinh = listDonViTinh[i];%>
+                            <option value="<%:donViTinh.MaDonViTinh %>" <%:(i==0)?"selected=true":"" %>><%:donViTinh.TenDonViTinh%></option>   
+                           <%} %>                
+                        </select>
+		                <label for="email"><%:AdminFoodString.Price %></label>
+		                <input type="text" name="price_new" id="price_new" value="" class="text ui-widget-content ui-corner-all" />		                
+                    </fieldset>
+	                <% Html.EndForm(); %>
+                </div>--%>
+
 			    <%--<div id="unit_content">                
                     <div class="unit">
                         <div class="unit_name"></div>
@@ -99,6 +117,9 @@
 	</table>
 	<!-- end id-form  -->
     <%--<% Html.EndForm(); %>--%>
+        <div id="dialog-form-add-unit" title="Dialog Title">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+		</div>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
@@ -121,22 +142,7 @@
         });
     });
 </script>
-<!-- Tooltips -->
-<script src="../../Scripts/jquery/jquery.tooltip.js" type="text/javascript"></script>
-<script src="../../Scripts/jquery/jquery.dimensions.js" type="text/javascript"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('a.info-tooltip ').tooltip({
-            track: true,
-            delay: 0,
-            fixPNG: true,
-            showURL: false,
-            showBody: " - ",
-            top: -35,
-            left: 5
-        });
-    });
-</script>
+
 <!-- Tooltips -->
 <script src="../../Scripts/jquery/jquery.tooltip.js" type="text/javascript"></script>
 <script src="../../Scripts/jquery/jquery.dimensions.js" type="text/javascript"></script>
@@ -160,7 +166,32 @@
         $(formContent).find('#gia_submit').val($(elementInput).val());
         $(formContent).submit();
     }
+    $(function () {
+        $("#dialog-form-add-unit").dialog({
+            autoOpen: true,
+            width: 350,
+            buttons: {
+                "aa": function () {
+//                    if ($('#price_new').val() > 0) {
+//                        $(this).dialog("close");
+//                        $('#form_add_unit').submit();
+                    //                    }
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+        $("#buttAddUnit")
+			.button()
+			.click(function () {
+			    $("#dialog-form-add-unit").dialog("open");
+			});
+    });
 </script>
+<style>
+    label, input { display:block; }
+    #dialog-form-add-unit label { color:steelblue;}
+</style>
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="PageHeadingContent" runat="server">

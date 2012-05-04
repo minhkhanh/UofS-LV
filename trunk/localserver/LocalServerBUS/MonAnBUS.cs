@@ -34,5 +34,17 @@ namespace LocalServerBUS
         {
             return MonAnDAO.CapNhapMonAn(monAn);
         }
+
+        public static List<DonViTinh> LayDanhSachDonViTinhChuaCoTheoNgonNgu(MonAn monAn, NgonNgu ngonNgu)
+        {
+            var tmp = MonAnDAO.LayDanhSachDonViTinhChuaCoTheoNgonNgu(monAn);
+            foreach (var donViTinh in tmp)
+            {
+                donViTinh.TenDonViTinh =
+                    ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(donViTinh.MaDonViTinh, ngonNgu.MaNgonNgu).
+                        TenDonViTinh;
+            }
+            return tmp;
+        }
     }
 }

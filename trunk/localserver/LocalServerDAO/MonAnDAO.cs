@@ -64,5 +64,14 @@ namespace LocalServerDAO
             }
             return false;
         }
+
+        public static List<DonViTinh> LayDanhSachDonViTinhChuaCoTheoNgonNgu(MonAn monAn)
+        {
+            return
+                ThucDonDienTu.DataContext.DonViTinhs.Where(
+                    d =>
+                    !ThucDonDienTu.DataContext.ChiTietMonAnDonViTinhs.Where(
+                        c => c.DonViTinh.MaDonViTinh == d.MaDonViTinh && c.MonAn == monAn).Any()).ToList();
+        }
     }
 }

@@ -13,5 +13,10 @@ namespace LocalServerBUS
         {
             return DonViTinhDAO.LayDanhSachDonViTinh();
         }
+
+        public static DonViTinh LayDonViTinhTheoMa(int maDonViTinh)
+        {
+            return DonViTinhDAO.LayDonViTinhTheoMa(maDonViTinh);
+        }
     }
 }
