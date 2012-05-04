@@ -1,6 +1,6 @@
 package client.menu.db.contract;
 
-import client.menu.db.provider.MenuClientContentProvider;
+import client.menu.db.provider.MyContentProvider;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
@@ -18,8 +18,8 @@ public final class KhuVucContract implements BaseColumns {
             + COL_SID + " INTEGER NOT NULL UNIQUE, " + COL_AREA_NAME
             + " TEXT, " + COL_DESCRIPTION + " TEXT);";
     
-    public static final Uri CONTENT_URI = Uri.parse(MenuClientContentProvider.SCHEME
-            + MenuClientContentProvider.AUTHORITY + "/" + TABLE_NAME);
+    public static final Uri CONTENT_URI = Uri.parse(MyContentProvider.SCHEME
+            + MyContentProvider.AUTHORITY + "/" + TABLE_NAME);
     
     public static final ContentValues extractData(Cursor cursor) {
         ContentValues values = new ContentValues();

@@ -1,4 +1,4 @@
-package client.menu.fragment;
+package client.menu.ui.fragment;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
@@ -30,7 +30,7 @@ public class TableDialogFragment extends DialogFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		getDialog().setTitle("Table Dialog");
+		getDialog().setTitle(getString(R.string.dialog_table));
 
 		View layout = inflater.inflate(R.layout.dialog_table, container, false);
 		ListView list = (ListView) layout

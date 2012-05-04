@@ -1,7 +1,7 @@
-package client.menu.activity;
+package client.menu.ui.activity;
 
 import client.menu.R;
-import client.menu.fragment.TableDialogFragment;
+import client.menu.ui.fragment.TableDialogFragment;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;

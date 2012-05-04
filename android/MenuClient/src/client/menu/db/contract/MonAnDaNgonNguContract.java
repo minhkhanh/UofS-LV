@@ -1,6 +1,6 @@
 package client.menu.db.contract;
 
-import client.menu.db.provider.MenuClientContentProvider;
+import client.menu.db.provider.MyContentProvider;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
@@ -20,8 +20,8 @@ public final class MonAnDaNgonNguContract implements BaseColumns {
             + NgonNguContract.COL_SID + ")," + COL_DISH_NAME + " TEXT,"
             + COL_DISH_DESCRIPTION + " TEXT);";
     
-    public static final Uri URI_TABLE = Uri.parse(MenuClientContentProvider.SCHEME
-            + MenuClientContentProvider.AUTHORITY + "/" + TABLE_NAME);
-    public static final Uri URI_ROW = Uri.parse(MenuClientContentProvider.SCHEME
-            + MenuClientContentProvider.AUTHORITY + "/" + TABLE_NAME + "/#");
+    public static final Uri URI_TABLE = Uri.parse(MyContentProvider.SCHEME
+            + MyContentProvider.AUTHORITY + "/" + TABLE_NAME);
+    public static final Uri URI_ROW = Uri.parse(MyContentProvider.SCHEME
+            + MyContentProvider.AUTHORITY + "/" + TABLE_NAME + "/#");
 }

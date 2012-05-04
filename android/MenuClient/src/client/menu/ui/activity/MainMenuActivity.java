@@ -1,11 +1,11 @@
-package client.menu.activity;
+package client.menu.ui.activity;
 
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import client.menu.R;
-import client.menu.fragment.CategoryListFragment;
+import client.menu.ui.fragment.CategoryListFragment;
 
 public class MainMenuActivity extends Activity {
 	@Override

@@ -6,5 +6,5 @@
     <string name="table_list_caption">Selecting table</string>
     <string name="main_menu_caption">Restaurent menu</string>
     <string name="split_table_caption">Spliting table</string>
-
+    <string name="dialog_table">Choose one task</string>
 </resources>

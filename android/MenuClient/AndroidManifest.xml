@@ -7,10 +7,11 @@
     <uses-sdk android:minSdkVersion="15" />
 
     <application
+        android:name=".application.MyApplication"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name" >
+        android:label="@string/app_name" android:uiOptions="splitActionBarWhenNarrow">
         <activity
-            android:name=".activity.MenuClientActivity"
+            android:name=".ui.activity.MenuClientActivity"
             android:configChanges="locale"
             android:label="@string/app_name" >
             <intent-filter>
@@ -19,22 +20,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.MainMenuActivity"
+            android:name=".ui.activity.MainMenuActivity"
             android:configChanges="locale"
             android:label="@string/main_menu_caption" >
         </activity>
         <activity
-            android:name=".activity.TableListActivity"
+            android:name=".ui.activity.TableListActivity"
             android:configChanges="locale"
             android:label="@string/table_list_caption" >
         </activity>
         <activity
-            android:name=".activity.SplitTableActivity"
+            android:name=".ui.activity.SplitTableActivity"
             android:configChanges="locale"
             android:label="@string/split_table_caption" >
         </activity>
-        <provider android:name=".db.provider.MenuClientContentProvider" android:authorities="client.menu.db.provider"></provider>
-        <activity android:name=".activity.TestActivity"></activity>
+        <provider android:name=".db.provider.MyContentProvider" android:authorities="client.menu.db.provider"></provider>
+        <activity android:name=".ui.activity.TestActivity"></activity>
     </application>
 
 </manifest>

@@ -1,22 +1,23 @@
-package client.menu.activity;
+package client.menu.ui.activity;
 
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import client.menu.R;
+import client.menu.application.AppLocale;
+import client.menu.application.ApplicationSettings;
+import client.menu.application.MyApplication;
 import client.menu.db.contract.NgonNguContract;
-import client.menu.util.AppSettings;
-import client.menu.util.C;
 import client.menu.util.Utilitiy;
 
 public class MenuClientActivity extends Activity implements LoaderCallbacks<Cursor>,
@@ -32,7 +33,7 @@ public class MenuClientActivity extends Activity implements LoaderCallbacks<Curs
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        AppSettings.appLocale.applyLanguage(this);
+        MyApplication.gSettings.getLocale().applyLanguage(this);
         setContentView(R.layout.layout_main);
 
         mSpinner = (Spinner) findViewById(R.id.spinner1);
@@ -70,7 +71,8 @@ public class MenuClientActivity extends Activity implements LoaderCallbacks<Curs
         switch (id) {
             case LOADER_ID_LANGUAGE_LIST:
                 String[] proj = new String[] { NgonNguContract._ID,
-                        NgonNguContract.COL_DISPLAY_NAME, NgonNguContract.COL_ABBREVIATE };
+                        NgonNguContract.COL_SID, NgonNguContract.COL_DISPLAY_NAME,
+                        NgonNguContract.COL_ABBREVIATE };
                 CursorLoader loader = new CursorLoader(MenuClientActivity.this,
                         NgonNguContract.CONTENT_URI, proj, null, null, null);
 
@@ -103,13 +105,17 @@ public class MenuClientActivity extends Activity implements LoaderCallbacks<Curs
         if (arg0 == mSpinner) {
             Cursor cursor = ((SimpleCursorAdapter) arg0.getAdapter()).getCursor();
             if (cursor.moveToPosition(pos)) {
-                String lang = cursor.getString(cursor
+                String abbr = cursor.getString(cursor
                         .getColumnIndex(NgonNguContract.COL_ABBREVIATE));
+                
+                AppLocale locale = MyApplication.gSettings.getLocale();
+                String settAbbr = locale.loadLangAbbr();
+                if (settAbbr == null || !settAbbr.equals(abbr)) {
+                    locale.setLanguage(NgonNguContract.extractData(cursor));
 
-//                Log.d(C.TAG, lang + " : " + AppSettings.appLocale.getLanguage());
-                if (!AppSettings.appLocale.getLanguage().equals(lang)) {
-                    AppSettings.appLocale.setLanguage(lang);
-                    Utilitiy.restartActivity(MenuClientActivity.this);
+                    if (!locale.loadLangAbbr().equals(settAbbr)) {
+                        Utilitiy.restartActivity(MenuClientActivity.this);
+                    }
                 }
             }
         }
