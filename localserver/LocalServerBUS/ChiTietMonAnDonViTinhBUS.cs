@@ -38,5 +38,10 @@ namespace LocalServerBUS
         {
             return ChiTietMonAnDonViTinhDAO.Xoa(chiTietMonAnDonViTinh);
         }
+
+        public static bool ThemMoi(ChiTietMonAnDonViTinh chiTietMonAnDonViTinh)
+        {
+            return ChiTietMonAnDonViTinhDAO.ThemMoi(chiTietMonAnDonViTinh);
+        }
     }
 }

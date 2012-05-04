@@ -68,5 +68,20 @@ namespace LocalServerDAO
             }
             return false;
         }
+
+        public static bool ThemMoi(ChiTietMonAnDonViTinh chiTietMonAnDonViTinh)
+        {
+            try
+            {
+                ThucDonDienTu.DataContext.ChiTietMonAnDonViTinhs.InsertOnSubmit(chiTietMonAnDonViTinh);
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
     }
 }

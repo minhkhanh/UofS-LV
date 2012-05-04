@@ -46,6 +46,14 @@ namespace LocalServerWeb
             }
         }
 
+        protected void Application_EndRequest(object sender, EventArgs e)
+        {
+            if (Request.CurrentExecutionFilePathExtension != null && Request.CurrentExecutionFilePathExtension.Contains("png"))
+            {
+                Response.ContentType = "image/png";
+            }
+        }
+
         protected void Session_Start(object sender, EventArgs e)
         {
             if (Session["nguoiDungOnline"]!=null)

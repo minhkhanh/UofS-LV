@@ -15,6 +15,8 @@ namespace LocalServerDTO
         [DataMember]
         [Column(IsPrimaryKey = true, IsDbGenerated = true, Name = "MaDonViTinh")]
         public int MaDonViTinh { get; set; }
+
+        public string TenDonViTinh { get; set; }
     }
 
 }

@@ -66,15 +66,18 @@ namespace LocalServerWeb.Controllers
             ViewData["listDanhMuc"] = DanhMucBUS.LayDanhSachDanhMucLevelThapNhatTheoNgonNgu(SharedCode.GetCurrentLanguage(Session));
             ViewData["monAn"] = monAn;
 
-            var listDonViTinh = ChiTietMonAnDonViTinhBUS.LayDanhSachChiTietMonAnDonViTinhTheoMonAn(monAn.MaMonAn);
-            foreach (var donViTinh in listDonViTinh)
+            var listChiTienMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayDanhSachChiTietMonAnDonViTinhTheoMonAn(monAn.MaMonAn);
+            foreach (var donViTinh in listChiTienMonAnDonViTinh)
             {
                 donViTinh.TenDonViTinh =
                     ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(donViTinh.DonViTinh.MaDonViTinh,
                                                                               SharedCode.GetCurrentLanguage(Session).
                                                                                   MaNgonNgu).TenDonViTinh;
             }
-            ViewData["listChiTienMonAnDonViTinh"] = listDonViTinh;
+            ViewData["listChiTienMonAnDonViTinh"] = listChiTienMonAnDonViTinh;
+
+            var listDonViTinh = MonAnBUS.LayDanhSachDonViTinhChuaCoTheoNgonNgu(monAn, SharedCode.GetCurrentLanguage(Session));
+            ViewData["listDonViTinh"] = listDonViTinh;
 
             return View();
         }
@@ -135,6 +138,22 @@ namespace LocalServerWeb.Controllers
             if (chiTietMonAnDonViTinh == null) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
             ChiTietMonAnDonViTinhBUS.Xoa(chiTietMonAnDonViTinh);
             return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
+        }
+
+        [HttpPost]
+        public ActionResult AddUnitPrice(int listDonViTinh, int maMonAn, int gia)
+        {
+            var monAn = MonAnBUS.LayMonAn(maMonAn);
+            if (monAn == null || gia <= 0) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
+            var tmp = ChiTietMonAnDonViTinhBUS.LayChiTietMonAnDonViTinh(monAn.MaMonAn, listDonViTinh);
+            if (tmp != null) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
+            var donViTinh = DonViTinhBUS.LayDonViTinhTheoMa(listDonViTinh);
+            var chiTietMonAnDonViTinh = new ChiTietMonAnDonViTinh();
+            chiTietMonAnDonViTinh.DonViTinh = donViTinh;
+            chiTietMonAnDonViTinh.MonAn = monAn;
+            chiTietMonAnDonViTinh.DonGia = gia;
+            ChiTietMonAnDonViTinhBUS.ThemMoi(chiTietMonAnDonViTinh);
+            return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });            
         }
     }
 }
