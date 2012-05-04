@@ -1,4 +1,4 @@
-package client.menu.adapter;
+package client.menu.ui.adapter;
 
 import android.content.Context;
 import android.view.View;

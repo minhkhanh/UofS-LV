@@ -5,7 +5,7 @@
  <!-- pressed -->
     <item android:drawable="@drawable/organ_square" android:state_focused="true"/>
  <!-- focused -->
-    <item android:drawable="@drawable/green_square"/>
+    <item android:drawable="@drawable/green_square" android:state_selected="true"/>
  <!-- default -->
 
 </selector>

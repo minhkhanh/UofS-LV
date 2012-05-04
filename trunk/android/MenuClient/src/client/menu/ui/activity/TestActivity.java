@@ -1,4 +1,4 @@
-package client.menu.activity;
+package client.menu.ui.activity;
 
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -36,7 +36,7 @@ public class TestActivity extends Activity {
                 String[] projection = new String[] { BaseColumns._ID,
                         MonAnContract.COL_SID, MonAnContract.COL_AVATAR };
                 CursorLoader cursor = new CursorLoader(TestActivity.this,
-                        MonAnContract.URI_TABLE, projection, null, null, null);
+                        MonAnContract.CONTENT_URI, projection, null, null, null);
                 return cursor;
             }
 

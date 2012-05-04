@@ -1,0 +1,28 @@
+package client.menu.ui.activity;
+
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import client.menu.R;
+import client.menu.ui.fragment.AreaListFragment;
+
+public class TableListActivity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.layout_two_fragment);
+
+        FragmentManager fm = getFragmentManager();
+        AreaListFragment f = (AreaListFragment) fm.findFragmentByTag("AreaListFragment");
+        if (f == null) {
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.LeftPaneHolder, new AreaListFragment(), "AreaListFragment");
+            ft.commit();
+        }
+    }
+}

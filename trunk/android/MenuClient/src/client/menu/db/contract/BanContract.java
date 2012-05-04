@@ -1,6 +1,6 @@
 package client.menu.db.contract;
 
-import client.menu.db.provider.MenuClientContentProvider;
+import client.menu.db.provider.MyContentProvider;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
@@ -24,6 +24,6 @@ public final class BanContract implements BaseColumns {
             + COL_STATUS + " BOOLEAN, " + COL_ROOT_ID + " INTEGER REFERENCES "
             + TABLE_NAME + " (" + COL_SID + "));";
     
-    public static final Uri CONTENT_URI = Uri.parse(MenuClientContentProvider.SCHEME
-            + MenuClientContentProvider.AUTHORITY + "/" + TABLE_NAME);
+    public static final Uri CONTENT_URI = Uri.parse(MyContentProvider.SCHEME
+            + MyContentProvider.AUTHORITY + "/" + TABLE_NAME);
 }

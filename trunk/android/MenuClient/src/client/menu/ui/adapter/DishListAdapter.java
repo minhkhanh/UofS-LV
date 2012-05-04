@@ -1,4 +1,4 @@
-package client.menu.adapter;
+package client.menu.ui.adapter;
 
 import java.util.HashMap;
 
@@ -16,7 +16,7 @@ import client.menu.db.dto.MonAnDTO;
 public class DishListAdapter extends ArrayAdapter<MonAnDTO> {
 	
 	public DishListAdapter(Context context, MonAnDTO[] objects) {
-		super(context, R.layout.row_dish_list, objects);
+		super(context, R.layout.item_dish_list, objects);
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class DishListAdapter extends ArrayAdapter<MonAnDTO> {
 			LayoutInflater inflater = (LayoutInflater) getContext()
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-			row = inflater.inflate(R.layout.row_dish_list, null);
+			row = inflater.inflate(R.layout.item_dish_list, null);
 			map = new HashMap<String, View>();
 			map.put("dishImage", row.findViewById(R.id.AnhMonAn));
 			map.put("dishRate", row.findViewById(R.id.DanhGiaMonAn));

@@ -14,6 +14,7 @@ import client.menu.db.contract.KhuVucContract;
 import client.menu.db.contract.MonAnContract;
 import client.menu.db.contract.MonAnDaNgonNguContract;
 import client.menu.db.contract.NgonNguContract;
+import client.menu.db.contract.ThamSoContract;
 import client.menu.util.C;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
@@ -27,6 +28,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL(ThamSoContract.SQL_CREATE);
+        
         db.execSQL(NgonNguContract.SQL_CREATE);
         
         db.execSQL(DonViTinhContract.SQL_CREATE);

@@ -12,15 +12,17 @@
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:src="@drawable/grilled_shrimp" />
-
+
         <TextView
-            android:id="@+id/TenMonAn"
+            android:id="@+id/DishName"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="left|center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:text="Tôm nướng"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:width="300dp" android:paddingLeft="10dp" android:paddingRight="10dp"/>
+            android:width="300dp" />
 
         <TextView
             android:id="@+id/GiaMonAn"
