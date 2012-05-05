@@ -4,7 +4,7 @@
 <%@ Import Namespace="LocalServerWeb.Resources.Views.AdminFood" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	ViewDetailFood
+	<%:AdminFoodString.Title %>
 </asp:Content>
 
 
@@ -86,7 +86,7 @@
                     </tbody>
                 </table>
                 <input type="button" value="<%:AdminFoodString.AddUnit %>" style="float: right;margin-right: 50px;" id="buttAddUnit"/>
-<%--                <div id="dialog-form-add-unit" title="<%:AdminFoodString.AddUnit %>">
+                <div id="dialog-form-add-unit" title="<%:AdminFoodString.AddUnit %>">
 	                <% Html.BeginForm("AddUnitPrice", "AdminFood", FormMethod.Post, new { id = "form_add_unit"}); %>
                     <fieldset>
 		                <label for="name"><%:AdminFoodString.Unit %></label>
@@ -102,7 +102,7 @@
 		                <input type="text" name="price_new" id="price_new" value="" class="text ui-widget-content ui-corner-all" />		                
                     </fieldset>
 	                <% Html.EndForm(); %>
-                </div>--%>
+                </div>
 
 			    <%--<div id="unit_content">                
                     <div class="unit">
@@ -117,9 +117,6 @@
 	</table>
 	<!-- end id-form  -->
     <%--<% Html.EndForm(); %>--%>
-        <div id="dialog-form-add-unit" title="Dialog Title">
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-		</div>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
@@ -168,14 +165,15 @@
     }
     $(function () {
         $("#dialog-form-add-unit").dialog({
-            autoOpen: true,
+            autoOpen: false,
             width: 350,
+            position: 'center',
             buttons: {
-                "aa": function () {
-//                    if ($('#price_new').val() > 0) {
-//                        $(this).dialog("close");
-//                        $('#form_add_unit').submit();
-                    //                    }
+                "Submit": function () {
+                    if ($('#price_new').val() > 0) {
+                        $(this).dialog("close");
+                        $('#form_add_unit').submit();
+                                        }
                     $(this).dialog("close");
                 }
             }
@@ -185,8 +183,16 @@
 			.button()
 			.click(function () {
 			    $("#dialog-form-add-unit").dialog("open");
-			});
+			    $('.ui-dialog').center();
+		});
     });
+    $.fn.center = function() {
+        this.css("position", "absolute");
+        this.css("top", ($(window).height() - this.height()) / 2 + $(window).scrollTop() + "px");
+        this.css("left", ($(window).width() - this.width()) / 2 + $(window).scrollLeft() + "px");
+        return this;
+    };
+
 </script>
 <style>
     label, input { display:block; }
@@ -195,4 +201,5 @@
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="PageHeadingContent" runat="server">
+    <%:AdminFoodString.Title %>
 </asp:Content>
