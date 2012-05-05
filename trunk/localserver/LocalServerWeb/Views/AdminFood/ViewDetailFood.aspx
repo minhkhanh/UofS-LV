@@ -78,7 +78,6 @@
                                 <input name="maDonViTinh" type="hidden" value="<%:chiTienMonAnDonViTinh.DonViTinh.MaDonViTinh %>"/>
                                 <input type="hidden" name="gia" value="-1" id="gia_submit"/>
                                 <a title="<%:AdminFoodString.Save %>" class="icon-1 info-tooltip" onclick="editPrice('#form_editPrice_<%:iCount %>', '#gia_input_<%:iCount %>');"></a>		
-                                <a title="<%:AdminFoodString.Delete %>" class="icon-2 info-tooltip" onclick="editPrice('#form_editPrice_<%:iCount %>', '#gia_input_<%:iCount %>');"></a>
                                 <%:Html.ActionLink(" ", "DeleteUnit", "AdminFood", new { maMonAn = Request.QueryString["maMonAn"], maDonViTinh = chiTienMonAnDonViTinh.DonViTinh.MaDonViTinh }, new { tilte = AdminFoodString.Delete, Class = "icon-2 info-tooltip" })%>
                                 <% Html.EndForm(); %>
                             </td>
