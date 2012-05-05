@@ -51,18 +51,18 @@ namespace LocalServerWeb.Controllers
             return View(model);
         }
 
-        public ActionResult Food(int id)
+        public ActionResult Food(int? id)
         {
-            FoodCategoryLinksViewModel foodCategoryLinksViewModel = GetFoodCategoryLinksViewModel(id, false);
+            FoodCategoryLinksViewModel foodCategoryLinksViewModel = GetFoodCategoryLinksViewModel(id??1, false);
             ViewData["foodCategoryLinksViewModel"] = foodCategoryLinksViewModel;
 
-            FoodCategorySidebarViewModel foodCategorySidebarViewModel = GetFoodCategorySidebarViewModel(id, false);
+            FoodCategorySidebarViewModel foodCategorySidebarViewModel = GetFoodCategorySidebarViewModel(id??1, false);
             ViewData["foodCategorySidebarViewModel"] = foodCategorySidebarViewModel;
 
-            FoodDetailViewModel foodDetailViewModel = GetFoodDetailViewModel(id);
+            FoodDetailViewModel foodDetailViewModel = GetFoodDetailViewModel(id??1);
             ViewData["foodDetailViewModel"] = foodDetailViewModel;
 
-            return View(id);
+            return View(id??1);
         }
 
         private FoodCategoryLinksViewModel GetFoodCategoryLinksViewModel(int id, bool isCategory)
