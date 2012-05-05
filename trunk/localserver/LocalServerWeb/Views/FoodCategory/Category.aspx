@@ -8,6 +8,7 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
+<link rel="stylesheet" href="../../Content/foodcategorycss/category.css" type="text/css" />
 <link rel="stylesheet" href="../../Content/foodcategorycss/foodcategorylinks.css" type="text/css" />
 <link rel="stylesheet" href="../../Content/foodcategorycss/foodcategorysidebar.css" type="text/css" />
 <link rel="stylesheet" href="../../Content/foodcategorycss/foodgalleryitem.css" type="text/css" />
@@ -28,11 +29,12 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
+<div = "category">
     <h2>Category</h2>
 
     <%Html.RenderPartial("AjaxCategory", Model); %>
 
+</div>
 </asp:Content>
 
 
