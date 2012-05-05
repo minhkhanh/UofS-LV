@@ -18,17 +18,17 @@ namespace LocalServerWeb.Controllers
         // URL: /FoodCategory
         // **************************************
 
-        public ActionResult Index(int id, string cat)
+        public ActionResult Index()
         {
             return Redirect("/FoodCategory/Category/0");          
         }
 
-        public ActionResult Category(int id, string page)
+        public ActionResult Category(int? id, string page)
         {
-            FoodCategoryLinksViewModel foodCategoryLinksViewModel = GetFoodCategoryLinksViewModel(id, true);
+            FoodCategoryLinksViewModel foodCategoryLinksViewModel = GetFoodCategoryLinksViewModel(id??0, true);
             ViewData["foodCategoryLinksViewModel"] = foodCategoryLinksViewModel;
 
-            FoodCategorySidebarViewModel foodCategorySidebarViewModel = GetFoodCategorySidebarViewModel(id, true);
+            FoodCategorySidebarViewModel foodCategorySidebarViewModel = GetFoodCategorySidebarViewModel(id??0, true);
             ViewData["foodCategorySidebarViewModel"] = foodCategorySidebarViewModel;
 
             //List<FoodGalleryItemViewModel> foodGalleryItemViewModels = GetFoodGalleryItemViewModels(id);
@@ -37,7 +37,7 @@ namespace LocalServerWeb.Controllers
 
             int _page = 1;
             int.TryParse(page, out _page);
-            PagedList<FoodGalleryItemViewModel> model = GetFoodGalleryItemViewModels(id).AsQueryable().ToPagedList(_page, 9);
+            PagedList<FoodGalleryItemViewModel> model = GetFoodGalleryItemViewModels(id??0).AsQueryable().ToPagedList(_page, 9);
 
             // For use in foodgalleryiten.css item_num attribute
             int stt = 1;
