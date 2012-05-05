@@ -141,17 +141,17 @@ namespace LocalServerWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddUnitPrice(int listDonViTinh, int maMonAn, int gia)
+        public ActionResult AddUnitPrice(int listDonViTinh, int maMonAn, int price_new)
         {
             var monAn = MonAnBUS.LayMonAn(maMonAn);
-            if (monAn == null || gia <= 0) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
+            if (monAn == null || price_new <= 0) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
             var tmp = ChiTietMonAnDonViTinhBUS.LayChiTietMonAnDonViTinh(monAn.MaMonAn, listDonViTinh);
             if (tmp != null) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
             var donViTinh = DonViTinhBUS.LayDonViTinhTheoMa(listDonViTinh);
             var chiTietMonAnDonViTinh = new ChiTietMonAnDonViTinh();
             chiTietMonAnDonViTinh.DonViTinh = donViTinh;
             chiTietMonAnDonViTinh.MonAn = monAn;
-            chiTietMonAnDonViTinh.DonGia = gia;
+            chiTietMonAnDonViTinh.DonGia = price_new;
             ChiTietMonAnDonViTinhBUS.ThemMoi(chiTietMonAnDonViTinh);
             return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });            
         }

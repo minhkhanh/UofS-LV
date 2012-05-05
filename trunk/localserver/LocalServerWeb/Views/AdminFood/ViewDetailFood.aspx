@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 <%@ Import Namespace="LocalServerDTO" %>
 <%@ Import Namespace="LocalServerWeb.Codes" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.AdminFood" %>
@@ -78,6 +78,7 @@
                                 <input name="maDonViTinh" type="hidden" value="<%:chiTienMonAnDonViTinh.DonViTinh.MaDonViTinh %>"/>
                                 <input type="hidden" name="gia" value="-1" id="gia_submit"/>
                                 <a title="<%:AdminFoodString.Save %>" class="icon-1 info-tooltip" onclick="editPrice('#form_editPrice_<%:iCount %>', '#gia_input_<%:iCount %>');"></a>		
+                                <a title="<%:AdminFoodString.Delete %>" class="icon-2 info-tooltip" onclick="editPrice('#form_editPrice_<%:iCount %>', '#gia_input_<%:iCount %>');"></a>
                                 <%:Html.ActionLink(" ", "DeleteUnit", "AdminFood", new { maMonAn = Request.QueryString["maMonAn"], maDonViTinh = chiTienMonAnDonViTinh.DonViTinh.MaDonViTinh }, new { tilte = AdminFoodString.Delete, Class = "icon-2 info-tooltip" })%>
                                 <% Html.EndForm(); %>
                             </td>
@@ -85,22 +86,21 @@
                     <%} %>
                     </tbody>
                 </table>
-                <input type="button" value="<%:AdminFoodString.AddUnit %>" style="float: right;margin-right: 50px;" id="buttAddUnit"/>
+                <input type="button" value="<%:AdminFoodString.AddUnit %>" style="float: right;margin-right: 50px;<%: (ViewData["listDonViTinh"] as List<DonViTinh>).Count>0 ? "":"display: none;"%>" id="buttAddUnit"/>
                 <div id="dialog-form-add-unit" title="<%:AdminFoodString.AddUnit %>">
 	                <% Html.BeginForm("AddUnitPrice", "AdminFood", FormMethod.Post, new { id = "form_add_unit"}); %>
-                    <fieldset>
 		                <label for="name"><%:AdminFoodString.Unit %></label>
-                        <select name="listDanhMuc" class="listDanhMuc" onchange="submit();">
+                        <select name="listDonViTinh" class="listDonViTinh">
                         <% var listDonViTinh = ViewData["listDonViTinh"] as List<DonViTinh>;
                             for (int i=0; i<listDonViTinh.Count; ++i)
                             {
                                 var donViTinh = listDonViTinh[i];%>
-                            <option value="<%:donViTinh.MaDonViTinh %>" <%:(i==0)?"selected=true":"" %>><%:donViTinh.TenDonViTinh%></option>   
+                            <option value="<%:donViTinh.MaDonViTinh %>"><%:donViTinh.TenDonViTinh%></option>   
                            <%} %>                
                         </select>
 		                <label for="email"><%:AdminFoodString.Price %></label>
 		                <input type="text" name="price_new" id="price_new" value="" class="text ui-widget-content ui-corner-all" />		                
-                    </fieldset>
+                        <input type="hidden" name="maMonAn" value="<%:Request.QueryString["maMonAn"] %>"/>
 	                <% Html.EndForm(); %>
                 </div>
 
@@ -173,8 +173,8 @@
                     if ($('#price_new').val() > 0) {
                         $(this).dialog("close");
                         $('#form_add_unit').submit();
-                                        }
-                    $(this).dialog("close");
+                        $(this).dialog("close");
+                    }                    
                 }
             }
         });
@@ -184,7 +184,9 @@
 			.click(function () {
 			    $("#dialog-form-add-unit").dialog("open");
 			    $('.ui-dialog').center();
-		});
+			    //$('#dialog-form-add-unit #listDonViTinh :nth-child(4)').attr('selected', 'selected');
+			    $('.listDonViTinh').selectbox({ inputClass: "listData", debug: true });
+			});
     });
     $.fn.center = function() {
         this.css("position", "absolute");
@@ -197,6 +199,7 @@
 <style>
     label, input { display:block; }
     #dialog-form-add-unit label { color:steelblue;}
+    #price_new { width: 195px;}
 </style>
 </asp:Content>
 
