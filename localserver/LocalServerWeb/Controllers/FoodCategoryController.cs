@@ -37,7 +37,13 @@ namespace LocalServerWeb.Controllers
 
             int _page = 1;
             int.TryParse(page, out _page);
-            PagedList<FoodGalleryItemViewModel> model = GetFoodGalleryItemViewModels(id).AsQueryable().ToPagedList(_page, 2);
+            PagedList<FoodGalleryItemViewModel> model = GetFoodGalleryItemViewModels(id).AsQueryable().ToPagedList(_page, 9);
+
+            int stt = 1;
+            foreach (FoodGalleryItemViewModel item in model)
+            {
+                item.STT = stt++;
+            }
             // Using ajax
             if (Request.IsAjaxRequest())
                 return PartialView("AjaxCategory", model);
@@ -213,15 +219,18 @@ namespace LocalServerWeb.Controllers
 
             if (dsMonAn != null)
             {
+
                 for (int i = 0; i < dsMonAn.Count; ++i)
                 {
+                    
                     try
                     {
                         MonAn monAn = dsMonAn[i];
 
                         FoodGalleryItemViewModel viewModel = GetFoodGalleryItemViewModel(monAn, maNgonNgu);
 
-                        viewModels.Add(viewModel);  
+                        viewModels.Add(viewModel);
+                        
                     }
                     catch (Exception e)
                     {
