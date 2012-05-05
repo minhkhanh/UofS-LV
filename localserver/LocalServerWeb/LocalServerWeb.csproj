@@ -203,6 +203,8 @@
     <Content Include="Content\admincss\pro_dropline.css" />
     <Content Include="Content\admincss\pro_dropline_ie.css" />
     <Content Include="Content\admincss\screen.css" />
+    <Content Include="Content\foodcategorycss\category.css" />
+    <Content Include="Content\foodcategorycss\food.css" />
     <Content Include="Content\foodcategorycss\foodcategorylinks.css" />
     <Content Include="Content\foodcategorycss\foodcategorysidebar.css" />
     <Content Include="Content\foodcategorycss\foodgallery.css" />

@@ -39,6 +39,7 @@ namespace LocalServerWeb.Controllers
             int.TryParse(page, out _page);
             PagedList<FoodGalleryItemViewModel> model = GetFoodGalleryItemViewModels(id).AsQueryable().ToPagedList(_page, 9);
 
+            // For use in foodgalleryiten.css item_num attribute
             int stt = 1;
             foreach (FoodGalleryItemViewModel item in model)
             {

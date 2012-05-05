@@ -11,13 +11,16 @@
                 <% Html.RenderPartial("FoodCategoryLinks"); %>
             </td>
         </tr>
-        <tr>
+        <tr valign="top">
             <td>
                 <% Html.RenderPartial("FoodCategorySidebar"); %>
             </td>
             <td>
                 <% Html.RenderPartial("FoodGallery", Model); %>
-
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="right">
                 <%= Html.AjaxPager(Model, new PagerOptions() { PageIndexParameterName = "page", 
                     AlwaysShowFirstLastPageNumber = true,
                     CurrentPagerItemWrapperFormatString = "<span class=\"cpb\">{0}</span>",
