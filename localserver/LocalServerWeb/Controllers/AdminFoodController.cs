@@ -136,7 +136,7 @@ namespace LocalServerWeb.Controllers
             if (monAn == null) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
             var chiTietMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayChiTietMonAnDonViTinh(monAn.MaMonAn, maDonViTinh);
             if (chiTietMonAnDonViTinh == null) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
-            ChiTietMonAnDonViTinhBUS.Xoa(chiTietMonAnDonViTinh);
+            bool b = ChiTietMonAnDonViTinhBUS.Xoa(chiTietMonAnDonViTinh);
             return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
         }
 
