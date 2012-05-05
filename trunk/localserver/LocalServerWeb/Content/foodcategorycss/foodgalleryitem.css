@@ -1,16 +1,93 @@
 ﻿div#food_gallery_item
 {
-    width:145px;
-    height:145px;
-    background-color:Lime;
+    -webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+    color: black;
+    font-weight: bold;
+    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,.25);
+    -moz-box-shadow: 0 3px 6px rgba(0,0,0,.25);
+    
+    padding: 10px 10px 15px;
+    margin: 0 0 27px 30px;
+
+    text-align: center;
+    font-family: "Marker Felt", sans-serif;
+    text-decoration: none;
+    font-size: 13px;
+    
+    width: 150px;
+    height: 160px;
 }
 
-div#food_gallery_item table
+
+
+div#food_gallery_item[item_num="1"]
 {
-    margin: 0px auto;
-}   
+    
+}
+
+div#food_gallery_item[item_num="2"]
+{
+    -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+}
+
+div#food_gallery_item[item_num="3"]
+{
+    -webkit-transform: none;
+    -moz-transform: none;
+    position: relative;
+    top: -5px;
+}
+
+div#food_gallery_item[item_num="4"]
+{
+    -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+}
+
+div#food_gallery_item[item_num="5"]
+{
+    -webkit-transform: rotate(5deg);
+    -moz-transform: rotate(5deg);
+    position: relative;
+    right: 5px;
+}
+
+div#food_gallery_item[item_num="6"]
+{
+    -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+}
+
+div#food_gallery_item[item_num="7"]
+{
+    position: relative;
+    top: 3px;
+    left: -5px;
+}
+
+div#food_gallery_item[item_num="8"]
+{
+    -webkit-transform: none;
+    -moz-transform: none;
+    position: relative;
+    top: -5px;
+}
+
+div#food_gallery_item[item_num="9"]
+{
+    
+}
+
+div#food_gallery_item:hover
+{
+    -webkit-transform: scale(1.25);
+    -moz-transform: scale(1.25);
+}
 
 div#food_gallery_item img
-{
-    padding-left: 10px;  
+{   
+    width: 100px;  
 }
+

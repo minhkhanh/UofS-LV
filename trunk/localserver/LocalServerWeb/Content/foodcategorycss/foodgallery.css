@@ -1,6 +1,8 @@
 ﻿div#food_gallery
 {
     border: 1px solid black;
+    margin-bottom: 50px;
+    padding-top: 20px;
 }
 
 div#food_gallery table tr

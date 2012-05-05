@@ -6,8 +6,7 @@
 <div id = "food_gallery">
 <% if (Model != null)
    {
-       int numCol = 4;
-       int numRow = 10;
+       int numCol = 3;
 
        if (Model.Count > 0)
        {
