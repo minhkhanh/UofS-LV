@@ -829,6 +829,19 @@ namespace LocalServerWeb
             return null;
         }
 
+        public List<ChiTietHoaDon> ThemNhieuChiTietHoaDon(List<ChiTietHoaDon> _listChiTietHoaDon)
+        {
+            try
+            {
+                return ChiTietHoaDonBUS.ThemNhieuChiTietHoaDon(_listChiTietHoaDon);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return null;
+        }
+
         public bool SuaChiTietHoaDon(ChiTietHoaDon _chiTietHoaDon)
         {
             try

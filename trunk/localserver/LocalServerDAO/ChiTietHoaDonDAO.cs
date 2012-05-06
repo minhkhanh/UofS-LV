@@ -34,6 +34,21 @@ namespace LocalServerDAO
             return _chiTietHoaDon;
         }
 
+        public static List<ChiTietHoaDon> ThemNhieuChiTietHoaDon(List<ChiTietHoaDon> _listChiTietHoaDon)
+        {
+            ThucDonDienTu.DataContext.ChiTietHoaDons.InsertAllOnSubmit(_listChiTietHoaDon);
+            try
+            {
+                ThucDonDienTu.DataContext.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                _listChiTietHoaDon = null;
+            }
+
+            return _listChiTietHoaDon;
+        }
+
         public static bool SuaChiTietHoaDon(ChiTietHoaDon _chiTietHoaDon)
         {
             bool result = false;

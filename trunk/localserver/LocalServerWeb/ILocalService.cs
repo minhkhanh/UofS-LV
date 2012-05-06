@@ -294,6 +294,10 @@ namespace LocalServerWeb
         [OperationContract]
         ChiTietHoaDon ThemChiTietHoaDon(ChiTietHoaDon _chiTietHoaDon);
 
+        [WebInvoke(Method = "POST", UriTemplate = "themNhieuChiTietHoaDon")]
+        [OperationContract]
+        List<ChiTietHoaDon> ThemNhieuChiTietHoaDon(List<ChiTietHoaDon> _listChiTietHoaDon);
+
         [WebInvoke(Method = "PUT", UriTemplate = "suaChiTietHoaDon")]
         [OperationContract]
         bool SuaChiTietHoaDon(ChiTietHoaDon _chiTietHoaDon);
