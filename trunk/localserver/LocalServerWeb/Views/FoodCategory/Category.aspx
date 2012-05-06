@@ -30,7 +30,6 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <div = "category">
-    <h2>Category</h2>
 
     <%Html.RenderPartial("AjaxCategory", Model); %>
 

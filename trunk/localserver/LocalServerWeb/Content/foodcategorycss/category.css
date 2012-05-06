@@ -1,5 +1,8 @@
 ﻿div#ajax_category
 {
     border: 5px solid #7d6b72;
-    width: 100%; 
+    
+    margin-top:10px;
+    padding:10px 10px;
+    width: 100%;
 }

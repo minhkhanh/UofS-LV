@@ -207,6 +207,7 @@
     <Content Include="Content\foodcategorycss\food.css" />
     <Content Include="Content\foodcategorycss\foodcategorylinks.css" />
     <Content Include="Content\foodcategorycss\foodcategorysidebar.css" />
+    <Content Include="Content\foodcategorycss\fooddetail.css" />
     <Content Include="Content\foodcategorycss\foodgallery.css" />
     <Content Include="Content\foodcategorycss\foodgalleryitem.css" />
     <Content Include="Content\foodcategorycss\foodrelate.css" />
