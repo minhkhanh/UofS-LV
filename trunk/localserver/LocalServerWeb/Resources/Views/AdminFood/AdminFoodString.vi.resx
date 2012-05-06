@@ -129,6 +129,9 @@
   <data name="Delete" xml:space="preserve">
     <value>Xóa</value>
   </data>
+  <data name="Detail" xml:space="preserve">
+    <value>Chi tiết</value>
+  </data>
   <data name="Picture" xml:space="preserve">
     <value>Hình mô tả</value>
   </data>
