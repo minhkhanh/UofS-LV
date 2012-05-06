@@ -120,6 +120,9 @@
   <data name="AddFood" xml:space="preserve">
     <value>Add new food</value>
   </data>
+  <data name="AddLanguageFood" xml:space="preserve">
+    <value>Add Language Food</value>
+  </data>
   <data name="AddUnit" xml:space="preserve">
     <value>Add Unit</value>
   </data>
@@ -130,7 +133,19 @@
     <value>Delete</value>
   </data>
   <data name="Detail" xml:space="preserve">
-    <value>Detail</value>
+    <value>Detail language </value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="FoodDescription" xml:space="preserve">
+    <value>Food Description</value>
+  </data>
+  <data name="FoodName" xml:space="preserve">
+    <value>Food Name</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
   </data>
   <data name="Picture" xml:space="preserve">
     <value>Picture</value>

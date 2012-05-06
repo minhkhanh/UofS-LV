@@ -120,6 +120,9 @@
   <data name="AddFood" xml:space="preserve">
     <value>Thêm món ăn mới</value>
   </data>
+  <data name="AddLanguageFood" xml:space="preserve">
+    <value>Thêm ngôn ngữ món</value>
+  </data>
   <data name="AddUnit" xml:space="preserve">
     <value>Thêm đơn vị tính</value>
   </data>
@@ -130,7 +133,19 @@
     <value>Xóa</value>
   </data>
   <data name="Detail" xml:space="preserve">
-    <value>Chi tiết</value>
+    <value>Chi tiết ngôn ngữ </value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Sửa</value>
+  </data>
+  <data name="FoodDescription" xml:space="preserve">
+    <value>Mô tả món ăn</value>
+  </data>
+  <data name="FoodName" xml:space="preserve">
+    <value>Tên món ăn</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Ngôn ngữ</value>
   </data>
   <data name="Picture" xml:space="preserve">
     <value>Hình mô tả</value>

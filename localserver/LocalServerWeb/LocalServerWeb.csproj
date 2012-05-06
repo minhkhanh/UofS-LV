@@ -392,6 +392,7 @@
     <Content Include="Scripts\mootools-1.2.1-core.js" />
     <Content Include="Scripts\slideitmoo-1.1.js" />
     <Content Include="Views\AdminFood\AddFood.aspx" />
+    <Content Include="Views\AdminFood\AddLanguageFood.aspx" />
     <Content Include="Views\AdminFood\Index.aspx" />
     <Content Include="Views\AdminFood\ViewDetailFood.aspx" />
     <Content Include="Views\AdminHome\Index.aspx" />

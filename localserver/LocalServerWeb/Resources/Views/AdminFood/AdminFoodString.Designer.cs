@@ -70,6 +70,15 @@ namespace LocalServerWeb.Resources.Views.AdminFood {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Language Food.
+        /// </summary>
+        public static string AddLanguageFood {
+            get {
+                return ResourceManager.GetString("AddLanguageFood", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Unit.
         /// </summary>
         public static string AddUnit {
@@ -97,11 +106,47 @@ namespace LocalServerWeb.Resources.Views.AdminFood {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Detail.
+        ///   Looks up a localized string similar to Detail language .
         /// </summary>
         public static string Detail {
             get {
                 return ResourceManager.GetString("Detail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Food Description.
+        /// </summary>
+        public static string FoodDescription {
+            get {
+                return ResourceManager.GetString("FoodDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Food Name.
+        /// </summary>
+        public static string FoodName {
+            get {
+                return ResourceManager.GetString("FoodName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
             }
         }
         

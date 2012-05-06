@@ -23,5 +23,25 @@ namespace LocalServerDAO
         {
             return ThucDonDienTu.DataContext.ChiTietMonAnDaNgonNgus.ToList();
         }
+
+        public static List<ChiTietMonAnDaNgonNgu> LayDanhSachChiTietMonAnDaNgonNguTheMonAn(MonAn monAn)
+        {
+            return ThucDonDienTu.DataContext.ChiTietMonAnDaNgonNgus.Where(c => c.MonAn == monAn).ToList();
+        }
+
+        public static bool Xoa(ChiTietMonAnDaNgonNgu chiTietMonAnDaNgonNgu)
+        {
+            try
+            {
+                ThucDonDienTu.DataContext.ChiTietMonAnDaNgonNgus.DeleteOnSubmit(chiTietMonAnDaNgonNgu);
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
     }
 }

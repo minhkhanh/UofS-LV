@@ -79,8 +79,14 @@ namespace LocalServerWeb.Controllers
             var listDonViTinh = MonAnBUS.LayDanhSachDonViTinhChuaCoTheoNgonNgu(monAn, SharedCode.GetCurrentLanguage(Session));
             ViewData["listDonViTinh"] = listDonViTinh;
 
-            var listNgonNguMonAn = MonAnBUS.LayDanhSachNgonNguCuaMonAn(monAn);
-            ViewData["listNgonNguMonAn"] = listNgonNguMonAn;
+            //var listNgonNguMonAn = MonAnBUS.LayDanhSachNgonNguCuaMonAn(monAn);
+            //ViewData["listNgonNguMonAn"] = listNgonNguMonAn;
+
+            var listChiTietMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayDanhSachChiTietMonAnDaNgonNguTheMonAn(monAn);
+            ViewData["listChiTietMonAnDaNgonNgu"] = listChiTietMonAnDaNgonNgu;
+
+            var listNgonNguChuaCo = MonAnBUS.LayDanhSachNgonNguMonAnChuaCo(monAn);
+            ViewData["listNgonNguChuaCo"] = listNgonNguChuaCo;
 
             return View();
         }
@@ -158,6 +164,52 @@ namespace LocalServerWeb.Controllers
             chiTietMonAnDonViTinh.DonGia = price_new;
             ChiTietMonAnDonViTinhBUS.ThemMoi(chiTietMonAnDonViTinh);
             return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });            
+        }
+
+        public ActionResult AddLanguageFood(int maMonAn, int listNgonNguChuaCo)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddLanguageFood(int listDanhMuc, HttpPostedFileBase uploadFile)
+        {
+            TempData["listDanhMuc"] = listDanhMuc;
+            var danhMuc = DanhMucBUS.LayDanhMuc(listDanhMuc);
+
+            if (uploadFile == null || uploadFile.ContentLength == 0 || danhMuc == null)
+            {
+                return RedirectToAction("AddFood");
+            }
+            string fileName = Guid.NewGuid() + Path.GetFileName(uploadFile.FileName);
+            string filePath = Path.Combine(HttpContext.Server.MapPath("../Uploads/FoodImages"), fileName);
+
+            MonAn monAn = new MonAn();
+            monAn.DanhMuc = danhMuc;
+            monAn.DiemDanhGia = 0;
+            monAn.NgungBan = false;
+            monAn.SoLuotDanhGia = 0;
+            monAn.HinhAnh = "Uploads/FoodImages/" + fileName;
+            if (MonAnBUS.ThemMonAn(monAn))
+            {
+                uploadFile.SaveAs(filePath);
+                return RedirectToAction("ViewDetailFood", new { maMonAn = monAn.MaMonAn });
+            }
+            return RedirectToAction("AddFood");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteLanguageFood(int maMonAn, int maNgonNgu)
+        {
+            var monAn = MonAnBUS.LayMonAn(maMonAn);
+            if (monAn == null ) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
+            var ngonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
+            var listNgonNguMon = MonAnBUS.LayDanhSachNgonNguCuaMonAn(monAn);
+            if (ngonNgu == null || !listNgonNguMon.Contains(ngonNgu)) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
+            var chiTietMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(maMonAn, maNgonNgu);
+            if (chiTietMonAnDaNgonNgu == null) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
+            ChiTietMonAnDaNgonNguBUS.Xoa(chiTietMonAnDaNgonNgu);
+            return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
         }
     }
 }

@@ -12,6 +12,8 @@
     color: black;
 }
 
+div.clear { clear: both; }
+
 #unit_content {
     
 }
