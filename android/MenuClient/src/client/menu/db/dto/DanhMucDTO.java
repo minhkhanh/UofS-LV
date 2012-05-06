@@ -1,9 +1,6 @@
 package client.menu.db.dto;
 
-import java.io.Serializable;
-
-public class DanhMucDTO implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class DanhMucDTO {
 	int maDanhMuc;
 	int maDanhMucCha;
 	

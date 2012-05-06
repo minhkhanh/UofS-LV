@@ -19,7 +19,7 @@ import client.menu.util.C;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     
-    private static final String DB_NAME = "ThucDonDienTu.db";
+    private static final String DB_NAME = "ttdt.db";
     private static final int DB_VERSION = 1;
     
     public MyDatabaseHelper(Context context) {
@@ -28,22 +28,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(ThamSoContract.SQL_CREATE);
-        
-        db.execSQL(NgonNguContract.SQL_CREATE);
-        
-        db.execSQL(DonViTinhContract.SQL_CREATE);
-        db.execSQL(DanhMucContract.SQL_CREATE);        
-        db.execSQL(DanhMucDaNgonNguContract.SQL_CREATE);
-        db.execSQL(DonViTinhDaNgonNguContract.SQL_CREATE);
-        
-        db.execSQL(MonAnContract.SQL_CREATE);        
-        db.execSQL(DonViTinhMonAnContract.SQL_CREATE);
-        db.execSQL(MonAnDaNgonNguContract.SQL_CREATE);
-        
-        db.execSQL(KhuVucContract.SQL_CREATE);
-        db.execSQL(BanContract.SQL_CREATE);
-        
         Log.d(C.TAG, "MyDatabaseHelper.onCreate");
     }
 
