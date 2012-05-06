@@ -1,9 +1,6 @@
 package client.menu.db.dto;
 
-import java.io.Serializable;
-
-public class MonAnDTO implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class MonAnDTO {
 	int maMonAn;
 	String hinhAnh;
 	float diemDanhGia;

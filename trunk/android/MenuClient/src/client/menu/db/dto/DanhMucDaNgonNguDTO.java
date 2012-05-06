@@ -1,32 +1,38 @@
 package client.menu.db.dto;
 
-import java.io.Serializable;
+public class DanhMucDaNgonNguDTO {
 
-public class ChiTietDanhMucDaNgonNguDTO implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
-	int maDanhMuc;
-	int maNgonNgu;
-	String tenDanhMuc;
+	int mId;
+    int mMaDanhMuc;
+	int mMaNgonNgu;
+	String mTenDanhMuc;
 	String moTaDanhMuc;
 	
+
+    public int getId() {
+        return mId;
+    }
+    public void setId(int id) {
+        mId = id;
+    }
+	
 	public int getMaDanhMuc() {
-		return maDanhMuc;
+		return mMaDanhMuc;
 	}
 	public void setMaDanhMuc(int maDanhMuc) {
-		this.maDanhMuc = maDanhMuc;
+		this.mMaDanhMuc = maDanhMuc;
 	}
 	public int getMaNgonNgu() {
-		return maNgonNgu;
+		return mMaNgonNgu;
 	}
 	public void setMaNgonNgu(int maNgonNgu) {
-		this.maNgonNgu = maNgonNgu;
+		this.mMaNgonNgu = maNgonNgu;
 	}
 	public String getTenDanhMuc() {
-		return tenDanhMuc;
+		return mTenDanhMuc;
 	}
 	public void setTenDanhMuc(String tenDanhMuc) {
-		this.tenDanhMuc = tenDanhMuc;
+		this.mTenDanhMuc = tenDanhMuc;
 	}
 	public String getMoTaDanhMuc() {
 		return moTaDanhMuc;

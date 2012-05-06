@@ -1,5 +1,9 @@
 package client.menu.ui.fragment;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Hashtable;
+
 import android.app.ListFragment;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentValues;
@@ -116,5 +120,10 @@ public class DishListFragment extends ListFragment {
         setListAdapter(mAdapter);
 
         getLoaderManager().initLoader(LOADER_ID_DISH_LIST, null, mLoaderCallbacks);
+    }
+    
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
     }
 }
