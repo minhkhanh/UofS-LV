@@ -83,5 +83,14 @@ namespace LocalServerDAO
                         Count() >
                     0).ToList();
         }
+
+        public static List<NgonNgu> LayDanhSachNgonNguMonAnChuaCo(MonAn monAn)
+        {
+            return ThucDonDienTu.DataContext.NgonNgus.Except(ThucDonDienTu.DataContext.NgonNgus.Where(
+                n =>
+                ThucDonDienTu.DataContext.ChiTietMonAnDaNgonNgus.Where(c => c.MonAn == monAn && c.NgonNgu == n).
+                    Count() >
+                0)).ToList();
+        }
     }
 }

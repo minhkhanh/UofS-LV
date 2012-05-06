@@ -18,5 +18,15 @@ namespace LocalServerBUS
         {
             return ChiTietMonAnDaNgonNguDAO.LayDanhSachChiTietMonAnDaNgonNgu();
         }
+
+        public static List<ChiTietMonAnDaNgonNgu> LayDanhSachChiTietMonAnDaNgonNguTheMonAn(MonAn monAn)
+        {
+            return ChiTietMonAnDaNgonNguDAO.LayDanhSachChiTietMonAnDaNgonNguTheMonAn(monAn);
+        }
+
+        public static bool Xoa(ChiTietMonAnDaNgonNgu chiTietMonAnDaNgonNgu)
+        {
+            return ChiTietMonAnDaNgonNguDAO.Xoa(chiTietMonAnDaNgonNgu);
+        }
     }
 }

@@ -119,73 +119,71 @@
 	    </tr>
 
         
-        <% foreach (var ngonNgu in ViewData["listNgonNguMonAn"] as List<NgonNgu>)
+        <% for (int i = 0; i < (ViewData["listChiTietMonAnDaNgonNgu"] as List<ChiTietMonAnDaNgonNgu>).Count; ++i )
            {
-               
-           } %>
+               var chiTietMonAnDaNgonNgu =
+                   (ViewData["listChiTietMonAnDaNgonNgu"] as List<ChiTietMonAnDaNgonNgu>)[i]; %>
 	    <tr>
-		    <th><%:AdminFoodString.Detail %></th>
-		    <td>
-                <table id="Table1" summary="Employee Pay Sheet">
-                    <thead>
-    	                <tr>
-        	                <th scope="col"><%:AdminFoodString.Unit %></th>
-                            <th scope="col"><%:AdminFoodString.Price %></th>
-                            <th scope="col"><%:AdminFoodString.UnitPriceAction %></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <% int iCount = 0; %>
-                    <% foreach (var chiTienMonAnDonViTinh in ViewData["listChiTienMonAnDonViTinh"] as List<ChiTietMonAnDonViTinh>) { %>                                                            
-    	                <tr>                                                     
-        	                <td><%:chiTienMonAnDonViTinh.TenDonViTinh %></td>
-                            <td><input value="<%:chiTienMonAnDonViTinh.DonGia %>" name="gia" id="Text1"/></td>
-                            <td>
-                                <% Html.BeginForm("EditPrice", "AdminFood", FormMethod.Post, new { id = "form_editPrice_" + (iCount)}); %>  
-                                <input name="maMonAn" type="hidden" value="<%:Request.QueryString["maMonAn"] %>"/>
-                                <input name="maDonViTinh" type="hidden" value="<%:chiTienMonAnDonViTinh.DonViTinh.MaDonViTinh %>"/>
-                                <input type="hidden" name="gia" value="-1" id="gia_submit"/>
-                                <a title="<%:AdminFoodString.Save %>" class="icon-1 info-tooltip" onclick="editPrice('#form_editPrice_<%:iCount %>', '#gia_input_<%:iCount %>');"></a>		                                
-                                <% Html.EndForm(); %>
-                                <% Html.BeginForm("DeleteUnit", "AdminFood", FormMethod.Post, new { id = "form_delete_" + (iCount) }); %>  
-                                <input name="maMonAn" type="hidden" value="<%:Request.QueryString["maMonAn"] %>"/>
-                                <input name="maDonViTinh" type="hidden" value="<%:chiTienMonAnDonViTinh.DonViTinh.MaDonViTinh %>"/>
-                                <a title="<%:AdminFoodString.Delete %>" class="icon-2 info-tooltip" onclick="deleteUnit('#form_editPrice_<%:iCount %>');" />
-                                <% Html.EndForm(); %>
-                            </td>
-                        </tr>                    
-                    <%} %>
-                    </tbody>
-                </table>
-                <input type="button" value="<%:AdminFoodString.AddUnit %>" style="float: right;margin-right: 50px;<%: (ViewData["listDonViTinh"] as List<DonViTinh>).Count>0 ? "":"display: none;"%>" id="Button1"/>
-                <div id="Div1" title="<%:AdminFoodString.AddUnit %>">
-	                <% Html.BeginForm("AddUnitPrice", "AdminFood", FormMethod.Post, new { id = "form_add_unit"}); %>
-		                <label for="name"><%:AdminFoodString.Unit %></label>
-                        <select name="listDonViTinh" class="listDonViTinh">
-                        <% var listDonViTinh = ViewData["listDonViTinh"] as List<DonViTinh>;
-                            for (int i=0; i<listDonViTinh.Count; ++i)
-                            {
-                                var donViTinh = listDonViTinh[i];%>
-                            <option value="<%:donViTinh.MaDonViTinh %>"><%:donViTinh.TenDonViTinh%></option>   
-                           <%} %>                
-                        </select>
-		                <label for="email"><%:AdminFoodString.Price %></label>
-		                <input type="text" name="price_new" id="Text2" value="" class="text ui-widget-content ui-corner-all" />		                
-                        <input type="hidden" name="maMonAn" value="<%:Request.QueryString["maMonAn"] %>"/>
-	                <% Html.EndForm(); %>
+		    <th><%:AdminFoodString.Detail + chiTietMonAnDaNgonNgu.NgonNgu.TenNgonNgu%></th>
+		    <td>        
+                <div class="mon-an-header">
+                    <label class="ten-mon-an-title"><%:AdminFoodString.FoodName%></label> 
+                    <div class="mon-an-action">                        
+                        <table>
+                            <tr>
+                                <td>
+                                    <% Html.BeginForm("EditLanguageFood", "AdminFood", FormMethod.Post, new { id = "form_edit_language_" + (i) }); %>  
+                                    <input name="maMonAn" type="hidden" value="<%:Request.QueryString["maMonAn"] %>"/>
+                                    <input name="maNgonNgu" type="hidden" value="<%:chiTietMonAnDaNgonNgu.NgonNgu.MaNgonNgu %>"/>
+                                    <a title="<%:AdminFoodString.Edit %>" class="icon-1 info-tooltip" onclick="$('#form_edit_language_<%:i %>').submit();" />
+                                    <% Html.EndForm(); %>                                
+                                </td>                                
+                                <td>
+                                    <% Html.BeginForm("DeleteLanguageFood", "AdminFood", FormMethod.Post, new { id = "form_delete_language_" + (i) }); %>
+                                    <input name="maMonAn" type="hidden" value="<%:Request.QueryString["maMonAn"] %>"/>
+                                    <input name="maNgonNgu" type="hidden" value="<%:chiTietMonAnDaNgonNgu.NgonNgu.MaNgonNgu %>"/>                                      
+                                    <a title="<%:AdminFoodString.Delete %>" class="icon-2 info-tooltip" onclick="$('#form_delete_language_<%:i %>').submit();" />
+                                    <% Html.EndForm(); %>
+                                </td>
+                            </tr>
+                        </table>                                                
+                    </div>
                 </div>
-
-			    <%--<div id="unit_content">                
-                    <div class="unit">
-                        <div class="unit_name"></div>
-                        <div class="unit_price"></div>
-                        <div class="unit_action"></div>
-                    </div>                
-                </div>--%>
+                <label class="ten-mon-an"><%:chiTietMonAnDaNgonNgu.TenMonAn%></label> 
+                <label class="mo-ta-mon-an-title"><%:AdminFoodString.FoodDescription%></label> 
+                <div class="mo-ta-mon-an"><%:chiTietMonAnDaNgonNgu.MoTaMonAn%></div>
 		    </td>
 		    <td></td>
-	    </tr>
+	    </tr>               
+           <%} %>
 
+        <% if (((List<NgonNgu>)ViewData["listNgonNguChuaCo"]).Count > 0)
+           {%>
+        <tr>
+	    <th></th>
+	    <td>
+                
+            <input type="button" style="float: right;margin-right: 50px;" id="them-ngon-ngu-mon" value="<%:AdminFoodString.AddLanguageFood%>" />
+
+            <div id="dialog-form-add-language" title="<%:AdminFoodString.AddUnit %>">
+	            <% Html.BeginForm("AddLanguageFood", "AdminFood", FormMethod.Get, new { id = "form_add_language" }); %>
+		            <label for="name"><%:AdminFoodString.Language %></label>
+                    <select name="listNgonNguChuaCo" class="listData">
+                    <% var listNgonNguChuaCo = ViewData["listNgonNguChuaCo"] as List<NgonNgu>;
+                       for (int i = 0; i < listNgonNguChuaCo.Count; ++i)
+                        {
+                            var ngonNgu = listNgonNguChuaCo[i];%>
+                        <option value="<%:ngonNgu.MaNgonNgu %>"><%:ngonNgu.TenNgonNgu%></option>   
+                        <%} %>                
+                    </select>	                
+                    <input type="hidden" name="maMonAn" value="<%:Request.QueryString["maMonAn"] %>"/>
+	            <% Html.EndForm(); %>
+            </div>
+        </td>
+	    <td>
+	    </td>
+	    </tr>
+        <% } %>
 	</table>
 	<!-- end id-form  -->
     <%--<% Html.EndForm(); %>--%>
@@ -197,6 +195,7 @@
         $(document).ready(function () {
             $('.listDanhMuc').selectbox({ inputClass: "listDanhMuc", debug: true });
             $('input:button').button();
+            $('#add-language-food').button();
         });
     </script>    
 <!--  styled file upload script --> 
@@ -237,7 +236,7 @@
     }
     function deleteUnit(formContent) {
         $(formContent).submit();
-    }    
+    }   
     $(function () {
         $("#dialog-form-add-unit").dialog({
             autoOpen: false,
@@ -270,11 +269,65 @@
         return this;
     };
 
+    $(document).ready(function () {
+        $('#them-ngon-ngu-mon').button().click(function () {
+            $("#dialog-form-add-language").dialog("open");
+            $('.ui-dialog').center();
+            $('.listNgonNguChuaCo').selectbox({ inputClass: "listData", debug: true });
+        });
+        $("#dialog-form-add-language").dialog({
+            autoOpen: false,
+            width: 350,
+            position: 'center',
+            buttons: {
+                "Submit": function () {
+                    $('#form_add_language').submit();
+                    $(this).dialog("close");
+                }
+            }
+        });
+    });
+
 </script>
 <style>
     label, input { display:block; }
     #dialog-form-add-unit label { color:steelblue;}
     #price_new { width: 195px;}
+    .ten-mon-an-title 
+    {
+        color: #039;
+        font-size: 14px;
+        padding: 10px 8px;
+        float: left;
+        width: 85%;            
+    }
+    .mo-ta-mon-an-title
+    {
+        color: #039;
+        font-size: 14px;
+        padding: 10px 8px;    
+    }
+    .ten-mon-an 
+    {
+        color: black;
+        font-size: 13px;
+        padding: 10px 8px;        
+    }
+    .mo-ta-mon-an 
+    {
+        padding: 10px 8px;
+    }
+    .mon-an-header 
+    {
+        display: block;
+        border-top: 2px solid #6678B1;
+    }
+    .mon-an-action
+    {
+        line-height: 20px;
+        padding-top: 10px;
+        margin-right: 5px;
+    }
 </style>
 </asp:Content>
 

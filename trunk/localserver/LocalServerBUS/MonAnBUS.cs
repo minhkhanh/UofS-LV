@@ -51,5 +51,10 @@ namespace LocalServerBUS
         {
             return MonAnDAO.LayDanhSachNgonNguCuaMonAn(monAn);
         }
+
+        public static List<NgonNgu> LayDanhSachNgonNguMonAnChuaCo(MonAn monAn)
+        {
+            return MonAnDAO.LayDanhSachNgonNguMonAnChuaCo(monAn);
+        }
     }
 }
