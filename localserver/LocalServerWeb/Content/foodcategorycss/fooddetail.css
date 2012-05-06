@@ -1,0 +1,20 @@
+﻿div#food_detail
+{
+    
+    
+}
+
+div#food_detail img[alt="food_image"]
+{
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+
+
+    padding:8px;
+    border:solid;
+    border-color: #dddddd #aaaaaa #aaaaaa #dddddd;
+    border-width: 1px 2px 2px 1px;
+    background-color:white;   
+    
+}

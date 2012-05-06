@@ -1,11 +1,15 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<PagedList<FoodGalleryItemViewModel>>" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.FoodCategory" %>
-<%@ Import Namespace="LocalServerWeb.ViewModels"%>
-<%@ Import Namespace="Webdiyer.WebControls.Mvc"%>
+<%@ Import Namespace="LocalServerWeb.ViewModels" %>
+<%@ Import Namespace="Webdiyer.WebControls.Mvc" %>
 
-
-<div id = "ajax_category">
+<div id="ajax_category">
     <table width="100%">
+        <tr>
+            <td colspan="2">
+                Category
+            </td>
+        </tr>
         <tr>
             <td colspan="2">
                 <% Html.RenderPartial("FoodCategoryLinks"); %>
@@ -30,5 +34,4 @@
             </td>
         </tr>
     </table>
-
 </div>

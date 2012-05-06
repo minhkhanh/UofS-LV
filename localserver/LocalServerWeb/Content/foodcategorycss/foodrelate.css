@@ -1,7 +1,7 @@
 ﻿div#food_relate
 {
-    width: 800px;
-    margin: 10px auto;
+    width: 700px;
+    margin: 5px auto;
 }
 
 div#food_relate * {
@@ -14,7 +14,7 @@ div#food_relate #intro {
 }
 
 div#food_relate #slider {
-    width: 800px;
+    width: 700px;
     margin: 0 auto;
     position: relative;
 	border: 10px solid #ccc;
@@ -22,7 +22,7 @@ div#food_relate #slider {
 
 div#food_relate .scroll {
 	overflow: hidden;
-	width: 800px;
+	width: 700px;
     margin: 0 auto;
     position: relative;
 }

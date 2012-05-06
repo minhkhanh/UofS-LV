@@ -11,7 +11,7 @@
            <table width="100%">
                 <tr>
                     <td>
-                        <img src =" <%: viewModel.HinhAnh %> "  alt="food images" />
+                        <img src =" <%: viewModel.HinhAnh %> "  alt="food_image" />
                     </td>
                     <td>
                        <%: viewModel.TenMonAn %>

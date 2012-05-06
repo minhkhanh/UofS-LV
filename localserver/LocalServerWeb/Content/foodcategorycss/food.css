@@ -1,4 +1,8 @@
 ﻿div#food
 {
-    border: 1px solid blue;   
+    border: 5px solid #7d6b72;
+    
+    margin-top: 10px;
+    padding: 10px 10px;
+    width: 100%;  
 }
