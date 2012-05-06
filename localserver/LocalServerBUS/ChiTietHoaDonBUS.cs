@@ -20,6 +20,11 @@ namespace LocalServerBUS
             return ChiTietHoaDonDAO.ThemChiTietHoaDon(_chiTietHoaDon);
         }
 
+        public static List<ChiTietHoaDon> ThemNhieuChiTietHoaDon(List<ChiTietHoaDon> _listChiTietHoaDon)
+        {
+            return ChiTietHoaDonDAO.ThemNhieuChiTietHoaDon(_listChiTietHoaDon);
+        }
+
         public static bool SuaChiTietHoaDon(ChiTietHoaDon _chiTietHoaDon)
         {
             return ChiTietHoaDonDAO.SuaChiTietHoaDon(_chiTietHoaDon);
