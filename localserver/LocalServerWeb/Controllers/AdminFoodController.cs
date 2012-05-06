@@ -79,6 +79,9 @@ namespace LocalServerWeb.Controllers
             var listDonViTinh = MonAnBUS.LayDanhSachDonViTinhChuaCoTheoNgonNgu(monAn, SharedCode.GetCurrentLanguage(Session));
             ViewData["listDonViTinh"] = listDonViTinh;
 
+            var listNgonNguMonAn = MonAnBUS.LayDanhSachNgonNguCuaMonAn(monAn);
+            ViewData["listNgonNguMonAn"] = listNgonNguMonAn;
+
             return View();
         }
 
@@ -130,6 +133,7 @@ namespace LocalServerWeb.Controllers
             return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
         }
 
+        [HttpPost]
         public ActionResult DeleteUnit(int maMonAn, int maDonViTinh)
         {
             var monAn = MonAnBUS.LayMonAn(maMonAn);

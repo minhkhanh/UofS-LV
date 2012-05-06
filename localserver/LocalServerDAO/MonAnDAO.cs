@@ -73,5 +73,15 @@ namespace LocalServerDAO
                     !ThucDonDienTu.DataContext.ChiTietMonAnDonViTinhs.Where(
                         c => c.DonViTinh.MaDonViTinh == d.MaDonViTinh && c.MonAn == monAn).Any()).ToList();
         }
+
+        public static List<NgonNgu> LayDanhSachNgonNguCuaMonAn(MonAn monAn)
+        {
+            return
+                ThucDonDienTu.DataContext.NgonNgus.Where(
+                    n =>
+                    ThucDonDienTu.DataContext.ChiTietMonAnDaNgonNgus.Where(c => c.MonAn == monAn && c.NgonNgu == n).
+                        Count() >
+                    0).ToList();
+        }
     }
 }
