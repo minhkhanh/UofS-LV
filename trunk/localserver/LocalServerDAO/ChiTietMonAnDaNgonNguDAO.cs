@@ -43,5 +43,34 @@ namespace LocalServerDAO
             }
             return false;
         }
+
+        public static bool Them(ChiTietMonAnDaNgonNgu chiTietMonAnDaNgonNgu)
+        {
+            try
+            {
+                ThucDonDienTu.DataContext.ChiTietMonAnDaNgonNgus.InsertOnSubmit(chiTietMonAnDaNgonNgu);
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
+
+        public static bool CapNhat(ChiTietMonAnDaNgonNgu chiTietMonAnDaNgonNgu)
+        {
+            try
+            {
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
     }
 }

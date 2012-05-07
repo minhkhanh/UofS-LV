@@ -3,7 +3,7 @@
 <%@ Import Namespace="LocalServerWeb.Resources.Views.AdminFood" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	<%: AdminFoodString.AddLanguageFood %>
+	<%: AdminFoodString.EditLanguageFood %>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -17,9 +17,9 @@
 		</tbody></table>
     </div>
     <% } %>
-    <% Html.BeginForm("AddLanguageFood", "AdminFood", FormMethod.Post, new { id = "form-them-ngon-ngu-mon" }); %>
+    <% Html.BeginForm("EditLanguageFood", "AdminFood", FormMethod.Post, new { id = "form-them-ngon-ngu-mon" }); %>
     <input type="hidden" name="maMonAn" value="<%:Request.QueryString["maMonAn"] %>" />
-    <input type="hidden" name="maNgonNgu" value="<%:Request.QueryString["listNgonNguChuaCo"] %>" />
+    <input type="hidden" name="maNgonNgu" value="<%:Request.QueryString["maNgonNgu"] %>" />
     <table border="0" cellpadding="0" cellspacing="0" >
 
     	<tr>
@@ -41,7 +41,7 @@
     	<tr>
 		<th></th>
 		<td>
-            <input type="button" style="float: right;margin-right: 22px;" id="them-ngon-ngu-mon" value="<%:AdminFoodString.AddLanguageFood%>" />
+            <input type="button" style="float: right;margin-right: 22px;" id="them-ngon-ngu-mon" value="<%:AdminFoodString.EditLanguageFood %>" />
         </td>
 		<td></td>
 		</tr>  
@@ -64,5 +64,5 @@
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="PageHeadingContent" runat="server">
-    <%: AdminFoodString.AddLanguageFood + ": " + (ViewData["ngonNgu"] as NgonNgu).TenNgonNgu %>
+    <%: AdminFoodString.EditLanguageFood + ": " + (ViewData["ngonNgu"] as NgonNgu).TenNgonNgu%>
 </asp:Content>

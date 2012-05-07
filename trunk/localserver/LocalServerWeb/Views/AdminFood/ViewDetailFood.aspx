@@ -132,7 +132,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    <% Html.BeginForm("EditLanguageFood", "AdminFood", FormMethod.Post, new { id = "form_edit_language_" + (i) }); %>  
+                                    <% Html.BeginForm("EditLanguageFood", "AdminFood", FormMethod.Get, new { id = "form_edit_language_" + (i) }); %>  
                                     <input name="maMonAn" type="hidden" value="<%:Request.QueryString["maMonAn"] %>"/>
                                     <input name="maNgonNgu" type="hidden" value="<%:chiTietMonAnDaNgonNgu.NgonNgu.MaNgonNgu %>"/>
                                     <a title="<%:AdminFoodString.Edit %>" class="icon-1 info-tooltip" onclick="$('#form_edit_language_<%:i %>').submit();" />
@@ -151,7 +151,7 @@
                 </div>
                 <label class="ten-mon-an"><%:chiTietMonAnDaNgonNgu.TenMonAn%></label> 
                 <label class="mo-ta-mon-an-title"><%:AdminFoodString.FoodDescription%></label> 
-                <div class="mo-ta-mon-an"><%:chiTietMonAnDaNgonNgu.MoTaMonAn%></div>
+                <div class="mo-ta-mon-an"><%=chiTietMonAnDaNgonNgu.MoTaMonAn%></div>
 		    </td>
 		    <td></td>
 	    </tr>               
