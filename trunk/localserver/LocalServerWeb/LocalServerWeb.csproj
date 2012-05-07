@@ -81,6 +81,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminFoodController.cs" />
     <Compile Include="Controllers\AdminHomeController.cs" />
+    <Compile Include="Controllers\AdminInvoiceController.cs" />
     <Compile Include="Controllers\AdminOrderController.cs" />
     <Compile Include="Controllers\AdminUserController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -135,6 +136,16 @@
       <DependentUpon>AdminHomeString.vi.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\AdminInvoice\AdminInvoiceString.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminInvoiceString.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\AdminInvoice\AdminInvoiceString.vi.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminInvoiceString.vi.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\Views\AdminOrder\AdminOrderString.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -409,6 +420,8 @@
     <Content Include="Views\AdminFood\Index.aspx" />
     <Content Include="Views\AdminFood\ViewDetailFood.aspx" />
     <Content Include="Views\AdminHome\Index.aspx" />
+    <Content Include="Views\AdminInvoice\Index.aspx" />
+    <Content Include="Views\AdminInvoice\InvoiceDetail.aspx" />
     <Content Include="Views\AdminOrder\Index.aspx" />
     <Content Include="Views\AdminOrder\OrderDetail.aspx" />
     <Content Include="Views\AdminUser\AddUser.aspx" />
@@ -509,6 +522,14 @@
     <EmbeddedResource Include="Resources\Views\AdminHome\AdminHomeString.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AdminHomeString.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminInvoice\AdminInvoiceString.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminInvoiceString.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminInvoice\AdminInvoiceString.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminInvoiceString.vi.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\AdminOrder\AdminOrderString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

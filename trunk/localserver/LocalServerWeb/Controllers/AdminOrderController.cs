@@ -23,7 +23,7 @@ namespace LocalServerWeb.Controllers
 
         public ActionResult OrderDetail(int? id)
         {
-            SharedCode.FillAdminMainMenu(ViewData, 3, -1);
+            SharedCode.FillAdminMainMenu(ViewData, 3, 0);
             if(id == null || id < 1)
                 return View();
 
