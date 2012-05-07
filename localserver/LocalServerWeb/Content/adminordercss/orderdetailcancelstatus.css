@@ -1,0 +1,20 @@
+﻿table#order_detail_cancel_status
+{
+
+}
+
+table#order_detail_cancel_status th[colspan="2"]
+{
+    border-bottom: 1px solid black;
+}
+
+
+table#order_detail_cancel_status th
+{
+   
+}
+
+table#order_detail_cancel_status td
+{
+    padding-left: 10px;
+}

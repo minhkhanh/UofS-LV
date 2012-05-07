@@ -117,52 +117,61 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AccountManager" xml:space="preserve">
-    <value>Quản lý tài khoản</value>
+  <data name="AccountName" xml:space="preserve">
+    <value>Tên tài khoản</value>
   </data>
-  <data name="AccountManagerList" xml:space="preserve">
-    <value>Danh sách tài khoản</value>
+  <data name="CacelStatusNo" xml:space="preserve">
+    <value>Không</value>
   </data>
-  <data name="AdminAddUser" xml:space="preserve">
-    <value>Thêm tài khoản mới</value>
+  <data name="CancelStatus" xml:space="preserve">
+    <value>Tình trạng hủy</value>
   </data>
-  <data name="AdminHome" xml:space="preserve">
-    <value>Trang chủ</value>
+  <data name="CancelStatusTitle" xml:space="preserve">
+    <value>Chi tiết hủy order</value>
   </data>
-  <data name="Detail" xml:space="preserve">
-    <value>Chi tiết</value>
+  <data name="CancelStatusYes" xml:space="preserve">
+    <value>Có</value>
   </data>
-  <data name="Error" xml:space="preserve">
-    <value>Lỗi</value>
+  <data name="DetailNoData" xml:space="preserve">
+    <value>Hiện không có thông tin về chi tiết order này</value>
   </data>
-  <data name="FoodManager" xml:space="preserve">
-    <value>Quản lý món ăn</value>
+  <data name="DetailTitle" xml:space="preserve">
+    <value>Chi tiết order</value>
   </data>
-  <data name="FoodManagerAddFood" xml:space="preserve">
-    <value>Thêm món ăn mới</value>
+  <data name="FoodName" xml:space="preserve">
+    <value>Tên món ăn</value>
   </data>
-  <data name="FoodManagerList" xml:space="preserve">
-    <value>Danh sách món ăn</value>
+  <data name="NoData" xml:space="preserve">
+    <value>Hiện không có order nào</value>
   </data>
-  <data name="Footer" xml:space="preserve">
-    <value>Hệ thống luận văn - Thực Đơn Điện</value>
+  <data name="Note" xml:space="preserve">
+    <value>Ghi chú</value>
   </data>
-  <data name="Language" xml:space="preserve">
-    <value>Ngôn ngữ</value>
+  <data name="NumberOrdinary" xml:space="preserve">
+    <value>STT</value>
   </data>
-  <data name="LogOff" xml:space="preserve">
-    <value>Đăng xuất</value>
+  <data name="Option" xml:space="preserve">
+    <value>Tùy chọn</value>
   </data>
-  <data name="LogOn" xml:space="preserve">
-    <value>Đăng nhập</value>
+  <data name="OrderID" xml:space="preserve">
+    <value>Mã order</value>
   </data>
-  <data name="Order" xml:space="preserve">
-    <value>Order</value>
+  <data name="ProcessorName" xml:space="preserve">
+    <value>Bộ phận chế biến</value>
   </data>
-  <data name="OrderList" xml:space="preserve">
+  <data name="Quantity" xml:space="preserve">
+    <value>Số lượng</value>
+  </data>
+  <data name="QuantityAllowed" xml:space="preserve">
+    <value>Số lượng cho phép</value>
+  </data>
+  <data name="QuantityRequired" xml:space="preserve">
+    <value>Số lượng yêu cầu</value>
+  </data>
+  <data name="TableName" xml:space="preserve">
+    <value>Tên bàn</value>
+  </data>
+  <data name="Title" xml:space="preserve">
     <value>Danh sách order</value>
-  </data>
-  <data name="Welcome" xml:space="preserve">
-    <value>Xin chào</value>
   </data>
 </root>

@@ -129,6 +129,12 @@
   <data name="AdminHome" xml:space="preserve">
     <value>Admin home</value>
   </data>
+  <data name="Detail" xml:space="preserve">
+    <value>Detail</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="FoodManager" xml:space="preserve">
     <value>Food Manager</value>
   </data>
@@ -149,6 +155,12 @@
   </data>
   <data name="LogOn" xml:space="preserve">
     <value>Log On</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="OrderList" xml:space="preserve">
+    <value>Order list</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Welcome</value>

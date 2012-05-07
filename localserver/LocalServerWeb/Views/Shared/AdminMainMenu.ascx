@@ -45,13 +45,10 @@
 		
 		<div class="nav-divider">&nbsp;</div>
 		
-		<ul <%: ((int)ViewData["menuMainId"] == 3)?"class=current":"class=select" %> ><li><a href="#nogo"><b>Clients</b></a>
+		<ul <%: ((int)ViewData["menuMainId"] == 3)?"class=current":"class=select" %> ><li><a href="#nogo"><b><%: SharedString.Order%></b></a>
 		<div class='select_sub <%: ((int)ViewData["menuMainId"] == 3)?"show":"" %> '>
 			<ul class="sub">
-				<li <%: ((int)ViewData["menuSubId"] == 0 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><a href="#nogo">Clients Details 1</a></li>
-				<li <%: ((int)ViewData["menuSubId"] == 1 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><a href="#nogo">Clients Details 2</a></li>
-				<li <%: ((int)ViewData["menuSubId"] == 2 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><a href="#nogo">Clients Details 3</a></li>
-			 
+				<li <%: ((int)ViewData["menuSubId"] == 0 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.OrderList, "Index", "AdminOrder") %></li>
 			</ul>
 		</div>
 		</li>
