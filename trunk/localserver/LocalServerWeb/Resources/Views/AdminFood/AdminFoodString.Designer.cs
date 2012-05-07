@@ -79,6 +79,15 @@ namespace LocalServerWeb.Resources.Views.AdminFood {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Language Food Error.
+        /// </summary>
+        public static string AddLanguageFoodError {
+            get {
+                return ResourceManager.GetString("AddLanguageFoodError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Unit.
         /// </summary>
         public static string AddUnit {
@@ -120,6 +129,15 @@ namespace LocalServerWeb.Resources.Views.AdminFood {
         public static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
             }
         }
         

@@ -123,6 +123,9 @@
   <data name="AddLanguageFood" xml:space="preserve">
     <value>Add Language Food</value>
   </data>
+  <data name="AddLanguageFoodError" xml:space="preserve">
+    <value>Add Language Food Error</value>
+  </data>
   <data name="AddUnit" xml:space="preserve">
     <value>Add Unit</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
   </data>
   <data name="FoodDescription" xml:space="preserve">
     <value>Food Description</value>
