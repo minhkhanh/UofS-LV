@@ -92,8 +92,8 @@
 			<td class="options-width">
 			<a href="" title="<%:AdminUserString.Edit %>" class="icon-1 info-tooltip"></a>			
             <%--<a href="/AdminUser/" title="<%:AdminUserString.Lock %>" class="icon-6 info-tooltip"></a>--%>
-            <%:Html.ActionLink(" ", "LockUnlock", "AdminUser", new { maTaiKhoan = taiKhoan.MaTaiKhoan }, new { tilte = AdminUserString.Lock, Class = "icon-6 info-tooltip" })%>
-            <%:Html.ActionLink(" ", "Delete", "AdminUser", new { maTaiKhoan = taiKhoan.MaTaiKhoan }, new { tilte = AdminUserString.Lock, Class = "icon-2 info-tooltip" })%>
+            <%:Html.ActionLink(" ", "LockUnlock", "AdminUser", new { maTaiKhoan = taiKhoan.MaTaiKhoan }, new { title = AdminUserString.Lock, Class = "icon-6 info-tooltip" })%>
+            <%:Html.ActionLink(" ", "Delete", "AdminUser", new { maTaiKhoan = taiKhoan.MaTaiKhoan }, new { title = AdminUserString.Lock, Class = "icon-2 info-tooltip" })%>
             <%--<a href="" title="<%:AdminUserString.Delete %>" class="icon-2 info-tooltip"></a>
 			<a href="" title="Edit" class="icon-3 info-tooltip"></a>
 			<a href="" title="Edit" class="icon-4 info-tooltip"></a>

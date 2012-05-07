@@ -70,7 +70,8 @@ namespace LocalServerDTO
         //    set { _donViTinh.Entity = value; }
         //}
 
-
+        //theo ngon ngu hien tai
+        public string TenMonAn { get; set; }
 
     }
 }

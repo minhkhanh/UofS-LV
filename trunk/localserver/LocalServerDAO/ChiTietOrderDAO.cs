@@ -19,6 +19,11 @@ namespace LocalServerDAO
             return null;
         }
 
+        public static List<ChiTietOrder> LayNhieuChiTietOrder(int maOrder)
+        {
+            return ThucDonDienTu.DataContext.ChiTietOrders.Where(m => m.Order.MaOrder == maOrder).ToList();
+        }
+
         public static ChiTietOrder ThemChiTietOrder(ChiTietOrder _chiTietOrder)
         {
             ThucDonDienTu.DataContext.ChiTietOrders.InsertOnSubmit(_chiTietOrder);
