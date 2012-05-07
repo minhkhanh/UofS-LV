@@ -16,7 +16,7 @@ namespace LocalServerWeb.Controllers
         public ActionResult Index()
         {
             SharedCode.FillAdminMainMenu(ViewData, 3, 1);
-
+            ViewData["listHoaDon"] = HoaDonBUS.LayDanhSachHoaDon();
             return View();
         }
 
@@ -27,7 +27,16 @@ namespace LocalServerWeb.Controllers
                 return View();
 
             int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
+            List<ChiTietHoaDon> listChiTietHoaDOn = ChiTietHoaDonBUS.LayNhieuChiTietHoaDon(id ?? 1);
 
+            foreach (ChiTietHoaDon ct in listChiTietHoaDOn)
+            {
+                ChiTietMonAnDaNgonNgu ctMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(ct.MonAn.MaMonAn, maNgonNgu);
+                ct.MonAn.TenMonAn = ctMonAnDaNgonNgu.TenMonAn;
+
+            }
+
+            ViewData["listChiTietHoaDon"] = listChiTietHoaDOn;
             return View();
         }
     }

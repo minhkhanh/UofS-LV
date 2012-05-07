@@ -10,6 +10,11 @@ namespace LocalServerBUS
 {
     public class HoaDonBUS
     {
+        public static List<HoaDon> LayDanhSachHoaDon()
+        {
+            return HoaDonDAO.LayDanhSachHoaDon();
+        }
+
         public static HoaDon LayHoaDon(int maHoaDon)
         {
             return HoaDonDAO.LayHoaDon(maHoaDon);

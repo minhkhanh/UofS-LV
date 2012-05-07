@@ -9,11 +9,6 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
     <script src="../../Scripts/jquery/jquery.selectbox-0.5.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.nhomTaiKhoan').selectbox({ inputClass: "styledselect_pages", debug: true });
-        });
-    </script>
     <script src="../../Scripts/jquery/jquery.tooltip.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery/jquery.dimensions.js" type="text/javascript"></script>
     <script type="text/javascript">

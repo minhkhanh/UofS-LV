@@ -117,7 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountName" xml:space="preserve">
+    <value>Người lập</value>
+  </data>
+  <data name="CreatedAt" xml:space="preserve">
+    <value>Thời điểm lập</value>
+  </data>
+  <data name="DetailNoData" xml:space="preserve">
+    <value>Hiện không có thông tin về chi tiết hóa đơn này</value>
+  </data>
+  <data name="DetailTitle" xml:space="preserve">
+    <value>Chi tiết hóa đơn</value>
+  </data>
+  <data name="FoodName" xml:space="preserve">
+    <value>Món ăn</value>
+  </data>
+  <data name="InvoiceID" xml:space="preserve">
+    <value>Mã hóa đơn</value>
+  </data>
+  <data name="JoinedTables" xml:space="preserve">
+    <value>DS bàn ghép</value>
+  </data>
+  <data name="MainTable" xml:space="preserve">
+    <value>Bàn chính</value>
+  </data>
+  <data name="NoData" xml:space="preserve">
+    <value>Hiện không có hóa đơn nào</value>
+  </data>
+  <data name="NumberOrdinary" xml:space="preserve">
+    <value>STT</value>
+  </data>
+  <data name="Option" xml:space="preserve">
+    <value>Tùy chọn</value>
+  </data>
+  <data name="Promotion" xml:space="preserve">
+    <value>Khuyến mãi</value>
+  </data>
+  <data name="PromotionValue" xml:space="preserve">
+    <value>Giá trị khuyến mãi</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Số lượng</value>
+  </data>
+  <data name="Sum" xml:space="preserve">
+    <value>Thành tiền</value>
+  </data>
+  <data name="SurchargeName" xml:space="preserve">
+    <value>Phụ thu</value>
+  </data>
+  <data name="SurchargeValue" xml:space="preserve">
+    <value>Giá trị phụ thu</value>
+  </data>
   <data name="Title" xml:space="preserve">
     <value>Danh sách hóa đơn</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Tổng tiền</value>
+  </data>
+  <data name="UnitPrice" xml:space="preserve">
+    <value>Đơn giá</value>
   </data>
 </root>

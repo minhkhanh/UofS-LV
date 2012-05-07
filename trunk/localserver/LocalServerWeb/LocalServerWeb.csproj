@@ -858,7 +858,7 @@
       <LastGenOutput>AdminHomeString.vi.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\AdminInvoice\AdminInvoiceString.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AdminInvoiceString.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\AdminInvoice\AdminInvoiceString.vi.resx">
