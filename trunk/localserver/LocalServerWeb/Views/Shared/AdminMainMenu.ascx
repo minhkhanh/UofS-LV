@@ -50,12 +50,15 @@
 			<ul class="sub">
 				<li <%: ((int)ViewData["menuSubId"] == 0 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.OrderList, "Index", "AdminOrder") %></li>
                 <li <%: ((int)ViewData["menuSubId"] == 1 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.InvoiceList, "Index", "AdminInvoice") %></li>
+                <li <%: ((int)ViewData["menuSubId"] == 2 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.LanguageList, "Index", "AdminLanguage") %></li>
+                <li <%: ((int)ViewData["menuSubId"] == 3 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.AddLanguage, "AddLanguge", "AdminLanguage") %></li>
 			</ul>
 		</div>
 		</li>
 		</ul>
 		
 		<div class="nav-divider">&nbsp;</div>
+
 		
 		<ul <%: ((int)ViewData["menuMainId"] == 4)?"class=current":"class=select" %> ><li><a href="#nogo"><b>News</b></a>
 		<div class='select_sub <%: ((int)ViewData["menuMainId"] == 4)?"show":"" %> '>

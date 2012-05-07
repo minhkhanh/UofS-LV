@@ -29,5 +29,21 @@ namespace LocalServerDAO
             if (temp.Count() == 0) return null;
             return temp.First();
         }
+
+        public static bool XoaNgonNgu(int maNgonNgu)
+        {
+            try
+            {
+                var objNgonNgu = LayNgonNguTheoMa(maNgonNgu);
+                ThucDonDienTu.DataContext.NgonNgus.DeleteOnSubmit(objNgonNgu);
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
     }
 }

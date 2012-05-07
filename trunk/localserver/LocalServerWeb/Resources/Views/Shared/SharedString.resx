@@ -123,6 +123,9 @@
   <data name="AccountManagerList" xml:space="preserve">
     <value>List of account</value>
   </data>
+  <data name="AddLanguage" xml:space="preserve">
+    <value>Add new language</value>
+  </data>
   <data name="AdminAddUser" xml:space="preserve">
     <value>Add new user</value>
   </data>
@@ -145,7 +148,7 @@
     <value>List of food</value>
   </data>
   <data name="Footer" xml:space="preserve">
-    <value>ThucDonDienTu - Resturent ManagerTử</value>
+    <value>ThucDonDienTu - Restaurant ManagerTử</value>
   </data>
   <data name="Invoice" xml:space="preserve">
     <value>Invoice</value>
@@ -155,6 +158,9 @@
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
+  </data>
+  <data name="LanguageList" xml:space="preserve">
+    <value>Language list</value>
   </data>
   <data name="LogOff" xml:space="preserve">
     <value>Log Off</value>
