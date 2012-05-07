@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using LocalServerBUS;
 using LocalServerDTO;
 using LocalServerWeb.Codes;
+using LocalServerWeb.Resources.Views.AdminFood;
 
 namespace LocalServerWeb.Controllers
 {
@@ -168,31 +169,34 @@ namespace LocalServerWeb.Controllers
 
         public ActionResult AddLanguageFood(int maMonAn, int listNgonNguChuaCo)
         {
+            SharedCode.FillAdminMainMenu(ViewData, 2, -1);
+            var monAn = MonAnBUS.LayMonAn(maMonAn);
+            NgonNgu ngonNgu = NgonNguBUS.LayNgonNguTheoMa(listNgonNguChuaCo);
+            if (monAn==null || ngonNgu==null)
+            {
+                return RedirectToAction("Index", "AdminHome");
+            }
+            ViewData["ngonNgu"] = ngonNgu;
             return View();
         }
 
         [HttpPost]
-        public ActionResult AddLanguageFood(int listDanhMuc, HttpPostedFileBase uploadFile)
+        public ActionResult AddLanguageFood(int maMonAn, int maNgonNgu, string tenMonAn, string moTaMonAn)
         {
-            TempData["listDanhMuc"] = listDanhMuc;
-            var danhMuc = DanhMucBUS.LayDanhMuc(listDanhMuc);
+            TempData["tenMonAn"] = tenMonAn;
+            TempData["moTaMonAn"] = moTaMonAn;
+            var monAn = MonAnBUS.LayMonAn(maMonAn);
+            var ngonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
 
-            if (uploadFile == null || uploadFile.ContentLength == 0 || danhMuc == null)
+            if (monAn == null || ngonNgu == null || tenMonAn == null || moTaMonAn == null || tenMonAn.Length < 5 || moTaMonAn.Length < 5)
             {
-                return RedirectToAction("AddFood");
+                TempData["error"] = AdminFoodString.AddLanguageFoodError;
+                return RedirectToAction("Index", "AdminFood");
             }
-            string fileName = Guid.NewGuid() + Path.GetFileName(uploadFile.FileName);
-            string filePath = Path.Combine(HttpContext.Server.MapPath("../Uploads/FoodImages"), fileName);
 
-            MonAn monAn = new MonAn();
-            monAn.DanhMuc = danhMuc;
-            monAn.DiemDanhGia = 0;
-            monAn.NgungBan = false;
-            monAn.SoLuotDanhGia = 0;
-            monAn.HinhAnh = "Uploads/FoodImages/" + fileName;
-            if (MonAnBUS.ThemMonAn(monAn))
+            var chiTietMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(maMonAn, maNgonNgu);
+            if (chiTietMonAnDaNgonNgu==null)
             {
-                uploadFile.SaveAs(filePath);
                 return RedirectToAction("ViewDetailFood", new { maMonAn = monAn.MaMonAn });
             }
             return RedirectToAction("AddFood");
