@@ -147,6 +147,12 @@
   <data name="Footer" xml:space="preserve">
     <value>ThucDonDienTu - Resturent ManagerTử</value>
   </data>
+  <data name="Invoice" xml:space="preserve">
+    <value>Invoice</value>
+  </data>
+  <data name="InvoiceList" xml:space="preserve">
+    <value>Invoice list</value>
+  </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
   </data>
