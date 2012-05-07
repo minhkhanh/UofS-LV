@@ -133,6 +133,15 @@ namespace LocalServerWeb.Resources.Views.AdminFood {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit language food.
+        /// </summary>
+        public static string EditLanguageFood {
+            get {
+                return ResourceManager.GetString("EditLanguageFood", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string Error {

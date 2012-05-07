@@ -141,6 +141,9 @@
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="EditLanguageFood" xml:space="preserve">
+    <value>Edit language food</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>

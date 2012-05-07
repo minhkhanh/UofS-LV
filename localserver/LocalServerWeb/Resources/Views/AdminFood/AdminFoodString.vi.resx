@@ -141,6 +141,9 @@
   <data name="Edit" xml:space="preserve">
     <value>Sửa</value>
   </data>
+  <data name="EditLanguageFood" xml:space="preserve">
+    <value>Sửa ngôn ngữ món</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Lỗi</value>
   </data>

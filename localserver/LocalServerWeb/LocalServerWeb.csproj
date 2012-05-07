@@ -748,9 +748,11 @@
     <Content Include="Scripts\MD5.js" />
     <Content Include="Scripts\mootools-1.2-more.js" />
     <Content Include="Scripts\mootools-1.2.1-core.js" />
+    <Content Include="Scripts\myScript.js" />
     <Content Include="Scripts\slideitmoo-1.1.js" />
     <Content Include="Views\AdminFood\AddFood.aspx" />
     <Content Include="Views\AdminFood\AddLanguageFood.aspx" />
+    <Content Include="Views\AdminFood\EditLanguageFood.aspx" />
     <Content Include="Views\AdminFood\Index.aspx" />
     <Content Include="Views\AdminFood\ViewDetailFood.aspx" />
     <Content Include="Views\AdminHome\Index.aspx" />
