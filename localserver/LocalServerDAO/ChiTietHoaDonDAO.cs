@@ -19,6 +19,11 @@ namespace LocalServerDAO
             return null;
         }
 
+        public static List<ChiTietHoaDon> LayNhieuChiTietHoaDon(int maHoaDon)
+        {
+            return ThucDonDienTu.DataContext.ChiTietHoaDons.Where(m => m.HoaDon.MaHoaDon == maHoaDon).ToList();
+        }
+
         public static ChiTietHoaDon ThemChiTietHoaDon(ChiTietHoaDon _chiTietHoaDon)
         {
             ThucDonDienTu.DataContext.ChiTietHoaDons.InsertOnSubmit(_chiTietHoaDon);

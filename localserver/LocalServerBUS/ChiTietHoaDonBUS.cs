@@ -15,6 +15,11 @@ namespace LocalServerBUS
             return ChiTietHoaDonDAO.LayChiTietHoaDon(maChiTietHoaDon);
         }
 
+        public static List<ChiTietHoaDon> LayNhieuChiTietHoaDon(int maHoaDon)
+        {
+            return ChiTietHoaDonDAO.LayNhieuChiTietHoaDon(maHoaDon);
+        }
+
         public static ChiTietHoaDon ThemChiTietHoaDon(ChiTietHoaDon _chiTietHoaDon)
         {
             return ChiTietHoaDonDAO.ThemChiTietHoaDon(_chiTietHoaDon);

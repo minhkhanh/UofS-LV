@@ -8,6 +8,11 @@ namespace LocalServerDAO
 {
     public class HoaDonDAO
     {
+        public static List<HoaDon> LayDanhSachHoaDon()
+        {
+            return ThucDonDienTu.DataContext.HoaDons.ToList();
+        }
+
         public static HoaDon LayHoaDon(int maHoaDon)
         {
             var temp = ThucDonDienTu.DataContext.HoaDons.Where(h => h.MaHoaDon == maHoaDon);
