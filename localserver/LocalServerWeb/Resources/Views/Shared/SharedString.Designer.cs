@@ -79,6 +79,15 @@ namespace LocalServerWeb.Resources.Views.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new language.
+        /// </summary>
+        public static string AddLanguage {
+            get {
+                return ResourceManager.GetString("AddLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new user.
         /// </summary>
         public static string AdminAddUser {
@@ -142,7 +151,7 @@ namespace LocalServerWeb.Resources.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ThucDonDienTu - Resturent ManagerTử.
+        ///   Looks up a localized string similar to ThucDonDienTu - Restaurant ManagerTử.
         /// </summary>
         public static string Footer {
             get {
@@ -174,6 +183,15 @@ namespace LocalServerWeb.Resources.Views.Shared {
         public static string Language {
             get {
                 return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language list.
+        /// </summary>
+        public static string LanguageList {
+            get {
+                return ResourceManager.GetString("LanguageList", resourceCulture);
             }
         }
         
