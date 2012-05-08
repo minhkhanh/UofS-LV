@@ -54,6 +54,8 @@
                 <li <%: ((int)ViewData["menuSubId"] == 3 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.AddLanguage, "Add", "AdminLanguage") %></li>
                 <li <%: ((int)ViewData["menuSubId"] == 4 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.AreaList, "Index", "AdminArea") %></li>
                 <li <%: ((int)ViewData["menuSubId"] == 5 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.AddArea, "Add", "AdminArea") %></li>
+                <li <%: ((int)ViewData["menuSubId"] == 6 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.TableList, "Index", "AdminTable") %></li>
+                <li <%: ((int)ViewData["menuSubId"] == 7 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.AddTable, "Add", "AdminTable") %></li>
 			</ul>
 		</div>
 		</li>
