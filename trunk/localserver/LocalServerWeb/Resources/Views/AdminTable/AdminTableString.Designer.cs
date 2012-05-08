@@ -160,6 +160,15 @@ namespace LocalServerWeb.Resources.Views.AdminTable {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Requested table not found.
+        /// </summary>
+        public static string ErrorTableNotFound {
+            get {
+                return ResourceManager.GetString("ErrorTableNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There are no tables.
         /// </summary>
         public static string NoData {

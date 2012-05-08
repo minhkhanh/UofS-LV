@@ -150,6 +150,9 @@
   <data name="ErrorCannotDelete" xml:space="preserve">
     <value>Can't delete</value>
   </data>
+  <data name="ErrorTableNotFound" xml:space="preserve">
+    <value>Requested table not found</value>
+  </data>
   <data name="NoData" xml:space="preserve">
     <value>There are no tables</value>
   </data>
