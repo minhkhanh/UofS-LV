@@ -90,6 +90,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FoodCategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KitchenController.cs" />
     <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -229,6 +230,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HomeString.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Kitchen\KitchenString.vi.Designer.cs">
+      <DependentUpon>KitchenString.vi.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\Kitchen\KitchenString.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KitchenString.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\Views\Shared\SharedString.vi.Designer.cs">
       <DependentUpon>SharedString.vi.resx</DependentUpon>
@@ -809,6 +820,7 @@
     <Content Include="Views\FoodCategory\Category.aspx" />
     <Content Include="Views\FoodCategory\Food.aspx" />
     <Content Include="Views\FoodCategory\Index.aspx" />
+    <Content Include="Views\Kitchen\Index.aspx" />
     <Content Include="Views\Shared\AdminMainMenu.ascx" />
     <Content Include="Views\Shared\AjaxCategory.ascx" />
     <Content Include="Views\Shared\FoodCategoryLinks.ascx" />
@@ -973,6 +985,14 @@
     <EmbeddedResource Include="Resources\Views\Home\HomeString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>HomeString.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Kitchen\KitchenString.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>KitchenString.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Kitchen\KitchenString.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>KitchenString.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Shared\SharedString.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
