@@ -106,6 +106,15 @@ namespace LocalServerWeb.Resources.Views.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new table.
+        /// </summary>
+        public static string AddTable {
+            get {
+                return ResourceManager.GetString("AddTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new user.
         /// </summary>
         public static string AdminAddUser {
@@ -291,6 +300,15 @@ namespace LocalServerWeb.Resources.Views.Shared {
         public static string Submit {
             get {
                 return ResourceManager.GetString("Submit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Table list.
+        /// </summary>
+        public static string TableList {
+            get {
+                return ResourceManager.GetString("TableList", resourceCulture);
             }
         }
         

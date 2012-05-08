@@ -132,6 +132,9 @@
   <data name="AddLanguage" xml:space="preserve">
     <value>Add new language</value>
   </data>
+  <data name="AddTable" xml:space="preserve">
+    <value>Add new table</value>
+  </data>
   <data name="AdminAddUser" xml:space="preserve">
     <value>Add new user</value>
   </data>
@@ -194,6 +197,9 @@
   </data>
   <data name="Submit" xml:space="preserve">
     <value>Submit</value>
+  </data>
+  <data name="TableList" xml:space="preserve">
+    <value>Table list</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Welcome</value>

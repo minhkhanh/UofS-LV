@@ -23,7 +23,7 @@ namespace LocalServerWeb.Controllers
 
         public ActionResult Add()
         {
-            SharedCode.FillAdminMainMenu(ViewData, 3, 3);
+            SharedCode.FillAdminMainMenu(ViewData, 3, 5);
             if (TempData["checkDic"] == null)
             {
                 TempData.Clear();
@@ -73,7 +73,7 @@ namespace LocalServerWeb.Controllers
 
         public ActionResult Edit(int? id)
         {
-            SharedCode.FillAdminMainMenu(ViewData, 3, 3);
+            SharedCode.FillAdminMainMenu(ViewData, 3, 4);
             if (TempData["checkDic"] == null)
             {
                 TempData.Clear();
