@@ -770,6 +770,7 @@
     <Content Include="Views\AdminInvoice\Index.aspx" />
     <Content Include="Views\AdminInvoice\InvoiceDetail.aspx" />
     <Content Include="Views\AdminLanguage\Add.aspx" />
+    <Content Include="Views\AdminLanguage\Edit.aspx" />
     <Content Include="Views\AdminLanguage\Index.aspx" />
     <Content Include="Views\AdminOrder\Index.aspx" />
     <Content Include="Views\AdminOrder\OrderDetail.aspx" />

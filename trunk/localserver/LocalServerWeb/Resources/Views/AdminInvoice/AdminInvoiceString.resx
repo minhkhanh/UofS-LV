@@ -150,6 +150,9 @@
   <data name="Option" xml:space="preserve">
     <value>Option</value>
   </data>
+  <data name="Print" xml:space="preserve">
+    <value>Print this invoice</value>
+  </data>
   <data name="Promotion" xml:space="preserve">
     <value>Promotion</value>
   </data>

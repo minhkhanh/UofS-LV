@@ -3,6 +3,7 @@
 <%@ Import Namespace="LocalServerDTO" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.AdminLanguage" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.Shared" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%: AdminLanguageString.Title %>
 </asp:Content>
@@ -49,8 +50,8 @@
 			<td><%: ngonNgu.TenNgonNgu %></td>
 			<td><%: ngonNgu.KiHieu %></td>
             <td class="options-width">
-                <%:Html.ActionLink(" ", "ModifyLanguage", "AdminLanguage", new { id = ngonNgu.MaNgonNgu }, new { title = AdminLanguageString.Modify, Class = "icon-6 info-tooltip" })%>
-                 <%:Html.ActionLink(" ", "DeleteLanguage", "AdminLanguage", new { id = ngonNgu.MaNgonNgu }, new { title = AdminLanguageString.Delete, Class = "icon-6 info-tooltip" })%>
+                <%:Html.ActionLink(" ", "Edit", "AdminLanguage", new { id = ngonNgu.MaNgonNgu }, new { title = AdminLanguageString.Modify, Class = "icon-6 info-tooltip" })%>
+                 <%:Html.ActionLink(" ", "Delete", "AdminLanguage", new { id = ngonNgu.MaNgonNgu }, new { title = AdminLanguageString.Delete, Class = "icon-6 info-tooltip" })%>
             </td>
 		</tr>
         <% } %>

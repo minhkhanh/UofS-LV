@@ -150,4 +150,7 @@
   <data name="Option" xml:space="preserve">
     <value>Tùy chọn</value>
   </data>
+  <data name="Title" xml:space="preserve">
+    <value>Danh sách ngôn ngữ</value>
+  </data>
 </root>
