@@ -54,7 +54,7 @@
                 <%: AdminTableString.AreaName %>:
             </th>
             <td>
-                <%= Html.DropDownList("maKhuVuc", new SelectList(ViewData["listKhuVuc"] as List<KhuVuc>, "MaKhuVuc", "TenKhuVuc", (ViewData["maKhuVuc"]!=null)?ViewData["maKhuVuc"]:1), new {Class = "listKhuVuc" })%>
+                <%= Html.DropDownList("maKhuVuc", new SelectList(ViewData["listKhuVuc"] as List<KhuVuc>, "MaKhuVuc", "TenKhuVuc", (TempData["maKhuVuc"]!=null)?TempData["maKhuVuc"]:1), new {Class = "listKhuVuc" })%>
             </td>
             <td>
                 <% if (((Dictionary<string, string>)TempData["checkDic"]).ContainsKey("maKhuVuc") && ((Dictionary<string, string>)TempData["checkDic"])["maKhuVuc"] != null)
@@ -82,7 +82,7 @@
                 <%: AdminTableString.ActiveName %>:
             </th>
             <td>
-                <input type="checkbox" class="" name="active-checkbox" <%: (TempData["active"]!=null)?"checked":"" %>
+                <input type="checkbox" class="" name="active-checkbox" <%: (TempData["active"]!=null && (bool)TempData["active"]==true)?"checked":"" %>
                     onclick="change_active(this);" />
                 <input type="hidden" name="active" id="hidden-active" value="" />
             </td>

@@ -139,5 +139,85 @@ namespace LocalServerWeb.Controllers
 
         }
 
+        public ActionResult Edit(int? id)
+        {
+            SharedCode.FillAdminMainMenu(ViewData, 3, 6);
+            ViewData["listKhuVuc"] = KhuVucBUS.LayDanhSachKhuVuc();
+
+            if (TempData["checkDic"] == null)
+            {
+                TempData.Clear();
+                TempData["checkDic"] = new Dictionary<string, string>();
+            }
+
+            Ban objBan = BanBUS.LayBan(id ?? 0);
+            if (id == null || objBan == null)
+            {
+                TempData["error"] = AdminTableString.ErrorTableNotFound;
+            }
+            else
+            {
+                TempData["tenBan"] = objBan.TenBan;
+                TempData["maKhuVuc"] = objBan.KhuVuc.MaKhuVuc;
+                TempData["ghiChu"] = objBan.GhiChu;
+                TempData["active"] = objBan.Active; 
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int maBan, string tenBan, int maKhuVuc, string ghiChu, string active)
+        {
+            TempData["tenBan"] = tenBan;
+            TempData["maKhuVuc"] = maKhuVuc;
+            TempData["ghiChu"] = ghiChu;
+            TempData["active"] = (active == "true") ? true : false;
+
+            var checkDic = new Dictionary<string, string>();
+
+            bool bCheckOk = true;
+
+            if (tenBan == null || tenBan.Trim().Length < 1)
+            {
+                bCheckOk = false;
+                checkDic.Add("tenBan", SharedString.InputWrong);
+            }
+
+            KhuVuc objKhuVuc = KhuVucBUS.LayKhuVuc(maKhuVuc);
+            if (maKhuVuc == 0 || objKhuVuc == null)
+            {
+                bCheckOk = false;
+                checkDic.Add("maKhuVuc", AdminTableString.ErrorAreaNotFound);
+            }
+
+            if (bCheckOk)
+            {
+                try
+                {
+                    Ban ban = BanBUS.LayBan(maBan);
+                    ban.TenBan = tenBan;
+                    ban.KhuVuc = objKhuVuc;
+                    ban.GhiChu = ghiChu;
+                    ban.Active = (active == "true") ? true : false;
+                    ban.TinhTrang = false;
+                    ban.BanChinh = null;
+
+
+                    // Need to clear TempData
+                    if (BanBUS.CapNhat(ban))
+                        return RedirectToAction("Index", "AdminTable");
+                }
+                catch (Exception e)
+                {
+                    Console.Out.WriteLine(e.StackTrace);
+                }
+            }
+
+            TempData["checkDic"] = checkDic;
+            return RedirectToAction("Add");
+
+        }
+
     }
 }

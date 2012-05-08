@@ -150,6 +150,9 @@
   <data name="ErrorCannotDelete" xml:space="preserve">
     <value>Không thể xóa</value>
   </data>
+  <data name="ErrorTableNotFound" xml:space="preserve">
+    <value>Không tồn tại bàn được yêu cầu</value>
+  </data>
   <data name="NoData" xml:space="preserve">
     <value>Hiện không có bàn nào</value>
   </data>
