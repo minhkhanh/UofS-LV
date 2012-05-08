@@ -79,6 +79,7 @@
     <Compile Include="Codes\MyMembershipProvider.cs" />
     <Compile Include="Codes\SharedCode.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminAreaController.cs" />
     <Compile Include="Controllers\AdminFoodController.cs" />
     <Compile Include="Controllers\AdminHomeController.cs" />
     <Compile Include="Controllers\AdminInvoiceController.cs" />
@@ -117,6 +118,16 @@
       <DependentUpon>AccountString.vi.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\AdminArea\AdminAreaString.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminAreaString.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\AdminArea\AdminAreaString.vi.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminAreaString.vi.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\Views\AdminFood\AdminFoodString.Designer.cs">
       <DependentUpon>AdminFoodString.resx</DependentUpon>
@@ -762,6 +773,9 @@
     <Content Include="Scripts\mootools-1.2.1-core.js" />
     <Content Include="Scripts\myScript.js" />
     <Content Include="Scripts\slideitmoo-1.1.js" />
+    <Content Include="Views\AdminArea\Add.aspx" />
+    <Content Include="Views\AdminArea\Edit.aspx" />
+    <Content Include="Views\AdminArea\Index.aspx" />
     <Content Include="Views\AdminFood\AddFood.aspx" />
     <Content Include="Views\AdminFood\AddLanguageFood.aspx" />
     <Content Include="Views\AdminFood\EditLanguageFood.aspx" />
@@ -857,6 +871,14 @@
     <EmbeddedResource Include="Resources\Views\Account\AccountString.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AccountString.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminArea\AdminAreaString.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminAreaString.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminArea\AdminAreaString.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminAreaString.vi.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\AdminFood\AdminFoodString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

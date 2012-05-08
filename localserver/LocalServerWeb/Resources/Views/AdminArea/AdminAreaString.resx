@@ -117,88 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AccountManager" xml:space="preserve">
-    <value>Quản lý tài khoản</value>
+  <data name="AddTitle" xml:space="preserve">
+    <value>Add new area</value>
   </data>
-  <data name="AccountManagerList" xml:space="preserve">
-    <value>Danh sách tài khoản</value>
+  <data name="AreaDescription" xml:space="preserve">
+    <value>Area description</value>
   </data>
-  <data name="Add" xml:space="preserve">
-    <value>Thêm</value>
+  <data name="AreaName" xml:space="preserve">
+    <value>Area name</value>
   </data>
-  <data name="AddArea" xml:space="preserve">
-    <value>Thêm khu vực mới</value>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
   </data>
-  <data name="AddLanguage" xml:space="preserve">
-    <value>Thêm ngôn ngữ mới</value>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
   </data>
-  <data name="AdminAddUser" xml:space="preserve">
-    <value>Thêm tài khoản mới</value>
+  <data name="EditTitle" xml:space="preserve">
+    <value>Edit area</value>
   </data>
-  <data name="AdminHome" xml:space="preserve">
-    <value>Trang chủ</value>
+  <data name="ErrorAreaNotFound" xml:space="preserve">
+    <value>Requested area not found</value>
   </data>
-  <data name="Area" xml:space="preserve">
-    <value>Khu vực</value>
+  <data name="ErrorCannotDelete" xml:space="preserve">
+    <value>Can't delete</value>
   </data>
-  <data name="AreaList" xml:space="preserve">
-    <value>Danh sách khu vực</value>
-  </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Hủy bỏ</value>
-  </data>
-  <data name="Detail" xml:space="preserve">
-    <value>Chi tiết</value>
-  </data>
-  <data name="Error" xml:space="preserve">
-    <value>Lỗi</value>
-  </data>
-  <data name="FoodManager" xml:space="preserve">
-    <value>Quản lý món ăn</value>
-  </data>
-  <data name="FoodManagerAddFood" xml:space="preserve">
-    <value>Thêm món ăn mới</value>
-  </data>
-  <data name="FoodManagerList" xml:space="preserve">
-    <value>Danh sách món ăn</value>
-  </data>
-  <data name="Footer" xml:space="preserve">
-    <value>Hệ thống luận văn - Thực Đơn Điện</value>
+  <data name="InputRequired" xml:space="preserve">
+    <value>Input required</value>
   </data>
   <data name="InputWrong" xml:space="preserve">
-    <value>Đầu vào không hợp lệ</value>
+    <value>Input not accepted</value>
   </data>
-  <data name="Invoice" xml:space="preserve">
-    <value>Hóa đơn</value>
+  <data name="NoData" xml:space="preserve">
+    <value>There are no areas</value>
   </data>
-  <data name="InvoiceList" xml:space="preserve">
-    <value>Danh sách hóa đơn</value>
+  <data name="NumberOrdinary" xml:space="preserve">
+    <value>No.</value>
   </data>
-  <data name="Language" xml:space="preserve">
-    <value>Ngôn ngữ</value>
+  <data name="Option" xml:space="preserve">
+    <value>Option</value>
   </data>
-  <data name="LanguageList" xml:space="preserve">
-    <value>Danh sách ngôn ngữ</value>
-  </data>
-  <data name="LogOff" xml:space="preserve">
-    <value>Đăng xuất</value>
-  </data>
-  <data name="LogOn" xml:space="preserve">
-    <value>Đăng nhập</value>
-  </data>
-  <data name="Order" xml:space="preserve">
-    <value>Order</value>
-  </data>
-  <data name="OrderList" xml:space="preserve">
-    <value>Danh sách order</value>
-  </data>
-  <data name="Reset" xml:space="preserve">
-    <value>Nhập lại</value>
-  </data>
-  <data name="Submit" xml:space="preserve">
-    <value>Gởi yêu cầu</value>
-  </data>
-  <data name="Welcome" xml:space="preserve">
-    <value>Xin chào</value>
+  <data name="Title" xml:space="preserve">
+    <value>Area list</value>
   </data>
 </root>

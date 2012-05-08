@@ -16,7 +16,7 @@
 		</div>
 		</li>
         </ul>			
-		
+		s
 		<div class="nav-divider">&nbsp;</div>
 		                    
 		<ul <%: ((int)ViewData["menuMainId"] == 1)?"class=current":"class=select" %> ><li><a href="#nogo"><b><%:SharedString.AccountManager %></b></a>
@@ -52,6 +52,8 @@
                 <li <%: ((int)ViewData["menuSubId"] == 1 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.InvoiceList, "Index", "AdminInvoice") %></li>
                 <li <%: ((int)ViewData["menuSubId"] == 2 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.LanguageList, "Index", "AdminLanguage") %></li>
                 <li <%: ((int)ViewData["menuSubId"] == 3 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.AddLanguage, "Add", "AdminLanguage") %></li>
+                <li <%: ((int)ViewData["menuSubId"] == 4 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.AreaList, "Index", "AdminArea") %></li>
+                <li <%: ((int)ViewData["menuSubId"] == 5 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.AddArea, "Add", "AdminArea") %></li>
 			</ul>
 		</div>
 		</li>

@@ -1,13 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <%@ Import Namespace="LocalServerDTO" %>
-<%@ Import Namespace="LocalServerWeb.Resources.Views.AdminLanguage" %>
+<%@ Import Namespace="LocalServerWeb.Resources.Views.AdminArea" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.Shared" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    <%: AdminLanguageString.Title %>
+    <%: AdminAreaString.Title %>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="PageHeadingContent" runat="server">
-    <%: AdminLanguageString.Title %>
+    <%: AdminAreaString.Title %>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
     <script src="../../Scripts/jquery/jquery.selectbox-0.5.js" type="text/javascript"></script>
@@ -48,7 +48,7 @@
         </table>
     </div>
     <% } %>
-    <% if (ViewData["listNgonNgu"] != null && ((List<NgonNgu>)ViewData["listNgonNgu"]).Count > 0)
+    <% if (ViewData["listKhuVuc"] != null && ((List<KhuVuc>)ViewData["listKhuVuc"]).Count > 0)
        {
     %>
     <div id="table-content">
@@ -57,37 +57,37 @@
             <tr>
                 <th class="table-header-repeat line-left">
                     <a>
-                        <%: AdminLanguageString.NumberOrdinary %></a>
+                        <%: AdminAreaString.NumberOrdinary %></a>
                 </th>
                 <th class="table-header-repeat line-left minwidth-1">
                     <a>
-                        <%: AdminLanguageString.LanguageName %></a>
+                        <%: AdminAreaString.AreaName %></a>
                 </th>
                 <th class="table-header-repeat line-left minwidth-1">
                     <a>
-                        <%: AdminLanguageString.LanguageCuture %></a>
+                        <%: AdminAreaString.AreaDescription %></a>
                 </th>
                 <th class="table-header-repeat line-left">
                     <a>
-                        <%: AdminLanguageString.Option %></a>
+                        <%: AdminAreaString.Option%></a>
                 </th>
             </tr>
             <% int iCount = 0; %>
-            <% foreach (var ngonNgu in (List<NgonNgu>)ViewData["listNgonNgu"])
+            <% foreach (var khuVuc in (List<KhuVuc>)ViewData["listKhuVuc"])
                { %>
             <tr <%: (iCount++ %2 == 0)?"":"class=alternate-row" %>>
                 <td>
                     <%: iCount %>
                 </td>
                 <td>
-                    <%: ngonNgu.TenNgonNgu %>
+                    <%: khuVuc.TenKhuVuc %>
                 </td>
                 <td>
-                    <%: ngonNgu.KiHieu %>
+                    <%: khuVuc.MoTa %>
                 </td>
                 <td class="options-width">
-                    <%:Html.ActionLink(" ", "Edit", "AdminLanguage", new { id = ngonNgu.MaNgonNgu }, new { title = AdminLanguageString.Edit, Class = "icon-6 info-tooltip" })%>
-                    <%:Html.ActionLink(" ", "Delete", "AdminLanguage", new { id = ngonNgu.MaNgonNgu }, new { title = AdminLanguageString.Delete, Class = "icon-6 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "Edit", "AdminArea", new { id = khuVuc.MaKhuVuc }, new { title = AdminAreaString.Edit, Class = "icon-6 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "Delete", "AdminArea", new { id = khuVuc.MaKhuVuc }, new { title = AdminAreaString.Delete, Class = "icon-6 info-tooltip" })%>
                 </td>
             </tr>
             <% } %>
@@ -105,7 +105,7 @@
                     <td class="red-left">
                         <%:SharedString.Error %>
                         <a href="">
-                            <%: AdminLanguageString.NoData %></a>
+                            <%: AdminAreaString.NoData %></a>
                     </td>
                     <td class="red-right">
                         <a class="close-red">

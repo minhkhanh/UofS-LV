@@ -22,8 +22,9 @@ input.pretty-button:hover
 
 input.pretty-button:active							
 { 
-    top: 1px;
     text-decoration: none;
+    top: 1px;
+    left: 2px;
 }
 
 input.pretty-button:active::-moz-focus-inner {

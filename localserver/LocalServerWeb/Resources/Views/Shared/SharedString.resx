@@ -126,6 +126,9 @@
   <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="AddArea" xml:space="preserve">
+    <value>Add new area</value>
+  </data>
   <data name="AddLanguage" xml:space="preserve">
     <value>Add new language</value>
   </data>
@@ -134,6 +137,12 @@
   </data>
   <data name="AdminHome" xml:space="preserve">
     <value>Admin home</value>
+  </data>
+  <data name="Area" xml:space="preserve">
+    <value>Area</value>
+  </data>
+  <data name="AreaList" xml:space="preserve">
+    <value>Area list</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>

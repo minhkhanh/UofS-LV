@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LocalServerWeb.Resources.Views.AdminLanguage {
+namespace LocalServerWeb.Resources.Views.AdminArea {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace LocalServerWeb.Resources.Views.AdminLanguage {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class AdminLanguageString {
+    public class AdminAreaString {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AdminLanguageString() {
+        internal AdminAreaString() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace LocalServerWeb.Resources.Views.AdminLanguage {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LocalServerWeb.Resources.Views.AdminLanguage.AdminLanguageString", typeof(AdminLanguageString).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LocalServerWeb.Resources.Views.AdminArea.AdminAreaString", typeof(AdminAreaString).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,29 @@ namespace LocalServerWeb.Resources.Views.AdminLanguage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add a new language.
+        ///   Looks up a localized string similar to Add new area.
         /// </summary>
         public static string AddTitle {
             get {
                 return ResourceManager.GetString("AddTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Area description.
+        /// </summary>
+        public static string AreaDescription {
+            get {
+                return ResourceManager.GetString("AreaDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Area name.
+        /// </summary>
+        public static string AreaName {
+            get {
+                return ResourceManager.GetString("AreaName", resourceCulture);
             }
         }
         
@@ -88,7 +106,7 @@ namespace LocalServerWeb.Resources.Views.AdminLanguage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit language.
+        ///   Looks up a localized string similar to Edit area.
         /// </summary>
         public static string EditTitle {
             get {
@@ -97,7 +115,16 @@ namespace LocalServerWeb.Resources.Views.AdminLanguage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot delete.
+        ///   Looks up a localized string similar to Requested area not found.
+        /// </summary>
+        public static string ErrorAreaNotFound {
+            get {
+                return ResourceManager.GetString("ErrorAreaNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t delete.
         /// </summary>
         public static string ErrorCannotDelete {
             get {
@@ -106,11 +133,11 @@ namespace LocalServerWeb.Resources.Views.AdminLanguage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Requested language not found.
+        ///   Looks up a localized string similar to Input required.
         /// </summary>
-        public static string ErrorLanguageNotFound {
+        public static string InputRequired {
             get {
-                return ResourceManager.GetString("ErrorLanguageNotFound", resourceCulture);
+                return ResourceManager.GetString("InputRequired", resourceCulture);
             }
         }
         
@@ -124,25 +151,7 @@ namespace LocalServerWeb.Resources.Views.AdminLanguage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Language culture.
-        /// </summary>
-        public static string LanguageCuture {
-            get {
-                return ResourceManager.GetString("LanguageCuture", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Language name.
-        /// </summary>
-        public static string LanguageName {
-            get {
-                return ResourceManager.GetString("LanguageName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There are no languages.
+        ///   Looks up a localized string similar to There are no areas.
         /// </summary>
         public static string NoData {
             get {
@@ -169,7 +178,7 @@ namespace LocalServerWeb.Resources.Views.AdminLanguage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Language list.
+        ///   Looks up a localized string similar to Area list.
         /// </summary>
         public static string Title {
             get {

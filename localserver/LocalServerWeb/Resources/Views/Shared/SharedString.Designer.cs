@@ -88,6 +88,15 @@ namespace LocalServerWeb.Resources.Views.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new area.
+        /// </summary>
+        public static string AddArea {
+            get {
+                return ResourceManager.GetString("AddArea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new language.
         /// </summary>
         public static string AddLanguage {
@@ -111,6 +120,24 @@ namespace LocalServerWeb.Resources.Views.Shared {
         public static string AdminHome {
             get {
                 return ResourceManager.GetString("AdminHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Area.
+        /// </summary>
+        public static string Area {
+            get {
+                return ResourceManager.GetString("Area", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Area list.
+        /// </summary>
+        public static string AreaList {
+            get {
+                return ResourceManager.GetString("AreaList", resourceCulture);
             }
         }
         

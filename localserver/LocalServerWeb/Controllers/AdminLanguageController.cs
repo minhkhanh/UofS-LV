@@ -171,7 +171,7 @@ namespace LocalServerWeb.Controllers
                 return RedirectToAction("Index", "Error");
             }
 
-            NgonNgu objNgonNgu = NgonNguBUS.LayNgonNguTheoMa(id ?? 1);
+            NgonNgu objNgonNgu = NgonNguBUS.LayNgonNguTheoMa(id ?? 0);
             if (objNgonNgu == null)
             {
                 TempData["error"] = AdminLanguageString.InputWrong;
@@ -180,7 +180,7 @@ namespace LocalServerWeb.Controllers
 
             if (!NgonNguBUS.Xoa(objNgonNgu.MaNgonNgu))
             {
-                TempData["error"] = AdminLanguageString.DeleteError;
+                TempData["errorCannotDelete"] = AdminLanguageString.ErrorCannotDelete;
                 return RedirectToAction("Index");
             }
 
