@@ -129,6 +129,9 @@
   <data name="EditTitle" xml:space="preserve">
     <value>Edit language</value>
   </data>
+  <data name="ErrorLanguageNotFound" xml:space="preserve">
+    <value>Requested language not found</value>
+  </data>
   <data name="InputWrong" xml:space="preserve">
     <value>Input not accepted</value>
   </data>

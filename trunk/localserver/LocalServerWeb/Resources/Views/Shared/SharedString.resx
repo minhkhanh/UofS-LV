@@ -123,6 +123,9 @@
   <data name="AccountManagerList" xml:space="preserve">
     <value>List of account</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
   <data name="AddLanguage" xml:space="preserve">
     <value>Add new language</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="AdminHome" xml:space="preserve">
     <value>Admin home</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
   </data>
   <data name="Detail" xml:space="preserve">
     <value>Detail</value>
@@ -173,6 +179,12 @@
   </data>
   <data name="OrderList" xml:space="preserve">
     <value>Order list</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Welcome</value>

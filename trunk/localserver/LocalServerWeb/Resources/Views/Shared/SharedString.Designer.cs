@@ -79,6 +79,15 @@ namespace LocalServerWeb.Resources.Views.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new language.
         /// </summary>
         public static string AddLanguage {
@@ -102,6 +111,15 @@ namespace LocalServerWeb.Resources.Views.Shared {
         public static string AdminHome {
             get {
                 return ResourceManager.GetString("AdminHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
             }
         }
         
@@ -228,6 +246,24 @@ namespace LocalServerWeb.Resources.Views.Shared {
         public static string OrderList {
             get {
                 return ResourceManager.GetString("OrderList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        public static string Reset {
+            get {
+                return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit.
+        /// </summary>
+        public static string Submit {
+            get {
+                return ResourceManager.GetString("Submit", resourceCulture);
             }
         }
         

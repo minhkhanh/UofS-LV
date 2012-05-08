@@ -97,6 +97,15 @@ namespace LocalServerWeb.Resources.Views.AdminLanguage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Requested language not found.
+        /// </summary>
+        public static string ErrorLanguageNotFound {
+            get {
+                return ResourceManager.GetString("ErrorLanguageNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Input not accepted.
         /// </summary>
         public static string InputWrong {

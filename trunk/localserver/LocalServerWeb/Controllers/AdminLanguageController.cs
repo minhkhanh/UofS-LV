@@ -90,7 +90,18 @@ namespace LocalServerWeb.Controllers
             {
                 TempData.Clear();
                 TempData["checkDic"] = new Dictionary<string, string>();
-            }   
+            }
+
+            NgonNgu objNgonNgu = NgonNguBUS.LayNgonNguTheoMa(id ?? 0);
+            if (id == null || objNgonNgu == null)
+            {
+                TempData["error"] = AdminLanguageString.ErrorLanguageNotFound;
+            }
+            else
+            {
+                TempData["tenNgonNgu"] = objNgonNgu.TenNgonNgu;
+                TempData["kiHieu"] = objNgonNgu.KiHieu;
+            }
 
             return View();
         }
@@ -108,8 +119,7 @@ namespace LocalServerWeb.Controllers
             NgonNgu objNgonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
             if (objNgonNgu == null)
             {
-                bCheckOk = false;
-                return RedirectToAction("Index", "AdminLanguage");
+                return RedirectToAction("Index");
             }
 
             var regexTenNgonNgu = new Regex("[a-zA-Z]{2,20}");
