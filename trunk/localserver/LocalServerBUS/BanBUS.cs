@@ -44,5 +44,20 @@ namespace LocalServerBUS
         {
             return BanDAO.LayBan(maBan);
         }
+
+        public static bool Xoa(int maBan)
+        {
+            return BanDAO.Xoa(maBan);
+        }
+
+        public static bool Them(Ban ban)
+        {
+            return BanDAO.Them(ban);
+        }
+
+        public static bool CapNhat(Ban ban)
+        {
+            return BanDAO.CapNhat(ban);
+        }
     }
 }

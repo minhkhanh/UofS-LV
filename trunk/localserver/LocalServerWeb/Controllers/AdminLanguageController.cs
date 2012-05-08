@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using LocalServerBUS;
 using LocalServerWeb.Codes;
 using LocalServerWeb.Resources.Views.AdminLanguage;
+using LocalServerWeb.Resources.Views.Shared;
 using LocalServerDTO;
 using LocalServerWeb.ViewModels;
 
@@ -46,7 +47,7 @@ namespace LocalServerWeb.Controllers
             if (tenNgonNgu == null || !regexTenNgonNgu.IsMatch(tenNgonNgu))
             {
                 bCheckOk = false;
-                checkDic.Add("tenNgonNgu", AdminLanguageString.InputWrong);
+                checkDic.Add("tenNgonNgu", SharedString.InputWrong);
             }
 
             var regexKiHieu1 = new Regex("[a-z]{2}");
@@ -56,7 +57,7 @@ namespace LocalServerWeb.Controllers
             if (kiHieu == null || !(regexKiHieu1.IsMatch(kiHieu) || regexKiHieu2.IsMatch(kiHieu) || regexKiHieu3.IsMatch(kiHieu)))
             {
                 bCheckOk = false;
-                checkDic.Add("kiHieu", AdminLanguageString.InputWrong);
+                checkDic.Add("kiHieu", SharedString.InputWrong);
             }
 
 
@@ -126,7 +127,7 @@ namespace LocalServerWeb.Controllers
             if (tenNgonNgu == null || !regexTenNgonNgu.IsMatch(tenNgonNgu))
             {
                 bCheckOk = false;
-                checkDic.Add("tenNgonNgu", AdminLanguageString.InputWrong);
+                checkDic.Add("tenNgonNgu", SharedString.InputWrong);
             }
 
             var regexKiHieu1 = new Regex("[a-z]{2}");
@@ -136,7 +137,7 @@ namespace LocalServerWeb.Controllers
             if (kiHieu == null || !(regexKiHieu1.IsMatch(kiHieu) || regexKiHieu2.IsMatch(kiHieu) || regexKiHieu3.IsMatch(kiHieu)))
             {
                 bCheckOk = false;
-                checkDic.Add("kiHieu", AdminLanguageString.InputWrong);
+                checkDic.Add("kiHieu", SharedString.InputWrong);
             }
 
 
@@ -167,21 +168,20 @@ namespace LocalServerWeb.Controllers
         {
             if (id == null ||id <= 0)
             {
-                TempData["error"] = AdminLanguageString.InputWrong;
+                TempData["error"] = SharedString.InputWrong;
                 return RedirectToAction("Index", "Error");
             }
 
             NgonNgu objNgonNgu = NgonNguBUS.LayNgonNguTheoMa(id ?? 0);
             if (objNgonNgu == null)
             {
-                TempData["error"] = AdminLanguageString.InputWrong;
+                TempData["error"] = SharedString.InputWrong;
                 return RedirectToAction("Index", "Error");
             }
 
             if (!NgonNguBUS.Xoa(objNgonNgu.MaNgonNgu))
             {
                 TempData["errorCannotDelete"] = AdminLanguageString.ErrorCannotDelete;
-                return RedirectToAction("Index");
             }
 
             return RedirectToAction("Index");

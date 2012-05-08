@@ -135,9 +135,6 @@
   <data name="ErrorLanguageNotFound" xml:space="preserve">
     <value>Không tìm thấy ngôn ngữ được yêu cầu</value>
   </data>
-  <data name="InputWrong" xml:space="preserve">
-    <value>Đầu vào không hợp lệ</value>
-  </data>
   <data name="LanguageCuture" xml:space="preserve">
     <value>Kí hiệu ngôn ngữ</value>
   </data>

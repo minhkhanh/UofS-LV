@@ -94,5 +94,50 @@ namespace LocalServerDAO
             }
             return null;
         }
+
+        public static bool Xoa(int maBan)
+        {
+            try
+            {
+                var objBan = LayBan(maBan);
+                ThucDonDienTu.DataContext.Bans.DeleteOnSubmit(objBan);
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
+
+        public static bool Them(Ban ban)
+        {
+            try
+            {
+                ThucDonDienTu.DataContext.Bans.InsertOnSubmit(ban);
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
+
+        public static bool CapNhat(Ban ban)
+        {
+            try
+            {
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
     }
 }

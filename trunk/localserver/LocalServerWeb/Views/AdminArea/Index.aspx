@@ -28,6 +28,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <!--  Error message: Cannot delete this area  -->
     <% if (TempData["errorCannotDelete"] != null)
        {%>
     <div id="message-red">

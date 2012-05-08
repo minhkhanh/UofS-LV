@@ -144,9 +144,6 @@
   <data name="InputRequired" xml:space="preserve">
     <value>Không được để trống</value>
   </data>
-  <data name="InputWrong" xml:space="preserve">
-    <value>Đầu vào không hợp lệ</value>
-  </data>
   <data name="NoData" xml:space="preserve">
     <value>Hiện không có khu vực nào</value>
   </data>

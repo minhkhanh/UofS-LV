@@ -138,14 +138,14 @@
   <data name="ErrorAreaNotFound" xml:space="preserve">
     <value>Requested area not found</value>
   </data>
+  <data name="ErrorCannotChangeArea" xml:space="preserve">
+    <value>Can't change area</value>
+  </data>
   <data name="ErrorCannotDelete" xml:space="preserve">
     <value>Can't delete</value>
   </data>
   <data name="InputRequired" xml:space="preserve">
     <value>Input required</value>
-  </data>
-  <data name="InputWrong" xml:space="preserve">
-    <value>Input not accepted</value>
   </data>
   <data name="NoData" xml:space="preserve">
     <value>There are no areas</value>
