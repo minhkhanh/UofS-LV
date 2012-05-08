@@ -123,11 +123,14 @@
   <data name="Delete" xml:space="preserve">
     <value>Xóa</value>
   </data>
-  <data name="DeleteError" xml:space="preserve">
-    <value>Không xóa được</value>
+  <data name="Edit" xml:space="preserve">
+    <value>Sửa</value>
   </data>
   <data name="EditTitle" xml:space="preserve">
     <value>Cập nhật ngôn ngữ</value>
+  </data>
+  <data name="ErrorCannotDelete" xml:space="preserve">
+    <value>Không thể xóa</value>
   </data>
   <data name="ErrorLanguageNotFound" xml:space="preserve">
     <value>Không tìm thấy ngôn ngữ được yêu cầu</value>
@@ -140,9 +143,6 @@
   </data>
   <data name="LanguageName" xml:space="preserve">
     <value>Tên ngôn ngữ</value>
-  </data>
-  <data name="Modify" xml:space="preserve">
-    <value>Sửa</value>
   </data>
   <data name="NoData" xml:space="preserve">
     <value>Hiện tại không có ngôn ngữ nào</value>

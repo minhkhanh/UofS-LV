@@ -123,11 +123,14 @@
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
-  <data name="DeleteError" xml:space="preserve">
-    <value>Can't delete</value>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
   </data>
   <data name="EditTitle" xml:space="preserve">
     <value>Edit language</value>
+  </data>
+  <data name="ErrorCannotDelete" xml:space="preserve">
+    <value>Cannot delete</value>
   </data>
   <data name="ErrorLanguageNotFound" xml:space="preserve">
     <value>Requested language not found</value>
@@ -140,9 +143,6 @@
   </data>
   <data name="LanguageName" xml:space="preserve">
     <value>Language name</value>
-  </data>
-  <data name="Modify" xml:space="preserve">
-    <value>Modify</value>
   </data>
   <data name="NoData" xml:space="preserve">
     <value>There are no languages</value>
