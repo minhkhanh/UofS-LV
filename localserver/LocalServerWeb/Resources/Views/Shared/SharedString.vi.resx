@@ -123,6 +123,9 @@
   <data name="AccountManagerList" xml:space="preserve">
     <value>Danh sách tài khoản</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Thêm</value>
+  </data>
   <data name="AddLanguage" xml:space="preserve">
     <value>Thêm ngôn ngữ mới</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="AdminHome" xml:space="preserve">
     <value>Trang chủ</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Hủy bỏ</value>
   </data>
   <data name="Detail" xml:space="preserve">
     <value>Chi tiết</value>
@@ -176,6 +182,12 @@
   </data>
   <data name="OrderList" xml:space="preserve">
     <value>Danh sách order</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Nhập lại</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Gởi yêu cầu</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Xin chào</value>

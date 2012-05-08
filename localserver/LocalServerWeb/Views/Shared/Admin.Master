@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">      
     <link rel="stylesheet" href="../../Content/admincss/screen.css" type="text/css" media="screen" title="default" />
+    <link rel="stylesheet" href="../../Content/admincss/prettybutton.css" type="text/css" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../Content/admincss/myStyle.css" type="text/css"/>
     <link href="../../Content/ui-lightness/jquery-ui-1.8.20.custom.css" rel="stylesheet" type="text/css" />

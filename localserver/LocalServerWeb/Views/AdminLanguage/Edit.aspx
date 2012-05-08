@@ -7,16 +7,33 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%: AdminLanguageString.EditTitle %>
 </asp:Content>
-
 <asp:Content ID="Content4" ContentPlaceHolderID="PageHeadingContent" runat="server">
     <%: AdminLanguageString.EditTitle %>
     <%: Url.RequestContext.RouteData.Values["id"]%>
 </asp:Content>
-
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <% if (TempData["error"] != null)
+       {%>
+    <div id="message-red">
+        <table border="0" width="100%" cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td class="red-left">
+                        <%:SharedString.Error %>
+                        <a href="">
+                            <%: TempData["error"] %></a>
+                    </td>
+                    <td class="red-right">
+                        <a class="close-red">
+                            <img src="../../Images/adminimages/table/icon_close_red.gif" alt="" /></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <% } %>
     <% Html.BeginForm("Edit", "AdminLanguage", FormMethod.Post); %>
     <!-- start id-form -->
     <input type="hidden" name="maNgonNgu" value="<%:Url.RequestContext.RouteData.Values["id"] %>" />
@@ -45,7 +62,7 @@
             </th>
             <td>
                 <input type="text" class="inp-form<%:(((Dictionary<string, string>) TempData["checkDic"]).ContainsKey("kiHieu") && ((Dictionary<string, string>) TempData["checkDic"])["kiHieu"]!=null) ? "-error" : ""%>"
-                    name="kiHieu" />
+                    name="kiHieu" value="<%: TempData["kiHieu"]?? "" %>" />
             </td>
             <td>
                 <% if (((Dictionary<string, string>)TempData["checkDic"]).ContainsKey("kiHieu") && ((Dictionary<string, string>)TempData["checkDic"])["kiHieu"] != null)
@@ -64,6 +81,7 @@
             <td valign="top">
                 <input type="submit" value="" class="form-submit" />
                 <input type="reset" value="" class="form-reset" />
+                <input type="button" class="pretty-button" value="<%: SharedString.Cancel %>"  onclick="window.location.href='<%: Url.Action("Index", "AdminLanguage") %>';"/>
             </td>
             <td>
             </td>
