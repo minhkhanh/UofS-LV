@@ -24,15 +24,133 @@ namespace LocalServerWeb.Controllers
         public ActionResult Add()
         {
             SharedCode.FillAdminMainMenu(ViewData, 3, 3);
+            if (TempData["checkDic"] == null)
+            {
+                TempData.Clear();
+                TempData["checkDic"] = new Dictionary<string, string>();
+            }   
 
             return View();
         }
 
-        public ActionResult Edit()
+        [HttpPost]
+        public ActionResult Add(string tenNgonNgu, string kiHieu)
+        {
+            TempData["tenNgonNgu"] = tenNgonNgu;
+            TempData["kiHieu"] = kiHieu;
+
+            var checkDic = new Dictionary<string, string>();
+
+            bool bCheckOk = true;
+            var regexTenNgonNgu = new Regex("[a-zA-Z]{2,20}");
+            if (tenNgonNgu == null || !regexTenNgonNgu.IsMatch(tenNgonNgu))
+            {
+                bCheckOk = false;
+                checkDic.Add("tenNgonNgu", AdminLanguageString.InputWrong);
+            }
+
+            var regexKiHieu1 = new Regex("[a-z]{2}");
+            var regexKiHieu2 = new Regex("[a-z]{2}-[A-Z]{2}");
+            var regexKiHieu3 = new Regex("[a-z]{2}-[A-Z]{2}-[A-Z]{2}");
+
+            if (kiHieu == null || !(regexKiHieu1.IsMatch(kiHieu) || regexKiHieu2.IsMatch(kiHieu) || regexKiHieu3.IsMatch(kiHieu)))
+            {
+                bCheckOk = false;
+                checkDic.Add("kiHieu", AdminLanguageString.InputWrong);
+            }
+
+
+            if (bCheckOk)
+            {
+                try
+                {
+                    NgonNgu ngonNgu = new NgonNgu();
+                    ngonNgu.TenNgonNgu = tenNgonNgu;
+                    ngonNgu.KiHieu = kiHieu;
+
+                    // Need to clear TempData
+                    if (NgonNguBUS.Them(ngonNgu))
+                        return RedirectToAction("Index", "AdminLanguage");
+                }
+                catch (Exception e)
+                {
+                    Console.Out.WriteLine(e.StackTrace);
+                }
+            }
+
+            TempData["checkDic"] = checkDic;
+            return RedirectToAction("Add");
+
+        }
+
+        public ActionResult Edit(int? id)
         {
             SharedCode.FillAdminMainMenu(ViewData, 3, 2);
+            if (TempData["checkDic"] == null)
+            {
+                TempData.Clear();
+                TempData["checkDic"] = new Dictionary<string, string>();
+            }   
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int maNgonNgu, string tenNgonNgu, string kiHieu)
+        {
+            TempData["tenNgonNgu"] = tenNgonNgu;
+            TempData["kiHieu"] = kiHieu;
+
+            var checkDic = new Dictionary<string, string>();
+
+            bool bCheckOk = true;
+
+            NgonNgu objNgonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
+            if (objNgonNgu == null)
+            {
+                bCheckOk = false;
+                return RedirectToAction("Index", "AdminLanguage");
+            }
+
+            var regexTenNgonNgu = new Regex("[a-zA-Z]{2,20}");
+            if (tenNgonNgu == null || !regexTenNgonNgu.IsMatch(tenNgonNgu))
+            {
+                bCheckOk = false;
+                checkDic.Add("tenNgonNgu", AdminLanguageString.InputWrong);
+            }
+
+            var regexKiHieu1 = new Regex("[a-z]{2}");
+            var regexKiHieu2 = new Regex("[a-z]{2}-[A-Z]{2}");
+            var regexKiHieu3 = new Regex("[a-z]{2}-[A-Z]{2}-[A-Z]{2}");
+
+            if (kiHieu == null || !(regexKiHieu1.IsMatch(kiHieu) || regexKiHieu2.IsMatch(kiHieu) || regexKiHieu3.IsMatch(kiHieu)))
+            {
+                bCheckOk = false;
+                checkDic.Add("kiHieu", AdminLanguageString.InputWrong);
+            }
+
+
+            if (bCheckOk)
+            {
+                try
+                {
+                    NgonNgu ngonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
+                    ngonNgu.TenNgonNgu = tenNgonNgu;
+                    ngonNgu.KiHieu = kiHieu;
+
+                    // Need to clear TempData
+                    if (NgonNguBUS.CapNhat(ngonNgu))
+                        return RedirectToAction("Index", "AdminLanguage");
+                }
+                catch (Exception e)
+                {
+                    Console.Out.WriteLine(e.StackTrace);
+                }
+            }
+
+            TempData["checkDic"] = checkDic;
+            return RedirectToAction("Edit");
+
         }
 
         public ActionResult Delete(int? id)
@@ -50,7 +168,7 @@ namespace LocalServerWeb.Controllers
                 return RedirectToAction("Index", "Error");
             }
 
-            if (!NgonNguBUS.XoaNgonNgu(objNgonNgu.MaNgonNgu))
+            if (!NgonNguBUS.Xoa(objNgonNgu.MaNgonNgu))
             {
                 TempData["error"] = AdminLanguageString.DeleteError;
                 return RedirectToAction("Index");

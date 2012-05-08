@@ -88,7 +88,7 @@ namespace LocalServerWeb.Resources.Views.AdminLanguage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Modify language.
+        ///   Looks up a localized string similar to Edit language.
         /// </summary>
         public static string EditTitle {
             get {

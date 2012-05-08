@@ -160,6 +160,15 @@ namespace LocalServerWeb.Resources.Views.AdminInvoice {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Print this invoice.
+        /// </summary>
+        public static string Print {
+            get {
+                return ResourceManager.GetString("Print", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Promotion.
         /// </summary>
         public static string Promotion {

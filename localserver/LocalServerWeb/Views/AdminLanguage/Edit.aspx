@@ -5,19 +5,21 @@
 <%@ Import Namespace="LocalServerWeb.Resources.Views.Shared" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    <%: AdminLanguageString.AddTitle %>
+    <%: AdminLanguageString.EditTitle %>
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="PageHeadingContent" runat="server">
-    <%: AdminLanguageString.AddTitle %>
+    <%: AdminLanguageString.EditTitle %>
+    <%: Url.RequestContext.RouteData.Values["id"]%>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <% Html.BeginForm("Add", "AdminLanguage", FormMethod.Post); %>
+    <% Html.BeginForm("Edit", "AdminLanguage", FormMethod.Post); %>
     <!-- start id-form -->
+    <input type="hidden" name="maNgonNgu" value="<%:Url.RequestContext.RouteData.Values["id"] %>" />
     <table border="0" cellpadding="0" cellspacing="0" id="id-form">
         <tr>
             <th valign="top">

@@ -22,10 +22,22 @@ namespace LocalServerBUS
             return NgonNguDAO.LayNgonNguTheoKiHieu(kiHieu);
         }
 
-        public static bool XoaNgonNgu(int maNgonNgu)
+        public static bool Xoa(int maNgonNgu)
         {
-            return NgonNguDAO.XoaNgonNgu(maNgonNgu);
+            return NgonNguDAO.Xoa(maNgonNgu);
         }
+
+        public static bool Them(NgonNgu ngonNgu)
+        {
+            return NgonNguDAO.Them(ngonNgu);
+        }
+
+        public static bool CapNhat(NgonNgu ngonNgu)
+        {
+            return NgonNguDAO.CapNhat(ngonNgu);
+        }
+
+
 
     }
 }

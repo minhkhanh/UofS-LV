@@ -30,12 +30,41 @@ namespace LocalServerDAO
             return temp.First();
         }
 
-        public static bool XoaNgonNgu(int maNgonNgu)
+        public static bool Xoa(int maNgonNgu)
         {
             try
             {
                 var objNgonNgu = LayNgonNguTheoMa(maNgonNgu);
                 ThucDonDienTu.DataContext.NgonNgus.DeleteOnSubmit(objNgonNgu);
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
+
+        public static bool Them(NgonNgu ngonNgu)
+        {
+            try
+            {
+                ThucDonDienTu.DataContext.NgonNgus.InsertOnSubmit(ngonNgu);
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
+
+        public static bool CapNhat(NgonNgu ngonNgu)
+        {
+            try
+            {
                 ThucDonDienTu.DataContext.SubmitChanges();
                 return true;
             }

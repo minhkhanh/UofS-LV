@@ -127,7 +127,7 @@
     <value>Can't delete</value>
   </data>
   <data name="EditTitle" xml:space="preserve">
-    <value>Modify language</value>
+    <value>Edit language</value>
   </data>
   <data name="InputWrong" xml:space="preserve">
     <value>Input not accepted</value>
