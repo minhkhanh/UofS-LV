@@ -117,11 +117,53 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="ActiveName" xml:space="preserve">
+    <value>Active</value>
+  </data>
   <data name="AddTitle" xml:space="preserve">
     <value>Add new table</value>
   </data>
+  <data name="AreaName" xml:space="preserve">
+    <value>Area name</value>
+  </data>
+  <data name="Deactive" xml:space="preserve">
+    <value>Deactive</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
   <data name="EditTitle" xml:space="preserve">
     <value>Edit table</value>
+  </data>
+  <data name="ErrorAreaNotFound" xml:space="preserve">
+    <value>Area not found</value>
+  </data>
+  <data name="ErrorCannotChangeArea" xml:space="preserve">
+    <value>Can't change area</value>
+  </data>
+  <data name="ErrorCannotDelete" xml:space="preserve">
+    <value>Can't delete</value>
+  </data>
+  <data name="NoData" xml:space="preserve">
+    <value>There are no tables</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="NumberOrdinary" xml:space="preserve">
+    <value>No.</value>
+  </data>
+  <data name="Option" xml:space="preserve">
+    <value>Option</value>
+  </data>
+  <data name="TableName" xml:space="preserve">
+    <value>Table name</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Table list</value>

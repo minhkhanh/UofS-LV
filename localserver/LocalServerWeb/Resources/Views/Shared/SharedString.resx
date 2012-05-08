@@ -168,6 +168,9 @@
   <data name="Footer" xml:space="preserve">
     <value>ThucDonDienTu - Restaurant ManagerTử</value>
   </data>
+  <data name="InputWrong" xml:space="preserve">
+    <value>Input not accepted</value>
+  </data>
   <data name="Invoice" xml:space="preserve">
     <value>Invoice</value>
   </data>

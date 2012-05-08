@@ -124,6 +124,15 @@ namespace LocalServerWeb.Resources.Views.AdminArea {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t change area.
+        /// </summary>
+        public static string ErrorCannotChangeArea {
+            get {
+                return ResourceManager.GetString("ErrorCannotChangeArea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can&apos;t delete.
         /// </summary>
         public static string ErrorCannotDelete {
@@ -138,15 +147,6 @@ namespace LocalServerWeb.Resources.Views.AdminArea {
         public static string InputRequired {
             get {
                 return ResourceManager.GetString("InputRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Input not accepted.
-        /// </summary>
-        public static string InputWrong {
-            get {
-                return ResourceManager.GetString("InputWrong", resourceCulture);
             }
         }
         

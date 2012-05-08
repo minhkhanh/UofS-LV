@@ -115,15 +115,6 @@ namespace LocalServerWeb.Resources.Views.AdminLanguage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Input not accepted.
-        /// </summary>
-        public static string InputWrong {
-            get {
-                return ResourceManager.GetString("InputWrong", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Language culture.
         /// </summary>
         public static string LanguageCuture {

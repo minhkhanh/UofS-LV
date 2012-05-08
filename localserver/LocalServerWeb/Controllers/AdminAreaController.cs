@@ -9,6 +9,7 @@ using LocalServerWeb.Codes;
 using LocalServerWeb.Resources.Views.AdminArea;
 using LocalServerDTO;
 using LocalServerWeb.ViewModels;
+using LocalServerWeb.Resources.Views.Shared;
 
 namespace LocalServerWeb.Controllers
 {
@@ -137,14 +138,14 @@ namespace LocalServerWeb.Controllers
         {
             if (id == null || id <= 0)
             {
-                TempData["error"] = AdminAreaString.InputWrong;
+                TempData["error"] = SharedString.InputWrong;
                 return RedirectToAction("Index", "Error");
             }
 
             KhuVuc objKhuVuc = KhuVucBUS.LayKhuVuc(id ?? 0);
             if (objKhuVuc == null)
             {
-                TempData["error"] = AdminAreaString.InputWrong;
+                TempData["error"] = SharedString.InputWrong;
                 return RedirectToAction("Index", "Error");
             }
 
