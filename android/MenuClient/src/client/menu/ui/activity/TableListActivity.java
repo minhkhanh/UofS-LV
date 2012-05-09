@@ -15,7 +15,7 @@ public class TableListActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.layout_two_fragment);
+        setContentView(R.layout.layout_two_panes);
 
         FragmentManager fm = getFragmentManager();
         AreaListFragment f = (AreaListFragment) fm.findFragmentByTag("AreaListFragment");

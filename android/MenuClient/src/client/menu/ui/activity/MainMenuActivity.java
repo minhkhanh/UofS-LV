@@ -11,14 +11,14 @@ public class MainMenuActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.layout_two_fragment);
+		setContentView(R.layout.layout_three_panes);
 
 		FragmentManager fm = getFragmentManager();
 		CategoryListFragment f = (CategoryListFragment) fm
 				.findFragmentByTag("CategoryListFragment");
 		if (f == null) {
 			FragmentTransaction ft = fm.beginTransaction();
-			ft.replace(R.id.LeftPaneHolder,
+			ft.replace(R.id.GroupPaneHolder,
 					new CategoryListFragment(), "CategoryListFragment");
 			ft.commit();
 		}
