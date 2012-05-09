@@ -27,39 +27,45 @@
 		<form id="mainform" action="">
 		<table border="0" width="100%" cellpadding="0" cellspacing="0" id="product-table">
 		<tr>
-			<th class="table-header-repeat line-left minwidth-1"><a href=""><%: KitchenString.KhuVuc %></a>	</th>
-			<th class="table-header-repeat line-left minwidth-1"><a href=""><%: KitchenString.Ban %></a></th>
-			<th class="table-header-repeat line-left"><a href="">Email</a></th>
-			<th class="table-header-repeat line-left"><a href="">Due</a></th>
-			<th class="table-header-repeat line-left"><a href="">Website</a></th>
-			<th class="table-header-options line-left"><a href="">Options</a></th>
+			<th class="table-header-repeat line-left"><a href=""><%: KitchenString.KhuVuc %></a>	</th>
+			<th class="table-header-repeat line-left"><a href=""><%: KitchenString.Ban %></a></th>
+			<th class="table-header-repeat line-left"><a href=""><%: KitchenString.MaOrder%></a></th>
+			<th class="table-header-repeat line-left"><a href=""><%: KitchenString.TenMon%></a></th>
+			<th class="table-header-repeat line-left"><a href=""><%: KitchenString.DonViTinh%></a></th>
+			<th class="table-header-repeat line-left"><a href=""><%: KitchenString.SoLuong%></a></th>
+            <th class="table-header-repeat line-left"><a href=""><%: KitchenString.DaXong%></a></th>
+            <th class="table-header-repeat line-left"><a href=""><%: KitchenString.DangCheBien%></a></th>
+            <th class="table-header-repeat line-left"><a href=""><%: KitchenString.PhucVu%></a></th>
+            <th class="table-header-repeat line-left"><a href=""><%: KitchenString.TuyChon%></a></th>
 		</tr>
 		<tr>
-			<td>Sabev</td>
-			<td>George</td>
-			<td><a href="">george@mainevent.co.za</a></td>
-			<td>R250</td>
-			<td><a href="">www.mainevent.co.za</a></td>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+			<td>4</td>
+			<td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
 			<td class="options-width">
 			<a href="" title="Edit" class="icon-1 info-tooltip"></a>
 			<a href="" title="Edit" class="icon-2 info-tooltip"></a>
-			<a href="" title="Edit" class="icon-3 info-tooltip"></a>
-			<a href="" title="Edit" class="icon-4 info-tooltip"></a>
-			<a href="" title="Edit" class="icon-5 info-tooltip"></a>
 			</td>
 		</tr>
 		<tr class="alternate-row">
-			<td>Sabev</td>
-			<td>George</td>
-			<td><a href="">george@mainevent.co.za</a></td>
-			<td>R250</td>
-			<td><a href="">www.mainevent.co.za</a></td>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+			<td>4</td>
+			<td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
 			<td class="options-width">
 			<a href="" title="Edit" class="icon-1 info-tooltip"></a>
 			<a href="" title="Edit" class="icon-2 info-tooltip"></a>
-			<a href="" title="Edit" class="icon-3 info-tooltip"></a>
-			<a href="" title="Edit" class="icon-4 info-tooltip"></a>
-			<a href="" title="Edit" class="icon-5 info-tooltip"></a>
 			</td>
 		</tr>
 		</table>

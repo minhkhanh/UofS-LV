@@ -120,7 +120,31 @@
   <data name="Ban" xml:space="preserve">
     <value>Bàn</value>
   </data>
+  <data name="DangCheBien" xml:space="preserve">
+    <value>Đang chế biến</value>
+  </data>
+  <data name="DaXong" xml:space="preserve">
+    <value>Đã xong</value>
+  </data>
+  <data name="DonViTinh" xml:space="preserve">
+    <value>Đơn vị tính</value>
+  </data>
   <data name="KhuVuc" xml:space="preserve">
     <value>Khu vực</value>
+  </data>
+  <data name="MaOrder" xml:space="preserve">
+    <value>Mã order</value>
+  </data>
+  <data name="PhucVu" xml:space="preserve">
+    <value>Phục vụ</value>
+  </data>
+  <data name="SoLuong" xml:space="preserve">
+    <value>Số lượng</value>
+  </data>
+  <data name="TenMon" xml:space="preserve">
+    <value>Tên món</value>
+  </data>
+  <data name="TuyChon" xml:space="preserve">
+    <value>Tùy chọn</value>
   </data>
 </root>
