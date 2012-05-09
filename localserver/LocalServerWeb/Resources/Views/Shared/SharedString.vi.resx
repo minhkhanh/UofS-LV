@@ -129,6 +129,9 @@
   <data name="AddArea" xml:space="preserve">
     <value>Thêm khu vực mới</value>
   </data>
+  <data name="AddExchangeRate" xml:space="preserve">
+    <value>Thêm tỉ giá mới</value>
+  </data>
   <data name="AddLanguage" xml:space="preserve">
     <value>Thêm ngôn ngữ mới</value>
   </data>
@@ -155,6 +158,12 @@
   </data>
   <data name="Error" xml:space="preserve">
     <value>Lỗi</value>
+  </data>
+  <data name="ExchangeRate" xml:space="preserve">
+    <value>Tỉ giá</value>
+  </data>
+  <data name="ExchangeRateList" xml:space="preserve">
+    <value>Danh sách tỉ giá</value>
   </data>
   <data name="FoodManager" xml:space="preserve">
     <value>Quản lý món ăn</value>
@@ -203,6 +212,9 @@
   </data>
   <data name="TableList" xml:space="preserve">
     <value>Danh sách bàn</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Cập nhật</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Xin chào</value>
