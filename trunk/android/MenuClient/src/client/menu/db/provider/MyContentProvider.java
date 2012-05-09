@@ -10,6 +10,7 @@ import android.net.Uri;
 import client.menu.db.contract.BanContract;
 import client.menu.db.contract.DanhMucContract;
 import client.menu.db.contract.DanhMucDaNgonNguContract;
+import client.menu.db.contract.DonViTinhMonAnContract;
 import client.menu.db.contract.KhuVucContract;
 import client.menu.db.contract.MonAnContract;
 import client.menu.db.contract.MonAnDaNgonNguContract;
@@ -34,8 +35,12 @@ public class MyContentProvider extends ContentProvider {
     private static final int MATCH_NGONNGU_MACDINH = 6;
     private static final int MATCH_NGONNGU = 7;
     private static final int MATCH_MONAN_INNER_DANGONNGU = 8;
+    private static final int MATCH_DONVITINH_MONAN = 9;
 
     static {
+        uriMatcher.addURI(AUTHORITY, DonViTinhMonAnContract.TABLE_NAME + "/",
+                MATCH_DONVITINH_MONAN);
+
         uriMatcher.addURI(AUTHORITY, MonAnContract.TABLE_NAME + "/"
                 + MonAnContract.PATH_MONAN_INNER_DANGONNGU, MATCH_MONAN_INNER_DANGONNGU);
 
@@ -83,6 +88,9 @@ public class MyContentProvider extends ContentProvider {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 
         switch (uriMatcher.match(uri)) {
+            case MATCH_DONVITINH_MONAN:
+                queryBuilder.setTables(DonViTinhMonAnContract.TABLE_NAME);
+                break;
             case MATCH_MONAN_INNER_DANGONNGU:
                 queryBuilder.setTables(MonAnContract.TABLE_NAME + " INNER JOIN "
                         + MonAnDaNgonNguContract.TABLE_NAME + " ON ("

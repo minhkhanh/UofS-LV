@@ -1,7 +1,7 @@
 package client.menu.ui.activity;
 
 import client.menu.R;
-import client.menu.ui.fragment.TableDialogFragment;
+import client.menu.ui.fragment.AuthDialogFragment;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
@@ -30,7 +30,7 @@ public class SplitTableActivity extends Activity {
 					ft.remove(prev);
 				}
 
-				DialogFragment newFragment = TableDialogFragment.newInstance();
+				DialogFragment newFragment = AuthDialogFragment.newInstance();
 				newFragment.show(ft, "dialog");
 			}
 		});

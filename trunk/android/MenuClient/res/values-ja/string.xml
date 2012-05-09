@@ -6,6 +6,6 @@
     <string name="table_list_caption">テーブルを選択</string>
     <string name="main_menu_caption">メニュー</string>
     <string name="split_table_caption">別のテーブル</string>
-    <string name="dialog_table">タスクを選択します</string>
+    <string name="title_dialog_auth">タスクを選択します</string>
 
 </resources>

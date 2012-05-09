@@ -6,10 +6,15 @@
     <string name="table_list_caption">Chọn bàn</string>
     <string name="main_menu_caption">Thực đơn</string>
     <string name="split_table_caption">Tách bàn</string>
-    <string name="dialog_table">Chọn công việc</string>
-    <string name="context_table_item_1">Một</string>
-    <string name="context_table_item_2">Hai</string>
-    <string name="construct_merge_table">Nhấn giữ lâu để ghép bàn</string>
+    <string name="title_dialog_auth">Chọn công việc</string>
+    <string name="context_table_item_order">Gọi món</string>
+    <string name="context_table_item_check">Thanh toán</string>
+    <string name="context_table_item_split">Tách bàn</string><string name="construct_merge_table">Nhấn giữ lâu để ghép bàn</string>
     <string name="options_item_merge_table">Ghép bàn</string>
+    <string name="caption_waiter_username">Tên đăng nhập</string>
+    <string name="caption_waiter_password">Mật khẩu</string>
+    <string name="caption_ok">Đồng ý</string>
+    <string name="caption_cancel">Hủy bỏ</string>
+    
 
 </resources>

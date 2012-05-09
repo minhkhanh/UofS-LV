@@ -125,7 +125,7 @@ public class AreaListFragment extends ListFragment {
             TableGridFragment tableGrid = (TableGridFragment) getFragmentManager()
                     .findFragmentById(R.id.RightPaneHolder);
 
-            if (tableGrid == null || tableGrid.getAreaId() != areaId) {
+            if (tableGrid == null || tableGrid.getMaKhuVuc() != areaId) {
                 tableGrid = TableGridFragment.newInstance(areaId);
 
                 FragmentTransaction ft = getFragmentManager().beginTransaction();

@@ -16,9 +16,9 @@ public class ThamSoContract implements BaseColumns {
             + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_SID
             + " INTEGER NOT NULL UNIQUE, " + COL_PARAM_NAME + " TEXT," + COL_DATA_TYPE
             + " TEXT," + COL_VALUE + " TEXT);";
-    
+
     public static final Integer SID_NGONNGU_MACDINH = 1;
-    
+
     public static final Uri CONTENT_URI = Uri.parse(MyContentProvider.SCHEME
             + MyContentProvider.AUTHORITY + "/" + TABLE_NAME);
 }

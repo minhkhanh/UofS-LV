@@ -35,28 +35,69 @@ public class TableGridFragment extends Fragment {
 
     public static final int LOADER_ID_TABLE_LIST = 0;
 
-    private int mAreaId;
+    private int mMaKhuVuc;
 
     private SimpleCursorAdapter mAdapter;
     private GridView mTableGrid;
     private ActionMode mActionMode;
 
-    // private OnLongClickListener mOnLongClickListener = new
-    // OnLongClickListener() {
-    //
-    // @Override
-    // public boolean onLongClick(View v) {
-    //
-    // }
-    // };
-
-    private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
+    private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
         @Override
-        public void onItemClick(AdapterView<?> parent, View v, int pos, long id) {
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            // TODO Auto-generated method stub
+            return false;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+            mActionMode = null;
+        }
+
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            MenuInflater inflater = mode.getMenuInflater();
+            inflater.inflate(R.menu.context_table, menu);
+
+            return true;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            // Toast.makeText(getActivity(), "Đang xây dựng",
+            // Toast.LENGTH_SHORT).show();
+            switch (item.getItemId()) {
+                case R.id.itemOrder:
+                    
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+                    if (prev != null) {
+                        ft.remove(prev);
+                    }
+                    ft.addToBackStack(null);
+
+                    // Create and show the dialog.
+                    DialogFragment newFragment = AuthDialogFragment.newInstance();
+                    newFragment.show(ft, "dialog");
+                    break;
+
+                default:
+                    break;
+            }
+            mode.finish();
+            return true;
+        }
+    };
+
+    private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
             if (parent == mTableGrid) {
-                Intent intent = new Intent(getActivity(), MainMenuActivity.class);
-                startActivity(intent);
+                if (mActionMode != null) {
+                    return;
+                }
+
+                mActionMode = getActivity().startActionMode(mActionModeCallback);
             }
         }
     };
@@ -68,10 +109,10 @@ public class TableGridFragment extends Fragment {
             switch (id) {
                 case LOADER_ID_TABLE_LIST:
                     String[] proj = new String[] { BanContract._ID, BanContract.COL_SID,
-                            BanContract.COL_TABLE_NAME };
+                            BanContract.COL_TEN_BAN };
                     CursorLoader loader = new CursorLoader(getActivity(),
-                            BanContract.CONTENT_URI, proj, BanContract.COL_AREA_ID
-                                    + " = ?", new String[] { String.valueOf(mAreaId) },
+                            BanContract.CONTENT_URI, proj, BanContract.COL_MA_KHU_VUC
+                                    + " = ?", new String[] { String.valueOf(mMaKhuVuc) },
                             null);
 
                     return loader;
@@ -100,21 +141,21 @@ public class TableGridFragment extends Fragment {
         }
     };
 
-    public int getAreaId() {
-        return mAreaId;
+    public int getMaKhuVuc() {
+        return mMaKhuVuc;
     }
 
-    public void setAreaId(int areaId) {
-        mAreaId = areaId;
+    public void setMaKhuVuc(int maKhuVuc) {
+        mMaKhuVuc = maKhuVuc;
     }
 
     public static TableGridFragment newInstance(int areaId) {
         TableGridFragment f = new TableGridFragment();
-        f.mAreaId = areaId;
+        f.mMaKhuVuc = areaId;
 
         return f;
     }
-    
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -138,24 +179,24 @@ public class TableGridFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt("mAreaId", mAreaId);
+        outState.putInt("mAreaId", mMaKhuVuc);
     }
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
         if (savedInstanceState != null) {
-            mAreaId = savedInstanceState.getInt("mAreaId");
+            mMaKhuVuc = savedInstanceState.getInt("mAreaId");
         }
-        
+
         setHasOptionsMenu(true);
 
-        String[] from = new String[] { BanContract.COL_TABLE_NAME };
+        String[] from = new String[] { BanContract.COL_TEN_BAN };
         int[] to = new int[] { R.id.TableCaption };
         mAdapter = new SimpleCursorAdapter(getActivity(), R.layout.item_table_grid, null,
                 from, to, 0);
-        
+
         getLoaderManager().initLoader(LOADER_ID_TABLE_LIST, null, mLoaderCallbacks);
     }
 
@@ -164,10 +205,9 @@ public class TableGridFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         // getActivity().getActionBar().setSubtitle(R.string.construct_merge_table);
 
-
-        mTableGrid = (GridView) getActivity().findViewById(R.id.TableGrid);
+        mTableGrid = (GridView) getView().findViewById(R.id.TableGrid);
         mTableGrid.setAdapter(mAdapter);
-        mTableGrid.setOnItemClickListener(mOnItemClickListener);       
+        mTableGrid.setOnItemClickListener(mOnItemClickListener);
     }
 
     @Override

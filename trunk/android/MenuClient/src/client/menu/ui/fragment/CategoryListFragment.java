@@ -76,9 +76,6 @@ public class CategoryListFragment extends ListFragment {
                             DanhMucDaNgonNguContract.COL_CATEGORY_NAME };
                     Integer sid = MyApplication.gSettings.getLocale().getLanguage()
                             .getAsInteger(NgonNguContract.COL_SID);
-                    // String selection =
-                    // DanhMucDaNgonNguContract.COL_LANGUAGE_ID + " = ?";
-                    // String[] selArgs = { sid.toString() };
                     CursorLoader loader = new CursorLoader(getActivity(),
                             DanhMucContract.URI_DANHMUC_INNER_DANGONNGU, proj,
                             DanhMucDaNgonNguContract.COL_LANGUAGE_ID + "=?",
@@ -115,7 +112,7 @@ public class CategoryListFragment extends ListFragment {
 
         getLoaderManager().initLoader(LOADER_ID_CAT_LIST, null, mLoaderCallbacks);
 
-        View dishList = getActivity().findViewById(R.id.RightPaneHolder);
+        View dishList = getActivity().findViewById(R.id.ContentPaneHolder);
         mIsDualPane = dishList != null && dishList.getVisibility() == View.VISIBLE;
 
         if (savedInstanceState != null) {
@@ -137,13 +134,13 @@ public class CategoryListFragment extends ListFragment {
             getListView().setItemChecked(index, true);
 
             DishListFragment dishList = (DishListFragment) getFragmentManager()
-                    .findFragmentById(R.id.RightPaneHolder);
+                    .findFragmentById(R.id.ContentPaneHolder);
 
             if (dishList == null || dishList.getMaDanhMuc() != maDanhMuc) {
                 dishList = DishListFragment.newInstance(maDanhMuc);
 
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.RightPaneHolder, dishList);
+                ft.replace(R.id.ContentPaneHolder, dishList);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.commit();
             }
@@ -152,7 +149,7 @@ public class CategoryListFragment extends ListFragment {
             DishListFragment dishList = DishListFragment.newInstance(maDanhMuc);
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.LeftPaneHolder, dishList);
+            ft.replace(R.id.GroupPaneHolder, dishList);
             ft.addToBackStack(null);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
