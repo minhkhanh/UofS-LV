@@ -117,6 +117,8 @@ namespace LocalServerWeb.Controllers
                 viewModel.Names = new List<string>();
                 viewModel.Ids = new List<int>();
                 viewModel.IsCategories = new List<bool>();
+
+                Console.WriteLine(e.Message);
             }
 
             // Alwasy has Index at the beginning
@@ -178,6 +180,8 @@ namespace LocalServerWeb.Controllers
                 viewModel.Ids = new List<int>();
                 viewModel.ParentName = FoodCategoryString.Index;
                 viewModel.ParentId = 0;
+
+                Console.WriteLine(e.Message);
             }
 
             return viewModel;
@@ -214,7 +218,7 @@ namespace LocalServerWeb.Controllers
             }
             catch (Exception e)
             {
-
+                Console.WriteLine(e.Message);
             }
             
 
@@ -235,7 +239,7 @@ namespace LocalServerWeb.Controllers
                     }
                     catch (Exception e)
                     {
-
+                        Console.WriteLine(e.Message);
                     }
                            
                 }
@@ -302,7 +306,7 @@ namespace LocalServerWeb.Controllers
                         }
                         catch (Exception e)
                         {
-
+                            Console.WriteLine(e.Message);
                         }
                     }
                 }
@@ -312,6 +316,7 @@ namespace LocalServerWeb.Controllers
             catch (Exception e)
             {
                 viewModel = null;
+                Console.WriteLine(e.Message);
             }
 
 

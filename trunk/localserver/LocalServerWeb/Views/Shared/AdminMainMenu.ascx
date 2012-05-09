@@ -56,6 +56,8 @@
                 <li <%: ((int)ViewData["menuSubId"] == 5 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.AddArea, "Add", "AdminArea") %></li>
                 <li <%: ((int)ViewData["menuSubId"] == 6 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.TableList, "Index", "AdminTable") %></li>
                 <li <%: ((int)ViewData["menuSubId"] == 7 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.AddTable, "Add", "AdminTable") %></li>
+                <li <%: ((int)ViewData["menuSubId"] == 8 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.ExchangeRateList, "Index", "AdminExchangeRate") %></li>
+                <li <%: ((int)ViewData["menuSubId"] == 9 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.AddExchangeRate, "Add", "AdminExchangeRate") %></li>
 			</ul>
 		</div>
 		</li>
