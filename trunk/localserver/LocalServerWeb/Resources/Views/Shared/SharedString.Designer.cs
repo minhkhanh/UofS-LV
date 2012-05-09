@@ -97,6 +97,15 @@ namespace LocalServerWeb.Resources.Views.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new exchange rate.
+        /// </summary>
+        public static string AddExchangeRate {
+            get {
+                return ResourceManager.GetString("AddExchangeRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new language.
         /// </summary>
         public static string AddLanguage {
@@ -174,6 +183,24 @@ namespace LocalServerWeb.Resources.Views.Shared {
         public static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exchange rate.
+        /// </summary>
+        public static string ExchangeRate {
+            get {
+                return ResourceManager.GetString("ExchangeRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exchange rate list.
+        /// </summary>
+        public static string ExchangeRateList {
+            get {
+                return ResourceManager.GetString("ExchangeRateList", resourceCulture);
             }
         }
         
@@ -318,6 +345,15 @@ namespace LocalServerWeb.Resources.Views.Shared {
         public static string TableList {
             get {
                 return ResourceManager.GetString("TableList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        public static string Update {
+            get {
+                return ResourceManager.GetString("Update", resourceCulture);
             }
         }
         

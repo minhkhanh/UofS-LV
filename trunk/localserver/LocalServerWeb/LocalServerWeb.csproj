@@ -80,6 +80,7 @@
     <Compile Include="Codes\SharedCode.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminAreaController.cs" />
+    <Compile Include="Controllers\AdminExchangeRateController.cs" />
     <Compile Include="Controllers\AdminFoodController.cs" />
     <Compile Include="Controllers\AdminHomeController.cs" />
     <Compile Include="Controllers\AdminInvoiceController.cs" />
@@ -130,6 +131,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AdminAreaString.vi.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\AdminExchangeRate\AdminExchangeRateString.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminExchangeRateString.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\AdminExchangeRate\AdminExchangeRateString.vi.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminExchangeRateString.vi.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\Views\AdminFood\AdminFoodString.Designer.cs">
       <DependentUpon>AdminFoodString.resx</DependentUpon>
@@ -798,6 +809,9 @@
     <Content Include="Views\AdminArea\Add.aspx" />
     <Content Include="Views\AdminArea\Edit.aspx" />
     <Content Include="Views\AdminArea\Index.aspx" />
+    <Content Include="Views\AdminExchangeRate\Add.aspx" />
+    <Content Include="Views\AdminExchangeRate\Edit.aspx" />
+    <Content Include="Views\AdminExchangeRate\Index.aspx" />
     <Content Include="Views\AdminFood\AddFood.aspx" />
     <Content Include="Views\AdminFood\AddLanguageFood.aspx" />
     <Content Include="Views\AdminFood\EditLanguageFood.aspx" />
@@ -905,6 +919,14 @@
     <EmbeddedResource Include="Resources\Views\AdminArea\AdminAreaString.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AdminAreaString.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminExchangeRate\AdminExchangeRateString.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminExchangeRateString.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminExchangeRate\AdminExchangeRateString.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminExchangeRateString.vi.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\AdminFood\AdminFoodString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
