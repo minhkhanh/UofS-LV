@@ -120,11 +120,38 @@
   <data name="AddTitle" xml:space="preserve">
     <value>Add new category</value>
   </data>
+  <data name="CategoryDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="CategoryName" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
   <data name="EditTitle" xml:space="preserve">
     <value>Edit category</value>
   </data>
+  <data name="ErrorCannotChangeParentCategory" xml:space="preserve">
+    <value>Can't change parent category</value>
+  </data>
+  <data name="ErrorCannotDelete" xml:space="preserve">
+    <value>Can't delete</value>
+  </data>
   <data name="NoData" xml:space="preserve">
     <value>There are no categories</value>
+  </data>
+  <data name="NumberOrdinary" xml:space="preserve">
+    <value>No.</value>
+  </data>
+  <data name="Option" xml:space="preserve">
+    <value>Option</value>
+  </data>
+  <data name="ParentCategoryName" xml:space="preserve">
+    <value>Parent category</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Category list</value>

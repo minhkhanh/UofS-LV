@@ -70,6 +70,42 @@ namespace LocalServerWeb.Resources.Views.AdminCategory {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string CategoryDescription {
+            get {
+                return ResourceManager.GetString("CategoryDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string CategoryName {
+            get {
+                return ResourceManager.GetString("CategoryName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit category.
         /// </summary>
         public static string EditTitle {
@@ -79,11 +115,56 @@ namespace LocalServerWeb.Resources.Views.AdminCategory {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t change parent category.
+        /// </summary>
+        public static string ErrorCannotChangeParentCategory {
+            get {
+                return ResourceManager.GetString("ErrorCannotChangeParentCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t delete.
+        /// </summary>
+        public static string ErrorCannotDelete {
+            get {
+                return ResourceManager.GetString("ErrorCannotDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There are no categories.
         /// </summary>
         public static string NoData {
             get {
                 return ResourceManager.GetString("NoData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No..
+        /// </summary>
+        public static string NumberOrdinary {
+            get {
+                return ResourceManager.GetString("NumberOrdinary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Option.
+        /// </summary>
+        public static string Option {
+            get {
+                return ResourceManager.GetString("Option", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parent category.
+        /// </summary>
+        public static string ParentCategoryName {
+            get {
+                return ResourceManager.GetString("ParentCategoryName", resourceCulture);
             }
         }
         

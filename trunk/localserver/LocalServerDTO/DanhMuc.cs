@@ -28,7 +28,10 @@ namespace LocalServerDTO
             set { _danhMucCha.Entity = value; }
         }
 
-        //theo ngon ngu hien tai
+        // Theo Ngon Ngu hien tai
         public string TenDanhMuc { get; set; }
+
+        // Theo Ngon Ngu hien tai
+        public string MoTaDanhMuc { get; set; }
     }
 }

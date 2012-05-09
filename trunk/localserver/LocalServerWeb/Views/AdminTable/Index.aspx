@@ -10,12 +10,6 @@
     <%: AdminTableString.Title %>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
-    <script type="text/javascript">
-        function changeGroupUser(groupObj, userId) {
-            alert(userId);
-
-        }
-    </script>
     <script src="../../Scripts/jquery/jquery.selectbox-0.5.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
