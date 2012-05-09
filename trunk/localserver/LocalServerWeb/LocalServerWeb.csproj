@@ -80,6 +80,7 @@
     <Compile Include="Codes\SharedCode.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminAreaController.cs" />
+    <Compile Include="Controllers\AdminCategoryController.cs" />
     <Compile Include="Controllers\AdminExchangeRateController.cs" />
     <Compile Include="Controllers\AdminFoodController.cs" />
     <Compile Include="Controllers\AdminHomeController.cs" />
@@ -131,6 +132,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AdminAreaString.vi.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\AdminCategory\AdminCategoryString.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminCategoryString.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\AdminCategory\AdminCategoryString.vi.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminCategoryString.vi.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\Views\AdminExchangeRate\AdminExchangeRateString.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -809,6 +820,9 @@
     <Content Include="Views\AdminArea\Add.aspx" />
     <Content Include="Views\AdminArea\Edit.aspx" />
     <Content Include="Views\AdminArea\Index.aspx" />
+    <Content Include="Views\AdminCategory\Add.aspx" />
+    <Content Include="Views\AdminCategory\Edit.aspx" />
+    <Content Include="Views\AdminCategory\Index.aspx" />
     <Content Include="Views\AdminExchangeRate\Add.aspx" />
     <Content Include="Views\AdminExchangeRate\Edit.aspx" />
     <Content Include="Views\AdminExchangeRate\Index.aspx" />
@@ -919,6 +933,14 @@
     <EmbeddedResource Include="Resources\Views\AdminArea\AdminAreaString.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AdminAreaString.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminCategory\AdminCategoryString.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminCategoryString.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminCategory\AdminCategoryString.vi.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminCategoryString.vi.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\AdminExchangeRate\AdminExchangeRateString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

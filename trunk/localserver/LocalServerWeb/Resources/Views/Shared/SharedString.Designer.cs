@@ -97,6 +97,15 @@ namespace LocalServerWeb.Resources.Views.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new category.
+        /// </summary>
+        public static string AddCategory {
+            get {
+                return ResourceManager.GetString("AddCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new exchange rate.
         /// </summary>
         public static string AddExchangeRate {
@@ -165,6 +174,24 @@ namespace LocalServerWeb.Resources.Views.Shared {
         public static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string Category {
+            get {
+                return ResourceManager.GetString("Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category list.
+        /// </summary>
+        public static string CategoryList {
+            get {
+                return ResourceManager.GetString("CategoryList", resourceCulture);
             }
         }
         

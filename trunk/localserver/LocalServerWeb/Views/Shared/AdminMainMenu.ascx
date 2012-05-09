@@ -48,7 +48,8 @@
 		<ul <%: ((int)ViewData["menuMainId"] == 3)?"class=current":"class=select" %> ><li><a href="#nogo"><b><%: SharedString.Order%> / <%:SharedString.Invoice %></b></a>
 		<div class='select_sub <%: ((int)ViewData["menuMainId"] == 3)?"show":"" %> '>
 			<ul class="sub">
-				<li <%: ((int)ViewData["menuSubId"] == 0 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.OrderList, "Index", "AdminOrder") %></li>
+				<!--
+                <li <%: ((int)ViewData["menuSubId"] == 0 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.OrderList, "Index", "AdminOrder") %></li>
                 <li <%: ((int)ViewData["menuSubId"] == 1 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.InvoiceList, "Index", "AdminInvoice") %></li>
                 <li <%: ((int)ViewData["menuSubId"] == 2 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.LanguageList, "Index", "AdminLanguage") %></li>
                 <li <%: ((int)ViewData["menuSubId"] == 3 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.AddLanguage, "Add", "AdminLanguage") %></li>
@@ -58,6 +59,9 @@
                 <li <%: ((int)ViewData["menuSubId"] == 7 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.AddTable, "Add", "AdminTable") %></li>
                 <li <%: ((int)ViewData["menuSubId"] == 8 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.ExchangeRateList, "Index", "AdminExchangeRate") %></li>
                 <li <%: ((int)ViewData["menuSubId"] == 9 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.AddExchangeRate, "Add", "AdminExchangeRate") %></li>
+                -->
+                <li <%: ((int)ViewData["menuSubId"] == 0 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.CategoryList, "Index", "AdminCategory") %></li>
+                <li <%: ((int)ViewData["menuSubId"] == 1 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.AddCategory, "Add", "AdminCategory") %></li>
 			</ul>
 		</div>
 		</li>
