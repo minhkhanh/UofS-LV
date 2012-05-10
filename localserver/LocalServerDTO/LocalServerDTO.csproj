@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Ban.cs" />
     <Compile Include="BoPhanCheBien.cs" />
+    <Compile Include="ChiTietCheBienOrder.cs" />
     <Compile Include="ChiTietDanhMucBoPhanCheBien.cs" />
     <Compile Include="ChiTietDanhMucDaNgonNgu.cs" />
     <Compile Include="ChiTietDonViTinhDaNgonNgu.cs" />

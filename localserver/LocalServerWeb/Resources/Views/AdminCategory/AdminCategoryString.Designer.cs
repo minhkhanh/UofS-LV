@@ -115,6 +115,15 @@ namespace LocalServerWeb.Resources.Views.AdminCategory {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This category can&apos;t be the parent of itself.
+        /// </summary>
+        public static string ErrorCannotBeParentCategory {
+            get {
+                return ResourceManager.GetString("ErrorCannotBeParentCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can&apos;t change parent category.
         /// </summary>
         public static string ErrorCannotChangeParentCategory {

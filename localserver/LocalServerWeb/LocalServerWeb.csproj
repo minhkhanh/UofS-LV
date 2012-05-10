@@ -88,6 +88,7 @@
     <Compile Include="Controllers\AdminLanguageController.cs" />
     <Compile Include="Controllers\AdminOrderController.cs" />
     <Compile Include="Controllers\AdminTableController.cs" />
+    <Compile Include="Controllers\AdminUnitController.cs" />
     <Compile Include="Controllers\AdminUserController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FoodCategoryController.cs" />
@@ -842,6 +843,9 @@
     <Content Include="Views\AdminTable\Add.aspx" />
     <Content Include="Views\AdminTable\Edit.aspx" />
     <Content Include="Views\AdminTable\Index.aspx" />
+    <Content Include="Views\AdminUnit\Add.aspx" />
+    <Content Include="Views\AdminUnit\Edit.aspx" />
+    <Content Include="Views\AdminUnit\Index.aspx" />
     <Content Include="Views\AdminUser\AddUser.aspx" />
     <Content Include="Views\AdminUser\Index.aspx" />
     <Content Include="Views\Error\Index.aspx" />
@@ -897,6 +901,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\foodcategory\foodrelate\" />
+    <Folder Include="Resources\Views\AdminUnit\" />
     <Folder Include="Uploads\FoodImages\" />
   </ItemGroup>
   <ItemGroup>
@@ -939,7 +944,7 @@
       <LastGenOutput>AdminCategoryString.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\AdminCategory\AdminCategoryString.vi.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AdminCategoryString.vi.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\AdminExchangeRate\AdminExchangeRateString.resx">

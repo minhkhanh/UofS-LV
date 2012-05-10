@@ -78,7 +78,7 @@
     </div>
     <% } %>
     <!--  start table-content  -->
-    <% if (ViewData["listBan"] != null && ((List<Ban>)ViewData["listBan"]).Count > 0)
+    <% if (ViewData["listDanhMuc"] != null && ((List<DanhMuc>)ViewData["listDanhMuc"]).Count > 0)
        {
     %>
     <div id="table-content">
@@ -107,30 +107,27 @@
                 </th>
             </tr>
             <% int iCount = 0; %>
-            <% foreach (var ban in (List<Ban>)ViewData["listBan"])
+            <% foreach (var danhMuc in (List<DanhMuc>)ViewData["listDanhMuc"])
                { %>
             <tr <%: (iCount++%2==0)?"":"class=alternate-row" %>>
                 <td>
                     <%: iCount %>
                 </td>
                 <td>
-                    <%: ban.TenBan %>
+                    <%: danhMuc.TenDanhMuc %>
                 </td>
                 <td>
-                    <% Html.BeginForm("ChangeArea", "AdminTable", FormMethod.Post); %>
-                    <%= Html.DropDownList("maKhuVuc", new SelectList(ViewData["listKhuVuc"] as List<KhuVuc>, "MaKhuVuc", "TenKhuVuc", ban.KhuVuc.MaKhuVuc), new { onchange = "submit();", Class = "listKhuVuc" })%>
-                    <input type="hidden" name="maBan" value="<%: ban.MaBan %>" id="maBan<%:iCount %>" />
+                    <%: danhMuc.MoTaDanhMuc %>
+                </td>
+                <td>
+                    <% Html.BeginForm("ChangeParentCategory", "AdminCategory", FormMethod.Post); %>
+                    <%= Html.DropDownList("maDanhMucCha", new SelectList(ViewData["listDanhMuc"] as List<DanhMuc>, "MaDanhMuc", "TenDanhMuc", (danhMuc.DanhMucCha!=null)?danhMuc.DanhMucCha.MaDanhMuc:0), new { onchange = "submit();", Class = "listDanhMucCha" })%>
+                    <input type="hidden" name="maDanhMuc" value="<%: danhMuc.MaDanhMuc %>" id="maDanhMuc<%:iCount %>" />
                     <% Html.EndForm(); %>
                 </td>
-                <td>
-                    <%: ban.GhiChu %>
-                </td>
-                <td>
-                    <%: ban.Active?AdminTableString.Active:AdminTableString.Deactive %>
-                </td>
                 <td class="options-width">
-                    <%:Html.ActionLink(" ", "Edit", "AdminTable", new { id = ban.MaBan }, new { title = AdminTableString.Edit, Class = "icon-6 info-tooltip" })%>
-                    <%:Html.ActionLink(" ", "Delete", "AdminTable", new { id = ban.MaBan }, new { title = AdminTableString.Delete, Class = "icon-2 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "Edit", "AdminTable", new { id = danhMuc.MaDanhMuc }, new { title = AdminCategoryString.Edit, Class = "icon-6 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "Delete", "AdminTable", new { id = danhMuc.MaDanhMuc }, new { title = AdminCategoryString.Delete, Class = "icon-2 info-tooltip" })%>
                 </td>
             </tr>
             <% } %>
@@ -147,7 +144,7 @@
                 <tr>
                     <td class="red-left">
                         Error. <a href="">
-                            <%:AdminTableString.NoData %></a>
+                            <%: AdminCategoryString.NoData %></a>
                     </td>
                     <td class="red-right">
                         <a class="close-red">

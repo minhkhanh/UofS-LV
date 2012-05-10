@@ -24,9 +24,9 @@ namespace LocalServerBUS
             return DanhMucDAO.LayDanhSachDanhMucTheoDanhMucCha(maDanhMucCha);
         }
 
-        public static List<DanhMuc> LayDanhSachDanhMucCha()
+        public static List<DanhMuc> LayDanhSachDanhMucRoot()
         {
-            return DanhMucDAO.LayDanhSachDanhMucCha();
+            return DanhMucDAO.LayDanhSachDanhMucRoot();
         }
 
         public static List<DanhMuc> LayDanhSachDanhMucConChauDanhMucCha(int maDanhMucCha)
@@ -67,5 +67,22 @@ namespace LocalServerBUS
             }
             return temp.ToList();
         }
+
+        public static bool Xoa(int maDanhMuc)
+        {
+            return DanhMucDAO.Xoa(maDanhMuc);
+        }
+
+        public static bool Them(DanhMuc danhMuc)
+        {
+            return DanhMucDAO.Them(danhMuc);
+        }
+
+        public static bool CapNhat(DanhMuc danhMuc)
+        {
+            return DanhMucDAO.CapNhat(danhMuc);
+        }
+
+
     }
 }

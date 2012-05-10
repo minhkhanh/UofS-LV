@@ -135,6 +135,9 @@
   <data name="EditTitle" xml:space="preserve">
     <value>Edit category</value>
   </data>
+  <data name="ErrorCannotBeParentCategory" xml:space="preserve">
+    <value>This category can't be the parent of itself</value>
+  </data>
   <data name="ErrorCannotChangeParentCategory" xml:space="preserve">
     <value>Can't change parent category</value>
   </data>

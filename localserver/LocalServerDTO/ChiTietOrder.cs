@@ -60,5 +60,17 @@ namespace LocalServerDTO
             set { _boPhanCheBien.Entity = value; }
         }
 
+        [DataMember(Name = "MaDonViTinh")]
+        [Column(Name = "MaDonViTinh")]
+        private int? _maDonViTinh;
+
+        private EntityRef<DonViTinh> _donViTinh = new EntityRef<DonViTinh>();
+        [Association(Name = "DonViTinh_ChiTietOrder_FK1", IsForeignKey = true, Storage = "_donViTinh", ThisKey = "_maDonViTinh")]
+        public DonViTinh DonViTinh
+        {
+            get { return _donViTinh.Entity; }
+            set { _donViTinh.Entity = value; }
+        }
+
     }
 }
