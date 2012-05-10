@@ -1,70 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/LinearLayout1"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/itemDishList"
     android:layout_width="fill_parent"
-    android:layout_height="128dp" android:weightSum="5">
+    android:layout_height="128dp"
+    android:minHeight="128dp" >
 
     <ImageView
         android:id="@+id/imgDishAvatar"
         android:layout_width="128dp"
         android:layout_height="fill_parent"
-        android:src="@drawable/dish_sample"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/dish_sample" />
 
-    <LinearLayout
-        android:layout_height="fill_parent"
-        android:orientation="vertical" android:layout_width="0dp" android:layout_weight="4">
-
-        <TextView
-            android:id="@+id/textDishName"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:gravity="top|left"
-            android:maxLines="1"
-            android:text="Tôm nướng"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <TextView
-            android:id="@+id/textDishDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:maxLength="100"
-            android:maxLines="3"
-            android:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent" >
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Giá: " android:layout_gravity="bottom"/>
-
-            <Spinner
-                android:id="@+id/spinDishPrices"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"/>
-
-            <ListView
-                android:id="@+id/listView1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" >
-            </ListView>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
     <TextView
-        android:id="@+id/textView1"
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:text="sample" android:layout_weight="1"/>
+        android:id="@+id/textDishName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/imgDishAvatar"
+        android:ellipsize="marquee"
+        android:gravity="top|left"
+        android:maxLines="1"
+        android:text="Tôm nướng"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-</LinearLayout>
+    <Space
+        android:id="@+id/Space1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true" />
+
+    <Space
+        android:id="@+id/Space2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignBaseline="@+id/Space1"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/Space1" />
+
+    <Space
+        android:id="@+id/Space3"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignBaseline="@+id/Space1"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:id="@+id/textDishDescription"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textDishName"
+        android:layout_toRightOf="@+id/imgDishAvatar"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:maxLength="100"
+        android:maxLines="3"
+        android:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView" />
+
+    <Spinner
+        android:id="@+id/spinDishPrices"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textDishDescription"
+        android:layout_alignParentBottom="true" />
+
+    <RatingBar
+        android:id="@+id/rateDish"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:isIndicator="true"
+        android:numStars="5" />
+
+</RelativeLayout>

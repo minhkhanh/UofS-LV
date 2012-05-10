@@ -107,7 +107,7 @@ public class MenuClientActivity extends Activity implements LoaderCallbacks<Curs
             if (cursor.moveToPosition(pos)) {
                 String abbr = cursor.getString(cursor
                         .getColumnIndex(NgonNguContract.COL_ABBREVIATE));
-                
+
                 AppLocale locale = MyApplication.gSettings.getLocale();
                 String settAbbr = locale.loadLangAbbr();
                 if (settAbbr == null || !settAbbr.equals(abbr)) {
