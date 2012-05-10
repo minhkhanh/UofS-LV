@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BanBUS.cs" />
     <Compile Include="BoPhanCheBienBUS.cs" />
+    <Compile Include="ChiTietCheBienOrderBUS.cs" />
     <Compile Include="ChiTietDanhMucBoPhanCheBienBUS.cs" />
     <Compile Include="ChiTietDanhMucDaNgonNguBUS.cs" />
     <Compile Include="ChiTietDonViTinhDaNgonNguBUS.cs" />
