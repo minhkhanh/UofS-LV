@@ -13,5 +13,23 @@ namespace LocalServerBUS
         {
             return BoPhanCheBienDAO.LayDanhSachBoPhanCheBien();
         }
+
+        public static List<ChiTietOrder> LayDanhSachChiTietOrderCanCheBien(BoPhanCheBien boPhanCheBien)
+        {
+            var listCTO = BoPhanCheBienDAO.LayDanhSachChiTietOrderCanCheBien(boPhanCheBien);
+            //foreach (var chiTietOrder in listCTO)
+            //{
+            //    chiTietOrder.SoLuongDaCheBien =
+            //        ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder).SoLuongDaCheBien;
+            //    chiTietOrder.SoLuongDangCheBien =
+            //        ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder).SoLuongDangCheBien;
+            //}
+            return listCTO;
+        }
+
+        public static BoPhanCheBien LayBoPhanCheBienTheoMa(int maBoPhanCheBien)
+        {
+            return BoPhanCheBienDAO.LayBoPhanCheBienTheoMa(maBoPhanCheBien);
+        }
     }
 }
