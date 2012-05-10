@@ -628,6 +628,14 @@ REFERENCES [dbo].[ChiTietOrder] (
 )
 GO
 
+ALTER TABLE [dbo].[ChiTietCheBienOrder] WITH CHECK ADD CONSTRAINT [ChiTietOrder_ChiTietCheBienOrder_FK1] FOREIGN KEY (
+[MaChiTietOrder]
+)
+REFERENCES [dbo].[ChiTietOrder] (
+[MaChiTietOrder]
+)
+GO
+
 GO
 
 GO
