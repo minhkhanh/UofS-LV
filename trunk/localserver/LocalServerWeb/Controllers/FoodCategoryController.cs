@@ -144,7 +144,7 @@ namespace LocalServerWeb.Controllers
                     viewModel.ParentName = FoodCategoryString.Index;
                     viewModel.ParentId = 0;
 
-                    List<DanhMuc> listDanhMuc = DanhMucBUS.LayDanhSachDanhMucCha();
+                    List<DanhMuc> listDanhMuc = DanhMucBUS.LayDanhSachDanhMucRoot();
                     for (int i = 0; i < listDanhMuc.Count; ++i)
                     {
                         ChiTietDanhMucDaNgonNgu ct = ChiTietDanhMucDaNgonNguBUS.LayChiTietDanhMucDaNgonNgu(listDanhMuc[i].MaDanhMuc, maNgonNgu);

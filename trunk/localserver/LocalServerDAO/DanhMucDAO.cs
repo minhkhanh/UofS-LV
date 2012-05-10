@@ -35,7 +35,7 @@ namespace LocalServerDAO
             return null;
         }
 
-        public static List<DanhMuc> LayDanhSachDanhMucCha()
+        public static List<DanhMuc> LayDanhSachDanhMucRoot()
         {
             return ThucDonDienTu.DataContext.DanhMucs.Where(d => d.DanhMucCha == null).ToList();
         }
@@ -47,6 +47,53 @@ namespace LocalServerDAO
                 ThucDonDienTu.DataContext.DanhMucs.Where(
                     d => !ThucDonDienTu.DataContext.DanhMucs.Where(c => c.DanhMucCha == d).Any());
             return temp.ToList();
+        }
+
+        // Can xoa cac Chi Tiet Danh Muc Da Ngon Ngu tuong ung !?
+        public static bool Xoa(int maDanhMuc)
+        {
+            try
+            {
+                var objDanhMuc = LayDanhMuc(maDanhMuc);
+                ThucDonDienTu.DataContext.DanhMucs.DeleteOnSubmit(objDanhMuc);
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
+
+        // Can them cac Chi Tiet Danh Muc Da Ngon Ngu tuong ung
+        public static bool Them(DanhMuc danhMuc)
+        {
+            try
+            {
+                ThucDonDienTu.DataContext.DanhMucs.InsertOnSubmit(danhMuc);
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
+
+        public static bool CapNhat(DanhMuc danhMuc)
+        {
+            try
+            {
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
         }
     }
 }

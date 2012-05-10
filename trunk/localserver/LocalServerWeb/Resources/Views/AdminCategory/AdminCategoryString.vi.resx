@@ -135,6 +135,9 @@
   <data name="EditTitle" xml:space="preserve">
     <value>Cập nhật danh mục</value>
   </data>
+  <data name="ErrorCannotBeParentCategory" xml:space="preserve">
+    <value>Danh mục không thể là danh mục cha của chính nó</value>
+  </data>
   <data name="ErrorCannotChangeParentCategory" xml:space="preserve">
     <value>Không thể thay đổi danh mục cha</value>
   </data>
@@ -143,6 +146,9 @@
   </data>
   <data name="NoData" xml:space="preserve">
     <value>Hiện không có danh mục nào</value>
+  </data>
+  <data name="NumberOrdinary" xml:space="preserve">
+    <value>STT</value>
   </data>
   <data name="Option" xml:space="preserve">
     <value>Tùy chọn</value>
