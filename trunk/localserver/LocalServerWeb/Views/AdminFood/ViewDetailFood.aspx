@@ -82,7 +82,7 @@
                                 <% Html.BeginForm("DeleteUnit", "AdminFood", FormMethod.Post, new { id = "form_delete_" + (iCount) }); %>  
                                 <input name="maMonAn" type="hidden" value="<%:Request.QueryString["maMonAn"] %>"/>
                                 <input name="maDonViTinh" type="hidden" value="<%:chiTienMonAnDonViTinh.DonViTinh.MaDonViTinh %>"/>
-                                <a title="<%:AdminFoodString.Delete %>" class="icon-2 info-tooltip" onclick="deleteUnit('#form_editPrice_<%:iCount %>');" />
+                                <a title="<%:AdminFoodString.Delete %>" class="icon-2 info-tooltip" onclick="deleteUnit('#form_delete_<%:iCount %>');" />
                                 <% Html.EndForm(); %>
                             </td>
                         </tr>                    
