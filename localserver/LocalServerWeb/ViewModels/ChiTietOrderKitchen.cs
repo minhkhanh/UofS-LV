@@ -27,6 +27,8 @@ namespace LocalServerWeb
 
         public int SoLuongDangCheBien { get; set; }
 
+        public string TenPhucVu { get; set; }
+
         //public bool DuocPhepCheBien { get; set; }
 
     }

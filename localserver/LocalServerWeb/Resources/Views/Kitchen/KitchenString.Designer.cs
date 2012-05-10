@@ -70,6 +70,15 @@ namespace LocalServerWeb.Resources.Views.Kitchen {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cook.
+        /// </summary>
+        public static string CheBien {
+            get {
+                return ResourceManager.GetString("CheBien", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DangCheBien.
         /// </summary>
         public static string DangCheBien {
@@ -97,11 +106,29 @@ namespace LocalServerWeb.Resources.Views.Kitchen {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Note.
+        /// </summary>
+        public static string GhiChu {
+            get {
+                return ResourceManager.GetString("GhiChu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Region.
         /// </summary>
         public static string KhuVuc {
             get {
                 return ResourceManager.GetString("KhuVuc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MaChiTietOrder.
+        /// </summary>
+        public static string MaChiTietOrder {
+            get {
+                return ResourceManager.GetString("MaChiTietOrder", resourceCulture);
             }
         }
         
