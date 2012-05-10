@@ -73,7 +73,8 @@ CREATE TABLE [dbo].[ChiTietOrder] (
 , [MaMonAn] int  NULL
 , [MaDonViTinh] int  NULL   
 , [GhiChu] nvarchar(200)  NULL  
-, [MaBoPhanCheBien] int  NULL  
+, [MaBoPhanCheBien] int  NULL 
+, [DuocPhepCheBien] bit NULL 
 )
 GO
 
