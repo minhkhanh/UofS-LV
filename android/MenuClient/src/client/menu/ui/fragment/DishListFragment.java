@@ -10,26 +10,20 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.OnHierarchyChangeListener;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import client.menu.R;
 import client.menu.application.MyApplication;
 import client.menu.db.contract.DonViTinhMonAnContract;
 import client.menu.db.contract.MonAnContract;
 import client.menu.db.contract.MonAnDaNgonNguContract;
 import client.menu.db.contract.NgonNguContract;
-import client.menu.util.C;
 
 public class DishListFragment extends ListFragment {
 
@@ -39,66 +33,76 @@ public class DishListFragment extends ListFragment {
     private SimpleCursorAdapter mAdapter;
 
     private class LoadDishUnitsAsyncTask extends
-            AsyncTask<Integer, Integer, List<ArrayAdapter<String>>> {
-        
-        List<Spinner> mSpinnerList = new ArrayList<Spinner>();
+            AsyncTask<Void, Integer, ArrayAdapter<String>> {
+
+        Integer mIndex;
+        Spinner mSpinner;
+
+        public LoadDishUnitsAsyncTask(Spinner spinner, int index) {
+            mIndex = index;
+            mSpinner = spinner;
+        }
 
         @Override
-        protected void onPostExecute(List<ArrayAdapter<String>> result) {
-            for (int i = 0; i < result.size(); ++i) {;
-                Spinner spinner = mSpinnerList.get(i);
-                spinner.setAdapter(result.get(i));
-                // spinner.setBackgroundColor(R.color.red);
-//                Log.d("onPostExecute", result.get(i) == null ? "null" : "not null");
-            }
+        protected void onPostExecute(ArrayAdapter<String> result) {
+            mSpinner.setAdapter(result);
         };
 
         @Override
-        protected List<ArrayAdapter<String>> doInBackground(Integer... params) {
-            List<ArrayAdapter<String>> result = new ArrayList<ArrayAdapter<String>>();
-
+        protected ArrayAdapter<String> doInBackground(Void... unused) {
             Cursor adaptCursor = mAdapter.getCursor();
-            for (int i = 0; i < params.length; ++i) {
-                
-                adaptCursor.moveToPosition(params[i]);
-                Integer maMonAn = adaptCursor.getInt(adaptCursor
-                        .getColumnIndex(MonAnContract.COL_SID));
+            adaptCursor.moveToPosition(mIndex);
+            Integer maMonAn = adaptCursor.getInt(adaptCursor
+                    .getColumnIndex(MonAnContract.COL_SID));
 
-                String[] projection = new String[] { DonViTinhMonAnContract._ID,
-                        DonViTinhMonAnContract.COL_MA_MON_AN,
-                        DonViTinhMonAnContract.COL_MA_DON_VI,
-                        DonViTinhMonAnContract.COL_DON_GIA };
-                String selection = DonViTinhMonAnContract.COL_MA_MON_AN + "=?";
-                String[] selArgs = new String[] { maMonAn.toString() };
+            String[] projection = new String[] { DonViTinhMonAnContract._ID,
+                    DonViTinhMonAnContract.COL_MA_MON_AN,
+                    DonViTinhMonAnContract.COL_MA_DON_VI,
+                    DonViTinhMonAnContract.COL_DON_GIA };
+            String selection = DonViTinhMonAnContract.COL_MA_MON_AN + "=?";
+            String[] selArgs = new String[] { maMonAn.toString() };
 
-                Cursor cursor = getActivity().getContentResolver().query(
-                        DonViTinhMonAnContract.CONTENT_URI, projection, selection,
-                        selArgs, null);
+            Cursor cursor = getActivity().getContentResolver().query(
+                    DonViTinhMonAnContract.CONTENT_URI, projection, selection, selArgs,
+                    null);
 
-                if (cursor != null) {
-                    List<String> items = new ArrayList<String>();
-                    while (cursor.moveToNext()) {
-                        // Integer _id = cursor.getInt(0);
-                        Float price = cursor.getFloat(3);
+            if (cursor != null) {
+                List<String> data = new ArrayList<String>();
+                while (cursor.moveToNext()) {
+                    // Integer _id = cursor.getInt(0);
+                    Float price = cursor.getFloat(3);
 
-                        items.add(price.toString());
-                    }
-
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                            getActivity(), android.R.layout.simple_spinner_item,
-                            android.R.id.text1, items);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    result.add(adapter);
-                    
-                    ViewGroup frame = (ViewGroup) getListView().getChildAt(params[i]);
-                    Spinner spinner = (Spinner) frame.findViewById(R.id.spinDishPrices);
-                    mSpinnerList.add(spinner);
+                    data.add(Float.toString(price));
                 }
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                        android.R.layout.simple_spinner_item, android.R.id.text1, data);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                return adapter;
             }
 
-            return result;
+            return null;
+        }
+    };
+
+    private OnHierarchyChangeListener mOnListItemChange = new OnHierarchyChangeListener() {
+
+        @Override
+        public void onChildViewRemoved(View parent, View child) {
         }
 
+        @Override
+        public void onChildViewAdded(View parent, View child) {
+            if (child.getId() == R.id.itemDishList) {
+                int pos = getListView().getPositionForView(child);
+
+                Spinner spinner = (Spinner) ((ViewGroup) child)
+                        .findViewById(R.id.spinDishPrices);
+
+                new LoadDishUnitsAsyncTask(spinner, pos).execute();
+            }
+        }
     };
 
     private LoaderCallbacks<Cursor> mLoaderCallbacks = new LoaderCallbacks<Cursor>() {
@@ -117,12 +121,8 @@ public class DishListFragment extends ListFragment {
             switch (loader.getId()) {
                 case LOADER_ID_DISH_LIST:
                     mAdapter.swapCursor(loadedCursor);
-                    for (int i = 0; i < getListView().getCount(); ++i) {
-                        new LoadDishUnitsAsyncTask().execute(i);
-                    }
                     break;
             }
-
         }
 
         @Override
@@ -175,25 +175,6 @@ public class DishListFragment extends ListFragment {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        for (int i = 0; i < getListAdapter().getCount(); ++i) {
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                    android.R.layout.simple_spinner_item, android.R.id.text1,
-                    new String[] { "10" });
-            
-            
-
-            final ViewGroup frame = (ViewGroup) getListView().getChildAt(i);
-            final Spinner spinner = (Spinner) frame.findViewById(R.id.spinDishPrices);
-            spinner.setAdapter(adapter);
-
-            Log.d("onOptionsItemSelected", spinner.getAdapter() == null ? "null"
-                    : "not null");
-        }
-        return true;
-    }
-
-    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
 
@@ -217,12 +198,8 @@ public class DishListFragment extends ListFragment {
                 from, to, 0);
 
         setListAdapter(mAdapter);
+        getListView().setOnHierarchyChangeListener(mOnListItemChange);
 
         getLoaderManager().initLoader(LOADER_ID_DISH_LIST, null, mLoaderCallbacks);
-    }
-
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
     }
 }
