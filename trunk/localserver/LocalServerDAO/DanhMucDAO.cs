@@ -37,7 +37,7 @@ namespace LocalServerDAO
 
         public static List<DanhMuc> LayDanhSachDanhMucRoot()
         {
-            return ThucDonDienTu.DataContext.DanhMucs.Where(d => d.DanhMucCha == null).ToList();
+            return ThucDonDienTu.DataContext.DanhMucs.Where(d => d.DanhMucCha.MaDanhMuc == 1).ToList();
         }
 
 

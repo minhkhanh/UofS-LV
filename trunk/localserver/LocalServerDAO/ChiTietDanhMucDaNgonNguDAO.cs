@@ -23,5 +23,54 @@ namespace LocalServerDAO
         {
             return ThucDonDienTu.DataContext.ChiTietDanhMucDaNgonNgus.ToList();
         }
+
+        public static List<ChiTietDanhMucDaNgonNgu> LayDanhSachChiTietDanhMucDaNgonNguTheoDanhMuc(int maDanhMuc)
+        {
+            return ThucDonDienTu.DataContext.ChiTietDanhMucDaNgonNgus.Where(c => c.DanhMuc.MaDanhMuc == maDanhMuc).ToList();
+        }
+
+        public static bool Xoa(ChiTietDanhMucDaNgonNgu chiTietDanhMucDaNgonNgu)
+        {
+            try
+            {
+                ThucDonDienTu.DataContext.ChiTietDanhMucDaNgonNgus.DeleteOnSubmit(chiTietDanhMucDaNgonNgu);
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
+
+        public static bool Them(ChiTietDanhMucDaNgonNgu chiTietDanhMucDaNgonNgu)
+        {
+            try
+            {
+                ThucDonDienTu.DataContext.ChiTietDanhMucDaNgonNgus.InsertOnSubmit(chiTietDanhMucDaNgonNgu);
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
+
+        public static bool CapNhat(ChiTietDanhMucDaNgonNgu chiTietDanhMucDaNgonNgu)
+        {
+            try
+            {
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
     }
 }

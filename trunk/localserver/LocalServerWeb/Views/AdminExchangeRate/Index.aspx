@@ -32,7 +32,7 @@
     <!--  Error message: Cannot delete this exchange rate  -->
     <% if (TempData["errorCannotDelete"] != null)
        {%>
-    <div id="message-red">
+    <div class="message-red">
         <table border="0" width="100%" cellpadding="0" cellspacing="0">
             <tbody>
                 <tr>
@@ -53,14 +53,14 @@
     <!--  Error message: Cannot update the value for this exchange rate  -->
     <% if (TempData["errorCannotUpdate"] != null)
        {%>
-    <div id="Div2">
+    <div class="message-red">
         <table border="0" width="100%" cellpadding="0" cellspacing="0">
             <tbody>
                 <tr>
                     <td class="red-left">
                         <%:SharedString.Error %>
                         <a href="">
-                            <%: TempData["errorCannotDelete"]%></a>
+                            <%: TempData["errorCannotUpdate"]%></a>
                     </td>
                     <td class="red-right">
                         <a class="close-red">

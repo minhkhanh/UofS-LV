@@ -61,6 +61,15 @@ namespace LocalServerWeb.Resources.Views.AdminCategory {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new language detail.
+        /// </summary>
+        public static string AddLanguageDetail {
+            get {
+                return ResourceManager.GetString("AddLanguageDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new category.
         /// </summary>
         public static string AddTitle {
@@ -79,7 +88,7 @@ namespace LocalServerWeb.Resources.Views.AdminCategory {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Category.
+        ///   Looks up a localized string similar to Category name.
         /// </summary>
         public static string CategoryName {
             get {
@@ -106,20 +115,20 @@ namespace LocalServerWeb.Resources.Views.AdminCategory {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit language detail.
+        /// </summary>
+        public static string EditLanguageDetail {
+            get {
+                return ResourceManager.GetString("EditLanguageDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit category.
         /// </summary>
         public static string EditTitle {
             get {
                 return ResourceManager.GetString("EditTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This category can&apos;t be the parent of itself.
-        /// </summary>
-        public static string ErrorCannotBeParentCategory {
-            get {
-                return ResourceManager.GetString("ErrorCannotBeParentCategory", resourceCulture);
             }
         }
         
@@ -133,11 +142,83 @@ namespace LocalServerWeb.Resources.Views.AdminCategory {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t choose its descentdant as its parent.
+        /// </summary>
+        public static string ErrorCannotChooseItsDescendant {
+            get {
+                return ResourceManager.GetString("ErrorCannotChooseItsDescendant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t choose itself as its parent.
+        /// </summary>
+        public static string ErrorCannotChooseItself {
+            get {
+                return ResourceManager.GetString("ErrorCannotChooseItself", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can&apos;t delete.
         /// </summary>
         public static string ErrorCannotDelete {
             get {
                 return ResourceManager.GetString("ErrorCannotDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t update category language detail.
+        /// </summary>
+        public static string ErrorCannotUpdateLanguageDetail {
+            get {
+                return ResourceManager.GetString("ErrorCannotUpdateLanguageDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category not found.
+        /// </summary>
+        public static string ErrorCategoryNotFound {
+            get {
+                return ResourceManager.GetString("ErrorCategoryNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category language detail already exist.
+        /// </summary>
+        public static string ErrorLanguageDetailExist {
+            get {
+                return ResourceManager.GetString("ErrorLanguageDetailExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category language detail not found.
+        /// </summary>
+        public static string ErrorLanguageDetailNotFound {
+            get {
+                return ResourceManager.GetString("ErrorLanguageDetailNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language detail.
+        /// </summary>
+        public static string LanguageDetail {
+            get {
+                return ResourceManager.GetString("LanguageDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language name.
+        /// </summary>
+        public static string LanguageName {
+            get {
+                return ResourceManager.GetString("LanguageName", resourceCulture);
             }
         }
         

@@ -83,6 +83,14 @@ namespace LocalServerBUS
             return DanhMucDAO.CapNhat(danhMuc);
         }
 
+        // Check if B is descendant of A
+        public static bool IsItsDescendant(int maDanhMucA, int maDanhMucB)
+        {
+            List<DanhMuc> listConChau = LayDanhSachDanhMucConChauDanhMucCha(maDanhMucA);
+            if (listConChau != null && listConChau.Count > 0 && listConChau.Contains(DanhMucBUS.LayDanhMuc(maDanhMucB)))
+                return true;
+            return false;
+        }
 
     }
 }

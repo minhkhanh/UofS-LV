@@ -38,7 +38,7 @@
     <!--  Error message: Cannot delete this table  -->
     <% if (TempData["errorCannotDelete"] != null)
        {%>
-    <div id="message-red">
+    <div class="message-red">
         <table border="0" width="100%" cellpadding="0" cellspacing="0">
             <tbody>
                 <tr>
@@ -59,7 +59,7 @@
     <!--  Error message: Cannot change area for this table  -->
     <% if (TempData["errorCannotChangeParentCategory"] != null)
        {%>
-    <div id="Div2">
+    <div class="message-red">
         <table border="0" width="100%" cellpadding="0" cellspacing="0">
             <tbody>
                 <tr>
@@ -67,6 +67,47 @@
                         <%:SharedString.Error %>
                         <a href="">
                             <%: TempData["errorCannotChangeParentCategory"]%></a>
+                    </td>
+                    <td class="red-right">
+                        <a class="close-red">
+                            <img src="../../Images/adminimages/table/icon_close_red.gif" alt="" /></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <% } %><!--  Error message: Cannot change area for this table  -->
+    <% if (TempData["errorCannotChooseItself"] != null)
+       {%>
+    <div class="message-red">
+        <table border="0" width="100%" cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td class="red-left">
+                        <%:SharedString.Error %>
+                        <a href="">
+                            <%: TempData["errorCannotChooseItself"]%></a>
+                    </td>
+                    <td class="red-right">
+                        <a class="close-red">
+                            <img src="../../Images/adminimages/table/icon_close_red.gif" alt="" /></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <% } %>
+    <!--  Error message: Cannot change area for this table  -->
+    <% if (TempData["errorCannotChooseItsDescendant"] != null)
+       {%>
+    <div class="message-red">
+        <table border="0" width="100%" cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td class="red-left">
+                        <%:SharedString.Error %>
+                        <a href="">
+                            <%: TempData["errorCannotChooseItsDescendant"]%></a>
                     </td>
                     <td class="red-right">
                         <a class="close-red">
@@ -108,7 +149,11 @@
             </tr>
             <% int iCount = 0; %>
             <% foreach (var danhMuc in (List<DanhMuc>)ViewData["listDanhMuc"])
-               { %>
+               {
+                   // Don't show if this is category None
+                   if (danhMuc.MaDanhMuc == 1)
+                       continue;
+                   %>
             <tr <%: (iCount++%2==0)?"":"class=alternate-row" %>>
                 <td>
                     <%: iCount %>
@@ -123,6 +168,7 @@
                     <% Html.BeginForm("ChangeParentCategory", "AdminCategory", FormMethod.Post); %>
                     <%= Html.DropDownList("maDanhMucCha", new SelectList(ViewData["listDanhMuc"] as List<DanhMuc>, "MaDanhMuc", "TenDanhMuc", (danhMuc.DanhMucCha!=null)?danhMuc.DanhMucCha.MaDanhMuc:0), new { onchange = "submit();", Class = "listDanhMucCha" })%>
                     <input type="hidden" name="maDanhMuc" value="<%: danhMuc.MaDanhMuc %>" id="maDanhMuc<%:iCount %>" />
+                    <input type="hidden" name="previous_action" value="Index"/>
                     <% Html.EndForm(); %>
                 </td>
                 <td class="options-width">
