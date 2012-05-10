@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="BanDAO.cs" />
     <Compile Include="BoPhanCheBienDAO.cs" />
+    <Compile Include="ChiTietCheBienOrderDAO.cs" />
     <Compile Include="ChiTietDanhMucBoPhanCheBienDAO.cs" />
     <Compile Include="ChiTietDanhMucDaNgonNguDAO.cs" />
     <Compile Include="ChiTietDonViTinhDaNgonNgu.cs" />
