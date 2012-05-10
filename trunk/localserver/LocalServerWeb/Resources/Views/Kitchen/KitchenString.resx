@@ -147,4 +147,13 @@
   <data name="TuyChon" xml:space="preserve">
     <value>Option</value>
   </data>
+  <data name="CheBien" xml:space="preserve">
+    <value>Cook</value>
+  </data>
+  <data name="GhiChu" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="MaChiTietOrder" xml:space="preserve">
+    <value>MaChiTietOrder</value>
+  </data>
 </root>

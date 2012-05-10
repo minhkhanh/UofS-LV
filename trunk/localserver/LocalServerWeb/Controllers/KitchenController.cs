@@ -41,7 +41,8 @@ namespace LocalServerWeb.Controllers
                                              TenDonViTinh = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(chiTietOrder.DonViTinh.MaDonViTinh, SharedCode.GetCurrentLanguage(Session).MaNgonNgu).TenDonViTinh,
                                              SoLuong = chiTietOrder.SoLuong,
                                              SoLuongDaCheBien = ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder).SoLuongDaCheBien,
-                                             SoLuongDangCheBien = ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder).SoLuongDangCheBien
+                                             SoLuongDangCheBien = ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder).SoLuongDangCheBien,
+                                             TenPhucVu = chiTietOrder.Order.TaiKhoan.TenTaiKhoan
                                          });
             }
             ViewData["listChiTietOrderKitchen"] = listChiTietOrderKitchen;
