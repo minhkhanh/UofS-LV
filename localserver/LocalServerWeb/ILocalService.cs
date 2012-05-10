@@ -41,6 +41,10 @@ namespace LocalServerWeb
         [OperationContract]
         List<Ban> LayDanhSachBanTheoKhuVuc(int maKhuVuc);
 
+        [WebInvoke(Method = "PUT", UriTemplate = "capNhatBan")]
+        [OperationContract]
+        bool CapNhatBan(Ban ban);
+
 
         /// <summary>
         /// Tách bàn đã ghép ra thành các bàn rời nhau

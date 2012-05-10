@@ -123,6 +123,20 @@ namespace LocalServerWeb
             return false;
         }
 
+        public bool CapNhatBan(Ban ban)
+        {
+            try
+            {
+                return BanBUS.CapNhat(ban);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return false;
+        }
+
+
 
         // Mon An
         public List<MonAn> LayDanhSachMonAn()
