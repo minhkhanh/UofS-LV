@@ -128,16 +128,29 @@ namespace LocalServerDAO
 
         public static bool CapNhat(Ban ban)
         {
+            bool result = false;
+            var temp = ThucDonDienTu.DataContext.Bans.Where(b => b.MaBan == ban.MaBan);
+            if (temp.Count() > 0)
+            {
+                Ban b = temp.First();
+                b.Active = ban.Active;
+                b._maBanChinh = ban._maBanChinh;
+                b._maKhuVuc = ban._maKhuVuc;
+                b.GhiChu = ban.GhiChu;
+                b.TinhTrang = ban.TinhTrang;
+            }
+
             try
             {
                 ThucDonDienTu.DataContext.SubmitChanges();
-                return true;
+                result = true;
             }
             catch (Exception e)
             {
-                Console.Out.WriteLine(e.StackTrace);
+                result = false;
             }
-            return false;
+
+            return result;
         }
     }
 }
