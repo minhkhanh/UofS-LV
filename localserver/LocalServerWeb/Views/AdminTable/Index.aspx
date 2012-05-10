@@ -58,7 +58,7 @@
     <!--  Error message: Cannot change area for this table  -->
     <% if (TempData["errorCannotChangeArea"] != null)
        {%>
-    <div id="Div2">
+    <div id="message-red">
         <table border="0" width="100%" cellpadding="0" cellspacing="0">
             <tbody>
                 <tr>

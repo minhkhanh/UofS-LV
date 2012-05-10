@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddLanguageDetail" xml:space="preserve">
+    <value>Add new language detail</value>
+  </data>
   <data name="AddTitle" xml:space="preserve">
     <value>Add new category</value>
   </data>
@@ -124,7 +127,7 @@
     <value>Description</value>
   </data>
   <data name="CategoryName" xml:space="preserve">
-    <value>Category</value>
+    <value>Category name</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
@@ -132,17 +135,41 @@
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="EditLanguageDetail" xml:space="preserve">
+    <value>Edit language detail</value>
+  </data>
   <data name="EditTitle" xml:space="preserve">
     <value>Edit category</value>
-  </data>
-  <data name="ErrorCannotBeParentCategory" xml:space="preserve">
-    <value>This category can't be the parent of itself</value>
   </data>
   <data name="ErrorCannotChangeParentCategory" xml:space="preserve">
     <value>Can't change parent category</value>
   </data>
+  <data name="ErrorCannotChooseItsDescendant" xml:space="preserve">
+    <value>Can't choose its descentdant as its parent</value>
+  </data>
+  <data name="ErrorCannotChooseItself" xml:space="preserve">
+    <value>Can't choose itself as its parent</value>
+  </data>
   <data name="ErrorCannotDelete" xml:space="preserve">
     <value>Can't delete</value>
+  </data>
+  <data name="ErrorCannotUpdateLanguageDetail" xml:space="preserve">
+    <value>Can't update category language detail</value>
+  </data>
+  <data name="ErrorCategoryNotFound" xml:space="preserve">
+    <value>Category not found</value>
+  </data>
+  <data name="ErrorLanguageDetailExist" xml:space="preserve">
+    <value>Category language detail already exist</value>
+  </data>
+  <data name="ErrorLanguageDetailNotFound" xml:space="preserve">
+    <value>Category language detail not found</value>
+  </data>
+  <data name="LanguageDetail" xml:space="preserve">
+    <value>Language detail</value>
+  </data>
+  <data name="LanguageName" xml:space="preserve">
+    <value>Language name</value>
   </data>
   <data name="NoData" xml:space="preserve">
     <value>There are no categories</value>

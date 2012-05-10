@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddLanguageDetail" xml:space="preserve">
+    <value>Thêm chi tiết ngôn ngữ mới</value>
+  </data>
   <data name="AddTitle" xml:space="preserve">
     <value>Thêm danh mục mới</value>
   </data>
@@ -124,7 +127,7 @@
     <value>Mô tả</value>
   </data>
   <data name="CategoryName" xml:space="preserve">
-    <value>Danh mục</value>
+    <value>Tên danh mục</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Xóa</value>
@@ -132,17 +135,38 @@
   <data name="Edit" xml:space="preserve">
     <value>Sửa</value>
   </data>
+  <data name="EditLanguageDetail" xml:space="preserve">
+    <value>Cập nhật chi tiết ngôn ngữ</value>
+  </data>
   <data name="EditTitle" xml:space="preserve">
     <value>Cập nhật danh mục</value>
-  </data>
-  <data name="ErrorCannotBeParentCategory" xml:space="preserve">
-    <value>Danh mục không thể là danh mục cha của chính nó</value>
   </data>
   <data name="ErrorCannotChangeParentCategory" xml:space="preserve">
     <value>Không thể thay đổi danh mục cha</value>
   </data>
+  <data name="ErrorCannotChooseItsDescendant" xml:space="preserve">
+    <value>Không thể chọn danh mục cha thuộc cấp thấp hơn</value>
+  </data>
+  <data name="ErrorCannotChooseItself" xml:space="preserve">
+    <value>Không thể chọn danh mục cha là chính nó</value>
+  </data>
   <data name="ErrorCannotDelete" xml:space="preserve">
     <value>Không thể xóa</value>
+  </data>
+  <data name="ErrorCannotUpdateLanguageDetail" xml:space="preserve">
+    <value>Không thể cập nhật chi tiết ngôn ngữ này</value>
+  </data>
+  <data name="ErrorLanguageDetailExist" xml:space="preserve">
+    <value>Chi tiết ngôn ngữ này đã tồn tại</value>
+  </data>
+  <data name="ErrorLanguageDetailNotFound" xml:space="preserve">
+    <value>Không tồn tại chi tiết ngôn ngữ này</value>
+  </data>
+  <data name="LanguageDetail" xml:space="preserve">
+    <value>Chi tiết ngôn ngữ</value>
+  </data>
+  <data name="LanguageName" xml:space="preserve">
+    <value>Tên ngôn ngữ</value>
   </data>
   <data name="NoData" xml:space="preserve">
     <value>Hiện không có danh mục nào</value>
