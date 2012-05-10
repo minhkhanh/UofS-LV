@@ -29,7 +29,7 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<div = "category">
+<div id = "category">
 
     <%Html.RenderPartial("AjaxCategory", Model); %>
 
