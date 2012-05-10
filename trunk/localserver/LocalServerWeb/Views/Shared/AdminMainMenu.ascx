@@ -16,7 +16,7 @@
 		</div>
 		</li>
         </ul>			
-		s
+		
 		<div class="nav-divider">&nbsp;</div>
 		                    
 		<ul <%: ((int)ViewData["menuMainId"] == 1)?"class=current":"class=select" %> ><li><a href="#nogo"><b><%:SharedString.AccountManager %></b></a>
