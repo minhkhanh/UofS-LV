@@ -14,6 +14,18 @@ namespace LocalServerBUS
             return ChiTietOrderDAO.LayChiTietOrder(maChiTietOrder);
         }
 
+        //public static ChiTietOrder LayChiTietOrderDetail(int maChiTietOrder)
+        //{
+        //    var ct = ChiTietOrderDAO.LayChiTietOrder(maChiTietOrder);
+        //    var cto = ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(maChiTietOrder);
+        //    if (ct!=null && cto!=null)
+        //    {
+        //        ct.SoLuongDaCheBien = cto.SoLuongDaCheBien;
+        //        ct.SoLuongDangCheBien = cto.SoLuongDangCheBien;
+        //    }
+        //    return ct;
+        //}
+
         public static List<ChiTietOrder> LayNhieuChiTietOrder(int maOrder)
         {
             return ChiTietOrderDAO.LayNhieuChiTietOrder(maOrder);
