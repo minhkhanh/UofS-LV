@@ -97,6 +97,15 @@ namespace LocalServerWeb.Resources.Views.AdminUnit {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit language detail.
+        /// </summary>
+        public static string EditLanguageDetail {
+            get {
+                return ResourceManager.GetString("EditLanguageDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit unit.
         /// </summary>
         public static string EditTitle {

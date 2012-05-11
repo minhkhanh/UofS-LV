@@ -48,7 +48,7 @@
     <Compile Include="ChiTietCheBienOrderDAO.cs" />
     <Compile Include="ChiTietDanhMucBoPhanCheBienDAO.cs" />
     <Compile Include="ChiTietDanhMucDaNgonNguDAO.cs" />
-    <Compile Include="ChiTietDonViTinhDaNgonNgu.cs" />
+    <Compile Include="ChiTietDonViTinhDaNgonNguDAO.cs" />
     <Compile Include="ChiTietHoaDonDAO.cs" />
     <Compile Include="ChiTietHuyOrderDAO.cs" />
     <Compile Include="ChiTietMonAnDaNgonNguDAO.cs" />
