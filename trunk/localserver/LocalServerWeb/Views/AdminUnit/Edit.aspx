@@ -11,21 +11,37 @@
     <%: Url.RequestContext.RouteData.Values["id"] %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <% if (TempData["errorNotFound"] != null)
-       {
-           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorNotFound"]);
-       }
-    %>
+    <!--  Error message: Cannot delete language detail  -->
     <% if (TempData["errorCannotDelete"] != null)
        {
            Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotDelete"]);
-       }
+       } 
     %>
+    <!--  Delete successfully  -->
+    <% if (TempData["infoDeleteSuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoDeleteSuccess"]);
+       } 
+    %>
+    <!--  Error message: Cannot edit language detail  -->
     <% if (TempData["errorCannotEdit"] != null)
        {
            Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotEdit"]);
-       }
+       } 
     %>
+    <!--  Edit successfully  -->
+    <% if (TempData["infoEditSuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoEditSuccess"]);
+       } 
+    %>
+    <!--  Add successfully, this will be show if previous Add redirect to Edit -->
+    <% if (TempData["infoAddSuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoAddSuccess"]);
+       } 
+    %>
+    <!--  Main code  --------------------------------------------------------------------------->
     <!-- start id-form -->
     <div id="table-content">
         <table border="0" cellpadding="0" cellspacing="0" id="id-form" width="100%">
