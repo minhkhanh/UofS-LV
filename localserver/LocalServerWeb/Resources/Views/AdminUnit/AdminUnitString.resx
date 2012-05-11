@@ -117,10 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddLanguageDetail" xml:space="preserve">
+    <value>Add new language detail</value>
+  </data>
+  <data name="AddTitle" xml:space="preserve">
+    <value>Add new unit</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EditTitle" xml:space="preserve">
+    <value>Edit unit</value>
+  </data>
+  <data name="ErrorCannotDelete" xml:space="preserve">
+    <value>Can't delete</value>
+  </data>
+  <data name="ErrorLanguageDetailExist" xml:space="preserve">
+    <value>Language detail not found</value>
+  </data>
+  <data name="ErrorLanguageDetailNotFound" xml:space="preserve">
+    <value>Language detail already exist</value>
+  </data>
+  <data name="ErrorNoLanguageDetail" xml:space="preserve">
+    <value>There are not language details</value>
+  </data>
+  <data name="ErrorUnitNotFound" xml:space="preserve">
+    <value>Requested unit not found</value>
+  </data>
+  <data name="LanguageDetail" xml:space="preserve">
+    <value>Language detail</value>
+  </data>
+  <data name="LanguageName" xml:space="preserve">
+    <value>Language name</value>
+  </data>
   <data name="NoData" xml:space="preserve">
-    <value />
+    <value>There are not units</value>
+  </data>
+  <data name="NumberOrdinary" xml:space="preserve">
+    <value>No.</value>
+  </data>
+  <data name="Option" xml:space="preserve">
+    <value>Option</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value />
+    <value>Unit list</value>
+  </data>
+  <data name="UnitName" xml:space="preserve">
+    <value>Unit name</value>
   </data>
 </root>

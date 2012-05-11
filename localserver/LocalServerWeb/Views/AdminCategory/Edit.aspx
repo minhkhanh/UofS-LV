@@ -38,16 +38,7 @@
                     <% Html.BeginForm("AddCategoryLanguage", "AdminCategory", FormMethod.Post, new { id = "form-add-language" }); %>
                     <label for="name">
                         <%: AdminCategoryString.LanguageName %></label>
-                    <select name="maNgonNgu" class="listData">
-                        <% var listNgonNguChuaCo = ViewData["listNgonNguChuaCo"] as List<NgonNgu>;
-                           for (int i = 0; i < listNgonNguChuaCo.Count; ++i)
-                           {
-                               var ngonNgu = listNgonNguChuaCo[i];%>
-                        <option value="<%:ngonNgu.MaNgonNgu %>">
-                            <%:ngonNgu.TenNgonNgu
-                            %></option>
-                        <%} %>
-                    </select>
+                    <%= Html.DropDownList("maNgonNgu", new SelectList(ViewData["listNgonNguChuaCo"] as List<NgonNgu>, "MaNgonNgu", "TenNgonNgu", 1), new { Class = "listData" })%>
                     <label for="name">
                         <%: AdminCategoryString.CategoryName %></label>
                     <input type="text" name="tenDanhMuc" value="" class="text ui-widget-content ui-corner-all" />

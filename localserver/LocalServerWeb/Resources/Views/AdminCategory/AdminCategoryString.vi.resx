@@ -162,6 +162,9 @@
   <data name="ErrorLanguageDetailNotFound" xml:space="preserve">
     <value>Không tồn tại chi tiết ngôn ngữ này</value>
   </data>
+  <data name="ErrorNoLanguageDetail" xml:space="preserve">
+    <value>Hiện không có chi tiết ngôn ngữ nào</value>
+  </data>
   <data name="LanguageDetail" xml:space="preserve">
     <value>Chi tiết ngôn ngữ</value>
   </data>

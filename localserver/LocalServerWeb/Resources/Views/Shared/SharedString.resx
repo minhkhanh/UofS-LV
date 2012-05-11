@@ -141,6 +141,9 @@
   <data name="AddTable" xml:space="preserve">
     <value>Add new table</value>
   </data>
+  <data name="AddUnit" xml:space="preserve">
+    <value>Add new unit</value>
+  </data>
   <data name="AdminAddUser" xml:space="preserve">
     <value>Add new user</value>
   </data>
@@ -221,6 +224,12 @@
   </data>
   <data name="TableList" xml:space="preserve">
     <value>Table list</value>
+  </data>
+  <data name="Unit" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <data name="UnitList" xml:space="preserve">
+    <value>Unit list</value>
   </data>
   <data name="Update" xml:space="preserve">
     <value>Update</value>

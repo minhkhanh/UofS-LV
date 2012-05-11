@@ -18,5 +18,20 @@ namespace LocalServerBUS
         {
             return DonViTinhDAO.LayDonViTinhTheoMa(maDonViTinh);
         }
+
+        public static bool Xoa(int maDonViTinh)
+        {
+            return DonViTinhDAO.Xoa(maDonViTinh);
+        }
+
+        public static bool Them(DonViTinh donViTinh)
+        {
+            return DonViTinhDAO.Them(donViTinh);
+        }
+
+        public static bool CapNhat(DonViTinh donViTinh)
+        {
+            return DonViTinhDAO.CapNhat(donViTinh);
+        }
     }
 }

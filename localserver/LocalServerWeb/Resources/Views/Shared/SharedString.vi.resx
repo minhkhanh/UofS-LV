@@ -141,6 +141,9 @@
   <data name="AddTable" xml:space="preserve">
     <value>Thêm bàn mới</value>
   </data>
+  <data name="AddUnit" xml:space="preserve">
+    <value>Thêm đơn vị tính mới</value>
+  </data>
   <data name="AdminAddUser" xml:space="preserve">
     <value>Thêm tài khoản mới</value>
   </data>
@@ -221,6 +224,12 @@
   </data>
   <data name="TableList" xml:space="preserve">
     <value>Danh sách bàn</value>
+  </data>
+  <data name="Unit" xml:space="preserve">
+    <value>Đơn vị tính</value>
+  </data>
+  <data name="UnitList" xml:space="preserve">
+    <value>Danh sách đơn vị tính</value>
   </data>
   <data name="Update" xml:space="preserve">
     <value>Cập nhật</value>
