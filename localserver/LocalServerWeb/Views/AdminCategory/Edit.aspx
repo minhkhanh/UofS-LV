@@ -38,7 +38,16 @@
                     <% Html.BeginForm("AddCategoryLanguage", "AdminCategory", FormMethod.Post, new { id = "form-add-language" }); %>
                     <label for="name">
                         <%: AdminCategoryString.LanguageName %></label>
-                    <%= Html.DropDownList("maNgonNgu", new SelectList(ViewData["listNgonNguChuaCo"] as List<NgonNgu>, "MaNgonNgu", "TenNgonNgu", 1), new { Class = "listNgonNguChuaCo" })%>
+                    <select name="maNgonNgu" class="listData">
+                        <% var listNgonNguChuaCo = ViewData["listNgonNguChuaCo"] as List<NgonNgu>;
+                           for (int i = 0; i < listNgonNguChuaCo.Count; ++i)
+                           {
+                               var ngonNgu = listNgonNguChuaCo[i];%>
+                        <option value="<%:ngonNgu.MaNgonNgu %>">
+                            <%:ngonNgu.TenNgonNgu
+                            %></option>
+                        <%} %>
+                    </select>
                     <label for="name">
                         <%: AdminCategoryString.CategoryName %></label>
                     <input type="text" name="tenDanhMuc" value="" class="text ui-widget-content ui-corner-all" />
@@ -116,21 +125,21 @@
     </table>
     <!-- end id-form  -->
     <!-- begin edit language detail. This will be call when click Edit-->
-                <div id="dialog-form-edit-language" title="<%: AdminCategoryString.EditLanguageDetail %>">
-                    <% Html.BeginForm("EditCategoryLanguage", "AdminCategory", FormMethod.Post, new { id = "form-edit-language" }); %>
-                    <label for="name">
-                        <%: AdminCategoryString.LanguageName %></label>
-                    <input type="text" name="tenNgonNgu" readonly="readonly" value="" />
-                    <label for="name">
-                        <%: AdminCategoryString.CategoryName %></label>
-                    <input type="text" name="tenDanhMuc"  value="" class="text ui-widget-content ui-corner-all" />
-                    <label for="name">
-                        <%: AdminCategoryString.CategoryDescription %></label>
-                    <input type="text" name="moTaDanhMuc" value="" class="text ui-widget-content ui-corner-all" />
-                    <input type="hidden" name="maDanhMuc" value="<%: Url.RequestContext.RouteData.Values["id"] %>" />
-                    <input type="hidden" name="maNgonNgu" value="" />
-                    <% Html.EndForm(); %>
-                </div>
+    <div id="dialog-form-edit-language" title="<%: AdminCategoryString.EditLanguageDetail %>">
+        <% Html.BeginForm("EditCategoryLanguage", "AdminCategory", FormMethod.Post, new { id = "form-edit-language" }); %>
+        <label for="name">
+            <%: AdminCategoryString.LanguageName %></label>
+        <input type="text" name="tenNgonNgu" readonly="readonly" value="" />
+        <label for="name">
+            <%: AdminCategoryString.CategoryName %></label>
+        <input type="text" name="tenDanhMuc" value="" class="text ui-widget-content ui-corner-all" />
+        <label for="name">
+            <%: AdminCategoryString.CategoryDescription %></label>
+        <input type="text" name="moTaDanhMuc" value="" class="text ui-widget-content ui-corner-all" />
+        <input type="hidden" name="maDanhMuc" value="<%: Url.RequestContext.RouteData.Values["id"] %>" />
+        <input type="hidden" name="maNgonNgu" value="" />
+        <% Html.EndForm(); %>
+    </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
     <script src="../../Scripts/jquery/jquery.selectbox-0.5.js" type="text/javascript"></script>
@@ -229,7 +238,6 @@
             border-bottom: none;
             border-color: gray;
             padding-left: 5px;
-            
         }
         
         #table-chi-tiet-ngon-ngu td
@@ -242,8 +250,8 @@
         {
             background: #B0B0B0;
             margin-bottom: 5px;
-            font-size:larger;
-        } 
+            font-size: larger;
+        }
         
         #table-chi-tiet-ngon-ngu tr
         {
@@ -252,8 +260,7 @@
         
         #table-chi-tiet-ngon-ngu .chi-tiet-title
         {
-            font-weight:bold;
+            font-weight: bold;
         }
-        
     </style>
 </asp:Content>
