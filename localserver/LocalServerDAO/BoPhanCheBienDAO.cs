@@ -15,17 +15,15 @@ namespace LocalServerDAO
 
         public static List<ChiTietOrder> LayDanhSachChiTietOrderCanCheBien(BoPhanCheBien boPhanCheBien)
         {
+            //return
+            //    ThucDonDienTu.DataContext.ChiTietOrders.Where(
+            //        c =>
+            //        c.BoPhanCheBien == boPhanCheBien && c.DuocPhepCheBien == true &&
+            //        (!ThucDonDienTu.DataContext.ChiTietCheBienOrders.Where(bo => bo.ChiTietOrder == c).Any() || ThucDonDienTu.DataContext.ChiTietCheBienOrders.Where(bo => bo.ChiTietOrder == c).First().SoLuongDaCheBien + ThucDonDienTu.DataContext.ChiTietCheBienOrders.Where(bo => bo.ChiTietOrder == c).First().SoLuongDangCheBien < c.SoLuong)).ToList();
             return
                 ThucDonDienTu.DataContext.ChiTietOrders.Where(
                     c =>
-                    c.BoPhanCheBien == boPhanCheBien && c.DuocPhepCheBien == true &&
-                    (!ThucDonDienTu.DataContext.ChiTietCheBienOrders.Where(bo => bo.ChiTietOrder == c).Any() || ThucDonDienTu.DataContext.ChiTietCheBienOrders.Where(bo => bo.ChiTietOrder == c).First().SoLuongDaCheBien + ThucDonDienTu.DataContext.ChiTietCheBienOrders.Where(bo => bo.ChiTietOrder == c).First().SoLuongDangCheBien < c.SoLuong)).ToList();
-            //return
-            //    ThucDonDienTu.DataContext.ChiTietCheBienOrders.Where(
-            //        c =>
-            //        c.ChiTietOrder.BoPhanCheBien == boPhanCheBien && c.ChiTietOrder.DuocPhepCheBien == true &&
-            //        c.ChiTietOrder.SoLuong > c.SoLuongDaCheBien + c.SoLuongDangCheBien).Select(c => c.ChiTietOrder).
-            //        ToList();
+                    c.BoPhanCheBien == boPhanCheBien && c.DuocPhepCheBien ).ToList();
         }
 
         public static BoPhanCheBien LayBoPhanCheBienTheoMa(int maBoPhanCheBien)
