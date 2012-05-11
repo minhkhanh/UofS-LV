@@ -144,14 +144,32 @@
   <data name="ErrorAreaNotFound" xml:space="preserve">
     <value>Area not found</value>
   </data>
+  <data name="ErrorCannotAdd" xml:space="preserve">
+    <value>Can't add</value>
+  </data>
   <data name="ErrorCannotChangeArea" xml:space="preserve">
     <value>Can't change area</value>
   </data>
   <data name="ErrorCannotDelete" xml:space="preserve">
     <value>Can't delete</value>
   </data>
+  <data name="ErrorCannotEdit" xml:space="preserve">
+    <value>Can't edit</value>
+  </data>
   <data name="ErrorTableNotFound" xml:space="preserve">
     <value>Requested table not found</value>
+  </data>
+  <data name="InfoAddSuccess" xml:space="preserve">
+    <value>Add successfully</value>
+  </data>
+  <data name="InfoChangeAreaSuccess" xml:space="preserve">
+    <value>Change area successfully</value>
+  </data>
+  <data name="InfoDeleteSuccess" xml:space="preserve">
+    <value>Delete successfully</value>
+  </data>
+  <data name="InfoEditSuccess" xml:space="preserve">
+    <value>Edit successfully</value>
   </data>
   <data name="NoData" xml:space="preserve">
     <value>There are no tables</value>

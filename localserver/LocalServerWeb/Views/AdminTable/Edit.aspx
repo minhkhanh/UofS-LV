@@ -26,26 +26,13 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <% if (TempData["error"] != null)
-       {%>
-    <div id="message-red">
-        <table border="0" width="100%" cellpadding="0" cellspacing="0">
-            <tbody>
-                <tr>
-                    <td class="red-left">
-                        <%:SharedString.Error %>
-                        <a href="">
-                            <%: TempData["error"] %></a>
-                    </td>
-                    <td class="red-right">
-                        <a class="close-red">
-                            <img src="../../Images/adminimages/table/icon_close_red.gif" alt="" /></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <% } %>
+    <!--  Error message: Cannot edit table   -->
+    <% if (TempData["errorCannotDelete"] != null)
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotDelete"]);
+       } 
+    %>
+    <!--  Main code  --------------------------------------------------------------------------->
     <% Html.BeginForm("Edit", "AdminTable", FormMethod.Post); %>
     <!-- start id-form -->
     <input type="hidden" name="maBan" value="<%:Url.RequestContext.RouteData.Values["id"] %>" />

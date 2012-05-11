@@ -47,6 +47,10 @@ namespace LocalServerWeb.Controllers
             {
                 TempData["errorCannotChangeArea"] = AdminTableString.ErrorCannotChangeArea;
             }
+            else
+            {
+                TempData["infoChangeAreaSuccess"] = AdminTableString.InfoChangeAreaSuccess;
+            }
 
             return RedirectToAction("Index");
         }
@@ -69,6 +73,10 @@ namespace LocalServerWeb.Controllers
             if (!BanBUS.Xoa(objBan.MaBan))
             {
                 TempData["errorCannotDelete"] = AdminTableString.ErrorCannotDelete;
+            }
+            else
+            {
+                TempData["infoDeleteSuccess"] = AdminTableString.InfoDeleteSuccess;
             }
 
             return RedirectToAction("Index");
@@ -126,7 +134,14 @@ namespace LocalServerWeb.Controllers
 
                     // Need to clear TempData
                     if (BanBUS.Them(ban))
+                    {
+                        TempData["infoAddSuccess"] = AdminTableString.InfoAddSuccess;
                         return RedirectToAction("Index", "AdminTable");
+                    }
+                    else
+                    {
+                        TempData["errorCannotAdd"] = AdminTableString.ErrorCannotAdd;
+                    }
                 }
                 catch (Exception e)
                 {
@@ -150,10 +165,17 @@ namespace LocalServerWeb.Controllers
                 TempData["checkDic"] = new Dictionary<string, string>();
             }
 
-            Ban objBan = BanBUS.LayBan(id ?? 0);
-            if (id == null || objBan == null)
+            if (id == null || id <= 0)
             {
-                TempData["error"] = AdminTableString.ErrorTableNotFound;
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            Ban objBan = BanBUS.LayBan(id ?? 0);
+            if (objBan == null)
+            {
+                TempData["errorNotFound"] = AdminTableString.ErrorTableNotFound;
+                return RedirectToAction("Index", "Error");
             }
             else
             {
@@ -206,7 +228,14 @@ namespace LocalServerWeb.Controllers
 
                     // Need to clear TempData
                     if (BanBUS.CapNhat(ban))
+                    {
+                        TempData["infoEditSuccess"] = AdminTableString.InfoEditSuccess;
                         return RedirectToAction("Index", "AdminTable");
+                    }
+                    else
+                    {
+                        TempData["errorCannotEdit"] = AdminTableString.ErrorCannotEdit;
+                    }
                 }
                 catch (Exception e)
                 {

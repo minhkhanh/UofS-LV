@@ -34,48 +34,43 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <!--  Error message: Cannot delete this table  -->
+    <!--  Error message: Cannot delete this area  -->
     <% if (TempData["errorCannotDelete"] != null)
-       {%>
-    <div id="message-red">
-        <table border="0" width="100%" cellpadding="0" cellspacing="0">
-            <tbody>
-                <tr>
-                    <td class="red-left">
-                        <%:SharedString.Error %>
-                        <a href="">
-                            <%: TempData["errorCannotDelete"]%></a>
-                    </td>
-                    <td class="red-right">
-                        <a class="close-red">
-                            <img src="../../Images/adminimages/table/icon_close_red.gif" alt="" /></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <% } %>
-    <!--  Error message: Cannot change area for this table  -->
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotDelete"]);
+       } 
+    %>
+    <!--  Delete successfully  -->
+    <% if (TempData["infoDeleteSuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoDeleteSuccess"]);
+       } 
+    %>
+    <!--  Cannot update online  -->
     <% if (TempData["errorCannotChangeArea"] != null)
-       {%>
-    <div id="message-red">
-        <table border="0" width="100%" cellpadding="0" cellspacing="0">
-            <tbody>
-                <tr>
-                    <td class="red-left">
-                        <%:SharedString.Error %>
-                        <a href="">
-                            <%: TempData["errorCannotChangeArea"]%></a>
-                    </td>
-                    <td class="red-right">
-                        <a class="close-red">
-                            <img src="../../Images/adminimages/table/icon_close_red.gif" alt="" /></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <% } %>
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotChangeArea"]);
+       } 
+    %>
+    <!--  Update successfully  -->
+    <% if (TempData["infoChangeAreaSuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoChangeAreaSuccess"]);
+       } 
+    %>
+    <!--  Add successfully  -->
+    <% if (TempData["infoAddSuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoAddSuccess"]);
+       } 
+    %>
+    <!--  Edit successfully  -->
+    <% if (TempData["infoEditSuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoEditSuccess"]);
+       } 
+    %>
+    <!--  Main code  --------------------------------------------------------------------------->
     <!--  start table-content  -->
     <% if (ViewData["listBan"] != null && ((List<Ban>)ViewData["listBan"]).Count > 0)
        {
