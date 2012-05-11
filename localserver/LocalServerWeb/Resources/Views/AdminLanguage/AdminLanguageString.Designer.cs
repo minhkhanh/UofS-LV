@@ -97,6 +97,15 @@ namespace LocalServerWeb.Resources.Views.AdminLanguage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t add.
+        /// </summary>
+        public static string ErrorCannotAdd {
+            get {
+                return ResourceManager.GetString("ErrorCannotAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot delete.
         /// </summary>
         public static string ErrorCannotDelete {
@@ -106,11 +115,47 @@ namespace LocalServerWeb.Resources.Views.AdminLanguage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t edit.
+        /// </summary>
+        public static string ErrorCannotEdit {
+            get {
+                return ResourceManager.GetString("ErrorCannotEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Requested language not found.
         /// </summary>
         public static string ErrorLanguageNotFound {
             get {
                 return ResourceManager.GetString("ErrorLanguageNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add successfully.
+        /// </summary>
+        public static string InfoAddSuccess {
+            get {
+                return ResourceManager.GetString("InfoAddSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete successfully.
+        /// </summary>
+        public static string InfoDeleteSuccess {
+            get {
+                return ResourceManager.GetString("InfoDeleteSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit successfully.
+        /// </summary>
+        public static string InfoEditSuccess {
+            get {
+                return ResourceManager.GetString("InfoEditSuccess", resourceCulture);
             }
         }
         

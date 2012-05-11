@@ -92,6 +92,9 @@ namespace LocalServerWeb.Controllers
                 // If add successfully, 
                 if (DonViTinhBUS.Them(donViTinh))
                     return RedirectToAction("Edit", new { id = donViTinh.MaDonViTinh });
+                // If add failed
+                else
+                    TempData["errorCannotAdd"] = AdminUnitString.ErrorCannotAdd;
             }
             catch (Exception e)
             {
@@ -106,12 +109,18 @@ namespace LocalServerWeb.Controllers
         {
             SharedCode.FillAdminMainMenu(ViewData, 3, 0);
 
-            DonViTinh donViTinh = DonViTinhBUS.LayDonViTinhTheoMa(id ?? 0);
-            if (id == null || donViTinh == null)
+            if (id == null || id <= 0)
             {
-                TempData["errorNotFound"] = AdminUnitString.ErrorUnitNotFound;
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
             }
 
+            DonViTinh donViTinh = DonViTinhBUS.LayDonViTinhTheoMa(id ?? 0);
+            if (donViTinh == null)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
 
             ViewData["listNgonNguChuaCo"] = ChiTietDonViTinhDaNgonNguBUS.LayDanhSachNgonNguChuaCo(id ?? 0);
             ViewData["listChiTietDonViTinhDaNgonNgu"] = ChiTietDonViTinhDaNgonNguBUS.LayDanhSachChiTietDonViTinhDaNgonNguTheoDonViTinh(id ?? 0);

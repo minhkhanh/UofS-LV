@@ -71,7 +71,14 @@ namespace LocalServerWeb.Controllers
 
                     // Need to clear TempData
                     if (NgonNguBUS.Them(ngonNgu))
+                    {
+                        TempData["infoAddSuccess"] = AdminLanguageString.InfoAddSuccess;
                         return RedirectToAction("Index", "AdminLanguage");
+                    }
+                    else
+                    {
+                        TempData["errorCannotAdd"] = AdminLanguageString.ErrorCannotAdd;
+                    }
                 }
                 catch (Exception e)
                 {
@@ -93,10 +100,17 @@ namespace LocalServerWeb.Controllers
                 TempData["checkDic"] = new Dictionary<string, string>();
             }
 
-            NgonNgu objNgonNgu = NgonNguBUS.LayNgonNguTheoMa(id ?? 0);
-            if (id == null || objNgonNgu == null)
+            if (id == null || id <= 0)
             {
-                TempData["error"] = AdminLanguageString.ErrorLanguageNotFound;
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            NgonNgu objNgonNgu = NgonNguBUS.LayNgonNguTheoMa(id ?? 0);
+            if (objNgonNgu == null)
+            {
+                TempData["errorNotFound"] = AdminLanguageString.ErrorLanguageNotFound;
+                return RedirectToAction("Index", "Error");
             }
             else
             {
@@ -151,7 +165,14 @@ namespace LocalServerWeb.Controllers
 
                     // Need to clear TempData
                     if (NgonNguBUS.CapNhat(ngonNgu))
+                    {
+                        TempData["infoEditSuccess"] = AdminLanguageString.InfoEditSuccess;
                         return RedirectToAction("Index", "AdminLanguage");
+                    }
+                    else
+                    {
+                        TempData["errorCannotEdit"] = AdminLanguageString.ErrorCannotEdit;
+                    }
                 }
                 catch (Exception e)
                 {
@@ -175,13 +196,18 @@ namespace LocalServerWeb.Controllers
             NgonNgu objNgonNgu = NgonNguBUS.LayNgonNguTheoMa(id ?? 0);
             if (objNgonNgu == null)
             {
-                TempData["error"] = SharedString.InputWrong;
+                TempData["errorNotFound"] = AdminLanguageString.ErrorLanguageNotFound;
                 return RedirectToAction("Index", "Error");
             }
 
             if (!NgonNguBUS.Xoa(objNgonNgu.MaNgonNgu))
             {
                 TempData["errorCannotDelete"] = AdminLanguageString.ErrorCannotDelete;
+
+            }
+            else
+            {
+                TempData["infoDeleteSuccess"] = AdminLanguageString.InfoDeleteSuccess;
             }
 
             return RedirectToAction("Index");

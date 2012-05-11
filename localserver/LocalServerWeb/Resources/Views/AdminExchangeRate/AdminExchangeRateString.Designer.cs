@@ -106,11 +106,29 @@ namespace LocalServerWeb.Resources.Views.AdminExchangeRate {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t add.
+        /// </summary>
+        public static string ErrorCannotAdd {
+            get {
+                return ResourceManager.GetString("ErrorCannotAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can&apos;t delete.
         /// </summary>
         public static string ErrorCannotDelete {
             get {
                 return ResourceManager.GetString("ErrorCannotDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t edit.
+        /// </summary>
+        public static string ErrorCannotEdit {
+            get {
+                return ResourceManager.GetString("ErrorCannotEdit", resourceCulture);
             }
         }
         
@@ -129,6 +147,42 @@ namespace LocalServerWeb.Resources.Views.AdminExchangeRate {
         public static string ErrorExchangeRateNotFound {
             get {
                 return ResourceManager.GetString("ErrorExchangeRateNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add successfully.
+        /// </summary>
+        public static string InfoAddSuccess {
+            get {
+                return ResourceManager.GetString("InfoAddSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete successfully.
+        /// </summary>
+        public static string InfoDeleteSuccess {
+            get {
+                return ResourceManager.GetString("InfoDeleteSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit successfully.
+        /// </summary>
+        public static string InfoEditSuccess {
+            get {
+                return ResourceManager.GetString("InfoEditSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update successfully.
+        /// </summary>
+        public static string InfoUpdateSuccess {
+            get {
+                return ResourceManager.GetString("InfoUpdateSuccess", resourceCulture);
             }
         }
         
@@ -169,7 +223,7 @@ namespace LocalServerWeb.Resources.Views.AdminExchangeRate {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update.
+        ///   Looks up a localized string similar to Update online.
         /// </summary>
         public static string Update {
             get {

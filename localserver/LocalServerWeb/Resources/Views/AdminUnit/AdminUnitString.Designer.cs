@@ -115,11 +115,29 @@ namespace LocalServerWeb.Resources.Views.AdminUnit {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t add.
+        /// </summary>
+        public static string ErrorCannotAdd {
+            get {
+                return ResourceManager.GetString("ErrorCannotAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can&apos;t delete.
         /// </summary>
         public static string ErrorCannotDelete {
             get {
                 return ResourceManager.GetString("ErrorCannotDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t edit.
+        /// </summary>
+        public static string ErrorCannotEdit {
+            get {
+                return ResourceManager.GetString("ErrorCannotEdit", resourceCulture);
             }
         }
         
@@ -138,15 +156,6 @@ namespace LocalServerWeb.Resources.Views.AdminUnit {
         public static string ErrorLanguageDetailNotFound {
             get {
                 return ResourceManager.GetString("ErrorLanguageDetailNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There are not language details.
-        /// </summary>
-        public static string ErrorNoLanguageDetail {
-            get {
-                return ResourceManager.GetString("ErrorNoLanguageDetail", resourceCulture);
             }
         }
         
@@ -219,6 +228,15 @@ namespace LocalServerWeb.Resources.Views.AdminUnit {
         public static string UnitName {
             get {
                 return ResourceManager.GetString("UnitName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no language details.
+        /// </summary>
+        public static string WarningNoLanguageDetail {
+            get {
+                return ResourceManager.GetString("WarningNoLanguageDetail", resourceCulture);
             }
         }
     }

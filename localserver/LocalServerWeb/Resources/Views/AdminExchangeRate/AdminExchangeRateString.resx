@@ -132,14 +132,32 @@
   <data name="EditTitle" xml:space="preserve">
     <value>Edit exchange rate</value>
   </data>
+  <data name="ErrorCannotAdd" xml:space="preserve">
+    <value>Can't add</value>
+  </data>
   <data name="ErrorCannotDelete" xml:space="preserve">
     <value>Can't delete</value>
+  </data>
+  <data name="ErrorCannotEdit" xml:space="preserve">
+    <value>Can't edit</value>
   </data>
   <data name="ErrorCannotUpdate" xml:space="preserve">
     <value>Can't update</value>
   </data>
   <data name="ErrorExchangeRateNotFound" xml:space="preserve">
     <value>Requested exchange rate not found</value>
+  </data>
+  <data name="InfoAddSuccess" xml:space="preserve">
+    <value>Add successfully</value>
+  </data>
+  <data name="InfoDeleteSuccess" xml:space="preserve">
+    <value>Delete successfully</value>
+  </data>
+  <data name="InfoEditSuccess" xml:space="preserve">
+    <value>Edit successfully</value>
+  </data>
+  <data name="InfoUpdateSuccess" xml:space="preserve">
+    <value>Update successfully</value>
   </data>
   <data name="NoData" xml:space="preserve">
     <value>There are no exchange rates</value>
@@ -154,7 +172,7 @@
     <value>Exchange rate list</value>
   </data>
   <data name="Update" xml:space="preserve">
-    <value>Update</value>
+    <value>Update online</value>
   </data>
   <data name="UpdatedAt" xml:space="preserve">
     <value>Updated at</value>

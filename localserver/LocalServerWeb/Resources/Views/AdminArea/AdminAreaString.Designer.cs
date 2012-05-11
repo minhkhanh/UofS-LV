@@ -124,11 +124,11 @@ namespace LocalServerWeb.Resources.Views.AdminArea {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can&apos;t change area.
+        ///   Looks up a localized string similar to Can&apos;t add.
         /// </summary>
-        public static string ErrorCannotChangeArea {
+        public static string ErrorCannotAdd {
             get {
-                return ResourceManager.GetString("ErrorCannotChangeArea", resourceCulture);
+                return ResourceManager.GetString("ErrorCannotAdd", resourceCulture);
             }
         }
         
@@ -138,6 +138,42 @@ namespace LocalServerWeb.Resources.Views.AdminArea {
         public static string ErrorCannotDelete {
             get {
                 return ResourceManager.GetString("ErrorCannotDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t edit.
+        /// </summary>
+        public static string ErrorCannotEdit {
+            get {
+                return ResourceManager.GetString("ErrorCannotEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add successfully.
+        /// </summary>
+        public static string InfoAddSuccess {
+            get {
+                return ResourceManager.GetString("InfoAddSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete successfully.
+        /// </summary>
+        public static string InfoDeleteSuccess {
+            get {
+                return ResourceManager.GetString("InfoDeleteSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit successfully.
+        /// </summary>
+        public static string InfoEditSuccess {
+            get {
+                return ResourceManager.GetString("InfoEditSuccess", resourceCulture);
             }
         }
         

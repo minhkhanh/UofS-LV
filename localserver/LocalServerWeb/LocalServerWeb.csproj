@@ -877,8 +877,10 @@
     <Content Include="Views\Shared\LanguageUserControl.ascx" />
     <Content Include="Views\Shared\LatestSlider.ascx" />
     <Content Include="Views\Shared\LeftSidebar.ascx" />
-    <Content Include="Views\Shared\MessageTooltip.ascx" />
+    <Content Include="Views\Shared\ErrorMessageTooltip.ascx" />
+    <Content Include="Views\Shared\InfoMessageTooltip.ascx" />
     <Content Include="Views\Shared\OrderDetailCancelStatus.ascx" />
+    <Content Include="Views\Shared\WarningMessageTooltip.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
