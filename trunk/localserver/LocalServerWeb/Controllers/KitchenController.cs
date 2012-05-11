@@ -11,12 +11,15 @@ namespace LocalServerWeb.Controllers
 {
     public class KitchenController : BaseController
     {
+        public const int TIMER_TICK = 10000;
+
         //
         // GET: /Kitchen/
 
         public ActionResult Index()
         {
             SharedCode.FillAdminMainMenu(ViewData, 3, 0);
+            ViewData["iTimerTick"] = TIMER_TICK;
             return View();
         }
 
@@ -30,6 +33,7 @@ namespace LocalServerWeb.Controllers
             var listChiTietOrderKitchen = new List<ChiTietOrderKitchen>();
             foreach (var chiTietOrder in listChiTietOrder)
             {
+                var chiTietCheBienOrder = ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder);
                 listChiTietOrderKitchen.Add(new ChiTietOrderKitchen
                                          {
                                              MaChiTietOrder = chiTietOrder.MaChiTietOrder,
@@ -40,8 +44,8 @@ namespace LocalServerWeb.Controllers
                                              GhiChu = chiTietOrder.GhiChu,
                                              TenDonViTinh = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(chiTietOrder.DonViTinh.MaDonViTinh, SharedCode.GetCurrentLanguage(Session).MaNgonNgu).TenDonViTinh,
                                              SoLuong = chiTietOrder.SoLuong,
-                                             SoLuongDaCheBien = ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder).SoLuongDaCheBien,
-                                             SoLuongDangCheBien = ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder).SoLuongDangCheBien,
+                                             SoLuongDaCheBien = chiTietCheBienOrder!=null ? chiTietCheBienOrder.SoLuongDaCheBien : 0,
+                                             SoLuongDangCheBien = chiTietCheBienOrder!=null ? chiTietCheBienOrder.SoLuongDangCheBien : 0,
                                              TenPhucVu = chiTietOrder.Order.TaiKhoan.TenTaiKhoan
                                          });
             }
@@ -54,11 +58,13 @@ namespace LocalServerWeb.Controllers
             if (!Request.IsAjaxRequest()) return RedirectToAction("Index", "Error");
             var chiTietOrder = ChiTietOrderBUS.LayChiTietOrder(maChiTietOrder);
             if (chiTietOrder==null) return new EmptyResult();
-            int iSoLuongCheBienToiDa = chiTietOrder.SoLuong -
-                                       ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder).
-                                           SoLuongDaCheBien -
-                                       ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder).
-                                           SoLuongDangCheBien;
+            var chiTietCheBienOrder = ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder);
+            int iSoLuongCheBienToiDa = chiTietOrder.SoLuong;
+            if (chiTietCheBienOrder!=null)
+            {
+                iSoLuongCheBienToiDa -= (chiTietCheBienOrder.SoLuongDaCheBien + chiTietCheBienOrder.SoLuongDangCheBien);
+            }
+            
             ViewData["iSoLuongCheBienToiDa"] = iSoLuongCheBienToiDa;
             return PartialView("DialogCheBien");
         }
@@ -69,13 +75,23 @@ namespace LocalServerWeb.Controllers
             if (!Request.IsAjaxRequest()) return false;
             var chiTietOrder = ChiTietOrderBUS.LayChiTietOrder(maChiTietOrder);
             if (chiTietOrder == null) return false;
-            int iSoLuongCheBienToiDa = chiTietOrder.SoLuong -
-                                       ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder).
-                                           SoLuongDaCheBien -
-                                       ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder).
-                                           SoLuongDangCheBien;
+            var chiTietCheBienOrder = ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder);
+            int iSoLuongCheBienToiDa = chiTietOrder.SoLuong;
+            if (chiTietCheBienOrder != null)
+            {
+                iSoLuongCheBienToiDa -= (chiTietCheBienOrder.SoLuongDaCheBien + chiTietCheBienOrder.SoLuongDangCheBien);
+            }
             if (soLuongCheBien<=0 || soLuongCheBien>iSoLuongCheBienToiDa) return false;
-            return true;
+            if (chiTietCheBienOrder!=null)
+            {
+                chiTietCheBienOrder.SoLuongDangCheBien += soLuongCheBien;
+                return ChiTietCheBienOrderBUS.SuaChiTietCheBienOrder(chiTietCheBienOrder);
+            }
+            chiTietCheBienOrder = new ChiTietCheBienOrder();
+            chiTietCheBienOrder.ChiTietOrder = chiTietOrder;
+            chiTietCheBienOrder.SoLuongDaCheBien = 0;
+            chiTietCheBienOrder.SoLuongDangCheBien = soLuongCheBien;
+            return ChiTietCheBienOrderBUS.ThemChiTietCheBienOrder(chiTietCheBienOrder);
         }
     }
 }

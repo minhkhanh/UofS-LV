@@ -33,11 +33,11 @@
 			<td><%: chiTietOrder.TenDonViTinh %></td>
             <td><%: chiTietOrder.SoLuong %></td>
             <td><%: chiTietOrder.SoLuongDaCheBien %></td>
-            <% if (chiTietOrder.SoLuongDangCheBien>0) {%>    
-                <td><%: chiTietOrder.SoLuongDangCheBien %></td>
-            <%} else { %>
-                <td><button class="button-che-bien"><%: KitchenString.CheBien %></button></td>
+            <td><%: chiTietOrder.SoLuongDangCheBien %>            
+            <% if (chiTietOrder.SoLuongDangCheBien + chiTietOrder.SoLuongDaCheBien < chiTietOrder.SoLuong) {%>    
+                <button class="button-che-bien"><%: KitchenString.CheBien %></button>
             <%} %>
+            </td>
             <td><%: chiTietOrder.TenPhucVu %></td>
 			<td class="options-width">
 			<a href="" title="Edit" class="icon-1 info-tooltip"></a>
