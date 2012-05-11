@@ -3,7 +3,6 @@
 <%@ Import Namespace="LocalServerDTO" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.AdminCategory" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.Shared" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%: AdminCategoryString.Title %>
 </asp:Content>
@@ -37,87 +36,23 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <!--  Error message: Cannot delete this table  -->
     <% if (TempData["errorCannotDelete"] != null)
-       {%>
-    <div class="message-red">
-        <table border="0" width="100%" cellpadding="0" cellspacing="0">
-            <tbody>
-                <tr>
-                    <td class="red-left">
-                        <%:SharedString.Error %>
-                        <a href="">
-                            <%: TempData["errorCannotDelete"]%></a>
-                    </td>
-                    <td class="red-right">
-                        <a class="close-red">
-                            <img src="../../Images/adminimages/table/icon_close_red.gif" alt="" /></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <% } %>
+       {
+           Html.RenderPartial("MessageTooltip", model: TempData["errorCannotDelete"]);
+       } %>
     <!--  Error message: Cannot change area for this table  -->
     <% if (TempData["errorCannotChangeParentCategory"] != null)
-       {%>
-    <div class="message-red">
-        <table border="0" width="100%" cellpadding="0" cellspacing="0">
-            <tbody>
-                <tr>
-                    <td class="red-left">
-                        <%:SharedString.Error %>
-                        <a href="">
-                            <%: TempData["errorCannotChangeParentCategory"]%></a>
-                    </td>
-                    <td class="red-right">
-                        <a class="close-red">
-                            <img src="../../Images/adminimages/table/icon_close_red.gif" alt="" /></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <% } %><!--  Error message: Cannot change area for this table  -->
+       {
+           Html.RenderPartial("MessageTooltip", model: TempData["errorCannotChangeParentCategory"]);
+       } %><!--  Error message: Cannot change area for this table  -->
     <% if (TempData["errorCannotChooseItself"] != null)
-       {%>
-    <div class="message-red">
-        <table border="0" width="100%" cellpadding="0" cellspacing="0">
-            <tbody>
-                <tr>
-                    <td class="red-left">
-                        <%:SharedString.Error %>
-                        <a href="">
-                            <%: TempData["errorCannotChooseItself"]%></a>
-                    </td>
-                    <td class="red-right">
-                        <a class="close-red">
-                            <img src="../../Images/adminimages/table/icon_close_red.gif" alt="" /></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <% } %>
+       {
+           Html.RenderPartial("MessageTooltip", model: TempData["errorCannotChooseItself"]);
+       } %>
     <!--  Error message: Cannot change area for this table  -->
     <% if (TempData["errorCannotChooseItsDescendant"] != null)
-       {%>
-    <div class="message-red">
-        <table border="0" width="100%" cellpadding="0" cellspacing="0">
-            <tbody>
-                <tr>
-                    <td class="red-left">
-                        <%:SharedString.Error %>
-                        <a href="">
-                            <%: TempData["errorCannotChooseItsDescendant"]%></a>
-                    </td>
-                    <td class="red-right">
-                        <a class="close-red">
-                            <img src="../../Images/adminimages/table/icon_close_red.gif" alt="" /></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <% } %>
+       {
+           Html.RenderPartial("MessageTooltip", model: TempData["errorCannotChooseItsDescendant"]);
+       } %>
     <!--  start table-content  -->
     <% if (ViewData["listDanhMuc"] != null && ((List<DanhMuc>)ViewData["listDanhMuc"]).Count > 0)
        {
@@ -153,7 +88,7 @@
                    // Don't show if this is category None
                    if (danhMuc.MaDanhMuc == 1)
                        continue;
-                   %>
+            %>
             <tr <%: (iCount++%2==0)?"":"class=alternate-row" %>>
                 <td>
                     <%: iCount %>
@@ -168,12 +103,12 @@
                     <% Html.BeginForm("ChangeParentCategory", "AdminCategory", FormMethod.Post); %>
                     <%= Html.DropDownList("maDanhMucCha", new SelectList(ViewData["listDanhMuc"] as List<DanhMuc>, "MaDanhMuc", "TenDanhMuc", (danhMuc.DanhMucCha!=null)?danhMuc.DanhMucCha.MaDanhMuc:0), new { onchange = "submit();", Class = "listDanhMucCha" })%>
                     <input type="hidden" name="maDanhMuc" value="<%: danhMuc.MaDanhMuc %>" id="maDanhMuc<%:iCount %>" />
-                    <input type="hidden" name="previous_action" value="Index"/>
+                    <input type="hidden" name="previous_action" value="Index" />
                     <% Html.EndForm(); %>
                 </td>
                 <td class="options-width">
-                    <%:Html.ActionLink(" ", "Edit", "AdminTable", new { id = danhMuc.MaDanhMuc }, new { title = AdminCategoryString.Edit, Class = "icon-6 info-tooltip" })%>
-                    <%:Html.ActionLink(" ", "Delete", "AdminTable", new { id = danhMuc.MaDanhMuc }, new { title = AdminCategoryString.Delete, Class = "icon-2 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "Edit", "AdminCategory", new { id = danhMuc.MaDanhMuc }, new { title = AdminCategoryString.Edit, Class = "icon-6 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "Delete", "AdminCategory", new { id = danhMuc.MaDanhMuc }, new { title = AdminCategoryString.Delete, Class = "icon-2 info-tooltip" })%>
                 </td>
             </tr>
             <% } %>

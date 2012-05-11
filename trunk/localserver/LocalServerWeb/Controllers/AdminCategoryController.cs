@@ -274,7 +274,7 @@ namespace LocalServerWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditCategoryLanguage(int maDanhMuc, int maNgonNgu, string tenDanhMuc, string moTaDanhMuc)
+        public ActionResult EditCategoryLanguage(int maDanhMuc, int maNgonNgu, string tenDanhMuc, string moTaDanhMuc, string tenNgonNgu)
         {
             if (maDanhMuc < 0 || maNgonNgu <= 0)
             {

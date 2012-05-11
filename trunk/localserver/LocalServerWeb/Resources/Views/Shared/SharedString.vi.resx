@@ -225,6 +225,9 @@
   <data name="Update" xml:space="preserve">
     <value>Cập nhật</value>
   </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Cảnh báo</value>
+  </data>
   <data name="Welcome" xml:space="preserve">
     <value>Xin chào</value>
   </data>
