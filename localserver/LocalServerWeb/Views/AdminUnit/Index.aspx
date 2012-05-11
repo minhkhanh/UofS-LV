@@ -30,11 +30,19 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <!--  Error message: Cannot delete this table  -->
+    <!--  Error message: Cannot delete this unit  -->
     <% if (TempData["errorCannotDelete"] != null)
        {
            Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotDelete"]);
-       } %>
+       } 
+    %>
+    <!--  Delete successfully  -->
+    <% if (TempData["infoDeleteSuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoDeleteSuccess"]);
+       } 
+    %>
+    <!--  Main code  --------------------------------------------------------------------------->
     <!--  start table-content  -->
     <% if (ViewData["listDonViTinh"] != null && ((List<DonViTinh>)ViewData["listDonViTinh"]).Count > 0)
        {

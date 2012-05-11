@@ -33,6 +33,7 @@
            Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotAdd"]);
        }
     %>
+    <!--  Main code  --------------------------------------------------------------------------->
     <% Html.BeginForm("AddBasic", "AdminUnit", FormMethod.Post); %>
     <!-- start id-form -->
     <div id="table-content">

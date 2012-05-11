@@ -153,6 +153,15 @@
   <data name="ErrorUnitNotFound" xml:space="preserve">
     <value>Requested unit not found</value>
   </data>
+  <data name="InfoAddSuccess" xml:space="preserve">
+    <value>Add successfully</value>
+  </data>
+  <data name="InfoDeleteSuccess" xml:space="preserve">
+    <value>Delete successfully</value>
+  </data>
+  <data name="InfoEditSuccess" xml:space="preserve">
+    <value>Edit successfully</value>
+  </data>
   <data name="LanguageDetail" xml:space="preserve">
     <value>Language detail</value>
   </data>
