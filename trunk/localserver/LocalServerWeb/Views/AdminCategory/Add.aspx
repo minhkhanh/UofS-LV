@@ -3,7 +3,6 @@
 <%@ Import Namespace="LocalServerDTO" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.AdminCategory" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.Shared" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%: AdminCategoryString.AddTitle %>
 </asp:Content>
@@ -57,30 +56,32 @@
     <% } %>
     <% Html.BeginForm("Add", "AdminCategory", FormMethod.Post); %>
     <!-- start id-form -->
-    <table border="0" cellpadding="0" cellspacing="0" id="id-form">
-        <tr>
-            <th valign="top">
-                <%: AdminCategoryString.ParentCategoryName %>:
-            </th>
-            <td>
-                 <%= Html.DropDownList("maDanhMucCha", new SelectList(ViewData["listDanhMuc"] as List<DanhMuc>, "MaDanhMuc", "TenDanhMuc", 1), new { onchange = "submit();", Class = "listDanhMucCha" })%>
-            </td>
-            <td>
-                &nbsp;
-            </td>
-        </tr>
-        <tr>
-            <th>
-                &nbsp;
-            </th>
-            <td valign="top">
-                <input type="submit" value="" class="form-submit" />
-                <input type="reset" value="" class="form-reset" />
-            </td>
-            <td>
-            </td>
-        </tr>
-    </table>
+    <div id="table-content">
+        <table border="0" cellpadding="0" cellspacing="0" id="id-form">
+            <tr>
+                <th valign="top">
+                    <%: AdminCategoryString.ParentCategoryName %>:
+                </th>
+                <td>
+                    <%= Html.DropDownList("maDanhMucCha", new SelectList(ViewData["listDanhMuc"] as List<DanhMuc>, "MaDanhMuc", "TenDanhMuc", 1), new { onchange = "submit();", Class = "listDanhMucCha" })%>
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    &nbsp;
+                </th>
+                <td valign="top">
+                    <input type="submit" value="" class="form-submit" />
+                    <input type="reset" value="" class="form-reset" />
+                </td>
+                <td>
+                </td>
+            </tr>
+        </table>
+    </div>
     <!-- end id-form  -->
     <% Html.EndForm(); %>
 </asp:Content>

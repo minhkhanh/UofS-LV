@@ -214,6 +214,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AdmintableString.vi.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Views\AdminUnit\AdminUnitString.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminUnitString.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\AdminUnit\AdminUnitString.vi.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminUnitString.vi.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Views\AdminUser\AdminUserString.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -905,7 +915,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\foodcategory\foodrelate\" />
-    <Folder Include="Resources\Views\AdminUnit\" />
     <Folder Include="Uploads\FoodImages\" />
   </ItemGroup>
   <ItemGroup>
@@ -1006,6 +1015,14 @@
     <EmbeddedResource Include="Resources\Views\AdminTable\AdmintableString.vi.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AdmintableString.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminUnit\AdminUnitString.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminUnitString.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminUnit\AdminUnitString.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminUnitString.vi.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\AdminUser\AdminUserString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -62,6 +62,8 @@
                 -->
                 <li <%: ((int)ViewData["menuSubId"] == 0 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.CategoryList, "Index", "AdminCategory") %></li>
                 <li <%: ((int)ViewData["menuSubId"] == 1 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.AddCategory, "Add", "AdminCategory") %></li>
+                <li <%: ((int)ViewData["menuSubId"] == 2 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.UnitList, "Index", "AdminUnit") %></li>
+                <li <%: ((int)ViewData["menuSubId"] == 3 && (int)ViewData["menuMainId"] == 3)?"class=sub_show":"" %> ><%:Html.ActionLink(SharedString.AddUnit, "Add", "AdminUnit") %></li>
 			</ul>
 		</div>
 		</li>

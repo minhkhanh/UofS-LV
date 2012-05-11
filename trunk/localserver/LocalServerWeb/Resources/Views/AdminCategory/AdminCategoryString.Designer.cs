@@ -205,6 +205,15 @@ namespace LocalServerWeb.Resources.Views.AdminCategory {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are no language details.
+        /// </summary>
+        public static string ErrorNoLanguageDetail {
+            get {
+                return ResourceManager.GetString("ErrorNoLanguageDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language detail.
         /// </summary>
         public static string LanguageDetail {

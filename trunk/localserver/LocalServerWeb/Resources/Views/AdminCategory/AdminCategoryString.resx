@@ -165,6 +165,9 @@
   <data name="ErrorLanguageDetailNotFound" xml:space="preserve">
     <value>Category language detail not found</value>
   </data>
+  <data name="ErrorNoLanguageDetail" xml:space="preserve">
+    <value>There are no language details</value>
+  </data>
   <data name="LanguageDetail" xml:space="preserve">
     <value>Language detail</value>
   </data>

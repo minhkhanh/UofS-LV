@@ -93,7 +93,7 @@
                 <div id="dialog-form-add-unit" title="<%:AdminFoodString.AddUnit %>">
 	                <% Html.BeginForm("AddUnitPrice", "AdminFood", FormMethod.Post, new { id = "form_add_unit"}); %>
 		                <label for="name"><%:AdminFoodString.Unit %></label>
-                        <select name="listDonViTinh" class="listDonViTinh">
+                        <select name="listDonViTinh" class="listData">
                         <% var listDonViTinh = ViewData["listDonViTinh"] as List<DonViTinh>;
                             for (int i=0; i<listDonViTinh.Count; ++i)
                             {

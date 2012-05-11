@@ -133,6 +133,15 @@ namespace LocalServerWeb.Resources.Views.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new unit.
+        /// </summary>
+        public static string AddUnit {
+            get {
+                return ResourceManager.GetString("AddUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new user.
         /// </summary>
         public static string AdminAddUser {
@@ -372,6 +381,24 @@ namespace LocalServerWeb.Resources.Views.Shared {
         public static string TableList {
             get {
                 return ResourceManager.GetString("TableList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unit.
+        /// </summary>
+        public static string Unit {
+            get {
+                return ResourceManager.GetString("Unit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unit list.
+        /// </summary>
+        public static string UnitList {
+            get {
+                return ResourceManager.GetString("UnitList", resourceCulture);
             }
         }
         
