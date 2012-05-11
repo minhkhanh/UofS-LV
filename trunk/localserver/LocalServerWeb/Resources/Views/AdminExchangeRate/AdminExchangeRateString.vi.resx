@@ -132,17 +132,32 @@
   <data name="EditTitle" xml:space="preserve">
     <value>Cập nhật tỉ giá</value>
   </data>
+  <data name="ErrorCannotAdd" xml:space="preserve">
+    <value>Không thể thêm</value>
+  </data>
   <data name="ErrorCannotDelete" xml:space="preserve">
     <value>Không thể xóa</value>
   </data>
-  <data name="ErrorCannotUpdate" xml:space="preserve">
-    <value>Không thể cập nhật</value>
+  <data name="ErrorCannotEdit" xml:space="preserve">
+    <value>Không thể câp nhật</value>
   </data>
-  <data name="ErrorCategoryNotFound" xml:space="preserve">
-    <value>Danh mục không tồn tại</value>
+  <data name="ErrorCannotUpdate" xml:space="preserve">
+    <value>Không thể cập nhật online</value>
   </data>
   <data name="ErrorExchangeRateNotFound" xml:space="preserve">
     <value>Không tồn tại tỉ giá được yêu cầu</value>
+  </data>
+  <data name="InfoAddSuccess" xml:space="preserve">
+    <value>Thêm thành công</value>
+  </data>
+  <data name="InfoDeleteSuccess" xml:space="preserve">
+    <value>Xóa thành công</value>
+  </data>
+  <data name="InfoEditSuccess" xml:space="preserve">
+    <value>Cập nhật thành công</value>
+  </data>
+  <data name="InfoUpdateSuccess" xml:space="preserve">
+    <value>Cập nhật online thành công</value>
   </data>
   <data name="NoData" xml:space="preserve">
     <value>Hiện không có tỉ giá nào</value>
@@ -157,7 +172,7 @@
     <value>Danh sách tỉ giá</value>
   </data>
   <data name="Update" xml:space="preserve">
-    <value>Cập nhật giá trị</value>
+    <value>Cập nhật giá trị online</value>
   </data>
   <data name="UpdatedAt" xml:space="preserve">
     <value>Thời điểm cập nhật</value>

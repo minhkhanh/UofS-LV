@@ -33,7 +33,7 @@
     <!--  Error message: Cannot delete this table  -->
     <% if (TempData["errorCannotDelete"] != null)
        {
-           Html.RenderPartial("MessageTooltip", model: TempData["errorCannotDelete"]);
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotDelete"]);
        } %>
     <!--  start table-content  -->
     <% if (ViewData["listDonViTinh"] != null && ((List<DonViTinh>)ViewData["listDonViTinh"]).Count > 0)

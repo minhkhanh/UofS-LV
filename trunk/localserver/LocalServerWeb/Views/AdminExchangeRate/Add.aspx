@@ -16,8 +16,16 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <!--  Error message: Cannot add this area  -->
+    <% if (TempData["errorCannotAdd"] != null)
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotAdd"]);
+       } 
+    %>
+    <!--  Main code  --------------------------------------------------------------------------->
     <% Html.BeginForm("Add", "AdminExchangeRate", FormMethod.Post); %>
     <!-- start id-form -->
+    <div id="table-content">
     <table border="0" cellpadding="0" cellspacing="0" id="id-form">
         <tr>
             <th valign="top">
@@ -67,6 +75,7 @@
             </td>
         </tr>
     </table>
+    </div>
     <!-- end id-form  -->
     <% Html.EndForm(); %>
 </asp:Content>

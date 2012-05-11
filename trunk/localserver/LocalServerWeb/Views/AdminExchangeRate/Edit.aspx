@@ -17,29 +17,29 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<% if (TempData["errorNotFound"] != null)
-       {%>
-    <div id="message-red">
-        <table border="0" width="100%" cellpadding="0" cellspacing="0">
-            <tbody>
-                <tr>
-                    <td class="red-left">
-                        <%:SharedString.Error %>
-                        <a href="">
-                            <%: TempData["errorNotFound"]%></a>
-                    </td>
-                    <td class="red-right">
-                        <a class="close-red">
-                            <img src="../../Images/adminimages/table/icon_close_red.gif" alt="" /></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <% } %>
+    <!--  Error message: Cannot edit this area  -->
+    <% if (TempData["errorCannotEdit"] != null)
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotEdit"]);
+       } 
+    %>
+    <!--  Cannot update online  -->
+    <% if (TempData["errorCannotUpdate"] != null)
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotUpdate"]);
+       } 
+    %>
+    <!--  Update successfully  -->
+    <% if (TempData["infoUpdateSuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoUpdateSuccess"]);
+       } 
+    %>
+    <!--  Main code  --------------------------------------------------------------------------->
     <% Html.BeginForm("Edit", "AdminExchangeRate", FormMethod.Post); %>
     <!-- start id-form -->
     <input type="hidden" name="maTiGia" value="<%:Url.RequestContext.RouteData.Values["id"] %>" />
+    <div id="table-content">
     <table border="0" cellpadding="0" cellspacing="0" id="id-form">
         <tr>
             <th valign="top">
@@ -89,6 +89,7 @@
             </td>
         </tr>
     </table>
+    </div>
     <!-- end id-form  -->
     <% Html.EndForm(); %>
 </asp:Content>

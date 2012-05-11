@@ -33,13 +33,17 @@ namespace LocalServerWeb.Controllers
             TiGia objTiGia = TiGiaBUS.LayTiGia(id ?? 0);
             if (objTiGia == null)
             {
-                TempData["error"] = SharedString.InputWrong;
+                TempData["error"] = AdminExchangeRateString.ErrorExchangeRateNotFound;
                 return RedirectToAction("Index", "Error");
             }
 
             if (!TiGiaBUS.Xoa(objTiGia.MaTiGia))
             {
                 TempData["errorCannotDelete"] = AdminExchangeRateString.ErrorCannotDelete;
+            }
+            else
+            {
+                TempData["infoDeleteSuccess"] = AdminExchangeRateString.InfoDeleteSuccess;
             }
 
             return RedirectToAction("Index");
@@ -93,7 +97,14 @@ namespace LocalServerWeb.Controllers
 
                     // Need to clear TempData
                     if (TiGiaBUS.Them(tiGia))
+                    {
+                        TempData["infoAddSuccess"] = AdminExchangeRateString.InfoAddSuccess;
                         return RedirectToAction("Index", "AdminExchangeRate");
+                    }
+                    else
+                    {
+                        TempData["errorCannotAdd"] = AdminExchangeRateString.ErrorCannotAdd;
+                    }
                 }
                 catch (Exception e)
                 {
@@ -116,10 +127,17 @@ namespace LocalServerWeb.Controllers
                 TempData["checkDic"] = new Dictionary<string, string>();
             }
 
+            if (id == null || id <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
             TiGia objTiGia = TiGiaBUS.LayTiGia(id ?? 0);
-            if (id == null || objTiGia == null)
+            if (objTiGia == null)
             {
                 TempData["errorNotFound"] = AdminExchangeRateString.ErrorExchangeRateNotFound;
+                return RedirectToAction("Index", "Error");
             }
             else
             {
@@ -166,7 +184,14 @@ namespace LocalServerWeb.Controllers
 
                     // Need to clear TempData
                     if (TiGiaBUS.CapNhat(tiGia))
+                    {
+                        TempData["infoEditSuccess"] = AdminExchangeRateString.InfoEditSuccess;
                         return RedirectToAction("Index", "AdminExchangeRate");
+                    }
+                    else
+                    {
+                        TempData["errorCannotEdit"] = AdminExchangeRateString.ErrorCannotEdit;
+                    }
                 }
                 catch (Exception e)
                 {

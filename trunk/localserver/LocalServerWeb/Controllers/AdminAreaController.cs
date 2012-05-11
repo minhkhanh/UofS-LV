@@ -59,7 +59,14 @@ namespace LocalServerWeb.Controllers
 
                     // Need to clear TempData
                     if (KhuVucBUS.Them(khuVuc))
+                    {
+                        TempData["infoAddSuccess"] = AdminAreaString.InfoAddSuccess;
                         return RedirectToAction("Index", "AdminArea");
+                    }
+                    else
+                    {
+                        TempData["errorCannotAdd"] = AdminAreaString.ErrorCannotAdd;
+                    }
                 }
                 catch (Exception e)
                 {
@@ -81,10 +88,17 @@ namespace LocalServerWeb.Controllers
                 TempData["checkDic"] = new Dictionary<string, string>();
             }
 
-            KhuVuc objKhuVuc = KhuVucBUS.LayKhuVuc(id ?? 0);
-            if (id == null || objKhuVuc == null)
+            if (id == null || id <= 0)
             {
-                TempData["error"] = AdminAreaString.ErrorAreaNotFound;
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            KhuVuc objKhuVuc = KhuVucBUS.LayKhuVuc(id ?? 0);
+            if (objKhuVuc == null)
+            {
+                TempData["errorNotFound"] = AdminAreaString.ErrorAreaNotFound;
+                return RedirectToAction("Index", "Error");
             }
             else
             {
@@ -120,7 +134,14 @@ namespace LocalServerWeb.Controllers
 
                     // Need to clear TempData
                     if (KhuVucBUS.CapNhat(khuVuc))
+                    {
+                        TempData["infoEditSuccess"] = AdminAreaString.InfoEditSuccess;
                         return RedirectToAction("Index", "AdminArea");
+                    }
+                    else
+                    {
+                        TempData["errorCannotEdit"] = AdminAreaString.ErrorCannotEdit;
+                    }
                 }
                 catch (Exception e)
                 {
@@ -129,7 +150,7 @@ namespace LocalServerWeb.Controllers
             }
 
             TempData["checkDic"] = checkDic;
-            return RedirectToAction("Add");
+            return RedirectToAction("Edit");
 
         }
 
@@ -145,14 +166,17 @@ namespace LocalServerWeb.Controllers
             KhuVuc objKhuVuc = KhuVucBUS.LayKhuVuc(id ?? 0);
             if (objKhuVuc == null)
             {
-                TempData["error"] = SharedString.InputWrong;
+                TempData["errorNotFound"] = AdminAreaString.ErrorAreaNotFound;
                 return RedirectToAction("Index", "Error");
             }
 
             if (!KhuVucBUS.Xoa(objKhuVuc.MaKhuVuc))
             {
                 TempData["errorCannotDelete"] = AdminAreaString.ErrorCannotDelete;
-                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["infoDeleteSuccess"] = AdminAreaString.InfoDeleteSuccess;
             }
 
             return RedirectToAction("Index");

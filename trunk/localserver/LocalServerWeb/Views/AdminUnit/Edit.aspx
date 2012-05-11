@@ -11,6 +11,21 @@
     <%: Url.RequestContext.RouteData.Values["id"] %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <% if (TempData["errorNotFound"] != null)
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorNotFound"]);
+       }
+    %>
+    <% if (TempData["errorCannotDelete"] != null)
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotDelete"]);
+       }
+    %>
+    <% if (TempData["errorCannotEdit"] != null)
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotEdit"]);
+       }
+    %>
     <!-- start id-form -->
     <div id="table-content">
         <table border="0" cellpadding="0" cellspacing="0" id="id-form" width="100%">

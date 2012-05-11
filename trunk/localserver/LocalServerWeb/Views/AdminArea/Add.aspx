@@ -16,6 +16,13 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <!--  Error message: Cannot add new area  -->
+    <% if (TempData["errorCannotAdd"] != null)
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotAdd"]);
+       } 
+    %>
+    <!--  Main code  ----------------------------------------------------------------------->
     <% Html.BeginForm("Add", "AdminArea", FormMethod.Post); %>
     <!-- start id-form -->
     <table border="0" cellpadding="0" cellspacing="0" id="id-form">

@@ -29,48 +29,43 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <!--  Error message: Cannot delete this exchange rate  -->
+    <!--  Error message: Cannot delete this area  -->
     <% if (TempData["errorCannotDelete"] != null)
-       {%>
-    <div class="message-red">
-        <table border="0" width="100%" cellpadding="0" cellspacing="0">
-            <tbody>
-                <tr>
-                    <td class="red-left">
-                        <%:SharedString.Error %>
-                        <a href="">
-                            <%: TempData["errorCannotDelete"]%></a>
-                    </td>
-                    <td class="red-right">
-                        <a class="close-red">
-                            <img src="../../Images/adminimages/table/icon_close_red.gif" alt="" /></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <% } %>
-    <!--  Error message: Cannot update the value for this exchange rate  -->
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotDelete"]);
+       } 
+    %>
+    <!--  Delete successfully  -->
+    <% if (TempData["infoDeleteSuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoDeleteSuccess"]);
+       } 
+    %>
+    <!--  Cannot update online  -->
     <% if (TempData["errorCannotUpdate"] != null)
-       {%>
-    <div class="message-red">
-        <table border="0" width="100%" cellpadding="0" cellspacing="0">
-            <tbody>
-                <tr>
-                    <td class="red-left">
-                        <%:SharedString.Error %>
-                        <a href="">
-                            <%: TempData["errorCannotUpdate"]%></a>
-                    </td>
-                    <td class="red-right">
-                        <a class="close-red">
-                            <img src="../../Images/adminimages/table/icon_close_red.gif" alt="" /></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <% } %>
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotUpdate"]);
+       } 
+    %>
+    <!--  Update successfully  -->
+    <% if (TempData["infoUpdateSuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoUpdateSuccess"]);
+       } 
+    %>
+    <!--  Add successfully  -->
+    <% if (TempData["infoAddSuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoAddSuccess"]);
+       } 
+    %>
+    <!--  Edit successfully  -->
+    <% if (TempData["infoEditSuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoEditSuccess"]);
+       } 
+    %>
+    <!--  Main code  --------------------------------------------------------------------------->
     <% if (ViewData["listTiGia"] != null && ((List<TiGia>)ViewData["listTiGia"]).Count > 0)
        {
     %>

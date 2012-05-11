@@ -30,25 +30,29 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <!--  Error message: Cannot delete this area  -->
     <% if (TempData["errorCannotDelete"] != null)
-       {%>
-    <div id="message-red">
-        <table border="0" width="100%" cellpadding="0" cellspacing="0">
-            <tbody>
-                <tr>
-                    <td class="red-left">
-                        <%:SharedString.Error %>
-                        <a href="">
-                            <%: TempData["errorCannotDelete"]%></a>
-                    </td>
-                    <td class="red-right">
-                        <a class="close-red">
-                            <img src="../../Images/adminimages/table/icon_close_red.gif" alt="" /></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <% } %>
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotDelete"]);
+       } 
+    %>
+    <!--  Delete successfully  -->
+    <% if (TempData["infoDeleteSuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoDeleteSuccess"]);
+       } 
+    %>
+    <!--  Add successfully  -->
+    <% if (TempData["infoAddSuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoAddSuccess"]);
+       } 
+    %>
+    <!--  Edit successfully  -->
+    <% if (TempData["infoEditSuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoEditSuccess"]);
+       } 
+    %>
+    <!--  Main code  --------------------------------------------------------------------------->
     <% if (ViewData["listKhuVuc"] != null && ((List<KhuVuc>)ViewData["listKhuVuc"]).Count > 0)
        {
     %>
