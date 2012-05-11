@@ -24,7 +24,7 @@
                
            
 		<tr <%: (iCount++%2==0)?"":"class=alternate-row" %> >
-            <td><%: chiTietOrder.MaChiTietOrder %></td>
+            <td class="ma-chi-tiet-order"><%: chiTietOrder.MaChiTietOrder %></td>
 			<td><%: chiTietOrder.TenKhuVuc %></td>
 			<td><%: chiTietOrder.TenBan %></td>
             <td><%: chiTietOrder.MaOrder %></td>
@@ -36,7 +36,7 @@
             <% if (chiTietOrder.SoLuongDangCheBien>0) {%>    
                 <td><%: chiTietOrder.SoLuongDangCheBien %></td>
             <%} else { %>
-                <td><a><%: KitchenString.CheBien %></a></td>
+                <td><button class="button-che-bien"><%: KitchenString.CheBien %></button></td>
             <%} %>
             <td><%: chiTietOrder.TenPhucVu %></td>
 			<td class="options-width">

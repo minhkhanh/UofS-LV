@@ -49,5 +49,33 @@ namespace LocalServerWeb.Controllers
             return PartialView("KitchenOrder");
         }
 
+        public ActionResult GetDialogCheBien(int maChiTietOrder)
+        {
+            if (!Request.IsAjaxRequest()) return RedirectToAction("Index", "Error");
+            var chiTietOrder = ChiTietOrderBUS.LayChiTietOrder(maChiTietOrder);
+            if (chiTietOrder==null) return new EmptyResult();
+            int iSoLuongCheBienToiDa = chiTietOrder.SoLuong -
+                                       ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder).
+                                           SoLuongDaCheBien -
+                                       ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder).
+                                           SoLuongDangCheBien;
+            ViewData["iSoLuongCheBienToiDa"] = iSoLuongCheBienToiDa;
+            return PartialView("DialogCheBien");
+        }
+
+        [HttpPost]
+        public bool PostCheBien(int maChiTietOrder, int soLuongCheBien)
+        {
+            if (!Request.IsAjaxRequest()) return false;
+            var chiTietOrder = ChiTietOrderBUS.LayChiTietOrder(maChiTietOrder);
+            if (chiTietOrder == null) return false;
+            int iSoLuongCheBienToiDa = chiTietOrder.SoLuong -
+                                       ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder).
+                                           SoLuongDaCheBien -
+                                       ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder).
+                                           SoLuongDangCheBien;
+            if (soLuongCheBien<=0 || soLuongCheBien>iSoLuongCheBienToiDa) return false;
+            return true;
+        }
     }
 }
