@@ -142,6 +142,15 @@ namespace LocalServerWeb.Resources.Views.Kitchen {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NhapSoLuongCheBien.
+        /// </summary>
+        public static string NhapSoLuongCheBien {
+            get {
+                return ResourceManager.GetString("NhapSoLuongCheBien", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PhucVu.
         /// </summary>
         public static string PhucVu {

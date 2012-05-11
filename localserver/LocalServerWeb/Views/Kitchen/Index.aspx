@@ -9,9 +9,46 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#test-button').button().click(function () {
-            $('#kitchen-table').load('<%= Url.Action("GetKitchenOrder", new { maBoPhanCheBien = 1}) %>');
+            getKitchenOrderTable();
+        });
+        $("#dialog-form-che-bien").dialog({
+            autoOpen: false,
+            width: 350,
+            position: 'center',
+            buttons: {
+                "<%=KitchenString.CheBien %>": function () {
+                    $.ajax({
+                        type: 'POST',
+                        url: '<%= Url.Action("PostCheBien") %>',
+                        data: $('#form-so-luong-che-bien').serialize(),
+                        success: function (response) {
+                            alert(response);
+                        }
+                    });
+                    $(this).dialog("close");
+                }
+            }
         });
     });
+    function getKitchenOrderTable() {
+        $('#kitchen-table').load('<%= Url.Action("GetKitchenOrder", new { maBoPhanCheBien = 1}) %>', function () {
+            $('#kitchen-table .button-che-bien').button().click(function () {
+                var tmp = $(this).parent().parent().find('.ma-chi-tiet-order').html();
+                //alert(tmp);
+                $.ajax({
+                    type: 'GET',
+                    url: '<%= Url.Action("GetDialogCheBien") %>',
+                    data: 'maChiTietOrder='+tmp, 
+                    success: function (response) {
+                        $("#dialog-form-che-bien").html(response);
+                        $("#dialog-form-che-bien").dialog("open");
+                        $('.ui-dialog').center();
+                    } 
+                });
+
+            });
+        });
+    }
 </script>
 </asp:Content>
 
@@ -39,5 +76,7 @@
 	</div>
 	<!--  end content-table  -->
 
-    <div></div>
+    <div id="dialog-form-che-bien" title="<%:KitchenString.NhapSoLuongCheBien %>">
+
+    </div>
 </asp:Content>

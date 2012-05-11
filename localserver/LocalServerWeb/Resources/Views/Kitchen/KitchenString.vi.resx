@@ -156,4 +156,7 @@
   <data name="MaChiTietOrder" xml:space="preserve">
     <value>Mã chi tiết</value>
   </data>
+  <data name="NhapSoLuongCheBien" xml:space="preserve">
+    <value>Nhập số lượng chế biến</value>
+  </data>
 </root>

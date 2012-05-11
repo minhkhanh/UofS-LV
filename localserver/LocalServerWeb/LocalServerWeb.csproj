@@ -853,6 +853,7 @@
     <Content Include="Views\FoodCategory\Category.aspx" />
     <Content Include="Views\FoodCategory\Food.aspx" />
     <Content Include="Views\FoodCategory\Index.aspx" />
+    <Content Include="Views\Kitchen\DialogCheBien.ascx" />
     <Content Include="Views\Kitchen\Index.aspx" />
     <Content Include="Views\Kitchen\KitchenOrder.ascx" />
     <Content Include="Views\Shared\AdminMainMenu.ascx" />
@@ -1079,8 +1080,8 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>49946</DevelopmentServerPort>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>5252</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost/LocalServerWeb</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
