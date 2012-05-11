@@ -26,13 +26,13 @@ namespace LocalServerBUS
 
         public static List<NgonNgu> LayDanhSachNgonNguChuaCo(int maDanhMuc)
         {
-            List<NgonNgu> listNgonNgu = new List<NgonNgu>();
+            List<NgonNgu> listNgonNgu = NgonNguBUS.LayDanhSachNgonNgu();
 
-            List<ChiTietDanhMucDaNgonNgu> listChiTiet = LayDanhSachChiTietDanhMucDaNgonNgu();
+            List<ChiTietDanhMucDaNgonNgu> listChiTiet = LayDanhSachChiTietDanhMucDaNgonNguTheoDanhMuc(maDanhMuc);
             foreach (ChiTietDanhMucDaNgonNgu ct in listChiTiet)
             {
-                if (ct.DanhMuc.MaDanhMuc != maDanhMuc)
-                    listNgonNgu.Add(ct.NgonNgu);
+                if (listNgonNgu.Contains(ct.NgonNgu))
+                    listNgonNgu.Remove(ct.NgonNgu);
             }
 
             return listNgonNgu;
