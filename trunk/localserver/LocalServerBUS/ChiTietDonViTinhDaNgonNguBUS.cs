@@ -18,5 +18,39 @@ namespace LocalServerBUS
         {
             return ChiTietDonViTinhDaNgonNguDAO.LayDanhSachChiTietDonViTinhDaNgonNgu();
         }
+
+        public static List<ChiTietDonViTinhDaNgonNgu> LayDanhSachChiTietDonViTinhDaNgonNguTheoDonViTinh(int maDonViTinh)
+        {
+            return ChiTietDonViTinhDaNgonNguDAO.LayDanhSachChiTietDonViTinhDaNgonNguTheoDonViTinh(maDonViTinh);
+        }
+
+        public static bool Xoa(ChiTietDonViTinhDaNgonNgu chiTietDonViTinhDaNgonNgu)
+        {
+            return ChiTietDonViTinhDaNgonNguDAO.Xoa(chiTietDonViTinhDaNgonNgu);
+        }
+
+        public static bool Them(ChiTietDonViTinhDaNgonNgu chiTietDonViTinhDaNgonNgu)
+        {
+            return ChiTietDonViTinhDaNgonNguDAO.Them(chiTietDonViTinhDaNgonNgu);
+        }
+
+        public static bool CapNhat(ChiTietDonViTinhDaNgonNgu chiTietDonViTinhDaNgonNgu)
+        {
+            return ChiTietDonViTinhDaNgonNguDAO.CapNhat(chiTietDonViTinhDaNgonNgu);
+        }
+
+        public static List<NgonNgu> LayDanhSachNgonNguChuaCo(int maDonViTinh)
+        {
+            List<NgonNgu> listNgonNgu = NgonNguBUS.LayDanhSachNgonNgu();
+
+            List<ChiTietDonViTinhDaNgonNgu> listChiTiet = LayDanhSachChiTietDonViTinhDaNgonNguTheoDonViTinh(maDonViTinh);
+            foreach (ChiTietDonViTinhDaNgonNgu ct in listChiTiet)
+            {
+                if (listNgonNgu.Contains(ct.NgonNgu))
+                    listNgonNgu.Remove(ct.NgonNgu);
+            }
+
+            return listNgonNgu;
+        }
     }
 }

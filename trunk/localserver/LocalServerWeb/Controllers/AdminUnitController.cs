@@ -75,5 +75,161 @@ namespace LocalServerWeb.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult Add()
+        {
+            SharedCode.FillAdminMainMenu(ViewData, 3, 3);
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddBasic()
+        {
+            try
+            {
+                DonViTinh donViTinh = new DonViTinh();
+
+                // If add successfully, 
+                if (DonViTinhBUS.Them(donViTinh))
+                    return RedirectToAction("Edit", new { id = donViTinh.MaDonViTinh });
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+
+            return RedirectToAction("Add");
+
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            SharedCode.FillAdminMainMenu(ViewData, 3, 0);
+
+            DonViTinh donViTinh = DonViTinhBUS.LayDonViTinhTheoMa(id ?? 0);
+            if (id == null || donViTinh == null)
+            {
+                TempData["errorNotFound"] = AdminUnitString.ErrorUnitNotFound;
+            }
+
+
+            ViewData["listNgonNguChuaCo"] = ChiTietDonViTinhDaNgonNguBUS.LayDanhSachNgonNguChuaCo(id ?? 0);
+            ViewData["listChiTietDonViTinhDaNgonNgu"] = ChiTietDonViTinhDaNgonNguBUS.LayDanhSachChiTietDonViTinhDaNgonNguTheoDonViTinh(id ?? 0);
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DeleteUnitLanguage(int maDonViTinh, int maNgonNgu)
+        {
+            if (maDonViTinh < 0 || maNgonNgu <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            DonViTinh DonViTinh = DonViTinhBUS.LayDonViTinhTheoMa(maDonViTinh);
+            NgonNgu ngonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
+            if (DonViTinh == null || ngonNgu == null)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            bool bCheck = true;
+            ChiTietDonViTinhDaNgonNgu ct = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(DonViTinh.MaDonViTinh, ngonNgu.MaNgonNgu);
+            if (ct == null)
+            {
+                TempData["errorLanguageDetailNotFound"] = AdminUnitString.ErrorLanguageDetailNotFound;
+                bCheck = false;
+            }
+
+            if (bCheck)
+            {
+                if (!ChiTietDonViTinhDaNgonNguBUS.Xoa(ct))
+                {
+                    TempData["errorCannotDelete"] = AdminUnitString.ErrorCannotDelete;
+
+                }
+            }
+
+            return RedirectToAction("Edit", new { id = maDonViTinh });
+        }
+
+        [HttpPost]
+        public ActionResult AddUnitLanguage(int maDonViTinh, int maNgonNgu, string tenDonViTinh)
+        {
+            if (maDonViTinh < 0 || maNgonNgu <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            DonViTinh DonViTinh = DonViTinhBUS.LayDonViTinhTheoMa(maDonViTinh);
+            NgonNgu ngonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
+            if (DonViTinh == null || ngonNgu == null)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            bool bCheck = true;
+            ChiTietDonViTinhDaNgonNgu ct = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(DonViTinh.MaDonViTinh, ngonNgu.MaNgonNgu);
+            if (ct != null)
+            {
+                TempData["errorLanguageDetailExist"] = AdminUnitString.ErrorLanguageDetailExist;
+                bCheck = false;
+            }
+
+            if (bCheck)
+            {
+                ChiTietDonViTinhDaNgonNgu ctMoi = new ChiTietDonViTinhDaNgonNgu();
+                ctMoi.DonViTinh = DonViTinh;
+                ctMoi.NgonNgu = ngonNgu;
+                ctMoi.TenDonViTinh = tenDonViTinh;
+
+                ChiTietDonViTinhDaNgonNguBUS.Them(ctMoi);
+
+            }
+
+            return RedirectToAction("Edit", new { id = maDonViTinh });
+        }
+
+        [HttpPost]
+        public ActionResult EditUnitLanguage(int maDonViTinh, int maNgonNgu, string tenDonViTinh, string tenNgonNgu)
+        {
+            if (maDonViTinh < 0 || maNgonNgu <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            DonViTinh DonViTinh = DonViTinhBUS.LayDonViTinhTheoMa(maDonViTinh);
+            NgonNgu ngonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
+            if (DonViTinh == null || ngonNgu == null)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            bool bCheck = true;
+            ChiTietDonViTinhDaNgonNgu ct = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(DonViTinh.MaDonViTinh, ngonNgu.MaNgonNgu);
+            if (ct == null)
+            {
+                TempData["errorLanguageDetailExist"] = AdminUnitString.ErrorLanguageDetailNotFound;
+                bCheck = false;
+            }
+
+            if (bCheck)
+            {
+
+                ct.TenDonViTinh = tenDonViTinh;
+
+                ChiTietDonViTinhDaNgonNguBUS.CapNhat(ct);
+
+            }
+
+            return RedirectToAction("Edit", new { id = maDonViTinh });
+        }
     }
 }
