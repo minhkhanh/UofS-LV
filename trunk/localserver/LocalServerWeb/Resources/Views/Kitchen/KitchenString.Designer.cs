@@ -115,6 +115,15 @@ namespace LocalServerWeb.Resources.Views.Kitchen {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HetCheBien.
+        /// </summary>
+        public static string HetCheBien {
+            get {
+                return ResourceManager.GetString("HetCheBien", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Region.
         /// </summary>
         public static string KhuVuc {
@@ -151,6 +160,24 @@ namespace LocalServerWeb.Resources.Views.Kitchen {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NhapSoLuongHet.
+        /// </summary>
+        public static string NhapSoLuongHet {
+            get {
+                return ResourceManager.GetString("NhapSoLuongHet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NhapSoLuongXong.
+        /// </summary>
+        public static string NhapSoLuongXong {
+            get {
+                return ResourceManager.GetString("NhapSoLuongXong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PhucVu.
         /// </summary>
         public static string PhucVu {
@@ -183,6 +210,15 @@ namespace LocalServerWeb.Resources.Views.Kitchen {
         public static string TuyChon {
             get {
                 return ResourceManager.GetString("TuyChon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xong.
+        /// </summary>
+        public static string Xong {
+            get {
+                return ResourceManager.GetString("Xong", resourceCulture);
             }
         }
     }
