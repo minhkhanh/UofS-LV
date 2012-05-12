@@ -40,18 +40,22 @@
         <table border="0" cellpadding="0" cellspacing="0" id="id-form">
             <tr>
                 <th valign="top">
-                    &nbsp;
+                    <%: SharedString.Guidance %>
                 </th>
                 <td>
-                    &nbsp;
+                    <%: SharedString.Step %> 1: 
+                    <%: AdminUnitString.AddTitle %>
+                    <br />
+                    <%: SharedString.Step %> 2: 
+                    <%: AdminUnitString.AddLanguageDetail %>
                 </td>
                 <td>
-                    &nbsp;
+                    
                 </td>
             </tr>
             <tr>
                 <th>
-                    &nbsp;
+                    <%: SharedString.Step %> 1
                 </th>
                 <td valign="top">
                     <input type="submit" value="" class="form-submit" />

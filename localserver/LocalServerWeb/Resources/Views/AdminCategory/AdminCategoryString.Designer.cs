@@ -97,6 +97,15 @@ namespace LocalServerWeb.Resources.Views.AdminCategory {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose parent category.
+        /// </summary>
+        public static string ChooseParentCategory {
+            get {
+                return ResourceManager.GetString("ChooseParentCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string Delete {
@@ -133,6 +142,15 @@ namespace LocalServerWeb.Resources.Views.AdminCategory {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t add.
+        /// </summary>
+        public static string ErrorCannotAdd {
+            get {
+                return ResourceManager.GetString("ErrorCannotAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can&apos;t change parent category.
         /// </summary>
         public static string ErrorCannotChangeParentCategory {
@@ -165,6 +183,15 @@ namespace LocalServerWeb.Resources.Views.AdminCategory {
         public static string ErrorCannotDelete {
             get {
                 return ResourceManager.GetString("ErrorCannotDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t edit.
+        /// </summary>
+        public static string ErrorCannotEdit {
+            get {
+                return ResourceManager.GetString("ErrorCannotEdit", resourceCulture);
             }
         }
         
@@ -210,6 +237,42 @@ namespace LocalServerWeb.Resources.Views.AdminCategory {
         public static string ErrorNoLanguageDetail {
             get {
                 return ResourceManager.GetString("ErrorNoLanguageDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add successfully.
+        /// </summary>
+        public static string InfoAddSuccess {
+            get {
+                return ResourceManager.GetString("InfoAddSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change parent category successfully.
+        /// </summary>
+        public static string InfoChangeParentCategorySuccess {
+            get {
+                return ResourceManager.GetString("InfoChangeParentCategorySuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete successfully.
+        /// </summary>
+        public static string InfoDeleteSuccess {
+            get {
+                return ResourceManager.GetString("InfoDeleteSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit successfully.
+        /// </summary>
+        public static string InfoEditSuccess {
+            get {
+                return ResourceManager.GetString("InfoEditSuccess", resourceCulture);
             }
         }
         
@@ -273,6 +336,15 @@ namespace LocalServerWeb.Resources.Views.AdminCategory {
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no language details.
+        /// </summary>
+        public static string WarningNoLanguageDetail {
+            get {
+                return ResourceManager.GetString("WarningNoLanguageDetail", resourceCulture);
             }
         }
     }

@@ -39,13 +39,13 @@ namespace LocalServerWeb.Controllers
                     }
                     else
                     {
-                        DonViTinh.TenDonViTinh = "";
+                        DonViTinh.TenDonViTinh = SharedString.NoInformation;
                     }
 
                 }
                 catch (Exception e)
                 {
-                    DonViTinh.TenDonViTinh = "";
+                    DonViTinh.TenDonViTinh = SharedString.NoInformation;
                     Console.WriteLine(e.Message);
                 }
             }
@@ -64,13 +64,17 @@ namespace LocalServerWeb.Controllers
             DonViTinh objDonViTinh = DonViTinhBUS.LayDonViTinhTheoMa(id ?? 0);
             if (objDonViTinh == null)
             {
-                TempData["error"] = SharedString.InputWrong;
+                TempData["errorNotFound"] = AdminUnitString.ErrorUnitNotFound;
                 return RedirectToAction("Index", "Error");
             }
 
             if (!DonViTinhBUS.Xoa(objDonViTinh.MaDonViTinh))
             {
                 TempData["errorCannotDelete"] = AdminUnitString.ErrorCannotDelete;
+            }
+            else
+            {
+                TempData["infoDeleteSuccess"] = AdminUnitString.InfoDeleteSuccess;
             }
 
             return RedirectToAction("Index");
@@ -91,7 +95,10 @@ namespace LocalServerWeb.Controllers
 
                 // If add successfully, 
                 if (DonViTinhBUS.Them(donViTinh))
+                {
+                    TempData["infoAddSuccess"] = AdminUnitString.InfoAddSuccess;
                     return RedirectToAction("Edit", new { id = donViTinh.MaDonViTinh });
+                }
                 // If add failed
                 else
                     TempData["errorCannotAdd"] = AdminUnitString.ErrorCannotAdd;
@@ -118,12 +125,17 @@ namespace LocalServerWeb.Controllers
             DonViTinh donViTinh = DonViTinhBUS.LayDonViTinhTheoMa(id ?? 0);
             if (donViTinh == null)
             {
-                TempData["error"] = SharedString.InputWrong;
+                TempData["errorNotFound"] = AdminUnitString.ErrorUnitNotFound;
                 return RedirectToAction("Index", "Error");
             }
 
             ViewData["listNgonNguChuaCo"] = ChiTietDonViTinhDaNgonNguBUS.LayDanhSachNgonNguChuaCo(id ?? 0);
-            ViewData["listChiTietDonViTinhDaNgonNgu"] = ChiTietDonViTinhDaNgonNguBUS.LayDanhSachChiTietDonViTinhDaNgonNguTheoDonViTinh(id ?? 0);
+            List<ChiTietDonViTinhDaNgonNgu> listChiTietDonViTinhDaNgonNgu = ChiTietDonViTinhDaNgonNguBUS.LayDanhSachChiTietDonViTinhDaNgonNguTheoDonViTinh(id ?? 0);
+            if (listChiTietDonViTinhDaNgonNgu == null || listChiTietDonViTinhDaNgonNgu.Count == 0)
+            {
+                TempData["warningNoLanguageDetail"] = AdminUnitString.WarningNoLanguageDetail;
+            }
+            ViewData["listChiTietDonViTinhDaNgonNgu"] = listChiTietDonViTinhDaNgonNgu;
 
             return View();
         }
@@ -141,26 +153,28 @@ namespace LocalServerWeb.Controllers
             NgonNgu ngonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
             if (DonViTinh == null || ngonNgu == null)
             {
-                TempData["error"] = SharedString.InputWrong;
+                TempData["errorNotFound"] = AdminUnitString.ErrorLanguageDetailNotFound;
                 return RedirectToAction("Index", "Error");
             }
 
-            bool bCheck = true;
+
             ChiTietDonViTinhDaNgonNgu ct = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(DonViTinh.MaDonViTinh, ngonNgu.MaNgonNgu);
             if (ct == null)
             {
-                TempData["errorLanguageDetailNotFound"] = AdminUnitString.ErrorLanguageDetailNotFound;
-                bCheck = false;
+                TempData["errorNotFound"] = AdminUnitString.ErrorLanguageDetailNotFound;
+                return RedirectToAction("Index", "Error");
             }
 
-            if (bCheck)
+            if (!ChiTietDonViTinhDaNgonNguBUS.Xoa(ct))
             {
-                if (!ChiTietDonViTinhDaNgonNguBUS.Xoa(ct))
-                {
-                    TempData["errorCannotDelete"] = AdminUnitString.ErrorCannotDelete;
+                TempData["errorCannotDelete"] = AdminUnitString.ErrorCannotDelete;
 
-                }
             }
+            else
+            {
+                TempData["infoDeleteSuccess"] = AdminUnitString.InfoDeleteSuccess;
+            }
+
 
             return RedirectToAction("Edit", new { id = maDonViTinh });
         }
@@ -178,7 +192,7 @@ namespace LocalServerWeb.Controllers
             NgonNgu ngonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
             if (DonViTinh == null || ngonNgu == null)
             {
-                TempData["error"] = SharedString.InputWrong;
+                TempData["errorNotFound"] = AdminUnitString.ErrorLanguageDetailNotFound;
                 return RedirectToAction("Index", "Error");
             }
 
@@ -197,7 +211,14 @@ namespace LocalServerWeb.Controllers
                 ctMoi.NgonNgu = ngonNgu;
                 ctMoi.TenDonViTinh = tenDonViTinh;
 
-                ChiTietDonViTinhDaNgonNguBUS.Them(ctMoi);
+                if (ChiTietDonViTinhDaNgonNguBUS.Them(ctMoi))
+                {
+                    TempData["infoAddSuccess"] = AdminUnitString.InfoAddSuccess;
+                }
+                else
+                {
+                    TempData["errorCannotAdd"] = AdminUnitString.ErrorCannotAdd;
+                }
 
             }
 
@@ -217,26 +238,31 @@ namespace LocalServerWeb.Controllers
             NgonNgu ngonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
             if (DonViTinh == null || ngonNgu == null)
             {
-                TempData["error"] = SharedString.InputWrong;
+                TempData["errorNotFound"] = AdminUnitString.ErrorLanguageDetailNotFound;
                 return RedirectToAction("Index", "Error");
             }
 
-            bool bCheck = true;
+
             ChiTietDonViTinhDaNgonNgu ct = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(DonViTinh.MaDonViTinh, ngonNgu.MaNgonNgu);
             if (ct == null)
             {
-                TempData["errorLanguageDetailExist"] = AdminUnitString.ErrorLanguageDetailNotFound;
-                bCheck = false;
+                TempData["errorNotFound"] = AdminUnitString.ErrorLanguageDetailNotFound;
+                return RedirectToAction("Index", "Error");
+
             }
 
-            if (bCheck)
+
+            ct.TenDonViTinh = tenDonViTinh;
+
+            if (ChiTietDonViTinhDaNgonNguBUS.CapNhat(ct))
             {
-
-                ct.TenDonViTinh = tenDonViTinh;
-
-                ChiTietDonViTinhDaNgonNguBUS.CapNhat(ct);
-
+                TempData["infoEditSuccess"] = AdminUnitString.InfoEditSuccess;
             }
+            else
+            {
+                TempData["errorCannotEdit"] = AdminUnitString.ErrorCannotEdit;
+            }
+
 
             return RedirectToAction("Edit", new { id = maDonViTinh });
         }

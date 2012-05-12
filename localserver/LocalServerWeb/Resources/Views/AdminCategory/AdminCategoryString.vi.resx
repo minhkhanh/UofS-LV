@@ -129,6 +129,9 @@
   <data name="CategoryName" xml:space="preserve">
     <value>Tên danh mục</value>
   </data>
+  <data name="ChooseParentCategory" xml:space="preserve">
+    <value>Chọn danh mục cha</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Xóa</value>
   </data>
@@ -140,6 +143,9 @@
   </data>
   <data name="EditTitle" xml:space="preserve">
     <value>Cập nhật danh mục</value>
+  </data>
+  <data name="ErrorCannotAdd" xml:space="preserve">
+    <value>Không thể thêm</value>
   </data>
   <data name="ErrorCannotChangeParentCategory" xml:space="preserve">
     <value>Không thể thay đổi danh mục cha</value>
@@ -153,6 +159,9 @@
   <data name="ErrorCannotDelete" xml:space="preserve">
     <value>Không thể xóa</value>
   </data>
+  <data name="ErrorCannotEdit" xml:space="preserve">
+    <value>Không thể cập nhật</value>
+  </data>
   <data name="ErrorCannotUpdateLanguageDetail" xml:space="preserve">
     <value>Không thể cập nhật chi tiết ngôn ngữ này</value>
   </data>
@@ -164,6 +173,18 @@
   </data>
   <data name="ErrorNoLanguageDetail" xml:space="preserve">
     <value>Hiện không có chi tiết ngôn ngữ nào</value>
+  </data>
+  <data name="InfoAddSuccess" xml:space="preserve">
+    <value>Thêm thành công</value>
+  </data>
+  <data name="InfoChangeParentCategorySuccess" xml:space="preserve">
+    <value>Đổi danh mục cha thành công</value>
+  </data>
+  <data name="InfoDeleteSuccess" xml:space="preserve">
+    <value>Xóa thành công</value>
+  </data>
+  <data name="InfoEditSuccess" xml:space="preserve">
+    <value>Cập nhật thành công</value>
   </data>
   <data name="LanguageDetail" xml:space="preserve">
     <value>Chi tiết ngôn ngữ</value>
@@ -185,5 +206,8 @@
   </data>
   <data name="Title" xml:space="preserve">
     <value>Danh sách danh mục</value>
+  </data>
+  <data name="WarningNoLanguageDetail" xml:space="preserve">
+    <value>Không có chi tiết ngôn ngữ nào</value>
   </data>
 </root>

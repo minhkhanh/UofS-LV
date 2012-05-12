@@ -129,6 +129,9 @@
   <data name="CategoryName" xml:space="preserve">
     <value>Category name</value>
   </data>
+  <data name="ChooseParentCategory" xml:space="preserve">
+    <value>Choose parent category</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -141,6 +144,9 @@
   <data name="EditTitle" xml:space="preserve">
     <value>Edit category</value>
   </data>
+  <data name="ErrorCannotAdd" xml:space="preserve">
+    <value>Can't add</value>
+  </data>
   <data name="ErrorCannotChangeParentCategory" xml:space="preserve">
     <value>Can't change parent category</value>
   </data>
@@ -152,6 +158,9 @@
   </data>
   <data name="ErrorCannotDelete" xml:space="preserve">
     <value>Can't delete</value>
+  </data>
+  <data name="ErrorCannotEdit" xml:space="preserve">
+    <value>Can't edit</value>
   </data>
   <data name="ErrorCannotUpdateLanguageDetail" xml:space="preserve">
     <value>Can't update category language detail</value>
@@ -167,6 +176,18 @@
   </data>
   <data name="ErrorNoLanguageDetail" xml:space="preserve">
     <value>There are no language details</value>
+  </data>
+  <data name="InfoAddSuccess" xml:space="preserve">
+    <value>Add successfully</value>
+  </data>
+  <data name="InfoChangeParentCategorySuccess" xml:space="preserve">
+    <value>Change parent category successfully</value>
+  </data>
+  <data name="InfoDeleteSuccess" xml:space="preserve">
+    <value>Delete successfully</value>
+  </data>
+  <data name="InfoEditSuccess" xml:space="preserve">
+    <value>Edit successfully</value>
   </data>
   <data name="LanguageDetail" xml:space="preserve">
     <value>Language detail</value>
@@ -188,5 +209,8 @@
   </data>
   <data name="Title" xml:space="preserve">
     <value>Category list</value>
+  </data>
+  <data name="WarningNoLanguageDetail" xml:space="preserve">
+    <value>There are no language details</value>
   </data>
 </root>
