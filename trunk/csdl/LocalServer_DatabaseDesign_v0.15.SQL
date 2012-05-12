@@ -178,7 +178,7 @@ CREATE TABLE [dbo].[ChiTietKhongCheBienOrder] (
 [MaChiTietKhongCheBienOrder] int identity  NOT NULL  
 , [MaChiTietOrder] int NOT NULL  
 , [SoLuongKhongCheBien] int  NOT NULL  
-, [TinhTrang] int  NULL  
+, [TinhTrang] int  NOT NULL DEFAULT 0
 )
 GO
 
