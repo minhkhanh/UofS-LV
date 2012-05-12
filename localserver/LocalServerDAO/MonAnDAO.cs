@@ -36,7 +36,7 @@ namespace LocalServerDAO
             return null;
         }
 
-        public static bool ThemMonAn(MonAn monAn)
+        public static bool Them(MonAn monAn)
         {
             try
             {
@@ -51,10 +51,26 @@ namespace LocalServerDAO
             return false;
         }
 
-        public static bool CapNhapMonAn(MonAn monAn)
+        public static bool CapNhat(MonAn monAn)
         {
             try
             {                
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
+
+        public static bool Xoa(int maMonAn)
+        {
+            try
+            {
+                var objMonAn = LayMonAn(maMonAn);
+                ThucDonDienTu.DataContext.MonAns.DeleteOnSubmit(objMonAn);
                 ThucDonDienTu.DataContext.SubmitChanges();
                 return true;
             }

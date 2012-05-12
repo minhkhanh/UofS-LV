@@ -73,5 +73,7 @@ namespace LocalServerDTO
         //theo ngon ngu hien tai
         public string TenMonAn { get; set; }
 
+        //theo ngon ngu hien tai
+        public string MoTaMonAn { get; set; }
     }
 }

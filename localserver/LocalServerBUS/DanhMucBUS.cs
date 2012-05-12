@@ -92,5 +92,38 @@ namespace LocalServerBUS
             return false;
         }
 
+        public static List<DanhMuc> LayDanhSachDanhMucTheoMaNgonNgu(int maNgonNgu, string noInfomation)
+        {
+            List<DanhMuc> listDanhMuc = DanhMucBUS.LayDanhSachDanhMuc();
+
+            foreach (DanhMuc danhmuc in listDanhMuc)
+            {
+                try
+                {
+                    ChiTietDanhMucDaNgonNgu ct = ChiTietDanhMucDaNgonNguBUS.LayChiTietDanhMucDaNgonNgu(danhmuc.MaDanhMuc, maNgonNgu);
+                    if (ct != null)
+                    {
+                        danhmuc.TenDanhMuc = ct.TenDanhMuc;
+                        danhmuc.MoTaDanhMuc = ct.MoTaDanhMuc;
+                    }
+                    else
+                    {
+                        danhmuc.TenDanhMuc = noInfomation;
+                        danhmuc.MoTaDanhMuc = noInfomation;
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    danhmuc.TenDanhMuc = noInfomation;
+                    danhmuc.MoTaDanhMuc = noInfomation;
+
+                    Console.WriteLine(e.Message);
+                }
+            }
+
+            return listDanhMuc;
+        }
+
     }
 }

@@ -327,11 +327,22 @@ namespace LocalServerWeb
         [OperationContract]
         int PhepCong(int a, int b);
 
-        [WebInvoke(Method = "GET", UriTemplate = "test")]
-        [OperationContract]
-        string Test();
-
         [WebInvoke(Method = "POST", UriTemplate = "addText")]
         string AddText();
+
+        // Check to ensure server work correctly
+        [WebInvoke(Method = "GET", UriTemplate = "testGet")]
+        [OperationContract]
+        string TestGET();
+
+        [WebInvoke(Method = "POST", UriTemplate = "testPost")]
+        [OperationContract]
+        string TestPOST();
+
+        [WebInvoke(Method = "PUT", UriTemplate = "testPut")]
+        [OperationContract]
+        string TestPUT();
+
+        
     }
 }

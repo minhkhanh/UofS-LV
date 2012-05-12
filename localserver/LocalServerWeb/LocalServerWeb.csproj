@@ -838,7 +838,7 @@
     <Content Include="Views\AdminExchangeRate\Add.aspx" />
     <Content Include="Views\AdminExchangeRate\Edit.aspx" />
     <Content Include="Views\AdminExchangeRate\Index.aspx" />
-    <Content Include="Views\AdminFood\AddFood.aspx" />
+    <Content Include="Views\AdminFood\Add.aspx" />
     <Content Include="Views\AdminFood\AddLanguageFood.aspx" />
     <Content Include="Views\AdminFood\EditLanguageFood.aspx" />
     <Content Include="Views\AdminFood\Index.aspx" />
