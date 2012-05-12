@@ -22,7 +22,7 @@
         <% foreach (var chiTietOrder in (List<ChiTietOrderKitchen>)ViewData["listChiTietOrderKitchen"])
            { %>
                
-           
+          
 		<tr <%: (iCount++%2==0)?"":"class=alternate-row" %> >
             <td class="ma-chi-tiet-order"><%: chiTietOrder.MaChiTietOrder %></td>
 			<td><%: chiTietOrder.TenKhuVuc %></td>

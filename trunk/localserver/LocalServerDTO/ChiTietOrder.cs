@@ -73,8 +73,10 @@ namespace LocalServerDTO
         }
 
         /// <summary>
-        /// 0 - binh thuong dc che bien
-        /// 1 - da che bien xong
+        /// 0 - binh thuong vua moi order
+        /// 1 - dang che bien
+        /// 2 - khoa, ko duoc che bien tiep
+        /// 3 - da xong
         /// </summary>
         [Column(Name = "TinhTrang", IsDbGenerated = true)]
         public int TinhTrang { get; set; }

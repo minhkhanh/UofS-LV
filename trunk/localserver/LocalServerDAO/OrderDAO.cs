@@ -64,5 +64,9 @@ namespace LocalServerDAO
             return result;
         }
 
+        //public static bool KiemTraChuaCheBien(ChiTietOrder chiTietOrder)
+        //{
+        //    ThucDonDienTu.DataContext.c
+        //}
     }
 }

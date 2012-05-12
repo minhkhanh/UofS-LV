@@ -40,8 +40,11 @@ namespace LocalServerDTO
             get { return _ban.Entity; }
             set { _ban.Entity = value; }
         }
+
         /// <summary>
-        /// 0 - binh thuong can dc che bien
+        /// 0 - binh thuong vua moi order
+        /// 1 - dang che bien
+        /// 2 - khoa ko duoc che bien tiep
         /// </summary>
         [Column(Name = "TinhTrang", IsDbGenerated = true)]
         public int TinhTrang { get; set; }

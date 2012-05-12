@@ -23,5 +23,14 @@ namespace LocalServerBUS
         {
             return ChiTietCheBienOrderDAO.SuaChiTietCheBienOrder(_chiTietCheBienOrder);
         }
+
+        public static bool CheBienXong(ChiTietCheBienOrder chiTietCheBienOrder, int soLuongCheBienXong)
+        {
+            return ChiTietCheBienOrderDAO.CheBienXong(chiTietCheBienOrder, soLuongCheBienXong);
+        }
+        public static bool CheBien(int maChiTietOrder, int soLuongCheBien)
+        {
+            return ChiTietCheBienOrderDAO.CheBien(maChiTietOrder, soLuongCheBien);
+        }
     }
 }
