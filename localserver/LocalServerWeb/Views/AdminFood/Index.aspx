@@ -43,7 +43,7 @@
     <!--  Error message: Cannot change category  -->
     <% if (TempData["errorCannotChangeCategory"] != null)
        {
-           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotChangeParentCategory"]);
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotChangeCategory"]);
        } 
     %>
     <!--  Delete successfully  -->
@@ -55,7 +55,7 @@
     <!--  Change category successfully  -->
     <% if (TempData["infoChangeCategorySuccess"] != null)
        {
-           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoChangeParentCategorySuccess"]);
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoChangeCategorySuccess"]);
        } 
     %>
     <!--  Main code  --------------------------------------------------------------------------->

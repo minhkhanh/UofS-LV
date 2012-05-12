@@ -26,7 +26,7 @@ namespace LocalServerWeb.Controllers
         public ActionResult Add()
         {
             SharedCode.FillAdminMainMenu(ViewData, 2, 1);
-            ViewData["listDanhMuc"] = DanhMucBUS.LayDanhSachDanhMucLevelThapNhatTheoNgonNgu(SharedCode.GetCurrentLanguage(Session));
+            ViewData["listDanhMuc"] = LayDanhSachDanhMucLevelThapNhat();
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace LocalServerWeb.Controllers
                 return RedirectToAction("Index");
             }
             SharedCode.FillAdminMainMenu(ViewData, 2, -1);
-            ViewData["listDanhMuc"] = DanhMucBUS.LayDanhSachDanhMucLevelThapNhatTheoNgonNgu(SharedCode.GetCurrentLanguage(Session));
+            ViewData["listDanhMuc"] = LayDanhSachDanhMucLevelThapNhat();
             ViewData["monAn"] = monAn;
 
             var listChiTienMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayDanhSachChiTietMonAnDonViTinhTheoMonAn(monAn.MaMonAn);
@@ -105,18 +105,7 @@ namespace LocalServerWeb.Controllers
             return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn});
         }
 
-        [HttpPost]
-        public ActionResult UpdateCategory(int listDanhMuc, int maMonAn)
-        {
-            var danhMuc = DanhMucBUS.LayDanhMuc(listDanhMuc);
-            var monAn = MonAnBUS.LayMonAn(maMonAn);
-            if (danhMuc != null && monAn != null)
-            {
-                monAn.DanhMuc = danhMuc;
-                MonAnBUS.CapNhat(monAn);
-            }
-            return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
-        }
+        
 
         public ActionResult UpdateImageFood(int maMonAn, HttpPostedFileBase uploadFile)
         {            
@@ -303,6 +292,25 @@ namespace LocalServerWeb.Controllers
             return listDanhMuc;
         }
 
+        private List<DanhMuc> LayDanhSachDanhMucLevelThapNhat()
+        {
+            int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
+            List<DanhMuc> listDanhMuc = DanhMucBUS.LayDanhSachDanhMucLevelThapNhatTheoMaNgonNgu(maNgonNgu, SharedString.NoInformation);
+            if (listDanhMuc != null && listDanhMuc.Count > 0)
+            {
+                foreach (DanhMuc danhMuc in listDanhMuc)
+                {
+                    if (danhMuc.MaDanhMuc == 1)
+                    {
+                        listDanhMuc.Remove(danhMuc);
+                        break;
+                    }
+                }
+            }
+
+            return listDanhMuc;
+        }
+
         public ActionResult Delete(int? id)
         {
             if (id == null || id <= 0)
@@ -328,6 +336,40 @@ namespace LocalServerWeb.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult ChangeCategory(int maMonAn, int maDanhMuc, string previous_action)
+        {
+            if (maMonAn <= 0 || maDanhMuc <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            DanhMuc danhMuc = DanhMucBUS.LayDanhMuc(maDanhMuc);
+            MonAn monAn = MonAnBUS.LayMonAn(maMonAn);
+            if (monAn == null || danhMuc == null)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+
+            monAn.DanhMuc = danhMuc;
+            if (MonAnBUS.CapNhat(monAn))
+            {
+                TempData["infoChangeCategorySuccess"] = AdminFoodString.InfoChangeCategorySuccess;
+            }
+            else
+            {
+                TempData["errorCannotChangeCategory"] = AdminFoodString.ErrorCannotChangeCategory;
+            }
+
+            if (previous_action == "Index")
+                return RedirectToAction("Index");
+            return RedirectToAction(previous_action, new { id = maMonAn });
+
         }
     }
 }

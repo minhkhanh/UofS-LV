@@ -56,16 +56,81 @@ namespace LocalServerBUS
             return DanhMucDAO.LayDanhSachDanhMucLevelThapNhat();
         }
 
-        public static List<DanhMuc> LayDanhSachDanhMucLevelThapNhatTheoNgonNgu(NgonNgu ngonNgu)
+        public static List<DanhMuc> LayDanhSachDanhMucLevelThapNhatTheoMaNgonNgu(int maNgonNgu, string noInformation)
         {
-            var temp = LayDanhSachDanhMucLevelThapNhat();
-            foreach (var danhMuc in temp)
+            List<DanhMuc> listDanhMuc = DanhMucBUS.LayDanhSachDanhMucLevelThapNhat();
+
+            foreach (DanhMuc danhmuc in listDanhMuc)
             {
-                danhMuc.TenDanhMuc =
-                    ChiTietDanhMucDaNgonNguBUS.LayChiTietDanhMucDaNgonNgu(danhMuc.MaDanhMuc, ngonNgu.MaNgonNgu).
-                        TenDanhMuc;
+                try
+                {
+                    ChiTietDanhMucDaNgonNgu ct = ChiTietDanhMucDaNgonNguBUS.LayChiTietDanhMucDaNgonNgu(danhmuc.MaDanhMuc, maNgonNgu);
+                    if (ct != null)
+                    {
+                        danhmuc.TenDanhMuc = ct.TenDanhMuc;
+                        danhmuc.MoTaDanhMuc = ct.MoTaDanhMuc;
+                    }
+                    else
+                    {
+                        danhmuc.TenDanhMuc = noInformation;
+                        danhmuc.MoTaDanhMuc = noInformation;
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    danhmuc.TenDanhMuc = noInformation;
+                    danhmuc.MoTaDanhMuc = noInformation;
+
+                    Console.WriteLine(e.Message);
+                }
             }
-            return temp.ToList();
+
+            return listDanhMuc;
+        }
+
+        
+
+        // Check if B is descendant of A
+        public static bool IsItsDescendant(int maDanhMucA, int maDanhMucB)
+        {
+            List<DanhMuc> listConChau = LayDanhSachDanhMucConChauDanhMucCha(maDanhMucA);
+            if (listConChau != null && listConChau.Count > 0 && listConChau.Contains(DanhMucBUS.LayDanhMuc(maDanhMucB)))
+                return true;
+            return false;
+        }
+
+        public static List<DanhMuc> LayDanhSachDanhMucTheoMaNgonNgu(int maNgonNgu, string noInformation)
+        {
+            List<DanhMuc> listDanhMuc = DanhMucBUS.LayDanhSachDanhMuc();
+
+            foreach (DanhMuc danhmuc in listDanhMuc)
+            {
+                try
+                {
+                    ChiTietDanhMucDaNgonNgu ct = ChiTietDanhMucDaNgonNguBUS.LayChiTietDanhMucDaNgonNgu(danhmuc.MaDanhMuc, maNgonNgu);
+                    if (ct != null)
+                    {
+                        danhmuc.TenDanhMuc = ct.TenDanhMuc;
+                        danhmuc.MoTaDanhMuc = ct.MoTaDanhMuc;
+                    }
+                    else
+                    {
+                        danhmuc.TenDanhMuc = noInformation;
+                        danhmuc.MoTaDanhMuc = noInformation;
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    danhmuc.TenDanhMuc = noInformation;
+                    danhmuc.MoTaDanhMuc = noInformation;
+
+                    Console.WriteLine(e.Message);
+                }
+            }
+
+            return listDanhMuc;
         }
 
         public static bool Xoa(int maDanhMuc)
@@ -82,48 +147,5 @@ namespace LocalServerBUS
         {
             return DanhMucDAO.CapNhat(danhMuc);
         }
-
-        // Check if B is descendant of A
-        public static bool IsItsDescendant(int maDanhMucA, int maDanhMucB)
-        {
-            List<DanhMuc> listConChau = LayDanhSachDanhMucConChauDanhMucCha(maDanhMucA);
-            if (listConChau != null && listConChau.Count > 0 && listConChau.Contains(DanhMucBUS.LayDanhMuc(maDanhMucB)))
-                return true;
-            return false;
-        }
-
-        public static List<DanhMuc> LayDanhSachDanhMucTheoMaNgonNgu(int maNgonNgu, string noInfomation)
-        {
-            List<DanhMuc> listDanhMuc = DanhMucBUS.LayDanhSachDanhMuc();
-
-            foreach (DanhMuc danhmuc in listDanhMuc)
-            {
-                try
-                {
-                    ChiTietDanhMucDaNgonNgu ct = ChiTietDanhMucDaNgonNguBUS.LayChiTietDanhMucDaNgonNgu(danhmuc.MaDanhMuc, maNgonNgu);
-                    if (ct != null)
-                    {
-                        danhmuc.TenDanhMuc = ct.TenDanhMuc;
-                        danhmuc.MoTaDanhMuc = ct.MoTaDanhMuc;
-                    }
-                    else
-                    {
-                        danhmuc.TenDanhMuc = noInfomation;
-                        danhmuc.MoTaDanhMuc = noInfomation;
-                    }
-
-                }
-                catch (Exception e)
-                {
-                    danhmuc.TenDanhMuc = noInfomation;
-                    danhmuc.MoTaDanhMuc = noInfomation;
-
-                    Console.WriteLine(e.Message);
-                }
-            }
-
-            return listDanhMuc;
-        }
-
     }
 }

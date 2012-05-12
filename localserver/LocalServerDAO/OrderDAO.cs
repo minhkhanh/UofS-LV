@@ -49,6 +49,7 @@ namespace LocalServerDAO
                 Order or = temp.First();
                 or._maBan = _order._maBan;
                 or._maTaiKhoan = _order._maTaiKhoan;
+                or.TinhTrang = _order.TinhTrang;
             }
 
             try
