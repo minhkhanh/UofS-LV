@@ -25,14 +25,19 @@ namespace LocalServerBUS
             return MonAnDAO.LayMonAn(maMonAn);
         }
 
-        public static bool ThemMonAn(MonAn monAn)
+        public static bool Them(MonAn monAn)
         {
-            return MonAnDAO.ThemMonAn(monAn);
+            return MonAnDAO.Them(monAn);
         }
 
-        public static bool CapNhatMonAn(MonAn monAn)
+        public static bool CapNhat(MonAn monAn)
         {
-            return MonAnDAO.CapNhapMonAn(monAn);
+            return MonAnDAO.CapNhat(monAn);
+        }
+
+        public static bool Xoa(int maMonAn)
+        {
+            return MonAnDAO.Xoa(maMonAn);
         }
 
         public static List<DonViTinh> LayDanhSachDonViTinhChuaCoTheoNgonNgu(MonAn monAn, NgonNgu ngonNgu)
@@ -55,6 +60,37 @@ namespace LocalServerBUS
         public static List<NgonNgu> LayDanhSachNgonNguMonAnChuaCo(MonAn monAn)
         {
             return MonAnDAO.LayDanhSachNgonNguMonAnChuaCo(monAn);
+        }
+
+        public static List<MonAn> LayDanhSachMonAnTheoMaNgonNgu(int maNgonNgu, string noInformation)
+        {
+            List<MonAn> listMonAn = MonAnBUS.LayDanhSachMonAn();
+            foreach (MonAn monAn in listMonAn)
+            {
+                try
+                {
+                    ChiTietMonAnDaNgonNgu ctNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(monAn.MaMonAn, maNgonNgu);
+                    if (ctNgonNgu != null)
+                    {
+                        monAn.TenMonAn = ctNgonNgu.TenMonAn;
+                        monAn.MoTaMonAn = ctNgonNgu.MoTaMonAn;
+                    }
+                    else
+                    {
+                        monAn.TenMonAn = noInformation;
+                        monAn.MoTaMonAn = noInformation;
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    monAn.TenMonAn = noInformation;
+                    monAn.MoTaMonAn = noInformation;
+                    Console.WriteLine(e.Message);
+                }
+            }
+
+            return listMonAn;
         }
     }
 }

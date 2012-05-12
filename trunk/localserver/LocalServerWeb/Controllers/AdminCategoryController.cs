@@ -78,35 +78,7 @@ namespace LocalServerWeb.Controllers
         private List<DanhMuc> LayDanhSachDanhMuc()
         {
             int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
-            List<DanhMuc> listDanhMuc = DanhMucBUS.LayDanhSachDanhMuc();
-
-            foreach (DanhMuc danhmuc in listDanhMuc)
-            {
-                try
-                {
-                    ChiTietDanhMucDaNgonNgu ct = ChiTietDanhMucDaNgonNguBUS.LayChiTietDanhMucDaNgonNgu(danhmuc.MaDanhMuc, maNgonNgu);
-                    if (ct != null)
-                    {
-                        danhmuc.TenDanhMuc = ct.TenDanhMuc;
-                        danhmuc.MoTaDanhMuc = ct.MoTaDanhMuc;
-                    }
-                    else
-                    {
-                        danhmuc.TenDanhMuc = SharedString.NoInformation;
-                        danhmuc.MoTaDanhMuc = SharedString.NoInformation;
-                    }
-                    
-                }
-                catch (Exception e)
-                {
-                    danhmuc.TenDanhMuc = SharedString.NoInformation;
-                    danhmuc.MoTaDanhMuc = SharedString.NoInformation;
-
-                    Console.WriteLine(e.Message);
-                }
-            }
-
-            return listDanhMuc;
+            return DanhMucBUS.LayDanhSachDanhMucTheoMaNgonNgu(maNgonNgu, SharedString.NoInformation);
         }
 
         public ActionResult Delete(int? id)

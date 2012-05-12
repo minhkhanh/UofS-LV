@@ -895,9 +895,19 @@ namespace LocalServerWeb
         }
 
 
-        public string Test()
+        public string TestGET()
         {
-            return "Hello eMenu";
+            return "GETOK";
+        }
+
+        public string TestPOST()
+        {
+            return "POSTOK";
+        }
+
+        public string TestPUT()
+        {
+            return "PUTOK";
         }
 
         public List<Foo> LayDanhSachFoo()

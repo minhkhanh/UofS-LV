@@ -8,21 +8,22 @@ using LocalServerBUS;
 using LocalServerDTO;
 using LocalServerWeb.Codes;
 using LocalServerWeb.Resources.Views.AdminFood;
+using LocalServerWeb.Resources.Views.Shared;
 
 namespace LocalServerWeb.Controllers
 {
     public class AdminFoodController : BaseController
     {
-        //
-        // GET: /AdminHome/
 
         public ActionResult Index()
         {
             SharedCode.FillAdminMainMenu(ViewData, 2, 0);
+            ViewData["listMonAn"] = LayDanhSachMonAn();
+            ViewData["listDanhMuc"] = LayDanhSachDanhMuc();
             return View();
         }
 
-        public ActionResult AddFood()
+        public ActionResult Add()
         {
             SharedCode.FillAdminMainMenu(ViewData, 2, 1);
             ViewData["listDanhMuc"] = DanhMucBUS.LayDanhSachDanhMucLevelThapNhatTheoNgonNgu(SharedCode.GetCurrentLanguage(Session));
@@ -30,7 +31,7 @@ namespace LocalServerWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddFood(int listDanhMuc, HttpPostedFileBase uploadFile)
+        public ActionResult Add(int listDanhMuc, HttpPostedFileBase uploadFile)
         {
             TempData["listDanhMuc"] = listDanhMuc;
             var danhMuc = DanhMucBUS.LayDanhMuc(listDanhMuc);
@@ -48,7 +49,7 @@ namespace LocalServerWeb.Controllers
             monAn.NgungBan = false;
             monAn.SoLuotDanhGia = 0;
             monAn.HinhAnh = "Uploads/FoodImages/" + fileName;
-            if (MonAnBUS.ThemMonAn(monAn))
+            if (MonAnBUS.Them(monAn))
             {
                 uploadFile.SaveAs(filePath);
                 return RedirectToAction("ViewDetailFood", new {maMonAn = monAn.MaMonAn});
@@ -112,7 +113,7 @@ namespace LocalServerWeb.Controllers
             if (danhMuc != null && monAn != null)
             {
                 monAn.DanhMuc = danhMuc;
-                MonAnBUS.CapNhatMonAn(monAn);
+                MonAnBUS.CapNhat(monAn);
             }
             return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
         }
@@ -127,7 +128,7 @@ namespace LocalServerWeb.Controllers
                 string filePath = Path.Combine(HttpContext.Server.MapPath("../Uploads/FoodImages"), fileName);
                 string oldFilePath = Path.Combine(HttpContext.Server.MapPath("/"), monAn.HinhAnh);
                 monAn.HinhAnh = "Uploads/FoodImages/" + fileName;
-                if (MonAnBUS.CapNhatMonAn(monAn))
+                if (MonAnBUS.CapNhat(monAn))
                 {
                     uploadFile.SaveAs(filePath);
                     if (System.IO.File.Exists(oldFilePath)) System.IO.File.Delete(oldFilePath);
@@ -276,5 +277,57 @@ namespace LocalServerWeb.Controllers
             return RedirectToAction("ViewDetailFood", new { maMonAn = monAn.MaMonAn });
         }
 
+
+        private List<MonAn> LayDanhSachMonAn()
+        {
+            int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
+            return MonAnBUS.LayDanhSachMonAnTheoMaNgonNgu(maNgonNgu, SharedString.NoInformation);
+        }
+
+        private List<DanhMuc> LayDanhSachDanhMuc()
+        {
+            int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
+            List<DanhMuc> listDanhMuc =  DanhMucBUS.LayDanhSachDanhMucTheoMaNgonNgu(maNgonNgu, SharedString.NoInformation);
+            if (listDanhMuc != null && listDanhMuc.Count > 0)
+            {
+                foreach (DanhMuc danhMuc in listDanhMuc)
+                {
+                    if (danhMuc.MaDanhMuc == 1)
+                    {
+                        listDanhMuc.Remove(danhMuc);
+                        break;
+                    }
+                }
+            }
+
+            return listDanhMuc;
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null || id <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            MonAn objMonAn = MonAnBUS.LayMonAn(id ?? 0);
+            if (objMonAn == null)
+            {
+                TempData["errorNotFound"] = AdminFoodString.ErrorFoodNotFound;
+                return RedirectToAction("Index", "Error");
+            }
+
+            if (!MonAnBUS.Xoa(objMonAn.MaMonAn))
+            {
+                TempData["errorCannotDelete"] = AdminFoodString.ErrorCannotDelete;
+            }
+            else
+            {
+                TempData["infoDeleteSuccess"] = AdminFoodString.InfoDeleteSuccess;
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

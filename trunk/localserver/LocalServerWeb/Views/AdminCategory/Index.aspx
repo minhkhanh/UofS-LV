@@ -40,19 +40,19 @@
            Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotDelete"]);
        } 
     %>
-    <!--  Error message: Cannot change area for this table  -->
+    <!--  Error message: Cannot change area for this category  -->
     <% if (TempData["errorCannotChangeParentCategory"] != null)
        {
            Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotChangeParentCategory"]);
        } 
     %>
-    <!--  Error message: Cannot change area for this table  -->
+    <!--  Error message: Cannot choose itself as its parent  -->
     <% if (TempData["errorCannotChooseItself"] != null)
        {
            Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotChooseItself"]);
        } 
     %>
-    <!--  Error message: Cannot change area for this table  -->
+    <!--  Error message: Cannot choose its descendant as its parent  -->
     <% if (TempData["errorCannotChooseItsDescendant"] != null)
        {
            Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotChooseItsDescendant"]);

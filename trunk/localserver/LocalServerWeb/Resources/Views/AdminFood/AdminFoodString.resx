@@ -126,8 +126,14 @@
   <data name="AddLanguageFoodError" xml:space="preserve">
     <value>Add Language Food Error</value>
   </data>
+  <data name="AddTitle" xml:space="preserve">
+    <value>Add new food</value>
+  </data>
   <data name="AddUnit" xml:space="preserve">
     <value>Add Unit</value>
+  </data>
+  <data name="Available" xml:space="preserve">
+    <value>Available</value>
   </data>
   <data name="Category" xml:space="preserve">
     <value>Category</value>
@@ -144,8 +150,26 @@
   <data name="EditLanguageFood" xml:space="preserve">
     <value>Edit language food</value>
   </data>
+  <data name="EditTitle" xml:space="preserve">
+    <value>Edit food</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
+  </data>
+  <data name="ErrorCannotAdd" xml:space="preserve">
+    <value>Can't add</value>
+  </data>
+  <data name="ErrorCannotChangeCategory" xml:space="preserve">
+    <value>Can't change category</value>
+  </data>
+  <data name="ErrorCannotDelete" xml:space="preserve">
+    <value>Can't delete</value>
+  </data>
+  <data name="ErrorCannotEdit" xml:space="preserve">
+    <value>Can't edit</value>
+  </data>
+  <data name="ErrorFoodNotFound" xml:space="preserve">
+    <value>Requested food not found</value>
   </data>
   <data name="FoodDescription" xml:space="preserve">
     <value>Food Description</value>
@@ -153,8 +177,32 @@
   <data name="FoodName" xml:space="preserve">
     <value>Food Name</value>
   </data>
+  <data name="InfoAddSuccess" xml:space="preserve">
+    <value>Add successfully</value>
+  </data>
+  <data name="InfoChangeCategorySuccess" xml:space="preserve">
+    <value>Change category successfully</value>
+  </data>
+  <data name="InfoDeleteSuccess" xml:space="preserve">
+    <value>Delete successfully</value>
+  </data>
+  <data name="InfoEditSuccess" xml:space="preserve">
+    <value>Edit successfully</value>
+  </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
+  </data>
+  <data name="NoData" xml:space="preserve">
+    <value>There are no food</value>
+  </data>
+  <data name="NotAvailable" xml:space="preserve">
+    <value>Not available</value>
+  </data>
+  <data name="NumberOrdinary" xml:space="preserve">
+    <value>No.</value>
+  </data>
+  <data name="Option" xml:space="preserve">
+    <value>Option</value>
   </data>
   <data name="Picture" xml:space="preserve">
     <value>Picture</value>
@@ -168,16 +216,31 @@
   <data name="Price" xml:space="preserve">
     <value>Price</value>
   </data>
+  <data name="RatingTimes" xml:space="preserve">
+    <value>Rating times</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="Score" xml:space="preserve">
+    <value>Score</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
   <data name="Title" xml:space="preserve">
-    <value>Food manager</value>
+    <value>Food list</value>
   </data>
   <data name="Unit" xml:space="preserve">
     <value>Unit</value>
   </data>
   <data name="UnitPriceAction" xml:space="preserve">
     <value>Option</value>
+  </data>
+  <data name="WarningNoLanguageDetail" xml:space="preserve">
+    <value>There are no language details</value>
+  </data>
+  <data name="WarningNoUnitDetail" xml:space="preserve">
+    <value>There are no unit details</value>
   </data>
 </root>
