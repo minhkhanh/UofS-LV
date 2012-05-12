@@ -19,5 +19,10 @@ namespace LocalServerBUS
         {
             return ChiTietKhongCheBienOrderDAO.CapNhat(chiTietCheBienOrder);
         }
+
+        public static bool KhoaCheBienVaTaoThongBaoKhongCheBien(ChiTietOrder chiTietOrder, int soLuongHetCheBien)
+        {
+            return ChiTietKhongCheBienOrderDAO.KhoaCheBienVaTaoThongBaoKhongCheBien(chiTietOrder, soLuongHetCheBien);
+        }
     }
 }

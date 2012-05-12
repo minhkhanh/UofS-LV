@@ -73,25 +73,7 @@ namespace LocalServerWeb.Controllers
         public bool PostCheBien(int maChiTietOrder, int soLuongCheBien)
         {
             if (!Request.IsAjaxRequest()) return false;
-            var chiTietOrder = ChiTietOrderBUS.LayChiTietOrder(maChiTietOrder);
-            if (chiTietOrder == null) return false;
-            var chiTietCheBienOrder = ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder);
-            int iSoLuongCheBienToiDa = chiTietOrder.SoLuong;
-            if (chiTietCheBienOrder != null)
-            {
-                iSoLuongCheBienToiDa -= (chiTietCheBienOrder.SoLuongDaCheBien + chiTietCheBienOrder.SoLuongDangCheBien);
-            }
-            if (soLuongCheBien<=0 || soLuongCheBien>iSoLuongCheBienToiDa) return false;
-            if (chiTietCheBienOrder!=null)
-            {
-                chiTietCheBienOrder.SoLuongDangCheBien += soLuongCheBien;
-                return ChiTietCheBienOrderBUS.SuaChiTietCheBienOrder(chiTietCheBienOrder);
-            }
-            chiTietCheBienOrder = new ChiTietCheBienOrder();
-            chiTietCheBienOrder.ChiTietOrder = chiTietOrder;
-            chiTietCheBienOrder.SoLuongDaCheBien = 0;
-            chiTietCheBienOrder.SoLuongDangCheBien = soLuongCheBien;
-            return ChiTietCheBienOrderBUS.ThemChiTietCheBienOrder(chiTietCheBienOrder);
+            return ChiTietCheBienOrderBUS.CheBien(maChiTietOrder, soLuongCheBien);
         }
 
         public ActionResult GetDialogCheBienXong(int maChiTietOrder)
@@ -123,15 +105,8 @@ namespace LocalServerWeb.Controllers
             var chiTietCheBienOrder = ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder);
             if (chiTietCheBienOrder == null) return false;
             if (soLuongCheBienXong > chiTietCheBienOrder.SoLuongDangCheBien) return false;
-            chiTietCheBienOrder.SoLuongDaCheBien += soLuongCheBienXong;
-            chiTietCheBienOrder.SoLuongDangCheBien -= soLuongCheBienXong;
-            if (chiTietOrder.SoLuong == chiTietCheBienOrder.SoLuongDaCheBien && ChiTietCheBienOrderBUS.SuaChiTietCheBienOrder(chiTietCheBienOrder))
-            {
-                // da che bien xong
-                chiTietOrder.TinhTrang = 1;
-                return ChiTietOrderBUS.SuaChiTietOrder(chiTietOrder);
-            }
-            return false;
+
+            return ChiTietCheBienOrderBUS.CheBienXong(chiTietCheBienOrder, soLuongCheBienXong);
         }
 
         public ActionResult GetDialogHetCheBien(int maChiTietOrder)
@@ -163,13 +138,9 @@ namespace LocalServerWeb.Controllers
                 iSoLuongCheBienToiDa -= (chiTietCheBienOrder.SoLuongDaCheBien + chiTietCheBienOrder.SoLuongDangCheBien);
             }
             if (soLuongHetCheBien > iSoLuongCheBienToiDa) return false;
-            if (chiTietOrder.SoLuong == chiTietCheBienOrder.SoLuongDaCheBien && ChiTietCheBienOrderBUS.SuaChiTietCheBienOrder(chiTietCheBienOrder))
-            {
-                // da che bien xong
-                chiTietOrder.TinhTrang = 1;
-                return ChiTietOrderBUS.SuaChiTietOrder(chiTietOrder);
-            }
-            return false;
+
+            // ok bat dau luu tru
+            return ChiTietKhongCheBienOrderBUS.KhoaCheBienVaTaoThongBaoKhongCheBien(chiTietOrder, soLuongHetCheBien);
         }
     }
 }

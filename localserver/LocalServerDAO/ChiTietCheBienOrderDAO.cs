@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Transactions;
 using LocalServerDTO;
 
 namespace LocalServerDAO
@@ -59,6 +60,80 @@ namespace LocalServerDAO
             }
 
             return result;
+        }
+
+        public static bool CheBienXong(ChiTietCheBienOrder chiTietCheBienOrder, int soLuongCheBienXong)
+        {
+            using (var transaction = new TransactionScope())
+            {
+                try
+                {
+                    if (soLuongCheBienXong > chiTietCheBienOrder.SoLuongDangCheBien) return false;
+                    chiTietCheBienOrder.SoLuongDaCheBien += soLuongCheBienXong;
+                    chiTietCheBienOrder.SoLuongDangCheBien -= soLuongCheBienXong;
+                    //ChiTietCheBienOrderDAO.SuaChiTietCheBienOrder(chiTietCheBienOrder);
+                    if (chiTietCheBienOrder.ChiTietOrder.SoLuong == chiTietCheBienOrder.SoLuongDaCheBien)
+                    {
+                        // da che bien xong
+                        chiTietCheBienOrder.ChiTietOrder.TinhTrang = 1;
+                        //ChiTietOrderBUS.SuaChiTietOrder(chiTietOrder);
+                    }
+                    ThucDonDienTu.DataContext.SubmitChanges();
+
+                    transaction.Complete();
+                    return true;
+                }
+                catch (Exception e)
+                {                    
+                    Console.Out.WriteLine(e.StackTrace);
+                    return false;
+                }                
+            }
+        }
+
+        public static bool CheBien(int maChiTietOrder, int soLuongCheBien)
+        {
+            using (var transaction = new TransactionScope())
+            {
+                try
+                {
+                    var chiTietOrder = ChiTietOrderDAO.LayChiTietOrder(maChiTietOrder);
+                    // check co bi lock ko dc che bien ko
+                    if (chiTietOrder == null || chiTietOrder.Order.TinhTrang == 2 || chiTietOrder.TinhTrang == 2) return false;
+                    var chiTietCheBienOrder = ChiTietCheBienOrderDAO.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder);
+
+                    int iSoLuongCheBienToiDa = chiTietOrder.SoLuong;
+                    if (chiTietCheBienOrder != null)
+                    {
+                        iSoLuongCheBienToiDa -= (chiTietCheBienOrder.SoLuongDaCheBien + chiTietCheBienOrder.SoLuongDangCheBien);
+                    }
+                    if (soLuongCheBien <= 0 || soLuongCheBien > iSoLuongCheBienToiDa) return false;
+
+                    if (chiTietCheBienOrder != null)
+                    {
+                        chiTietCheBienOrder.SoLuongDangCheBien += soLuongCheBien;                        
+                    }
+
+                    chiTietCheBienOrder = new ChiTietCheBienOrder();
+                    chiTietCheBienOrder.ChiTietOrder = chiTietOrder;
+                    chiTietCheBienOrder.SoLuongDaCheBien = 0;
+                    chiTietCheBienOrder.SoLuongDangCheBien = soLuongCheBien;
+                    ThucDonDienTu.DataContext.ChiTietCheBienOrders.InsertOnSubmit(chiTietCheBienOrder);
+
+                    chiTietOrder.TinhTrang = 1;
+                    chiTietOrder.Order.TinhTrang = 1;
+
+                    ThucDonDienTu.DataContext.SubmitChanges();
+
+                    transaction.Complete();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    Console.Out.WriteLine(e.StackTrace);
+                    return false;
+                }
+            }
         }
     }
 }

@@ -132,7 +132,7 @@
                 });
             });
             
-            $('#kitchen-table .button-het-che-bien').button().click(function () {
+            $('#kitchen-table #button-het-che-bien').button().click(function () {
                 bTimerOn = false;
                 var tmp = $(this).parent().parent().find('.ma-chi-tiet-order').html();
                 $.ajax({
