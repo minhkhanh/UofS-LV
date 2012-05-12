@@ -23,7 +23,7 @@ namespace LocalServerDAO
             return
                 ThucDonDienTu.DataContext.ChiTietOrders.Where(
                     c =>
-                    c.BoPhanCheBien == boPhanCheBien && c.DuocPhepCheBien ).ToList();
+                    c.BoPhanCheBien == boPhanCheBien && c.TinhTrang == 0 ).ToList();
         }
 
         public static BoPhanCheBien LayBoPhanCheBienTheoMa(int maBoPhanCheBien)

@@ -72,8 +72,12 @@ namespace LocalServerDTO
             set { _donViTinh.Entity = value; }
         }
 
-        [Column(Name = "DuocPhepCheBien")]
-        public bool DuocPhepCheBien { get; set; }
+        /// <summary>
+        /// 0 - binh thuong dc che bien
+        /// 1 - da che bien xong
+        /// </summary>
+        [Column(Name = "TinhTrang", IsDbGenerated = true)]
+        public int TinhTrang { get; set; }
 
         public int SoLuongDaCheBien { get; set; }
         public int SoLuongDangCheBien { get; set; }

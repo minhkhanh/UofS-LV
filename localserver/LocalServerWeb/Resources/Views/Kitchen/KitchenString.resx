@@ -159,4 +159,16 @@
   <data name="NhapSoLuongCheBien" xml:space="preserve">
     <value>NhapSoLuongCheBien</value>
   </data>
+  <data name="Xong" xml:space="preserve">
+    <value>Xong</value>
+  </data>
+  <data name="HetCheBien" xml:space="preserve">
+    <value>HetCheBien</value>
+  </data>
+  <data name="NhapSoLuongHet" xml:space="preserve">
+    <value>NhapSoLuongHet</value>
+  </data>
+  <data name="NhapSoLuongXong" xml:space="preserve">
+    <value>NhapSoLuongXong</value>
+  </data>
 </root>

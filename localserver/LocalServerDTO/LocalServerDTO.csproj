@@ -54,6 +54,7 @@
     <Compile Include="ChiTietMonAnDonViTinh.cs" />
     <Compile Include="ChiTietMonLienQuan.cs" />
     <Compile Include="ChiTietOrder.cs" />
+    <Compile Include="ChiTietKhongCheBienOrder.cs" />
     <Compile Include="DanhMuc.cs" />
     <Compile Include="DonViTinh.cs" />
     <Compile Include="Foo.cs" />

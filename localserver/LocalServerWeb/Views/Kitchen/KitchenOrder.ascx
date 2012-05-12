@@ -37,12 +37,29 @@
             <% if (chiTietOrder.SoLuongDangCheBien + chiTietOrder.SoLuongDaCheBien < chiTietOrder.SoLuong) {%>    
                 <button class="button-che-bien"><%: KitchenString.CheBien %></button>
             <%} %>
+            <% if (chiTietOrder.SoLuongDangCheBien > 0) {%>    
+                <button class="button-che-bien-xong"><%: KitchenString.Xong %></button>
+            <%} %>
             </td>
             <td><%: chiTietOrder.TenPhucVu %></td>
 			<td class="options-width">
-			<a href="" title="Edit" class="icon-1 info-tooltip"></a>
-			<a href="" title="Edit" class="icon-2 info-tooltip"></a>
+			<a id="button-het-che-bien" title="<%:KitchenString.HetCheBien %>" class="icon-2 info-tooltip"></a>
+			<a title="Edit" class="icon-2 info-tooltip"></a>
 			</td>
 		</tr>
         <%} %>
 		</table>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('a.info-tooltip ').tooltip({
+            track: true,
+            delay: 0,
+            fixPNG: true,
+            showURL: false,
+            showBody: " - ",
+            top: -35,
+            left: 5
+        });
+    });
+</script>
