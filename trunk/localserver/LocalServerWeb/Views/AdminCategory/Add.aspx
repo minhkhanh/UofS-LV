@@ -34,36 +34,41 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <% if (TempData["errorNotFound"] != null)
-       {%>
-    <div class="message-red">
-        <table border="0" width="100%" cellpadding="0" cellspacing="0">
-            <tbody>
-                <tr>
-                    <td class="red-left">
-                        <%:SharedString.Error %>
-                        <a href="">
-                            <%: TempData["errorNotFound"]%></a>
-                    </td>
-                    <td class="red-right">
-                        <a class="close-red">
-                            <img src="../../Images/adminimages/table/icon_close_red.gif" alt="" /></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <% } %>
+    <!--  Error message: Cannot add new category  -->
+    <% if (TempData["errorCannotAdd"] != null)
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotAdd"]);
+       } 
+    %>
+    <!--  Main code  --------------------------------------------------------------------------->
     <% Html.BeginForm("Add", "AdminCategory", FormMethod.Post); %>
     <!-- start id-form -->
     <div id="table-content">
         <table border="0" cellpadding="0" cellspacing="0" id="id-form">
             <tr>
                 <th valign="top">
-                    <%: AdminCategoryString.ParentCategoryName %>:
+                    <%: SharedString.Guidance %>
                 </th>
                 <td>
-                    <%= Html.DropDownList("maDanhMucCha", new SelectList(ViewData["listDanhMuc"] as List<DanhMuc>, "MaDanhMuc", "TenDanhMuc", 1), new { onchange = "submit();", Class = "listDanhMucCha" })%>
+                    <%: SharedString.Step %> 1: 
+                    <%: AdminCategoryString.ChooseParentCategory %>
+                    <br />
+                    <%: SharedString.Step %> 2: 
+                    <%: AdminCategoryString.AddTitle %>
+                    <br />
+                    <%: SharedString.Step %> 3: 
+                    <%: AdminCategoryString.AddLanguageDetail %>
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+            <tr>
+                <th valign="top">
+                    <%: SharedString.Step %> 1
+                </th>
+                <td>
+                    <%= Html.DropDownList("maDanhMucCha", new SelectList(ViewData["listDanhMuc"] as List<DanhMuc>, "MaDanhMuc", "TenDanhMuc", 1), new { Class = "listDanhMucCha" })%>
                 </td>
                 <td>
                     &nbsp;
@@ -71,7 +76,7 @@
             </tr>
             <tr>
                 <th>
-                    &nbsp;
+                    <%: SharedString.Step %> 2
                 </th>
                 <td valign="top">
                     <input type="submit" value="" class="form-submit" />

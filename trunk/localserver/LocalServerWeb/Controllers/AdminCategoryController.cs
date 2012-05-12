@@ -36,7 +36,7 @@ namespace LocalServerWeb.Controllers
 
             if (danhMuc == null || danhMucCha == null)
             {
-                TempData["error"] = SharedString.InputWrong;
+                TempData["error"] = AdminCategoryString.ErrorCategoryNotFound;
                 return RedirectToAction("Index", "Error");
             }
 
@@ -63,6 +63,10 @@ namespace LocalServerWeb.Controllers
                 {
                     TempData["errorCannotChangeParentCategory"] = AdminCategoryString.ErrorCannotChangeParentCategory;
                 }
+                else
+                {
+                    TempData["infoChangeParentCategorySuccess"] = AdminCategoryString.InfoChangeParentCategorySuccess;
+                }
             }
             
             // Should redirect to previous action
@@ -88,15 +92,15 @@ namespace LocalServerWeb.Controllers
                     }
                     else
                     {
-                        danhmuc.TenDanhMuc = "";
-                        danhmuc.MoTaDanhMuc = "";
+                        danhmuc.TenDanhMuc = SharedString.NoInformation;
+                        danhmuc.MoTaDanhMuc = SharedString.NoInformation;
                     }
                     
                 }
                 catch (Exception e)
                 {
-                    danhmuc.TenDanhMuc = "";
-                    danhmuc.MoTaDanhMuc = "";
+                    danhmuc.TenDanhMuc = SharedString.NoInformation;
+                    danhmuc.MoTaDanhMuc = SharedString.NoInformation;
 
                     Console.WriteLine(e.Message);
                 }
@@ -116,13 +120,17 @@ namespace LocalServerWeb.Controllers
             DanhMuc objDanhMuc = DanhMucBUS.LayDanhMuc(id ?? 0);
             if (objDanhMuc == null)
             {
-                TempData["error"] = SharedString.InputWrong;
+                TempData["error"] = AdminCategoryString.ErrorCategoryNotFound;
                 return RedirectToAction("Index", "Error");
             }
 
             if (!DanhMucBUS.Xoa(objDanhMuc.MaDanhMuc))
             {
                 TempData["errorCannotDelete"] = AdminCategoryString.ErrorCannotDelete;
+            }
+            else
+            {
+                TempData["infoDeleteSuccess"] = AdminCategoryString.InfoDeleteSuccess;
             }
 
             return RedirectToAction("Index");
@@ -159,7 +167,14 @@ namespace LocalServerWeb.Controllers
 
                     // If add successfully, 
                     if (DanhMucBUS.Them(danhMuc))
+                    {
+                        TempData["infoAddSuccess"] = AdminCategoryString.InfoAddSuccess;
                         return RedirectToAction("Edit", new { id = danhMuc.MaDanhMuc });
+                    }
+                    else
+                    {
+                        TempData["errorCannotAdd"] = AdminCategoryString.ErrorCannotAdd;
+                    }
                 }
                 catch (Exception e)
                 {
@@ -175,23 +190,33 @@ namespace LocalServerWeb.Controllers
         public ActionResult Edit(int? id)
         {
             SharedCode.FillAdminMainMenu(ViewData, 3, 0);
-            ViewData["listDanhMuc"] = LayDanhSachDanhMuc();
-            
+
+            if (id == null || id <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
 
             DanhMuc danhMuc = DanhMucBUS.LayDanhMuc(id ?? 0);
-            if (id == null || danhMuc == null)
+            if (danhMuc == null)
             {
                 TempData["errorNotFound"] = AdminCategoryString.ErrorCategoryNotFound;
+                return RedirectToAction("Index", "Error");
             }
             else
             {
-                TempData["maDanhMucCha"] = (danhMuc.DanhMucCha!=null)?danhMuc.DanhMucCha.MaDanhMuc:1;
+                TempData["maDanhMucCha"] = (danhMuc.DanhMucCha != null) ? danhMuc.DanhMucCha.MaDanhMuc : 1;
             }
 
+            ViewData["listDanhMuc"] = LayDanhSachDanhMuc();
 
-            
             ViewData["listNgonNguChuaCo"] = ChiTietDanhMucDaNgonNguBUS.LayDanhSachNgonNguChuaCo(id ?? 0);
-            ViewData["listChiTietDanhMucDaNgonNgu"] = ChiTietDanhMucDaNgonNguBUS.LayDanhSachChiTietDanhMucDaNgonNguTheoDanhMuc(id ?? 0);
+            List<ChiTietDanhMucDaNgonNgu> listChiTietDanhMucDaNgonNgu = ChiTietDanhMucDaNgonNguBUS.LayDanhSachChiTietDanhMucDaNgonNguTheoDanhMuc(id ?? 0);
+            if (listChiTietDanhMucDaNgonNgu == null || listChiTietDanhMucDaNgonNgu.Count == 0)
+            {
+                TempData["warningNoLanguageDetail"] = AdminCategoryString.WarningNoLanguageDetail;
+            }
+            ViewData["listChiTietDanhMucDaNgonNgu"] = listChiTietDanhMucDaNgonNgu;
 
             return View();
         }
@@ -209,26 +234,29 @@ namespace LocalServerWeb.Controllers
             NgonNgu ngonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
             if (danhMuc == null || ngonNgu == null)
             {
-                TempData["error"] = SharedString.InputWrong;
+                TempData["error"] = AdminCategoryString.ErrorLanguageDetailNotFound;
                 return RedirectToAction("Index", "Error");
             }
 
-            bool bCheck = true;
+
             ChiTietDanhMucDaNgonNgu ct = ChiTietDanhMucDaNgonNguBUS.LayChiTietDanhMucDaNgonNgu(danhMuc.MaDanhMuc, ngonNgu.MaNgonNgu);
             if (ct == null)
             {
-                TempData["errorLanguageDetailNotFound"] = AdminCategoryString.ErrorLanguageDetailNotFound;
-                bCheck = false;
+                TempData["errorNotFound"] = AdminCategoryString.ErrorLanguageDetailNotFound;
+                return RedirectToAction("Index", "Error");
+
             }
 
-            if (bCheck)
+
+            if (!ChiTietDanhMucDaNgonNguBUS.Xoa(ct))
             {
-                if (!ChiTietDanhMucDaNgonNguBUS.Xoa(ct))
-                {
-                    TempData["errorCannotDelete"] = AdminCategoryString.ErrorCannotDelete;
-
-                }
+                TempData["errorCannotDelete"] = AdminCategoryString.ErrorCannotDelete;
             }
+            else
+            {
+                TempData["infoDeleteSuccess"] = AdminCategoryString.InfoDeleteSuccess;
+            }
+
 
             return RedirectToAction("Edit", new { id = maDanhMuc });  
         }
@@ -266,7 +294,14 @@ namespace LocalServerWeb.Controllers
                 ctMoi.TenDanhMuc = tenDanhMuc;
                 ctMoi.MoTaDanhMuc = moTaDanhMuc;
 
-                ChiTietDanhMucDaNgonNguBUS.Them(ctMoi);
+                if (ChiTietDanhMucDaNgonNguBUS.Them(ctMoi))
+                {
+                    TempData["infoAddSuccess"] = AdminCategoryString.InfoAddSuccess;
+                }
+                else
+                {
+                    TempData["errorCannotAdd"] = AdminCategoryString.ErrorCannotAdd;
+                }
   
             }
 
@@ -290,23 +325,27 @@ namespace LocalServerWeb.Controllers
                 return RedirectToAction("Index", "Error");
             }
 
-            bool bCheck = true;
+
             ChiTietDanhMucDaNgonNgu ct = ChiTietDanhMucDaNgonNguBUS.LayChiTietDanhMucDaNgonNgu(danhMuc.MaDanhMuc, ngonNgu.MaNgonNgu);
             if (ct == null)
             {
-                TempData["errorLanguageDetailExist"] = AdminCategoryString.ErrorLanguageDetailNotFound;
-                bCheck = false;
+                TempData["errorNotFound"] = AdminCategoryString.ErrorLanguageDetailNotFound;
+                return RedirectToAction("Index", "Error");
             }
 
-            if (bCheck)
+
+            ct.TenDanhMuc = tenDanhMuc;
+            ct.MoTaDanhMuc = moTaDanhMuc;
+
+            if (ChiTietDanhMucDaNgonNguBUS.CapNhat(ct))
             {
-
-                ct.TenDanhMuc = tenDanhMuc;
-                ct.MoTaDanhMuc = moTaDanhMuc;
-
-                ChiTietDanhMucDaNgonNguBUS.CapNhat(ct);
-
+                TempData["infoEditSuccess"] = AdminCategoryString.InfoEditSuccess;
             }
+            else
+            {
+                TempData["errorCannotEdit"] = AdminCategoryString.ErrorCannotEdit;
+            }
+
 
             return RedirectToAction("Edit", new { id = maDanhMuc });
         }

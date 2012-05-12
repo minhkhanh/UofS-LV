@@ -189,6 +189,9 @@
   <data name="Footer" xml:space="preserve">
     <value>Hệ thống luận văn - Thực Đơn Điện</value>
   </data>
+  <data name="Guidance" xml:space="preserve">
+    <value>Hướng dẫn</value>
+  </data>
   <data name="InputWrong" xml:space="preserve">
     <value>Đầu vào không hợp lệ</value>
   </data>
@@ -210,6 +213,9 @@
   <data name="LogOn" xml:space="preserve">
     <value>Đăng nhập</value>
   </data>
+  <data name="NoInformation" xml:space="preserve">
+    <value>Chưa có thông tin</value>
+  </data>
   <data name="Order" xml:space="preserve">
     <value>Order</value>
   </data>
@@ -218,6 +224,9 @@
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Nhập lại</value>
+  </data>
+  <data name="Step" xml:space="preserve">
+    <value>Bước</value>
   </data>
   <data name="Submit" xml:space="preserve">
     <value>Gởi yêu cầu</value>

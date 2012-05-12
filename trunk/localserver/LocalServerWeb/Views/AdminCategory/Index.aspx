@@ -37,22 +37,40 @@
     <!--  Error message: Cannot delete this table  -->
     <% if (TempData["errorCannotDelete"] != null)
        {
-           Html.RenderPartial("MessageTooltip", model: TempData["errorCannotDelete"]);
-       } %>
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotDelete"]);
+       } 
+    %>
     <!--  Error message: Cannot change area for this table  -->
     <% if (TempData["errorCannotChangeParentCategory"] != null)
        {
-           Html.RenderPartial("MessageTooltip", model: TempData["errorCannotChangeParentCategory"]);
-       } %><!--  Error message: Cannot change area for this table  -->
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotChangeParentCategory"]);
+       } 
+    %>
+    <!--  Error message: Cannot change area for this table  -->
     <% if (TempData["errorCannotChooseItself"] != null)
        {
-           Html.RenderPartial("MessageTooltip", model: TempData["errorCannotChooseItself"]);
-       } %>
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotChooseItself"]);
+       } 
+    %>
     <!--  Error message: Cannot change area for this table  -->
     <% if (TempData["errorCannotChooseItsDescendant"] != null)
        {
-           Html.RenderPartial("MessageTooltip", model: TempData["errorCannotChooseItsDescendant"]);
-       } %>
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotChooseItsDescendant"]);
+       } 
+    %>
+    <!--  Delete successfully  -->
+    <% if (TempData["infoDeleteSuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoDeleteSuccess"]);
+       } 
+    %>
+    <!--  Change parent category successfully  -->
+    <% if (TempData["infoChangeParentCategorySuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoChangeParentCategorySuccess"]);
+       } 
+    %>
+    <!--  Main code  --------------------------------------------------------------------------->
     <!--  start table-content  -->
     <% if (ViewData["listDanhMuc"] != null && ((List<DanhMuc>)ViewData["listDanhMuc"]).Count > 0)
        {

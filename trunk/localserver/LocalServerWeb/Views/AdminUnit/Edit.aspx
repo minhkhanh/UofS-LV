@@ -36,9 +36,28 @@
        } 
     %>
     <!--  Add successfully, this will be show if previous Add redirect to Edit -->
+    <!--  This will also be shown when add new languge detail successfully -->
     <% if (TempData["infoAddSuccess"] != null)
        {
            Html.RenderPartial("InfoMessageTooltip", model: TempData["infoAddSuccess"]);
+       } 
+    %>
+    <!--  If add new language detail failed, show this  -->
+    <% if (TempData["errorCannotAdd"] != null)
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotAdd"]);
+       } 
+    %>
+    <!--  If you add a language detail that already exist, show error -->
+    <% if (TempData["errorLanguageDetailExist"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["errorLanguageDetailExist"]);
+       } 
+    %>
+    <!--  If user has not added any language detail, show warning -->
+    <% if (TempData["warningNoLanguageDetail"] != null)
+       {
+           Html.RenderPartial("WarningMessageTooltip", model: TempData["warningNoLanguageDetail"]);
        } 
     %>
     <!--  Main code  --------------------------------------------------------------------------->
@@ -71,17 +90,19 @@
             <% } %>
             <!-- end add new language detail -->
             <!-- begin list table language detail -->
-            <% for (int i = 0; i < (ViewData["listChiTietDonViTinhDaNgonNgu"] as List<ChiTietDonViTinhDaNgonNgu>).Count; ++i)
+            <% if (ViewData["listChiTietDonViTinhDaNgonNgu"] != null)
                {
-                   var chiTietDonViTinhDaNgonNgu =
-                       (ViewData["listChiTietDonViTinhDaNgonNgu"] as List<ChiTietDonViTinhDaNgonNgu>)[i]; %>
+                   for (int i = 0; i < (ViewData["listChiTietDonViTinhDaNgonNgu"] as List<ChiTietDonViTinhDaNgonNgu>).Count; ++i)
+                   {
+                       var chiTietDonViTinhDaNgonNgu =
+                           (ViewData["listChiTietDonViTinhDaNgonNgu"] as List<ChiTietDonViTinhDaNgonNgu>)[i]; %>
             <tr>
                 <td colspan="2">
                     <table width="100%" id="table-chi-tiet-ngon-ngu">
                         <tr>
                             <td width="250px" class="danh-muc-title">
-                                <%: AdminUnitString.LanguageDetail %>
-                                <%: chiTietDonViTinhDaNgonNgu.NgonNgu.TenNgonNgu %>
+                                <%: AdminUnitString.LanguageDetail%>
+                                <%: chiTietDonViTinhDaNgonNgu.NgonNgu.TenNgonNgu%>
                             </td>
                             <td align="right">
                                 <div class="don-vi-tinh-action">
@@ -108,16 +129,17 @@
                         </tr>
                         <tr>
                             <td class="chi-tiet-title">
-                                <%: AdminUnitString.UnitName %>
+                                <%: AdminUnitString.UnitName%>
                             </td>
                             <td>
-                                <%: chiTietDonViTinhDaNgonNgu.TenDonViTinh %>
+                                <%: chiTietDonViTinhDaNgonNgu.TenDonViTinh%>
                             </td>
                         </tr>
                     </table>
                 </td>
             </tr>
-            <%} %>
+            <%}
+               } %>
             <!-- end list table language detail -->
         </table>
     </div>

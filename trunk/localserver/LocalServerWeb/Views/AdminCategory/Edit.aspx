@@ -11,6 +11,80 @@
     <%: Url.RequestContext.RouteData.Values["id"] %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <!--  Error message: Cannot delete language detail  -->
+    <% if (TempData["errorCannotDelete"] != null)
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotDelete"]);
+       } 
+    %>
+    <!--  Error message: Cannot change area for this table  -->
+    <% if (TempData["errorCannotChangeParentCategory"] != null)
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotChangeParentCategory"]);
+       } 
+    %>
+    <!--  Error message: Cannot change area for this table  -->
+    <% if (TempData["errorCannotChooseItself"] != null)
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotChooseItself"]);
+       } 
+    %>
+    <!--  Error message: Cannot change area for this table  -->
+    <% if (TempData["errorCannotChooseItsDescendant"] != null)
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotChooseItsDescendant"]);
+       } 
+    %>
+    <!--  Delete successfully  -->
+    <% if (TempData["infoDeleteSuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoDeleteSuccess"]);
+       } 
+    %>
+    <!--  Change parent category successfully  -->
+    <% if (TempData["infoChangeParentCategorySuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoChangeParentCategorySuccess"]);
+       } 
+    %>
+    <!--  If you add a language detail that already exist, show error -->
+    <% if (TempData["errorLanguageDetailExist"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["errorLanguageDetailExist"]);
+       } 
+    %>
+    <!--  If user has not added any language detail, show warning -->
+    <% if (TempData["warningNoLanguageDetail"] != null)
+       {
+           Html.RenderPartial("WarningMessageTooltip", model: TempData["warningNoLanguageDetail"]);
+       } 
+    %>
+    <!--  Error message: Cannot edit language detail  -->
+    <% if (TempData["errorCannotEdit"] != null)
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotEdit"]);
+       } 
+    %>
+    <!--  Edit successfully  -->
+    <% if (TempData["infoEditSuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoEditSuccess"]);
+       } 
+    %>
+    <!--  Add successfully, this will be show if previous Add redirect to Edit -->
+    <!--  This will also be shown when add new languge detail successfully -->
+    <% if (TempData["infoAddSuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoAddSuccess"]);
+       } 
+    %>
+    <!--  If add new language detail failed, show this  -->
+    <% if (TempData["errorCannotAdd"] != null)
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotAdd"]);
+       } 
+    %>
+    <!--  Main code  --------------------------------------------------------------------------->
     <!-- start id-form -->
     <div id="table-content">
         <table border="0" cellpadding="0" cellspacing="0" id="id-form" width="100%">
@@ -57,17 +131,19 @@
             <% } %>
             <!-- end add new language detail -->
             <!-- begin list table language detail -->
-            <% for (int i = 0; i < (ViewData["listChiTietDanhMucDaNgonNgu"] as List<ChiTietDanhMucDaNgonNgu>).Count; ++i)
+            <% if (ViewData["listChiTietDanhMucDaNgonNgu"] != null)
                {
-                   var chiTietDanhMucDaNgonNgu =
-                       (ViewData["listChiTietDanhMucDaNgonNgu"] as List<ChiTietDanhMucDaNgonNgu>)[i]; %>
+                   for (int i = 0; i < (ViewData["listChiTietDanhMucDaNgonNgu"] as List<ChiTietDanhMucDaNgonNgu>).Count; ++i)
+                   {
+                       var chiTietDanhMucDaNgonNgu =
+                           (ViewData["listChiTietDanhMucDaNgonNgu"] as List<ChiTietDanhMucDaNgonNgu>)[i]; %>
             <tr>
                 <td colspan="2">
                     <table width="100%" id="table-chi-tiet-ngon-ngu">
                         <tr>
                             <td width="250px" class="danh-muc-title">
-                                <%: AdminCategoryString.LanguageDetail %>
-                                <%: chiTietDanhMucDaNgonNgu.NgonNgu.TenNgonNgu %>
+                                <%: AdminCategoryString.LanguageDetail%>
+                                <%: chiTietDanhMucDaNgonNgu.NgonNgu.TenNgonNgu%>
                             </td>
                             <td align="right">
                                 <div class="danh-muc-action">
@@ -95,24 +171,25 @@
                         </tr>
                         <tr>
                             <td class="chi-tiet-title">
-                                <%: AdminCategoryString.CategoryName %>
+                                <%: AdminCategoryString.CategoryName%>
                             </td>
                             <td>
-                                <%: chiTietDanhMucDaNgonNgu.TenDanhMuc %>
+                                <%: chiTietDanhMucDaNgonNgu.TenDanhMuc%>
                             </td>
                         </tr>
                         <tr>
                             <td class="chi-tiet-title">
-                                <%: AdminCategoryString.CategoryDescription %>
+                                <%: AdminCategoryString.CategoryDescription%>
                             </td>
                             <td>
-                                <%: chiTietDanhMucDaNgonNgu.MoTaDanhMuc %>
+                                <%: chiTietDanhMucDaNgonNgu.MoTaDanhMuc%>
                             </td>
                         </tr>
                     </table>
                 </td>
             </tr>
-            <%} %>
+            <%}
+               } %>
             <!-- end list table language detail -->
         </table>
     </div>

@@ -189,6 +189,9 @@
   <data name="Footer" xml:space="preserve">
     <value>ThucDonDienTu - Restaurant ManagerTử</value>
   </data>
+  <data name="Guidance" xml:space="preserve">
+    <value>Guidance</value>
+  </data>
   <data name="InputWrong" xml:space="preserve">
     <value>Input not accepted</value>
   </data>
@@ -210,6 +213,9 @@
   <data name="LogOn" xml:space="preserve">
     <value>Log On</value>
   </data>
+  <data name="NoInformation" xml:space="preserve">
+    <value>No information</value>
+  </data>
   <data name="Order" xml:space="preserve">
     <value>Order</value>
   </data>
@@ -218,6 +224,9 @@
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Reset</value>
+  </data>
+  <data name="Step" xml:space="preserve">
+    <value>Step</value>
   </data>
   <data name="Submit" xml:space="preserve">
     <value>Submit</value>
