@@ -32,7 +32,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <!--  Error message: Cannot delete this unit  -->
+    <!--  Error message: Cannot delete this processor  -->
     <% if (TempData["errorCannotDelete"] != null)
        {
            Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotDelete"]);
@@ -42,6 +42,18 @@
     <% if (TempData["infoDeleteSuccess"] != null)
        {
            Html.RenderPartial("InfoMessageTooltip", model: TempData["infoDeleteSuccess"]);
+       } 
+    %>
+    <!--  Add successfully  -->
+    <% if (TempData["infoAddSuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoAddSuccess"]);
+       } 
+    %>
+    <!--  Edit successfully  -->
+    <% if (TempData["infoEditSuccess"] != null)
+       {
+           Html.RenderPartial("InfoMessageTooltip", model: TempData["infoEditSuccess"]);
        } 
     %>
     <!--  Main code  --------------------------------------------------------------------------->

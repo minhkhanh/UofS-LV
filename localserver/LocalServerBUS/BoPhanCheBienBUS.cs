@@ -31,5 +31,20 @@ namespace LocalServerBUS
         {
             return BoPhanCheBienDAO.LayBoPhanCheBienTheoMa(maBoPhanCheBien);
         }
+
+        public static bool Xoa(int maBoPhanCheBien)
+        {
+            return BoPhanCheBienDAO.Xoa(maBoPhanCheBien);
+        }
+
+        public static bool Them(BoPhanCheBien boPhanCheBien)
+        {
+            return BoPhanCheBienDAO.Them(boPhanCheBien);
+        }
+
+        public static bool CapNhat(BoPhanCheBien boPhanCheBien)
+        {
+            return BoPhanCheBienDAO.CapNhat(boPhanCheBien);
+        }
     }
 }
