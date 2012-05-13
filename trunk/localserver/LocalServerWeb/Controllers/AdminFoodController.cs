@@ -19,7 +19,7 @@ namespace LocalServerWeb.Controllers
         {
             SharedCode.FillAdminMainMenu(ViewData, 2, 0);
             ViewData["listMonAn"] = LayDanhSachMonAn();
-            ViewData["listDanhMuc"] = LayDanhSachDanhMuc();
+            ViewData["listDanhMuc"] = LayDanhSachDanhMucLevelThapNhat();
             return View();
         }
 
@@ -31,62 +31,89 @@ namespace LocalServerWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(int listDanhMuc, HttpPostedFileBase uploadFile)
+        public ActionResult Add(int maDanhMuc, HttpPostedFileBase uploadFile)
         {
-            TempData["listDanhMuc"] = listDanhMuc;
-            var danhMuc = DanhMucBUS.LayDanhMuc(listDanhMuc);
+            TempData["maDanhMuc"] = maDanhMuc;
+            DanhMuc danhMuc = DanhMucBUS.LayDanhMuc(maDanhMuc);
             
-            if (uploadFile==null || uploadFile.ContentLength == 0 || danhMuc==null)
+            if (uploadFile==null || uploadFile.ContentLength == 0 || danhMuc == null)
             {
-                return RedirectToAction("AddFood");
+                TempData["errorCannotAdd"] = AdminFoodString.ErrorCannotAdd;
+                return RedirectToAction("Add");
             }
+
             string fileName = Guid.NewGuid() + Path.GetFileName(uploadFile.FileName);
             string filePath = Path.Combine(HttpContext.Server.MapPath("../Uploads/FoodImages"), fileName);                           
             
+            // When newly add a Food, there arenot any language details and unit details. So that Food is not available
+            // NgungBan = true
             MonAn monAn = new MonAn();
             monAn.DanhMuc = danhMuc;
             monAn.DiemDanhGia = 0;
-            monAn.NgungBan = false;
+            monAn.NgungBan = true;
             monAn.SoLuotDanhGia = 0;
             monAn.HinhAnh = "Uploads/FoodImages/" + fileName;
+
             if (MonAnBUS.Them(monAn))
             {
+                TempData["infoAddSuccess"] = AdminFoodString.InfoAddSuccess;
                 uploadFile.SaveAs(filePath);
-                return RedirectToAction("ViewDetailFood", new {maMonAn = monAn.MaMonAn});
+                return RedirectToAction("Edit", new { id = monAn.MaMonAn });
             }
-            return RedirectToAction("AddFood");
+            else
+            {
+                TempData["errorCannotAdd"] = AdminFoodString.ErrorCannotAdd;
+            }
+
+            return RedirectToAction("Add");
         }
 
-        public ActionResult ViewDetailFood(int maMonAn)
+        public ActionResult Edit(int? id)
         {
-            var monAn = MonAnBUS.LayMonAn(maMonAn);
-            if (monAn==null)
+            if (id == null || id <= 0)
             {
-                return RedirectToAction("Index");
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
             }
-            SharedCode.FillAdminMainMenu(ViewData, 2, -1);
+
+            MonAn monAn = MonAnBUS.LayMonAn(id ?? 0);
+            if (monAn == null)
+            {
+                TempData["errorNotFound"] = AdminFoodString.ErrorFoodNotFound;
+                return RedirectToAction("Index", "Error");
+            }
+            else
+            {
+                TempData["maDanhMuc"] = (monAn.DanhMuc != null) ? monAn.DanhMuc.MaDanhMuc : 1;
+            }
+
+            SharedCode.FillAdminMainMenu(ViewData, 2, 0);
+
             ViewData["listDanhMuc"] = LayDanhSachDanhMucLevelThapNhat();
             ViewData["monAn"] = monAn;
 
-            var listChiTienMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayDanhSachChiTietMonAnDonViTinhTheoMonAn(monAn.MaMonAn);
-            foreach (var donViTinh in listChiTienMonAnDonViTinh)
+            // list Chi Tiet Mon An Don Vi Tinh theo Ngon Ngu hien tai
+            var listChiTietMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayDanhSachChiTietMonAnDonViTinhTheoMonAn(monAn.MaMonAn);
+            foreach (var donViTinh in listChiTietMonAnDonViTinh)
             {
-                donViTinh.TenDonViTinh =
-                    ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(donViTinh.DonViTinh.MaDonViTinh,
-                                                                              SharedCode.GetCurrentLanguage(Session).
-                                                                                  MaNgonNgu).TenDonViTinh;
+                ChiTietDonViTinhDaNgonNgu ctDonViTinhDaNgonNgu = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(donViTinh.DonViTinh.MaDonViTinh,
+                                                                              SharedCode.GetCurrentLanguage(Session).MaNgonNgu);
+                if(ctDonViTinhDaNgonNgu != null)
+                    donViTinh.TenDonViTinh = ctDonViTinhDaNgonNgu.TenDonViTinh;
+                else
+                    donViTinh.TenDonViTinh = SharedString.NoInformation;
             }
-            ViewData["listChiTienMonAnDonViTinh"] = listChiTienMonAnDonViTinh;
+            ViewData["listChiTietMonAnDonViTinh"] = listChiTietMonAnDonViTinh;
 
+            // list Don Vi Tinh chua co
             var listDonViTinh = MonAnBUS.LayDanhSachDonViTinhChuaCoTheoNgonNgu(monAn, SharedCode.GetCurrentLanguage(Session));
             ViewData["listDonViTinh"] = listDonViTinh;
 
-            //var listNgonNguMonAn = MonAnBUS.LayDanhSachNgonNguCuaMonAn(monAn);
-            //ViewData["listNgonNguMonAn"] = listNgonNguMonAn;
-
+            // list Chi Tiet Mon An Da Ngon Ngu
             var listChiTietMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayDanhSachChiTietMonAnDaNgonNguTheMonAn(monAn);
             ViewData["listChiTietMonAnDaNgonNgu"] = listChiTietMonAnDaNgonNgu;
 
+            // list Ngon Ngu Chua Co
             var listNgonNguChuaCo = MonAnBUS.LayDanhSachNgonNguMonAnChuaCo(monAn);
             ViewData["listNgonNguChuaCo"] = listNgonNguChuaCo;
 
@@ -95,14 +122,32 @@ namespace LocalServerWeb.Controllers
 
         [HttpPost]
         public ActionResult EditPrice(int maMonAn, int maDonViTinh, int gia)
-        {            
-            var monAn = MonAnBUS.LayMonAn(maMonAn);
-            if (monAn == null || gia <= 0) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
+        {
+            if (maMonAn <= 0 || maDonViTinh <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            MonAn monAn = MonAnBUS.LayMonAn(maMonAn);
+            if (monAn == null || gia <= 0) 
+                return RedirectToAction("Edit", new { id = maMonAn });
+
             var chiTietMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayChiTietMonAnDonViTinh(monAn.MaMonAn, maDonViTinh);
-            if (chiTietMonAnDonViTinh == null) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
+            if (chiTietMonAnDonViTinh == null) 
+                return RedirectToAction("Edit", new { id = maMonAn });
+
             chiTietMonAnDonViTinh.DonGia = gia;
-            ChiTietMonAnDonViTinhBUS.CapNhat(chiTietMonAnDonViTinh);
-            return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn});
+            if (ChiTietMonAnDonViTinhBUS.CapNhat(chiTietMonAnDonViTinh))
+            {
+                TempData["infoEditSuccess"] = AdminFoodString.InfoEditSuccess;
+            }
+            else
+            {
+                TempData["errorCannotEdit"] = AdminFoodString.ErrorCannotEdit;
+            }
+
+            return RedirectToAction("Edit", new { id = maMonAn });
         }
 
         
@@ -112,60 +157,137 @@ namespace LocalServerWeb.Controllers
             try
             {
                 var monAn = MonAnBUS.LayMonAn(maMonAn);
-                if (uploadFile == null || uploadFile.ContentLength == 0 || monAn == null) throw new Exception("Input wrong!");
+                if (uploadFile == null || uploadFile.ContentLength == 0 || monAn == null) 
+                    throw new Exception("Input wrong!");
+
                 string fileName = Guid.NewGuid() + Path.GetFileName(uploadFile.FileName);
                 string filePath = Path.Combine(HttpContext.Server.MapPath("../Uploads/FoodImages"), fileName);
                 string oldFilePath = Path.Combine(HttpContext.Server.MapPath("/"), monAn.HinhAnh);
+
                 monAn.HinhAnh = "Uploads/FoodImages/" + fileName;
                 if (MonAnBUS.CapNhat(monAn))
                 {
+                    TempData["infoEditSuccess"] = AdminFoodString.InfoEditSuccess;
                     uploadFile.SaveAs(filePath);
-                    if (System.IO.File.Exists(oldFilePath)) System.IO.File.Delete(oldFilePath);
+                    if (System.IO.File.Exists(oldFilePath)) 
+                        System.IO.File.Delete(oldFilePath);
+                }
+                else
+                {
+                    TempData["errorCannotEdit"] = AdminFoodString.ErrorCannotEdit;
                 }
             }
             catch (Exception e)
             {
                 Console.Out.WriteLine(e.StackTrace);
             }
-            return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
+
+            return RedirectToAction("Edit", new { id = maMonAn });
         }
 
         [HttpPost]
         public ActionResult DeleteUnit(int maMonAn, int maDonViTinh)
         {
-            var monAn = MonAnBUS.LayMonAn(maMonAn);
-            if (monAn == null) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
+            if (maMonAn <= 0 || maDonViTinh <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            MonAn monAn = MonAnBUS.LayMonAn(maMonAn);
+            DonViTinh donViTinh = DonViTinhBUS.LayDonViTinhTheoMa(maDonViTinh);
+            if (monAn == null || donViTinh == null)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
             var chiTietMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayChiTietMonAnDonViTinh(monAn.MaMonAn, maDonViTinh);
-            if (chiTietMonAnDonViTinh == null) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
-            bool b = ChiTietMonAnDonViTinhBUS.Xoa(chiTietMonAnDonViTinh);
-            return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
+            if (chiTietMonAnDonViTinh == null)
+            {
+                TempData["errorUnitDetailNotFound"] = AdminFoodString.ErrorUnitDetailNotFound;
+                return RedirectToAction("Edit", new { id = maMonAn });
+            }
+
+            if (ChiTietMonAnDonViTinhBUS.Xoa(chiTietMonAnDonViTinh))
+            {
+                TempData["infoDeleteSuccess"] = AdminFoodString.InfoDeleteSuccess;
+            }
+            else
+            {
+                TempData["errorCannotDelete"] = AdminFoodString.ErrorCannotDelete;
+            }
+
+            return RedirectToAction("Edit", new { id = maMonAn });
         }
 
         [HttpPost]
-        public ActionResult AddUnitPrice(int listDonViTinh, int maMonAn, int price_new)
+        public ActionResult AddUnitPrice(int maDonViTinh, int maMonAn, int price_new)
         {
-            var monAn = MonAnBUS.LayMonAn(maMonAn);
-            if (monAn == null || price_new <= 0) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
-            var tmp = ChiTietMonAnDonViTinhBUS.LayChiTietMonAnDonViTinh(monAn.MaMonAn, listDonViTinh);
-            if (tmp != null) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
-            var donViTinh = DonViTinhBUS.LayDonViTinhTheoMa(listDonViTinh);
+            if (maMonAn <= 0 || maDonViTinh <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            MonAn monAn = MonAnBUS.LayMonAn(maMonAn);
+            DonViTinh donViTinh = DonViTinhBUS.LayDonViTinhTheoMa(maDonViTinh);
+            if (monAn == null || donViTinh == null)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            if(price_new <= 0)
+            {
+                return RedirectToAction("Edit", new { id = maMonAn });
+            }
+
+            var tmp = ChiTietMonAnDonViTinhBUS.LayChiTietMonAnDonViTinh(monAn.MaMonAn, maDonViTinh);
+            if (tmp != null)
+            {
+                TempData["errorUnitDetailExist"] = AdminFoodString.ErrorUnitDetailExist;
+                return RedirectToAction("Edit", new { id = maMonAn });
+            }
+
+
             var chiTietMonAnDonViTinh = new ChiTietMonAnDonViTinh();
             chiTietMonAnDonViTinh.DonViTinh = donViTinh;
             chiTietMonAnDonViTinh.MonAn = monAn;
             chiTietMonAnDonViTinh.DonGia = price_new;
-            ChiTietMonAnDonViTinhBUS.ThemMoi(chiTietMonAnDonViTinh);
-            return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });            
+
+            if (ChiTietMonAnDonViTinhBUS.ThemMoi(chiTietMonAnDonViTinh))
+            {
+                TempData["infoAddSuccess"] = AdminFoodString.InfoAddSuccess;
+            }
+            else
+            {
+                TempData["errorCannotAdd"] = AdminFoodString.ErrorCannotAdd;
+            }
+            
+
+            return RedirectToAction("Edit", new { id = maMonAn });         
         }
 
-        public ActionResult AddLanguageFood(int maMonAn, int listNgonNguChuaCo)
+        public ActionResult AddLanguageFood(int maMonAn, int maNgonNgu)
         {
             SharedCode.FillAdminMainMenu(ViewData, 2, -1);
-            var monAn = MonAnBUS.LayMonAn(maMonAn);
-            NgonNgu ngonNgu = NgonNguBUS.LayNgonNguTheoMa(listNgonNguChuaCo);
+
+            if (maMonAn <= 0 || maNgonNgu <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            MonAn monAn = MonAnBUS.LayMonAn(maMonAn);
+            NgonNgu ngonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
+
             if (monAn==null || ngonNgu==null)
             {
-                return RedirectToAction("Index", "AdminHome");
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
             }
+
             ViewData["ngonNgu"] = ngonNgu;
             return View();
         }
@@ -174,63 +296,125 @@ namespace LocalServerWeb.Controllers
         [HttpPost]
         public ActionResult AddLanguageFood(int maMonAn, int maNgonNgu, string tenMonAn, string moTaMonAn)
         {
+            if (maMonAn <= 0 || maNgonNgu <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
             TempData["tenMonAn"] = tenMonAn;
             TempData["moTaMonAn"] = moTaMonAn;
             var monAn = MonAnBUS.LayMonAn(maMonAn);
             var ngonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
 
-            ChiTietMonAnDaNgonNgu chiTietMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(maMonAn, maNgonNgu);
             if (monAn == null || ngonNgu == null)
-            {                
-                return RedirectToAction("Index", "AdminFood");
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
             }
+
+
+            ChiTietMonAnDaNgonNgu chiTietMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(maMonAn, maNgonNgu);
 
             if (chiTietMonAnDaNgonNgu != null)
             {
-                return RedirectToAction("ViewDetailFood", new { maMonAn = monAn.MaMonAn });
+                TempData["errorLanguageDetailExist"] = AdminFoodString.ErrorLanguageDetailExist;
+                return RedirectToAction("Edit", new { id = maMonAn });  
             }
             
             if (tenMonAn == null || moTaMonAn == null || tenMonAn.Length < 5 || moTaMonAn.Length < 5)
             {
-                TempData["error"] = AdminFoodString.AddLanguageFoodError;
-                return RedirectToAction("AddLanguageFood", new { maMonAn = monAn.MaMonAn, listNgonNguChuaCo = ngonNgu.MaNgonNgu });
+                TempData["errorCannotAdd"] = AdminFoodString.ErrorCannotAdd;
+                return RedirectToAction("AddLanguageFood", new { maMonAn = monAn.MaMonAn, maNgonNgu = ngonNgu.MaNgonNgu });
             }
+
             chiTietMonAnDaNgonNgu = new ChiTietMonAnDaNgonNgu();
             chiTietMonAnDaNgonNgu.MonAn = monAn;
             chiTietMonAnDaNgonNgu.NgonNgu = ngonNgu;
             chiTietMonAnDaNgonNgu.TenMonAn = tenMonAn;
             chiTietMonAnDaNgonNgu.MoTaMonAn = moTaMonAn;
-            ChiTietMonAnDaNgonNguBUS.Them(chiTietMonAnDaNgonNgu);
-            return RedirectToAction("ViewDetailFood", new { maMonAn = monAn.MaMonAn });
+
+            if (ChiTietMonAnDaNgonNguBUS.Them(chiTietMonAnDaNgonNgu))
+            {
+                TempData["infoAddSuccess"] = AdminFoodString.InfoAddSuccess;
+            }
+            else
+            {
+                TempData["errorCannotAdd"] = AdminFoodString.ErrorCannotAdd;
+            }
+            
+
+            return RedirectToAction("Edit", new { id = maMonAn });  
         }
 
         [HttpPost]
         public ActionResult DeleteLanguageFood(int maMonAn, int maNgonNgu)
         {
-            var monAn = MonAnBUS.LayMonAn(maMonAn);
-            if (monAn == null ) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
-            var ngonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
+            if (maMonAn <= 0 || maNgonNgu <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            MonAn monAn = MonAnBUS.LayMonAn(maMonAn);
+            if (monAn == null )
+                return RedirectToAction("Edit", new { id = maMonAn });  
+
+            NgonNgu ngonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
             var listNgonNguMon = MonAnBUS.LayDanhSachNgonNguCuaMonAn(monAn);
-            if (ngonNgu == null || !listNgonNguMon.Contains(ngonNgu)) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
+
+            if (ngonNgu == null || !listNgonNguMon.Contains(ngonNgu))
+                return RedirectToAction("Edit", new { id = maMonAn });  
             var chiTietMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(maMonAn, maNgonNgu);
-            if (chiTietMonAnDaNgonNgu == null) return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
-            ChiTietMonAnDaNgonNguBUS.Xoa(chiTietMonAnDaNgonNgu);
-            return RedirectToAction("ViewDetailFood", new { maMonAn = maMonAn });
+
+            if (chiTietMonAnDaNgonNgu == null)
+            {
+                TempData["errorLanguageDetailNotFound"] = AdminFoodString.ErrorLanguageDetailNotFound;
+                return RedirectToAction("Edit", new { id = maMonAn });
+            }
+
+            if (ChiTietMonAnDaNgonNguBUS.Xoa(chiTietMonAnDaNgonNgu))
+            {
+                TempData["infoDeleteSuccess"] = AdminFoodString.InfoDeleteSuccess;
+            }
+            else
+            {
+                TempData["errorCannotDelete"] = AdminFoodString.ErrorCannotDelete;
+            }
+
+            return RedirectToAction("Edit", new { id = maMonAn });  
         }
 
         public ActionResult EditLanguageFood(int maMonAn, int maNgonNgu)
         {
             SharedCode.FillAdminMainMenu(ViewData, 2, -1);
-            var monAn = MonAnBUS.LayMonAn(maMonAn);
-            NgonNgu ngonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
-            ChiTietMonAnDaNgonNgu chiTietMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(maMonAn, maNgonNgu);
-            if (monAn == null || ngonNgu == null || chiTietMonAnDaNgonNgu==null)
+
+            if (maMonAn <= 0 || maNgonNgu <= 0)
             {
-                return RedirectToAction("Index", "AdminHome");
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
             }
+
+            
+            MonAn monAn = MonAnBUS.LayMonAn(maMonAn);
+            NgonNgu ngonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
+            if (monAn == null || ngonNgu == null)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            ChiTietMonAnDaNgonNgu chiTietMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(maMonAn, maNgonNgu);
+            if (chiTietMonAnDaNgonNgu == null)
+            {
+                TempData["errorLanguageDetailNotFound"] = AdminFoodString.ErrorLanguageDetailNotFound;
+                return RedirectToAction("Edit", new { id = maMonAn });  
+            }
+
             ViewData["ngonNgu"] = ngonNgu;
             TempData["tenMonAn"] = chiTietMonAnDaNgonNgu.TenMonAn;
             TempData["moTaMonAn"] = chiTietMonAnDaNgonNgu.MoTaMonAn;
+
             return View();
         }
 
@@ -238,32 +422,50 @@ namespace LocalServerWeb.Controllers
         [HttpPost]
         public ActionResult EditLanguageFood(int maMonAn, int maNgonNgu, string tenMonAn, string moTaMonAn)
         {
+            if (maMonAn <= 0 || maNgonNgu <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
             TempData["tenMonAn"] = tenMonAn;
             TempData["moTaMonAn"] = moTaMonAn;
-            var monAn = MonAnBUS.LayMonAn(maMonAn);
-            var ngonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
 
-            ChiTietMonAnDaNgonNgu chiTietMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(maMonAn, maNgonNgu);
+            MonAn monAn = MonAnBUS.LayMonAn(maMonAn);
+            NgonNgu ngonNgu = NgonNguBUS.LayNgonNguTheoMa(maNgonNgu);
+
             if (monAn == null || ngonNgu == null)
             {
-                return RedirectToAction("Index", "AdminFood");
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
             }
+
+            ChiTietMonAnDaNgonNgu chiTietMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(maMonAn, maNgonNgu);
 
             if (chiTietMonAnDaNgonNgu == null)
             {
-                return RedirectToAction("ViewDetailFood", new { maMonAn = monAn.MaMonAn });
+                TempData["errorLanguageDetailNotFound"] = AdminFoodString.ErrorLanguageDetailNotFound;
+                return RedirectToAction("Edit", new { id = maMonAn });
             }
 
             if (tenMonAn == null || moTaMonAn == null || tenMonAn.Length < 5 || moTaMonAn.Length < 5)
             {
-                TempData["error"] = AdminFoodString.AddLanguageFoodError;
+                TempData["errorCannotEdit"] = AdminFoodString.ErrorCannotEdit;
                 return RedirectToAction("EditLanguageFood", new { maMonAn = monAn.MaMonAn, maNgonNgu = ngonNgu.MaNgonNgu });
             }
 
             chiTietMonAnDaNgonNgu.TenMonAn = tenMonAn;
             chiTietMonAnDaNgonNgu.MoTaMonAn = moTaMonAn;
-            ChiTietMonAnDaNgonNguBUS.CapNhat(chiTietMonAnDaNgonNgu);
-            return RedirectToAction("ViewDetailFood", new { maMonAn = monAn.MaMonAn });
+            if (ChiTietMonAnDaNgonNguBUS.CapNhat(chiTietMonAnDaNgonNgu))
+            {
+                TempData["infoEditSuccess"] = AdminFoodString.InfoEditSuccess;
+            }
+            else
+            {
+                TempData["errorCannotEdit"] = AdminFoodString.ErrorCannotEdit;
+            }
+
+            return RedirectToAction("Edit", new { id = maMonAn });
         }
 
 

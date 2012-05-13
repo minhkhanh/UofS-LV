@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddFood" xml:space="preserve">
-    <value>Add new food</value>
+  <data name="AddLanguageDetail" xml:space="preserve">
+    <value>Add new language detail</value>
   </data>
   <data name="AddLanguageFood" xml:space="preserve">
     <value>Add Language Food</value>
@@ -132,11 +132,20 @@
   <data name="AddUnit" xml:space="preserve">
     <value>Add Unit</value>
   </data>
+  <data name="AddUnitDetail" xml:space="preserve">
+    <value>Add new unit detail</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>Available</value>
   </data>
   <data name="Category" xml:space="preserve">
     <value>Category</value>
+  </data>
+  <data name="ChooseCategory" xml:space="preserve">
+    <value>Choose category</value>
+  </data>
+  <data name="ChoosePicture" xml:space="preserve">
+    <value>Choose picture</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
@@ -147,11 +156,17 @@
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="EditLanguageDetail" xml:space="preserve">
+    <value>Edit language detail</value>
+  </data>
   <data name="EditLanguageFood" xml:space="preserve">
     <value>Edit language food</value>
   </data>
   <data name="EditTitle" xml:space="preserve">
     <value>Edit food</value>
+  </data>
+  <data name="EditUnitDetail" xml:space="preserve">
+    <value>Edit unit detail</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
@@ -170,6 +185,18 @@
   </data>
   <data name="ErrorFoodNotFound" xml:space="preserve">
     <value>Requested food not found</value>
+  </data>
+  <data name="ErrorLanguageDetailExist" xml:space="preserve">
+    <value>Language detail already exist</value>
+  </data>
+  <data name="ErrorLanguageDetailNotFound" xml:space="preserve">
+    <value>Language detail not found</value>
+  </data>
+  <data name="ErrorUnitDetailExist" xml:space="preserve">
+    <value>Unit detail already exist</value>
+  </data>
+  <data name="ErrorUnitDetailNotFound" xml:space="preserve">
+    <value>Unit detail not found</value>
   </data>
   <data name="FoodDescription" xml:space="preserve">
     <value>Food Description</value>
@@ -191,6 +218,9 @@
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
+  </data>
+  <data name="LanguageDetail" xml:space="preserve">
+    <value>Language detail</value>
   </data>
   <data name="NoData" xml:space="preserve">
     <value>There are no food</value>

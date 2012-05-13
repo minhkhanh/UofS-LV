@@ -61,11 +61,11 @@ namespace LocalServerWeb.Resources.Views.AdminFood {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add new food.
+        ///   Looks up a localized string similar to Add new language detail.
         /// </summary>
-        public static string AddFood {
+        public static string AddLanguageDetail {
             get {
-                return ResourceManager.GetString("AddFood", resourceCulture);
+                return ResourceManager.GetString("AddLanguageDetail", resourceCulture);
             }
         }
         
@@ -106,6 +106,15 @@ namespace LocalServerWeb.Resources.Views.AdminFood {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new unit detail.
+        /// </summary>
+        public static string AddUnitDetail {
+            get {
+                return ResourceManager.GetString("AddUnitDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Available.
         /// </summary>
         public static string Available {
@@ -120,6 +129,24 @@ namespace LocalServerWeb.Resources.Views.AdminFood {
         public static string Category {
             get {
                 return ResourceManager.GetString("Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose category.
+        /// </summary>
+        public static string ChooseCategory {
+            get {
+                return ResourceManager.GetString("ChooseCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose picture.
+        /// </summary>
+        public static string ChoosePicture {
+            get {
+                return ResourceManager.GetString("ChoosePicture", resourceCulture);
             }
         }
         
@@ -151,6 +178,15 @@ namespace LocalServerWeb.Resources.Views.AdminFood {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit language detail.
+        /// </summary>
+        public static string EditLanguageDetail {
+            get {
+                return ResourceManager.GetString("EditLanguageDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit language food.
         /// </summary>
         public static string EditLanguageFood {
@@ -165,6 +201,15 @@ namespace LocalServerWeb.Resources.Views.AdminFood {
         public static string EditTitle {
             get {
                 return ResourceManager.GetString("EditTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit unit detail.
+        /// </summary>
+        public static string EditUnitDetail {
+            get {
+                return ResourceManager.GetString("EditUnitDetail", resourceCulture);
             }
         }
         
@@ -219,6 +264,42 @@ namespace LocalServerWeb.Resources.Views.AdminFood {
         public static string ErrorFoodNotFound {
             get {
                 return ResourceManager.GetString("ErrorFoodNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language detail already exist.
+        /// </summary>
+        public static string ErrorLanguageDetailExist {
+            get {
+                return ResourceManager.GetString("ErrorLanguageDetailExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language detail not found.
+        /// </summary>
+        public static string ErrorLanguageDetailNotFound {
+            get {
+                return ResourceManager.GetString("ErrorLanguageDetailNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unit detail already exist.
+        /// </summary>
+        public static string ErrorUnitDetailExist {
+            get {
+                return ResourceManager.GetString("ErrorUnitDetailExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unit detail not found.
+        /// </summary>
+        public static string ErrorUnitDetailNotFound {
+            get {
+                return ResourceManager.GetString("ErrorUnitDetailNotFound", resourceCulture);
             }
         }
         
@@ -282,6 +363,15 @@ namespace LocalServerWeb.Resources.Views.AdminFood {
         public static string Language {
             get {
                 return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language detail.
+        /// </summary>
+        public static string LanguageDetail {
+            get {
+                return ResourceManager.GetString("LanguageDetail", resourceCulture);
             }
         }
         

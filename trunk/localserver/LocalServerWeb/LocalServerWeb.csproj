@@ -842,7 +842,7 @@
     <Content Include="Views\AdminFood\AddLanguageFood.aspx" />
     <Content Include="Views\AdminFood\EditLanguageFood.aspx" />
     <Content Include="Views\AdminFood\Index.aspx" />
-    <Content Include="Views\AdminFood\ViewDetailFood.aspx" />
+    <Content Include="Views\AdminFood\Edit.aspx" />
     <Content Include="Views\AdminHome\Index.aspx" />
     <Content Include="Views\AdminInvoice\Index.aspx" />
     <Content Include="Views\AdminInvoice\InvoiceDetail.aspx" />
