@@ -264,6 +264,9 @@
   <data name="Unit" xml:space="preserve">
     <value>Unit</value>
   </data>
+  <data name="UnitDetail" xml:space="preserve">
+    <value>Unit detail</value>
+  </data>
   <data name="UnitPriceAction" xml:space="preserve">
     <value>Option</value>
   </data>

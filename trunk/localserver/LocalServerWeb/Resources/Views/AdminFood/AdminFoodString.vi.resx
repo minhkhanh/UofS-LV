@@ -264,6 +264,9 @@
   <data name="Unit" xml:space="preserve">
     <value>Đơn vị tính</value>
   </data>
+  <data name="UnitDetail" xml:space="preserve">
+    <value>Chi tiết đơn vị tính</value>
+  </data>
   <data name="UnitPriceAction" xml:space="preserve">
     <value>Thao tác</value>
   </data>
