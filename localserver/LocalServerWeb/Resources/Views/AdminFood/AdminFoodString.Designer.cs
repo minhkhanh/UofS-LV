@@ -502,6 +502,15 @@ namespace LocalServerWeb.Resources.Views.AdminFood {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unit detail.
+        /// </summary>
+        public static string UnitDetail {
+            get {
+                return ResourceManager.GetString("UnitDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Option.
         /// </summary>
         public static string UnitPriceAction {

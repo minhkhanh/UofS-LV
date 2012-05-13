@@ -99,6 +99,7 @@
     <!--  Main code  --------------------------------------------------------------------------->
     <div id="table-content">
         <table border="0" cellpadding="0" cellspacing="0" id="id-form" width="100%">
+            <!-- Choose category-->
             <tr>
                 <th valign="top">
                     <%:AdminFoodString.Category %>:
@@ -113,6 +114,7 @@
                 <td>
                 </td>
             </tr>
+            <!--Show picture -->
             <tr>
                 <th>
                     <%:AdminFoodString.Picture %>:
@@ -125,6 +127,7 @@
                 <td>
                 </td>
             </tr>
+            <!--Picture update-->
             <tr>
                 <th>
                     <%:AdminFoodString.PictureUpdate %>:
@@ -138,6 +141,7 @@
                 <td>
                 </td>
             </tr>
+            <!--Picture size-->
             <tr>
                 <th>
                 </th>
@@ -147,6 +151,7 @@
                 <td>
                 </td>
             </tr>
+            <!--Add new unit detail button-->
             <tr>
                 <th>
                     <input type="button" value="<%:AdminFoodString.AddUnit %>" style="float: right; margin-right: 50px;
@@ -177,6 +182,21 @@
                 <td>
                 </td>
             </tr>
+            <!--Unit detail banner -->
+            <tr>
+                <td colspan="2">
+                    <table width="100%" id="table-chi-tiet-don-vi-tinh">
+                        <tr>
+                            <td width="250px">
+                                <%: AdminFoodString.UnitDetail %>
+                            </td>
+                            <td align="right">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <!--Unit detail table -->
             <tr>
                 <th>
                     <%:AdminFoodString.Unit %>
@@ -236,6 +256,7 @@
                 <td>
                 </td>
             </tr>
+            <!--Show add new language detail button-->
             <% if (((List<NgonNgu>)ViewData["listNgonNguChuaCo"]).Count > 0)
                {%>
             <tr>
@@ -265,6 +286,7 @@
                 </td>
             </tr>
             <% } %>
+            <!--Language detail banner table-->
             <% if (ViewData["listChiTietMonAnDaNgonNgu"] != null)
                {
                    for (int i = 0; i < (ViewData["listChiTietMonAnDaNgonNgu"] as List<ChiTietMonAnDaNgonNgu>).Count; ++i)
@@ -469,5 +491,20 @@
         {
             font-weight: bold;
         }
+        
+        #table-chi-tiet-don-vi-tinh tr:first-child
+        {
+            background: #B0B0B0;
+            margin-bottom: 5px;
+            font-size: larger;
+            height: 50px;
+        }
+        
+        #table-chi-tiet-don-vi-tinh td
+        {
+           padding-left: 5px;
+           padding-top: 5px;
+        }
+        
     </style>
 </asp:Content>
