@@ -23,7 +23,7 @@
            { %>
                
           
-		<tr <%: (iCount++%2==0)?"":"class=alternate-row" %> >
+		<tr <%: (iCount++%2==0)?"":"class=alternate-row" %> <%= (chiTietOrder.TinhTrang==2)?"style='border-style: solid; border-color: red;'":"" %> >
             <td class="ma-chi-tiet-order"><%: chiTietOrder.MaChiTietOrder %></td>
 			<td><%: chiTietOrder.TenKhuVuc %></td>
 			<td><%: chiTietOrder.TenBan %></td>
@@ -33,18 +33,24 @@
 			<td><%: chiTietOrder.TenDonViTinh %></td>
             <td><%: chiTietOrder.SoLuong %></td>
             <td><%: chiTietOrder.SoLuongDaCheBien %></td>
-            <td><%: chiTietOrder.SoLuongDangCheBien %>            
-            <% if (chiTietOrder.SoLuongDangCheBien + chiTietOrder.SoLuongDaCheBien < chiTietOrder.SoLuong) {%>    
+            <td><%: chiTietOrder.SoLuongDangCheBien + " " %>            
+            <% if (chiTietOrder.TinhTrang!=2 && chiTietOrder.SoLuongDangCheBien + chiTietOrder.SoLuongDaCheBien < chiTietOrder.SoLuong) {%>    
                 <button class="button-che-bien"><%: KitchenString.CheBien %></button>
             <%} %>
             <% if (chiTietOrder.SoLuongDangCheBien > 0) {%>    
                 <button class="button-che-bien-xong"><%: KitchenString.Xong %></button>
             <%} %>
+            <%--<% if (chiTietOrder.TinhTrang==2) {%>    
+                <button class="button-bi-khoa-che-bien"><%: KitchenString.BiKhoa %></button>
+            <%} %>--%>
             </td>
             <td><%: chiTietOrder.TenPhucVu %></td>
 			<td class="options-width">
-			<a id="button-het-che-bien" title="<%:KitchenString.HetCheBien %>" class="icon-2 info-tooltip"></a>
-			<a title="Edit" class="icon-2 info-tooltip"></a>
+            <% if (chiTietOrder.TinhTrang!=2) {%>    
+                <a id="button-het-che-bien" title="<%:KitchenString.HetCheBien %>" class="icon-2 info-tooltip"></a>
+            <%} else { %>			
+            <%:KitchenString.BiKhoa %>
+            <%} %>
 			</td>
 		</tr>
         <%} %>

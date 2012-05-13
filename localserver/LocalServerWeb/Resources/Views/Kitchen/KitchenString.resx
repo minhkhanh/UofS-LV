@@ -171,4 +171,7 @@
   <data name="NhapSoLuongXong" xml:space="preserve">
     <value>NhapSoLuongXong</value>
   </data>
+  <data name="BiKhoa" xml:space="preserve">
+    <value>BiKhoa</value>
+  </data>
 </root>

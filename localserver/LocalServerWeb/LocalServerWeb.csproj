@@ -1062,7 +1062,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Kitchen\KitchenString.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>KitchenString.vi.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Kitchen\KitchenString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

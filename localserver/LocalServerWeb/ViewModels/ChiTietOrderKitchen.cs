@@ -29,7 +29,7 @@ namespace LocalServerWeb
 
         public string TenPhucVu { get; set; }
 
-        //public bool DuocPhepCheBien { get; set; }
+        public int TinhTrang { get; set; }
 
     }
 }

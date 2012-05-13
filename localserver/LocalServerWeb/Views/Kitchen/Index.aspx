@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+<%@ Import Namespace="LocalServerDTO" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.Kitchen" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
@@ -101,7 +102,7 @@
             timer = setTimeout("getKitchenOrderTable()", 1000);
             return;   
         }
-        $('#kitchen-table').load('<%= Url.Action("GetKitchenOrder", new { maBoPhanCheBien = 1}) %>', function () {    
+        $('#kitchen-table').load('<%= Url.Action("GetKitchenOrder", new { maBoPhanCheBien = ((BoPhanCheBien)ViewData["boPhanCheBien"]).MaBoPhanCheBien}) %>', function () {    
             $('#kitchen-table .button-che-bien').button().click(function () {
                 bTimerOn = false;
                 var tmp = $(this).parent().parent().find('.ma-chi-tiet-order').html();
@@ -157,7 +158,7 @@
 	<!--  start table-content  -->
 	<div id="table-content">
 			
-		<!--  start message-yellow -->
+		<%--<!--  start message-yellow -->
 		<div id="message-yellow">
 		<table border="0" width="100%" cellpadding="0" cellspacing="0">
 		<tr>
@@ -166,7 +167,7 @@
 		</tr>
 		</table>
 		</div>
-		<!--  end message-yellow -->						
+		<!--  end message-yellow -->--%>						
 		 
 		<!--  start product-table ..................................................................................... -->
         <div id="kitchen-table">

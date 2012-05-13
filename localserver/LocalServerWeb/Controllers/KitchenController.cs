@@ -16,10 +16,14 @@ namespace LocalServerWeb.Controllers
         //
         // GET: /Kitchen/
 
-        public ActionResult Index()
+        public ActionResult Index(int? maBoPhanCheBien)
         {
+            if (maBoPhanCheBien == null) return RedirectToAction("Index", "Error");
+            var boPhanCheBien = BoPhanCheBienBUS.LayBoPhanCheBienTheoMa((int) maBoPhanCheBien);
+            if (boPhanCheBien == null) return RedirectToAction("Index", "Error");
             SharedCode.FillAdminMainMenu(ViewData, 3, 0);
             ViewData["iTimerTick"] = TIMER_TICK;
+            ViewData["boPhanCheBien"] = boPhanCheBien;
             return View();
         }
 
@@ -46,7 +50,8 @@ namespace LocalServerWeb.Controllers
                                              SoLuong = chiTietOrder.SoLuong,
                                              SoLuongDaCheBien = chiTietCheBienOrder!=null ? chiTietCheBienOrder.SoLuongDaCheBien : 0,
                                              SoLuongDangCheBien = chiTietCheBienOrder!=null ? chiTietCheBienOrder.SoLuongDangCheBien : 0,
-                                             TenPhucVu = chiTietOrder.Order.TaiKhoan.TenTaiKhoan
+                                             TenPhucVu = chiTietOrder.Order.TaiKhoan.TenTaiKhoan,
+                                             TinhTrang = chiTietOrder.TinhTrang
                                          });
             }
             ViewData["listChiTietOrderKitchen"] = listChiTietOrderKitchen;

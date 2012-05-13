@@ -171,4 +171,7 @@
   <data name="NhapSoLuongXong" xml:space="preserve">
     <value>Nhập số lượng xong</value>
   </data>
+  <data name="BiKhoa" xml:space="preserve">
+    <value>Bị khóa</value>
+  </data>
 </root>
