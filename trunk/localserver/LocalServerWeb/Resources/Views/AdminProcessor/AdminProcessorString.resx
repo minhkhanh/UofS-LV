@@ -135,7 +135,7 @@
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
-  <data name="EdiTitle" xml:space="preserve">
+  <data name="EditTitle" xml:space="preserve">
     <value>Edit processor</value>
   </data>
   <data name="ErrorCannotAdd" xml:space="preserve">
@@ -147,7 +147,7 @@
   <data name="ErrorProcessorNotFound" xml:space="preserve">
     <value>Requested processor not found</value>
   </data>
-  <data name="ErrrorCannotDelete" xml:space="preserve">
+  <data name="ErrorCannotDelete" xml:space="preserve">
     <value>Can't delete</value>
   </data>
   <data name="InfoAddSuccess" xml:space="preserve">
@@ -179,5 +179,20 @@
   </data>
   <data name="WarningNoCategoryDetail" xml:space="preserve">
     <value>There are no category details</value>
+  </data>
+  <data name="CategoryDetail" xml:space="preserve">
+    <value>Category detail</value>
+  </data>
+  <data name="CategoryName" xml:space="preserve">
+    <value>Category name</value>
+  </data>
+  <data name="ErrorAccountNotFound" xml:space="preserve">
+    <value>Account not found</value>
+  </data>
+  <data name="ErrorCategoryDetailExist" xml:space="preserve">
+    <value>Category detail alreaedy exist</value>
+  </data>
+  <data name="ErrorCategoryDetailNotFound" xml:space="preserve">
+    <value>Category detail not found</value>
   </data>
 </root>

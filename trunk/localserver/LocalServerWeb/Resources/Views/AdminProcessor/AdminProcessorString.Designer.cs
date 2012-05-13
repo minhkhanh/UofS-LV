@@ -97,6 +97,24 @@ namespace LocalServerWeb.Resources.Views.AdminProcessor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Category detail.
+        /// </summary>
+        public static string CategoryDetail {
+            get {
+                return ResourceManager.GetString("CategoryDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category name.
+        /// </summary>
+        public static string CategoryName {
+            get {
+                return ResourceManager.GetString("CategoryName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string Delete {
@@ -117,9 +135,18 @@ namespace LocalServerWeb.Resources.Views.AdminProcessor {
         /// <summary>
         ///   Looks up a localized string similar to Edit processor.
         /// </summary>
-        public static string EdiTitle {
+        public static string EditTitle {
             get {
-                return ResourceManager.GetString("EdiTitle", resourceCulture);
+                return ResourceManager.GetString("EditTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account not found.
+        /// </summary>
+        public static string ErrorAccountNotFound {
+            get {
+                return ResourceManager.GetString("ErrorAccountNotFound", resourceCulture);
             }
         }
         
@@ -133,6 +160,15 @@ namespace LocalServerWeb.Resources.Views.AdminProcessor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t delete.
+        /// </summary>
+        public static string ErrorCannotDelete {
+            get {
+                return ResourceManager.GetString("ErrorCannotDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can&apos;t edit.
         /// </summary>
         public static string ErrorCannotEdit {
@@ -142,20 +178,29 @@ namespace LocalServerWeb.Resources.Views.AdminProcessor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Category detail alreaedy exist.
+        /// </summary>
+        public static string ErrorCategoryDetailExist {
+            get {
+                return ResourceManager.GetString("ErrorCategoryDetailExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category detail not found.
+        /// </summary>
+        public static string ErrorCategoryDetailNotFound {
+            get {
+                return ResourceManager.GetString("ErrorCategoryDetailNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Requested processor not found.
         /// </summary>
         public static string ErrorProcessorNotFound {
             get {
                 return ResourceManager.GetString("ErrorProcessorNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Can&apos;t delete.
-        /// </summary>
-        public static string ErrrorCannotDelete {
-            get {
-                return ResourceManager.GetString("ErrrorCannotDelete", resourceCulture);
             }
         }
         
