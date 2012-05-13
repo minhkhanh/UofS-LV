@@ -15,6 +15,13 @@ namespace LocalServerWeb.Controllers
 {
     public class AdminProcessorController : BaseController
     {
+        public ActionResult Index()
+        {
+            SharedCode.FillAdminMainMenu(ViewData, 3, 2);
+            ViewData["listBoPhanCheBien"] = BoPhanCheBienBUS.LayDanhSachBoPhanCheBien();
+            return View();
+        }
+
 
     }
 }

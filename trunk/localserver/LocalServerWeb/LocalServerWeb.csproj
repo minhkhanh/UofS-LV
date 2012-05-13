@@ -87,6 +87,7 @@
     <Compile Include="Controllers\AdminInvoiceController.cs" />
     <Compile Include="Controllers\AdminLanguageController.cs" />
     <Compile Include="Controllers\AdminOrderController.cs" />
+    <Compile Include="Controllers\AdminProcessorController.cs" />
     <Compile Include="Controllers\AdminTableController.cs" />
     <Compile Include="Controllers\AdminUnitController.cs" />
     <Compile Include="Controllers\AdminUserController.cs" />
@@ -203,6 +204,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AdminOrderString.vi.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\AdminProcessor\AdminProcessorString.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminProcessorString.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\AdminProcessor\AdminProcessorString.vi.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminProcessorString.vi.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\Views\AdminTable\AdminTableString.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -851,6 +862,9 @@
     <Content Include="Views\AdminLanguage\Index.aspx" />
     <Content Include="Views\AdminOrder\Index.aspx" />
     <Content Include="Views\AdminOrder\OrderDetail.aspx" />
+    <Content Include="Views\AdminProcessor\Add.aspx" />
+    <Content Include="Views\AdminProcessor\Edit.aspx" />
+    <Content Include="Views\AdminProcessor\Index.aspx" />
     <Content Include="Views\AdminTable\Add.aspx" />
     <Content Include="Views\AdminTable\Edit.aspx" />
     <Content Include="Views\AdminTable\Index.aspx" />
@@ -1011,6 +1025,14 @@
     <EmbeddedResource Include="Resources\Views\AdminOrder\AdminOrderString.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AdminOrderString.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminProcessor\AdminProcessorString.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminProcessorString.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminProcessor\AdminProcessorString.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminProcessorString.vi.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\AdminTable\AdminTableString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

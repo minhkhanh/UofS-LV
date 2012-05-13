@@ -22,7 +22,7 @@ namespace LocalServerWeb.Resources.Views.AdminProcessor {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class AdminProcessorString {
+    public class AdminProcessorString {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace LocalServerWeb.Resources.Views.AdminProcessor {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LocalServerWeb.Resources.Views.AdminProcessor.AdminProcessorString", typeof(AdminProcessorString).Assembly);
@@ -51,7 +51,7 @@ namespace LocalServerWeb.Resources.Views.AdminProcessor {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,11 +61,191 @@ namespace LocalServerWeb.Resources.Views.AdminProcessor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to In charge .
+        /// </summary>
+        public static string AccountName {
+            get {
+                return ResourceManager.GetString("AccountName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new category detail.
+        /// </summary>
+        public static string AddCategoryDetail {
+            get {
+                return ResourceManager.GetString("AddCategoryDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new processor.
+        /// </summary>
+        public static string AddTitle {
+            get {
+                return ResourceManager.GetString("AddTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit processor.
+        /// </summary>
+        public static string EdiTitle {
+            get {
+                return ResourceManager.GetString("EdiTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t add.
+        /// </summary>
+        public static string ErrorCannotAdd {
+            get {
+                return ResourceManager.GetString("ErrorCannotAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t edit.
+        /// </summary>
+        public static string ErrorCannotEdit {
+            get {
+                return ResourceManager.GetString("ErrorCannotEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requested processor not found.
+        /// </summary>
+        public static string ErrorProcessorNotFound {
+            get {
+                return ResourceManager.GetString("ErrorProcessorNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t delete.
+        /// </summary>
+        public static string ErrrorCannotDelete {
+            get {
+                return ResourceManager.GetString("ErrrorCannotDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add successfully.
+        /// </summary>
+        public static string InfoAddSuccess {
+            get {
+                return ResourceManager.GetString("InfoAddSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete successfully.
+        /// </summary>
+        public static string InfoDeleteSuccess {
+            get {
+                return ResourceManager.GetString("InfoDeleteSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit successfully.
+        /// </summary>
+        public static string InfoEditSuccess {
+            get {
+                return ResourceManager.GetString("InfoEditSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no processors.
+        /// </summary>
+        public static string NoData {
+            get {
+                return ResourceManager.GetString("NoData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No..
+        /// </summary>
+        public static string NumberOrdinary {
+            get {
+                return ResourceManager.GetString("NumberOrdinary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Option.
+        /// </summary>
+        public static string Option {
+            get {
+                return ResourceManager.GetString("Option", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string ProcessorDescription {
+            get {
+                return ResourceManager.GetString("ProcessorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processor name.
+        /// </summary>
+        public static string ProcessorName {
+            get {
+                return ResourceManager.GetString("ProcessorName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Processor list.
         /// </summary>
-        internal static string Title {
+        public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no category details.
+        /// </summary>
+        public static string WarningNoCategoryDetail {
+            get {
+                return ResourceManager.GetString("WarningNoCategoryDetail", resourceCulture);
             }
         }
     }
