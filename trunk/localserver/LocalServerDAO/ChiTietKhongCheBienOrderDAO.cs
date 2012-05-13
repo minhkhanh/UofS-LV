@@ -66,14 +66,14 @@ namespace LocalServerDAO
                 try
                 {
                     // neu van chua bat dau che bien thi lock ca order
-                    if (chiTietOrder.Order.TinhTrang == 0)
-                        chiTietOrder.Order.TinhTrang = 2;
-                    else // nguoc lai thi chi lock 1 chitiet
-                        chiTietOrder.TinhTrang = 2;
-                    ThucDonDienTu.DataContext.SubmitChanges();
+                    var order = OrderDAO.LayOrder(chiTietOrder.Order.MaOrder);
+                    if (order.TinhTrang == 0)
+                        order.TinhTrang = 2;
+                    // nguoc lai thi chi lock 1 chitiet
+                    chiTietOrder.TinhTrang = 2;
                     // tao chitietkhongchebien
-                    ChiTietKhongCheBienOrder chiTietKhongCheBienOrder = new ChiTietKhongCheBienOrder();
-                    chiTietKhongCheBienOrder.ChiTietOrder = chiTietOrder;
+                    var chiTietKhongCheBienOrder = new ChiTietKhongCheBienOrder();
+                    chiTietKhongCheBienOrder._maChiTietOrder = chiTietOrder.MaChiTietOrder;
                     chiTietKhongCheBienOrder.SoLuongKhongCheBien = soLuongHetCheBien;
                     ThucDonDienTu.DataContext.ChiTietKhongCheBienOrders.InsertOnSubmit(chiTietKhongCheBienOrder);
 

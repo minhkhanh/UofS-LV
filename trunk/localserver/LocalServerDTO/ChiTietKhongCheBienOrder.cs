@@ -36,7 +36,7 @@ namespace LocalServerDTO
         /// 0 - binh thuong
         /// </summary>
         [DataMember]
-        [Column(Name = "TinhTrang", IsDbGenerated = true)]
+        [Column(Name = "TinhTrang")]
         public int TinhTrang { get; set; }
 
     }

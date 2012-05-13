@@ -78,7 +78,7 @@ namespace LocalServerDTO
         /// 2 - khoa, ko duoc che bien tiep
         /// 3 - da xong
         /// </summary>
-        [Column(Name = "TinhTrang", IsDbGenerated = true)]
+        [Column(Name = "TinhTrang")]
         public int TinhTrang { get; set; }
 
         public int SoLuongDaCheBien { get; set; }

@@ -70,6 +70,15 @@ namespace LocalServerWeb.Resources.Views.Kitchen {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BiKhoa.
+        /// </summary>
+        public static string BiKhoa {
+            get {
+                return ResourceManager.GetString("BiKhoa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cook.
         /// </summary>
         public static string CheBien {
