@@ -183,6 +183,7 @@ namespace LocalServerWeb.Controllers
             ViewData["listDanhMuc"] = LayDanhSachDanhMuc();
 
             ViewData["listNgonNguChuaCo"] = ChiTietDanhMucDaNgonNguBUS.LayDanhSachNgonNguChuaCo(id ?? 0);
+
             List<ChiTietDanhMucDaNgonNgu> listChiTietDanhMucDaNgonNgu = ChiTietDanhMucDaNgonNguBUS.LayDanhSachChiTietDanhMucDaNgonNguTheoDanhMuc(id ?? 0);
             if (listChiTietDanhMucDaNgonNgu == null || listChiTietDanhMucDaNgonNgu.Count == 0)
             {

@@ -141,7 +141,7 @@
                 <td colspan="2">
                     <table width="100%" id="table-chi-tiet-ngon-ngu">
                         <tr>
-                            <td width="250px" class="danh-muc-title">
+                            <td width="250px">
                                 <%: AdminCategoryString.LanguageDetail%>
                                 <%: chiTietDanhMucDaNgonNgu.NgonNgu.TenNgonNgu%>
                             </td>
