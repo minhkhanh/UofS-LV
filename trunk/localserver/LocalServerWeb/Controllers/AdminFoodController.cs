@@ -85,6 +85,7 @@ namespace LocalServerWeb.Controllers
             else
             {
                 TempData["maDanhMuc"] = (monAn.DanhMuc != null) ? monAn.DanhMuc.MaDanhMuc : 1;
+                ViewData["status"] = monAn.NgungBan;
             }
 
             SharedCode.FillAdminMainMenu(ViewData, 2, 0);
@@ -94,6 +95,12 @@ namespace LocalServerWeb.Controllers
 
             // list Chi Tiet Mon An Don Vi Tinh theo Ngon Ngu hien tai
             var listChiTietMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayDanhSachChiTietMonAnDonViTinhTheoMonAn(monAn.MaMonAn);
+
+            if (listChiTietMonAnDonViTinh == null || listChiTietMonAnDonViTinh.Count == 0)
+            {
+                TempData["warningNoUnitDetail"] = AdminFoodString.WarningNoUnitDetail;
+            }
+
             foreach (var donViTinh in listChiTietMonAnDonViTinh)
             {
                 ChiTietDonViTinhDaNgonNgu ctDonViTinhDaNgonNgu = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(donViTinh.DonViTinh.MaDonViTinh,
@@ -111,6 +118,11 @@ namespace LocalServerWeb.Controllers
 
             // list Chi Tiet Mon An Da Ngon Ngu
             var listChiTietMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayDanhSachChiTietMonAnDaNgonNguTheMonAn(monAn);
+            if (listChiTietMonAnDaNgonNgu == null || listChiTietMonAnDaNgonNgu.Count == 0)
+            {
+                TempData["warningNoLanguageDetail"] = AdminFoodString.WarningNoLanguageDetail;
+            }
+
             ViewData["listChiTietMonAnDaNgonNgu"] = listChiTietMonAnDaNgonNgu;
 
             // list Ngon Ngu Chua Co
@@ -571,6 +583,38 @@ namespace LocalServerWeb.Controllers
             if (previous_action == "Index")
                 return RedirectToAction("Index");
             return RedirectToAction(previous_action, new { id = maMonAn });
+
+        }
+
+        [HttpPost]
+        public ActionResult ChangeStatus(int maMonAn, int status)
+        {
+            if (maMonAn <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            MonAn monAn = MonAnBUS.LayMonAn(maMonAn);
+            if (monAn == null)
+            {
+                TempData["errorNotFound"] = AdminFoodString.ErrorFoodNotFound;
+                return RedirectToAction("Index", "Error");
+            }
+
+
+            monAn.NgungBan = (status == 0) ? true : false;
+            if (MonAnBUS.CapNhat(monAn))
+            {
+                TempData["infoEditSuccess"] = AdminFoodString.InfoEditSuccess;
+            }
+            else
+            {
+                TempData["errorCannotEdit"] = AdminFoodString.ErrorCannotEdit;
+            }
+
+
+            return RedirectToAction("Edit", new { id = maMonAn });
 
         }
     }

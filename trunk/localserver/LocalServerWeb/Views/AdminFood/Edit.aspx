@@ -120,9 +120,18 @@
                     <%:AdminFoodString.Status %>:
                 </th>
                 <td>
-                    <input type="checkbox" class="" name="active-checkbox" <%: (TempData["active"]!=null && (bool)TempData["active"]==true)?"checked":"" %>
-                    onclick="change_active(this);" />
-                    <input type="hidden" name="active" id="hidden-active" value="" />
+                    <% if (ViewData["status"] != null)
+                       {
+                           Html.BeginForm("ChangeStatus", "AdminFood", FormMethod.Post, new { id = "form_change_status" }); %>
+                    <select name="status" class="listDanhMuc" onchange="$('#form_change_status').submit();">
+                        <option <%:((bool)ViewData["status"])?"selected":"" %> value="0">
+                            <%:AdminFoodString.NotAvailable %></option>
+                        <option <%:(!(bool)ViewData["status"])?"selected":"" %> value="1">
+                            <%:AdminFoodString.Available %></option>
+                    </select>
+                    <input type="hidden" name="maMonAn" value="<%:Url.RequestContext.RouteData.Values["id"] %>" />
+                    <% Html.EndForm();
+                       }%>
                 </td>
                 <td>
                     
