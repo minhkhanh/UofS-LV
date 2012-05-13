@@ -114,6 +114,20 @@
                 <td>
                 </td>
             </tr>
+            <!-- Change available status-->
+            <tr>
+                <th valign="top">
+                    <%:AdminFoodString.Status %>:
+                </th>
+                <td>
+                    <input type="checkbox" class="" name="active-checkbox" <%: (TempData["active"]!=null && (bool)TempData["active"]==true)?"checked":"" %>
+                    onclick="change_active(this);" />
+                    <input type="hidden" name="active" id="hidden-active" value="" />
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
             <!--Show picture -->
             <tr>
                 <th>
@@ -154,7 +168,7 @@
             <!--Add new unit detail button-->
             <tr>
                 <th>
-                    <input type="button" value="<%:AdminFoodString.AddUnit %>" style="float: right; margin-right: 50px;
+                    <input type="button" value="<%:AdminFoodString.AddUnit %>" style="margin-top:20px;margin-right: 50px;
                         <%: (ViewData["listDonViTinh"] as List<DonViTinh>).Count>0 ? "":"display: none;"%>"
                         id="buttAddUnit" />
                     <div id="dialog-form-add-unit" title="<%:AdminFoodString.AddUnit %>">
