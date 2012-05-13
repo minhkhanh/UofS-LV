@@ -117,7 +117,67 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountName" xml:space="preserve">
+    <value>In charge </value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AddCategoryDetail" xml:space="preserve">
+    <value>Add new category detail</value>
+  </data>
+  <data name="AddTitle" xml:space="preserve">
+    <value>Add new processor</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EdiTitle" xml:space="preserve">
+    <value>Edit processor</value>
+  </data>
+  <data name="ErrorCannotAdd" xml:space="preserve">
+    <value>Can't add</value>
+  </data>
+  <data name="ErrorCannotEdit" xml:space="preserve">
+    <value>Can't edit</value>
+  </data>
+  <data name="ErrorProcessorNotFound" xml:space="preserve">
+    <value>Requested processor not found</value>
+  </data>
+  <data name="ErrrorCannotDelete" xml:space="preserve">
+    <value>Can't delete</value>
+  </data>
+  <data name="InfoAddSuccess" xml:space="preserve">
+    <value>Add successfully</value>
+  </data>
+  <data name="InfoDeleteSuccess" xml:space="preserve">
+    <value>Delete successfully</value>
+  </data>
+  <data name="InfoEditSuccess" xml:space="preserve">
+    <value>Edit successfully</value>
+  </data>
+  <data name="NoData" xml:space="preserve">
+    <value>There are no processors</value>
+  </data>
+  <data name="NumberOrdinary" xml:space="preserve">
+    <value>No.</value>
+  </data>
+  <data name="Option" xml:space="preserve">
+    <value>Option</value>
+  </data>
+  <data name="ProcessorDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="ProcessorName" xml:space="preserve">
+    <value>Processor name</value>
+  </data>
   <data name="Title" xml:space="preserve">
     <value>Processor list</value>
+  </data>
+  <data name="WarningNoCategoryDetail" xml:space="preserve">
+    <value>There are no category details</value>
   </data>
 </root>

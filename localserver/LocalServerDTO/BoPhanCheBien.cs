@@ -22,7 +22,7 @@ namespace LocalServerDTO
 
         [DataMember]
         [Column(Name = "MoTa")]
-        public string Mota { get; set; }
+        public string MoTa { get; set; }
 
         [DataMember(Name = "MaTaiKhoan")]
         [Column(Name = "MaTaiKhoan")]
