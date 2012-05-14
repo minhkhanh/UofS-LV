@@ -1,9 +1,10 @@
-package client.menu.application;
+package client.menu.app;
 
 import java.util.Locale;
 
 import client.menu.db.contract.NgonNguContract;
 import client.menu.db.contract.ThamSoContract;
+import client.menu.db.dto.NgonNguDTO;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -16,13 +17,13 @@ import android.net.Uri;
 public class AppLocale {
 
     ApplicationSettings mAppSettings;
-    private ContentValues mLanguage = new ContentValues();
+    private NgonNguDTO mLanguage = new NgonNguDTO();
 
     public static final AppLocale createWithDefaultLanguage(ContentResolver resolver) {
         AppLocale locale = new AppLocale();
 
         Cursor cursor = resolver.query(NgonNguContract.URI_NGONNGU_MACDINH,
-                NgonNguContract.getAllColumns(), null, null, null);
+                NgonNguContract.getFullProjection(), null, null, null);
         if (cursor.moveToFirst()) {
             // String value = cursor.getString(cursor
             // .getColumnIndex(ThamSoContract.COL_VALUE));
@@ -33,13 +34,21 @@ public class AppLocale {
             // null, null);
             //
             // if (cursor2.moveToFirst()) {
-            locale.mLanguage = NgonNguContract.extractData(cursor);
+            locale.mLanguage = NgonNguDTO.extractFrom(cursor);
             // }
-            
+
             cursor.close();
         }
 
         return locale;
+    }
+
+    public NgonNguDTO getLanguage() {
+        return mLanguage;
+    }
+
+    public void setLanguage(NgonNguDTO language) {
+        mLanguage = language;
     }
 
     // public AppLocale(ApplicationSettings settings, String langAbbr) {
@@ -47,20 +56,12 @@ public class AppLocale {
     // mAppSettings = settings;
     // }
 
-    public ContentValues getLanguage() {
-        return mLanguage;
-    }
-
-    public void setLanguage(ContentValues language) {
-        mLanguage = language;
-    }
-
     public String loadLangAbbr() {
-        return mLanguage.getAsString(NgonNguContract.COL_ABBREVIATE);
+        return mLanguage.getKiHieu();
     }
 
     public void storeLangAbbr(String abbr) {
-        mLanguage.put(NgonNguContract.COL_ABBREVIATE, abbr);
+        mLanguage.setKiHieu(abbr);
     }
 
     public boolean applyLanguage(Context context) {

@@ -18,6 +18,10 @@ public final class DonViTinhMonAnContract implements BaseColumns {
             + DonViTinhContract.TABLE_NAME + "(" + DonViTinhContract.COL_SID + "),"
             + COL_DON_GIA + " REAL);";
 
+    public static final String PATH_DONVITINHMONAN_INNER_DANGONNGU = "01";
+
     public static final Uri CONTENT_URI = Uri.parse(MyContentProvider.SCHEME
             + MyContentProvider.AUTHORITY + "/" + TABLE_NAME);
+    public static final Uri URI_DONVITINHMONAN_INNER_DANGONNGU = Uri.withAppendedPath(
+            CONTENT_URI, PATH_DONVITINHMONAN_INNER_DANGONNGU);
 }

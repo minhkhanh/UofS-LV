@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteQueryBuilder;
 
 public final class NgonNguDAO extends AbstractDAO {
     
+    
+    
     public NgonNguDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);        
     }

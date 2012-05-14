@@ -16,8 +16,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import client.menu.R;
-import client.menu.application.ApplicationSettings;
-import client.menu.application.MyApplication;
+import client.menu.app.ApplicationSettings;
+import client.menu.app.MyApplication;
 import client.menu.db.contract.DanhMucContract;
 import client.menu.db.contract.DanhMucDaNgonNguContract;
 import client.menu.db.contract.KhuVucContract;
@@ -75,7 +75,7 @@ public class CategoryListFragment extends ListFragment {
                             DanhMucContract.TABLE_NAME + "." + DanhMucContract.COL_SID,
                             DanhMucDaNgonNguContract.COL_CATEGORY_NAME };
                     Integer sid = MyApplication.gSettings.getLocale().getLanguage()
-                            .getAsInteger(NgonNguContract.COL_SID);
+                            .getMaNgonNgu();
                     CursorLoader loader = new CursorLoader(getActivity(),
                             DanhMucContract.URI_DANHMUC_INNER_DANGONNGU, proj,
                             DanhMucDaNgonNguContract.COL_LANGUAGE_ID + "=?",

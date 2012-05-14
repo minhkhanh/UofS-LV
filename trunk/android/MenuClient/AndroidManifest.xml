@@ -7,7 +7,7 @@
     <uses-sdk android:minSdkVersion="15" />
 
     <application
-        android:name=".application.MyApplication"
+        android:name=".app.MyApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" android:uiOptions="splitActionBarWhenNarrow">
         <activity
@@ -36,6 +36,7 @@
         </activity>
         <provider android:name=".db.provider.MyContentProvider" android:authorities="client.menu.db.provider"></provider>
         <activity android:name=".ui.activity.TestActivity"></activity>
+        <activity android:name=".ui.activity.OrderActivity"></activity>
     </application>
 
 </manifest>

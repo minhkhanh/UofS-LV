@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import client.menu.R;
 import client.menu.ui.activity.MainMenuActivity;
-import client.menu.util.Utilitiy;
+import client.menu.util.U;
 
 public class AuthDialogFragment extends DialogFragment {
 
@@ -26,7 +26,7 @@ public class AuthDialogFragment extends DialogFragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btnOK:
-                    Utilitiy.toastText(getActivity(), "Xác thực thành công!");
+                    U.toastText(getActivity(), "Xác thực thành công!");
 
                     Intent intent = new Intent(getActivity(), MainMenuActivity.class);
                     startActivity(intent);
@@ -52,7 +52,6 @@ public class AuthDialogFragment extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Holo_Dialog);
-
     }
 
     @Override

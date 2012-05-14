@@ -29,7 +29,7 @@ import client.menu.R;
 import client.menu.db.contract.BanContract;
 import client.menu.ui.activity.MainMenuActivity;
 import client.menu.util.C;
-import client.menu.util.Utilitiy;
+import client.menu.util.U;
 
 public class TableGridFragment extends Fragment {
 
@@ -215,7 +215,7 @@ public class TableGridFragment extends Fragment {
             Bundle savedInstanceState) {
 
         ViewGroup frame = (ViewGroup) inflater.inflate(R.layout.frame_table_grid, null);
-        GridView grid = (GridView) Utilitiy.extractViewFromParent(frame, R.id.TableGrid);
+        GridView grid = (GridView) U.extractViewFromParent(frame, R.id.TableGrid);
 
         return grid;
     }

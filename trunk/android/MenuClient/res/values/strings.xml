@@ -16,6 +16,12 @@
     <string name="caption_ok">Đồng ý</string>
     <string name="caption_cancel">Hủy bỏ</string>
     <string name="caption_price">Giá</string>
+    <string name="sample_long">This is a long sample text. This is a long sample text. This is a long sample text. This is a long sample text. This is a long sample text. This is a long sample text. This is a long sample text. This is a long sample text. This is a long sample text. This is a long sample text. This is a long sample text. This is a long sample text. </string>
+    <string name="option_view_order">Xem Order</string>
+    <string name="button_remove">Xóa</string>
+    <string name="sign_lt">&lt;</string>
+    <string name="sign_gt">></string>
+    <string name="func_onChildClick">onChildClick</string>
     
 
 </resources>

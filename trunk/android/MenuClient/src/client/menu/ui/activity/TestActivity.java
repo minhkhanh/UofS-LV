@@ -21,7 +21,7 @@ public class TestActivity extends Activity {
         setContentView(R.layout.layout_test);
 
         String[] from = new String[] { BaseColumns._ID, MonAnContract.COL_SID,
-                MonAnContract.COL_AVATAR };
+                MonAnContract.COL_HINH_ANH };
         int[] to = new int[] { R.id.textView1, R.id.textView2, R.id.textView3 };
         adapter = new SimpleCursorAdapter(this,
                 R.layout.item_test_list, null, from, to,
@@ -34,7 +34,7 @@ public class TestActivity extends Activity {
             @Override
             public Loader<Cursor> onCreateLoader(int id, Bundle args) {
                 String[] projection = new String[] { BaseColumns._ID,
-                        MonAnContract.COL_SID, MonAnContract.COL_AVATAR };
+                        MonAnContract.COL_SID, MonAnContract.COL_HINH_ANH };
                 CursorLoader cursor = new CursorLoader(TestActivity.this,
                         MonAnContract.CONTENT_URI, projection, null, null, null);
                 return cursor;
