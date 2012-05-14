@@ -6,6 +6,10 @@
 	Index
 </asp:Content>
 
+<asp:Content ID="Content4" ContentPlaceHolderID="PageHeadingContent" runat="server">
+	<%: ((BoPhanCheBien)ViewData["boPhanCheBien"]).TenBoPhan %>
+</asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
 <!-- Tooltips -->
 <script src="../../Scripts/jquery/jquery.tooltip.js" type="text/javascript"></script>

@@ -165,6 +165,9 @@
   <data name="CategoryList" xml:space="preserve">
     <value>Category list</value>
   </data>
+  <data name="Config" xml:space="preserve">
+    <value>Config</value>
+  </data>
   <data name="Detail" xml:space="preserve">
     <value>Detail</value>
   </data>
@@ -203,6 +206,9 @@
   </data>
   <data name="InvoiceList" xml:space="preserve">
     <value>Invoice list</value>
+  </data>
+  <data name="Kitchen" xml:space="preserve">
+    <value>Kitchen</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>

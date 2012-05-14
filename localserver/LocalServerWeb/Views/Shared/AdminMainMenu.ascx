@@ -72,16 +72,31 @@
 		<div class="nav-divider">&nbsp;</div>
 
 		
-		<ul <%: ((int)ViewData["menuMainId"] == 4)?"class=current":"class=select" %> ><li><a href="#nogo"><b>News</b></a>
+		<ul <%: ((int)ViewData["menuMainId"] == 4)?"class=current":"class=select" %> ><li><a href="<%:Url.Action("Index", "AdminConfig") %>"><b><%: SharedString.Config %></b></a>
 		<div class='select_sub <%: ((int)ViewData["menuMainId"] == 4)?"show":"" %> '>
-			<ul class="sub">
+			<%--<ul class="sub">
 				<li <%: ((int)ViewData["menuSubId"] == 0 && (int)ViewData["menuMainId"] == 4)?"class=sub_show":"" %> ><a href="#nogo">News details 1</a></li>
 				<li <%: ((int)ViewData["menuSubId"] == 1 && (int)ViewData["menuMainId"] == 4)?"class=sub_show":"" %> ><a href="#nogo">News details 2</a></li>
 				<li <%: ((int)ViewData["menuSubId"] == 2 && (int)ViewData["menuMainId"] == 4)?"class=sub_show":"" %> ><a href="#nogo">News details 3</a></li>
+			</ul>--%>
+		</div>
+		</li>
+		</ul>
+
+<%--        <div class="nav-divider">&nbsp;</div>
+
+        <ul <%: ((int)ViewData["menuMainId"] == 5)?"class=current":"class=select" %> ><li><a href="#nogo"><b><%: SharedString.Kitchen %></b></a>
+		<div class='select_sub <%: ((int)ViewData["menuMainId"] == 4)?"show":"" %> '>
+			<ul class="sub">
+				<li <%: ((int)ViewData["menuSubId"] == 0 && (int)ViewData["menuMainId"] == 5)?"class=sub_show":"" %> ><a href="#nogo">News details 1</a></li>
+				<li <%: ((int)ViewData["menuSubId"] == 1 && (int)ViewData["menuMainId"] == 5)?"class=sub_show":"" %> ><a href="#nogo">News details 2</a></li>
+				<li <%: ((int)ViewData["menuSubId"] == 2 && (int)ViewData["menuMainId"] == 5)?"class=sub_show":"" %> ><a href="#nogo">News details 3</a></li>
 			</ul>
 		</div>
 		</li>
 		</ul>
+
+        <div class="nav-divider">&nbsp;</div>--%>
 		
 		<div class="clear"></div>
 		</div>
