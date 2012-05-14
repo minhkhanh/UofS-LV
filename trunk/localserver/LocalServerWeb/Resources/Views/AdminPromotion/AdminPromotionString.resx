@@ -117,16 +117,88 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
   <data name="AddTitle" xml:space="preserve">
-    <value />
+    <value>Promotion list</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Discount" xml:space="preserve">
+    <value>Discount</value>
+  </data>
+  <data name="DiscountPercent" xml:space="preserve">
+    <value>Discount percent</value>
+  </data>
+  <data name="DiscountType" xml:space="preserve">
+    <value>Discount type</value>
+  </data>
+  <data name="DiscountValue" xml:space="preserve">
+    <value>Discount value</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Eit</value>
+  </data>
+  <data name="EditFoodPromotion" xml:space="preserve">
+    <value>Edit food promotion</value>
+  </data>
+  <data name="EditInvoicePromotion" xml:space="preserve">
+    <value>Edit invoice promotion</value>
   </data>
   <data name="EditTitle" xml:space="preserve">
-    <value />
+    <value>Edit promotion</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>End date</value>
+  </data>
+  <data name="ErrorCannotAdd" xml:space="preserve">
+    <value>Can't add</value>
+  </data>
+  <data name="ErrorCannotDelete" xml:space="preserve">
+    <value>Can't delete</value>
+  </data>
+  <data name="ErrorCannotEdit" xml:space="preserve">
+    <value>Can't edit</value>
+  </data>
+  <data name="ErrorDateWrong" xml:space="preserve">
+    <value>Either start date or end date is not accepted</value>
+  </data>
+  <data name="ErrorEndDateAfter" xml:space="preserve">
+    <value>End date must be after start date</value>
+  </data>
+  <data name="ErrorPromotionNotFound" xml:space="preserve">
+    <value>Requested promotion not found</value>
+  </data>
+  <data name="InfoAddSuccess" xml:space="preserve">
+    <value>Delete successfully</value>
+  </data>
+  <data name="InfoDeleteSuccess" xml:space="preserve">
+    <value>Delete successfully</value>
+  </data>
+  <data name="InfoEditSuccess" xml:space="preserve">
+    <value>Edit successfully</value>
   </data>
   <data name="NoData" xml:space="preserve">
-    <value />
+    <value>There are no promotions</value>
+  </data>
+  <data name="NumberOrdinary" xml:space="preserve">
+    <value>No.</value>
+  </data>
+  <data name="Option" xml:space="preserve">
+    <value>Option</value>
+  </data>
+  <data name="PromotionDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="PromotionName" xml:space="preserve">
+    <value>Promotion name</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Start date</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value />
+    <value>Promotion list</value>
   </data>
 </root>

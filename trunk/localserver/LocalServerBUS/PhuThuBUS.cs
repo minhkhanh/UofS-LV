@@ -13,5 +13,25 @@ namespace LocalServerBUS
         {
             return PhuThuDAO.LayDanhSachPhuThu();
         }
+
+        public static PhuThu LayPhuThu(int maPhuThu)
+        {
+            return PhuThuDAO.LayPhuThu(maPhuThu);
+        }
+
+        public static bool Xoa(int maPhuThu)
+        {
+            return PhuThuDAO.Xoa(maPhuThu);
+        }
+
+        public static bool Them(PhuThu phuThu)
+        {
+            return PhuThuDAO.Them(phuThu);
+        }
+
+        public static bool CapNhat(PhuThu phuThu)
+        {
+            return PhuThuDAO.CapNhat(phuThu);
+        }
     }
 }

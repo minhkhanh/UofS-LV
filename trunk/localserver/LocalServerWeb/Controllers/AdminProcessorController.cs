@@ -65,7 +65,7 @@ namespace LocalServerWeb.Controllers
         public ActionResult Add(string tenBoPhan, string moTa, int maTaiKhoan)
         {
             TempData["tenBoPhan"] = tenBoPhan;
-            TempData["mota"] = moTa;
+            TempData["moTa"] = moTa;
             TempData["maTaiKhoan"] = maTaiKhoan;
 
             var checkDic = new Dictionary<string, string>();

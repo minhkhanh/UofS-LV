@@ -13,5 +13,63 @@ namespace LocalServerDAO
         {
             return ThucDonDienTu.DataContext.KhuyenMais.ToList();
         }
+
+        public static KhuyenMai LayKhuyenMai(int maKhuyenMai)
+        {
+            var temp = ThucDonDienTu.DataContext.KhuyenMais.Where(d => d.MaKhuyenMai == maKhuyenMai);
+            if (temp.Count() > 0)
+            {
+                KhuyenMai dm = temp.First();
+                return dm;
+            }
+            return null;
+        }
+
+
+        public static bool Xoa(int maKhuyenMai)
+        {
+            try
+            {
+                var objKhuyenMai = LayKhuyenMai(maKhuyenMai);
+                ThucDonDienTu.DataContext.KhuyenMais.DeleteOnSubmit(objKhuyenMai);
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
+
+
+        public static bool Them(KhuyenMai khuyenMai)
+        {
+            try
+            {
+                ThucDonDienTu.DataContext.KhuyenMais.InsertOnSubmit(khuyenMai);
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
+
+        public static bool CapNhat(KhuyenMai khuyenMai)
+        {
+            try
+            {
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
     }
 }

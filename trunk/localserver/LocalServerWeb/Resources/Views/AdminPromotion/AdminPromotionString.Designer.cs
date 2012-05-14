@@ -61,7 +61,16 @@ namespace LocalServerWeb.Resources.Views.AdminPromotion {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Promotion list.
         /// </summary>
         public static string AddTitle {
             get {
@@ -70,7 +79,79 @@ namespace LocalServerWeb.Resources.Views.AdminPromotion {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discount.
+        /// </summary>
+        public static string Discount {
+            get {
+                return ResourceManager.GetString("Discount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discount percent.
+        /// </summary>
+        public static string DiscountPercent {
+            get {
+                return ResourceManager.GetString("DiscountPercent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discount type.
+        /// </summary>
+        public static string DiscountType {
+            get {
+                return ResourceManager.GetString("DiscountType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discount value.
+        /// </summary>
+        public static string DiscountValue {
+            get {
+                return ResourceManager.GetString("DiscountValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Eit.
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit food promotion.
+        /// </summary>
+        public static string EditFoodPromotion {
+            get {
+                return ResourceManager.GetString("EditFoodPromotion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit invoice promotion.
+        /// </summary>
+        public static string EditInvoicePromotion {
+            get {
+                return ResourceManager.GetString("EditInvoicePromotion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit promotion.
         /// </summary>
         public static string EditTitle {
             get {
@@ -79,7 +160,97 @@ namespace LocalServerWeb.Resources.Views.AdminPromotion {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to End date.
+        /// </summary>
+        public static string EndDate {
+            get {
+                return ResourceManager.GetString("EndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t add.
+        /// </summary>
+        public static string ErrorCannotAdd {
+            get {
+                return ResourceManager.GetString("ErrorCannotAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t delete.
+        /// </summary>
+        public static string ErrorCannotDelete {
+            get {
+                return ResourceManager.GetString("ErrorCannotDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t edit.
+        /// </summary>
+        public static string ErrorCannotEdit {
+            get {
+                return ResourceManager.GetString("ErrorCannotEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Either start date or end date is not accepted.
+        /// </summary>
+        public static string ErrorDateWrong {
+            get {
+                return ResourceManager.GetString("ErrorDateWrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End date must be after start date.
+        /// </summary>
+        public static string ErrorEndDateAfter {
+            get {
+                return ResourceManager.GetString("ErrorEndDateAfter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requested promotion not found.
+        /// </summary>
+        public static string ErrorPromotionNotFound {
+            get {
+                return ResourceManager.GetString("ErrorPromotionNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete successfully.
+        /// </summary>
+        public static string InfoAddSuccess {
+            get {
+                return ResourceManager.GetString("InfoAddSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete successfully.
+        /// </summary>
+        public static string InfoDeleteSuccess {
+            get {
+                return ResourceManager.GetString("InfoDeleteSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit successfully.
+        /// </summary>
+        public static string InfoEditSuccess {
+            get {
+                return ResourceManager.GetString("InfoEditSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no promotions.
         /// </summary>
         public static string NoData {
             get {
@@ -88,7 +259,52 @@ namespace LocalServerWeb.Resources.Views.AdminPromotion {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to No..
+        /// </summary>
+        public static string NumberOrdinary {
+            get {
+                return ResourceManager.GetString("NumberOrdinary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Option.
+        /// </summary>
+        public static string Option {
+            get {
+                return ResourceManager.GetString("Option", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string PromotionDescription {
+            get {
+                return ResourceManager.GetString("PromotionDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Promotion name.
+        /// </summary>
+        public static string PromotionName {
+            get {
+                return ResourceManager.GetString("PromotionName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start date.
+        /// </summary>
+        public static string StartDate {
+            get {
+                return ResourceManager.GetString("StartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Promotion list.
         /// </summary>
         public static string Title {
             get {
