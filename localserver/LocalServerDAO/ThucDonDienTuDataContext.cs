@@ -56,5 +56,7 @@ namespace LocalServerDAO
         public Table<ChiTietDanhMucBoPhanCheBien> ChiTietDanhMucBoPhanCheBiens;
 
         public Table<NgonNgu> NgonNgus;
+
+        public Table<ThamSo> ThamSos;
     }
 }

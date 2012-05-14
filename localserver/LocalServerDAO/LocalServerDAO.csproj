@@ -57,6 +57,7 @@
     <Compile Include="ChiTietMonLienQuanDAO.cs" />
     <Compile Include="ChiTietOrderDAO.cs" />
     <Compile Include="ChiTietKhongCheBienOrderDAO.cs" />
+    <Compile Include="ThamSoDAO.cs" />
     <Compile Include="DanhMucDAO.cs" />
     <Compile Include="DonViTinhDAO.cs" />
     <Compile Include="FooDAO.cs" />
