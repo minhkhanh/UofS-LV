@@ -155,15 +155,15 @@
     <!-- Begin add category detail --------------------------------------------------------------------------->
     <table border="0" cellpadding="0" cellspacing="0" id="Table1" style="margin: 10px">
         <tr>
-            <th valign="top" width="130px" align="left">
+            <th valign="center" width="130px" align="left">
                 <%: AdminProcessorString.CategoryName %>:
             </th>
-            <td>
+            <td valign="center">
                 <% Html.BeginForm("AddCategoryProcessor", "AdminProcessor", FormMethod.Post); %>
                 <%= Html.DropDownList("maDanhMuc", new SelectList(ViewData["listDanhMuc"] as List<DanhMuc>, "MaDanhMuc", "TenDanhMuc", 1), new {Class = "listDanhMuc" })%>
                 <input type="hidden" name="maBoPhanCheBien" value="<%:Url.RequestContext.RouteData.Values["id"] %>" />
             </td>
-            <td>
+            <td valign="center">
                 <input type="submit" style="float: right; margin-right: 50px;"
                     value="<%: AdminProcessorString.AddCategoryDetail %>" />
                 <% Html.EndForm(); %>
