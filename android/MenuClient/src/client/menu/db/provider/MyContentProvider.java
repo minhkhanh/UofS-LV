@@ -10,6 +10,7 @@ import android.net.Uri;
 import client.menu.db.contract.BanContract;
 import client.menu.db.contract.DanhMucContract;
 import client.menu.db.contract.DanhMucDaNgonNguContract;
+import client.menu.db.contract.DonViTinhDaNgonNguContract;
 import client.menu.db.contract.DonViTinhMonAnContract;
 import client.menu.db.contract.KhuVucContract;
 import client.menu.db.contract.MonAnContract;
@@ -36,8 +37,13 @@ public class MyContentProvider extends ContentProvider {
     private static final int MATCH_NGONNGU = 7;
     private static final int MATCH_MONAN_INNER_DANGONNGU = 8;
     private static final int MATCH_DONVITINH_MONAN = 9;
+    private static final int MATCH_DONVITINHMONAN_DANGONNGU = 10;
 
     static {
+        uriMatcher.addURI(AUTHORITY, DonViTinhMonAnContract.TABLE_NAME + "/"
+                + DonViTinhMonAnContract.PATH_DONVITINHMONAN_INNER_DANGONNGU,
+                MATCH_DONVITINHMONAN_DANGONNGU);
+
         uriMatcher.addURI(AUTHORITY, DonViTinhMonAnContract.TABLE_NAME + "/",
                 MATCH_DONVITINH_MONAN);
 
@@ -86,8 +92,17 @@ public class MyContentProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection,
             String[] selectionArgs, String sortOrder) {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+        String limit = null;
 
         switch (uriMatcher.match(uri)) {
+            case MATCH_DONVITINHMONAN_DANGONNGU:
+                queryBuilder.setTables(DonViTinhMonAnContract.TABLE_NAME + " INNER JOIN "
+                        + DonViTinhDaNgonNguContract.TABLE_NAME + " ON ("
+                        + DonViTinhMonAnContract.TABLE_NAME + "."
+                        + DonViTinhMonAnContract.COL_MA_DON_VI + " = "
+                        + DonViTinhDaNgonNguContract.TABLE_NAME + "."
+                        + DonViTinhDaNgonNguContract.COL_MA_DON_VI + ")");
+                break;
             case MATCH_DONVITINH_MONAN:
                 queryBuilder.setTables(DonViTinhMonAnContract.TABLE_NAME);
                 break;
@@ -141,7 +156,7 @@ public class MyContentProvider extends ContentProvider {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs,
-                null, null, null);
+                null, null, null, limit);
 
         return cursor;
     }

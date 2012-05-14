@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-public final class Utilitiy {
+public final class U {
     
     public static final void toastText(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();

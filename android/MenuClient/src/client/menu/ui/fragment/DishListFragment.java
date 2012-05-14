@@ -3,8 +3,10 @@ package client.menu.ui.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.AsyncTaskLoader;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
@@ -16,14 +18,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.OnHierarchyChangeListener;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import client.menu.R;
-import client.menu.application.MyApplication;
+import client.menu.app.MyApplication;
+import client.menu.bus.SessionManager;
+import client.menu.bus.SessionManager.ServiceSession;
+import client.menu.db.contract.DonViTinhDaNgonNguContract;
 import client.menu.db.contract.DonViTinhMonAnContract;
 import client.menu.db.contract.MonAnContract;
 import client.menu.db.contract.MonAnDaNgonNguContract;
 import client.menu.db.contract.NgonNguContract;
+import client.menu.db.dto.ChiTietOrderDTO;
+import client.menu.db.dto.DonViTinhMonAnDTO;
+import client.menu.db.dto.MonAnDTO;
+import client.menu.util.U;
 
 public class DishListFragment extends ListFragment {
 
@@ -32,8 +42,10 @@ public class DishListFragment extends ListFragment {
     private int mMaDanhMuc;
     private SimpleCursorAdapter mAdapter;
 
+    private boolean mHaveExtendPane;
+
     private class LoadDishUnitsAsyncTask extends
-            AsyncTask<Void, Integer, ArrayAdapter<String>> {
+            AsyncTask<Void, Integer, SimpleCursorAdapter> {
 
         Integer mIndex;
         Spinner mSpinner;
@@ -44,45 +56,43 @@ public class DishListFragment extends ListFragment {
         }
 
         @Override
-        protected void onPostExecute(ArrayAdapter<String> result) {
+        protected void onPostExecute(SimpleCursorAdapter result) {
             mSpinner.setAdapter(result);
+            mSpinner.setFocusable(false); // does the magic!
         };
 
         @Override
-        protected ArrayAdapter<String> doInBackground(Void... unused) {
+        protected SimpleCursorAdapter doInBackground(Void... unused) {
             Cursor adaptCursor = mAdapter.getCursor();
             adaptCursor.moveToPosition(mIndex);
             Integer maMonAn = adaptCursor.getInt(adaptCursor
                     .getColumnIndex(MonAnContract.COL_SID));
 
-            String[] projection = new String[] { DonViTinhMonAnContract._ID,
+            String[] projection = new String[] {
+                    DonViTinhMonAnContract.TABLE_NAME + "." + DonViTinhMonAnContract._ID,
                     DonViTinhMonAnContract.COL_MA_MON_AN,
-                    DonViTinhMonAnContract.COL_MA_DON_VI,
-                    DonViTinhMonAnContract.COL_DON_GIA };
-            String selection = DonViTinhMonAnContract.COL_MA_MON_AN + "=?";
-            String[] selArgs = new String[] { maMonAn.toString() };
+                    DonViTinhMonAnContract.TABLE_NAME + "."
+                            + DonViTinhMonAnContract.COL_MA_DON_VI,
+                    DonViTinhMonAnContract.COL_DON_GIA,
+                    DonViTinhDaNgonNguContract.COL_TEN_DON_VI_TINH };
+            String selection = DonViTinhMonAnContract.COL_MA_MON_AN + "=? and "
+                    + DonViTinhDaNgonNguContract.COL_MA_NGON_NGU + "=?";
+            String[] selArgs = new String[] {
+                    maMonAn.toString(),
+                    MyApplication.gSettings.getLocale().getLanguage().getMaNgonNgu()
+                            .toString() };
 
             Cursor cursor = getActivity().getContentResolver().query(
-                    DonViTinhMonAnContract.CONTENT_URI, projection, selection, selArgs,
-                    null);
+                    DonViTinhMonAnContract.URI_DONVITINHMONAN_INNER_DANGONNGU,
+                    projection, selection, selArgs, null);
 
-            if (cursor != null) {
-                List<String> data = new ArrayList<String>();
-                while (cursor.moveToNext()) {
-                    // Integer _id = cursor.getInt(0);
-                    Float price = cursor.getFloat(3);
+            SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(),
+                    android.R.layout.simple_spinner_item, cursor,
+                    new String[] { DonViTinhDaNgonNguContract.COL_TEN_DON_VI_TINH },
+                    new int[] { android.R.id.text1 }, 0);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-                    data.add(Float.toString(price));
-                }
-
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                        android.R.layout.simple_spinner_item, android.R.id.text1, data);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-                return adapter;
-            }
-
-            return null;
+            return adapter;
         }
     };
 
@@ -139,7 +149,7 @@ public class DishListFragment extends ListFragment {
                             + MonAnDaNgonNguContract.COL_LANGUAGE_ID + "=?";
 
                     Integer sid = MyApplication.gSettings.getLocale().getLanguage()
-                            .getAsInteger(NgonNguContract.COL_SID);
+                            .getMaNgonNgu();
 
                     CursorLoader loader = new CursorLoader(getActivity(),
                             MonAnContract.URI_MONAN_INNER_DANGONNGU, proj, selection,
@@ -178,7 +188,7 @@ public class DishListFragment extends ListFragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
 
-        menu.add("check");
+        // menu.add("check");
     }
 
     @Override
@@ -201,5 +211,67 @@ public class DishListFragment extends ListFragment {
         getListView().setOnHierarchyChangeListener(mOnListItemChange);
 
         getLoaderManager().initLoader(LOADER_ID_DISH_LIST, null, mLoaderCallbacks);
+
+        View orderPreview = getActivity().findViewById(R.id.ExtendPaneHolder);
+        mHaveExtendPane = orderPreview != null
+                && orderPreview.getVisibility() == View.VISIBLE;
+    }
+
+    private DonViTinhMonAnDTO extractDonViTinhMonAnDTO(int pos) {
+        ViewGroup row = (ViewGroup) getListView().getChildAt(pos);
+        Spinner spinner = (Spinner) row.findViewById(R.id.spinDishPrices);
+
+        SimpleCursorAdapter adapter = (SimpleCursorAdapter) spinner.getAdapter();
+        Cursor cursor = adapter.getCursor();
+        if (cursor != null && cursor.moveToPosition(pos)) {
+            return DonViTinhMonAnDTO.extractFrom(cursor);
+        }
+
+        return null;
+    }
+
+    private MonAnDTO extractMonAnDTO(int pos) {
+        Cursor cursor = mAdapter.getCursor();
+        if (cursor != null && cursor.moveToPosition(pos)) {
+            return MonAnDTO.extractFrom(cursor);
+        }
+
+        return null;
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        // MonAnDTO monAn = extractMonAnDTO(position);
+        // // DonViTinhMonAnDTO dvt = extractDonViTinhMonAnDTO(position);
+        //
+        // SessionManager sessionManager = ((MyApplication)
+        // getActivity().getApplication())
+        // .getSessionManager();
+        // ServiceSession session = sessionManager.loadCurrentSession();
+        //
+        // session.addOrderItem(maMonAn, maDonViTinh);
+        //
+        // if (mHaveExtendPane) {
+        // OrderPreviewFragment orderPreview = (OrderPreviewFragment)
+        // getFragmentManager()
+        // .findFragmentById(R.id.ExtendPaneHolder);
+        //
+        // if (orderPreview == null) {
+        // orderPreview = new OrderPreviewFragment(monAn.getMaMonAn());
+        //
+        // FragmentTransaction ft = getFragmentManager().beginTransaction();
+        // ft.replace(R.id.ExtendPaneHolder, orderPreview);
+        // ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        // ft.commit();
+        // } else {
+        // orderPreview.updateList(monAn.getMaMonAn());
+        // }
+        //
+        // // orderPreview.updateList(monAn);
+        //
+        // U.toastText(getActivity(), "item click ok");
+        // }
     }
 }

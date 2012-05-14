@@ -1,4 +1,4 @@
-package client.menu.application;
+package client.menu.app;
 
 import android.app.Application;
 

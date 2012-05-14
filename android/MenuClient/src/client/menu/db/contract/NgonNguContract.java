@@ -38,7 +38,7 @@ public final class NgonNguContract implements BaseColumns {
         return values;
     }
 
-    public static final String[] getAllColumns() {
+    public static final String[] getFullProjection() {
         return new String[] { TABLE_NAME + "." + _ID, COL_SID, COL_DISPLAY_NAME,
                 COL_ABBREVIATE };
     }

@@ -1,34 +1,64 @@
 package client.menu.db.dto;
 
+import client.menu.db.contract.DonViTinhMonAnContract;
+import android.database.Cursor;
+
 public class DonViTinhMonAnDTO {
-    private int mId;
-    private int mMaMonAn;
-    private int mMaDonViTinh;
-    private float mDonGia;
-    public int getId() {
+    private Integer mId;
+    private Integer mMaMonAn;
+    private Integer mMaDonViTinh;
+    private Float mDonGia;
+
+    public static DonViTinhMonAnDTO extractFrom(Cursor cursor) {
+        DonViTinhMonAnDTO obj = new DonViTinhMonAnDTO();
+
+        int colIndex;
+        if ((colIndex = cursor.getColumnIndex(DonViTinhMonAnContract._ID)) != -1) {
+            obj.mId = cursor.getInt(colIndex);
+        }
+        if ((colIndex = cursor.getColumnIndex(DonViTinhMonAnContract.COL_MA_MON_AN)) != -1) {
+            obj.mMaMonAn = cursor.getInt(colIndex);
+        }
+        if ((colIndex = cursor.getColumnIndex(DonViTinhMonAnContract.COL_MA_DON_VI)) != -1) {
+            obj.mMaDonViTinh = cursor.getInt(colIndex);
+        }
+        if ((colIndex = cursor.getColumnIndex(DonViTinhMonAnContract.COL_DON_GIA)) != -1) {
+            obj.mDonGia = cursor.getFloat(colIndex);
+        }
+
+        return obj;
+    }
+
+    public Integer getId() {
         return mId;
     }
-    public void setId(int id) {
+
+    public void setId(Integer id) {
         mId = id;
     }
-    public int getMaMonAn() {
+
+    public Integer getMaMonAn() {
         return mMaMonAn;
     }
-    public void setMaMonAn(int maMonAn) {
+
+    public void setMaMonAn(Integer maMonAn) {
         mMaMonAn = maMonAn;
     }
-    public int getMaDonViTinh() {
+
+    public Integer getMaDonViTinh() {
         return mMaDonViTinh;
     }
-    public void setMaDonViTinh(int maDonViTinh) {
+
+    public void setMaDonViTinh(Integer maDonViTinh) {
         mMaDonViTinh = maDonViTinh;
     }
-    public float getDonGia() {
+
+    public Float getDonGia() {
         return mDonGia;
     }
-    public void setDonGia(float donGia) {
+
+    public void setDonGia(Float donGia) {
         mDonGia = donGia;
     }
-    
-    
+
 }

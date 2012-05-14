@@ -14,11 +14,12 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import client.menu.R;
-import client.menu.application.AppLocale;
-import client.menu.application.ApplicationSettings;
-import client.menu.application.MyApplication;
+import client.menu.app.AppLocale;
+import client.menu.app.ApplicationSettings;
+import client.menu.app.MyApplication;
 import client.menu.db.contract.NgonNguContract;
-import client.menu.util.Utilitiy;
+import client.menu.db.dto.NgonNguDTO;
+import client.menu.util.U;
 
 public class MenuClientActivity extends Activity implements LoaderCallbacks<Cursor>,
         OnItemSelectedListener {
@@ -61,7 +62,7 @@ public class MenuClientActivity extends Activity implements LoaderCallbacks<Curs
             Intent intent = new Intent(this, SplitTableActivity.class);
             startActivity(intent);
         } else if (v.getId() == R.id.testBtn) {
-            Intent intent = new Intent(this, TestActivity.class);
+            Intent intent = new Intent(this, OrderActivity.class);
             startActivity(intent);
         }
     }
@@ -111,10 +112,10 @@ public class MenuClientActivity extends Activity implements LoaderCallbacks<Curs
                 AppLocale locale = MyApplication.gSettings.getLocale();
                 String settAbbr = locale.loadLangAbbr();
                 if (settAbbr == null || !settAbbr.equals(abbr)) {
-                    locale.setLanguage(NgonNguContract.extractData(cursor));
+                    locale.setLanguage(NgonNguDTO.extractFrom(cursor));
 
                     if (!locale.loadLangAbbr().equals(settAbbr)) {
-                        Utilitiy.restartActivity(MenuClientActivity.this);
+                        U.restartActivity(MenuClientActivity.this);
                     }
                 }
             }
