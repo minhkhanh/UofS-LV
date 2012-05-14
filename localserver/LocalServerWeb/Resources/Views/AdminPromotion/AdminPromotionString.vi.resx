@@ -117,16 +117,88 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Thêm</value>
+  </data>
   <data name="AddTitle" xml:space="preserve">
-    <value />
+    <value>Thêm khuyến mãi mới</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Cập nhật</value>
+  </data>
+  <data name="Discount" xml:space="preserve">
+    <value>Giảm</value>
+  </data>
+  <data name="DiscountPercent" xml:space="preserve">
+    <value>Tỉ lệ giảm</value>
+  </data>
+  <data name="DiscountType" xml:space="preserve">
+    <value>Hình thức giảm</value>
+  </data>
+  <data name="DiscountValue" xml:space="preserve">
+    <value>Giá giảm</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="EditFoodPromotion" xml:space="preserve">
+    <value>Cập nhật khuyến mãi món</value>
+  </data>
+  <data name="EditInvoicePromotion" xml:space="preserve">
+    <value>Cập nhật khuyến mãi hóa đơn</value>
   </data>
   <data name="EditTitle" xml:space="preserve">
-    <value />
+    <value>Cập nhật khuyến mãi</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>Thời điểm kết thúc</value>
+  </data>
+  <data name="ErrorCannotAdd" xml:space="preserve">
+    <value>Không thể thêm</value>
+  </data>
+  <data name="ErrorCannotDelete" xml:space="preserve">
+    <value>Không thể xóa</value>
+  </data>
+  <data name="ErrorCannotEdit" xml:space="preserve">
+    <value>Không thể cập nhật</value>
+  </data>
+  <data name="ErrorDateWrong" xml:space="preserve">
+    <value>Thời điểm bắt đầu hoặc kết thúc không hợp lệ</value>
+  </data>
+  <data name="ErrorEndDateAfter" xml:space="preserve">
+    <value>Thời điểm kết thúc phải sau thời điểm bắt đầu</value>
+  </data>
+  <data name="ErrorPromotionNotFound" xml:space="preserve">
+    <value>Thông tin khuyến mãi được yêu cầu không tồn tại</value>
+  </data>
+  <data name="InfoAddSuccess" xml:space="preserve">
+    <value>Thêm thành công</value>
+  </data>
+  <data name="InfoDeleteSuccess" xml:space="preserve">
+    <value>Xóa thành công</value>
+  </data>
+  <data name="InfoEditSuccess" xml:space="preserve">
+    <value>Cập nhật thành công</value>
   </data>
   <data name="NoData" xml:space="preserve">
-    <value />
+    <value>Hiện không có khuyến mãi nào</value>
+  </data>
+  <data name="NumberOrdinary" xml:space="preserve">
+    <value>STT</value>
+  </data>
+  <data name="Option" xml:space="preserve">
+    <value>Tùy chọn</value>
+  </data>
+  <data name="PromotionDescription" xml:space="preserve">
+    <value>Mô tả</value>
+  </data>
+  <data name="PromotionName" xml:space="preserve">
+    <value>Tên khuyến mãi</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Thời điểm bắt đầu</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value />
+    <value>Danh sách khuyến mãi</value>
   </data>
 </root>

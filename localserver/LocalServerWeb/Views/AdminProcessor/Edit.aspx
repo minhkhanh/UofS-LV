@@ -8,6 +8,7 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="PageHeadingContent" runat="server">
     <%: AdminProcessorString.EditTitle %>
+    <%: Url.RequestContext.RouteData.Values["id"] %>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
     <script src="../../Scripts/jquery/jquery.selectbox-0.5.js" type="text/javascript"></script>

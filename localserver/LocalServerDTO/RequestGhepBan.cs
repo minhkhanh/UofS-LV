@@ -6,7 +6,7 @@ using System.Text;
 
 namespace LocalServerDTO
 {
-    [DataContract]
+    [DataContract(Namespace = "")]
     public class RequestGhepBan
     {
         [DataMember]
