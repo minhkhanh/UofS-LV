@@ -157,7 +157,7 @@
     <value>Danh sách khu vực</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Hủy bỏ</value>
+    <value>Bỏ qua</value>
   </data>
   <data name="Category" xml:space="preserve">
     <value>Danh mục</value>
@@ -167,6 +167,9 @@
   </data>
   <data name="Detail" xml:space="preserve">
     <value>Chi tiết</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Cập nhật</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Lỗi</value>

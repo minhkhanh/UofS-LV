@@ -10,6 +10,7 @@
 <body>
     <div align="center">
         <%: TempData["error"] ?? "" %>
+        <%: TempData["errorNotFound"] ?? "" %>
     </div>
 </body>
 </html>

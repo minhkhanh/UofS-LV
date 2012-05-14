@@ -55,7 +55,7 @@ namespace LocalServerWeb.Controllers
             ViewData["listTaiKhoan"] = TaiKhoanBUS.LayDanhSachTaiKhoan();
             if (TempData["checkDic"] == null)
             {
-                TempData.Clear();
+                //TempData.Clear();
                 TempData["checkDic"] = new Dictionary<string, string>();
             }
             return View();
@@ -124,7 +124,7 @@ namespace LocalServerWeb.Controllers
 
             if (TempData["checkDic"] == null)
             {
-                TempData.Clear();
+                //TempData.Clear();
                 TempData["checkDic"] = new Dictionary<string, string>();
             }
 

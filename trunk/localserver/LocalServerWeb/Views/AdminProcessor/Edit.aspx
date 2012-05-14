@@ -15,11 +15,29 @@
         $(document).ready(function () {
             $('.listTaiKhoan').selectbox({ inputClass: "styledselect_pages", debug: true });
             $('.listDanhMuc').selectbox({ inputClass: "styledselect_pages", debug: true });
+            $('input:submit').button();
+            $('input:reset').button();
+            $('input:button').button();
+        });
+    </script>
+    <script src="../../Scripts/jquery/jquery.tooltip.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery/jquery.dimensions.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('a.info-tooltip ').tooltip({
+                track: true,
+                delay: 0,
+                fixPNG: true,
+                showURL: false,
+                showBody: " - ",
+                top: -35,
+                left: 5
+            });
         });
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <!--  Error message: Cannot add this table  -->
+    <!--  Error message: Cannot edit this processor  -->
     <% if (TempData["errorCannotEdit"] != null)
        {
            Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotEdit"]);
@@ -53,6 +71,18 @@
     <% if (TempData["warningNoCategoryDetail"] != null)
        {
            Html.RenderPartial("WarningMessageTooltip", model: TempData["warningNoCategoryDetail"]);
+       } 
+    %>
+    <!--  Can't delete if category detail not found  -->
+    <% if (TempData["errorCategoryDetailNotFound"] != null)
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCategoryDetailNotFound"]);
+       } 
+    %>
+    <!--  Can't add if category detail already exist  -->
+    <% if (TempData["errorCategoryDetailExist"] != null)
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCategoryDetailExist"]);
        } 
     %>
     <!--  Main code  --------------------------------------------------------------------------->
@@ -112,8 +142,8 @@
                     &nbsp;
                 </th>
                 <td valign="top">
-                    <input type="submit" value="" class="form-submit" />
-                    <input type="reset" value="" class="form-reset" />
+                    <input type="submit" value="<%: SharedString.Edit %>" />
+                    <input type="reset" value="<%: SharedString.Reset %>" />
                 </td>
                 <td>
                 </td>
@@ -123,25 +153,26 @@
     <% Html.EndForm(); %>
     <!-- end id-form Edit Processor  -->
     <!-- Begin add category detail --------------------------------------------------------------------------->
-    <table border="0" cellpadding="0" cellspacing="0" id="Table1" style="margin:20px">
+    <table border="0" cellpadding="0" cellspacing="0" id="Table1" style="margin: 10px">
         <tr>
-            <th valign="top" width="200px" align="left">
+            <th valign="top" width="130px" align="left">
                 <%: AdminProcessorString.CategoryName %>:
             </th>
             <td>
                 <% Html.BeginForm("AddCategoryProcessor", "AdminProcessor", FormMethod.Post); %>
                 <%= Html.DropDownList("maDanhMuc", new SelectList(ViewData["listDanhMuc"] as List<DanhMuc>, "MaDanhMuc", "TenDanhMuc", 1), new {Class = "listDanhMuc" })%>
-                <input type="hidden" name="maBoPhanCheBien" value="<%:Url.RequestContext.RouteData.Values["id"] %>" /> 
+                <input type="hidden" name="maBoPhanCheBien" value="<%:Url.RequestContext.RouteData.Values["id"] %>" />
             </td>
             <td>
-                <input type="submit" value="Add"/>
-                 <% Html.EndForm(); %>
+                <input type="submit" style="float: right; margin-right: 50px;"
+                    value="<%: AdminProcessorString.AddCategoryDetail %>" />
+                <% Html.EndForm(); %>
             </td>
         </tr>
     </table>
     <!-- Begin category detail table--------------------------------------------------------------------------->
-    <% if(ViewData["listChiTietDanhMucBoPhanCheBien"] != null && ((List<ChiTietDanhMucBoPhanCheBien>)ViewData["listChiTietDanhMucBoPhanCheBien"]).Count > 0)
-    {
+    <% if (ViewData["listChiTietDanhMucBoPhanCheBien"] != null && ((List<ChiTietDanhMucBoPhanCheBien>)ViewData["listChiTietDanhMucBoPhanCheBien"]).Count > 0)
+       {
     %>
     <table border="0" width="100%" cellpadding="0" cellspacing="0" id="product-table">
         <tr>
@@ -159,8 +190,8 @@
             </th>
         </tr>
         <%int iCount = 0;%>
-        <% foreach(ChiTietDanhMucBoPhanCheBien ct in (List<ChiTietDanhMucBoPhanCheBien>)ViewData["listChiTietDanhMucBoPhanCheBien"])
-        {
+        <% foreach (ChiTietDanhMucBoPhanCheBien ct in (List<ChiTietDanhMucBoPhanCheBien>)ViewData["listChiTietDanhMucBoPhanCheBien"])
+           {
         %>
         <tr <%: (iCount++%2==0)?"":"class=alternate-row" %>>
             <td>
@@ -171,10 +202,10 @@
             </td>
             <td>
                 <% Html.BeginForm("DeleteCategoryProcessor", "AdminProcessor", FormMethod.Post, new { id = "form_delete_category_" + (iCount) }); %>
-                                                <input name="maBoPhanCheBien" type="hidden" value="<%: ct.BoPhanCheBien.MaBoPhanCheBien %>" />
-                                                <input name="maDanhMuc" type="hidden" value="<%: ct.DanhMuc.MaDanhMuc %>" />
-                                                <a title="<%: AdminProcessorString.Delete %>" class="icon-2 info-tooltip" onclick="$('#form_delete_category_<%:iCount %>').submit();" />
-                                                <% Html.EndForm(); %>
+                <input name="maBoPhanCheBien" type="hidden" value="<%: ct.BoPhanCheBien.MaBoPhanCheBien %>" />
+                <input name="maDanhMuc" type="hidden" value="<%: ct.DanhMuc.MaDanhMuc %>" />
+                <a title="<%: AdminProcessorString.Delete %>" class="icon-2 info-tooltip" onclick="$('#form_delete_category_<%:iCount %>').submit();" />
+                <% Html.EndForm(); %>
             </td>
         </tr>
         <%
