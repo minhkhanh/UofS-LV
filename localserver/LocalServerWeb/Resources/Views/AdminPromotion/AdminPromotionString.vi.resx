@@ -124,7 +124,7 @@
     <value>Thêm khuyến mãi mới</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Cập nhật</value>
+    <value>Xóa</value>
   </data>
   <data name="Discount" xml:space="preserve">
     <value>Giảm</value>
@@ -139,7 +139,7 @@
     <value>Giá giảm</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Xóa</value>
+    <value>Cập nhật</value>
   </data>
   <data name="EditFoodPromotion" xml:space="preserve">
     <value>Cập nhật khuyến mãi món</value>

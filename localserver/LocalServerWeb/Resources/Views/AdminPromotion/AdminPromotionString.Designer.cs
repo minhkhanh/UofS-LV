@@ -124,7 +124,7 @@ namespace LocalServerWeb.Resources.Views.AdminPromotion {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Eit.
+        ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string Edit {
             get {

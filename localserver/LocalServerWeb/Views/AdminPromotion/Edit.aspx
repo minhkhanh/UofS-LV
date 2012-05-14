@@ -62,9 +62,9 @@
                 </th>
                 <td>
                     <select name="hinhThucGiam" class="listHinhThucGiam">
-                        <option selected="selected" value="0">
+                        <option <%:((int)TempData["hinhThucGiam"]==0)?"selected":"" %> value="0">
                             <%: AdminPromotionString.DiscountValue %></option>
-                        <option value="1">
+                        <option <%:((int)TempData["hinhThucGiam"]==1)?"selected":"" %> value="1">
                             <%: AdminPromotionString.DiscountPercent %></option>
                     </select>
                 </td>

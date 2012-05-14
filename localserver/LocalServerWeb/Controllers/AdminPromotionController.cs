@@ -203,7 +203,7 @@ namespace LocalServerWeb.Controllers
 
         }
 
-        public ActionResult Edid(int? id)
+        public ActionResult Edit(int? id)
         {
             SharedCode.FillAdminMainMenu(ViewData, 3, 6);
             if (TempData["checkDic"] == null)
