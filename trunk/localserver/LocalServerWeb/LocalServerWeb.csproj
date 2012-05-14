@@ -81,6 +81,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminAreaController.cs" />
     <Compile Include="Controllers\AdminCategoryController.cs" />
+    <Compile Include="Controllers\AdminConfigController.cs" />
     <Compile Include="Controllers\AdminExchangeRateController.cs" />
     <Compile Include="Controllers\AdminFoodController.cs" />
     <Compile Include="Controllers\AdminHomeController.cs" />
@@ -242,6 +243,16 @@
     </Compile>
     <Compile Include="Resources\Views\AdminUser\AdminUserString.vi.Designer.cs">
       <DependentUpon>AdminUserString.vi.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\AdminConfig\AdminConfigString.Designer.cs">
+      <DependentUpon>AdminConfigString.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\AdminConfig\AdminConfigString.vi.Designer.cs">
+      <DependentUpon>AdminConfigString.vi.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -846,6 +857,7 @@
     <Content Include="Views\AdminCategory\Add.aspx" />
     <Content Include="Views\AdminCategory\Edit.aspx" />
     <Content Include="Views\AdminCategory\Index.aspx" />
+    <Content Include="Views\AdminConfig\Index.aspx" />
     <Content Include="Views\AdminExchangeRate\Add.aspx" />
     <Content Include="Views\AdminExchangeRate\Edit.aspx" />
     <Content Include="Views\AdminExchangeRate\Index.aspx" />
@@ -1057,6 +1069,14 @@
     <EmbeddedResource Include="Resources\Views\AdminUser\AdminUserString.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AdminUserString.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminConfig\AdminConfigString.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminConfigString.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminConfig\AdminConfigString.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminConfigString.vi.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Error\ErrorString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
