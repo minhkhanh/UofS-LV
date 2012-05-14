@@ -36,6 +36,7 @@ namespace LocalServerDAO
             foreach (var ban in dsBan)
             {
                 ban.BanChinh = null;
+                ban.Active = true;
             }
 
             //cập nhật csdl
@@ -62,8 +63,10 @@ namespace LocalServerDAO
                 //chec nhom ban da cap
                 var dsBan = ThucDonDienTu.DataContext.Bans.Where(b => b.BanChinh == banTmp);
                 if (dsBan.Count() != 0) return false;
+
                 //cap nhat gia tri ban chinh
                 banTmp.BanChinh = banChinh;
+                banTmp.Active = false;
             }
 
             ThucDonDienTu.DataContext.SubmitChanges();
