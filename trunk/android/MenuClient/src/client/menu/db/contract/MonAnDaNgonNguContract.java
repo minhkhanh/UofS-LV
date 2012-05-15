@@ -7,15 +7,15 @@ import android.provider.BaseColumns;
 public final class MonAnDaNgonNguContract implements BaseColumns {
     public static final String TABLE_NAME = "ChiTietMonAnDaNgonNgu";
 
-    public static final String COL_DISH_ID = "MaMonAn";
-    public static final String COL_LANGUAGE_ID = "MaNgonNgu";
+    public static final String COL_MA_MON = "MaMonAn";
+    public static final String COL_MA_NGON_NGU = "MaNgonNgu";
     public static final String COL_TEN_MON = "TenMonAn";
     public static final String COL_MO_TA_MON = "MoTaMonAn";
 
     public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" + _ID
-            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_DISH_ID
+            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_MA_MON
             + " INTEGER REFERENCES " + MonAnContract.TABLE_NAME + "("
-            + MonAnContract.COL_SID + ")," + COL_LANGUAGE_ID + " INTEGER REFERENCES "
+            + MonAnContract.COL_SID + ")," + COL_MA_NGON_NGU + " INTEGER REFERENCES "
             + NgonNguContract.TABLE_NAME + "(" + NgonNguContract.COL_SID + "),"
             + COL_TEN_MON + " TEXT," + COL_MO_TA_MON + " TEXT);";
 

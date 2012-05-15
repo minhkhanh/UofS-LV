@@ -17,8 +17,19 @@ public class SessionManager {
         private Integer mMaBan;
         List<ChiTietOrderDTO> mOrderItems = new ArrayList<ChiTietOrderDTO>();
 
-        protected ServiceSession(int maBan) {
+        protected ServiceSession(Integer maBan) {
             mMaBan = maBan;
+        }
+        
+        public int getOrderItemQuantity(Integer maMonAn, Integer maDonViTinh) {
+            for (int i = 0; i < mOrderItems.size(); ++i) {
+                ChiTietOrderDTO chiTiet = mOrderItems.get(i);
+                if (chiTiet.getMaMonAn() == maMonAn && chiTiet.getMaDonViTinh() == maDonViTinh) {
+                    return chiTiet.getSoLuong();
+                }
+            }
+            
+            return 0;
         }
 
         public void addOrderItem(Integer maMonAn, Integer maDonViTinh) {

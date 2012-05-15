@@ -111,7 +111,7 @@ public class MyContentProvider extends ContentProvider {
                         + MonAnDaNgonNguContract.TABLE_NAME + " ON ("
                         + MonAnContract.TABLE_NAME + "." + MonAnContract.COL_SID + " = "
                         + MonAnDaNgonNguContract.TABLE_NAME + "."
-                        + MonAnDaNgonNguContract.COL_DISH_ID + ")");
+                        + MonAnDaNgonNguContract.COL_MA_MON + ")");
                 break;
             case MATCH_NGONNGU_MACDINH:
                 queryBuilder.setTables(NgonNguContract.TABLE_NAME + ","
