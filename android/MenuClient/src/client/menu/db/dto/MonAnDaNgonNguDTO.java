@@ -1,43 +1,77 @@
 package client.menu.db.dto;
 
+import client.menu.db.contract.MonAnDaNgonNguContract;
+import android.database.Cursor;
+
 public class MonAnDaNgonNguDTO {
-	
-	int mId;
-    int mMaMonAn;
-	int mMaNgonNgu;
-	String mTenMonAn;
-	String mMoTaMonAn;
-	
-    public int getId() {
+
+    Integer mId;
+    Integer mMaMonAn;
+    Integer mMaNgonNgu;
+    String mTenMonAn;
+    String mMoTaMonAn;
+
+    public static MonAnDaNgonNguDTO extractFrom(Cursor cursor) {
+        MonAnDaNgonNguDTO obj = new MonAnDaNgonNguDTO();
+
+        int index;
+        if ((index = cursor.getColumnIndex(MonAnDaNgonNguContract._ID)) != -1) {
+            obj.mId = cursor.getInt(index);
+        }
+        if ((index = cursor.getColumnIndex(MonAnDaNgonNguContract.COL_MA_MON)) != -1) {
+            obj.mMaMonAn = cursor.getInt(index);
+        }
+        if ((index = cursor.getColumnIndex(MonAnDaNgonNguContract.COL_MA_NGON_NGU)) != -1) {
+            obj.mMaNgonNgu = cursor.getInt(index);
+        }
+        if ((index = cursor.getColumnIndex(MonAnDaNgonNguContract.COL_TEN_MON)) != -1) {
+            obj.mTenMonAn = cursor.getString(index);
+        }
+        if ((index = cursor.getColumnIndex(MonAnDaNgonNguContract.COL_MO_TA_MON)) != -1) {
+            obj.mMoTaMonAn = cursor.getString(index);
+        }
+
+        return obj;
+    }
+
+    public Integer getId() {
         return mId;
     }
-    public void setId(int id) {
+
+    public void setId(Integer id) {
         mId = id;
     }
-	public int getMaMonAn() {
-		return mMaMonAn;
-	}
-	public void setMaMonAn(int maMonAn) {
-		this.mMaMonAn = maMonAn;
-	}
-	public int getMaNgonNgu() {
-		return mMaNgonNgu;
-	}
-	public void setMaNgonNgu(int maNgonNgu) {
-		this.mMaNgonNgu = maNgonNgu;
-	}
-	public String getTenMonAn() {
-		return mTenMonAn;
-	}
-	public void setTenMonAn(String tenMonAn) {
-		this.mTenMonAn = tenMonAn;
-	}
-	public String getMoTaMonAn() {
-		return mMoTaMonAn;
-	}
-	public void setMoTaMonAn(String moTaMonAn) {
-		this.mMoTaMonAn = moTaMonAn;
-	}
-	
-	
+
+    public Integer getMaMonAn() {
+        return mMaMonAn;
+    }
+
+    public void setMaMonAn(Integer maMonAn) {
+        this.mMaMonAn = maMonAn;
+    }
+
+    public Integer getMaNgonNgu() {
+        return mMaNgonNgu;
+    }
+
+    public void setMaNgonNgu(Integer maNgonNgu) {
+        this.mMaNgonNgu = maNgonNgu;
+    }
+
+    public String getTenMonAn() {
+        return mTenMonAn;
+    }
+
+    public void setTenMonAn(String tenMonAn) {
+        this.mTenMonAn = tenMonAn;
+    }
+
+    public String getMoTaMonAn() {
+        return mMoTaMonAn;
+    }
+
+    public void setMoTaMonAn(String moTaMonAn) {
+        this.mMoTaMonAn = moTaMonAn;
+    }
+
 }

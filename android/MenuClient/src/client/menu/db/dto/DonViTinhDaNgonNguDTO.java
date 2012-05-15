@@ -24,7 +24,7 @@ public class DonViTinhDaNgonNguDTO {
             obj.mMaDonViTinh = cursor.getInt(index);
         }
         if ((index = cursor
-                .getColumnIndex(DonViTinhDaNgonNguContract.COL_TEN_DON_VI_TINH)) != -1) {
+                .getColumnIndex(DonViTinhDaNgonNguContract.COL_TEN_DON_VI)) != -1) {
             obj.mTenDonViTinh = cursor.getString(index);
         }
 

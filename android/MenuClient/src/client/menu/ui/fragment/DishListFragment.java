@@ -12,6 +12,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -31,8 +32,11 @@ import client.menu.db.contract.MonAnContract;
 import client.menu.db.contract.MonAnDaNgonNguContract;
 import client.menu.db.contract.NgonNguContract;
 import client.menu.db.dto.ChiTietOrderDTO;
+import client.menu.db.dto.DonViTinhDaNgonNguDTO;
 import client.menu.db.dto.DonViTinhMonAnDTO;
 import client.menu.db.dto.MonAnDTO;
+import client.menu.db.dto.MonAnDaNgonNguDTO;
+import client.menu.util.C;
 import client.menu.util.U;
 
 public class DishListFragment extends ListFragment {
@@ -41,18 +45,50 @@ public class DishListFragment extends ListFragment {
 
     private int mMaDanhMuc;
     private SimpleCursorAdapter mAdapter;
+    List<LoadDishUnitsAsyncTask> mDishUnitsLoadTaskList = new ArrayList<LoadDishUnitsAsyncTask>();
 
     private boolean mHaveExtendPane;
+
+    @SuppressWarnings("unused")
+    private void restoreDishUnitsLoadTaskList(Bundle savedInstanceState) {
+        mDishUnitsLoadTaskList = new ArrayList<LoadDishUnitsAsyncTask>();
+        ArrayList<Integer> savedIndices = savedInstanceState
+                .getIntegerArrayList("IndexArray");
+        if (savedIndices != null) {
+            for (int i = 0; i < savedIndices.size(); ++i) {
+                LoadDishUnitsAsyncTask task = new LoadDishUnitsAsyncTask(
+                        savedIndices.get(i));
+                task.execute();
+                mDishUnitsLoadTaskList.add(task);
+            }
+        }
+    }
+
+    private void cancelDishUnitsLoadTaskList() {
+        // ArrayList<Integer> savedIndices = new ArrayList<Integer>();
+        for (int i = 0; i < mDishUnitsLoadTaskList.size(); ++i) {
+            LoadDishUnitsAsyncTask task = mDishUnitsLoadTaskList.get(i);
+            if (task != null && task.getStatus() != AsyncTask.Status.FINISHED) {
+                // savedIndices.add(task.getIndex());
+                task.cancel(true);
+                // mDishUnitsLoadTaskList.set(i, null);
+            }
+        }
+        mDishUnitsLoadTaskList.clear();
+        // outState.putIntegerArrayList("IndexArray", savedIndices);
+    }
 
     private class LoadDishUnitsAsyncTask extends
             AsyncTask<Void, Integer, SimpleCursorAdapter> {
 
         Integer mIndex;
+
         Spinner mSpinner;
 
-        public LoadDishUnitsAsyncTask(Spinner spinner, int index) {
+        public LoadDishUnitsAsyncTask(int index) {
             mIndex = index;
-            mSpinner = spinner;
+            ViewGroup row = (ViewGroup) getListView().getChildAt(index);
+            mSpinner = (Spinner) row.findViewById(R.id.spinDishPrices);
         }
 
         @Override
@@ -74,9 +110,11 @@ public class DishListFragment extends ListFragment {
                     DonViTinhMonAnContract.TABLE_NAME + "."
                             + DonViTinhMonAnContract.COL_MA_DON_VI,
                     DonViTinhMonAnContract.COL_DON_GIA,
-                    DonViTinhDaNgonNguContract.COL_TEN_DON_VI_TINH };
+                    DonViTinhDaNgonNguContract.COL_TEN_DON_VI };
+
             String selection = DonViTinhMonAnContract.COL_MA_MON_AN + "=? and "
                     + DonViTinhDaNgonNguContract.COL_MA_NGON_NGU + "=?";
+
             String[] selArgs = new String[] {
                     maMonAn.toString(),
                     MyApplication.gSettings.getLocale().getLanguage().getMaNgonNgu()
@@ -87,10 +125,11 @@ public class DishListFragment extends ListFragment {
                     projection, selection, selArgs, null);
 
             SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(),
-                    android.R.layout.simple_spinner_item, cursor,
-                    new String[] { DonViTinhDaNgonNguContract.COL_TEN_DON_VI_TINH },
-                    new int[] { android.R.id.text1 }, 0);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    R.layout.item_dish_units_spinner, cursor, new String[] {
+                            DonViTinhDaNgonNguContract.COL_TEN_DON_VI,
+                            DonViTinhMonAnContract.COL_DON_GIA }, new int[] {
+                            R.id.textUnitName, R.id.textUnitPrice }, 0);
+            adapter.setDropDownViewResource(R.layout.item_dish_units_spinner);
 
             return adapter;
         }
@@ -105,12 +144,11 @@ public class DishListFragment extends ListFragment {
         @Override
         public void onChildViewAdded(View parent, View child) {
             if (child.getId() == R.id.itemDishList) {
-                int pos = getListView().getPositionForView(child);
-
-                Spinner spinner = (Spinner) ((ViewGroup) child)
-                        .findViewById(R.id.spinDishPrices);
-
-                new LoadDishUnitsAsyncTask(spinner, pos).execute();
+                int index = getListView().getPositionForView(child);
+                LoadDishUnitsAsyncTask task = new LoadDishUnitsAsyncTask(index);
+                task.execute();
+                mDishUnitsLoadTaskList.add(task);
+                Log.d(C.TAG, "child view added");
             }
         }
     };
@@ -142,11 +180,12 @@ public class DishListFragment extends ListFragment {
                     String[] proj = new String[] {
                             MonAnContract.TABLE_NAME + "." + MonAnContract._ID,
                             MonAnContract.TABLE_NAME + "." + MonAnContract.COL_SID,
+                            MonAnContract.COL_DIEM_DANH_GIA,
                             MonAnDaNgonNguContract.COL_TEN_MON,
                             MonAnDaNgonNguContract.COL_MO_TA_MON };
 
                     String selection = MonAnContract.COL_CATEGORY_ID + "=? and "
-                            + MonAnDaNgonNguContract.COL_LANGUAGE_ID + "=?";
+                            + MonAnDaNgonNguContract.COL_MA_NGON_NGU + "=?";
 
                     Integer sid = MyApplication.gSettings.getLocale().getLanguage()
                             .getMaNgonNgu();
@@ -182,18 +221,15 @@ public class DishListFragment extends ListFragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("mMaDanhMuc", mMaDanhMuc);
-    }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-
-        // menu.add("check");
+        cancelDishUnitsLoadTaskList();
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onActivityCreated(savedInstanceState);
+
+        // restoreDishUnitsLoadTaskList(savedInstanceState);
 
         if (savedInstanceState != null) {
             mMaDanhMuc = savedInstanceState.getInt("mMaDanhMuc");
@@ -217,23 +253,37 @@ public class DishListFragment extends ListFragment {
                 && orderPreview.getVisibility() == View.VISIBLE;
     }
 
-    private DonViTinhMonAnDTO extractDonViTinhMonAnDTO(int pos) {
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        // menu.add("check");
+    }
+
+    // @Override
+    // public void onActivityCreated(Bundle savedInstanceState) {
+    // super.onCreate(savedInstanceState);
+    //
+    //
+    // }
+
+    private DonViTinhDaNgonNguDTO extractDonViTinhDaNgonNguDTO(int pos) {
         ViewGroup row = (ViewGroup) getListView().getChildAt(pos);
         Spinner spinner = (Spinner) row.findViewById(R.id.spinDishPrices);
 
         SimpleCursorAdapter adapter = (SimpleCursorAdapter) spinner.getAdapter();
         Cursor cursor = adapter.getCursor();
         if (cursor != null && cursor.moveToPosition(pos)) {
-            return DonViTinhMonAnDTO.extractFrom(cursor);
+            return DonViTinhDaNgonNguDTO.extractFrom(cursor);
         }
 
         return null;
     }
 
-    private MonAnDTO extractMonAnDTO(int pos) {
+    private MonAnDaNgonNguDTO extractMonAnDaNgonNguDTO(int pos) {
         Cursor cursor = mAdapter.getCursor();
         if (cursor != null && cursor.moveToPosition(pos)) {
-            return MonAnDTO.extractFrom(cursor);
+            return MonAnDaNgonNguDTO.extractFrom(cursor);
         }
 
         return null;
@@ -243,35 +293,34 @@ public class DishListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
-        // MonAnDTO monAn = extractMonAnDTO(position);
-        // // DonViTinhMonAnDTO dvt = extractDonViTinhMonAnDTO(position);
-        //
-        // SessionManager sessionManager = ((MyApplication)
-        // getActivity().getApplication())
-        // .getSessionManager();
-        // ServiceSession session = sessionManager.loadCurrentSession();
-        //
-        // session.addOrderItem(maMonAn, maDonViTinh);
-        //
-        // if (mHaveExtendPane) {
-        // OrderPreviewFragment orderPreview = (OrderPreviewFragment)
-        // getFragmentManager()
-        // .findFragmentById(R.id.ExtendPaneHolder);
-        //
-        // if (orderPreview == null) {
-        // orderPreview = new OrderPreviewFragment(monAn.getMaMonAn());
-        //
-        // FragmentTransaction ft = getFragmentManager().beginTransaction();
-        // ft.replace(R.id.ExtendPaneHolder, orderPreview);
-        // ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        // ft.commit();
-        // } else {
-        // orderPreview.updateList(monAn.getMaMonAn());
-        // }
-        //
-        // // orderPreview.updateList(monAn);
-        //
-        // U.toastText(getActivity(), "item click ok");
-        // }
+//        MonAnDaNgonNguDTO monAnDaNgonNgu = extractMonAnDaNgonNguDTO(position);
+//        DonViTinhDaNgonNguDTO donViTinhDaNgonNgu = extractDonViTinhDaNgonNguDTO(position);
+//
+//        SessionManager sessionManager = ((MyApplication) getActivity().getApplication())
+//                .getSessionManager();
+//        ServiceSession session = sessionManager.loadCurrentSession();
+//
+//        session.addOrderItem(monAnDaNgonNgu.getMaMonAn(),
+//                donViTinhDaNgonNgu.getMaDonViTinh());
+//
+//        if (mHaveExtendPane) {
+//            OrderPreviewFragment orderPreview = (OrderPreviewFragment) getFragmentManager()
+//                    .findFragmentById(R.id.ExtendPaneHolder);
+//
+//            if (orderPreview == null) {
+//                orderPreview = new OrderPreviewFragment(monAn.getMaMonAn());
+//
+//                FragmentTransaction ft = getFragmentManager().beginTransaction();
+//                ft.replace(R.id.ExtendPaneHolder, orderPreview);
+//                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+//                ft.commit();
+//            } else {
+//                orderPreview.updateList(monAn.getMaMonAn());
+//            }
+//
+//            // orderPreview.updateList(monAn);
+//
+//            U.toastText(getActivity(), "item click ok");
+//        }
     }
 }

@@ -23,15 +23,6 @@ public class OrderPreviewFragment extends ListFragment {
     List<Map<String, Object>> adapterData = new ArrayList<Map<String, Object>>();
 
     public OrderPreviewFragment(int maMonAn) {
-
-//        ChiTietOrderDTO chiTietOrder = new ChiTietOrderDTO(null, null, null, 1, maMonAn,
-//                null, null);
-//        mOrder.add(chiTietOrder);
-//
-//        Map<String, Object> map = new HashMap<String, Object>();
-//        chiTietOrder.extract(map);
-//        map.put(DonViTinhMonAnContract.COL_DON_GIA, 555f);
-//        adapterData.add(map);
     }
 
     public void updateList(Integer maMonAn, Integer maDonViTinh) {
