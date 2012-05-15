@@ -617,5 +617,165 @@ namespace LocalServerWeb.Controllers
             return RedirectToAction("Edit", new { id = maMonAn });
 
         }
+
+        public ActionResult RelatedFood(int? id)
+        {
+            // Check if id OK and Food not NULL
+            if (id == null || id <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            MonAn monAn = MonAnBUS.LayMonAn(id ?? 0);
+            if (monAn == null)
+            {
+                TempData["errorNotFound"] = AdminFoodString.ErrorFoodNotFound;
+                return RedirectToAction("Index", "Error");
+            }
+
+            // Begin Related food
+            SharedCode.FillAdminMainMenu(ViewData, 3, 6);
+
+            ViewData["tenMonAn"] = LayTenMonAn(monAn.MaMonAn);
+            ViewData["listMonAn"] = LayDanhSachMonAn();
+            ViewData["listMonLienQuan"] = LayDanhSachMonLienQuan(monAn.MaMonAn);
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddRelatedFood(int maMonAn, int maMonAnLienQuan)
+        {
+            // Check if id OK and khuyenMai not NULL
+            if (maMonAn <= 0 || maMonAnLienQuan <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            MonAn monAn = MonAnBUS.LayMonAn(maMonAn);
+            MonAn monAnLienQuan = MonAnBUS.LayMonAn(maMonAnLienQuan);
+            if (monAn == null || monAnLienQuan == null)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+
+            // Begin Add related food
+            bool bCheck = true;
+            if (monAn == monAnLienQuan)
+            {
+                TempData["errorCannotAddItself"] = AdminFoodString.ErrorCannotAddItself;
+                bCheck = false;
+            }
+
+            ChiTietMonLienQuan ctMonLienQuan = ChiTietMonLienQuanBUS.LayChiTietMonLienQuan(maMonAn, maMonAnLienQuan);
+            if (ctMonLienQuan != null)
+            {
+                TempData["errorRelatedFoodExist"] = AdminFoodString.ErrorRelatedFoodExist;
+                bCheck = false;
+            }
+
+            if (bCheck)
+            {
+                ChiTietMonLienQuan ctMoi = new ChiTietMonLienQuan();
+                ctMoi.MonAn = monAn;
+                ctMoi.MonAnLienQuan = monAnLienQuan;
+
+                if (ChiTietMonLienQuanBUS.Them(ctMoi))
+                {
+                    TempData["infoAddSuccess"] = AdminFoodString.InfoAddSuccess;
+                }
+                else
+                {
+                    TempData["errorCannotAdd"] = AdminFoodString.ErrorCannotAdd;
+                }
+            }
+
+            return RedirectToAction("RelatedFood", new { id = maMonAn });
+        }
+
+        [HttpPost]
+        public ActionResult DeleteRelatedFood(int maMonAn, int maMonAnLienQuan)
+        {
+            // Check if id OK and khuyenMai not NULL
+            if (maMonAn <= 0 || maMonAnLienQuan <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            MonAn monAn = MonAnBUS.LayMonAn(maMonAn);
+            MonAn monAnLienQuan = MonAnBUS.LayMonAn(maMonAnLienQuan);
+            if (monAn == null || monAnLienQuan == null)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            // Begin delete related food
+            bool bCheck = true;
+
+            ChiTietMonLienQuan ctMonLienQuan = ChiTietMonLienQuanBUS.LayChiTietMonLienQuan(maMonAn, maMonAnLienQuan);
+            if (ctMonLienQuan == null)
+            {
+                TempData["errorRelatedFoodNotFound"] = AdminFoodString.ErrorRelatedFoodNotFound;
+                bCheck = false;
+            }
+
+            if (bCheck)
+            {
+                if (ChiTietMonLienQuanBUS.Xoa(ctMonLienQuan))
+                {
+                    TempData["infoDeleteSuccess"] = AdminFoodString.InfoDeleteSuccess;
+                }
+                else
+                {
+                    TempData["errorCannotDelete"] = AdminFoodString.ErrorCannotDelete;
+                }
+            }
+
+            return RedirectToAction("RelatedFood", new { id = maMonAn });
+        }
+
+        private List<ChiTietMonLienQuan> LayDanhSachMonLienQuan(int maMonAn)
+        {
+            int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
+            List<ChiTietMonLienQuan> listMonLienQuan = ChiTietMonLienQuanBUS.LayDanhSachChiTietMonLienQuan(maMonAn);
+            if (listMonLienQuan != null && listMonLienQuan.Count > 0)
+            {
+                foreach (ChiTietMonLienQuan ct in listMonLienQuan)
+                {
+                    ChiTietMonAnDaNgonNgu ctDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(ct.MonAn.MaMonAn, maNgonNgu);
+                    if (ctDaNgonNgu != null)
+                    {
+                        ct.MonAn.TenMonAn = ctDaNgonNgu.TenMonAn;
+                    }
+                    else
+                    {
+                        ct.MonAn.TenMonAn = SharedString.NoInformation;
+                    }
+                }
+            }
+
+            return listMonLienQuan;
+        }
+
+
+        private string LayTenMonAn(int maMonAn)
+        {
+            int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
+            ChiTietMonAnDaNgonNgu ctDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(maMonAn, maNgonNgu);
+            if (ctDaNgonNgu != null)
+            {
+                return ctDaNgonNgu.TenMonAn;
+            }
+            else
+            {
+                return SharedString.NoInformation;
+            }
+        }
     }
 }
