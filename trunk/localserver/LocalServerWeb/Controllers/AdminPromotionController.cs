@@ -379,5 +379,220 @@ namespace LocalServerWeb.Controllers
             return RedirectToAction("Add");
 
         }
+
+        public ActionResult FoodPromotion(int? id)
+        {
+            // Check if id OK and khuyenMai not NULL
+            if (id == null || id <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            KhuyenMai khuyenMai = KhuyenMaiBUS.LayKhuyenMai(id ?? 0);
+            if (khuyenMai == null)
+            {
+                TempData["errorNotFound"] = AdminPromotionString.ErrorPromotionNotFound;
+                return RedirectToAction("Index", "Error");
+            }
+
+            // Begin Food promotion
+            SharedCode.FillAdminMainMenu(ViewData, 3, 6);
+            ViewData["tenKhuyenMai"] = khuyenMai.TenKhuyenMai;
+            ViewData["listMonAn"] = LayDanhSachMonAn();
+            ViewData["listKhuyenMaiMon"] = LayDanhSachKhuyenMaiMon(khuyenMai.MaKhuyenMai);
+ 
+            return View();
+        }
+
+        public ActionResult InvoicePromotion(int? id)
+        {
+            // Check if id OK and khuyenMai not NULL
+            if (id == null || id <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            KhuyenMaiHoaDon khuyenMaiHoaDon = KhuyenMaiHoaDonBUS.LayKhuyenMaiHoaDon(id??0);
+            if (khuyenMaiHoaDon == null)
+            {
+                TempData["errorNotFound"] = AdminPromotionString.ErrorInvoicePromotionNotFound;
+                return RedirectToAction("Index", "Error");
+            }
+
+            // Begin invoice promotion
+            SharedCode.FillAdminMainMenu(ViewData, 3, 6);
+            if (TempData["checkDic"] == null)
+            {
+                //TempData.Clear();
+                TempData["checkDic"] = new Dictionary<string, string>();
+            }
+
+
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult AddFoodPromotion(int maKhuyenMai, int maMonAn)
+        {
+            // Check if id OK and khuyenMai not NULL
+            if (maKhuyenMai <=0 || maMonAn <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            KhuyenMai khuyenMai = KhuyenMaiBUS.LayKhuyenMai(maKhuyenMai);
+            MonAn monAn = MonAnBUS.LayMonAn(maMonAn);
+            if (khuyenMai == null || monAn == null)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            // Begin Add Food Promotion
+            bool bCheck = true;
+            KhuyenMaiMon khuyenMaiMon = KhuyenMaiMonBUS.LayKhuyenMaiMon(maKhuyenMai, maMonAn);
+            if (khuyenMaiMon != null)
+            {
+                TempData["errorFoodPromotionExist"] = AdminPromotionString.ErrorFoodPromotionExist;
+                bCheck = false;
+            }
+
+            if (bCheck)
+            {
+                KhuyenMaiMon kmMonMoi = new KhuyenMaiMon();
+                kmMonMoi.KhuyenMai = khuyenMai;
+                kmMonMoi.MonAn = monAn;
+                if (KhuyenMaiMonBUS.Them(kmMonMoi))
+                {
+                    TempData["infoAddSuccess"] = AdminPromotionString.InfoAddSuccess;
+                }
+                else
+                {
+                    TempData["errorCannotAdd"] = AdminPromotionString.ErrorCannotAdd;
+                }
+            }
+
+            return RedirectToAction("FoodPromotion", new { id = maKhuyenMai });
+        }
+
+        [HttpPost]
+        public ActionResult DeleteFoodPromotion(int maKhuyenMai, int maMonAn)
+        {
+            // Check if id OK and khuyenMai not NULL
+            if (maKhuyenMai <= 0 || maMonAn <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            KhuyenMai khuyenMai = KhuyenMaiBUS.LayKhuyenMai(maKhuyenMai);
+            MonAn monAn = MonAnBUS.LayMonAn(maMonAn);
+            if (khuyenMai == null || monAn == null)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            // Begin delete Food Promotion
+            bool bCheck = true;
+            KhuyenMaiMon khuyenMaiMon = KhuyenMaiMonBUS.LayKhuyenMaiMon(maKhuyenMai, maMonAn);
+            if (khuyenMaiMon == null)
+            {
+                TempData["errorFoodPromotionNotFound"] = AdminPromotionString.ErrorFoodPromotionNotFound;
+                bCheck = false;
+            }
+
+            if (bCheck)
+            {
+                if (KhuyenMaiMonBUS.Xoa(khuyenMaiMon))
+                {
+                    TempData["infoDeleteSuccess"] = AdminPromotionString.InfoDeleteSuccess;
+                }
+                else
+                {
+                    TempData["errorCannotDelete"] = AdminPromotionString.ErrorCannotDelete;
+                }
+            }
+
+            return RedirectToAction("FoodPromotion", new { id = maKhuyenMai });
+        }
+
+        [HttpPost]
+        public ActionResult ChangeInvoicePromotion(int maKhuyenMai, int? giaTri)
+        {
+            // Check if id OK and khuyenMai not NULL
+            if (maKhuyenMai <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            KhuyenMaiHoaDon khuyenMaiHoaDon = KhuyenMaiHoaDonBUS.LayKhuyenMaiHoaDon(maKhuyenMai);
+            if (khuyenMaiHoaDon == null)
+            {
+                TempData["errorNotFound"] = AdminPromotionString.ErrorInvoicePromotionNotFound;
+                return RedirectToAction("Index", "Error");
+            }
+
+            // Begin change invoice promotion
+            var checkDic = new Dictionary<string, string>();
+            TempData["giaTri"] = giaTri;
+
+            bool bCheckOk = true;
+
+            if (giaTri == null || giaTri < 0)
+            {
+                bCheckOk = false;
+                checkDic.Add("giaTri", SharedString.InputWrong);
+            }
+
+            if (bCheckOk)
+            {
+                khuyenMaiHoaDon.MucGiaApDung = giaTri??0;
+                if (KhuyenMaiHoaDonBUS.CapNhat(khuyenMaiHoaDon))
+                {
+                    TempData["infoEditSuccess"] = AdminPromotionString.InfoDeleteSuccess;
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["errorCannotEdit"] = AdminPromotionString.ErrorCannotEdit;
+                }
+            }
+
+            return RedirectToAction("InvoicePromotion", new { id = maKhuyenMai });
+            
+        }
+
+
+        private List<MonAn> LayDanhSachMonAn()
+        {
+            int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
+            return MonAnBUS.LayDanhSachMonAnTheoMaNgonNgu(maNgonNgu, SharedString.NoInformation);
+        }
+
+        private List<KhuyenMaiMon> LayDanhSachKhuyenMaiMon(int maKhuyenMai)
+        {
+            int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
+            List<KhuyenMaiMon> listKhuyenMaiMon = KhuyenMaiMonBUS.LayDanhSachKhuyenMaiMonTheoMa(maKhuyenMai);
+            foreach (KhuyenMaiMon km in listKhuyenMaiMon)
+            {
+                ChiTietMonAnDaNgonNgu ctDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(km.MonAn.MaMonAn, maNgonNgu);
+                if (ctDaNgonNgu != null)
+                {
+                    km.MonAn.TenMonAn = ctDaNgonNgu.TenMonAn;
+                }
+                else
+                {
+                    km.MonAn.TenMonAn = SharedString.NoInformation;
+                }
+            }
+
+            return listKhuyenMaiMon;
+        }
     }
 }

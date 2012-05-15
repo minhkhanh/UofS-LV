@@ -70,6 +70,15 @@ namespace LocalServerWeb.Resources.Views.AdminPromotion {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add food promotion.
+        /// </summary>
+        public static string AddFoodPromotion {
+            get {
+                return ResourceManager.GetString("AddFoodPromotion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Promotion list.
         /// </summary>
         public static string AddTitle {
@@ -214,11 +223,47 @@ namespace LocalServerWeb.Resources.Views.AdminPromotion {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Food promotion already exist.
+        /// </summary>
+        public static string ErrorFoodPromotionExist {
+            get {
+                return ResourceManager.GetString("ErrorFoodPromotionExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Food promotion not found.
+        /// </summary>
+        public static string ErrorFoodPromotionNotFound {
+            get {
+                return ResourceManager.GetString("ErrorFoodPromotionNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invoice promotion not found.
+        /// </summary>
+        public static string ErrorInvoicePromotionNotFound {
+            get {
+                return ResourceManager.GetString("ErrorInvoicePromotionNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Requested promotion not found.
         /// </summary>
         public static string ErrorPromotionNotFound {
             get {
                 return ResourceManager.GetString("ErrorPromotionNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Food name.
+        /// </summary>
+        public static string FoodName {
+            get {
+                return ResourceManager.GetString("FoodName", resourceCulture);
             }
         }
         

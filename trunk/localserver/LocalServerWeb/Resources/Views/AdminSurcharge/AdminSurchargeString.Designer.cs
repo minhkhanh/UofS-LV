@@ -70,11 +70,29 @@ namespace LocalServerWeb.Resources.Views.AdminSurcharge {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add area surcharge.
+        /// </summary>
+        public static string AddAreaSurcharge {
+            get {
+                return ResourceManager.GetString("AddAreaSurcharge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new surcharge.
         /// </summary>
         public static string AddTitle {
             get {
                 return ResourceManager.GetString("AddTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Area name.
+        /// </summary>
+        public static string AreaName {
+            get {
+                return ResourceManager.GetString("AreaName", resourceCulture);
             }
         }
         
@@ -120,6 +138,24 @@ namespace LocalServerWeb.Resources.Views.AdminSurcharge {
         public static string EndDate {
             get {
                 return ResourceManager.GetString("EndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Area surcharge alreay exist.
+        /// </summary>
+        public static string ErrorAreaSurchargeExist {
+            get {
+                return ResourceManager.GetString("ErrorAreaSurchargeExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Area surcharge not found.
+        /// </summary>
+        public static string ErrorAreaSurchargeNotFound {
+            get {
+                return ResourceManager.GetString("ErrorAreaSurchargeNotFound", resourceCulture);
             }
         }
         

@@ -120,6 +120,9 @@
   <data name="Add" xml:space="preserve">
     <value>Thêm</value>
   </data>
+  <data name="AddFoodPromotion" xml:space="preserve">
+    <value>Thêm khuyến mãi món</value>
+  </data>
   <data name="AddTitle" xml:space="preserve">
     <value>Thêm khuyến mãi mới</value>
   </data>
@@ -168,8 +171,20 @@
   <data name="ErrorEndDateAfter" xml:space="preserve">
     <value>Thời điểm kết thúc phải sau thời điểm bắt đầu</value>
   </data>
+  <data name="ErrorFoodPromotionExist" xml:space="preserve">
+    <value>Khuyến mãi món đã tồn tại</value>
+  </data>
+  <data name="ErrorFoodPromotionNotFound" xml:space="preserve">
+    <value>Khuyến mãi món không tồn tại</value>
+  </data>
+  <data name="ErrorInvoicePromotionNotFound" xml:space="preserve">
+    <value>Khuyến mãi hóa đơn không tồn tại</value>
+  </data>
   <data name="ErrorPromotionNotFound" xml:space="preserve">
     <value>Thông tin khuyến mãi được yêu cầu không tồn tại</value>
+  </data>
+  <data name="FoodName" xml:space="preserve">
+    <value>Tên món ăn</value>
   </data>
   <data name="InfoAddSuccess" xml:space="preserve">
     <value>Thêm thành công</value>
