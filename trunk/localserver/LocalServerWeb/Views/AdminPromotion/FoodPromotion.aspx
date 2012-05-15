@@ -11,28 +11,9 @@
     (<%: ViewData["tenKhuyenMai"] %>)
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
-    <script src="../../Scripts/jquery/jquery.selectbox-0.5.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('.listMonAn').selectbox({ inputClass: "listData", debug: true });
-            $('input:submit').button();
-            $('input:reset').button();
-            $('input:button').button();
-        });
-    </script>
-    <script src="../../Scripts/jquery/jquery.tooltip.js" type="text/javascript"></script>
-    <script src="../../Scripts/jquery/jquery.dimensions.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('a.info-tooltip ').tooltip({
-                track: true,
-                delay: 0,
-                fixPNG: true,
-                showURL: false,
-                showBody: " - ",
-                top: -35,
-                left: 5
-            });
         });
     </script>
 </asp:Content>
@@ -137,4 +118,5 @@
         <%   }
         %>
     </div>
+    <input type="button" value="<%: SharedString.Back %>"  onclick="window.location.href='<%: Url.Action("Index", "AdminPromotion") %>';"/>
 </asp:Content>

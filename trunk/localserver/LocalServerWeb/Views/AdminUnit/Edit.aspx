@@ -3,6 +3,8 @@
 <%@ Import Namespace="LocalServerDTO" %>
 <%@ Import Namespace="LocalServerWeb.Codes" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.AdminUnit" %>
+<%@ Import Namespace="LocalServerWeb.Resources.Views.Shared" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%: AdminUnitString.EditTitle %>
 </asp:Content>
@@ -143,6 +145,7 @@
             <!-- end list table language detail -->
         </table>
     </div>
+    <input type="button" value="<%: SharedString.Back %>"  onclick="window.location.href='<%: Url.Action("Index", "AdminUnit") %>';"/>
     <!-- end id-form  -->
     <!-- begin edit language detail. This will be call when click Edit-->
     <div id="dialog-form-edit-language" title="<%: AdminUnitString.EditLanguageDetail %>">
@@ -159,26 +162,9 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
-    <script src="../../Scripts/jquery/jquery.selectbox-0.5.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('input:button').button();
-        });
-    </script>
-    <!-- Tooltips -->
-    <script src="../../Scripts/jquery/jquery.tooltip.js" type="text/javascript"></script>
-    <script src="../../Scripts/jquery/jquery.dimensions.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('a.info-tooltip ').tooltip({
-                track: true,
-                delay: 0,
-                fixPNG: true,
-                showURL: false,
-                showBody: " - ",
-                top: -35,
-                left: 5
-            });
         });
     </script>
     <script type="text/javascript">

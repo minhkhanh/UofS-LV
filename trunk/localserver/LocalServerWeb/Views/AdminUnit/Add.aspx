@@ -10,22 +10,6 @@
     <%: AdminUnitString.AddTitle %>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
-    <!-- Tooltips -->
-    <script src="../../Scripts/jquery/jquery.tooltip.js" type="text/javascript"></script>
-    <script src="../../Scripts/jquery/jquery.dimensions.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(function () {
-            $('a.info-tooltip ').tooltip({
-                track: true,
-                delay: 0,
-                fixPNG: true,
-                showURL: false,
-                showBody: " - ",
-                top: -35,
-                left: 5
-            });
-        });
-    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <% if (TempData["errorCannotAdd"] != null)
@@ -58,8 +42,8 @@
                     <%: SharedString.Step %> 1
                 </th>
                 <td valign="top">
-                    <input type="submit" value="" class="form-submit" />
-                    <input type="reset" value="" class="form-reset" />
+                    <input type="submit" value="<%: SharedString.Add %>"/>
+                    <input type="button" value="<%: SharedString.Back %>"  onclick="window.location.href='<%: Url.Action("Index", "AdminUnit") %>';"/>
                 </td>
                 <td>
                 </td>

@@ -11,29 +11,8 @@
     (<%: ViewData["tenKhuyenMai"] %>)
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('input:submit').button();
-        $('input:reset').button();
-        $('input:button').button();
-    });
-    </script>
-    <script src="../../Scripts/jquery/jquery.tooltip.js" type="text/javascript"></script>
-    <script src="../../Scripts/jquery/jquery.dimensions.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('a.info-tooltip ').tooltip({
-                track: true,
-                delay: 0,
-                fixPNG: true,
-                showURL: false,
-                showBody: " - ",
-                top: -35,
-                left: 5
-            });
-        });
-    </script>
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <!--  Error message: Cannot edit this invoice promotion  -->
     <% if (TempData["errorCannotEdit"] != null)
@@ -78,7 +57,7 @@
                 <td valign="top">
                     <input type="submit" value="<%:SharedString.Edit %>" />
                     <input type="reset" value="<%: SharedString.Reset %>"  />
-                    <input type="button" class="pretty-button" value="<%: SharedString.Cancel %>" onclick="window.location.href='<%: Url.Action("Index", "AdminPromotion") %>';" />
+                    
                 </td>
                 <td>
                 </td>
@@ -87,4 +66,5 @@
     </div>
     <!-- end id-form  -->
     <% Html.EndForm(); %>
+    <input type="button" value="<%: SharedString.Back %>"  onclick="window.location.href='<%: Url.Action("Index", "AdminPromotion") %>';"/>
 </asp:Content>

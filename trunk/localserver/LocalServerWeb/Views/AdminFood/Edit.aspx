@@ -373,11 +373,9 @@
     <!-- end id-form  -->
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
-    <script src="../../Scripts/jquery/jquery.selectbox-0.5.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('.listDanhMuc').selectbox({ inputClass: "listDanhMuc", debug: true });
-            $('input:button').button();
             $('#add-language-food').button();
         });
     </script>
@@ -390,22 +388,6 @@
                 imageheight: 21,
                 imagewidth: 78,
                 width: 310
-            });
-        });
-    </script>
-    <!-- Tooltips -->
-    <script src="../../Scripts/jquery/jquery.tooltip.js" type="text/javascript"></script>
-    <script src="../../Scripts/jquery/jquery.dimensions.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('a.info-tooltip ').tooltip({
-                track: true,
-                delay: 0,
-                fixPNG: true,
-                showURL: false,
-                showBody: " - ",
-                top: -35,
-                left: 5
             });
         });
     </script>

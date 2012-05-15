@@ -156,6 +156,9 @@
   <data name="AreaList" xml:space="preserve">
     <value>Danh sách khu vực</value>
   </data>
+  <data name="Back" xml:space="preserve">
+    <value>Trở về</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Bỏ qua</value>
   </data>
