@@ -194,8 +194,9 @@
                     &nbsp;
                 </th>
                 <td valign="top">
-                    <input type="submit" value="" class="form-submit" />
-                    <input type="reset" value="" class="form-reset" />
+                    <input type="submit" value="<%: SharedString.Add %>"/>
+                    <input type="reset" value="<%: SharedString.Reset %>" />
+                    <input type="button" value="<%: SharedString.Back %>"  onclick="window.location.href='<%: Url.Action("Index", "AdminSurcharge") %>';"/>
                 </td>
                 <td>
                 </td>
@@ -206,27 +207,9 @@
     <% Html.EndForm(); %>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
-    <script src="../../Scripts/jquery/jquery.selectbox-0.5.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('.listHinhThucTang').selectbox({ inputClass: "listData", debug: true });
-            $('input:button').button();
-        });
-    </script>
-    <!-- Tooltips -->
-    <script src="../../Scripts/jquery/jquery.tooltip.js" type="text/javascript"></script>
-    <script src="../../Scripts/jquery/jquery.dimensions.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(function () {
-            $('a.info-tooltip ').tooltip({
-                track: true,
-                delay: 0,
-                fixPNG: true,
-                showURL: false,
-                showBody: " - ",
-                top: -35,
-                left: 5
-            });
         });
     </script>
     <!-- Date chooser -->

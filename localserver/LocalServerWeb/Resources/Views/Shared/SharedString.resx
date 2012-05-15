@@ -156,8 +156,8 @@
   <data name="AreaList" xml:space="preserve">
     <value>Area list</value>
   </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
   </data>
   <data name="Category" xml:space="preserve">
     <value>Category</value>

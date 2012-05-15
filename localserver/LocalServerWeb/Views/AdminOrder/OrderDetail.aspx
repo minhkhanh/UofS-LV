@@ -10,22 +10,6 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
     <link rel="stylesheet" href="../../Content/adminordercss/orderdetailcancelstatus.css" type="text/css" />
-    <script src="../../Scripts/jquery/jquery.selectbox-0.5.js" type="text/javascript"></script>
-    <script src="../../Scripts/jquery/jquery.tooltip.js" type="text/javascript"></script>
-    <script src="../../Scripts/jquery/jquery.dimensions.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(function () {
-            $('a.info-tooltip ').tooltip({
-                track: true,
-                delay: 0,
-                fixPNG: true,
-                showURL: false,
-                showBody: " - ",
-                top: -35,
-                left: 5
-            });
-        });
-    </script>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="PageHeadingContent" runat="server">
     <%:AdminOrderString.DetailTitle%>
@@ -112,4 +96,5 @@
         </table>
     </div>
     <%} %>
+    <input type="button" value="<%: SharedString.Back %>"  onclick="window.location.href='<%: Url.Action("Index", "AdminOrder") %>';"/>
 </asp:Content>

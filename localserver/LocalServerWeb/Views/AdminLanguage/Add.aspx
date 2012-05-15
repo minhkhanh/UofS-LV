@@ -67,8 +67,9 @@
                 &nbsp;
             </th>
             <td valign="top">
-                <input type="submit" value="" class="form-submit" />
-                <input type="reset" value="" class="form-reset" />
+                <input type="submit" value="<%: SharedString.Add %>"/>
+                <input type="reset" value="<%: SharedString.Reset %>" />
+                <input type="button" value="<%: SharedString.Back %>"  onclick="window.location.href='<%: Url.Action("Index", "AdminLanguage") %>';"/>
             </td>
             <td>
             </td>

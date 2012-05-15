@@ -36,3 +36,23 @@ $.fn.center = function () {
     this.css("left", ($(window).width() - this.width()) / 2 + $(window).scrollLeft() + "px");
     return this;
 };
+
+// Make button more beautiful
+$(document).ready(function () {
+    $('input:submit').button();
+    $('input:reset').button();
+    $('input:button').button();
+});
+
+// Tooltip
+$(document).ready(function () {
+    $('a.info-tooltip ').tooltip({
+        track: true,
+        delay: 0,
+        fixPNG: true,
+        showURL: false,
+        showBody: " - ",
+        top: -35,
+        left: 5
+    });
+});

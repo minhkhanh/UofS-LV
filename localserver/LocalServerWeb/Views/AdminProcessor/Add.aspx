@@ -10,7 +10,6 @@
     <%: AdminProcessorString.AddTitle %>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
-    <script src="../../Scripts/jquery/jquery.selectbox-0.5.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('.listTaiKhoan').selectbox({ inputClass: "styledselect_pages", debug: true });
@@ -80,8 +79,9 @@
                     &nbsp;
                 </th>
                 <td valign="top">
-                    <input type="submit" value="" class="form-submit" />
-                    <input type="reset" value="" class="form-reset" />
+                    <input type="submit" value="<%: SharedString.Add %>"/>
+                    <input type="reset" value="<%: SharedString.Reset %>" />
+                    <input type="button" value="<%: SharedString.Back %>"  onclick="window.location.href='<%: Url.Action("Index", "AdminProcessor") %>';"/>
                 </td>
                 <td>
                 </td>
