@@ -140,6 +140,7 @@
                 <td class="options-width">
                     <%:Html.ActionLink(" ", "Edit", "AdminFood", new { id = monAn.MaMonAn }, new { title = AdminFoodString.Edit, Class = "icon-6 info-tooltip" })%>
                     <%:Html.ActionLink(" ", "Delete", "AdminFood", new { id = monAn.MaMonAn }, new { title = AdminFoodString.Delete, Class = "icon-2 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "RelatedFood", "AdminFood", new { id = monAn.MaMonAn }, new { title = AdminFoodString.EditRelatedFood, Class = "icon-2 info-tooltip" })%>
                 </td>
             </tr>
             <% } %>

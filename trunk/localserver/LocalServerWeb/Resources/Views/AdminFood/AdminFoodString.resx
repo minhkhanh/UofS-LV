@@ -126,6 +126,9 @@
   <data name="AddLanguageFoodError" xml:space="preserve">
     <value>Add Language Food Error</value>
   </data>
+  <data name="AddRelatedFood" xml:space="preserve">
+    <value>Add new related food</value>
+  </data>
   <data name="AddTitle" xml:space="preserve">
     <value>Add new food</value>
   </data>
@@ -162,6 +165,9 @@
   <data name="EditLanguageFood" xml:space="preserve">
     <value>Edit language food</value>
   </data>
+  <data name="EditRelatedFood" xml:space="preserve">
+    <value>Edit related food</value>
+  </data>
   <data name="EditTitle" xml:space="preserve">
     <value>Edit food</value>
   </data>
@@ -173,6 +179,9 @@
   </data>
   <data name="ErrorCannotAdd" xml:space="preserve">
     <value>Can't add</value>
+  </data>
+  <data name="ErrorCannotAddItself" xml:space="preserve">
+    <value>Can't add itself as its related food</value>
   </data>
   <data name="ErrorCannotChangeCategory" xml:space="preserve">
     <value>Can't change category</value>
@@ -191,6 +200,12 @@
   </data>
   <data name="ErrorLanguageDetailNotFound" xml:space="preserve">
     <value>Language detail not found</value>
+  </data>
+  <data name="ErrorRelatedFoodExist" xml:space="preserve">
+    <value>Related food already exist</value>
+  </data>
+  <data name="ErrorRelatedFoodNotFound" xml:space="preserve">
+    <value>Related food not found</value>
   </data>
   <data name="ErrorUnitDetailExist" xml:space="preserve">
     <value>Unit detail already exist</value>
@@ -248,6 +263,9 @@
   </data>
   <data name="RatingTimes" xml:space="preserve">
     <value>Rating times</value>
+  </data>
+  <data name="RelatedFoodList" xml:space="preserve">
+    <value>Related food list</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>

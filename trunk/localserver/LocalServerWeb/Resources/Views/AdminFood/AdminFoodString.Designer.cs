@@ -88,6 +88,15 @@ namespace LocalServerWeb.Resources.Views.AdminFood {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new related food.
+        /// </summary>
+        public static string AddRelatedFood {
+            get {
+                return ResourceManager.GetString("AddRelatedFood", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new food.
         /// </summary>
         public static string AddTitle {
@@ -196,6 +205,15 @@ namespace LocalServerWeb.Resources.Views.AdminFood {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit related food.
+        /// </summary>
+        public static string EditRelatedFood {
+            get {
+                return ResourceManager.GetString("EditRelatedFood", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit food.
         /// </summary>
         public static string EditTitle {
@@ -228,6 +246,15 @@ namespace LocalServerWeb.Resources.Views.AdminFood {
         public static string ErrorCannotAdd {
             get {
                 return ResourceManager.GetString("ErrorCannotAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t add itself as its related food.
+        /// </summary>
+        public static string ErrorCannotAddItself {
+            get {
+                return ResourceManager.GetString("ErrorCannotAddItself", resourceCulture);
             }
         }
         
@@ -282,6 +309,24 @@ namespace LocalServerWeb.Resources.Views.AdminFood {
         public static string ErrorLanguageDetailNotFound {
             get {
                 return ResourceManager.GetString("ErrorLanguageDetailNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Related food already exist.
+        /// </summary>
+        public static string ErrorRelatedFoodExist {
+            get {
+                return ResourceManager.GetString("ErrorRelatedFoodExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Related food not found.
+        /// </summary>
+        public static string ErrorRelatedFoodNotFound {
+            get {
+                return ResourceManager.GetString("ErrorRelatedFoodNotFound", resourceCulture);
             }
         }
         
@@ -453,6 +498,15 @@ namespace LocalServerWeb.Resources.Views.AdminFood {
         public static string RatingTimes {
             get {
                 return ResourceManager.GetString("RatingTimes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Related food list.
+        /// </summary>
+        public static string RelatedFoodList {
+            get {
+                return ResourceManager.GetString("RelatedFoodList", resourceCulture);
             }
         }
         
