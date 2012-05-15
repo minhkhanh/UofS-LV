@@ -30,6 +30,7 @@ namespace LocalServerDAO
             var temp = ThucDonDienTu.DataContext.Bans.Where(b => b.MaBan == maBan);
             if (temp.Count() == 0) return false;
             Ban banChinh = temp.First();
+            banChinh.Active = true;
 
             //lấy danh sách các bàn trong nhóm
             var dsBan = ThucDonDienTu.DataContext.Bans.Where(b => b.BanChinh == banChinh);
@@ -51,6 +52,8 @@ namespace LocalServerDAO
             if (temp.Count() == 0) return false;
             Ban banChinh = temp.First();
             if (banChinh.BanChinh != null) return false;
+
+            banChinh.Active = false;
 
             //lay cac doi tuong ban phu
             foreach (var ban in request.MaBanPhuList)
