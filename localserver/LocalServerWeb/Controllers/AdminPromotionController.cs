@@ -562,7 +562,7 @@ namespace LocalServerWeb.Controllers
                 khuyenMaiHoaDon.MucGiaApDung = giaTri??0;
                 if (KhuyenMaiHoaDonBUS.CapNhat(khuyenMaiHoaDon))
                 {
-                    TempData["infoEditSuccess"] = AdminPromotionString.InfoDeleteSuccess;
+                    TempData["infoEditSuccess"] = AdminPromotionString.InfoEditSuccess;
                     return RedirectToAction("Index");
                 }
                 else
@@ -571,6 +571,7 @@ namespace LocalServerWeb.Controllers
                 }
             }
 
+            TempData["checkDic"] = checkDic;
             return RedirectToAction("InvoicePromotion", new { id = maKhuyenMai });
             
         }
