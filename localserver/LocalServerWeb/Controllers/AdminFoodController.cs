@@ -133,7 +133,7 @@ namespace LocalServerWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditPrice(int maMonAn, int maDonViTinh, int gia)
+        public ActionResult EditPrice(int maMonAn, int maDonViTinh, int? gia)
         {
             if (maMonAn <= 0 || maDonViTinh <= 0)
             {
@@ -142,14 +142,14 @@ namespace LocalServerWeb.Controllers
             }
 
             MonAn monAn = MonAnBUS.LayMonAn(maMonAn);
-            if (monAn == null || gia <= 0) 
+            if (monAn == null || gia == null || gia <= 0) 
                 return RedirectToAction("Edit", new { id = maMonAn });
 
             var chiTietMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayChiTietMonAnDonViTinh(monAn.MaMonAn, maDonViTinh);
             if (chiTietMonAnDonViTinh == null) 
                 return RedirectToAction("Edit", new { id = maMonAn });
 
-            chiTietMonAnDonViTinh.DonGia = gia;
+            chiTietMonAnDonViTinh.DonGia = gia??0;
             if (ChiTietMonAnDonViTinhBUS.CapNhat(chiTietMonAnDonViTinh))
             {
                 TempData["infoEditSuccess"] = AdminFoodString.InfoEditSuccess;
@@ -234,7 +234,7 @@ namespace LocalServerWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddUnitPrice(int maDonViTinh, int maMonAn, int price_new)
+        public ActionResult AddUnitPrice(int maDonViTinh, int maMonAn, int? price_new)
         {
             if (maMonAn <= 0 || maDonViTinh <= 0)
             {
@@ -250,7 +250,7 @@ namespace LocalServerWeb.Controllers
                 return RedirectToAction("Index", "Error");
             }
 
-            if(price_new <= 0)
+            if(price_new == null || price_new <= 0)
             {
                 return RedirectToAction("Edit", new { id = maMonAn });
             }
@@ -266,7 +266,7 @@ namespace LocalServerWeb.Controllers
             var chiTietMonAnDonViTinh = new ChiTietMonAnDonViTinh();
             chiTietMonAnDonViTinh.DonViTinh = donViTinh;
             chiTietMonAnDonViTinh.MonAn = monAn;
-            chiTietMonAnDonViTinh.DonGia = price_new;
+            chiTietMonAnDonViTinh.DonGia = price_new??0;
 
             if (ChiTietMonAnDonViTinhBUS.ThemMoi(chiTietMonAnDonViTinh))
             {
