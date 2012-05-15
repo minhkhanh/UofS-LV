@@ -180,9 +180,15 @@ namespace LocalServerWeb.Controllers
                         khuyenMai.TiLeGiam = giaTri??0;
                     }
 
-                    // Luon luon tao them Khuyen Mai Hoa Don voi gia tri ap dung = 0
+                    
                     if (KhuyenMaiBUS.Them(khuyenMai))
                     {
+                        // Luon luon tao them Khuyen Mai Hoa Don voi Muc Gia ap dung = 0
+                        KhuyenMaiHoaDon kmHoaDon = new KhuyenMaiHoaDon();
+                        kmHoaDon.KhuyenMai = khuyenMai;
+                        kmHoaDon.MucGiaApDung = 0;
+                        KhuyenMaiHoaDonBUS.Them(kmHoaDon);
+
                         TempData["infoAddSuccess"] = AdminPromotionString.InfoAddSuccess;
                         return RedirectToAction("Index", "AdminPromotion");
                     }
@@ -428,7 +434,8 @@ namespace LocalServerWeb.Controllers
                 //TempData.Clear();
                 TempData["checkDic"] = new Dictionary<string, string>();
             }
-
+            TempData["giaTri"] = khuyenMaiHoaDon.MucGiaApDung;
+            ViewData["tenKhuyenMai"] = khuyenMaiHoaDon.KhuyenMai.TenKhuyenMai;
 
             return View();
         }

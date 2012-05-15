@@ -51,7 +51,7 @@ namespace LocalServerWeb
         /// </summary>
         /// <param name="maBan">Mã bàn cha đại diện cho nhóm bàn</param>
         /// <returns>Tách thành công hoặc thất bại.</returns>
-        [WebInvoke(Method = "GET", UriTemplate = "tachBan?maBan={maBan}")]
+        [WebInvoke(Method = "POST", UriTemplate = "tachBan")]
         [OperationContract]
         bool TachBan(int maBan);
 

@@ -349,6 +349,15 @@ namespace LocalServerWeb.Resources.Views.AdminPromotion {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to For invoice total.
+        /// </summary>
+        public static string Threshold {
+            get {
+                return ResourceManager.GetString("Threshold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Promotion list.
         /// </summary>
         public static string Title {
