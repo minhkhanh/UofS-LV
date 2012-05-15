@@ -64,6 +64,8 @@ namespace LocalServerDAO
                 ct._maBoPhanCheBien = _chiTietOrder._maBoPhanCheBien;
                 ct._maMonAn = _chiTietOrder._maMonAn;
                 ct._maOrder = _chiTietOrder._maOrder;
+                ct._maDonViTinh = _chiTietOrder._maDonViTinh;
+
                 ct.GhiChu = _chiTietOrder.GhiChu;
                 ct.TinhTrang = _chiTietOrder.TinhTrang;
                 ct.SoLuong = _chiTietOrder.SoLuong;

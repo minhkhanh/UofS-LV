@@ -64,6 +64,9 @@ namespace LocalServerDAO
                 ct._maHoaDon = _chiTietHoaDon._maHoaDon;
                 ct._maKhuyenMai = _chiTietHoaDon._maKhuyenMai;
                 ct._maMonAn = _chiTietHoaDon._maMonAn;
+                ct._maDonViTinh = _chiTietHoaDon._maDonViTinh;
+
+
                 ct.DonGiaLuuTru = _chiTietHoaDon.DonGiaLuuTru;
                 ct.GiaTriKhuyenMaiLuuTru = _chiTietHoaDon.GiaTriKhuyenMaiLuuTru;
                 ct.SoLuong = _chiTietHoaDon.SoLuong;

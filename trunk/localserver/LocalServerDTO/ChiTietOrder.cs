@@ -62,7 +62,7 @@ namespace LocalServerDTO
 
         [DataMember(Name = "MaDonViTinh")]
         [Column(Name = "MaDonViTinh")]
-        private int? _maDonViTinh;
+        public int? _maDonViTinh;
 
         private EntityRef<DonViTinh> _donViTinh = new EntityRef<DonViTinh>();
         [Association(Name = "DonViTinh_ChiTietOrder_FK1", IsForeignKey = true, Storage = "_donViTinh", ThisKey = "_maDonViTinh")]
