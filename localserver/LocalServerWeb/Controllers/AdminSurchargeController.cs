@@ -379,5 +379,118 @@ namespace LocalServerWeb.Controllers
             return RedirectToAction("Add");
 
         }
+
+        public ActionResult AreaSurcharge(int? id)
+        {
+            // Check if id OK and khuyenMai not NULL
+            if (id == null || id <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            PhuThu phuThu = PhuThuBUS.LayPhuThu(id ?? 0);
+            if (phuThu == null)
+            {
+                TempData["errorNotFound"] = AdminSurchargeString.ErrorSurchargeNotFound;
+                return RedirectToAction("Index", "Error");
+            }
+
+            // Begin Area promotion
+            SharedCode.FillAdminMainMenu(ViewData, 3, 6);
+            ViewData["tenPhuThu"] = phuThu.TenPhuThu;
+            ViewData["listKhuVuc"] = KhuVucBUS.LayDanhSachKhuVuc();
+            ViewData["listPhuThuKhuVuc"] = PhuThuKhuVucBUS.LayDanhSachPhuThuKhuVucTheoMa(phuThu.MaPhuThu);
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddAreaSurcharge(int maPhuThu, int maKhuVuc)
+        {
+            // Check if id OK and phuThu not NULL
+            if (maPhuThu <= 0 || maKhuVuc <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            PhuThu phuThu = PhuThuBUS.LayPhuThu(maPhuThu);
+            KhuVuc khuVuc = KhuVucBUS.LayKhuVuc(maKhuVuc);
+            if (phuThu == null || khuVuc == null)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            // Begin Add Area Surcharge
+            bool bCheck = true;
+            PhuThuKhuVuc phuThuKhuVuc = PhuThuKhuVucBUS.LayPhuThuKhuVuc(maPhuThu, maKhuVuc);
+            if (phuThuKhuVuc != null)
+            {
+                TempData["errorAreaSurchargeExist"] = AdminSurchargeString.ErrorAreaSurchargeExist;
+                bCheck = false;
+            }
+
+            if (bCheck)
+            {
+                PhuThuKhuVuc ptKhuVucMoi = new PhuThuKhuVuc();
+                ptKhuVucMoi.PhuThu = phuThu;
+                ptKhuVucMoi.KhuVuc = khuVuc;
+                if (PhuThuKhuVucBUS.Them(ptKhuVucMoi))
+                {
+                    TempData["infoAddSuccess"] = AdminSurchargeString.InfoAddSuccess;
+                }
+                else
+                {
+                    TempData["errorCannotAdd"] = AdminSurchargeString.ErrorCannotAdd;
+                }
+            }
+
+            return RedirectToAction("AreaSurcharge", new { id = maPhuThu });
+        }
+
+        [HttpPost]
+        public ActionResult DeleteAreaSurcharge(int maPhuThu, int maKhuVuc)
+        {
+            // Check if id OK and phuThu not NULL
+            if (maPhuThu <= 0 || maKhuVuc <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            PhuThu phuThu = PhuThuBUS.LayPhuThu(maPhuThu);
+            KhuVuc khuVuc = KhuVucBUS.LayKhuVuc(maKhuVuc);
+            if (phuThu == null || khuVuc == null)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            // Begin Delete Area Surcharge
+            bool bCheck = true;
+            PhuThuKhuVuc phuThuKhuVuc = PhuThuKhuVucBUS.LayPhuThuKhuVuc(maPhuThu, maKhuVuc);
+            if (phuThuKhuVuc == null)
+            {
+                TempData["errorAreaSurchargeNotFound"] = AdminSurchargeString.ErrorAreaSurchargeNotFound;
+                bCheck = false;
+            }
+
+            if (bCheck)
+            {
+                if (PhuThuKhuVucBUS.Xoa(phuThuKhuVuc))
+                {
+                    TempData["infoDeleteSuccess"] = AdminSurchargeString.InfoDeleteSuccess;
+                }
+                else
+                {
+                    TempData["errorCannotDelete"] = AdminSurchargeString.ErrorCannotDelete;
+                }
+            }
+
+            return RedirectToAction("AreaSurcharge", new { id = maPhuThu });
+        }
+
     }
 }

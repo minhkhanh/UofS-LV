@@ -120,6 +120,9 @@
   <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="AddFoodPromotion" xml:space="preserve">
+    <value>Add food promotion</value>
+  </data>
   <data name="AddTitle" xml:space="preserve">
     <value>Promotion list</value>
   </data>
@@ -168,8 +171,20 @@
   <data name="ErrorEndDateAfter" xml:space="preserve">
     <value>End date must be after start date</value>
   </data>
+  <data name="ErrorFoodPromotionExist" xml:space="preserve">
+    <value>Food promotion already exist</value>
+  </data>
+  <data name="ErrorFoodPromotionNotFound" xml:space="preserve">
+    <value>Food promotion not found</value>
+  </data>
+  <data name="ErrorInvoicePromotionNotFound" xml:space="preserve">
+    <value>Invoice promotion not found</value>
+  </data>
   <data name="ErrorPromotionNotFound" xml:space="preserve">
     <value>Requested promotion not found</value>
+  </data>
+  <data name="FoodName" xml:space="preserve">
+    <value>Food name</value>
   </data>
   <data name="InfoAddSuccess" xml:space="preserve">
     <value>Delete successfully</value>
