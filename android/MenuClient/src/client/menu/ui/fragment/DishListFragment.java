@@ -7,6 +7,7 @@ import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.AsyncTaskLoader;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
@@ -121,8 +122,8 @@ public class DishListFragment extends ListFragment {
 
             String[] selArgs = new String[] {
                     maMonAn.toString(),
-                    MyApplication.gSettings.getLocale().getLanguage().getMaNgonNgu()
-                            .toString() };
+                    MyApplication.getSettings(getActivity()).getLocale().getLanguage()
+                            .getMaNgonNgu().toString() };
 
             Cursor cursor = getActivity().getContentResolver().query(
                     DonViTinhMonAnContract.URI_DONVITINHMONAN_INNER_DANGONNGU,
@@ -163,7 +164,14 @@ public class DishListFragment extends ListFragment {
         public void onLoaderReset(Loader<Cursor> loader) {
             switch (loader.getId()) {
                 case LOADER_ID_DISH_LIST:
+                    // Cursor c = mListAdapter.getCursor();
                     mListAdapter.swapCursor(null);
+                    // Cursor c = ((SimpleCursorAdapter)
+                    // getListAdapter()).getCursor();
+                    // c = mListAdapter.getCursor();
+
+                    // Log.d(C.TAG, "onLoaderReset : id = " +
+                    // LOADER_ID_DISH_LIST);
                     break;
             }
         }
@@ -192,8 +200,8 @@ public class DishListFragment extends ListFragment {
                     String selection = MonAnContract.COL_MA_DANH_MUC + "=? and "
                             + MonAnDaNgonNguContract.COL_MA_NGON_NGU + "=?";
 
-                    Integer sid = MyApplication.gSettings.getLocale().getLanguage()
-                            .getMaNgonNgu();
+                    Integer sid = MyApplication.getSettings(getActivity()).getLocale()
+                            .getLanguage().getMaNgonNgu();
 
                     CursorLoader loader = new CursorLoader(getActivity(),
                             MonAnContract.URI_MONAN_INNER_DANGONNGU, proj, selection,
@@ -249,6 +257,8 @@ public class DishListFragment extends ListFragment {
                 null, from, to, 0);
 
         setListAdapter(mListAdapter);
+        // setListShown(false);
+
         getListView().setOnHierarchyChangeListener(mOnListItemChange);
 
         getLoaderManager().initLoader(LOADER_ID_DISH_LIST, null, mLoaderCallbacks);
@@ -258,18 +268,19 @@ public class DishListFragment extends ListFragment {
                 && orderPreview.getVisibility() == View.VISIBLE;
     }
 
-//    private DonViTinhMonAnDTO extractDonViTinhMonAnDTO(int pos) {
-//        ViewGroup row = (ViewGroup) getListView().getChildAt(pos);
-//        Spinner spinner = (Spinner) row.findViewById(R.id.spinDishPrices);
-//
-//        SimpleCursorAdapter adapter = (SimpleCursorAdapter) spinner.getAdapter();
-//        Cursor cursor = adapter.getCursor();
-//        if (cursor != null && cursor.moveToPosition(spinner.getSelectedItemPosition())) {
-//            return DonViTinhMonAnDTO.extractFrom(cursor);
-//        }
-//
-//        return null;
-//    }
+    // private DonViTinhMonAnDTO extractDonViTinhMonAnDTO(int pos) {
+    // ViewGroup row = (ViewGroup) getListView().getChildAt(pos);
+    // Spinner spinner = (Spinner) row.findViewById(R.id.spinDishPrices);
+    //
+    // SimpleCursorAdapter adapter = (SimpleCursorAdapter) spinner.getAdapter();
+    // Cursor cursor = adapter.getCursor();
+    // if (cursor != null &&
+    // cursor.moveToPosition(spinner.getSelectedItemPosition())) {
+    // return DonViTinhMonAnDTO.extractFrom(cursor);
+    // }
+    //
+    // return null;
+    // }
 
     private DonViTinhDaNgonNguDTO extractDonViTinhDaNgonNguDTO(int pos) {
         ViewGroup row = (ViewGroup) getListView().getChildAt(pos);
@@ -300,8 +311,7 @@ public class DishListFragment extends ListFragment {
         MonAnDaNgonNguDTO monAnDaNgonNgu = extractMonAnDaNgonNguDTO(position);
         DonViTinhDaNgonNguDTO donViTinhDaNgonNgu = extractDonViTinhDaNgonNguDTO(position);
 
-        SessionManager sessionManager = ((MyApplication) getActivity().getApplication())
-                .getSessionManager();
+        SessionManager sessionManager = MyApplication.getSessionManager(getActivity());
         ServiceOrder order = sessionManager.loadCurrentSession().getOrder();
 
         order.addItem(monAnDaNgonNgu.getMaMonAn(), donViTinhDaNgonNgu.getMaDonViTinh());

@@ -14,8 +14,8 @@ public final class NgonNguContract implements BaseColumns {
     public static final String COL_KI_HIEU = "KiHieu";
 
     public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" + _ID
-            + " INT PRIMARY KEY AUTOINCREMENT, " + COL_MA_NGON_NGU
-            + " INT NOT NULL UNIQUE, " + COL_TEN_NGON_NGU + " TEXT, " + COL_KI_HIEU
+            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_MA_NGON_NGU
+            + " INTEGER NOT NULL UNIQUE, " + COL_TEN_NGON_NGU + " TEXT, " + COL_KI_HIEU
             + " TEXT);";
 
     public static final String PATH_NGONNGU_MACDINH = "01";

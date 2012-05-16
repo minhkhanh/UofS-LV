@@ -11,8 +11,8 @@ public final class DanhMucContract implements BaseColumns {
     public static final String COL_MA_DANH_MUC_CHA = "MaDanhMucCha";
 
     public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" + _ID
-            + " INT PRIMARY KEY AUTOINCREMENT, " + COL_MA_DANH_MUC
-            + " INT NOT NULL UNIQUE, " + COL_MA_DANH_MUC_CHA + " INT REFERENCES "
+            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_MA_DANH_MUC
+            + " INTEGER NOT NULL UNIQUE, " + COL_MA_DANH_MUC_CHA + " INTEGER REFERENCES "
             + TABLE_NAME + " (" + COL_MA_DANH_MUC + ")" + ");";
 
     public static final String PATH_DANHMUC_INNER_DANGONNGU = "01";

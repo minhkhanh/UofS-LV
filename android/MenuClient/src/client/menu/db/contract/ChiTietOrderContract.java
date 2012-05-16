@@ -17,11 +17,11 @@ public class ChiTietOrderContract implements BaseColumns {
     public static final String COL_MA_DON_VI_TINH = "MaDonViTinh";
 
     public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" + _ID
-            + " INT PRIMARY KEY AUTOINCREMENT," + COL_SID + " INT NOT NULL UNIQUE,"
-            + COL_MA_ORDER + " INT," + COL_SO_LUONG + " INT," + COL_GHI_CHU + " TEXT,"
-            + COL_MA_BO_PHAN_CHE_BIEN + " INT," + COL_TINH_TRANG
-            + " INT NOT NULL DEFAULT 0," + COL_MA_MON_AN + " INT," + COL_MA_DON_VI_TINH
-            + " INT," + "FOREIGN KEY (" + COL_MA_MON_AN + "," + COL_MA_DON_VI_TINH
+            + " INTEGER PRIMARY KEY AUTOINCREMENT," + COL_SID + " INTEGER NOT NULL UNIQUE,"
+            + COL_MA_ORDER + " INTEGER," + COL_SO_LUONG + " INTEGER," + COL_GHI_CHU + " TEXT,"
+            + COL_MA_BO_PHAN_CHE_BIEN + " INTEGER," + COL_TINH_TRANG
+            + " INTEGER NOT NULL DEFAULT 0," + COL_MA_MON_AN + " INTEGER," + COL_MA_DON_VI_TINH
+            + " INTEGER," + "FOREIGN KEY (" + COL_MA_MON_AN + "," + COL_MA_DON_VI_TINH
             + ") REFERENCES " + DonViTinhMonAnContract.TABLE_NAME + "("
             + DonViTinhMonAnContract.COL_MA_MON_AN + ","
             + DonViTinhMonAnContract.COL_MA_DON_VI + "));";

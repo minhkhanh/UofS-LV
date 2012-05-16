@@ -117,12 +117,13 @@ public class MyContentProvider extends ContentProvider {
                 queryBuilder.setTables(NgonNguContract.TABLE_NAME + ","
                         + ThamSoContract.TABLE_NAME);
                 queryBuilder.appendWhere(NgonNguContract.COL_MA_NGON_NGU + " = "
-                        + ThamSoContract.COL_VALUE + " and " + ThamSoContract.COL_MA_THAM_SO
-                        + "=" + ThamSoContract.SID_NGONNGU_MACDINH);
+                        + ThamSoContract.COL_VALUE + " and " + ThamSoContract.COL_PARAM_NAME
+                        + "=" + ThamSoContract.SID_MA_NGONNGU_MACDINH);
+                
                 break;
             case MATCH_THAMSO_ROW:
                 queryBuilder.setTables(ThamSoContract.TABLE_NAME);
-                queryBuilder.appendWhere(ThamSoContract.COL_MA_THAM_SO + "="
+                queryBuilder.appendWhere(ThamSoContract.COL_PARAM_NAME + "="
                         + uri.getLastPathSegment());
                 break;
             case MATCH_DANHMUC_INNER_DANGONNGU:

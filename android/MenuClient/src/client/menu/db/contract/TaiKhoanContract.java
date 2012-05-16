@@ -19,11 +19,11 @@ public class TaiKhoanContract implements BaseColumns {
     public static final String COL_MA_NHOM = "MaNhomTaiKhoan";
 
     public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" + _ID
-            + " INT PRIMARY KEY AUTOINCREMENT," + COL_MA_TAI_KHOAN
-            + " INT NOT NULL UNIQUE," + COL_TEN_TAI_KHOAN + " TEXT," + COL_MAT_KHAU
+            + " INTEGER PRIMARY KEY AUTOINCREMENT," + COL_MA_TAI_KHOAN
+            + " INTEGER NOT NULL UNIQUE," + COL_TEN_TAI_KHOAN + " TEXT," + COL_MAT_KHAU
             + " TEXT," + COL_HO_TEN + " TEXT," + COL_NGAY_SINH + " DATE," + COL_GIOI_TINH
-            + " INT," + COL_CMND + " TEXT," + COL_AVATAR + " TEXT," + COL_ACTIVE
-            + " INT," + COL_MA_NHOM + " INT REFERENCES "
+            + " INTEGER," + COL_CMND + " TEXT," + COL_AVATAR + " TEXT," + COL_ACTIVE
+            + " INTEGER," + COL_MA_NHOM + " INTEGER REFERENCES "
             + NhomTaiKhoanContract.TABLE_NAME + "(" + NhomTaiKhoanContract.COL_SID
             + "));";
 

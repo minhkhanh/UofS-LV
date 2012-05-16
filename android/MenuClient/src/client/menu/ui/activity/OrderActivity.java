@@ -6,8 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import client.menu.R;
+import client.menu.ui.view.OrderItemView;
 import client.menu.util.U;
 import android.app.Activity;
+import android.app.ListActivity;
+import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Loader;
+import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,58 +32,51 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-public class OrderActivity extends Activity {
-    ListView mListOrder;
-    List<Map<String, Object>> mListData = new ArrayList<Map<String, Object>>();
-    SimpleAdapter mListAdapter;
+public class OrderActivity extends ListActivity {
+//    ListView mListOrder;
+    private List<Map<String, Object>> mListData = new ArrayList<Map<String, Object>>();
+    private SimpleAdapter mListAdapter;
+    
+    private class LoadDishAsyncTask extends AsyncTask<Void, Integer, Cursor> {
+
+        @Override
+        protected Cursor doInBackground(Void... params) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+        
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_order);
-
-        mListOrder = (ListView) findViewById(R.id.listView1);
-
-        mListData = new ArrayList<Map<String, Object>>();
-        Map<String, Object> map = new Hashtable<String, Object>();
-        map.put("0", 0);
-        map.put("1", 1);
-        map.put("2", 2);
-        mListData.add(map);
-        mListData.add(map);
-
-        mListAdapter = new SimpleAdapter(this, mListData, R.layout.item_order,
-                new String[] { "0" }, new int[] { R.id.editQuantity });
-
-        mListOrder.setAdapter(mListAdapter);
-
     }
 
     public void onChildClick(View v) {
-        if (v.getId() == R.id.btnIncrease) {
-            ViewGroup group = (ViewGroup) v.getParent();
-            EditText editQuantity = (EditText) group.findViewById(R.id.editQuantity);
-            String text = editQuantity.getText().toString();
-            Integer value = Integer.valueOf(text) + 1;
-            if (value > 99) {
-                value = 0;
-            }
-            editQuantity.setText(value.toString());
-            // U.toastText(this, text);
-        } else if (v.getId() == R.id.btnDecrease) {
-            ViewGroup group = (ViewGroup) v.getParent();
-            EditText editQuantity = (EditText) group.findViewById(R.id.editQuantity);
-            String text = editQuantity.getText().toString();
-            Integer value = Integer.valueOf(text) - 1;
-            if (value < 0) {
-                value = 99;
-            }
-            editQuantity.setText(value.toString());
-        } else if (v.getId() == R.id.btnRemove) {
-            ViewGroup group = (ViewGroup) v.getParent();
-            int pos = mListOrder.getPositionForView(group);
-            mListData.remove(pos);
-            mListAdapter.notifyDataSetChanged();
-        }
+//        if (v.getId() == R.id.btnIncrease) {
+//            ViewGroup group = (ViewGroup) v.getParent();
+//            EditText editQuantity = (EditText) group.findViewById(R.id.editQuantity);
+//            String text = editQuantity.getText().toString();
+//            Integer value = Integer.valueOf(text) + 1;
+//            if (value > 99) {
+//                value = 0;
+//            }
+//            editQuantity.setText(value.toString());
+//            // U.toastText(this, text);
+//        } else if (v.getId() == R.id.btnDecrease) {
+//            ViewGroup group = (ViewGroup) v.getParent();
+//            EditText editQuantity = (EditText) group.findViewById(R.id.editQuantity);
+//            String text = editQuantity.getText().toString();
+//            Integer value = Integer.valueOf(text) - 1;
+//            if (value < 0) {
+//                value = 99;
+//            }
+//            editQuantity.setText(value.toString());
+//        } else if (v.getId() == R.id.btnRemove) {
+//            ViewGroup group = (ViewGroup) v.getParent();
+//            int pos = mListOrder.getPositionForView(group);
+//            mListData.remove(pos);
+//            mListAdapter.notifyDataSetChanged();
+//        }
     }
 }

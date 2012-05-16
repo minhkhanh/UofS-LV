@@ -12,10 +12,10 @@ public final class DonViTinhDaNgonNguContract implements BaseColumns {
     public static final String COL_TEN_DON_VI = "TenDonViTinh";
 
     public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" + _ID
-            + " INT PRIMARY KEY AUTOINCREMENT, " + COL_MA_NGON_NGU
-            + " INT NOT NULL REFERENCES " + NgonNguContract.TABLE_NAME + "("
+            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_MA_NGON_NGU
+            + " INTEGER NOT NULL REFERENCES " + NgonNguContract.TABLE_NAME + "("
             + NgonNguContract.COL_MA_NGON_NGU + ")," + COL_MA_DON_VI
-            + " INT NOT NULL REFERENCES " + DonViTinhContract.TABLE_NAME + "("
+            + " INTEGER NOT NULL REFERENCES " + DonViTinhContract.TABLE_NAME + "("
             + DonViTinhContract.COL_MA_DON_VI_TINH + ")," + COL_TEN_DON_VI + " TEXT,"
             + "UNIQUE (" + COL_MA_DON_VI + "," + COL_MA_NGON_NGU + "));";
 

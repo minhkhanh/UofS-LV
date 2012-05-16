@@ -19,14 +19,14 @@ public final class MonAnContract implements BaseColumns {
     public static final String COL_NGUNG_BAN = "NgungBan";
 
     public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" + _ID
-            + " INT PRIMARY KEY AUTOINCREMENT, " + COL_MA_MON_AN
-            + " INT NOT NULL UNIQUE, " + COL_HINH_ANH + " TEXT, " + COL_DIEM_DANH_GIA
+            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_MA_MON_AN
+            + " INTEGER NOT NULL UNIQUE, " + COL_HINH_ANH + " TEXT, " + COL_DIEM_DANH_GIA
             + " REAL NOT NULL DEFAULT (0), " + COL_SO_LUOT_RATE
-            + " INT NOT NULL DEFAULT (0), " + COL_DEFAULT_UNIT_ID + " INT REFERENCES "
+            + " INTEGER NOT NULL DEFAULT (0), " + COL_DEFAULT_UNIT_ID + " INTEGER REFERENCES "
             + DonViTinhContract.TABLE_NAME + " (" + DonViTinhContract.COL_MA_DON_VI_TINH
-            + ")," + COL_MA_DANH_MUC + " INT REFERENCES " + DanhMucContract.TABLE_NAME
+            + ")," + COL_MA_DANH_MUC + " INTEGER REFERENCES " + DanhMucContract.TABLE_NAME
             + " (" + DanhMucContract.COL_MA_DANH_MUC + ")," + COL_NGUNG_BAN
-            + " INT NOT NULL DEFAULT (0));";
+            + " INTEGER NOT NULL DEFAULT (0));";
 
     public static final String PATH_MONAN_INNER_DANGONNGU = "01";
 

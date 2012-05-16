@@ -10,8 +10,8 @@ public final class DonViTinhContract implements BaseColumns {
     public static final String COL_MA_DON_VI_TINH = "MaDonViTinh";
 
     public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" + _ID
-            + " INT PRIMARY KEY AUTOINCREMENT, " + COL_MA_DON_VI_TINH
-            + " INT NOT NULL UNIQUE);";
+            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_MA_DON_VI_TINH
+            + " INTEGER NOT NULL UNIQUE);";
 
     public static final Uri CONTENT_URI = Uri.parse(MyContentProvider.SCHEME
             + MyContentProvider.AUTHORITY + "/" + TABLE_NAME);

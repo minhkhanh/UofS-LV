@@ -14,8 +14,8 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import client.menu.R;
-import client.menu.app.AppLocale;
-import client.menu.app.ApplicationSettings;
+import client.menu.app.MyAppLocale;
+import client.menu.app.MyAppSettings;
 import client.menu.app.MyApplication;
 import client.menu.db.contract.NgonNguContract;
 import client.menu.db.dto.NgonNguDTO;
@@ -34,7 +34,8 @@ public class MenuClientActivity extends Activity implements LoaderCallbacks<Curs
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        MyApplication.gSettings.getLocale().applyLanguage(this);
+        MyApplication.getSettings(this).getLocale().applyLanguage(this);
+
         setContentView(R.layout.layout_main);
 
         mSpinner = (Spinner) findViewById(R.id.spinner1);
@@ -72,8 +73,8 @@ public class MenuClientActivity extends Activity implements LoaderCallbacks<Curs
         switch (id) {
             case LOADER_ID_LANGUAGE_LIST:
                 String[] proj = new String[] { NgonNguContract._ID,
-                        NgonNguContract.COL_MA_NGON_NGU, NgonNguContract.COL_TEN_NGON_NGU,
-                        NgonNguContract.COL_KI_HIEU };
+                        NgonNguContract.COL_MA_NGON_NGU,
+                        NgonNguContract.COL_TEN_NGON_NGU, NgonNguContract.COL_KI_HIEU };
                 CursorLoader loader = new CursorLoader(MenuClientActivity.this,
                         NgonNguContract.CONTENT_URI, proj, null, null, null);
 
@@ -109,7 +110,7 @@ public class MenuClientActivity extends Activity implements LoaderCallbacks<Curs
                 String abbr = cursor.getString(cursor
                         .getColumnIndex(NgonNguContract.COL_KI_HIEU));
 
-                AppLocale locale = MyApplication.gSettings.getLocale();
+                MyAppLocale locale = MyApplication.getSettings(this).getLocale();
                 String settAbbr = locale.loadLangAbbr();
                 if (settAbbr == null || !settAbbr.equals(abbr)) {
                     locale.setLanguage(NgonNguDTO.extractFrom(cursor));
