@@ -96,6 +96,12 @@
            Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotAdd"]);
        } 
     %>
+    <!--  Cannot Change food Status To Available when it has no unit details-->
+    <% if (TempData["errorCannotChangeStatusToAvailable"] != null)
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotChangeStatusToAvailable"]);
+       } 
+    %>
     <!--  Main code  --------------------------------------------------------------------------->
     <div id="table-content">
         <table border="0" cellpadding="0" cellspacing="0" id="id-form" width="100%">

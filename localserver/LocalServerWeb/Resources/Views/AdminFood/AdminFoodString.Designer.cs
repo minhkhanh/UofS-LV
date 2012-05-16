@@ -268,6 +268,15 @@ namespace LocalServerWeb.Resources.Views.AdminFood {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Không thể cho phép món này sẵn sàng vì nó không có đơn vị tính nào.
+        /// </summary>
+        public static string ErrorCannotChangeStatusToAvaiable {
+            get {
+                return ResourceManager.GetString("ErrorCannotChangeStatusToAvaiable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can&apos;t delete.
         /// </summary>
         public static string ErrorCannotDelete {
@@ -583,7 +592,7 @@ namespace LocalServerWeb.Resources.Views.AdminFood {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are no unit details.
+        ///   Looks up a localized string similar to There are no unit details. This food is not available.
         /// </summary>
         public static string WarningNoUnitDetail {
             get {

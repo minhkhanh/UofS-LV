@@ -118,6 +118,7 @@ namespace LocalServerWeb.Controllers
 
             // list Chi Tiet Mon An Da Ngon Ngu
             var listChiTietMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayDanhSachChiTietMonAnDaNgonNguTheMonAn(monAn);
+            // If there are no unit details, show warning
             if (listChiTietMonAnDaNgonNgu == null || listChiTietMonAnDaNgonNgu.Count == 0)
             {
                 TempData["warningNoLanguageDetail"] = AdminFoodString.WarningNoLanguageDetail;
@@ -224,6 +225,12 @@ namespace LocalServerWeb.Controllers
             if (ChiTietMonAnDonViTinhBUS.Xoa(chiTietMonAnDonViTinh))
             {
                 TempData["infoDeleteSuccess"] = AdminFoodString.InfoDeleteSuccess;
+                // If there are no units detail, the food is not available
+                if (ChiTietMonAnDonViTinhBUS.LayDanhSachChiTietMonAnDonViTinhTheoMonAn(maMonAn).Count == 0)
+                {
+                    monAn.NgungBan = true;
+                    MonAnBUS.CapNhat(monAn);
+                }
             }
             else
             {
@@ -602,6 +609,12 @@ namespace LocalServerWeb.Controllers
                 return RedirectToAction("Index", "Error");
             }
 
+            // If this food has no unit details, cannot change its status to Available
+            if(ChiTietMonAnDonViTinhBUS.LayDanhSachChiTietMonAnDonViTinhTheoMonAn(monAn.MaMonAn).Count == 0 && status == 1)
+            {
+                TempData["errorCannotChangeStatusToAvailable"] = AdminFoodString.ErrorCannotChangeStatusToAvaiable;
+                return RedirectToAction("Edit", new { id = maMonAn });
+            }
 
             monAn.NgungBan = (status == 0) ? true : false;
             if (MonAnBUS.CapNhat(monAn))
