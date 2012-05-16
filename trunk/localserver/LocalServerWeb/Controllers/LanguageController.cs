@@ -23,7 +23,7 @@ namespace LocalServerWeb.Controllers
             }
             catch (Exception ex)
             {
-                Console.Out.WriteLine("Error: " + ex.StackTrace);
+                System.Diagnostics.Debug.Write("Error: " + ex.StackTrace);
             }    
             return new EmptyResult();
         }

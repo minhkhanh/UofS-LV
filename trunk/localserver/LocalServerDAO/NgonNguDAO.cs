@@ -41,7 +41,7 @@ namespace LocalServerDAO
             }
             catch (Exception e)
             {
-                Console.Out.WriteLine(e.StackTrace);
+                System.Diagnostics.Debug.Write(e.StackTrace);
             }
             return false;
         }
@@ -56,7 +56,7 @@ namespace LocalServerDAO
             }
             catch (Exception e)
             {
-                Console.Out.WriteLine(e.StackTrace);
+                System.Diagnostics.Debug.Write(e.StackTrace);
             }
             return false;
         }
@@ -70,7 +70,7 @@ namespace LocalServerDAO
             }
             catch (Exception e)
             {
-                Console.Out.WriteLine(e.StackTrace);
+                System.Diagnostics.Debug.Write(e.StackTrace);
             }
             return false;
         }

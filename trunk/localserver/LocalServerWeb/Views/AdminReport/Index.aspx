@@ -6,13 +6,21 @@
 <script runat="server">                        
     protected void Page_Load(object sender, EventArgs e) 
     {         
-        rvReport.Reset();
-        rvReport.LocalReport.ReportPath = (string)ViewData["reportPath"];
-        rvReport.LocalReport.SetParameters((IEnumerable<ReportParameter>) ViewData["reportParameter"]);
-        rvReport.LocalReport.DataSources.Clear();
-        rvReport.LocalReport.DataSources.Add((ReportDataSource) ViewData["reportData"]);
-        rvReport.DataBind();
-        rvReport.LocalReport.Refresh();
+        try
+        {            
+            rvReport.Reset();
+            rvReport.ProcessingMode = ProcessingMode.Local;
+            rvReport.LocalReport.ReportPath = (string)ViewData["reportPath"];
+            rvReport.LocalReport.SetParameters((IEnumerable<ReportParameter>)ViewData["reportParameter"]);
+            rvReport.LocalReport.DataSources.Clear();
+            rvReport.LocalReport.DataSources.Add((ReportDataSource)ViewData["reportData"]);
+            rvReport.DataBind();
+            rvReport.LocalReport.Refresh();
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.Write("Error: " + ex.StackTrace);
+        }   
     }  
 </script> 
 

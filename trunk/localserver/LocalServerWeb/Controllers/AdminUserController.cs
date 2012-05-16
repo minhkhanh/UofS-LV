@@ -197,7 +197,7 @@ namespace LocalServerWeb.Controllers
                 }
                 catch (Exception e)
                 {
-                    Console.Out.WriteLine(e.StackTrace);
+                    System.Diagnostics.Debug.Write(e.StackTrace);
                 }                
             }
             TempData["checkDic"] = checkDic;
