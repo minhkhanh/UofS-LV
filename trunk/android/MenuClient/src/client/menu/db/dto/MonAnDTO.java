@@ -21,7 +21,7 @@ public class MonAnDTO {
         if ((index = cursor.getColumnIndex(MonAnContract._ID)) != -1) {
             monAn.mId = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(MonAnContract.COL_SID)) != -1) {
+        if ((index = cursor.getColumnIndex(MonAnContract.COL_MA_MON_AN)) != -1) {
             monAn.mMaMonAn = cursor.getInt(index);
         }
         if ((index = cursor.getColumnIndex(MonAnContract.COL_HINH_ANH)) != -1) {
@@ -36,10 +36,10 @@ public class MonAnDTO {
         if ((index = cursor.getColumnIndex(MonAnContract.COL_DEFAULT_UNIT_ID)) != -1) {
             monAn.mMaDonViTinhMacDinh = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(MonAnContract.COL_CATEGORY_ID)) != -1) {
+        if ((index = cursor.getColumnIndex(MonAnContract.COL_MA_DANH_MUC)) != -1) {
             monAn.mMaDanhMuc = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(MonAnContract.COL_UNAVAILABLE)) != -1) {
+        if ((index = cursor.getColumnIndex(MonAnContract.COL_NGUNG_BAN)) != -1) {
             monAn.mNgungBan = Boolean.valueOf(cursor.getString(index));
         }
 

@@ -16,13 +16,13 @@ public class NgonNguDTO {
         if ((index = cursor.getColumnIndex(NgonNguContract._ID)) != -1) {
             ngonNgu.mId = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(NgonNguContract.COL_SID)) != -1) {
+        if ((index = cursor.getColumnIndex(NgonNguContract.COL_MA_NGON_NGU)) != -1) {
             ngonNgu.mMaNgonNgu = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(NgonNguContract.COL_DISPLAY_NAME)) != -1) {
+        if ((index = cursor.getColumnIndex(NgonNguContract.COL_TEN_NGON_NGU)) != -1) {
             ngonNgu.mTenNgonNgu = cursor.getString(index);
         }
-        if ((index = cursor.getColumnIndex(NgonNguContract.COL_ABBREVIATE)) != -1) {
+        if ((index = cursor.getColumnIndex(NgonNguContract.COL_KI_HIEU)) != -1) {
             ngonNgu.mKiHieu = cursor.getString(index);
         }
 

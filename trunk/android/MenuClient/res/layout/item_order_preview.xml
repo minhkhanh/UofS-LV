@@ -14,10 +14,10 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/textPrice"
+        android:id="@+id/textUnitName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/textDishName"
         android:text="TextView" />
 
@@ -25,18 +25,10 @@
         android:id="@+id/textQuantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textPrice"
-        android:layout_alignBottom="@+id/textPrice"
-        android:layout_centerHorizontal="true"
+        android:layout_alignBaseline="@+id/textUnitName"
+        android:layout_alignBottom="@+id/textUnitName"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/textUnitName"
         android:text="Số lượng" />
-
-    <TextView
-        android:id="@+id/textSum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textQuantity"
-        android:layout_alignBottom="@+id/textQuantity"
-        android:layout_alignParentRight="true"
-        android:text="Thành tiền" />
 
 </RelativeLayout>

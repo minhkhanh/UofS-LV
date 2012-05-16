@@ -109,28 +109,28 @@ public class MyContentProvider extends ContentProvider {
             case MATCH_MONAN_INNER_DANGONNGU:
                 queryBuilder.setTables(MonAnContract.TABLE_NAME + " INNER JOIN "
                         + MonAnDaNgonNguContract.TABLE_NAME + " ON ("
-                        + MonAnContract.TABLE_NAME + "." + MonAnContract.COL_SID + " = "
+                        + MonAnContract.TABLE_NAME + "." + MonAnContract.COL_MA_MON_AN + " = "
                         + MonAnDaNgonNguContract.TABLE_NAME + "."
                         + MonAnDaNgonNguContract.COL_MA_MON + ")");
                 break;
             case MATCH_NGONNGU_MACDINH:
                 queryBuilder.setTables(NgonNguContract.TABLE_NAME + ","
                         + ThamSoContract.TABLE_NAME);
-                queryBuilder.appendWhere(NgonNguContract.COL_SID + " = "
-                        + ThamSoContract.COL_VALUE + " and " + ThamSoContract.COL_SID
+                queryBuilder.appendWhere(NgonNguContract.COL_MA_NGON_NGU + " = "
+                        + ThamSoContract.COL_VALUE + " and " + ThamSoContract.COL_MA_THAM_SO
                         + "=" + ThamSoContract.SID_NGONNGU_MACDINH);
                 break;
             case MATCH_THAMSO_ROW:
                 queryBuilder.setTables(ThamSoContract.TABLE_NAME);
-                queryBuilder.appendWhere(ThamSoContract.COL_SID + "="
+                queryBuilder.appendWhere(ThamSoContract.COL_MA_THAM_SO + "="
                         + uri.getLastPathSegment());
                 break;
             case MATCH_DANHMUC_INNER_DANGONNGU:
                 queryBuilder.setTables(DanhMucContract.TABLE_NAME + " INNER JOIN "
                         + DanhMucDaNgonNguContract.TABLE_NAME + " ON ("
-                        + DanhMucContract.TABLE_NAME + "." + DanhMucContract.COL_SID
+                        + DanhMucContract.TABLE_NAME + "." + DanhMucContract.COL_MA_DANH_MUC
                         + " = " + DanhMucDaNgonNguContract.TABLE_NAME + "."
-                        + DanhMucDaNgonNguContract.COL_CATEGORY_ID + ")");
+                        + DanhMucDaNgonNguContract.COL_MA_DANH_MUC + ")");
                 break;
 
             case MATCH_BAN:
@@ -147,7 +147,7 @@ public class MyContentProvider extends ContentProvider {
 
             case MATCH_NGONNGU_ROW:
                 queryBuilder.setTables(NgonNguContract.TABLE_NAME);
-                queryBuilder.appendWhere(NgonNguContract.COL_SID + "="
+                queryBuilder.appendWhere(NgonNguContract.COL_MA_NGON_NGU + "="
                         + uri.getLastPathSegment());
                 break;
             default:

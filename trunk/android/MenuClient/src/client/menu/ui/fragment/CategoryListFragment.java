@@ -72,13 +72,13 @@ public class CategoryListFragment extends ListFragment {
                 case LOADER_ID_CAT_LIST:
                     String[] proj = new String[] {
                             DanhMucContract.TABLE_NAME + "." + DanhMucContract._ID,
-                            DanhMucContract.TABLE_NAME + "." + DanhMucContract.COL_SID,
-                            DanhMucDaNgonNguContract.COL_CATEGORY_NAME };
+                            DanhMucContract.TABLE_NAME + "." + DanhMucContract.COL_MA_DANH_MUC,
+                            DanhMucDaNgonNguContract.COL_TEN_DANH_MUC };
                     Integer sid = MyApplication.gSettings.getLocale().getLanguage()
                             .getMaNgonNgu();
                     CursorLoader loader = new CursorLoader(getActivity(),
                             DanhMucContract.URI_DANHMUC_INNER_DANGONNGU, proj,
-                            DanhMucDaNgonNguContract.COL_LANGUAGE_ID + "=?",
+                            DanhMucDaNgonNguContract.COL_MA_NGON_NGU + "=?",
                             new String[] { sid.toString() }, null);
 
                     return loader;
@@ -103,7 +103,7 @@ public class CategoryListFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        String[] from = new String[] { DanhMucDaNgonNguContract.COL_CATEGORY_NAME };
+        String[] from = new String[] { DanhMucDaNgonNguContract.COL_TEN_DANH_MUC };
         int[] to = new int[] { android.R.id.text1 };
 
         mAdapter = new SimpleCursorAdapter(getActivity(),
@@ -128,7 +128,7 @@ public class CategoryListFragment extends ListFragment {
                 !cursor.moveToPosition(index))
             return;
 
-        int maDanhMuc = cursor.getInt(cursor.getColumnIndex(DanhMucContract.COL_SID));
+        int maDanhMuc = cursor.getInt(cursor.getColumnIndex(DanhMucContract.COL_MA_DANH_MUC));
 
         if (mIsDualPane) {
             getListView().setItemChecked(index, true);

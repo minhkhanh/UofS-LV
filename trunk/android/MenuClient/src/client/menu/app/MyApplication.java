@@ -18,5 +18,8 @@ public class MyApplication extends Application {
         
         gSettings = new ApplicationSettings(this);
         mSessionManager = new SessionManager();
+        
+        // create temporary session
+        mSessionManager.loadSession(1);
     }
 }

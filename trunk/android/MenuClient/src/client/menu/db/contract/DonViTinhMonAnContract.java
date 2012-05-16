@@ -12,11 +12,12 @@ public final class DonViTinhMonAnContract implements BaseColumns {
     public static final String COL_DON_GIA = "DonGia";
 
     public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" + _ID
-            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_MA_MON_AN
-            + " INTEGER REFERENCES " + MonAnContract.TABLE_NAME + "("
-            + MonAnContract.COL_SID + ")," + COL_MA_DON_VI + " INTEGER REFERENCES "
-            + DonViTinhContract.TABLE_NAME + "(" + DonViTinhContract.COL_SID + "),"
-            + COL_DON_GIA + " REAL);";
+            + " INT PRIMARY KEY AUTOINCREMENT," + COL_MA_MON_AN
+            + " INT NOT NULL REFERENCES " + MonAnContract.TABLE_NAME + "("
+            + MonAnContract.COL_MA_MON_AN + ")," + COL_MA_DON_VI
+            + " INT NOT NULL REFERENCES " + DonViTinhContract.TABLE_NAME + "("
+            + DonViTinhContract.COL_MA_DON_VI_TINH + ")," + COL_DON_GIA + " INT,"
+            + "UNIQUE(" + COL_MA_MON_AN + "," + COL_MA_DON_VI + "));";
 
     public static final String PATH_DONVITINHMONAN_INNER_DANGONNGU = "01";
 

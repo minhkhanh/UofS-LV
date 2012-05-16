@@ -38,7 +38,7 @@ public class MenuClientActivity extends Activity implements LoaderCallbacks<Curs
         setContentView(R.layout.layout_main);
 
         mSpinner = (Spinner) findViewById(R.id.spinner1);
-        String[] from = new String[] { NgonNguContract.COL_DISPLAY_NAME };
+        String[] from = new String[] { NgonNguContract.COL_TEN_NGON_NGU };
         int[] to = new int[] { android.R.id.text1 };
         langAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item,
                 null, from, to, 0);
@@ -72,8 +72,8 @@ public class MenuClientActivity extends Activity implements LoaderCallbacks<Curs
         switch (id) {
             case LOADER_ID_LANGUAGE_LIST:
                 String[] proj = new String[] { NgonNguContract._ID,
-                        NgonNguContract.COL_SID, NgonNguContract.COL_DISPLAY_NAME,
-                        NgonNguContract.COL_ABBREVIATE };
+                        NgonNguContract.COL_MA_NGON_NGU, NgonNguContract.COL_TEN_NGON_NGU,
+                        NgonNguContract.COL_KI_HIEU };
                 CursorLoader loader = new CursorLoader(MenuClientActivity.this,
                         NgonNguContract.CONTENT_URI, proj, null, null, null);
 
@@ -107,7 +107,7 @@ public class MenuClientActivity extends Activity implements LoaderCallbacks<Curs
             Cursor cursor = ((SimpleCursorAdapter) arg0.getAdapter()).getCursor();
             if (cursor.moveToPosition(pos)) {
                 String abbr = cursor.getString(cursor
-                        .getColumnIndex(NgonNguContract.COL_ABBREVIATE));
+                        .getColumnIndex(NgonNguContract.COL_KI_HIEU));
 
                 AppLocale locale = MyApplication.gSettings.getLocale();
                 String settAbbr = locale.loadLangAbbr();
