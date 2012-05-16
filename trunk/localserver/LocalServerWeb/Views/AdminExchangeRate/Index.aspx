@@ -95,9 +95,9 @@
                     <%: tiGia.ThoiDiemCapNhat.ToString() %>
                 </td>
                 <td class="options-width">
-                    <%:Html.ActionLink(" ", "Update", "AdminExchangeRate", new { id = tiGia.MaTiGia }, new { title = AdminExchangeRateString.Update, Class = "icon-6 info-tooltip" })%>
-                    <%:Html.ActionLink(" ", "Edit", "AdminExchangeRate", new { id = tiGia.MaTiGia }, new { title = AdminExchangeRateString.Edit, Class = "icon-6 info-tooltip" })%>
-                    <%:Html.ActionLink(" ", "Delete", "AdminExchangeRate", new { id = tiGia.MaTiGia }, new { title = AdminExchangeRateString.Delete, Class = "icon-6 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "Update", "AdminExchangeRate", new { id = tiGia.MaTiGia }, new { title = AdminExchangeRateString.Update, Class = "icon-5 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "Edit", "AdminExchangeRate", new { id = tiGia.MaTiGia }, new { title = AdminExchangeRateString.Edit, Class = "icon-1 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "Delete", "AdminExchangeRate", new { id = tiGia.MaTiGia }, new { title = AdminExchangeRateString.Delete, Class = "icon-2 info-tooltip" })%>
                 </td>
             </tr>
             <% } %>

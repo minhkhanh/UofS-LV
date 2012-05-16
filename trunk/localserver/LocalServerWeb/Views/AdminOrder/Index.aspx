@@ -35,7 +35,7 @@
 			<td><%:order.TaiKhoan.TenTaiKhoan %></td>
 			<td><%:order.Ban.TenBan %></td>
             <td class="options-width">
-                <%:Html.ActionLink(" ", "OrderDetail", "AdminOrder", new { id = order.MaOrder }, new { title = AdminOrderString.DetailTitle, Class = "icon-6 info-tooltip" })%>
+                <%:Html.ActionLink(" ", "OrderDetail", "AdminOrder", new { id = order.MaOrder }, new { title = AdminOrderString.DetailTitle, Class = "icon-3 info-tooltip" })%>
             </td>
 		</tr>
         <% } %>

@@ -76,8 +76,8 @@
                     <%: khuVuc.MoTa %>
                 </td>
                 <td class="options-width">
-                    <%:Html.ActionLink(" ", "Edit", "AdminArea", new { id = khuVuc.MaKhuVuc }, new { title = AdminAreaString.Edit, Class = "icon-6 info-tooltip" })%>
-                    <%:Html.ActionLink(" ", "Delete", "AdminArea", new { id = khuVuc.MaKhuVuc }, new { title = AdminAreaString.Delete, Class = "icon-6 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "Edit", "AdminArea", new { id = khuVuc.MaKhuVuc }, new { title = AdminAreaString.Edit, Class = "icon-1 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "Delete", "AdminArea", new { id = khuVuc.MaKhuVuc }, new { title = AdminAreaString.Delete, Class = "icon-2 info-tooltip" })%>
                 </td>
             </tr>
             <% } %>

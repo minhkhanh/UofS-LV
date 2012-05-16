@@ -75,8 +75,8 @@
                     <%: ngonNgu.KiHieu %>
                 </td>
                 <td class="options-width">
-                    <%:Html.ActionLink(" ", "Edit", "AdminLanguage", new { id = ngonNgu.MaNgonNgu }, new { title = AdminLanguageString.Edit, Class = "icon-6 info-tooltip" })%>
-                    <%:Html.ActionLink(" ", "Delete", "AdminLanguage", new { id = ngonNgu.MaNgonNgu }, new { title = AdminLanguageString.Delete, Class = "icon-6 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "Edit", "AdminLanguage", new { id = ngonNgu.MaNgonNgu }, new { title = AdminLanguageString.Edit, Class = "icon-1 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "Delete", "AdminLanguage", new { id = ngonNgu.MaNgonNgu }, new { title = AdminLanguageString.Delete, Class = "icon-2 info-tooltip" })%>
                 </td>
             </tr>
             <% } %>

@@ -81,7 +81,7 @@
                     <%: ct.KhuyenMai.TenKhuyenMai %>
                 </td>
                 <td class="options-width">
-                    <a href="" title="" class="icon-1 info-tooltip"></a>
+                    <a href="" title="" class="icon-3 info-tooltip"></a>
                 </td>
             </tr>
             <% } %>

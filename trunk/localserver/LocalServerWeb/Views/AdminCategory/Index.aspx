@@ -108,7 +108,7 @@
                     <% Html.EndForm(); %>
                 </td>
                 <td class="options-width">
-                    <%:Html.ActionLink(" ", "Edit", "AdminCategory", new { id = danhMuc.MaDanhMuc }, new { title = AdminCategoryString.Edit, Class = "icon-6 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "Edit", "AdminCategory", new { id = danhMuc.MaDanhMuc }, new { title = AdminCategoryString.Edit, Class = "icon-1 info-tooltip" })%>
                     <%:Html.ActionLink(" ", "Delete", "AdminCategory", new { id = danhMuc.MaDanhMuc }, new { title = AdminCategoryString.Delete, Class = "icon-2 info-tooltip" })%>
                 </td>
             </tr>

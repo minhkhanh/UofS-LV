@@ -68,7 +68,7 @@
                     <%:model.GhiChu %>
                 </td>
                 <td class="options-width">
-                    <a href="" title=" <% Html.RenderPartial("OrderDetailCancelStatus", model); %> " class="icon-1 info-tooltip"></a>
+                    <a href="" title=" <% Html.RenderPartial("OrderDetailCancelStatus", model); %> " class="icon-3 info-tooltip"></a>
                 </td>
             </tr>
             <% } %>

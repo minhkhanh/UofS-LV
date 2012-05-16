@@ -108,9 +108,9 @@
                     <%: phuThu.KetThuc %>
                 </td>
                 <td class="options-width">
-                    <%:Html.ActionLink(" ", "Edit", "AdminSurcharge", new { id = phuThu.MaPhuThu }, new { title = AdminSurchargeString.Edit, Class = "icon-6 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "Edit", "AdminSurcharge", new { id = phuThu.MaPhuThu }, new { title = AdminSurchargeString.Edit, Class = "icon-1 info-tooltip" })%>
                     <%:Html.ActionLink(" ", "Delete", "AdminSurcharge", new { id = phuThu.MaPhuThu }, new { title = AdminSurchargeString.Delete, Class = "icon-2 info-tooltip" })%>
-                    <%:Html.ActionLink(" ", "AreaSurcharge", "AdminSurcharge", new { id = phuThu.MaPhuThu }, new { title = AdminSurchargeString.EditAreaSurcharge, Class = "icon-2 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "AreaSurcharge", "AdminSurcharge", new { id = phuThu.MaPhuThu }, new { title = AdminSurchargeString.EditAreaSurcharge, Class = "icon-3 info-tooltip" })%>
                     
                 </td>
             </tr>

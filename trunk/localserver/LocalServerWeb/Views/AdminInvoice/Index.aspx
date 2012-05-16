@@ -85,8 +85,8 @@
                     <%: (hoaDon.PhuThu.GiaTang != 0)?hoaDon.PhuThu.GiaTang.ToString():hoaDon.PhuThu.TiLeTang.ToString()+"%" %>
                 </td>
                 <td class="options-width">
-                    <%:Html.ActionLink(" ", "InvoiceDetail", "AdminInvoice", new { id = hoaDon.MaHoaDon }, new { title = AdminInvoiceString.DetailTitle, Class = "icon-6 info-tooltip" })%>
-                    <%:Html.ActionLink(" ", "Index", "AdminInvoice", new { id = hoaDon.MaHoaDon }, new { title = AdminInvoiceString.Print, Class = "icon-6 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "InvoiceDetail", "AdminInvoice", new { id = hoaDon.MaHoaDon }, new { title = AdminInvoiceString.DetailTitle, Class = "icon-3 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "Index", "AdminInvoice", new { id = hoaDon.MaHoaDon }, new { title = AdminInvoiceString.Print, Class = "icon-4 info-tooltip" })%>
                 </td>
             </tr>
             <% } %>
