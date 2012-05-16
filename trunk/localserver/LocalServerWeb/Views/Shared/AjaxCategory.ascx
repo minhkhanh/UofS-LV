@@ -31,6 +31,7 @@
                     NumericPagerItemWrapperFormatString = "<span class=\"item\">{0}</span>",
                     CssClass = "pages", SeparatorHtml = "" }, 
                     new AjaxOptions() { UpdateTargetId = "ajax_category"})%>
+
             </td>
         </tr>
     </table>

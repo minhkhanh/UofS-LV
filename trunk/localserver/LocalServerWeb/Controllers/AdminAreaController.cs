@@ -10,16 +10,22 @@ using LocalServerWeb.Resources.Views.AdminArea;
 using LocalServerDTO;
 using LocalServerWeb.ViewModels;
 using LocalServerWeb.Resources.Views.Shared;
+using Webdiyer.WebControls.Mvc;
 
 namespace LocalServerWeb.Controllers
 {
     public class AdminAreaController : BaseController
     {
-        public ActionResult Index()
+        public ActionResult Index(string page)
         {
             SharedCode.FillAdminMainMenu(ViewData, 3, 4);
-            ViewData["listKhuVuc"] = KhuVucBUS.LayDanhSachKhuVuc();
-            return View();
+
+            int _page = 1;
+            int.TryParse(page, out _page);
+            PagedList<KhuVuc> pageListKhuVuc = KhuVucBUS.LayDanhSachKhuVuc().AsQueryable().ToPagedList(_page, 2);
+            ViewData["listKhuVuc"] = pageListKhuVuc;
+
+            return View(pageListKhuVuc);
         }
 
         public ActionResult Add()

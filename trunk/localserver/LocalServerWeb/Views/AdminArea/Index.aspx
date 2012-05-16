@@ -1,8 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<PagedList<KhuVuc>>" %>
 
 <%@ Import Namespace="LocalServerDTO" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.AdminArea" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.Shared" %>
+<%@ Import Namespace="Webdiyer.WebControls.Mvc" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%: AdminAreaString.Title %>
 </asp:Content>
@@ -10,6 +12,15 @@
     <%: AdminAreaString.Title %>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
+<style type="text/css">    
+    .pages { color:red;font-weight:bold; font-size:11px;}
+    .pages  .item{padding: 1px 6px;font-size: 13px;} /*numeric pager items*/
+    .pages .cpb {color:red;padding: 1px 6px;font-size: 13px;} /*current pager item*/
+    .pages a { text-decoration:none;padding: 0 5px; border: 1px solid #ddd;
+               margin:0 2px; color:#000;font-weight:normal;}
+    .pages a:hover { background-color: #E61636; color:#fff;
+                     border:1px solid #E61636; text-decoration:none;font-weight:normal;}
+</style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -106,4 +117,10 @@
         </table>
     </div>
     <%} %>
+    <div style="float:right;">
+        <%= Html.Pager(Model, new PagerOptions { PageIndexParameterName = "page", 
+        CurrentPagerItemWrapperFormatString = "<span class=\"cpb\">{0}</span>", 
+        NumericPagerItemWrapperFormatString = "<span class=\"item\">{0}</span>", 
+        CssClass = "pages", SeparatorHtml = "" })%>
+    </div>
 </asp:Content>
