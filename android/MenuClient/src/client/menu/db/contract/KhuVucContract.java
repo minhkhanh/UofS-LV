@@ -9,27 +9,15 @@ import android.provider.BaseColumns;
 public final class KhuVucContract implements BaseColumns {
     public static final String TABLE_NAME = "KhuVuc";
 
-    public static final String COL_SID = "MaKhuVuc";
-    public static final String COL_AREA_NAME = "TenKhuVuc";
-    public static final String COL_DESCRIPTION = "MoTa";
+    public static final String COL_MA_KHU_VUC = "MaKhuVuc";
+    public static final String COL_TEN_KHU_VUC = "TenKhuVuc";
+    public static final String COL_MO_TA = "MoTa";
 
     public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" + _ID
-            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_SID
-            + " INTEGER NOT NULL UNIQUE, " + COL_AREA_NAME + " TEXT, " + COL_DESCRIPTION
+            + " INT PRIMARY KEY AUTOINCREMENT, " + COL_MA_KHU_VUC
+            + " INT NOT NULL UNIQUE, " + COL_TEN_KHU_VUC + " TEXT, " + COL_MO_TA
             + " TEXT);";
 
     public static final Uri CONTENT_URI = Uri.parse(MyContentProvider.SCHEME
             + MyContentProvider.AUTHORITY + "/" + TABLE_NAME);
-
-    public static final ContentValues extractData(Cursor cursor) {
-        ContentValues values = new ContentValues();
-
-        values.put(_ID, cursor.getInt(cursor.getColumnIndex(_ID)));
-        values.put(COL_SID, cursor.getInt(cursor.getColumnIndex(COL_SID)));
-        values.put(COL_AREA_NAME, cursor.getString(cursor.getColumnIndex(COL_AREA_NAME)));
-        values.put(COL_DESCRIPTION,
-                cursor.getString(cursor.getColumnIndex(COL_DESCRIPTION)));
-
-        return values;
-    }
 }

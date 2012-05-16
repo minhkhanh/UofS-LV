@@ -30,7 +30,7 @@ public class OrderActivity extends Activity {
     ListView mListOrder;
     List<Map<String, Object>> mListData = new ArrayList<Map<String, Object>>();
     SimpleAdapter mListAdapter;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +47,7 @@ public class OrderActivity extends Activity {
         mListData.add(map);
 
         mListAdapter = new SimpleAdapter(this, mListData, R.layout.item_order,
-                new String[] { "0", "1" }, new int[] { R.id.editQuantity, R.id.textSum });
+                new String[] { "0" }, new int[] { R.id.editQuantity });
 
         mListOrder.setAdapter(mListAdapter);
 
@@ -77,7 +77,7 @@ public class OrderActivity extends Activity {
             ViewGroup group = (ViewGroup) v.getParent();
             int pos = mListOrder.getPositionForView(group);
             mListData.remove(pos);
-            mListAdapter.notifyDataSetChanged();            
+            mListAdapter.notifyDataSetChanged();
         }
     }
 }

@@ -7,13 +7,13 @@ import android.provider.BaseColumns;
 public final class DanhMucContract implements BaseColumns {
     public static final String TABLE_NAME = "DanhMuc";
 
-    public static final String COL_SID = "MaDanhMuc";
-    public static final String COL_PARENT_ID = "MaDanhMucCha";
+    public static final String COL_MA_DANH_MUC = "MaDanhMuc";
+    public static final String COL_MA_DANH_MUC_CHA = "MaDanhMucCha";
 
     public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" + _ID
-            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_SID
-            + " INTEGER NOT NULL UNIQUE, " + COL_PARENT_ID + " INTEGER REFERENCES "
-            + TABLE_NAME + " (" + COL_SID + ")" + ");";
+            + " INT PRIMARY KEY AUTOINCREMENT, " + COL_MA_DANH_MUC
+            + " INT NOT NULL UNIQUE, " + COL_MA_DANH_MUC_CHA + " INT REFERENCES "
+            + TABLE_NAME + " (" + COL_MA_DANH_MUC + ")" + ");";
 
     public static final String PATH_DANHMUC_INNER_DANGONNGU = "01";
 

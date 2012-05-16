@@ -25,6 +25,7 @@ import android.widget.Spinner;
 import client.menu.R;
 import client.menu.app.MyApplication;
 import client.menu.bus.SessionManager;
+import client.menu.bus.SessionManager.ServiceOrder;
 import client.menu.bus.SessionManager.ServiceSession;
 import client.menu.db.contract.DonViTinhDaNgonNguContract;
 import client.menu.db.contract.DonViTinhMonAnContract;
@@ -44,7 +45,7 @@ public class DishListFragment extends ListFragment {
     private static final int LOADER_ID_DISH_LIST = 0;
 
     private int mMaDanhMuc;
-    private SimpleCursorAdapter mAdapter;
+    private SimpleCursorAdapter mListAdapter;
     List<LoadDishUnitsAsyncTask> mDishUnitsLoadTaskList = new ArrayList<LoadDishUnitsAsyncTask>();
 
     private boolean mHaveExtendPane;
@@ -82,11 +83,11 @@ public class DishListFragment extends ListFragment {
             AsyncTask<Void, Integer, SimpleCursorAdapter> {
 
         Integer mIndex;
-
         Spinner mSpinner;
 
         public LoadDishUnitsAsyncTask(int index) {
             mIndex = index;
+
             ViewGroup row = (ViewGroup) getListView().getChildAt(index);
             mSpinner = (Spinner) row.findViewById(R.id.spinDishPrices);
         }
@@ -99,10 +100,13 @@ public class DishListFragment extends ListFragment {
 
         @Override
         protected SimpleCursorAdapter doInBackground(Void... unused) {
-            Cursor adaptCursor = mAdapter.getCursor();
-            adaptCursor.moveToPosition(mIndex);
+            Cursor adaptCursor = mListAdapter.getCursor();
+            if (adaptCursor == null || adaptCursor.moveToPosition(mIndex) == false) {
+                return null;
+            }
+
             Integer maMonAn = adaptCursor.getInt(adaptCursor
-                    .getColumnIndex(MonAnContract.COL_SID));
+                    .getColumnIndex(MonAnContract.COL_MA_MON_AN));
 
             String[] projection = new String[] {
                     DonViTinhMonAnContract.TABLE_NAME + "." + DonViTinhMonAnContract._ID,
@@ -159,7 +163,7 @@ public class DishListFragment extends ListFragment {
         public void onLoaderReset(Loader<Cursor> loader) {
             switch (loader.getId()) {
                 case LOADER_ID_DISH_LIST:
-                    mAdapter.swapCursor(null);
+                    mListAdapter.swapCursor(null);
                     break;
             }
         }
@@ -168,7 +172,7 @@ public class DishListFragment extends ListFragment {
         public void onLoadFinished(Loader<Cursor> loader, Cursor loadedCursor) {
             switch (loader.getId()) {
                 case LOADER_ID_DISH_LIST:
-                    mAdapter.swapCursor(loadedCursor);
+                    mListAdapter.swapCursor(loadedCursor);
                     break;
             }
         }
@@ -179,12 +183,13 @@ public class DishListFragment extends ListFragment {
                 case LOADER_ID_DISH_LIST:
                     String[] proj = new String[] {
                             MonAnContract.TABLE_NAME + "." + MonAnContract._ID,
-                            MonAnContract.TABLE_NAME + "." + MonAnContract.COL_SID,
+                            MonAnContract.TABLE_NAME + "." + MonAnContract.COL_MA_MON_AN,
                             MonAnContract.COL_DIEM_DANH_GIA,
+                            MonAnContract.COL_SO_LUOT_RATE,
                             MonAnDaNgonNguContract.COL_TEN_MON,
                             MonAnDaNgonNguContract.COL_MO_TA_MON };
 
-                    String selection = MonAnContract.COL_CATEGORY_ID + "=? and "
+                    String selection = MonAnContract.COL_MA_DANH_MUC + "=? and "
                             + MonAnDaNgonNguContract.COL_MA_NGON_NGU + "=?";
 
                     Integer sid = MyApplication.gSettings.getLocale().getLanguage()
@@ -240,10 +245,10 @@ public class DishListFragment extends ListFragment {
         String[] from = new String[] { MonAnDaNgonNguContract.COL_TEN_MON,
                 MonAnDaNgonNguContract.COL_MO_TA_MON };
         int[] to = new int[] { R.id.textDishName, R.id.textDishDescription };
-        mAdapter = new SimpleCursorAdapter(getActivity(), R.layout.item_dish_list, null,
-                from, to, 0);
+        mListAdapter = new SimpleCursorAdapter(getActivity(), R.layout.item_dish_list,
+                null, from, to, 0);
 
-        setListAdapter(mAdapter);
+        setListAdapter(mListAdapter);
         getListView().setOnHierarchyChangeListener(mOnListItemChange);
 
         getLoaderManager().initLoader(LOADER_ID_DISH_LIST, null, mLoaderCallbacks);
@@ -253,19 +258,18 @@ public class DishListFragment extends ListFragment {
                 && orderPreview.getVisibility() == View.VISIBLE;
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-
-        // menu.add("check");
-    }
-
-    // @Override
-    // public void onActivityCreated(Bundle savedInstanceState) {
-    // super.onCreate(savedInstanceState);
-    //
-    //
-    // }
+//    private DonViTinhMonAnDTO extractDonViTinhMonAnDTO(int pos) {
+//        ViewGroup row = (ViewGroup) getListView().getChildAt(pos);
+//        Spinner spinner = (Spinner) row.findViewById(R.id.spinDishPrices);
+//
+//        SimpleCursorAdapter adapter = (SimpleCursorAdapter) spinner.getAdapter();
+//        Cursor cursor = adapter.getCursor();
+//        if (cursor != null && cursor.moveToPosition(spinner.getSelectedItemPosition())) {
+//            return DonViTinhMonAnDTO.extractFrom(cursor);
+//        }
+//
+//        return null;
+//    }
 
     private DonViTinhDaNgonNguDTO extractDonViTinhDaNgonNguDTO(int pos) {
         ViewGroup row = (ViewGroup) getListView().getChildAt(pos);
@@ -273,7 +277,7 @@ public class DishListFragment extends ListFragment {
 
         SimpleCursorAdapter adapter = (SimpleCursorAdapter) spinner.getAdapter();
         Cursor cursor = adapter.getCursor();
-        if (cursor != null && cursor.moveToPosition(pos)) {
+        if (cursor != null && cursor.moveToPosition(spinner.getSelectedItemPosition())) {
             return DonViTinhDaNgonNguDTO.extractFrom(cursor);
         }
 
@@ -281,7 +285,7 @@ public class DishListFragment extends ListFragment {
     }
 
     private MonAnDaNgonNguDTO extractMonAnDaNgonNguDTO(int pos) {
-        Cursor cursor = mAdapter.getCursor();
+        Cursor cursor = mListAdapter.getCursor();
         if (cursor != null && cursor.moveToPosition(pos)) {
             return MonAnDaNgonNguDTO.extractFrom(cursor);
         }
@@ -293,34 +297,30 @@ public class DishListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
-//        MonAnDaNgonNguDTO monAnDaNgonNgu = extractMonAnDaNgonNguDTO(position);
-//        DonViTinhDaNgonNguDTO donViTinhDaNgonNgu = extractDonViTinhDaNgonNguDTO(position);
-//
-//        SessionManager sessionManager = ((MyApplication) getActivity().getApplication())
-//                .getSessionManager();
-//        ServiceSession session = sessionManager.loadCurrentSession();
-//
-//        session.addOrderItem(monAnDaNgonNgu.getMaMonAn(),
-//                donViTinhDaNgonNgu.getMaDonViTinh());
-//
-//        if (mHaveExtendPane) {
-//            OrderPreviewFragment orderPreview = (OrderPreviewFragment) getFragmentManager()
-//                    .findFragmentById(R.id.ExtendPaneHolder);
-//
-//            if (orderPreview == null) {
-//                orderPreview = new OrderPreviewFragment(monAn.getMaMonAn());
-//
-//                FragmentTransaction ft = getFragmentManager().beginTransaction();
-//                ft.replace(R.id.ExtendPaneHolder, orderPreview);
-//                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-//                ft.commit();
-//            } else {
-//                orderPreview.updateList(monAn.getMaMonAn());
-//            }
-//
-//            // orderPreview.updateList(monAn);
-//
-//            U.toastText(getActivity(), "item click ok");
-//        }
+        MonAnDaNgonNguDTO monAnDaNgonNgu = extractMonAnDaNgonNguDTO(position);
+        DonViTinhDaNgonNguDTO donViTinhDaNgonNgu = extractDonViTinhDaNgonNguDTO(position);
+
+        SessionManager sessionManager = ((MyApplication) getActivity().getApplication())
+                .getSessionManager();
+        ServiceOrder order = sessionManager.loadCurrentSession().getOrder();
+
+        order.addItem(monAnDaNgonNgu.getMaMonAn(), donViTinhDaNgonNgu.getMaDonViTinh());
+
+        if (mHaveExtendPane) {
+            OrderPreviewFragment orderPreview = (OrderPreviewFragment) getFragmentManager()
+                    .findFragmentById(R.id.ExtendPaneHolder);
+
+            if (orderPreview == null) {
+                orderPreview = new OrderPreviewFragment();
+                orderPreview.addItemData(monAnDaNgonNgu, donViTinhDaNgonNgu);
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.ExtendPaneHolder, orderPreview);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.commit();
+            } else {
+                orderPreview.updateList(monAnDaNgonNgu, donViTinhDaNgonNgu);
+            }
+        }
     }
 }

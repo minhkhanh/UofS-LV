@@ -7,36 +7,40 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import android.database.DataSetObservable;
+
 import client.menu.db.dto.ChiTietOrderDTO;
 import client.menu.db.dto.DonViTinhMonAnDTO;
 
 public class SessionManager {
 
-    public class ServiceSession {
-
-        private Integer mMaBan;
+    public class ServiceOrder {
         List<ChiTietOrderDTO> mOrderItems = new ArrayList<ChiTietOrderDTO>();
 
-        protected ServiceSession(Integer maBan) {
-            mMaBan = maBan;
+        protected ServiceOrder() {
         }
-        
-        public int getOrderItemQuantity(Integer maMonAn, Integer maDonViTinh) {
+
+        public int getCount() {
+            return mOrderItems.size();
+        }
+
+        public int getItemQuantity(Integer maMonAn, Integer maDonViTinh) {
             for (int i = 0; i < mOrderItems.size(); ++i) {
                 ChiTietOrderDTO chiTiet = mOrderItems.get(i);
-                if (chiTiet.getMaMonAn() == maMonAn && chiTiet.getMaDonViTinh() == maDonViTinh) {
+                if (chiTiet.getMaMonAn() == maMonAn
+                        && chiTiet.getMaDonViTinh() == maDonViTinh) {
                     return chiTiet.getSoLuong();
                 }
             }
-            
+
             return 0;
         }
 
-        public void addOrderItem(Integer maMonAn, Integer maDonViTinh) {
+        public ChiTietOrderDTO addItem(Integer maMonAn, Integer maDonViTinh) {
             for (ChiTietOrderDTO i : mOrderItems) {
                 if (i.getMaMonAn() == maMonAn && i.getMaDonViTinh() == maDonViTinh) {
                     i.setSoLuong(i.getSoLuong() + 1);
-                    return;
+                    return i;
                 }
             }
 
@@ -45,6 +49,22 @@ public class SessionManager {
             chiTiet.setMaDonViTinh(maDonViTinh);
             chiTiet.setSoLuong(1);
             mOrderItems.add(chiTiet);
+
+            return chiTiet;
+        }
+    }
+
+    public class ServiceSession {
+
+        private Integer mMaBan;
+        private ServiceOrder mOrder = new ServiceOrder();
+
+        protected ServiceSession(Integer maBan) {
+            mMaBan = maBan;
+        }
+
+        public ServiceOrder getOrder() {
+            return mOrder;
         }
 
         public Integer getMaBan() {
@@ -54,18 +74,19 @@ public class SessionManager {
         public void setMaBan(Integer maBan) {
             mMaBan = maBan;
         }
-
-        public List<ChiTietOrderDTO> getOrderItems() {
-            return mOrderItems;
-        }
-        
-        
     }
 
     List<ServiceSession> mSessionList = new ArrayList<ServiceSession>();
     int mIndexCurrent = -1;
 
     private ServiceSession createSession(Integer maBan) {
+        for (ServiceSession s : mSessionList) {
+            if (s.getMaBan() == maBan) {
+                throw new IllegalArgumentException("Duplicated session identification: "
+                        + maBan);
+            }
+        }
+
         ServiceSession session = new ServiceSession(maBan);
 
         mSessionList.add(session);
@@ -77,7 +98,12 @@ public class SessionManager {
     }
 
     public ServiceSession loadCurrentSession() {
-        return loadSession(mIndexCurrent);
+        if (mIndexCurrent < 0 || mIndexCurrent >= mSessionList.size()) {
+            throw new ArrayIndexOutOfBoundsException(
+                    "Session list index is out of bound: " + mIndexCurrent);
+        }
+
+        return mSessionList.get(mIndexCurrent);
     }
 
     public ServiceSession loadSession(Integer maBan) {
