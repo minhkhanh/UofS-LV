@@ -111,6 +111,23 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportForms\BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportForms\BillReportForm.aspx.cs">
+      <DependentUpon>BillReportForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportForms\BillReportForm.aspx.designer.cs">
+      <DependentUpon>BillReportForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForms\WebFormReport.Master.cs">
+      <DependentUpon>WebFormReport.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportForms\WebFormReport.Master.designer.cs">
+      <DependentUpon>WebFormReport.Master</DependentUpon>
+    </Compile>
     <Compile Include="Reports\BillReportData.cs" />
     <Compile Include="Reports\BillReportDataBinding.cs" />
     <Compile Include="Reports\PrintReport.cs" />
@@ -854,6 +871,7 @@
     <Content Include="Images\siteimages\templatemo_slider.jpg" />
     <Content Include="Images\siteimages\templatmeo_header.jpg" />
     <Content Include="LocalService.svc" />
+    <Content Include="ReportForms\BillReportForm.aspx" />
     <Content Include="Scripts\foodcategory\slider.js" />
     <Content Include="Scripts\jquery\Copy of custom_jquery.js" />
     <Content Include="Scripts\jquery\custom_jquery.js" />
@@ -1183,6 +1201,7 @@
     <None Include="Content\ckeditor\ckeditor.php" />
     <None Include="Content\ckeditor\ckeditor_php4.php" />
     <None Include="Content\ckeditor\ckeditor_php5.php" />
+    <Content Include="ReportForms\WebFormReport.Master" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

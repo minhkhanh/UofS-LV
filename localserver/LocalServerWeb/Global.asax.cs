@@ -21,7 +21,12 @@ namespace LocalServerWeb
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            //routes.Add(new ServiceRoute("LocalService", new ServiceHostFactory(), typeof(LocalService)));
+            //Custom route for reports
+            routes.MapPageRoute(
+             "ReportRoute",                         // Route name
+             "ReportForms/{reportname}",                // URL
+             "~/ReportForms/{reportname}.aspx"   // File
+             );
 
             routes.MapRoute(
                 "Default", // Route name
