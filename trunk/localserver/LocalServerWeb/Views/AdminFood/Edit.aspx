@@ -3,6 +3,7 @@
 <%@ Import Namespace="LocalServerDTO" %>
 <%@ Import Namespace="LocalServerWeb.Codes" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.AdminFood" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%:AdminFoodString.EditTitle %>
 </asp:Content>
@@ -151,7 +152,7 @@
                 <td>
                     <div class="image_food">
                         <img src="<%:SharedCode.GetHostApplicationAddress(Request)+(ViewData["monAn"] as MonAn).HinhAnh %>"
-                            alt="" /></div>
+                            alt="" width="100px" height="100px"/></div>
                 </td>
                 <td>
                 </td>
