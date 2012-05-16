@@ -91,6 +91,7 @@
     <Compile Include="Controllers\AdminOrderController.cs" />
     <Compile Include="Controllers\AdminProcessorController.cs" />
     <Compile Include="Controllers\AdminPromotionController.cs" />
+    <Compile Include="Controllers\AdminReportController.cs" />
     <Compile Include="Controllers\AdminSurchargeController.cs" />
     <Compile Include="Controllers\AdminTableController.cs" />
     <Compile Include="Controllers\AdminUnitController.cs" />
@@ -910,6 +911,7 @@
     <Content Include="Views\AdminPromotion\FoodPromotion.aspx" />
     <Content Include="Views\AdminPromotion\Index.aspx" />
     <Content Include="Views\AdminPromotion\InvoicePromotion.aspx" />
+    <Content Include="Views\AdminReport\Index.aspx" />
     <Content Include="Views\AdminSurcharge\Add.aspx" />
     <Content Include="Views\AdminSurcharge\AreaSurcharge.aspx" />
     <Content Include="Views\AdminSurcharge\Edit.aspx" />

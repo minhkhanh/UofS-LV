@@ -2,24 +2,31 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Web;
+using System.Web.Mvc;
 using LocalServerBUS;
 using LocalServerWeb.Codes;
+using LocalServerWeb.Reports;
 using Microsoft.Reporting.WebForms;
 
-namespace LocalServerWeb.Reports
+namespace LocalServerWeb.Controllers
 {
-    public class ReportManager
+    public class AdminReportController : BaseController
     {
-        public static bool PrintBill(int maHoaDon, int maNgonNgu)
+        //
+        // GET: /AdminReport/
+
+        public ActionResult Index()
         {
+            int maHoaDon = 1; //du lieu gia
+            int maNgonNgu = SharedCode.GetCurrentLanguage(Session).MaNgonNgu;
+            SharedCode.FillAdminMainMenu(ViewData, 2, -1);
             try
             {
                 var hoaDon = HoaDonBUS.LayHoaDon(maHoaDon);
-                if (hoaDon == null) return false;
+                if (hoaDon == null) return RedirectToAction("Index", "Error");
                 var thamSoBillPrinter = ThamSoBUS.LayThamSo("BillPrinter");
-                if (thamSoBillPrinter==null || thamSoBillPrinter.GiaTri.Length<=0) return false;
+                if (thamSoBillPrinter == null || thamSoBillPrinter.GiaTri.Length <= 0) return RedirectToAction("Index", "Error");
                 string deviceInfo =
                 @"<DeviceInfo>
                     <OutputFormat>EMF</OutputFormat>
@@ -30,7 +37,8 @@ namespace LocalServerWeb.Reports
                     <MarginRight>0.25in</MarginRight>
                     <MarginBottom>0.25in</MarginBottom>
                 </DeviceInfo>";
-                var printReport = new PrintReport(@"LocalServerWeb.Reports.BillReport.rdlc", thamSoBillPrinter.GiaTri, deviceInfo);
+                //var report = new PrintReport(@"LocalServerWeb.Reports.BillReport.rdlc", thamSoBillPrinter.GiaTri, deviceInfo);
+                
 
                 var datas = new List<BillReportData>();
                 var listChiTietHoaDon = ChiTietHoaDonBUS.LayNhieuChiTietHoaDon(hoaDon.MaHoaDon);
@@ -38,17 +46,17 @@ namespace LocalServerWeb.Reports
                 foreach (var chiTietHoaDon in listChiTietHoaDon)
                 {
                     datas.Add(new BillReportData
-                                  {
-                                      Stt = ++iCount,
-                                      DonGiaLuuTru = chiTietHoaDon.DonGiaLuuTru,
-                                      GiaTriKhuyenMaiLuuTru = chiTietHoaDon.GiaTriKhuyenMaiLuuTru,
-                                      SoLuong = chiTietHoaDon.SoLuong,
-                                      TenDonViTinh = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(chiTietHoaDon.DonViTinh.MaDonViTinh, maNgonNgu).TenDonViTinh,
-                                      TenMonAn = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(chiTietHoaDon.MonAn.MaMonAn, maNgonNgu).TenMonAn,
-                                      ThanhTien = chiTietHoaDon.ThanhTien
-                                  });
+                    {
+                        Stt = ++iCount,
+                        DonGiaLuuTru = chiTietHoaDon.DonGiaLuuTru,
+                        GiaTriKhuyenMaiLuuTru = chiTietHoaDon.GiaTriKhuyenMaiLuuTru,
+                        SoLuong = chiTietHoaDon.SoLuong,
+                        TenDonViTinh = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(chiTietHoaDon.DonViTinh.MaDonViTinh, maNgonNgu).TenDonViTinh,
+                        TenMonAn = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(chiTietHoaDon.MonAn.MaMonAn, maNgonNgu).TenMonAn,
+                        ThanhTien = chiTietHoaDon.ThanhTien
+                    });
                 }
-                printReport.AddDataSoruce(new ReportDataSource("BillReportData", datas));
+                ViewData["reportData"] = new ReportDataSource("BillReportData", datas);
 
                 var listParameter = new List<ReportParameter>();
                 listParameter.Add(new ReportParameter("MaHoaDon", hoaDon.MaHoaDon.ToString()));
@@ -57,16 +65,19 @@ namespace LocalServerWeb.Reports
                 listParameter.Add(new ReportParameter("TongTien", hoaDon.TongTien.ToString()));
                 listParameter.Add(new ReportParameter("TenBan", hoaDon.Ban.TenBan));
                 listParameter.Add(new ReportParameter("PhuThu", hoaDon.PhuThu.TenPhuThu));
-                printReport.SetParameters(listParameter.ToArray());
 
-                printReport.Print();
-                return true;
+                ViewData["reportParameter"] = listParameter;
+
+
+                ViewData["reportPath"] = "LocalServerWeb.Reports.BillReport.rdlc";// Path.Combine(HttpContext.Server.MapPath("/Reports"), "BillReport.rdlc");   
+                return View();
             }
             catch (Exception e)
             {
                 Console.Out.WriteLine(e.StackTrace);
             }
-            return false;
+            return RedirectToAction("Index", "Error");
         }
+
     }
 }
