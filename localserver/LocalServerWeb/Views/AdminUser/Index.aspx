@@ -1,4 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<PagedList<TaiKhoan>>" %>
+
+<%@ Import Namespace="LocalServerWeb.Codes" %>
 <%@ Import Namespace="LocalServerDTO" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.AdminUser" %>
 <%@ Import Namespace="Webdiyer.WebControls.Mvc" %>
@@ -61,7 +63,9 @@
 { %>
 		<tr <%: (iCount++%2==0)?"":"class=alternate-row" %> >
 			<td><%: ((ViewData["_page"]!=null)?(int)ViewData["_page"] : 1)*10-10 + iCount%></td>
-            <td>Avatar</td>
+            <td><div class="image_food">
+                        <img src="<%:SharedCode.GetHostApplicationAddress(Request)+taiKhoan.Avatar %>"
+                            alt="" width="50px" height="50px" /></div></td>
 			<td><%:taiKhoan.TenTaiKhoan %></td>
 			<td><%:taiKhoan.HoTen %></td>
 			<td><%:taiKhoan.NgaySinh %></td>

@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<PagedList<MonAn>>" %>
 
+<%@ Import Namespace="LocalServerWeb.Codes" %>
 <%@ Import Namespace="LocalServerDTO" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.AdminFood" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.Shared" %>
@@ -98,7 +99,9 @@
                     <%: ((ViewData["_page"]!=null)?(int)ViewData["_page"] : 1)*10-10 + iCount%>
                 </td>
                 <td>
-                    <%: monAn.HinhAnh %>
+                    <div class="image_food">
+                        <img src="<%:SharedCode.GetHostApplicationAddress(Request)+monAn.HinhAnh %>"
+                            alt="" width="50px" height="50px" /></div>
                 </td>
                 <td>
                     <%: monAn.TenMonAn %>
