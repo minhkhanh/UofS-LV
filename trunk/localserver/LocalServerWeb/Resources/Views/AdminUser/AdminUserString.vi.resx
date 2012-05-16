@@ -126,6 +126,9 @@
   <data name="AddUser" xml:space="preserve">
     <value>Thêm tài khoản</value>
   </data>
+  <data name="Avatar" xml:space="preserve">
+    <value>Hình đại diện</value>
+  </data>
   <data name="BOD" xml:space="preserve">
     <value>Ngày sinh</value>
   </data>
@@ -173,6 +176,9 @@
   </data>
   <data name="NoData" xml:space="preserve">
     <value>Hiện không có tài khoản nào.</value>
+  </data>
+  <data name="NumberOrdinary" xml:space="preserve">
+    <value>STT</value>
   </data>
   <data name="Options" xml:space="preserve">
     <value>Tùy chọn</value>

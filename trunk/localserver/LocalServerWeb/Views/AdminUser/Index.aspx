@@ -1,6 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<PagedList<TaiKhoan>>" %>
 <%@ Import Namespace="LocalServerDTO" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.AdminUser" %>
+<%@ Import Namespace="Webdiyer.WebControls.Mvc" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	<%:AdminUserString.Title %>
@@ -44,7 +45,8 @@
 		<!--  start product-table ..................................................................................... -->
 		<table border="0" width="100%" cellpadding="0" cellspacing="0" id="product-table">        
 		<tr>
-			<th class="table-header-repeat line-left"><a>Av</a> </th>
+			<th class="table-header-repeat line-left"><a><%: AdminUserString.NumberOrdinary %></a> </th>
+            <th class="table-header-repeat line-left minwidth-1"><a><%:AdminUserString.Avatar%></a>	</th>
 			<th class="table-header-repeat line-left minwidth-1"><a><%:AdminUserString.Username%></a>	</th>
 			<th class="table-header-repeat line-left minwidth-1"><a><%:AdminUserString.Name%></a></th>
 			<th class="table-header-repeat line-left"><a><%:AdminUserString.BOD%></a></th>
@@ -58,7 +60,8 @@
         <% foreach (var taiKhoan in (List<TaiKhoan>)ViewData["listTaiKhoan"])
 { %>
 		<tr <%: (iCount++%2==0)?"":"class=alternate-row" %> >
-			<td>Avatar</td>
+			<td><%: ((ViewData["_page"]!=null)?(int)ViewData["_page"] : 1)*10-10 + iCount%></td>
+            <td>Avatar</td>
 			<td><%:taiKhoan.TenTaiKhoan %></td>
 			<td><%:taiKhoan.HoTen %></td>
 			<td><%:taiKhoan.NgaySinh %></td>
@@ -98,5 +101,11 @@
 		</tbody></table>
     </div>
     <%} %>
+    <div style="float:right;">
+        <%= Html.Pager(Model, new PagerOptions { PageIndexParameterName = "page", 
+        CurrentPagerItemWrapperFormatString = "<span class=\"cpb\">{0}</span>", 
+        NumericPagerItemWrapperFormatString = "<span class=\"item\">{0}</span>", 
+        CssClass = "pages", SeparatorHtml = "" })%>
+    </div>
 </asp:Content>
 

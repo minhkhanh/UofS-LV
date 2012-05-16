@@ -12,15 +12,6 @@
     <%: AdminAreaString.Title %>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
-<style type="text/css">    
-    .pages { color:red;font-weight:bold; font-size:11px;}
-    .pages  .item{padding: 1px 6px;font-size: 13px;} /*numeric pager items*/
-    .pages .cpb {color:red;padding: 1px 6px;font-size: 13px;} /*current pager item*/
-    .pages a { text-decoration:none;padding: 0 5px; border: 1px solid #ddd;
-               margin:0 2px; color:#000;font-weight:normal;}
-    .pages a:hover { background-color: #E61636; color:#fff;
-                     border:1px solid #E61636; text-decoration:none;font-weight:normal;}
-</style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -78,7 +69,7 @@
                { %>
             <tr <%: (iCount++ %2 == 0)?"":"class=alternate-row" %>>
                 <td>
-                    <%: iCount %>
+                    <%: ((ViewData["_page"]!=null)?(int)ViewData["_page"] : 1)*10-10 + iCount%>
                 </td>
                 <td>
                     <%: khuVuc.TenKhuVuc %>

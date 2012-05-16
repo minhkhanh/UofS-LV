@@ -10,16 +10,23 @@ using LocalServerWeb.Resources.Views.AdminExchangeRate;
 using LocalServerWeb.Resources.Views.Shared;
 using LocalServerDTO;
 using LocalServerWeb.ViewModels;
+using Webdiyer.WebControls.Mvc;
 
 namespace LocalServerWeb.Controllers
 {
     public class AdminExchangeRateController : BaseController 
     {
-        public ActionResult Index()
+        public ActionResult Index(string page)
         {
             SharedCode.FillAdminMainMenu(ViewData, 3,8);
-            ViewData["listTiGia"] = TiGiaBUS.LayDanhSachTiGiaThatSu();
-            return View();
+
+            int _page = 1;
+            int.TryParse(page ?? "1", out _page);
+            PagedList<TiGia> pageListTiGia = TiGiaBUS.LayDanhSachTiGiaThatSu().AsQueryable().ToPagedList(_page, 10);
+            ViewData["listTiGia"] = pageListTiGia;
+            ViewData["_page"] = _page;
+
+            return View(pageListTiGia);
         }
 
         public ActionResult Delete(int? id)

@@ -10,16 +10,23 @@ using LocalServerWeb.Resources.Views.AdminCategory;
 using LocalServerWeb.Resources.Views.Shared;
 using LocalServerDTO;
 using LocalServerWeb.ViewModels;
+using Webdiyer.WebControls.Mvc;
 
 namespace LocalServerWeb.Controllers
 {
     public class AdminCategoryController : BaseController
     {
-        public ActionResult Index()
+        public ActionResult Index(string page)
         {
             SharedCode.FillAdminMainMenu(ViewData, 3, 0);
-            ViewData["listDanhMuc"] = LayDanhSachDanhMuc();
-            return View();
+
+            int _page = 1;
+            int.TryParse(page ?? "1", out _page);
+            PagedList<DanhMuc> pageListDanhMuc = LayDanhSachDanhMuc().AsQueryable().ToPagedList(_page, 10);
+            ViewData["listDanhMuc"] = pageListDanhMuc;
+            ViewData["_page"] = _page;
+
+            return View(pageListDanhMuc);
         }
 
         [HttpPost]
@@ -78,7 +85,18 @@ namespace LocalServerWeb.Controllers
         private List<DanhMuc> LayDanhSachDanhMuc()
         {
             int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
-            return DanhMucBUS.LayDanhSachDanhMucTheoMaNgonNgu(maNgonNgu, SharedString.NoInformation);
+            List<DanhMuc> listDanhMuc = DanhMucBUS.LayDanhSachDanhMucTheoMaNgonNgu(maNgonNgu, SharedString.NoInformation);
+            foreach(DanhMuc dm in listDanhMuc)
+            {
+                // DanhMuc co ID = 1 la danh muc ao, Khong Co, nen khong show
+                if (dm.MaDanhMuc == 1)
+                {
+                    listDanhMuc.Remove(dm);
+                    break;
+                }
+            }
+
+            return listDanhMuc;
         }
 
         public ActionResult Delete(int? id)

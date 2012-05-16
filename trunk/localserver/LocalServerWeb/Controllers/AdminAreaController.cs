@@ -21,9 +21,10 @@ namespace LocalServerWeb.Controllers
             SharedCode.FillAdminMainMenu(ViewData, 3, 4);
 
             int _page = 1;
-            int.TryParse(page, out _page);
-            PagedList<KhuVuc> pageListKhuVuc = KhuVucBUS.LayDanhSachKhuVuc().AsQueryable().ToPagedList(_page, 2);
+            int.TryParse(page??"1", out _page);
+            PagedList<KhuVuc> pageListKhuVuc = KhuVucBUS.LayDanhSachKhuVuc().AsQueryable().ToPagedList(_page, 10);
             ViewData["listKhuVuc"] = pageListKhuVuc;
+            ViewData["_page"] = _page;
 
             return View(pageListKhuVuc);
         }
