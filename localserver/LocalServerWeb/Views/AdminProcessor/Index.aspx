@@ -87,7 +87,7 @@
                     <%: boPhanCheBien.TaiKhoan.TenTaiKhoan %>
                 </td>
                 <td class="options-width">
-                    <%:Html.ActionLink(" ", "Edit", "AdminProcessor", new { id = boPhanCheBien.MaBoPhanCheBien }, new { title = AdminProcessorString.Edit, Class = "icon-6 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "Edit", "AdminProcessor", new { id = boPhanCheBien.MaBoPhanCheBien }, new { title = AdminProcessorString.Edit, Class = "icon-1 info-tooltip" })%>
                     <%:Html.ActionLink(" ", "Delete", "AdminProcessor", new { id = boPhanCheBien.MaBoPhanCheBien }, new { title = AdminProcessorString.Delete, Class = "icon-2 info-tooltip" })%>
                 </td>
             </tr>

@@ -110,7 +110,7 @@
                     <%: ban.Active?AdminTableString.Active:AdminTableString.Deactive %>
                 </td>
                 <td class="options-width">
-                    <%:Html.ActionLink(" ", "Edit", "AdminTable", new { id = ban.MaBan }, new { title = AdminTableString.Edit, Class = "icon-6 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "Edit", "AdminTable", new { id = ban.MaBan }, new { title = AdminTableString.Edit, Class = "icon-1 info-tooltip" })%>
                     <%:Html.ActionLink(" ", "Delete", "AdminTable", new { id = ban.MaBan }, new { title = AdminTableString.Delete, Class = "icon-2 info-tooltip" })%>
                 </td>
             </tr>

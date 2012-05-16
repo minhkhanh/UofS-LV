@@ -108,10 +108,10 @@
                     <%: khuyenMai.KetThuc %>
                 </td>
                 <td class="options-width">
-                    <%:Html.ActionLink(" ", "Edit", "AdminPromotion", new { id = khuyenMai.MaKhuyenMai }, new { title = AdminPromotionString.Edit, Class = "icon-6 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "Edit", "AdminPromotion", new { id = khuyenMai.MaKhuyenMai }, new { title = AdminPromotionString.Edit, Class = "icon-1 info-tooltip" })%>
                     <%:Html.ActionLink(" ", "Delete", "AdminPromotion", new { id = khuyenMai.MaKhuyenMai }, new { title = AdminPromotionString.Delete, Class = "icon-2 info-tooltip" })%>
-                    <%:Html.ActionLink(" ", "FoodPromotion", "AdminPromotion", new { id = khuyenMai.MaKhuyenMai }, new { title = AdminPromotionString.EditFoodPromotion, Class = "icon-2 info-tooltip" })%>
-                    <%:Html.ActionLink(" ", "InvoicePromotion", "AdminPromotion", new { id = khuyenMai.MaKhuyenMai }, new { title = AdminPromotionString.EditInvoicePromotion, Class = "icon-2 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "FoodPromotion", "AdminPromotion", new { id = khuyenMai.MaKhuyenMai }, new { title = AdminPromotionString.EditFoodPromotion, Class = "icon-3 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "InvoicePromotion", "AdminPromotion", new { id = khuyenMai.MaKhuyenMai }, new { title = AdminPromotionString.EditInvoicePromotion, Class = "icon-3 info-tooltip" })%>
                 </td>
             </tr>
             <% } %>

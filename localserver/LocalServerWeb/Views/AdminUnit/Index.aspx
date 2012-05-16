@@ -59,7 +59,7 @@
                     <%: donViTinh.TenDonViTinh %>
                 </td>
                 <td class="options-width">
-                    <%:Html.ActionLink(" ", "Edit", "AdminUnit", new { id = donViTinh.MaDonViTinh }, new { title = AdminUnitString.Edit, Class = "icon-6 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "Edit", "AdminUnit", new { id = donViTinh.MaDonViTinh }, new { title = AdminUnitString.Edit, Class = "icon-1 info-tooltip" })%>
                     <%:Html.ActionLink(" ", "Delete", "AdminUnit", new { id = donViTinh.MaDonViTinh }, new { title = AdminUnitString.Delete, Class = "icon-2 info-tooltip" })%>
                 </td>
             </tr>
