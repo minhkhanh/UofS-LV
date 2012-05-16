@@ -69,12 +69,12 @@ namespace LocalServerWeb.Controllers
                 ViewData["reportParameter"] = listParameter;
 
 
-                ViewData["reportPath"] = "LocalServerWeb.Reports.BillReport.rdlc";// Path.Combine(HttpContext.Server.MapPath("/Reports"), "BillReport.rdlc");   
+                ViewData["reportPath"] = Path.Combine(HttpContext.Server.MapPath("/Reports"), "BillReport.rdlc");   
                 return View();
             }
             catch (Exception e)
             {
-                Console.Out.WriteLine(e.StackTrace);
+                System.Diagnostics.Debug.Write(e.StackTrace);
             }
             return RedirectToAction("Index", "Error");
         }
