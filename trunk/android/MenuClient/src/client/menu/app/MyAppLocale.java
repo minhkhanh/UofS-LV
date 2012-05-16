@@ -14,16 +14,16 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 
-public class AppLocale {
+public class MyAppLocale {
 
-    ApplicationSettings mAppSettings;
+    MyAppSettings mAppSettings;
     private NgonNguDTO mLanguage = new NgonNguDTO();
 
-    public static final AppLocale createWithDefaultLanguage(ContentResolver resolver) {
-        AppLocale locale = new AppLocale();
+    public static final MyAppLocale createWithDefaultLanguage(ContentResolver resolver) {
+        MyAppLocale locale = new MyAppLocale();
 
-        Cursor cursor = resolver.query(NgonNguContract.URI_NGONNGU_MACDINH,
-                NgonNguContract.getFullProjection(), null, null, null);
+        Cursor cursor = resolver.query(NgonNguContract.URI_NGONNGU_MACDINH, null, null,
+                null, null);
         if (cursor.moveToFirst()) {
             // String value = cursor.getString(cursor
             // .getColumnIndex(ThamSoContract.COL_VALUE));

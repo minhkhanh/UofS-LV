@@ -14,8 +14,8 @@ public final class KhuVucContract implements BaseColumns {
     public static final String COL_MO_TA = "MoTa";
 
     public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" + _ID
-            + " INT PRIMARY KEY AUTOINCREMENT, " + COL_MA_KHU_VUC
-            + " INT NOT NULL UNIQUE, " + COL_TEN_KHU_VUC + " TEXT, " + COL_MO_TA
+            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_MA_KHU_VUC
+            + " INTEGER NOT NULL UNIQUE, " + COL_TEN_KHU_VUC + " TEXT, " + COL_MO_TA
             + " TEXT);";
 
     public static final Uri CONTENT_URI = Uri.parse(MyContentProvider.SCHEME

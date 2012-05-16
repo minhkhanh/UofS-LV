@@ -12,7 +12,7 @@ public class NhomTaiKhoanContract implements BaseColumns {
     public static final String COL_MO_TA = "MoTaNhom";
 
     public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" + _ID
-            + " INT PRIMARY KEY AUTOINCREMENT," + COL_SID + " INT NOT NULL UNIQUE,"
+            + " INTEGER PRIMARY KEY AUTOINCREMENT," + COL_SID + " INTEGER NOT NULL UNIQUE,"
             + COL_TEN_NHOM + " TEXT," + COL_MO_TA + " TEXT);";
 
     public static final Uri CONTENT_URI = Uri.parse(MyContentProvider.SCHEME

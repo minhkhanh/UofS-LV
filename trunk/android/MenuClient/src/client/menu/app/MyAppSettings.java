@@ -2,10 +2,10 @@ package client.menu.app;
 
 import android.app.Application;
 
-public final class ApplicationSettings {
+public final class MyAppSettings {
 
     private Application mApplication;
-    private AppLocale mLocale;
+    private MyAppLocale mLocale;
 
     public Application getApplication() {
         return mApplication;
@@ -15,17 +15,17 @@ public final class ApplicationSettings {
         mApplication = application;
     }
 
-    public AppLocale getLocale() {
+    public MyAppLocale getLocale() {
         return mLocale;
     }
 
-    public void setLocale(AppLocale locale) {
+    public void setLocale(MyAppLocale locale) {
         mLocale = locale;
     }
 
-    public ApplicationSettings(Application application) {
+    public MyAppSettings(Application application) {
         mApplication = application;
-        mLocale = AppLocale.createWithDefaultLanguage(mApplication
+        mLocale = MyAppLocale.createWithDefaultLanguage(mApplication
                 .getContentResolver());
     }
 }
