@@ -1,8 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<PagedList<BoPhanCheBien>>" %>
 
 <%@ Import Namespace="LocalServerDTO" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.AdminProcessor" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.Shared" %>
+<%@ Import Namespace="Webdiyer.WebControls.Mvc" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%: AdminProcessorString.Title %>
@@ -75,7 +76,7 @@
             %>
             <tr <%: (iCount++%2==0)?"":"class=alternate-row" %>>
                 <td>
-                    <%: iCount %>
+                    <%: ((ViewData["_page"]!=null)?(int)ViewData["_page"] : 1)*10-10 + iCount%>
                 </td>
                 <td>
                     <%: boPhanCheBien.TenBoPhan %>
@@ -116,4 +117,10 @@
         </table>
     </div>
     <%} %>
+    <div style="float:right;">
+        <%= Html.Pager(Model, new PagerOptions { PageIndexParameterName = "page", 
+        CurrentPagerItemWrapperFormatString = "<span class=\"cpb\">{0}</span>", 
+        NumericPagerItemWrapperFormatString = "<span class=\"item\">{0}</span>", 
+        CssClass = "pages", SeparatorHtml = "" })%>
+    </div>
 </asp:Content>

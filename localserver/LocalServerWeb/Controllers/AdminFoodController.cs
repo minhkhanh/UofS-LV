@@ -9,18 +9,25 @@ using LocalServerDTO;
 using LocalServerWeb.Codes;
 using LocalServerWeb.Resources.Views.AdminFood;
 using LocalServerWeb.Resources.Views.Shared;
+using Webdiyer.WebControls.Mvc;
 
 namespace LocalServerWeb.Controllers
 {
     public class AdminFoodController : BaseController
     {
 
-        public ActionResult Index()
+        public ActionResult Index(string page)
         {
             SharedCode.FillAdminMainMenu(ViewData, 2, 0);
-            ViewData["listMonAn"] = LayDanhSachMonAn();
             ViewData["listDanhMuc"] = LayDanhSachDanhMucLevelThapNhat();
-            return View();
+
+            int _page = 1;
+            int.TryParse(page ?? "1", out _page);
+            PagedList<MonAn> pageListMonAn = LayDanhSachMonAn().AsQueryable().ToPagedList(_page, 10);
+            ViewData["listMonAn"] = pageListMonAn;
+            ViewData["_page"] = _page;
+
+            return View(pageListMonAn);
         }
 
         public ActionResult Add()

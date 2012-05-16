@@ -10,16 +10,23 @@ using LocalServerWeb.Resources.Views.AdminSurcharge;
 using LocalServerWeb.Resources.Views.Shared;
 using LocalServerDTO;
 using LocalServerWeb.ViewModels;
+using Webdiyer.WebControls.Mvc;
 
 namespace LocalServerWeb.Controllers
 {
     public class AdminSurchargeController : BaseController
     {
-        public ActionResult Index()
+        public ActionResult Index(string page)
         {
             SharedCode.FillAdminMainMenu(ViewData, 3, 2);
-            ViewData["listPhuThu"] = PhuThuBUS.LayDanhSachPhuThu();
-            return View();
+
+            int _page = 1;
+            int.TryParse(page ?? "1", out _page);
+            PagedList<PhuThu> pageListPhuThu = PhuThuBUS.LayDanhSachPhuThu().AsQueryable().ToPagedList(_page, 10);
+            ViewData["listPhuThu"] = pageListPhuThu;
+            ViewData["_page"] = _page;
+
+            return View(pageListPhuThu);
         }
 
         public ActionResult Delete(int? id)

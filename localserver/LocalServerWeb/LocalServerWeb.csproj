@@ -367,6 +367,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\admincss\mvcpager.css" />
     <Content Include="Content\adminordercss\orderdetailcancelstatus.css" />
     <Content Include="Content\admincss\datePicker.css" />
     <Content Include="Content\admincss\myStyle.css" />

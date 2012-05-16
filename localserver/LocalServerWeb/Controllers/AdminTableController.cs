@@ -10,17 +10,25 @@ using LocalServerWeb.Resources.Views.AdminTable;
 using LocalServerWeb.Resources.Views.Shared;
 using LocalServerDTO;
 using LocalServerWeb.ViewModels;
+using Webdiyer.WebControls.Mvc;
 
 namespace LocalServerWeb.Controllers
 {
     public class AdminTableController : BaseController
     {
-        public ActionResult Index()
+        public ActionResult Index(string page)
         {
             SharedCode.FillAdminMainMenu(ViewData, 3, 6);
-            ViewData["listBan"] = BanBUS.LayDanhSachBan();
             ViewData["listKhuVuc"] = KhuVucBUS.LayDanhSachKhuVuc();
-            return View();
+
+
+            int _page = 1;
+            int.TryParse(page ?? "1", out _page);
+            PagedList<Ban> pageListBan = BanBUS.LayDanhSachBan().AsQueryable().ToPagedList(_page, 10);
+            ViewData["listBan"] = pageListBan;
+            ViewData["_page"] = _page;
+
+            return View(pageListBan);
         }
 
         [HttpPost]

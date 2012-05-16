@@ -8,6 +8,7 @@ using LocalServerBUS;
 using LocalServerWeb.Codes;
 using LocalServerWeb.Resources.Views.AdminUser;
 using LocalServerDTO;
+using Webdiyer.WebControls.Mvc;
 
 namespace LocalServerWeb.Controllers
 {
@@ -16,12 +17,18 @@ namespace LocalServerWeb.Controllers
         //
         // GET: /AdminUser/
 
-        public ActionResult Index()
+        public ActionResult Index(string page)
         {
             SharedCode.FillAdminMainMenu(ViewData, 1, 0);
-            ViewData["listTaiKhoan"] = TaiKhoanBUS.LayDanhSachTaiKhoan();
             ViewData["listNhomTaiKhoan"] = NhomTaiKhoanBUS.LayDanhSachNhomTaiKhoan();
-            return View();
+
+            int _page = 1;
+            int.TryParse(page ?? "1", out _page);
+            PagedList<TaiKhoan> pageListTaiKhoan = TaiKhoanBUS.LayDanhSachTaiKhoan().AsQueryable().ToPagedList(_page, 10);
+            ViewData["listTaiKhoan"] = pageListTaiKhoan;
+            ViewData["_page"] = _page;
+
+            return View(pageListTaiKhoan);
         }
 
         [HttpGet]

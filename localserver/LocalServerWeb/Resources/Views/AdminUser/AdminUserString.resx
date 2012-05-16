@@ -126,6 +126,9 @@
   <data name="AddUser" xml:space="preserve">
     <value>Add user</value>
   </data>
+  <data name="Avatar" xml:space="preserve">
+    <value>Avatar</value>
+  </data>
   <data name="BOD" xml:space="preserve">
     <value>BOD</value>
   </data>
@@ -173,6 +176,9 @@
   </data>
   <data name="NoData" xml:space="preserve">
     <value>Account list is empty.</value>
+  </data>
+  <data name="NumberOrdinary" xml:space="preserve">
+    <value>No.</value>
   </data>
   <data name="Options" xml:space="preserve">
     <value>Options</value>
