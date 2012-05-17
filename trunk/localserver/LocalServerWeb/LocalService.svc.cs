@@ -23,14 +23,14 @@ namespace LocalServerWeb
         }
 
         // Khu Vuc
-        public List<KhuVuc> LayDanhKhuVuc()
+        public List<KhuVuc> LayDanhKhuVuc(string junk)
         {
             return KhuVucBUS.LayDanhSachKhuVuc();
         }
 
         
         // Ban
-        public List<Ban> LayDanhSachBan()
+        public List<Ban> LayDanhSachBan(string junk)
         {
             var listBan = new List<Ban>();
             try
@@ -44,7 +44,7 @@ namespace LocalServerWeb
             return listBan;
         }
 
-        public Ban LayBan(int maBan)
+        public Ban LayBan(int maBan, string junk)
         {
             var ban = new Ban();
             try
@@ -58,7 +58,7 @@ namespace LocalServerWeb
             return ban;
         }
 
-        public List<Ban> LayDanhSachBanChinh()
+        public List<Ban> LayDanhSachBanChinh(string junk)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace LocalServerWeb
             return null;
         }
 
-        public List<Ban> LayDanhSachBanThuocBanChinh(int maBanChinh)
+        public List<Ban> LayDanhSachBanThuocBanChinh(int maBanChinh, string junk)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace LocalServerWeb
             return null;
         }
 
-        public List<Ban> LayDanhSachBanTheoKhuVuc(int maKhuVuc)
+        public List<Ban> LayDanhSachBanTheoKhuVuc(int maKhuVuc, string junk)
         {
             try
             {
@@ -139,7 +139,7 @@ namespace LocalServerWeb
 
 
         // Mon An
-        public List<MonAn> LayDanhSachMonAn()
+        public List<MonAn> LayDanhSachMonAn(string junk)
         {
             var listMonAn = new List<MonAn>();
             try
@@ -153,7 +153,7 @@ namespace LocalServerWeb
             return listMonAn;
         }
 
-        public List<MonAn> LayDanhSachMonAnTheoDanhMuc(int maDanhMuc)
+        public List<MonAn> LayDanhSachMonAnTheoDanhMuc(int maDanhMuc, string junk)
         {
             var listMonAn = new List<MonAn>();
             try
@@ -168,7 +168,7 @@ namespace LocalServerWeb
 
         }
 
-        public MonAn LayMonAn(int maMonAn)
+        public MonAn LayMonAn(int maMonAn, string junk)
         {
             var monAn = new MonAn();
             try
@@ -183,7 +183,7 @@ namespace LocalServerWeb
         }
         
         // Danh Muc
-        public List<DanhMuc> LayDanhSachDanhMuc()
+        public List<DanhMuc> LayDanhSachDanhMuc(string junk)
         {
             var listDanhMuc = new List<DanhMuc>();
             try
@@ -199,7 +199,7 @@ namespace LocalServerWeb
 
 
         // Chi Tiet Danh Muc Da Ngon Ngu
-        public ChiTietDanhMucDaNgonNgu LayChiTietDanhMucDaNgonNgu(int maDanhMuc, int maNgonNgu)
+        public ChiTietDanhMucDaNgonNgu LayChiTietDanhMucDaNgonNgu(int maDanhMuc, int maNgonNgu, string junk)
         {
             var ct = new ChiTietDanhMucDaNgonNgu();
             try
@@ -213,7 +213,7 @@ namespace LocalServerWeb
             return ct;
         }
 
-        public List<ChiTietDanhMucDaNgonNgu> LayDanhSachChiTietDanhMucDaNgonNgu()
+        public List<ChiTietDanhMucDaNgonNgu> LayDanhSachChiTietDanhMucDaNgonNgu(string junk)
         {
             var listChiTietDanhMucDaNgonNgu = new List<ChiTietDanhMucDaNgonNgu>();
             try
@@ -228,7 +228,7 @@ namespace LocalServerWeb
         }
 
         // Chi Tiet Don Vi Tinh Da Ngon Ngu
-        public ChiTietDonViTinhDaNgonNgu LayChiTietDonViTinhDaNgonNgu(int maDonViTinh, int maNgonNgu)
+        public ChiTietDonViTinhDaNgonNgu LayChiTietDonViTinhDaNgonNgu(int maDonViTinh, int maNgonNgu, string junk)
         {
             var ct = new ChiTietDonViTinhDaNgonNgu();
             try
@@ -242,7 +242,7 @@ namespace LocalServerWeb
             return ct;
         }
 
-        public List<ChiTietDonViTinhDaNgonNgu> LayDanhSachChiTietDonViTinhDaNgonNgu()
+        public List<ChiTietDonViTinhDaNgonNgu> LayDanhSachChiTietDonViTinhDaNgonNgu(string junk)
         {
             var listChiTietDonViTinhDaNgonNgu = new List<ChiTietDonViTinhDaNgonNgu>();
             try
@@ -258,7 +258,7 @@ namespace LocalServerWeb
 
 
         // Chi Tiet Mon An Da Ngon Ngu
-        public ChiTietMonAnDaNgonNgu LayChiTietMonAnDaNgonNgu(int maMonAn, int maNgonNgu)
+        public ChiTietMonAnDaNgonNgu LayChiTietMonAnDaNgonNgu(int maMonAn, int maNgonNgu, string junk)
         {
             var ct = new ChiTietMonAnDaNgonNgu();
             try
@@ -272,7 +272,7 @@ namespace LocalServerWeb
             return ct;
         }
 
-        public List<ChiTietMonAnDaNgonNgu> LayDanhSachChiTietMonAnDaNgonNgu()
+        public List<ChiTietMonAnDaNgonNgu> LayDanhSachChiTietMonAnDaNgonNgu(string junk)
         {
             var listChiTietMonAnDaNgonNgu = new List<ChiTietMonAnDaNgonNgu>();
             try
@@ -288,7 +288,7 @@ namespace LocalServerWeb
 
 
         // Chi Tiet Mon An Don Vi Tinh
-        public float LayChiTietMonAnDonViTinhDonGia(int maMonAn, int maDonViTinh)
+        public float LayChiTietMonAnDonViTinhDonGia(int maMonAn, int maDonViTinh, string junk)
         {
             float donGia = -1;
             try
@@ -302,7 +302,7 @@ namespace LocalServerWeb
             return donGia;
         }
 
-        public ChiTietMonAnDonViTinh LayChiTietMonAnDonViTinh(int maMonAn, int maDonViTinh)
+        public ChiTietMonAnDonViTinh LayChiTietMonAnDonViTinh(int maMonAn, int maDonViTinh, string junk)
         {
             var ct = new ChiTietMonAnDonViTinh();
             try
@@ -316,7 +316,7 @@ namespace LocalServerWeb
             return ct;
         }
 
-        public List<ChiTietMonAnDonViTinh> LayDanhSachChiTietMonAnDonViTinh()
+        public List<ChiTietMonAnDonViTinh> LayDanhSachChiTietMonAnDonViTinh(string junk)
         {
             var listChiTietMonAnDonViTinh = new List<ChiTietMonAnDonViTinh>();
             try
@@ -332,7 +332,7 @@ namespace LocalServerWeb
 
 
         // Ngon Ngu
-        public List<NgonNgu> LayDanhSachNgonNgu()
+        public List<NgonNgu> LayDanhSachNgonNgu(string junk)
         {
             var listNgonNgu = new List<NgonNgu>();
             try
@@ -348,7 +348,7 @@ namespace LocalServerWeb
 
 
         // Ti Gia
-        public List<TiGia> LayDanhSachTiGia()
+        public List<TiGia> LayDanhSachTiGia(string junk)
         {
             var listTiGia = new List<TiGia>();
             try
@@ -365,7 +365,7 @@ namespace LocalServerWeb
 
 
         // Nhom Tai Khoan
-        public List<NhomTaiKhoan> LayDanhSachNhomTaiKhoan()
+        public List<NhomTaiKhoan> LayDanhSachNhomTaiKhoan(string junk)
         {
             var listNhomTaiKhoan = new List<NhomTaiKhoan>();
             try
@@ -381,7 +381,7 @@ namespace LocalServerWeb
 
 
         // Tai Khoan
-        public List<TaiKhoan> LayDanhSachTaiKhoan()
+        public List<TaiKhoan> LayDanhSachTaiKhoan(string junk)
         {
             var listTaiKhoan = new List<TaiKhoan>();
             try
@@ -398,7 +398,7 @@ namespace LocalServerWeb
 
 
         // Phu Thu
-        public List<PhuThu> LayDanhSachPhuThu()
+        public List<PhuThu> LayDanhSachPhuThu(string junk)
         {
             var listPhuThu = new List<PhuThu>();
             try
@@ -414,7 +414,7 @@ namespace LocalServerWeb
 
 
         // Phu Thu Khu Vuc
-        public List<PhuThuKhuVuc> LayDanhSachPhuThuKhuVuc()
+        public List<PhuThuKhuVuc> LayDanhSachPhuThuKhuVuc(string junk)
         {
             var listPhuThuKhuVuc = new List<PhuThuKhuVuc>();
             try
@@ -428,7 +428,7 @@ namespace LocalServerWeb
             return listPhuThuKhuVuc;
         }
 
-        public List<PhuThuKhuVuc> LayDanhSachPhuThuKhuVucTheoMa(int maPhuThu)
+        public List<PhuThuKhuVuc> LayDanhSachPhuThuKhuVucTheoMa(int maPhuThu, string junk)
         {
             var listPhuThuKhuVuc = new List<PhuThuKhuVuc>();
             try
@@ -443,7 +443,7 @@ namespace LocalServerWeb
         }
 
         // Khuyen Mai
-        public List<KhuyenMai> LayDanhSachKhuyenMai()
+        public List<KhuyenMai> LayDanhSachKhuyenMai(string junk)
         {
             var listKhuyenMai = new List<KhuyenMai>();
             try
@@ -458,7 +458,7 @@ namespace LocalServerWeb
         }
 
         // Khuyen Mai Khu Vuc
-        public List<KhuyenMaiKhuVuc> LayDanhSachKhuyenMaiKhuVuc()
+        public List<KhuyenMaiKhuVuc> LayDanhSachKhuyenMaiKhuVuc(string junk)
         {
             var listKhuyenMaiKhuVuc = new List<KhuyenMaiKhuVuc>();
             try
@@ -472,7 +472,7 @@ namespace LocalServerWeb
             return listKhuyenMaiKhuVuc;
         }
 
-        public List<KhuyenMaiKhuVuc> LayDanhSachKhuyenMaiKhuVucTheoMa(int maKhuyenMai)
+        public List<KhuyenMaiKhuVuc> LayDanhSachKhuyenMaiKhuVucTheoMa(int maKhuyenMai, string junk)
         {
             var listKhuyenMaiKhuVuc = new List<KhuyenMaiKhuVuc>();
             try
@@ -488,7 +488,7 @@ namespace LocalServerWeb
 
 
         // Khuyen Mai Danh Muc
-        public List<KhuyenMaiDanhMuc> LayDanhSachKhuyenMaiDanhMuc()
+        public List<KhuyenMaiDanhMuc> LayDanhSachKhuyenMaiDanhMuc(string junk)
         {
             var listKhuyenMaiDanhMuc = new List<KhuyenMaiDanhMuc>();
             try
@@ -502,7 +502,7 @@ namespace LocalServerWeb
             return listKhuyenMaiDanhMuc;
         }
 
-        public List<KhuyenMaiDanhMuc> LayDanhSachKhuyenMaiDanhMucTheoMa(int maKhuyenMai)
+        public List<KhuyenMaiDanhMuc> LayDanhSachKhuyenMaiDanhMucTheoMa(int maKhuyenMai, string junk)
         {
             var listKhuyenMaiDanhMuc = new List<KhuyenMaiDanhMuc>();
             try
@@ -517,7 +517,7 @@ namespace LocalServerWeb
         }
 
         // Khuyen Mai Mon
-        public List<KhuyenMaiMon> LayDanhSachKhuyenMaiMon()
+        public List<KhuyenMaiMon> LayDanhSachKhuyenMaiMon(string junk)
         {
             var listKhuyenMaiMon = new List<KhuyenMaiMon>();
             try
@@ -531,7 +531,7 @@ namespace LocalServerWeb
             return listKhuyenMaiMon;
         }
 
-        public List<KhuyenMaiMon> LayDanhSachKhuyenMaiMonTheoMa(int maKhuyenMai)
+        public List<KhuyenMaiMon> LayDanhSachKhuyenMaiMonTheoMa(int maKhuyenMai, string junk)
         {
             var listKhuyenMaiMon = new List<KhuyenMaiMon>();
             try
@@ -546,7 +546,7 @@ namespace LocalServerWeb
         }
 
         // Khuyen Mai Hoa Don
-        public List<KhuyenMaiHoaDon> LayDanhSachKhuyenMaiHoaDon()
+        public List<KhuyenMaiHoaDon> LayDanhSachKhuyenMaiHoaDon(string junk)
         {
             var listKhuyenMaiHoaDon = new List<KhuyenMaiHoaDon>();
             try
@@ -560,7 +560,7 @@ namespace LocalServerWeb
             return listKhuyenMaiHoaDon;
         }
 
-        public List<KhuyenMaiHoaDon> LayDanhSachKhuyenMaiHoaDonTheoMa(int maKhuyenMai)
+        public List<KhuyenMaiHoaDon> LayDanhSachKhuyenMaiHoaDonTheoMa(int maKhuyenMai, string junk)
         {
             var listKhuyenMaiHoaDon = new List<KhuyenMaiHoaDon>();
             try
@@ -576,7 +576,7 @@ namespace LocalServerWeb
 
 
         // Bo Phan Che Bien
-        public List<BoPhanCheBien> LayDanhSachBoPhanCheBien()
+        public List<BoPhanCheBien> LayDanhSachBoPhanCheBien(string junk)
         {
             var listBoPhanCheBien = new List<BoPhanCheBien>();
             try
@@ -591,7 +591,7 @@ namespace LocalServerWeb
         }
 
         // Chi Tiet Mon Lien Quan
-        public List<ChiTietMonLienQuan> LayDanhSachChiTietMonLienQuan()
+        public List<ChiTietMonLienQuan> LayDanhSachChiTietMonLienQuan(string junk)
         {
             var listChiTietMonLienQuan = new List<ChiTietMonLienQuan>();
             try
@@ -605,7 +605,7 @@ namespace LocalServerWeb
             return listChiTietMonLienQuan;
         }
 
-        public List<ChiTietMonLienQuan> LayDanhSachChiTietMonLienQuanTheoMaMon(int maMonAn)
+        public List<ChiTietMonLienQuan> LayDanhSachChiTietMonLienQuanTheoMaMon(int maMonAn, string junk)
         {
             var listChiTietMonLienQuan = new List<ChiTietMonLienQuan>();
             try
@@ -622,7 +622,7 @@ namespace LocalServerWeb
         
 
         // Order
-        public List<Order> LayDanhSachOrder()
+        public List<Order> LayDanhSachOrder(string junk)
         {
             var listOrder = new List<Order>();
             try
@@ -636,7 +636,7 @@ namespace LocalServerWeb
             return listOrder;
         }
 
-        public Order LayOrder(int maOrder)
+        public Order LayOrder(int maOrder, string junk)
         {
             var Order = new Order();
             try
@@ -678,7 +678,7 @@ namespace LocalServerWeb
         }
 
         // Chi Tiet Order
-        public ChiTietOrder LayChiTietOrder(int maChiTietOrder)
+        public ChiTietOrder LayChiTietOrder(int maChiTietOrder, string junk)
         {
             var ChiTietOrder = new ChiTietOrder();
             try
@@ -733,7 +733,7 @@ namespace LocalServerWeb
 
 
         // Chi Tiet Huy Order
-        public ChiTietHuyOrder LayChiTietHuyOrder(int maChiTietHuyOrder)
+        public ChiTietHuyOrder LayChiTietHuyOrder(int maChiTietHuyOrder, string junk)
         {
             var ChiTietHuyOrder = new ChiTietHuyOrder();
             try
@@ -774,7 +774,7 @@ namespace LocalServerWeb
         }
 
         // Hoa Don
-        public HoaDon LayHoaDon(int maHoaDon)
+        public HoaDon LayHoaDon(int maHoaDon, string junk)
         {
             var hoaDon = new HoaDon();
             try
@@ -816,7 +816,7 @@ namespace LocalServerWeb
 
         
         // Chi Tiet Hoa Don
-        public ChiTietHoaDon LayChiTietHoaDon(int maChiTietHoaDon)
+        public ChiTietHoaDon LayChiTietHoaDon(int maChiTietHoaDon, string junk)
         {
             var ChiTietHoaDon = new ChiTietHoaDon();
             try
@@ -872,7 +872,7 @@ namespace LocalServerWeb
 
 
         // Picture
-        public Stream GetPicture(string path)
+        public Stream GetPicture(string path, string junk)
         {
             return PictureBUS.GetPicture(path);
         }

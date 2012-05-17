@@ -55,7 +55,7 @@ namespace LocalServerWeb.ReportsForm
                 listParameter.Add(new ReportParameter("TenBan", hoaDon.Ban.TenBan));
                 listParameter.Add(new ReportParameter("PhuThu", hoaDon.PhuThu.TenPhuThu));
 
-
+                
                 rvReport.Reset();
                 rvReport.LocalReport.ReportPath = Path.Combine(MapPath("/Reports"), "BillReport.rdlc");  //"LocalServerWeb.Reports.BillReport1.rdlc";//reportPath;
                 rvReport.LocalReport.SetParameters(listParameter);

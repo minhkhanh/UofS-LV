@@ -9,16 +9,23 @@ using LocalServerWeb.Codes;
 using LocalServerWeb.Resources.Views.AdminOrder;
 using LocalServerDTO;
 using LocalServerWeb.ViewModels;
+using Webdiyer.WebControls.Mvc;
 
 namespace LocalServerWeb.Controllers
 {
     public class AdminOrderController : BaseController
     {
-        public ActionResult Index()
+        public ActionResult Index(string page)
         {
             SharedCode.FillAdminMainMenu(ViewData, 3, 0);
-            ViewData["listOrder"] = OrderBUS.LayDanhSachOrder();
-            return View();
+
+            int _page = 1;
+            int.TryParse(page ?? "1", out _page);
+            PagedList<Order> pageListOrder = OrderBUS.LayDanhSachOrder().AsQueryable().ToPagedList(_page, 10);
+            ViewData["listOrder"] = pageListOrder;
+            ViewData["_page"] = _page;
+
+            return View(pageListOrder);
         }
 
         public ActionResult OrderDetail(int? id)
