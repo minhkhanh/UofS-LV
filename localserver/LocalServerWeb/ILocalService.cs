@@ -78,6 +78,12 @@ namespace LocalServerWeb
         [OperationContract]
         MonAn LayMonAn(int maMonAn, string junk);
 
+        
+        // Don Vi Tinh
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachDonViTinh?junk={junk}")]
+        [OperationContract]
+        List<DonViTinh> LayDanhSachDonViTinh(string junk);
+
 
         // Danh Muc
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachDanhMuc?junk={junk}")]
