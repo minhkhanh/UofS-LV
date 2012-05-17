@@ -181,6 +181,23 @@ namespace LocalServerWeb
             }
             return monAn;
         }
+
+
+        // Don Vi Tinh
+        public List<DonViTinh> LayDanhSachDonViTinh(string junk)
+        {
+            var listDonViTinh = new List<DonViTinh>();
+            try
+            {
+                listDonViTinh = DonViTinhBUS.LayDanhSachDonViTinh();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listDonViTinh;
+        }
+
         
         // Danh Muc
         public List<DanhMuc> LayDanhSachDanhMuc(string junk)
