@@ -107,18 +107,19 @@ public class DishListFragment extends ListFragment {
             }
 
             Integer maMonAn = adaptCursor.getInt(adaptCursor
-                    .getColumnIndex(MonAnContract.COL_MA_MON_AN));
+                    .getColumnIndex(MonAnContract.CL_MA_MON_AN));
 
             String[] projection = new String[] {
-                    DonViTinhMonAnContract.TABLE_NAME + "." + DonViTinhMonAnContract._ID,
-                    DonViTinhMonAnContract.COL_MA_MON_AN,
+                    DonViTinhMonAnContract.TABLE_NAME + "." + DonViTinhMonAnContract.CL_ID,
+                    DonViTinhMonAnContract.CL_MA_MON_AN,
                     DonViTinhMonAnContract.TABLE_NAME + "."
-                            + DonViTinhMonAnContract.COL_MA_DON_VI,
-                    DonViTinhMonAnContract.COL_DON_GIA,
-                    DonViTinhDaNgonNguContract.COL_TEN_DON_VI };
+                            + DonViTinhMonAnContract.CL_MA_DON_VI,
+                    DonViTinhMonAnContract.CL_DON_GIA,
+                    DonViTinhDaNgonNguContract.CL_TEN_DON_VI };
+            // String[] projection = null;
 
-            String selection = DonViTinhMonAnContract.COL_MA_MON_AN + "=? and "
-                    + DonViTinhDaNgonNguContract.COL_MA_NGON_NGU + "=?";
+            String selection = DonViTinhMonAnContract.CL_MA_MON_AN + "=? and "
+                    + DonViTinhDaNgonNguContract.CL_MA_NGON_NGU + "=?";
 
             String[] selArgs = new String[] {
                     maMonAn.toString(),
@@ -131,8 +132,8 @@ public class DishListFragment extends ListFragment {
 
             SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(),
                     R.layout.item_dish_units_spinner, cursor, new String[] {
-                            DonViTinhDaNgonNguContract.COL_TEN_DON_VI,
-                            DonViTinhMonAnContract.COL_DON_GIA }, new int[] {
+                            DonViTinhDaNgonNguContract.CL_TEN_DON_VI,
+                            DonViTinhMonAnContract.CL_DON_GIA }, new int[] {
                             R.id.textUnitName, R.id.textUnitPrice }, 0);
             adapter.setDropDownViewResource(R.layout.item_dish_units_spinner);
 
@@ -189,16 +190,18 @@ public class DishListFragment extends ListFragment {
         public Loader<Cursor> onCreateLoader(int id, Bundle args) {
             switch (id) {
                 case LOADER_ID_DISH_LIST:
-                    String[] proj = new String[] {
-                            MonAnContract.TABLE_NAME + "." + MonAnContract._ID,
-                            MonAnContract.TABLE_NAME + "." + MonAnContract.COL_MA_MON_AN,
-                            MonAnContract.COL_DIEM_DANH_GIA,
-                            MonAnContract.COL_SO_LUOT_RATE,
-                            MonAnDaNgonNguContract.COL_TEN_MON,
-                            MonAnDaNgonNguContract.COL_MO_TA_MON };
+                    // String[] proj = new String[] {
+                    // MonAnContract.TABLE_NAME + "." + MonAnContract.CL_ID,
+                    // MonAnContract.TABLE_NAME + "." +
+                    // MonAnContract.CL_MA_MON_AN,
+                    // MonAnContract.CL_DIEM_DANH_GIA,
+                    // MonAnContract.CL_SO_LUOT_RATE,
+                    // MonAnDaNgonNguContract.CL_TEN_MON,
+                    // MonAnDaNgonNguContract.CL_MO_TA_MON };
+                    String[] proj = null;
 
-                    String selection = MonAnContract.COL_MA_DANH_MUC + "=? and "
-                            + MonAnDaNgonNguContract.COL_MA_NGON_NGU + "=?";
+                    String selection = MonAnContract.CL_MA_DANH_MUC + "=? and "
+                            + MonAnDaNgonNguContract.CL_MA_NGON_NGU + "=?";
 
                     Integer sid = MyApplication.getSettings(getActivity()).getLocale()
                             .getLanguage().getMaNgonNgu();
@@ -250,8 +253,8 @@ public class DishListFragment extends ListFragment {
 
         setHasOptionsMenu(true);
 
-        String[] from = new String[] { MonAnDaNgonNguContract.COL_TEN_MON,
-                MonAnDaNgonNguContract.COL_MO_TA_MON };
+        String[] from = new String[] { MonAnDaNgonNguContract.CL_TEN_MON,
+                MonAnDaNgonNguContract.CL_MO_TA_MON };
         int[] to = new int[] { R.id.textDishName, R.id.textDishDescription };
         mListAdapter = new SimpleCursorAdapter(getActivity(), R.layout.item_dish_list,
                 null, from, to, 0);

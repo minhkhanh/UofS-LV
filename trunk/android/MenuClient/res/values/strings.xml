@@ -24,6 +24,9 @@
     <string name="func_onChildClick">onChildClick</string>
     <string name="letter_x">x</string>
     <string name="text_note">Ghi chú món</string>
+    <string name="text_select_one_unit">Hãy chọn một giá</string>
+    <string name="text_adjust_quantity">Hãy chọn số lượng</string>
+    <string name="text_give_note">Ghi chú món</string>
     
 
 </resources>

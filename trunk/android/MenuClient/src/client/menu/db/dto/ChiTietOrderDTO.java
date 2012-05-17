@@ -16,15 +16,15 @@ public class ChiTietOrderDTO {
     private Integer mMaDonViTinh;
 
     public void extractTo(Map<String, Object> map) {
-        map.put(ChiTietOrderContract._ID, mId);
-        map.put(ChiTietOrderContract.COL_SID, mMaChiTiet);
-        map.put(ChiTietOrderContract.COL_MA_ORDER, mMaOrder);
-        map.put(ChiTietOrderContract.COL_SO_LUONG, mSoLuong);
-        map.put(ChiTietOrderContract.COL_GHI_CHU, mGhiChu);
-        map.put(ChiTietOrderContract.COL_MA_BO_PHAN_CHE_BIEN, mMaBoPhanCheBien);
-        map.put(ChiTietOrderContract.COL_TINH_TRANG, mTinhTrang);
-        map.put(ChiTietOrderContract.COL_MA_MON_AN, mMaMonAn);
-        map.put(ChiTietOrderContract.COL_MA_DON_VI_TINH, mMaDonViTinh);
+        map.put(ChiTietOrderContract.CL_ID, mId);
+        map.put(ChiTietOrderContract.CL_SID, mMaChiTiet);
+        map.put(ChiTietOrderContract.CL_MA_ORDER, mMaOrder);
+        map.put(ChiTietOrderContract.CL_SO_LUONG, mSoLuong);
+        map.put(ChiTietOrderContract.CL_GHI_CHU, mGhiChu);
+        map.put(ChiTietOrderContract.CL_MA_BO_PHAN_CHE_BIEN, mMaBoPhanCheBien);
+        map.put(ChiTietOrderContract.CL_TINH_TRANG, mTinhTrang);
+        map.put(ChiTietOrderContract.CL_MA_MON_AN, mMaMonAn);
+        map.put(ChiTietOrderContract.CL_MA_DON_VI_TINH, mMaDonViTinh);
     }
 
     public Integer getId() {

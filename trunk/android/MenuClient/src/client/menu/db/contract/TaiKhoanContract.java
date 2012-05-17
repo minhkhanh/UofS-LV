@@ -4,29 +4,21 @@ import client.menu.db.provider.MyContentProvider;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-public class TaiKhoanContract implements BaseColumns {
+public class TaiKhoanContract  {
     public static final String TABLE_NAME = "TaiKhoan";
 
-    public static final String COL_MA_TAI_KHOAN = "MaTaiKhoan";
-    public static final String COL_TEN_TAI_KHOAN = "TenTaiKhoan";
-    public static final String COL_MAT_KHAU = "MatKhau";
-    public static final String COL_HO_TEN = "HoTen";
-    public static final String COL_NGAY_SINH = "NgaySinh";
-    public static final String COL_GIOI_TINH = "GioiTinh";
-    public static final String COL_CMND = "CMND";
-    public static final String COL_AVATAR = "Avatar";
-    public static final String COL_ACTIVE = "Active";
-    public static final String COL_MA_NHOM = "MaNhomTaiKhoan";
-
-    public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" + _ID
-            + " INTEGER PRIMARY KEY AUTOINCREMENT," + COL_MA_TAI_KHOAN
-            + " INTEGER NOT NULL UNIQUE," + COL_TEN_TAI_KHOAN + " TEXT," + COL_MAT_KHAU
-            + " TEXT," + COL_HO_TEN + " TEXT," + COL_NGAY_SINH + " DATE," + COL_GIOI_TINH
-            + " INTEGER," + COL_CMND + " TEXT," + COL_AVATAR + " TEXT," + COL_ACTIVE
-            + " INTEGER," + COL_MA_NHOM + " INTEGER REFERENCES "
-            + NhomTaiKhoanContract.TABLE_NAME + "(" + NhomTaiKhoanContract.COL_SID
-            + "));";
-
+    public static final String CL_ID = TABLE_NAME + BaseColumns._ID;
+    public static final String CL_MA_TAI_KHOAN = TABLE_NAME + ".MaTaiKhoan";
+    public static final String CL_TEN_TAI_KHOAN = TABLE_NAME + ".TenTaiKhoan";
+    public static final String CL_MAT_KHAU = TABLE_NAME + ".MatKhau";
+    public static final String CL_HO_TEN = TABLE_NAME + ".HoTen";
+    public static final String CL_NGAY_SINH = TABLE_NAME + ".NgaySinh";
+    public static final String CL_GIOI_TINH = TABLE_NAME + ".GioiTinh";
+    public static final String CL_CMND = TABLE_NAME + ".CMND";
+    public static final String CL_AVATAR = TABLE_NAME + ".Avatar";
+    public static final String CL_ACTIVE = TABLE_NAME + ".Active";
+    public static final String CL_MA_NHOM = TABLE_NAME + ".MaNhomTaiKhoan";
+    
     public static final Uri CONTENT_URI = Uri.parse(MyContentProvider.SCHEME
             + MyContentProvider.AUTHORITY + "/" + TABLE_NAME);
 }
