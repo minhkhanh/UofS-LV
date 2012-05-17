@@ -43,8 +43,8 @@ public class AreaListFragment extends ListFragment {
         public Loader<Cursor> onCreateLoader(int id, Bundle args) {
             switch (id) {
                 case LOADER_ID_AREA_LIST:
-                    String[] proj = new String[] { KhuVucContract._ID,
-                            KhuVucContract.COL_MA_KHU_VUC, KhuVucContract.COL_TEN_KHU_VUC };
+                    String[] proj = new String[] { KhuVucContract.CL_ID,
+                            KhuVucContract.CL_MA_KHU_VUC, KhuVucContract.CL_TEN_KHU_VUC };
                     CursorLoader loader = new CursorLoader(getActivity(),
                             KhuVucContract.CONTENT_URI, proj, null, null, null);
 
@@ -91,7 +91,7 @@ public class AreaListFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        String[] from = new String[] { KhuVucContract.COL_TEN_KHU_VUC };
+        String[] from = new String[] { KhuVucContract.CL_TEN_KHU_VUC };
         int[] to = new int[] { android.R.id.text1 };
 
         mAdapter = new SimpleCursorAdapter(getActivity(),
@@ -117,7 +117,7 @@ public class AreaListFragment extends ListFragment {
                 !cursor.moveToPosition(index))
             return;
 
-        int areaId = cursor.getInt(cursor.getColumnIndex(KhuVucContract.COL_MA_KHU_VUC));
+        int areaId = cursor.getInt(cursor.getColumnIndex(KhuVucContract.CL_MA_KHU_VUC));
 
         if (mIsDualPane) {
             getListView().setItemChecked(index, true);

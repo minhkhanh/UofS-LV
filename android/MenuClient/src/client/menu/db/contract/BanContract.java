@@ -4,24 +4,17 @@ import client.menu.db.provider.MyContentProvider;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-public final class BanContract implements BaseColumns {
+public final class BanContract {
     public static final String TABLE_NAME = "Ban";
 
-    public static final String COL_SID = "MaBan";
-    public static final String COL_MA_KHU_VUC = "MaKhuVuc";
-    public static final String COL_TEN_BAN = "TenBan";
-    public static final String COL_GHI_CHU = "GhiChu";
-    public static final String COL_ACTIVE = "Active";
-    public static final String COL_TINH_TRANG = "TinhTrang";
-    public static final String COL_MA_BAN_CHINH = "MaBanChinh";
-
-    public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" + _ID
-            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_SID
-            + " INTEGER NOT NULL UNIQUE, " + COL_MA_KHU_VUC + " INTEGER REFERENCES "
-            + KhuVucContract.TABLE_NAME + " ( " + KhuVucContract.COL_MA_KHU_VUC + "), "
-            + COL_TEN_BAN + " TEXT, " + COL_GHI_CHU + " TEXT, " + COL_ACTIVE
-            + " INTEGER DEFAULT ( 1 ), " + COL_TINH_TRANG + " INTEGER, " + COL_MA_BAN_CHINH
-            + " INTEGER REFERENCES " + TABLE_NAME + " (" + COL_SID + "));";
+    public static final String CL_ID = TABLE_NAME + BaseColumns._ID;
+    public static final String CL_SID = TABLE_NAME + ".MaBan";
+    public static final String CL_MA_KHU_VUC = TABLE_NAME + ".MaKhuVuc";
+    public static final String CL_TEN_BAN = TABLE_NAME + ".TenBan";
+    public static final String CL_GHI_CHU = TABLE_NAME + ".GhiChu";
+    public static final String CL_ACTIVE = TABLE_NAME + ".Active";
+    public static final String CL_TINH_TRANG = TABLE_NAME + ".TinhTrang";
+    public static final String CL_MA_BAN_CHINH = TABLE_NAME + ".MaBanChinh";
 
     public static final Uri CONTENT_URI = Uri.parse(MyContentProvider.SCHEME
             + MyContentProvider.AUTHORITY + "/" + TABLE_NAME);

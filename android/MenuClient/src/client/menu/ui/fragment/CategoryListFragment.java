@@ -71,15 +71,15 @@ public class CategoryListFragment extends ListFragment {
             switch (id) {
                 case LOADER_ID_CAT_LIST:
                     String[] proj = new String[] {
-                            DanhMucContract.TABLE_NAME + "." + DanhMucContract._ID,
+                            DanhMucContract.TABLE_NAME + "." + DanhMucContract.CL_ID,
                             DanhMucContract.TABLE_NAME + "."
-                                    + DanhMucContract.COL_MA_DANH_MUC,
-                            DanhMucDaNgonNguContract.COL_TEN_DANH_MUC };
+                                    + DanhMucContract.CL_MA_DANH_MUC,
+                            DanhMucDaNgonNguContract.CL_TEN_DANH_MUC };
                     Integer sid = MyApplication.getSettings(getActivity()).getLocale()
                             .getLanguage().getMaNgonNgu();
                     CursorLoader loader = new CursorLoader(getActivity(),
                             DanhMucContract.URI_DANHMUC_INNER_DANGONNGU, proj,
-                            DanhMucDaNgonNguContract.COL_MA_NGON_NGU + "=?",
+                            DanhMucDaNgonNguContract.CL_MA_NGON_NGU + "=?",
                             new String[] { sid.toString() }, null);
 
                     return loader;
@@ -104,7 +104,7 @@ public class CategoryListFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        String[] from = new String[] { DanhMucDaNgonNguContract.COL_TEN_DANH_MUC };
+        String[] from = new String[] { DanhMucDaNgonNguContract.CL_TEN_DANH_MUC };
         int[] to = new int[] { android.R.id.text1 };
 
         mAdapter = new SimpleCursorAdapter(getActivity(),
@@ -130,7 +130,7 @@ public class CategoryListFragment extends ListFragment {
             return;
 
         int maDanhMuc = cursor.getInt(cursor
-                .getColumnIndex(DanhMucContract.COL_MA_DANH_MUC));
+                .getColumnIndex(DanhMucContract.CL_MA_DANH_MUC));
 
         if (mIsDualPane) {
             getListView().setItemChecked(index, true);

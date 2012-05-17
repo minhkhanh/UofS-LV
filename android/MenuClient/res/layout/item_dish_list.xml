@@ -3,7 +3,7 @@
     android:id="@+id/itemDishList"
     android:layout_width="fill_parent"
     android:layout_height="128dp"
-    android:minHeight="128dp">
+    android:minHeight="128dp" >
 
     <ImageView
         android:id="@+id/imgDishAvatar"
@@ -12,13 +12,14 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:src="@drawable/dish_sample" />
-
+
     <RelativeLayout
+        android:id="@+id/relativeLayout1"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_toRightOf="@+id/imgDishAvatar"
         android:paddingLeft="5dp"
-        android:paddingTop="3dp">
+        android:paddingTop="3dp" >
 
         <TextView
             android:id="@+id/textDishName"
@@ -58,7 +59,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"/>
+            android:layout_alignParentLeft="true" android:contentDescription="@string/text_select_one_unit"/>
 
     </RelativeLayout>
 

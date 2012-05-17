@@ -108,10 +108,10 @@ public class TableGridFragment extends Fragment {
         public Loader<Cursor> onCreateLoader(int id, Bundle args) {
             switch (id) {
                 case LOADER_ID_TABLE_LIST:
-                    String[] proj = new String[] { BanContract._ID, BanContract.COL_SID,
-                            BanContract.COL_TEN_BAN };
+                    String[] proj = new String[] { BanContract.CL_ID, BanContract.CL_SID,
+                            BanContract.CL_TEN_BAN };
                     CursorLoader loader = new CursorLoader(getActivity(),
-                            BanContract.CONTENT_URI, proj, BanContract.COL_MA_KHU_VUC
+                            BanContract.CONTENT_URI, proj, BanContract.CL_MA_KHU_VUC
                                     + " = ?", new String[] { String.valueOf(mMaKhuVuc) },
                             null);
 
@@ -192,7 +192,7 @@ public class TableGridFragment extends Fragment {
 
         setHasOptionsMenu(true);
 
-        String[] from = new String[] { BanContract.COL_TEN_BAN };
+        String[] from = new String[] { BanContract.CL_TEN_BAN };
         int[] to = new int[] { R.id.TableCaption };
         mAdapter = new SimpleCursorAdapter(getActivity(), R.layout.item_table_grid, null,
                 from, to, 0);

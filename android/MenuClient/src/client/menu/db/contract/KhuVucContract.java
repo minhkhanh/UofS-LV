@@ -1,22 +1,16 @@
 package client.menu.db.contract;
 
-import client.menu.db.provider.MyContentProvider;
-import android.content.ContentValues;
-import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
+import client.menu.db.provider.MyContentProvider;
 
-public final class KhuVucContract implements BaseColumns {
+public final class KhuVucContract  {
     public static final String TABLE_NAME = "KhuVuc";
 
-    public static final String COL_MA_KHU_VUC = "MaKhuVuc";
-    public static final String COL_TEN_KHU_VUC = "TenKhuVuc";
-    public static final String COL_MO_TA = "MoTa";
-
-    public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" + _ID
-            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_MA_KHU_VUC
-            + " INTEGER NOT NULL UNIQUE, " + COL_TEN_KHU_VUC + " TEXT, " + COL_MO_TA
-            + " TEXT);";
+    public static final String CL_ID = TABLE_NAME + BaseColumns._ID;
+    public static final String CL_MA_KHU_VUC = TABLE_NAME + ".MaKhuVuc";
+    public static final String CL_TEN_KHU_VUC = TABLE_NAME + ".TenKhuVuc";
+    public static final String CL_MO_TA = TABLE_NAME + ".MoTa";
 
     public static final Uri CONTENT_URI = Uri.parse(MyContentProvider.SCHEME
             + MyContentProvider.AUTHORITY + "/" + TABLE_NAME);

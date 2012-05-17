@@ -41,7 +41,7 @@ public class OrderPreviewFragment extends ListFragment {
                 mQuantityList.set(i, mQuantityList.get(i) + 1);
 
                 Map<String, Object> map = adapterData.get(i);
-                map.put(ChiTietOrderContract.COL_SO_LUONG, mQuantityList.get(i));
+                map.put(ChiTietOrderContract.CL_SO_LUONG, mQuantityList.get(i));
 
                 adapterData.set(i, map);
                 return;
@@ -54,9 +54,9 @@ public class OrderPreviewFragment extends ListFragment {
         ++mItemCount;
 
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put(MonAnDaNgonNguContract.COL_TEN_MON, monAn.getTenMonAn());
-        map.put(DonViTinhDaNgonNguContract.COL_TEN_DON_VI, donViTinh.getTenDonViTinh());
-        map.put(ChiTietOrderContract.COL_SO_LUONG, 1);
+        map.put(MonAnDaNgonNguContract.CL_TEN_MON, monAn.getTenMonAn());
+        map.put(DonViTinhDaNgonNguContract.CL_TEN_DON_VI, donViTinh.getTenDonViTinh());
+        map.put(ChiTietOrderContract.CL_SO_LUONG, 1);
 
         adapterData.add(map);
     }
@@ -73,9 +73,9 @@ public class OrderPreviewFragment extends ListFragment {
 
         mListAdapter = new SimpleAdapter(getActivity(), adapterData,
                 R.layout.item_order_preview, new String[] {
-                        MonAnDaNgonNguContract.COL_TEN_MON,
-                        ChiTietOrderContract.COL_SO_LUONG,
-                        DonViTinhDaNgonNguContract.COL_TEN_DON_VI }, new int[] {
+                        MonAnDaNgonNguContract.CL_TEN_MON,
+                        ChiTietOrderContract.CL_SO_LUONG,
+                        DonViTinhDaNgonNguContract.CL_TEN_DON_VI }, new int[] {
                         R.id.textDishName, R.id.textQuantity, R.id.textUnitName });
 
         setListAdapter(mListAdapter);

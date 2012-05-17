@@ -26,7 +26,7 @@ public class MyAppLocale {
                 null, null);
         if (cursor.moveToFirst()) {
             // String value = cursor.getString(cursor
-            // .getColumnIndex(ThamSoContract.COL_VALUE));
+            // .getColumnIndex(ThamSoContract.CL_VALUE));
             //
             // Cursor cursor2 = resolver.query(
             // Uri.withAppendedPath(NgonNguContract.CONTENT_URI, value), null,

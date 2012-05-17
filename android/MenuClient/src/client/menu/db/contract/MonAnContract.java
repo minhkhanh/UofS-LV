@@ -6,27 +6,17 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-public final class MonAnContract implements BaseColumns {
+public final class MonAnContract  {
     public static final String TABLE_NAME = "MonAn";
 
-    // public static final String COL_ID = "_id";
-    public static final String COL_MA_MON_AN = "MaMonAn";
-    public static final String COL_HINH_ANH = "HinhAnh";
-    public static final String COL_DIEM_DANH_GIA = "DiemDanhGia";
-    public static final String COL_SO_LUOT_RATE = "SoLuotDanhGia";
-    public static final String COL_DEFAULT_UNIT_ID = "MaDonViTinhMacDinh";
-    public static final String COL_MA_DANH_MUC = "MaDanhMuc";
-    public static final String COL_NGUNG_BAN = "NgungBan";
-
-    public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" + _ID
-            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_MA_MON_AN
-            + " INTEGER NOT NULL UNIQUE, " + COL_HINH_ANH + " TEXT, " + COL_DIEM_DANH_GIA
-            + " REAL NOT NULL DEFAULT (0), " + COL_SO_LUOT_RATE
-            + " INTEGER NOT NULL DEFAULT (0), " + COL_DEFAULT_UNIT_ID + " INTEGER REFERENCES "
-            + DonViTinhContract.TABLE_NAME + " (" + DonViTinhContract.COL_MA_DON_VI_TINH
-            + ")," + COL_MA_DANH_MUC + " INTEGER REFERENCES " + DanhMucContract.TABLE_NAME
-            + " (" + DanhMucContract.COL_MA_DANH_MUC + ")," + COL_NGUNG_BAN
-            + " INTEGER NOT NULL DEFAULT (0));";
+    public static final String CL_ID = TABLE_NAME + BaseColumns._ID;
+    public static final String CL_MA_MON_AN = TABLE_NAME + ".MaMonAn";
+    public static final String CL_HINH_ANH = TABLE_NAME + ".HinhAnh";
+    public static final String CL_DIEM_DANH_GIA = TABLE_NAME + ".DiemDanhGia";
+    public static final String CL_SO_LUOT_RATE = TABLE_NAME + ".SoLuotDanhGia";
+    public static final String CL_DEFAULT_UNIT_ID = TABLE_NAME + ".MaDonViTinhMacDinh";
+    public static final String CL_MA_DANH_MUC = TABLE_NAME + ".MaDanhMuc";
+    public static final String CL_NGUNG_BAN = TABLE_NAME + ".NgungBan";
 
     public static final String PATH_MONAN_INNER_DANGONNGU = "01";
 
@@ -38,17 +28,16 @@ public final class MonAnContract implements BaseColumns {
     public static ContentValues extractData(Cursor cursor) {
         ContentValues values = new ContentValues();
 
-        values.put(_ID, cursor.getInt(cursor.getColumnIndex(_ID)));
-        values.put(COL_MA_MON_AN, cursor.getInt(cursor.getColumnIndex(COL_MA_MON_AN)));
-        values.put(COL_HINH_ANH, cursor.getString(cursor.getColumnIndex(COL_HINH_ANH)));
-        values.put(COL_DIEM_DANH_GIA,
-                cursor.getFloat(cursor.getColumnIndex(COL_DIEM_DANH_GIA)));
-        values.put(COL_SO_LUOT_RATE,
-                cursor.getInt(cursor.getColumnIndex(COL_SO_LUOT_RATE)));
-        values.put(COL_DEFAULT_UNIT_ID,
-                cursor.getInt(cursor.getColumnIndex(COL_DEFAULT_UNIT_ID)));
-        values.put(COL_MA_DANH_MUC, cursor.getInt(cursor.getColumnIndex(COL_MA_DANH_MUC)));
-        values.put(COL_NGUNG_BAN, cursor.getBlob(cursor.getColumnIndex(COL_NGUNG_BAN)));
+        values.put(CL_ID, cursor.getInt(cursor.getColumnIndex(CL_ID)));
+        values.put(CL_MA_MON_AN, cursor.getInt(cursor.getColumnIndex(CL_MA_MON_AN)));
+        values.put(CL_HINH_ANH, cursor.getString(cursor.getColumnIndex(CL_HINH_ANH)));
+        values.put(CL_DIEM_DANH_GIA,
+                cursor.getFloat(cursor.getColumnIndex(CL_DIEM_DANH_GIA)));
+        values.put(CL_SO_LUOT_RATE, cursor.getInt(cursor.getColumnIndex(CL_SO_LUOT_RATE)));
+        values.put(CL_DEFAULT_UNIT_ID,
+                cursor.getInt(cursor.getColumnIndex(CL_DEFAULT_UNIT_ID)));
+        values.put(CL_MA_DANH_MUC, cursor.getInt(cursor.getColumnIndex(CL_MA_DANH_MUC)));
+        values.put(CL_NGUNG_BAN, cursor.getBlob(cursor.getColumnIndex(CL_NGUNG_BAN)));
 
         return values;
     }

@@ -1,5 +1,6 @@
 package client.menu.util;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -17,6 +18,18 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 public final class U {
+
+    public static final String convertStreamToString(InputStream is) {
+        try {
+            return new java.util.Scanner(is).useDelimiter("\\A").next();
+        } catch (java.util.NoSuchElementException e) {
+            return "";
+        }
+    }
+
+    public static final void logOwnTag(String msg) {
+        Log.d(C.TAG, msg);
+    }
 
     public static final void toastText(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
@@ -37,7 +50,7 @@ public final class U {
             activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         }
 
-        Log.d(C.TAG, "restartActivity : " + activity);
+        U.logOwnTag("restartActivity : " + activity.getClass().toString());
     }
 
     public static final View extractViewFromParent(ViewGroup parent, int id) {

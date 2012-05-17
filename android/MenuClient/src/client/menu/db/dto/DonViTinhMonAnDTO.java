@@ -13,22 +13,22 @@ public class DonViTinhMonAnDTO {
         DonViTinhMonAnDTO obj = new DonViTinhMonAnDTO();
 
         int index;
-        if ((index = cursor.getColumnIndex(DonViTinhMonAnContract._ID)) != -1) {
+        if ((index = cursor.getColumnIndex(DonViTinhMonAnContract.CL_ID)) != -1) {
             obj.mId = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(DonViTinhMonAnContract.COL_MA_MON_AN)) != -1) {
+        if ((index = cursor.getColumnIndex(DonViTinhMonAnContract.CL_MA_MON_AN)) != -1) {
             obj.mMaMonAn = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(DonViTinhMonAnContract.COL_MA_DON_VI)) != -1) {
+        if ((index = cursor.getColumnIndex(DonViTinhMonAnContract.CL_MA_DON_VI)) != -1) {
             obj.mMaDonViTinh = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(DonViTinhMonAnContract.COL_MA_MON_AN)) != -1) {
+        if ((index = cursor.getColumnIndex(DonViTinhMonAnContract.CL_MA_MON_AN)) != -1) {
             obj.mMaMonAn = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(DonViTinhMonAnContract.COL_MA_DON_VI)) != -1) {
+        if ((index = cursor.getColumnIndex(DonViTinhMonAnContract.CL_MA_DON_VI)) != -1) {
             obj.mMaDonViTinh = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(DonViTinhMonAnContract.COL_DON_GIA)) != -1) {
+        if ((index = cursor.getColumnIndex(DonViTinhMonAnContract.CL_DON_GIA)) != -1) {
             obj.mDonGia = cursor.getFloat(index);
         }
 

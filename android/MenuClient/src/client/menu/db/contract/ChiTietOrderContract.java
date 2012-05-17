@@ -4,27 +4,18 @@ import client.menu.db.provider.MyContentProvider;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-public class ChiTietOrderContract implements BaseColumns {
+public class ChiTietOrderContract  {
     public static final String TABLE_NAME = "ChiTietOrder";
 
-    public static final String COL_SID = "MaChiTietOrder";
-    public static final String COL_MA_ORDER = "MaOrder";
-    public static final String COL_SO_LUONG = "SoLuong";
-    public static final String COL_GHI_CHU = "GhiChu";
-    public static final String COL_MA_BO_PHAN_CHE_BIEN = "MaBoPhanCheBien";
-    public static final String COL_TINH_TRANG = "TinhTrang";
-    public static final String COL_MA_MON_AN = "MaMonAn";
-    public static final String COL_MA_DON_VI_TINH = "MaDonViTinh";
-
-    public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" + _ID
-            + " INTEGER PRIMARY KEY AUTOINCREMENT," + COL_SID + " INTEGER NOT NULL UNIQUE,"
-            + COL_MA_ORDER + " INTEGER," + COL_SO_LUONG + " INTEGER," + COL_GHI_CHU + " TEXT,"
-            + COL_MA_BO_PHAN_CHE_BIEN + " INTEGER," + COL_TINH_TRANG
-            + " INTEGER NOT NULL DEFAULT 0," + COL_MA_MON_AN + " INTEGER," + COL_MA_DON_VI_TINH
-            + " INTEGER," + "FOREIGN KEY (" + COL_MA_MON_AN + "," + COL_MA_DON_VI_TINH
-            + ") REFERENCES " + DonViTinhMonAnContract.TABLE_NAME + "("
-            + DonViTinhMonAnContract.COL_MA_MON_AN + ","
-            + DonViTinhMonAnContract.COL_MA_DON_VI + "));";
+    public static final String CL_ID = TABLE_NAME + BaseColumns._ID;
+    public static final String CL_SID = TABLE_NAME + ".MaChiTietOrder";
+    public static final String CL_MA_ORDER = TABLE_NAME + ".MaOrder";
+    public static final String CL_SO_LUONG = TABLE_NAME + ".SoLuong";
+    public static final String CL_GHI_CHU = TABLE_NAME + ".GhiChu";
+    public static final String CL_MA_BO_PHAN_CHE_BIEN = TABLE_NAME + ".MaBoPhanCheBien";
+    public static final String CL_TINH_TRANG = TABLE_NAME + ".TinhTrang";
+    public static final String CL_MA_MON_AN = TABLE_NAME + ".MaMonAn";
+    public static final String CL_MA_DON_VI_TINH = TABLE_NAME + ".MaDonViTinh";
 
     public static final Uri CONTENT_URI = Uri.parse(MyContentProvider.SCHEME
             + MyContentProvider.AUTHORITY + "/" + TABLE_NAME);

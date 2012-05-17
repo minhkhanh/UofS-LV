@@ -18,28 +18,28 @@ public class MonAnDTO {
 
         int index;
 
-        if ((index = cursor.getColumnIndex(MonAnContract._ID)) != -1) {
+        if ((index = cursor.getColumnIndex(MonAnContract.CL_ID)) != -1) {
             monAn.mId = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(MonAnContract.COL_MA_MON_AN)) != -1) {
+        if ((index = cursor.getColumnIndex(MonAnContract.CL_MA_MON_AN)) != -1) {
             monAn.mMaMonAn = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(MonAnContract.COL_HINH_ANH)) != -1) {
+        if ((index = cursor.getColumnIndex(MonAnContract.CL_HINH_ANH)) != -1) {
             monAn.mHinhAnh = cursor.getString(index);
         }
-        if ((index = cursor.getColumnIndex(MonAnContract.COL_DIEM_DANH_GIA)) != -1) {
+        if ((index = cursor.getColumnIndex(MonAnContract.CL_DIEM_DANH_GIA)) != -1) {
             monAn.mDiemDanhGia = cursor.getFloat(index);
         }
-        if ((index = cursor.getColumnIndex(MonAnContract.COL_SO_LUOT_RATE)) != -1) {
+        if ((index = cursor.getColumnIndex(MonAnContract.CL_SO_LUOT_RATE)) != -1) {
             monAn.mSoLuotDanhGia = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(MonAnContract.COL_DEFAULT_UNIT_ID)) != -1) {
+        if ((index = cursor.getColumnIndex(MonAnContract.CL_DEFAULT_UNIT_ID)) != -1) {
             monAn.mMaDonViTinhMacDinh = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(MonAnContract.COL_MA_DANH_MUC)) != -1) {
+        if ((index = cursor.getColumnIndex(MonAnContract.CL_MA_DANH_MUC)) != -1) {
             monAn.mMaDanhMuc = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(MonAnContract.COL_NGUNG_BAN)) != -1) {
+        if ((index = cursor.getColumnIndex(MonAnContract.CL_NGUNG_BAN)) != -1) {
             monAn.mNgungBan = Boolean.valueOf(cursor.getString(index));
         }
 

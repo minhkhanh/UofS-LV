@@ -6,18 +6,14 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-public final class NgonNguContract implements BaseColumns {
+public final class NgonNguContract  {
     public static final String TABLE_NAME = "NgonNgu";
 
-    public static final String COL_MA_NGON_NGU = "MaNgonNgu";
-    public static final String COL_TEN_NGON_NGU = "TenNgonNgu";
-    public static final String COL_KI_HIEU = "KiHieu";
-
-    public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" + _ID
-            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_MA_NGON_NGU
-            + " INTEGER NOT NULL UNIQUE, " + COL_TEN_NGON_NGU + " TEXT, " + COL_KI_HIEU
-            + " TEXT);";
-
+    public static final String CL_ID = TABLE_NAME + BaseColumns._ID;
+    public static final String CL_MA_NGON_NGU = TABLE_NAME + ".MaNgonNgu";
+    public static final String CL_TEN_NGON_NGU = TABLE_NAME + ".TenNgonNgu";
+    public static final String CL_KI_HIEU = TABLE_NAME + ".KiHieu";
+    
     public static final String PATH_NGONNGU_MACDINH = "01";
 
     public static final Uri CONTENT_URI = Uri.parse(MyContentProvider.SCHEME
@@ -28,17 +24,17 @@ public final class NgonNguContract implements BaseColumns {
     public static final ContentValues extractData(Cursor cursor) {
         ContentValues values = new ContentValues();
 
-        values.put(_ID, cursor.getInt(cursor.getColumnIndex(_ID)));
-        values.put(COL_MA_NGON_NGU, cursor.getInt(cursor.getColumnIndex(COL_MA_NGON_NGU)));
-        values.put(COL_TEN_NGON_NGU,
-                cursor.getString(cursor.getColumnIndex(COL_TEN_NGON_NGU)));
-        values.put(COL_KI_HIEU, cursor.getString(cursor.getColumnIndex(COL_KI_HIEU)));
+        values.put(CL_ID, cursor.getInt(cursor.getColumnIndex(CL_ID)));
+        values.put(CL_MA_NGON_NGU, cursor.getInt(cursor.getColumnIndex(CL_MA_NGON_NGU)));
+        values.put(CL_TEN_NGON_NGU,
+                cursor.getString(cursor.getColumnIndex(CL_TEN_NGON_NGU)));
+        values.put(CL_KI_HIEU, cursor.getString(cursor.getColumnIndex(CL_KI_HIEU)));
 
         return values;
     }
 
     public static final String[] getFullProjection() {
-        return new String[] { TABLE_NAME + "." + _ID, COL_MA_NGON_NGU, COL_TEN_NGON_NGU,
-                COL_KI_HIEU };
+        return new String[] { TABLE_NAME + "." + CL_ID, CL_MA_NGON_NGU, CL_TEN_NGON_NGU,
+                CL_KI_HIEU };
     }
 }

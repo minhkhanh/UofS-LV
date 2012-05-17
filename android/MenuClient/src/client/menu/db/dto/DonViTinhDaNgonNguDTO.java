@@ -14,17 +14,17 @@ public class DonViTinhDaNgonNguDTO {
         DonViTinhDaNgonNguDTO obj = new DonViTinhDaNgonNguDTO();
 
         int index;
-        if ((index = cursor.getColumnIndex(DonViTinhDaNgonNguContract._ID)) != -1) {
+        if ((index = cursor.getColumnIndex(DonViTinhDaNgonNguContract.CL_ID)) != -1) {
             obj.mId = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(DonViTinhDaNgonNguContract.COL_MA_NGON_NGU)) != -1) {
+        if ((index = cursor.getColumnIndex(DonViTinhDaNgonNguContract.CL_MA_NGON_NGU)) != -1) {
             obj.mMaNgonNgu = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(DonViTinhDaNgonNguContract.COL_MA_DON_VI)) != -1) {
+        if ((index = cursor.getColumnIndex(DonViTinhDaNgonNguContract.CL_MA_DON_VI)) != -1) {
             obj.mMaDonViTinh = cursor.getInt(index);
         }
         if ((index = cursor
-                .getColumnIndex(DonViTinhDaNgonNguContract.COL_TEN_DON_VI)) != -1) {
+                .getColumnIndex(DonViTinhDaNgonNguContract.CL_TEN_DON_VI)) != -1) {
             obj.mTenDonViTinh = cursor.getString(index);
         }
 
