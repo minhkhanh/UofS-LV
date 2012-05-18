@@ -12,7 +12,7 @@ public class MyApplication extends Application {
 
     private SessionManager mSessionManager;
 
-    public static MyAppSettings getSettings(Activity activity) {
+    public static final MyAppSettings getSettings(Activity activity) {
         Application app = activity.getApplication();
         if (app instanceof MyApplication) {
             return ((MyApplication) app).gSettings;
@@ -21,7 +21,7 @@ public class MyApplication extends Application {
         throw new IllegalArgumentException(C.TAG + EX_MSG_01);
     }
 
-    public static SessionManager getSessionManager(Activity activity) {
+    public static final SessionManager getSessionManager(Activity activity) {
         Application app = activity.getApplication();
         if (app instanceof MyApplication) {
             return ((MyApplication) app).mSessionManager;

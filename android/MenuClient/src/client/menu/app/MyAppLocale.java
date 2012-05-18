@@ -6,6 +6,7 @@ import client.menu.db.contract.NgonNguContract;
 import client.menu.db.contract.ThamSoContract;
 import client.menu.db.dto.NgonNguDTO;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -18,6 +19,11 @@ public class MyAppLocale {
 
     MyAppSettings mAppSettings;
     private NgonNguDTO mLanguage = new NgonNguDTO();
+    
+    public static final NgonNguDTO getCurrentLanguage(Activity activity) {
+        MyAppLocale appLocale = MyAppSettings.getCurrentAppLocale(activity);
+        return appLocale.mLanguage;
+    }
 
     public static final MyAppLocale createWithDefaultLanguage(ContentResolver resolver) {
         MyAppLocale locale = new MyAppLocale();

@@ -3,26 +3,19 @@ package client.menu.ui.fragment;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import client.menu.R;
-import client.menu.app.MyAppSettings;
 import client.menu.app.MyApplication;
 import client.menu.db.contract.DanhMucContract;
 import client.menu.db.contract.DanhMucDaNgonNguContract;
-import client.menu.db.contract.KhuVucContract;
-import client.menu.db.contract.NgonNguContract;
-import client.menu.db.dto.DanhMucDTO;
 
 public class CategoryListFragment extends ListFragment {
 

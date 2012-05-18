@@ -7,10 +7,10 @@ import android.provider.BaseColumns;
 public final class DonViTinhMonAnContract  {
     public static final String TABLE_NAME = "ChiTietMonAnDonViTinh";
 
-    public static final String CL_ID = TABLE_NAME + BaseColumns._ID;
-    public static final String CL_MA_MON_AN = TABLE_NAME + ".MaMonAn";
-    public static final String CL_MA_DON_VI = TABLE_NAME + ".MaDonViTinh";
-    public static final String CL_DON_GIA = TABLE_NAME + ".DonGia";
+    public static final String CL_ID = BaseColumns._ID;
+    public static final String CL_MA_MON_AN = "MaMonAn";
+    public static final String CL_MA_DON_VI = "MaDonViTinh";
+    public static final String CL_DON_GIA = "DonGia";
 
     public static final String PATH_DONVITINHMONAN_INNER_DANGONNGU = "01";
 

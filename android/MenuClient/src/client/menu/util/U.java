@@ -2,22 +2,47 @@ package client.menu.util;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.List;
 
-import client.menu.db.contract.ChiTietOrderContract;
-import client.menu.db.contract.MonAnContract;
+import client.menu.bus.LoadDishUnitsAsyncTask;
 
 import android.app.Activity;
-import android.content.ContentValues;
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 public final class U {
+    
+    @SuppressWarnings("rawtypes")
+    public static final void cancelAsyncTasks(ArrayList<AsyncTask> tasks) {
+        for (int i = 0; i < tasks.size(); ++i) {
+            AsyncTask task = tasks.get(i);
+            if (task != null && task.getStatus() != AsyncTask.Status.FINISHED) {
+                task.cancel(true);
+            }
+        }
+        
+        tasks.clear();
+    }
+    
+    public static final int showDlgFragment(Fragment host, DialogFragment dlg, String tag) {
+        FragmentTransaction ft = host.getFragmentManager().beginTransaction();
+        Fragment prev = host.getFragmentManager().findFragmentByTag(tag);
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+        
+        return dlg.show(ft, tag);
+    }
 
     public static final String convertStreamToString(InputStream is) {
         try {

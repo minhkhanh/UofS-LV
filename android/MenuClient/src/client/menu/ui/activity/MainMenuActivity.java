@@ -3,6 +3,7 @@ package client.menu.ui.activity;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,6 +23,18 @@ public class MainMenuActivity extends Activity {
         inflater.inflate(R.menu.options_main_menu, menu);
         
         return true;
+    }
+    
+    @Override
+    public boolean onMenuItemSelected(int featureId, MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mitemViewOrder:
+                Intent intent = new Intent(this, OrderActivity.class);
+                startActivity(intent);
+                break;
+        }
+        
+        return super.onMenuItemSelected(featureId, item);
     }
     
 	@Override

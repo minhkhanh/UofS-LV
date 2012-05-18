@@ -9,10 +9,10 @@ import android.provider.BaseColumns;
 public final class NgonNguContract  {
     public static final String TABLE_NAME = "NgonNgu";
 
-    public static final String CL_ID = TABLE_NAME + BaseColumns._ID;
-    public static final String CL_MA_NGON_NGU = TABLE_NAME + ".MaNgonNgu";
-    public static final String CL_TEN_NGON_NGU = TABLE_NAME + ".TenNgonNgu";
-    public static final String CL_KI_HIEU = TABLE_NAME + ".KiHieu";
+    public static final String CL_ID = BaseColumns._ID;
+    public static final String CL_MA_NGON_NGU = "MaNgonNgu";
+    public static final String CL_TEN_NGON_NGU = "TenNgonNgu";
+    public static final String CL_KI_HIEU = "KiHieu";
     
     public static final String PATH_NGONNGU_MACDINH = "01";
 
@@ -34,7 +34,7 @@ public final class NgonNguContract  {
     }
 
     public static final String[] getFullProjection() {
-        return new String[] { TABLE_NAME + "." + CL_ID, CL_MA_NGON_NGU, CL_TEN_NGON_NGU,
+        return new String[] { "" + CL_ID, CL_MA_NGON_NGU, CL_TEN_NGON_NGU,
                 CL_KI_HIEU };
     }
 }
