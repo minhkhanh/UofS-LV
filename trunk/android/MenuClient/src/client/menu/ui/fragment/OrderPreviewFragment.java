@@ -6,21 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.ListFragment;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.widget.SimpleAdapter;
 import client.menu.R;
-import client.menu.app.MyApplication;
-import client.menu.bus.SessionManager;
-import client.menu.bus.SessionManager.ServiceOrder;
-import client.menu.bus.SessionManager.ServiceSession;
 import client.menu.db.contract.ChiTietOrderContract;
 import client.menu.db.contract.DonViTinhDaNgonNguContract;
-import client.menu.db.contract.DonViTinhMonAnContract;
 import client.menu.db.contract.MonAnDaNgonNguContract;
-import client.menu.db.dto.ChiTietOrderDTO;
 import client.menu.db.dto.DonViTinhDaNgonNguDTO;
-import client.menu.db.dto.MonAnDTO;
 import client.menu.db.dto.MonAnDaNgonNguDTO;
 
 public class OrderPreviewFragment extends ListFragment {

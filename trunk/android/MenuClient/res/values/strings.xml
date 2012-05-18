@@ -21,12 +21,15 @@
     <string name="caption_remove">Xóa</string>
     <string name="sign_minus">-</string>
     <string name="sign_plus">+</string>
-    <string name="func_onChildClick">onChildClick</string>
+    <string name="function_onChildClick">onChildClick</string>
     <string name="letter_x">x</string>
     <string name="text_note">Ghi chú món</string>
     <string name="text_select_one_unit">Hãy chọn một giá</string>
     <string name="text_adjust_quantity">Hãy chọn số lượng</string>
     <string name="text_give_note">Ghi chú món</string>
+    <string name="text_choose_a_price">Chọn giá</string>
+    <string name="caption_exit">Thoát</string>
+    <string name="option_confirm_order">Xác nhận Order</string>
     
 
 </resources>

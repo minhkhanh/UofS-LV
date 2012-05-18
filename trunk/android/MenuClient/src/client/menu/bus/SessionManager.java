@@ -1,23 +1,23 @@
 package client.menu.bus;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
-import android.database.DataSetObservable;
-
+import android.app.Activity;
+import client.menu.app.MyApplication;
 import client.menu.db.dto.ChiTietOrderDTO;
-import client.menu.db.dto.DonViTinhMonAnDTO;
 
 public class SessionManager {
 
     public class ServiceOrder {
         List<ChiTietOrderDTO> mOrderItems = new ArrayList<ChiTietOrderDTO>();
+        
+        public List<ChiTietOrderDTO> getData() {
+            return mOrderItems;
+        }
 
-        protected ServiceOrder() {
+        public ChiTietOrderDTO getItem(int index) {
+            return mOrderItems.get(index);
         }
 
         public int getCount() {
@@ -36,10 +36,12 @@ public class SessionManager {
             return 0;
         }
 
-        public ChiTietOrderDTO addItem(Integer maMonAn, Integer maDonViTinh) {
+        public ChiTietOrderDTO addItem(Integer maMonAn, Integer maDonViTinh,
+                Integer soLuong, String ghiChuMon) {
             for (ChiTietOrderDTO i : mOrderItems) {
                 if (i.getMaMonAn() == maMonAn && i.getMaDonViTinh() == maDonViTinh) {
                     i.setSoLuong(i.getSoLuong() + 1);
+                    i.setGhiChu(ghiChuMon);
                     return i;
                 }
             }
@@ -47,7 +49,8 @@ public class SessionManager {
             ChiTietOrderDTO chiTiet = new ChiTietOrderDTO();
             chiTiet.setMaMonAn(maMonAn);
             chiTiet.setMaDonViTinh(maDonViTinh);
-            chiTiet.setSoLuong(1);
+            chiTiet.setSoLuong(soLuong);
+            chiTiet.setGhiChu(ghiChuMon);
             mOrderItems.add(chiTiet);
 
             return chiTiet;
@@ -79,6 +82,18 @@ public class SessionManager {
     List<ServiceSession> mSessionList = new ArrayList<ServiceSession>();
     int mIndexCurrent = -1;
 
+    public static final ServiceSession loadCurrentSession(Activity activity) {
+        SessionManager manager = MyApplication.getSessionManager(activity);
+
+        if (manager.mIndexCurrent < 0
+                || manager.mIndexCurrent >= manager.mSessionList.size()) {
+            throw new ArrayIndexOutOfBoundsException(
+                    "Session list index is out of bound: " + manager.mIndexCurrent);
+        }
+
+        return manager.mSessionList.get(manager.mIndexCurrent);
+    }
+
     private ServiceSession createSession(Integer maBan) {
         for (ServiceSession s : mSessionList) {
             if (s.getMaBan() == maBan) {
@@ -95,15 +110,6 @@ public class SessionManager {
         mIndexCurrent = mSessionList.size() - 1;
 
         return session;
-    }
-
-    public ServiceSession loadCurrentSession() {
-        if (mIndexCurrent < 0 || mIndexCurrent >= mSessionList.size()) {
-            throw new ArrayIndexOutOfBoundsException(
-                    "Session list index is out of bound: " + mIndexCurrent);
-        }
-
-        return mSessionList.get(mIndexCurrent);
     }
 
     public ServiceSession loadSession(Integer maBan) {

@@ -9,14 +9,15 @@ import android.provider.BaseColumns;
 public final class MonAnContract  {
     public static final String TABLE_NAME = "MonAn";
 
-    public static final String CL_ID = TABLE_NAME + BaseColumns._ID;
-    public static final String CL_MA_MON_AN = TABLE_NAME + ".MaMonAn";
-    public static final String CL_HINH_ANH = TABLE_NAME + ".HinhAnh";
-    public static final String CL_DIEM_DANH_GIA = TABLE_NAME + ".DiemDanhGia";
-    public static final String CL_SO_LUOT_RATE = TABLE_NAME + ".SoLuotDanhGia";
-    public static final String CL_DEFAULT_UNIT_ID = TABLE_NAME + ".MaDonViTinhMacDinh";
-    public static final String CL_MA_DANH_MUC = TABLE_NAME + ".MaDanhMuc";
-    public static final String CL_NGUNG_BAN = TABLE_NAME + ".NgungBan";
+    public static final String CL_ID = BaseColumns._ID;
+    public static final String CL_MA_MON_AN = "MaMonAn";
+    public static final String CL_MA_MON_AN_QN = TABLE_NAME + ".MaMonAn";
+    public static final String CL_HINH_ANH = "HinhAnh";
+    public static final String CL_DIEM_DANH_GIA = "DiemDanhGia";
+    public static final String CL_SO_LUOT_RATE = "SoLuotDanhGia";
+    public static final String CL_DEFAULT_UNIT_ID = "MaDonViTinhMacDinh";
+    public static final String CL_MA_DANH_MUC = "MaDanhMuc";
+    public static final String CL_NGUNG_BAN = "NgungBan";
 
     public static final String PATH_MONAN_INNER_DANGONNGU = "01";
 
@@ -24,8 +25,12 @@ public final class MonAnContract  {
             + MyContentProvider.AUTHORITY + "/" + TABLE_NAME);
     public static final Uri URI_MONAN_INNER_DANGONNGU = Uri.withAppendedPath(CONTENT_URI,
             PATH_MONAN_INNER_DANGONNGU);
+    
+    public static final String preTable(String colName) {
+        return TABLE_NAME + "." + colName;
+    }
 
-    public static ContentValues extractData(Cursor cursor) {
+    public static ContentValues extractFrom(Cursor cursor) {
         ContentValues values = new ContentValues();
 
         values.put(CL_ID, cursor.getInt(cursor.getColumnIndex(CL_ID)));
@@ -40,10 +45,5 @@ public final class MonAnContract  {
         values.put(CL_NGUNG_BAN, cursor.getBlob(cursor.getColumnIndex(CL_NGUNG_BAN)));
 
         return values;
-    }
-
-    public String[] getAllColumns() {
-        // TODO Auto-generated method stub
-        return null;
     }
 }

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
+    android:layout_height="wrap_content" >
+
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imgDishAvatar"
         android:layout_toRightOf="@+id/imgDishAvatar"
-        android:padding="5dp">
+        android:padding="5dp" >
 
         <TextView
             android:id="@+id/textDishName"
@@ -42,19 +42,19 @@
             android:marqueeRepeatLimit="marquee_forever"
             android:maxLines="4"
             android:text="@string/sample_long" />
-
+
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/editDishNote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/textView2"
-            android:ems="10"
-            android:inputType="textMultiLine" >
+            android:gravity="top|left"
+            android:inputType="textMultiLine"
+            android:lines="4" >
 
-            <requestFocus />
         </EditText>
 
         <TextView
@@ -63,10 +63,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/textDishDescription"
-            android:text="@string/text_give_note" android:padding="5dp"/>
-
+            android:padding="5dp"
+            android:text="@string/text_give_note" />
     </RelativeLayout>
-
+
     <RelativeLayout
         android:id="@+id/relativeLayout3"
         android:layout_width="match_parent"
@@ -84,45 +84,74 @@
             android:text="@string/text_select_one_unit" />
 
         <NumberPicker
-            android:id="@+id/numberPicker1"
+            android:id="@+id/npickerQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView1"
             android:layout_centerHorizontal="true" />
 
         <ListView
-            android:id="@+id/listView1"
+            android:id="@+id/listDishUnits"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/numberPicker1"
+            android:layout_alignBottom="@+id/npickerQuantity"
             android:layout_alignParentLeft="true"
-            android:layout_alignTop="@+id/numberPicker1"
-            android:layout_toLeftOf="@+id/numberPicker1" >
+            android:layout_alignTop="@+id/npickerQuantity"
+            android:layout_toLeftOf="@+id/TextView01"
+            android:choiceMode="singleChoice" >
         </ListView>
 
         <TextView
             android:id="@+id/TextView01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/numberPicker1"
+            android:layout_above="@+id/npickerQuantity"
             android:layout_centerHorizontal="true"
             android:text="@string/text_adjust_quantity" />
-
-        <Button
-            android:id="@+id/btnCancel"
+
+        <ViewStub
+            android:id="@+id/viewStub1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:text="@string/caption_cancel" />
+            android:layout_alignLeft="@+id/listDishUnits"
+            android:layout_below="@+id/listDishUnits" />
 
+        <include
+            android:id="@+id/incSelectedUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/listDishUnits"
+            android:layout_alignRight="@+id/listDishUnits"
+            android:layout_below="@+id/listDishUnits"
+            layout="@layout/item_dish_units_spinner" />
+
+        <TextView
+            android:id="@+id/textSelectedQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/include1"
+            android:layout_alignLeft="@+id/npickerQuantity"
+            android:layout_alignRight="@+id/npickerQuantity"
+            android:layout_below="@+id/npickerQuantity"
+            android:lines="1"
+            android:padding="5dp"
+            android:text="TextView" android:gravity="center_vertical|center_horizontal|center"/>
+
         <Button
             android:id="@+id/btnOK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/numberPicker1"
+            android:layout_alignBottom="@+id/textView3"
             android:layout_alignParentRight="true"
             android:text="@string/caption_ok" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textSelectedQuantity"
+            android:layout_alignParentRight="true"
+            android:text="@string/caption_cancel" />
 
     </RelativeLayout>
 
@@ -131,6 +160,7 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/relativeLayout3" >
+
     </RelativeLayout>
 
     <ImageView
