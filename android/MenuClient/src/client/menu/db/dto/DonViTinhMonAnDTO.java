@@ -7,7 +7,7 @@ public class DonViTinhMonAnDTO {
     private Integer mId;
     private Integer mMaMonAn;
     private Integer mMaDonViTinh;
-    private Float mDonGia;
+    private Integer mDonGia;
 
     public static DonViTinhMonAnDTO extractFrom(Cursor cursor) {
         DonViTinhMonAnDTO obj = new DonViTinhMonAnDTO();
@@ -29,7 +29,7 @@ public class DonViTinhMonAnDTO {
             obj.mMaDonViTinh = cursor.getInt(index);
         }
         if ((index = cursor.getColumnIndex(DonViTinhMonAnContract.CL_DON_GIA)) != -1) {
-            obj.mDonGia = cursor.getFloat(index);
+            obj.mDonGia = cursor.getInt(index);
         }
 
         return obj;
@@ -59,11 +59,11 @@ public class DonViTinhMonAnDTO {
         mMaDonViTinh = maDonViTinh;
     }
 
-    public Float getDonGia() {
+    public Integer getDonGia() {
         return mDonGia;
     }
 
-    public void setDonGia(Float donGia) {
+    public void setDonGia(Integer donGia) {
         mDonGia = donGia;
     }
 }

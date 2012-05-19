@@ -6,13 +6,41 @@ import java.util.List;
 import android.app.Activity;
 import client.menu.app.MyApplication;
 import client.menu.db.dto.ChiTietOrderDTO;
+import client.menu.util.U;
 
 public class SessionManager {
 
     public class ServiceOrder {
         List<ChiTietOrderDTO> mOrderItems = new ArrayList<ChiTietOrderDTO>();
-        
-        public List<ChiTietOrderDTO> getData() {
+
+        public final void debugLogItems() {
+            for (int i = 0; i < mOrderItems.size(); ++i) {
+                U.logOwnTag(i + " : ( MaMonAn: " + mOrderItems.get(i).getMaMonAn()
+                        + ", MaDonViTinh: " + mOrderItems.get(i).getMaDonViTinh()
+                        + ", SoLuong: " + mOrderItems.get(i).getSoLuong() + ")");
+            }
+        }
+
+        public void gather() {
+            for (int i = 0; i < mOrderItems.size() - 1; ++i) {
+                ChiTietOrderDTO chiTiet1 = mOrderItems.get(i);
+                for (int j = i + 1; j < mOrderItems.size();) {
+                    ChiTietOrderDTO chiTiet2 = mOrderItems.get(j);
+                    if (chiTiet1.getMaMonAn() == chiTiet2.getMaMonAn()
+                            && chiTiet1.getMaDonViTinh() == chiTiet2.getMaDonViTinh()) {
+                        chiTiet1.setSoLuong(chiTiet1.getSoLuong() + chiTiet2.getSoLuong());
+                        chiTiet1.setGhiChu(chiTiet1.getGhiChu() + "\n"
+                                + chiTiet2.getGhiChu());
+
+                        mOrderItems.remove(j);
+                    } else {
+                        ++j;
+                    }
+                }
+            }
+        }
+
+        public List<ChiTietOrderDTO> getContent() {
             return mOrderItems;
         }
 
@@ -40,8 +68,8 @@ public class SessionManager {
                 Integer soLuong, String ghiChuMon) {
             for (ChiTietOrderDTO i : mOrderItems) {
                 if (i.getMaMonAn() == maMonAn && i.getMaDonViTinh() == maDonViTinh) {
-                    i.setSoLuong(i.getSoLuong() + 1);
-                    i.setGhiChu(ghiChuMon);
+                    i.setSoLuong(i.getSoLuong() + soLuong);
+//                    i.setGhiChu(ghiChuMon);
                     return i;
                 }
             }

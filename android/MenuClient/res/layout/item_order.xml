@@ -30,7 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:text="@string/sign_plus" android:onClick="@string/function_onChildClick"/>
+            android:onClick="@string/function_onChildClick"
+            android:text="@string/sign_plus" />
 
         <Button
             android:id="@+id/btnMinus"
@@ -39,7 +40,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/btnPlus"
-            android:text="@string/sign_minus" android:onClick="@string/function_onChildClick"/>
+            android:onClick="@string/function_onChildClick"
+            android:text="@string/sign_minus" />
 
         <Button
             android:id="@+id/btnClear"
@@ -54,9 +56,9 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/btnMinus"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:text="@string/letter_x" />
+            android:text="@string/letter_x" android:padding="5dp"/>
 
         <EditText
             android:id="@+id/editDishNote"
@@ -64,34 +66,31 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/textDishName"
-            android:layout_toLeftOf="@+id/btnPlus"
+            android:layout_toLeftOf="@+id/btnClear"
             android:contentDescription="@string/sample_long"
             android:ems="10"
             android:hint="@string/text_note"
             android:inputType="textMultiLine"
             android:maxLines="2"
-            android:textStyle="italic" >
-
-            <requestFocus />
-        </EditText>
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/textQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/btnMinus"
-            android:layout_alignBottom="@+id/btnMinus"
+            android:layout_alignParentBottom="true"
             android:layout_marginLeft="28dp"
             android:layout_toRightOf="@+id/textView1"
             android:text="TextView"
-            android:textStyle="bold" />
-
-        <Spinner
-            android:id="@+id/spinDishPrices"
-            android:layout_width="200dp"
+            android:textStyle="bold" android:padding="5dp"/>
+
+        <include
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/editDishNote"
-            android:layout_alignTop="@+id/btnMinus" android:padding="5dp"/>
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/textView1"
+            layout="@layout/item_dish_units_spinner" />
 
     </RelativeLayout>
 
