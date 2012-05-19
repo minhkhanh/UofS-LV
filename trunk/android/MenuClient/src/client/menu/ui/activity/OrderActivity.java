@@ -1,9 +1,7 @@
 package client.menu.ui.activity;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
 
 import android.app.ListActivity;
 import android.database.Cursor;
@@ -12,129 +10,106 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewGroup.OnHierarchyChangeListener;
-import android.widget.SimpleAdapter;
-import android.widget.Spinner;
 import client.menu.R;
 import client.menu.app.MyAppLocale;
-import client.menu.bus.LoadDishUnitsAsyncTask;
 import client.menu.bus.SessionManager;
 import client.menu.bus.SessionManager.ServiceOrder;
-import client.menu.db.contract.ChiTietOrderContract;
-import client.menu.db.contract.MonAnContract;
+import client.menu.db.contract.DonViTinhMonAnContract;
 import client.menu.db.contract.MonAnDaNgonNguContract;
 import client.menu.db.dto.ChiTietOrderDTO;
+import client.menu.db.dto.DonViTinhDaNgonNguDTO;
+import client.menu.db.dto.DonViTinhMonAnDTO;
 import client.menu.db.dto.MonAnDaNgonNguDTO;
 import client.menu.ui.adapter.OrderItemsAdapter;
 import client.menu.util.U;
 
 public class OrderActivity extends ListActivity {
-    private List<Map<String, Object>> mListData = new ArrayList<Map<String, Object>>();
-    private SimpleAdapter mListAdapter;
+
+    List<ChiTietOrderDTO> mChiTietOrderList;
+    private OrderItemsAdapter mListAdapter;
+    private int mItemTotal;
+    private int mItemCount = 0;
 
     private List<LoadOrderItemAsyncTask> mLoadOrderItemTasks = new ArrayList<OrderActivity.LoadOrderItemAsyncTask>();
-    private List<LoadDishUnitsAsyncTask> mLoadDishUnitsTasks = new ArrayList<LoadDishUnitsAsyncTask>();
 
-    private OnHierarchyChangeListener mListHierarchyChangeListener = new OnHierarchyChangeListener() {
+    private List<MonAnDaNgonNguDTO> mMonAnDaNgonNguList = new ArrayList<MonAnDaNgonNguDTO>();
+    private List<DonViTinhDaNgonNguDTO> mDonViTinhDaNgonNguList = new ArrayList<DonViTinhDaNgonNguDTO>();
+    private List<DonViTinhMonAnDTO> mDonViTinhMonAnList = new ArrayList<DonViTinhMonAnDTO>();
 
-        @Override
-        public void onChildViewRemoved(View parent, View child) {
-        }
-
-        @Override
-        public void onChildViewAdded(View parent, View child) {
-            Spinner spinner = (Spinner) ((ViewGroup) child)
-                    .findViewById(R.id.spinDishPrices);
-
-            int index = getListView().getPositionForView(child);
-            Integer maMonAn = (Integer) mListData.get(index).get(
-                    ChiTietOrderContract.CL_MA_MON_AN);
-            Integer maDonViTinh = (Integer) mListData.get(index).get(
-                    ChiTietOrderContract.CL_MA_DON_VI_TINH);
-
-            LoadDishUnitsAsyncTask task = new LoadDishUnitsAsyncTask(OrderActivity.this,
-                    spinner, maMonAn, maDonViTinh);
-            mLoadDishUnitsTasks.add(task);
-
-            task.execute();
-        }
-    };
-
-    private class LoadOrderItemAsyncTask extends
-            AsyncTask<Void, Integer, Map<String, Object>> {
+    private class LoadOrderItemAsyncTask extends AsyncTask<Void, Integer, Void> {
         private ChiTietOrderDTO mChiTietOrder;
+        private MonAnDaNgonNguDTO mMonAnDaNgonNgu;
+        private DonViTinhDaNgonNguDTO mDonViTinhDaNgonNgu;
+        private DonViTinhMonAnDTO mDonViTinhMonAn;
 
         public LoadOrderItemAsyncTask(ChiTietOrderDTO chiTietOrder) {
             mChiTietOrder = chiTietOrder;
         }
 
         @Override
-        protected void onPostExecute(Map<String, Object> result) {
+        protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
-            mListData.add(result);
-            mListAdapter.notifyDataSetChanged();
-//            getListView().add
+            mMonAnDaNgonNguList.add(mMonAnDaNgonNgu);
+            mDonViTinhDaNgonNguList.add(mDonViTinhDaNgonNgu);
+            mDonViTinhMonAnList.add(mDonViTinhMonAn);
+
+            ++mItemCount;
+            if (mItemCount == mItemTotal) {
+                mListAdapter = new OrderItemsAdapter(OrderActivity.this,
+                        mMonAnDaNgonNguList, mDonViTinhDaNgonNguList,
+                        mDonViTinhMonAnList, mChiTietOrderList);
+                setListAdapter(mListAdapter);
+            }
         }
 
         @Override
-        protected Map<String, Object> doInBackground(Void... params) {
+        protected Void doInBackground(Void... params) {
             String[] projection = null;
-            String selection = MonAnContract.CL_MA_MON_AN_QN + "=? and "
-                    + MonAnDaNgonNguContract.CL_MA_NGON_NGU + "=?";
+            String selection = DonViTinhMonAnContract.CL_MA_MON_AN_QN + "=? and "
+                    + MonAnDaNgonNguContract.CL_MA_NGON_NGU_QN + "=? and "
+                    + DonViTinhMonAnContract.CL_MA_DON_VI_QN + "=?";
+
             String[] selectionArgs = {
                     mChiTietOrder.getMaMonAn().toString(),
                     MyAppLocale.getCurrentLanguage(OrderActivity.this).getMaNgonNgu()
-                            .toString() };
+                            .toString(), mChiTietOrder.getMaDonViTinh().toString() };
 
-            Cursor cursor = getContentResolver().query(
-                    MonAnContract.URI_MONAN_INNER_DANGONNGU, projection, selection,
-                    selectionArgs, null);
+            Cursor cursor = OrderActivity.this.getContentResolver().query(
+                    DonViTinhMonAnContract.URI_MONANDANGONNGU_DONVITINHMONAN_DANGONNGU,
+                    projection, selection, selectionArgs, null);
 
             cursor.moveToFirst();
-            MonAnDaNgonNguDTO monAnDaNgonNgu = MonAnDaNgonNguDTO.extractFrom(cursor);
+            mMonAnDaNgonNgu = MonAnDaNgonNguDTO.extractFrom(cursor);
 
-            Map<String, Object> map = new Hashtable<String, Object>();
-            map.put(ChiTietOrderContract.CL_MA_MON_AN, monAnDaNgonNgu.getMaMonAn());
-            map.put(MonAnDaNgonNguContract.CL_TEN_MON, monAnDaNgonNgu.getTenMonAn());
-            map.put(ChiTietOrderContract.CL_SO_LUONG, mChiTietOrder.getSoLuong());
-            map.put(ChiTietOrderContract.CL_GHI_CHU, mChiTietOrder.getGhiChu());
-            map.put(ChiTietOrderContract.CL_MA_DON_VI_TINH,
-                    mChiTietOrder.getMaDonViTinh());
+//            selection = DonViTinhMonAnContract.CL_MA_MON_AN + "=? and "
+//                    + DonViTinhDaNgonNguContract.CL_MA_NGON_NGU + "=? and "
+//                    + DonViTinhMonAnContract.TABLE_NAME + "."
+//                    + DonViTinhMonAnContract.CL_MA_DON_VI + "=?";
+//
+//            selectionArgs = new String[] {
+//                    mMonAnDaNgonNgu.getMaMonAn().toString(),
+//                    MyAppLocale.getCurrentLanguage(OrderActivity.this).getMaNgonNgu()
+//                            .toString(), mChiTietOrder.getMaDonViTinh().toString() };
+//
+//            Cursor donViTinhCursor = OrderActivity.this.getContentResolver().query(
+//                    DonViTinhMonAnContract.URI_DONVITINHMONAN_INNER_DANGONNGU,
+//                    projection, selection, selectionArgs, null);
 
-            return map;
+            cursor.moveToFirst();
+            mDonViTinhDaNgonNgu = DonViTinhDaNgonNguDTO.extractFrom(cursor);
+            cursor.moveToFirst();
+            mDonViTinhMonAn = DonViTinhMonAnDTO.extractFrom(cursor);
+
+            return null;
         }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
-        cancelAsyncTasks();
     }
 
-    private void cancelAsyncTasks() {
-        for (int i = 0; i < mLoadDishUnitsTasks.size(); ++i) {
-            LoadDishUnitsAsyncTask task = mLoadDishUnitsTasks.get(i);
-            if (task != null && task.getStatus() != AsyncTask.Status.FINISHED) {
-                task.cancel(true);
-            }
-        }
-
-        mLoadDishUnitsTasks.clear();
-
-        for (int i = 0; i < mLoadOrderItemTasks.size(); ++i) {
-            LoadOrderItemAsyncTask task = mLoadOrderItemTasks.get(i);
-            if (task != null && task.getStatus() != AsyncTask.Status.FINISHED) {
-                task.cancel(true);
-            }
-        }
-
-        mLoadOrderItemTasks.clear();
-    }
-    
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         switch (item.getItemId()) {
@@ -145,72 +120,31 @@ public class OrderActivity extends ListActivity {
             default:
                 break;
         }
-        
+
         return false;
     }
-    
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.options_order, menu);
-        
+
         return true;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        String[] from = { MonAnDaNgonNguContract.CL_TEN_MON,
-//                ChiTietOrderContract.CL_SO_LUONG, ChiTietOrderContract.CL_GHI_CHU };
-//        int[] to = { R.id.textDishName, R.id.textQuantity, R.id.editDishNote };
-//        mListAdapter = new SimpleAdapter(this, mListData, R.layout.item_order, from, to);
-//        setListAdapter(mListAdapter);
-//
-//        getListView().setOnHierarchyChangeListener(mListHierarchyChangeListener);
-//
         ServiceOrder order = SessionManager.loadCurrentSession(this).getOrder();
-//        for (int i = 0; i < order.getCount(); ++i) {
-//            ChiTietOrderDTO chiTietOrder = order.getItem(i);
-//            LoadOrderItemAsyncTask task = new LoadOrderItemAsyncTask(chiTietOrder);
-//            mLoadOrderItemTasks.add(task);
-//
-//            task.execute();
-//        }
-        
-        OrderItemsAdapter adapter = new OrderItemsAdapter(this, order.getData());
-        setListAdapter(adapter);
+        mChiTietOrderList = order.getContent();
 
-        // U.logOwnTag("onCreate");
-    }
+        mItemTotal = mChiTietOrderList.size();
+        for (int i = 0; i < mItemTotal; ++i) {
+            ChiTietOrderDTO c = mChiTietOrderList.get(i);
+            LoadOrderItemAsyncTask task = new LoadOrderItemAsyncTask(c);
+            mLoadOrderItemTasks.add(task);
 
-    public void onChildClick(View v) {
-        // if (v.getId() == R.id.btnIncrease) {
-        // ViewGroup group = (ViewGroup) v.getParent();
-        // EditText editQuantity = (EditText)
-        // group.findViewById(R.id.editQuantity);
-        // String text = editQuantity.getText().toString();
-        // Integer value = Integer.valueOf(text) + 1;
-        // if (value > 99) {
-        // value = 0;
-        // }
-        // editQuantity.setText(value.toString());
-        // // U.toastText(this, text);
-        // } else if (v.getId() == R.id.btnDecrease) {
-        // ViewGroup group = (ViewGroup) v.getParent();
-        // EditText editQuantity = (EditText)
-        // group.findViewById(R.id.editQuantity);
-        // String text = editQuantity.getText().toString();
-        // Integer value = Integer.valueOf(text) - 1;
-        // if (value < 0) {
-        // value = 99;
-        // }
-        // editQuantity.setText(value.toString());
-        // } else if (v.getId() == R.id.btnRemove) {
-        // ViewGroup group = (ViewGroup) v.getParent();
-        // int pos = mListOrder.getPositionForView(group);
-        // mListData.remove(pos);
-        // mListAdapter.notifyDataSetChanged();
-        // }
+            task.execute();
+        }
     }
 }

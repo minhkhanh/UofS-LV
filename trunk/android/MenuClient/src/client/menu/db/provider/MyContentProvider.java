@@ -39,7 +39,14 @@ public class MyContentProvider extends ContentProvider {
     private static final int MATCH_DONVITINH_MONAN = 9;
     private static final int MATCH_DONVITINHMONAN_DANGONNGU = 10;
 
+    // join 3 tables: DonViTinhMonAn, DonViTinhDaNgonNgu, MonAnDaNgonNgu
+    private static final int MATCH_DONVITINH_MONAN_DANGONNGU = 11;
+
     static {
+        uriMatcher.addURI(AUTHORITY, DonViTinhMonAnContract.TABLE_NAME + "/"
+                + DonViTinhMonAnContract.PATH_MONANDANGONNGU_DONVITINHMONAN_DANGONNGU,
+                MATCH_DONVITINH_MONAN_DANGONNGU);
+
         uriMatcher.addURI(AUTHORITY, DonViTinhMonAnContract.TABLE_NAME + "/"
                 + DonViTinhMonAnContract.PATH_DONVITINHMONAN_INNER_DANGONNGU,
                 MATCH_DONVITINHMONAN_DANGONNGU);
@@ -95,6 +102,20 @@ public class MyContentProvider extends ContentProvider {
         String limit = null;
 
         switch (uriMatcher.match(uri)) {
+            case MATCH_DONVITINH_MONAN_DANGONNGU:
+                queryBuilder.setTables(MonAnDaNgonNguContract.TABLE_NAME + " INNER JOIN "
+                        + DonViTinhMonAnContract.TABLE_NAME + " ON ("
+                        + MonAnDaNgonNguContract.TABLE_NAME + "."
+                        + MonAnDaNgonNguContract.CL_MA_MON + "="
+                        + DonViTinhMonAnContract.TABLE_NAME + "."
+                        + DonViTinhMonAnContract.CL_MA_MON_AN + ")" + "INNER JOIN "
+                        + DonViTinhDaNgonNguContract.TABLE_NAME + " ON ("
+                        + DonViTinhMonAnContract.TABLE_NAME + "."
+                        + DonViTinhMonAnContract.CL_MA_DON_VI + "="
+                        + DonViTinhDaNgonNguContract.TABLE_NAME + "."
+                        + DonViTinhDaNgonNguContract.CL_MA_DON_VI + ")");
+                break;
+
             case MATCH_DONVITINHMONAN_DANGONNGU:
                 queryBuilder.setTables(DonViTinhMonAnContract.TABLE_NAME + " INNER JOIN "
                         + DonViTinhDaNgonNguContract.TABLE_NAME + " ON ("
@@ -109,17 +130,18 @@ public class MyContentProvider extends ContentProvider {
             case MATCH_MONAN_INNER_DANGONNGU:
                 queryBuilder.setTables(MonAnContract.TABLE_NAME + " INNER JOIN "
                         + MonAnDaNgonNguContract.TABLE_NAME + " ON ("
-                        + MonAnContract.TABLE_NAME + "." + MonAnContract.CL_MA_MON_AN + " = "
-                        + MonAnDaNgonNguContract.TABLE_NAME + "."
+                        + MonAnContract.TABLE_NAME + "." + MonAnContract.CL_MA_MON_AN
+                        + " = " + MonAnDaNgonNguContract.TABLE_NAME + "."
                         + MonAnDaNgonNguContract.CL_MA_MON + ")");
                 break;
             case MATCH_NGONNGU_MACDINH:
                 queryBuilder.setTables(NgonNguContract.TABLE_NAME + ","
                         + ThamSoContract.TABLE_NAME);
                 queryBuilder.appendWhere(NgonNguContract.CL_MA_NGON_NGU + " = "
-                        + ThamSoContract.CL_VALUE + " and " + ThamSoContract.CL_PARAM_NAME
-                        + "=" + ThamSoContract.SID_MA_NGONNGU_MACDINH);
-                
+                        + ThamSoContract.CL_VALUE + " and "
+                        + ThamSoContract.CL_PARAM_NAME + "="
+                        + ThamSoContract.SID_MA_NGONNGU_MACDINH);
+
                 break;
             case MATCH_THAMSO_ROW:
                 queryBuilder.setTables(ThamSoContract.TABLE_NAME);
@@ -129,8 +151,9 @@ public class MyContentProvider extends ContentProvider {
             case MATCH_DANHMUC_INNER_DANGONNGU:
                 queryBuilder.setTables(DanhMucContract.TABLE_NAME + " INNER JOIN "
                         + DanhMucDaNgonNguContract.TABLE_NAME + " ON ("
-                        + DanhMucContract.TABLE_NAME + "." + DanhMucContract.CL_MA_DANH_MUC
-                        + " = " + DanhMucDaNgonNguContract.TABLE_NAME + "."
+                        + DanhMucContract.TABLE_NAME + "."
+                        + DanhMucContract.CL_MA_DANH_MUC + " = "
+                        + DanhMucDaNgonNguContract.TABLE_NAME + "."
                         + DanhMucDaNgonNguContract.CL_MA_DANH_MUC + ")");
                 break;
 
