@@ -42,9 +42,9 @@
             android:layout_toLeftOf="@+id/btnPlus"
             android:onClick="@string/function_onChildClick"
             android:text="@string/sign_minus" />
-
+
         <Button
-            android:id="@+id/btnClear"
+            android:id="@+id/btnRemove"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,14 +59,14 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:text="@string/letter_x" android:padding="5dp"/>
-
+
         <EditText
             android:id="@+id/editDishNote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/textDishName"
-            android:layout_toLeftOf="@+id/btnClear"
+            android:layout_toLeftOf="@+id/btnRemove"
             android:contentDescription="@string/sample_long"
             android:ems="10"
             android:hint="@string/text_note"

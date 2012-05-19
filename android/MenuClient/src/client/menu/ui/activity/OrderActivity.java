@@ -5,7 +5,9 @@ import java.util.List;
 
 import android.app.ListActivity;
 import android.database.Cursor;
+import android.database.DataSetObserver;
 import android.os.AsyncTask;
+import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,16 +27,28 @@ import client.menu.util.U;
 
 public class OrderActivity extends ListActivity {
 
-    List<ChiTietOrderDTO> mChiTietOrderList;
+    private DataSetObserver mOrderObserver = new DataSetObserver() {
+        public void onChanged() {
+            excuteLoadData();
+        };
+    };
+
     private OrderItemsAdapter mListAdapter;
     private int mItemTotal;
-    private int mItemCount = 0;
+    private int mItemCount;
 
     private List<LoadOrderItemAsyncTask> mLoadOrderItemTasks = new ArrayList<OrderActivity.LoadOrderItemAsyncTask>();
 
+    private List<ChiTietOrderDTO> mChiTietOrderList = new ArrayList<ChiTietOrderDTO>();
     private List<MonAnDaNgonNguDTO> mMonAnDaNgonNguList = new ArrayList<MonAnDaNgonNguDTO>();
     private List<DonViTinhDaNgonNguDTO> mDonViTinhDaNgonNguList = new ArrayList<DonViTinhDaNgonNguDTO>();
     private List<DonViTinhMonAnDTO> mDonViTinhMonAnList = new ArrayList<DonViTinhMonAnDTO>();
+
+    private void bindDataToList() {
+        mListAdapter = new OrderItemsAdapter(OrderActivity.this, mMonAnDaNgonNguList,
+                mDonViTinhDaNgonNguList, mDonViTinhMonAnList, mChiTietOrderList);
+        setListAdapter(mListAdapter);
+    }
 
     private class LoadOrderItemAsyncTask extends AsyncTask<Void, Integer, Void> {
         private ChiTietOrderDTO mChiTietOrder;
@@ -53,14 +67,14 @@ public class OrderActivity extends ListActivity {
             mMonAnDaNgonNguList.add(mMonAnDaNgonNgu);
             mDonViTinhDaNgonNguList.add(mDonViTinhDaNgonNgu);
             mDonViTinhMonAnList.add(mDonViTinhMonAn);
+            mChiTietOrderList.add(mChiTietOrder);
 
-            ++mItemCount;
-            if (mItemCount == mItemTotal) {
-                mListAdapter = new OrderItemsAdapter(OrderActivity.this,
-                        mMonAnDaNgonNguList, mDonViTinhDaNgonNguList,
-                        mDonViTinhMonAnList, mChiTietOrderList);
-                setListAdapter(mListAdapter);
-            }
+            mListAdapter.notifyDataSetChanged();
+
+            // ++mItemCount;
+            // if (mItemCount == mItemTotal) {
+            // bindDataToList();
+            // }
         }
 
         @Override
@@ -81,21 +95,6 @@ public class OrderActivity extends ListActivity {
 
             cursor.moveToFirst();
             mMonAnDaNgonNgu = MonAnDaNgonNguDTO.extractFrom(cursor);
-
-//            selection = DonViTinhMonAnContract.CL_MA_MON_AN + "=? and "
-//                    + DonViTinhDaNgonNguContract.CL_MA_NGON_NGU + "=? and "
-//                    + DonViTinhMonAnContract.TABLE_NAME + "."
-//                    + DonViTinhMonAnContract.CL_MA_DON_VI + "=?";
-//
-//            selectionArgs = new String[] {
-//                    mMonAnDaNgonNgu.getMaMonAn().toString(),
-//                    MyAppLocale.getCurrentLanguage(OrderActivity.this).getMaNgonNgu()
-//                            .toString(), mChiTietOrder.getMaDonViTinh().toString() };
-//
-//            Cursor donViTinhCursor = OrderActivity.this.getContentResolver().query(
-//                    DonViTinhMonAnContract.URI_DONVITINHMONAN_INNER_DANGONNGU,
-//                    projection, selection, selectionArgs, null);
-
             cursor.moveToFirst();
             mDonViTinhDaNgonNgu = DonViTinhDaNgonNguDTO.extractFrom(cursor);
             cursor.moveToFirst();
@@ -135,12 +134,44 @@ public class OrderActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ServiceOrder order = SessionManager.loadCurrentSession(this).getOrder();
-        mChiTietOrderList = order.getContent();
 
-        mItemTotal = mChiTietOrderList.size();
+        ServiceOrder order = SessionManager.loadCurrentSession(this).getOrder();
+        order.registerObserver(mOrderObserver);
+
+        mListAdapter = new OrderItemsAdapter(this, mMonAnDaNgonNguList,
+                mDonViTinhDaNgonNguList, mDonViTinhMonAnList, mChiTietOrderList);
+        setListAdapter(mListAdapter);
+
+        excuteLoadData();
+    }
+
+    private void cleanTasks() {
+        for (int i = 0; i < mLoadOrderItemTasks.size();) {
+            LoadOrderItemAsyncTask task = mLoadOrderItemTasks.get(i);
+            if (task != null && task.getStatus() == Status.FINISHED) {
+                mLoadOrderItemTasks.remove(i);
+            } else {
+                ++i;
+            }
+        }
+    }
+
+    private void excuteLoadData() {
+        ServiceOrder order = SessionManager.loadCurrentSession(this).getOrder();
+
+        mChiTietOrderList.clear();// = new ArrayList<ChiTietOrderDTO>();
+        mMonAnDaNgonNguList.clear();// = new ArrayList<MonAnDaNgonNguDTO>();
+        mDonViTinhDaNgonNguList.clear();// = new
+                                        // ArrayList<DonViTinhDaNgonNguDTO>();
+        mDonViTinhMonAnList.clear();// = new ArrayList<DonViTinhMonAnDTO>();
+        mListAdapter.notifyDataSetChanged();
+        
+        cleanTasks();
+
+        mItemCount = 0;
+        mItemTotal = order.getCount();
         for (int i = 0; i < mItemTotal; ++i) {
-            ChiTietOrderDTO c = mChiTietOrderList.get(i);
+            ChiTietOrderDTO c = order.getItem(i);
             LoadOrderItemAsyncTask task = new LoadOrderItemAsyncTask(c);
             mLoadOrderItemTasks.add(task);
 

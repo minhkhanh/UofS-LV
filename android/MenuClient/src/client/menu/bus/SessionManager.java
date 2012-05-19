@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.database.DataSetObservable;
 import client.menu.app.MyApplication;
 import client.menu.db.dto.ChiTietOrderDTO;
 import client.menu.util.U;
 
 public class SessionManager {
 
-    public class ServiceOrder {
+    public class ServiceOrder extends DataSetObservable {
+        
         List<ChiTietOrderDTO> mOrderItems = new ArrayList<ChiTietOrderDTO>();
 
         public final void debugLogItems() {
@@ -40,10 +42,6 @@ public class SessionManager {
             }
         }
 
-        public List<ChiTietOrderDTO> getContent() {
-            return mOrderItems;
-        }
-
         public ChiTietOrderDTO getItem(int index) {
             return mOrderItems.get(index);
         }
@@ -52,16 +50,15 @@ public class SessionManager {
             return mOrderItems.size();
         }
 
-        public int getItemQuantity(Integer maMonAn, Integer maDonViTinh) {
+        public void removeItem(ChiTietOrderDTO chiTietOrder) {
             for (int i = 0; i < mOrderItems.size(); ++i) {
-                ChiTietOrderDTO chiTiet = mOrderItems.get(i);
-                if (chiTiet.getMaMonAn() == maMonAn
-                        && chiTiet.getMaDonViTinh() == maDonViTinh) {
-                    return chiTiet.getSoLuong();
+                ChiTietOrderDTO c = mOrderItems.get(i);
+                if (c.getMaMonAn() == chiTietOrder.getMaMonAn()
+                        && c.getMaDonViTinh() == chiTietOrder.getMaDonViTinh()) {
+                    mOrderItems.remove(i);
+                    return;
                 }
             }
-
-            return 0;
         }
 
         public ChiTietOrderDTO addItem(Integer maMonAn, Integer maDonViTinh,
@@ -69,7 +66,7 @@ public class SessionManager {
             for (ChiTietOrderDTO i : mOrderItems) {
                 if (i.getMaMonAn() == maMonAn && i.getMaDonViTinh() == maDonViTinh) {
                     i.setSoLuong(i.getSoLuong() + soLuong);
-//                    i.setGhiChu(ghiChuMon);
+                    // i.setGhiChu(ghiChuMon);
                     return i;
                 }
             }

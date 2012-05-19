@@ -30,6 +30,9 @@
     <string name="text_choose_a_price">Chọn giá</string>
     <string name="caption_exit">Thoát</string>
     <string name="option_confirm_order">Xác nhận Order</string>
+    <string name="msg_confirm_order_item_deletion">Bạn có chắc muốn bỏ món này?</string>
+    <string name="caption_yes">Có</string>
+    <string name="caption_no">Không</string>
     
 
 </resources>

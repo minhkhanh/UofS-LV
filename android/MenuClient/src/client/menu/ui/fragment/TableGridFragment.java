@@ -40,7 +40,6 @@ public class TableGridFragment extends Fragment {
 
         @Override
         public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-            // TODO Auto-generated method stub
             return false;
         }
 

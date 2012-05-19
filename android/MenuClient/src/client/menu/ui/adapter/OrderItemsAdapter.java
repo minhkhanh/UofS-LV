@@ -25,6 +25,7 @@ public class OrderItemsAdapter extends BaseAdapter {
             List<DonViTinhDaNgonNguDTO> donViTinhDaNgonNguList,
             List<DonViTinhMonAnDTO> donViTinhMonAnList,
             List<ChiTietOrderDTO> chiTietOrderList) {
+
         mMonAnDaNgonNguList = monAnDaNgonNguList;
         mDonViTinhDaNgonNguList = donViTinhDaNgonNguList;
         mDonViTinhMonAnList = donViTinhMonAnList;
