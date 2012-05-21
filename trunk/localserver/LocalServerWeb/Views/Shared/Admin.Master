@@ -77,7 +77,7 @@
  
 <!--  start nav-outer-repeat................................................................................................. START -->
 <div class="nav-outer-repeat"> 
- <% Html.RenderPartial("AdminMenu"); %>
+ <% Html.RenderPartial("ManagerMenu"); %>
 <!--  start nav-outer -->
 <%--
 <div class="nav-outer"> 

@@ -8,6 +8,8 @@ ul#css3menu1 li{
 	position:relative;display:block;white-space:nowrap;font-size:0;float:left;}
 ul#css3menu1 li:hover{
 	z-index:1;}
+ul#css3menu1 ul ul{
+	position:absolute;left:100%;top:0;}
 ul#css3menu1{
 	padding:6px 6px 6px 0;font-size:0;z-index:999;position:relative;display:inline-block;zoom:1;
 	*display:inline;}
@@ -39,6 +41,8 @@ ul#css3menu1 li a.pressed img.over{
 	display:inline;}
 ul#css3menu1 li a.pressed img.def{
 	display:none;}
+ul#css3menu1 ul span{
+	background-image:none;padding-right:16px;}
 ul#css3menu1 li:hover>a,ul#css3menu1 li>a.pressed{
 	background-color:#7ACF27;background-image:-o-linear-gradient(-90deg,rgba(255,255,255,0.38),rgba(85,170,0,0.7)); background-image:-moz-linear-gradient(-90deg,rgba(255,255,255,0.38),rgba(85,170,0,0.7));   background-image:-webkit-gradient(linear,50% 0%,50% 100%,from(rgba(255,255,255,0.38)),to(rgba(85,170,0,0.7)));  background-image:-webkit-linear-gradient(-90deg,rgba(255,255,255,0.38),rgba(85,170,0,0.7));border-style:solid;border-color:#F8F8F8;color:#333;text-decoration:none;filter:progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr=#60FFFFFF,endColorstr=#B355AA00)}
 ul#css3menu1 li.topmenu>a{
