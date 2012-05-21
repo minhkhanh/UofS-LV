@@ -10,8 +10,6 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import client.menu.R;
 import client.menu.app.MyApplication;
-import client.menu.db.contract.DanhMucContract;
-import client.menu.db.contract.DanhMucDaNgonNguContract;
 import client.menu.db.dao.DanhMucDAO;
 import client.menu.db.dto.DanhMucDTO;
 import client.menu.db.dto.DanhMucDaNgonNguDTO;

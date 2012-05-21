@@ -1,10 +1,7 @@
 package client.menu.ui.activity;
 
 import android.app.Activity;
-import android.app.LoaderManager.LoaderCallbacks;
-import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.Loader;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,7 +13,6 @@ import android.widget.Spinner;
 import client.menu.R;
 import client.menu.app.MyAppLocale;
 import client.menu.app.MyApplication;
-import client.menu.db.contract.NgonNguContract;
 import client.menu.db.dao.NgonNguDAO;
 import client.menu.db.dto.NgonNguDTO;
 import client.menu.util.U;
@@ -163,7 +159,7 @@ public class MenuClientActivity extends Activity implements OnItemSelectedListen
             Cursor cursor = ((SimpleCursorAdapter) arg0.getAdapter()).getCursor();
             if (cursor.moveToPosition(pos)) {
                 String abbr = cursor.getString(cursor
-                        .getColumnIndex(NgonNguContract.CL_KI_HIEU));
+                        .getColumnIndex(NgonNguDTO.CL_KI_HIEU));
 
                 MyAppLocale locale = MyApplication.getSettings(this).getLocale();
                 String settAbbr = locale.loadLangAbbr();

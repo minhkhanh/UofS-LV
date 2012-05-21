@@ -1,6 +1,5 @@
 package client.menu.db.dto;
 
-import client.menu.db.contract.DonViTinhMonAnContract;
 import android.database.Cursor;
 import android.provider.BaseColumns;
 
