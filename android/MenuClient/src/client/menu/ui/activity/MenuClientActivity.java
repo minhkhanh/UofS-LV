@@ -2,11 +2,11 @@ package client.menu.ui.activity;
 
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,19 +15,38 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import client.menu.R;
 import client.menu.app.MyAppLocale;
-import client.menu.app.MyAppSettings;
 import client.menu.app.MyApplication;
 import client.menu.db.contract.NgonNguContract;
+import client.menu.db.dao.NgonNguDAO;
 import client.menu.db.dto.NgonNguDTO;
 import client.menu.util.U;
 
-public class MenuClientActivity extends Activity implements LoaderCallbacks<Cursor>,
-        OnItemSelectedListener {
+public class MenuClientActivity extends Activity implements OnItemSelectedListener {
 
-    public static final int LOADER_ID_LANGUAGE_LIST = 0;
+    // public static final int LOADER_ID_LANGUAGE_LIST = 0;
+
+    int mSelIndex;
 
     Spinner mSpinner;
     SimpleCursorAdapter langAdapter;
+
+    LoadLanguageListTask mLoadLanguageListTask;
+
+    class LoadLanguageListTask extends AsyncTask<Void, Integer, Cursor> {
+
+        @Override
+        protected void onPostExecute(Cursor result) {
+            super.onPostExecute(result);
+            langAdapter.changeCursor(result);
+            mSpinner.setSelection(mSelIndex);
+        }
+
+        @Override
+        protected Cursor doInBackground(Void... params) {
+            return NgonNguDAO.getInstance().cursorAll();
+        }
+
+    };
 
     /** Called when the activity is first created. */
     @Override
@@ -39,7 +58,7 @@ public class MenuClientActivity extends Activity implements LoaderCallbacks<Curs
         setContentView(R.layout.layout_main);
 
         mSpinner = (Spinner) findViewById(R.id.spinner1);
-        String[] from = new String[] { NgonNguContract.CL_TEN_NGON_NGU };
+        String[] from = new String[] { NgonNguDTO.CL_TEN_NGON_NGU };
         int[] to = new int[] { android.R.id.text1 };
         langAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item,
                 null, from, to, 0);
@@ -49,7 +68,27 @@ public class MenuClientActivity extends Activity implements LoaderCallbacks<Curs
         mSpinner.setAdapter(langAdapter);
         mSpinner.setOnItemSelectedListener(this);
 
-        getLoaderManager().initLoader(LOADER_ID_LANGUAGE_LIST, null, this);
+        // new LoadLanguageListTask().execute();
+        // getLoaderManager().initLoader(LOADER_ID_LANGUAGE_LIST, null, this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mLoadLanguageListTask = new LoadLanguageListTask();
+        mLoadLanguageListTask.execute();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (mLoadLanguageListTask.getStatus() != AsyncTask.Status.FINISHED) {
+            mLoadLanguageListTask.cancel(true);
+        } else {
+            langAdapter.changeCursor(null);
+        }
     }
 
     public void onClick(View v) {
@@ -63,48 +102,64 @@ public class MenuClientActivity extends Activity implements LoaderCallbacks<Curs
             Intent intent = new Intent(this, SplitTableActivity.class);
             startActivity(intent);
         } else if (v.getId() == R.id.testBtn) {
-            Intent intent = new Intent(this, OrderActivity.class);
+            Intent intent = new Intent(this, BillActivity.class);
             startActivity(intent);
         }
     }
 
+    // @Override
+    // public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    // switch (id) {
+    // case LOADER_ID_LANGUAGE_LIST:
+    // String[] proj = new String[] { NgonNguContract.CL_ID,
+    // NgonNguContract.CL_MA_NGON_NGU, NgonNguContract.CL_TEN_NGON_NGU,
+    // NgonNguContract.CL_KI_HIEU };
+    // CursorLoader loader = new CursorLoader(MenuClientActivity.this,
+    // NgonNguContract.CONTENT_URI, proj, null, null, null);
+    //
+    // return loader;
+    // }
+    //
+    // return null;
+    // }
+    //
+    // @Override
+    // public void onLoadFinished(Loader<Cursor> arg0, Cursor cursor) {
+    // switch (arg0.getId()) {
+    // case LOADER_ID_LANGUAGE_LIST:
+    // langAdapter.swapCursor(cursor);
+    // break;
+    // }
+    // }
+    //
+    // @Override
+    // public void onLoaderReset(Loader<Cursor> arg0) {
+    // U.logOwnTag("onLoaderReset");
+    // switch (arg0.getId()) {
+    // case LOADER_ID_LANGUAGE_LIST:
+    // langAdapter.swapCursor(null);
+    // break;
+    // }
+    // }
+
     @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        switch (id) {
-            case LOADER_ID_LANGUAGE_LIST:
-                String[] proj = new String[] { NgonNguContract.CL_ID,
-                        NgonNguContract.CL_MA_NGON_NGU,
-                        NgonNguContract.CL_TEN_NGON_NGU, NgonNguContract.CL_KI_HIEU };
-                CursorLoader loader = new CursorLoader(MenuClientActivity.this,
-                        NgonNguContract.CONTENT_URI, proj, null, null, null);
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
 
-                return loader;
-        }
-
-        return null;
+        outState.putInt("mSelIndex", mSelIndex);
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> arg0, Cursor cursor) {
-        switch (arg0.getId()) {
-            case LOADER_ID_LANGUAGE_LIST:
-                langAdapter.swapCursor(cursor);
-                break;
-        }
-    }
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
 
-    @Override
-    public void onLoaderReset(Loader<Cursor> arg0) {
-        switch (arg0.getId()) {
-            case LOADER_ID_LANGUAGE_LIST:
-                langAdapter.swapCursor(null);
-                break;
-        }
+        mSelIndex = savedInstanceState.getInt("mSelIndex");
     }
 
     @Override
     public void onItemSelected(AdapterView<?> arg0, View arg1, int pos, long id) {
         if (arg0 == mSpinner) {
+            mSelIndex = pos;
             Cursor cursor = ((SimpleCursorAdapter) arg0.getAdapter()).getCursor();
             if (cursor.moveToPosition(pos)) {
                 String abbr = cursor.getString(cursor

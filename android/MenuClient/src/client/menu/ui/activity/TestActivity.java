@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import client.menu.R;
 import client.menu.db.contract.MonAnContract;
+import client.menu.db.dto.MonAnDTO;
 
 public class TestActivity extends Activity {
     SimpleCursorAdapter adapter;
@@ -20,8 +21,8 @@ public class TestActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_test);
 
-        String[] from = new String[] { BaseColumns._ID, MonAnContract.CL_MA_MON_AN,
-                MonAnContract.CL_HINH_ANH };
+        String[] from = new String[] { BaseColumns._ID, MonAnDTO.CL_MA_MON_AN,
+                MonAnDTO.CL_HINH_ANH };
         int[] to = new int[] { R.id.textView1, R.id.textView2, R.id.textView3 };
         adapter = new SimpleCursorAdapter(this,
                 R.layout.item_test_list, null, from, to,

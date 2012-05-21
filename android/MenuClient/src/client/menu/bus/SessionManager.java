@@ -3,16 +3,14 @@ package client.menu.bus;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.database.DataSetObservable;
-import client.menu.app.MyApplication;
 import client.menu.db.dto.ChiTietOrderDTO;
 import client.menu.util.U;
 
 public class SessionManager {
 
     public class ServiceOrder extends DataSetObservable {
-        
+
         List<ChiTietOrderDTO> mOrderItems = new ArrayList<ChiTietOrderDTO>();
 
         public final void debugLogItems() {
@@ -40,6 +38,10 @@ public class SessionManager {
                     }
                 }
             }
+        }
+        
+        public List<ChiTietOrderDTO> getContent() {
+            return mOrderItems;
         }
 
         public ChiTietOrderDTO getItem(int index) {
@@ -104,19 +106,30 @@ public class SessionManager {
         }
     }
 
+    private static SessionManager mInstance;
+
     List<ServiceSession> mSessionList = new ArrayList<ServiceSession>();
     int mIndexCurrent = -1;
 
-    public static final ServiceSession loadCurrentSession(Activity activity) {
-        SessionManager manager = MyApplication.getSessionManager(activity);
+    private SessionManager() {
+    }
 
-        if (manager.mIndexCurrent < 0
-                || manager.mIndexCurrent >= manager.mSessionList.size()) {
+    public static final void createInstance() {
+        mInstance = new SessionManager();
+        mInstance.loadSession(1);
+    }
+
+    public static final SessionManager getInstance() {
+        return mInstance;
+    }
+
+    public ServiceSession loadCurrentSession() {
+        if (mIndexCurrent < 0 || mIndexCurrent >= mSessionList.size()) {
             throw new ArrayIndexOutOfBoundsException(
-                    "Session list index is out of bound: " + manager.mIndexCurrent);
+                    "Session list index is out of bound: " + mIndexCurrent);
         }
 
-        return manager.mSessionList.get(manager.mIndexCurrent);
+        return mSessionList.get(mIndexCurrent);
     }
 
     private ServiceSession createSession(Integer maBan) {

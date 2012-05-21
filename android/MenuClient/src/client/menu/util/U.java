@@ -2,9 +2,6 @@ package client.menu.util;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
-
-import client.menu.bus.LoadDishUnitsAsyncTask;
 
 import android.app.Activity;
 import android.app.DialogFragment;

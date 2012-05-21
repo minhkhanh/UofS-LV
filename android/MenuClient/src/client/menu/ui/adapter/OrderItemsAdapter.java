@@ -7,29 +7,22 @@ import client.menu.db.dto.DonViTinhDaNgonNguDTO;
 import client.menu.db.dto.DonViTinhMonAnDTO;
 import client.menu.db.dto.MonAnDaNgonNguDTO;
 import client.menu.ui.view.OrderItemView;
+import android.content.ContentValues;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 public class OrderItemsAdapter extends BaseAdapter {
+    List<ContentValues> mData;
     List<ChiTietOrderDTO> mChiTietOrderList;
-
-    List<MonAnDaNgonNguDTO> mMonAnDaNgonNguList;
-    List<DonViTinhDaNgonNguDTO> mDonViTinhDaNgonNguList;
-    List<DonViTinhMonAnDTO> mDonViTinhMonAnList;
 
     Context mContext;
 
-    public OrderItemsAdapter(Context context, List<MonAnDaNgonNguDTO> monAnDaNgonNguList,
-            List<DonViTinhDaNgonNguDTO> donViTinhDaNgonNguList,
-            List<DonViTinhMonAnDTO> donViTinhMonAnList,
+    public OrderItemsAdapter(Context context, List<ContentValues> data,
             List<ChiTietOrderDTO> chiTietOrderList) {
-
-        mMonAnDaNgonNguList = monAnDaNgonNguList;
-        mDonViTinhDaNgonNguList = donViTinhDaNgonNguList;
-        mDonViTinhMonAnList = donViTinhMonAnList;
         mContext = context;
+        mData = data;
         mChiTietOrderList = chiTietOrderList;
     }
 
@@ -56,8 +49,7 @@ public class OrderItemsAdapter extends BaseAdapter {
             v = new OrderItemView(mContext);
         }
 
-        v.bindData(mChiTietOrderList.get(position), mMonAnDaNgonNguList.get(position),
-                mDonViTinhDaNgonNguList.get(position), mDonViTinhMonAnList.get(position));
+        v.bindData(mChiTietOrderList.get(position), mData.get(position));
 
         return v;
     }

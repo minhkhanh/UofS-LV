@@ -2,7 +2,16 @@ package client.menu.db.dto;
 
 import java.sql.Date;
 
+import android.provider.BaseColumns;
+
 public class TaiKhoanDTO {
+    public static final String TABLE_NAME = "NgonNgu";
+
+    public static final String CL_ID = BaseColumns._ID;
+    public static final String CL_MA_NGON_NGU = "MaNgonNgu";
+    public static final String CL_TEN_NGON_NGU = "TenNgonNgu";
+    public static final String CL_KI_HIEU = "KiHieu";
+    
     private int mId;
     private int mMaTaiKhoan;
     private String mTenTaiKhoan;

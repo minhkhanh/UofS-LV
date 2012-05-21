@@ -7,6 +7,7 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ActionMode;
@@ -22,19 +23,39 @@ import android.widget.GridView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 import client.menu.R;
+import client.menu.app.MyAppRepository;
 import client.menu.db.contract.BanContract;
+import client.menu.db.dao.BanDAO;
+import client.menu.db.dto.BanDTO;
 import client.menu.util.C;
 import client.menu.util.U;
 
 public class TableGridFragment extends Fragment {
 
-    public static final int LOADER_ID_TABLE_LIST = 0;
+    // public static final int LOADER_ID_TABLE_LIST = 0;
 
-    private int mMaKhuVuc;
+    private Integer mMaKhuVuc;
 
-    private SimpleCursorAdapter mAdapter;
+    private SimpleCursorAdapter mGridAdapter;
     private GridView mTableGrid;
     private ActionMode mActionMode;
+
+    LoadTableListTask mLoadTableListTask;
+
+    class LoadTableListTask extends AsyncTask<Integer, Integer, Cursor> {
+
+        @Override
+        protected void onPostExecute(Cursor result) {
+            super.onPostExecute(result);
+            mGridAdapter.changeCursor(result);
+        }
+
+        @Override
+        protected Cursor doInBackground(Integer... maKhuVuc) {
+            return BanDAO.getInstance().cursorByMaKhuVuc(maKhuVuc[0]);
+        }
+
+    };
 
     private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
@@ -62,7 +83,7 @@ public class TableGridFragment extends Fragment {
             // Toast.LENGTH_SHORT).show();
             switch (item.getItemId()) {
                 case R.id.itemOrder:
-                    
+
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
                     Fragment prev = getFragmentManager().findFragmentByTag("dialog");
                     if (prev != null) {
@@ -96,44 +117,45 @@ public class TableGridFragment extends Fragment {
         }
     };
 
-    private LoaderCallbacks<Cursor> mLoaderCallbacks = new LoaderCallbacks<Cursor>() {
-
-        @Override
-        public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-            switch (id) {
-                case LOADER_ID_TABLE_LIST:
-                    String[] proj = new String[] { BanContract.CL_ID, BanContract.CL_SID,
-                            BanContract.CL_TEN_BAN };
-                    CursorLoader loader = new CursorLoader(getActivity(),
-                            BanContract.CONTENT_URI, proj, BanContract.CL_MA_KHU_VUC
-                                    + " = ?", new String[] { String.valueOf(mMaKhuVuc) },
-                            null);
-
-                    return loader;
-            }
-
-            return null;
-        }
-
-        @Override
-        public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-            switch (loader.getId()) {
-                case LOADER_ID_TABLE_LIST:
-                    mAdapter.swapCursor(cursor);
-                    Log.d(C.TAG, "onLoadFinished : adapter.swapCursor(arg1);");
-                    break;
-            }
-        }
-
-        @Override
-        public void onLoaderReset(Loader<Cursor> loader) {
-            switch (loader.getId()) {
-                case LOADER_ID_TABLE_LIST:
-                    mAdapter.swapCursor(null);
-                    break;
-            }
-        }
-    };
+    // private LoaderCallbacks<Cursor> mLoaderCallbacks = new
+    // LoaderCallbacks<Cursor>() {
+    //
+    // @Override
+    // public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    // switch (id) {
+    // case LOADER_ID_TABLE_LIST:
+    // String[] proj = new String[] { BanContract.CL_ID, BanContract.CL_SID,
+    // BanContract.CL_TEN_BAN };
+    // CursorLoader loader = new CursorLoader(getActivity(),
+    // BanContract.CONTENT_URI, proj, BanContract.CL_MA_KHU_VUC
+    // + " = ?", new String[] { String.valueOf(mMaKhuVuc) },
+    // null);
+    //
+    // return loader;
+    // }
+    //
+    // return null;
+    // }
+    //
+    // @Override
+    // public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+    // switch (loader.getId()) {
+    // case LOADER_ID_TABLE_LIST:
+    // mAdapter.swapCursor(cursor);
+    // Log.d(C.TAG, "onLoadFinished : adapter.swapCursor(arg1);");
+    // break;
+    // }
+    // }
+    //
+    // @Override
+    // public void onLoaderReset(Loader<Cursor> loader) {
+    // switch (loader.getId()) {
+    // case LOADER_ID_TABLE_LIST:
+    // mAdapter.swapCursor(null);
+    // break;
+    // }
+    // }
+    // };
 
     public int getMaKhuVuc() {
         return mMaKhuVuc;
@@ -171,9 +193,28 @@ public class TableGridFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        mLoadTableListTask = new LoadTableListTask();
+        mLoadTableListTask.execute(mMaKhuVuc);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if (mLoadTableListTask.getStatus() != AsyncTask.Status.FINISHED) {
+            mLoadTableListTask.cancel(true);
+        } else {
+            mGridAdapter.changeCursor(null);
+        }
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt("mAreaId", mMaKhuVuc);
+        outState.putInt("mMaKhuVuc", mMaKhuVuc);
     }
 
     @Override
@@ -181,17 +222,18 @@ public class TableGridFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState != null) {
-            mMaKhuVuc = savedInstanceState.getInt("mAreaId");
+            mMaKhuVuc = savedInstanceState.getInt("mMaKhuVuc");
         }
 
         setHasOptionsMenu(true);
 
-        String[] from = new String[] { BanContract.CL_TEN_BAN };
+        String[] from = new String[] { BanDTO.CL_TEN_BAN };
         int[] to = new int[] { R.id.TableCaption };
-        mAdapter = new SimpleCursorAdapter(getActivity(), R.layout.item_table_grid, null,
-                from, to, 0);
+        mGridAdapter = new SimpleCursorAdapter(getActivity(), R.layout.item_table_grid,
+                null, from, to, 0);
 
-        getLoaderManager().initLoader(LOADER_ID_TABLE_LIST, null, mLoaderCallbacks);
+        // getLoaderManager().initLoader(LOADER_ID_TABLE_LIST, null,
+        // mLoaderCallbacks);
     }
 
     @Override
@@ -200,7 +242,7 @@ public class TableGridFragment extends Fragment {
         // getActivity().getActionBar().setSubtitle(R.string.construct_merge_table);
 
         mTableGrid = (GridView) getView().findViewById(R.id.TableGrid);
-        mTableGrid.setAdapter(mAdapter);
+        mTableGrid.setAdapter(mGridAdapter);
         mTableGrid.setOnItemClickListener(mOnItemClickListener);
     }
 

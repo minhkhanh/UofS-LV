@@ -1,32 +1,40 @@
 package client.menu.db.dto;
 
-import client.menu.db.contract.NgonNguContract;
 import android.database.Cursor;
+import android.provider.BaseColumns;
 
 public class NgonNguDTO {
+
+    public static final String TABLE_NAME = "NgonNgu";
+
+    public static final String CL_ID = BaseColumns._ID;
+    public static final String CL_MA_NGON_NGU = "MaNgonNgu";
+    public static final String CL_TEN_NGON_NGU = "TenNgonNgu";
+    public static final String CL_KI_HIEU = "KiHieu";
+
     private Integer mId;
     private Integer mMaNgonNgu;
     private String mTenNgonNgu;
     private String mKiHieu;
 
     public static NgonNguDTO extractFrom(Cursor cursor) {
-        NgonNguDTO ngonNgu = new NgonNguDTO();
+        NgonNguDTO obj = new NgonNguDTO();
 
         int index;
-        if ((index = cursor.getColumnIndex(NgonNguContract.CL_ID)) != -1) {
-            ngonNgu.mId = cursor.getInt(index);
+        if ((index = cursor.getColumnIndex(CL_ID)) != -1) {
+            obj.mId = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(NgonNguContract.CL_MA_NGON_NGU)) != -1) {
-            ngonNgu.mMaNgonNgu = cursor.getInt(index);
+        if ((index = cursor.getColumnIndex(CL_MA_NGON_NGU)) != -1) {
+            obj.mMaNgonNgu = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(NgonNguContract.CL_TEN_NGON_NGU)) != -1) {
-            ngonNgu.mTenNgonNgu = cursor.getString(index);
+        if ((index = cursor.getColumnIndex(CL_TEN_NGON_NGU)) != -1) {
+            obj.mTenNgonNgu = cursor.getString(index);
         }
-        if ((index = cursor.getColumnIndex(NgonNguContract.CL_KI_HIEU)) != -1) {
-            ngonNgu.mKiHieu = cursor.getString(index);
+        if ((index = cursor.getColumnIndex(CL_KI_HIEU)) != -1) {
+            obj.mKiHieu = cursor.getString(index);
         }
 
-        return ngonNgu;
+        return obj;
     }
 
     public Integer getId() {
