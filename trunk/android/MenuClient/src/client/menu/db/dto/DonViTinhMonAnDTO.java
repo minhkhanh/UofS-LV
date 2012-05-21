@@ -2,8 +2,19 @@ package client.menu.db.dto;
 
 import client.menu.db.contract.DonViTinhMonAnContract;
 import android.database.Cursor;
+import android.provider.BaseColumns;
 
 public class DonViTinhMonAnDTO {
+
+    public static final String TABLE_NAME = "ChiTietMonAnDonViTinh";
+
+    public static final String CL_ID = BaseColumns._ID;
+    public static final String CL_MA_MON_AN = "MaMonAn";
+    public static final String CL_MA_MON_AN_QN = TABLE_NAME + ".MaMonAn";
+    public static final String CL_MA_DON_VI = "MaDonViTinh";
+    public static final String CL_MA_DON_VI_QN = TABLE_NAME + ".MaDonViTinh";
+    public static final String CL_DON_GIA = "DonGia";
+
     private Integer mId;
     private Integer mMaMonAn;
     private Integer mMaDonViTinh;
@@ -13,22 +24,16 @@ public class DonViTinhMonAnDTO {
         DonViTinhMonAnDTO obj = new DonViTinhMonAnDTO();
 
         int index;
-        if ((index = cursor.getColumnIndex(DonViTinhMonAnContract.CL_ID)) != -1) {
+        if ((index = cursor.getColumnIndex(CL_ID)) != -1) {
             obj.mId = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(DonViTinhMonAnContract.CL_MA_MON_AN)) != -1) {
+        if ((index = cursor.getColumnIndex(CL_MA_MON_AN)) != -1) {
             obj.mMaMonAn = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(DonViTinhMonAnContract.CL_MA_DON_VI)) != -1) {
+        if ((index = cursor.getColumnIndex(CL_MA_DON_VI)) != -1) {
             obj.mMaDonViTinh = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(DonViTinhMonAnContract.CL_MA_MON_AN)) != -1) {
-            obj.mMaMonAn = cursor.getInt(index);
-        }
-        if ((index = cursor.getColumnIndex(DonViTinhMonAnContract.CL_MA_DON_VI)) != -1) {
-            obj.mMaDonViTinh = cursor.getInt(index);
-        }
-        if ((index = cursor.getColumnIndex(DonViTinhMonAnContract.CL_DON_GIA)) != -1) {
+        if ((index = cursor.getColumnIndex(CL_DON_GIA)) != -1) {
             obj.mDonGia = cursor.getInt(index);
         }
 

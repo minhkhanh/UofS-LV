@@ -8,23 +8,12 @@ import android.app.Application;
 public class MyApplication extends Application {
     private static final String EX_MSG_01 = "Can not get MyApplication object from the activity parameter.";
 
-    private MyAppSettings gSettings;
-
-    private SessionManager mSessionManager;
+    private MyAppSettings mSettings;
 
     public static final MyAppSettings getSettings(Activity activity) {
-        Application app = activity.getApplication();
-        if (app instanceof MyApplication) {
-            return ((MyApplication) app).gSettings;
-        }
-
-        throw new IllegalArgumentException(C.TAG + EX_MSG_01);
-    }
-
-    public static final SessionManager getSessionManager(Activity activity) {
-        Application app = activity.getApplication();
-        if (app instanceof MyApplication) {
-            return ((MyApplication) app).mSessionManager;
+        MyApplication app = (MyApplication) activity.getApplication();
+        if (app != null) {
+            return app.mSettings;
         }
 
         throw new IllegalArgumentException(C.TAG + EX_MSG_01);
@@ -33,11 +22,11 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
-        gSettings = new MyAppSettings(this);
-        mSessionManager = new SessionManager();
-
-        // create temporary session
-        mSessionManager.loadSession(1);
+        
+        MyAppRepository.createInstance(this);
+        
+        mSettings = new MyAppSettings(this);
+        SessionManager.createInstance();
+        
     }
 }

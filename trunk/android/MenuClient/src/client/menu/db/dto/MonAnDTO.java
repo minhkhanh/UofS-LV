@@ -1,9 +1,21 @@
 package client.menu.db.dto;
 
-import client.menu.db.contract.MonAnContract;
 import android.database.Cursor;
+import android.provider.BaseColumns;
 
 public class MonAnDTO {
+
+    public static final String TABLE_NAME = "MonAn";
+
+    public static final String CL_ID = BaseColumns._ID;
+    public static final String CL_MA_MON_AN = "MaMonAn";
+    public static final String CL_HINH_ANH = "HinhAnh";
+    public static final String CL_DIEM_DANH_GIA = "DiemDanhGia";
+    public static final String CL_SO_LUOT_RATE = "SoLuotDanhGia";
+    public static final String CL_DEFAULT_UNIT_ID = "MaDonViTinhMacDinh";
+    public static final String CL_MA_DANH_MUC = "MaDanhMuc";
+    public static final String CL_NGUNG_BAN = "NgungBan";
+
     private Integer mId;
     private Integer mMaMonAn;
     private String mHinhAnh;
@@ -18,28 +30,28 @@ public class MonAnDTO {
 
         int index;
 
-        if ((index = cursor.getColumnIndex(MonAnContract.CL_ID)) != -1) {
+        if ((index = cursor.getColumnIndex(CL_ID)) != -1) {
             monAn.mId = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(MonAnContract.CL_MA_MON_AN)) != -1) {
+        if ((index = cursor.getColumnIndex(CL_MA_MON_AN)) != -1) {
             monAn.mMaMonAn = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(MonAnContract.CL_HINH_ANH)) != -1) {
+        if ((index = cursor.getColumnIndex(CL_HINH_ANH)) != -1) {
             monAn.mHinhAnh = cursor.getString(index);
         }
-        if ((index = cursor.getColumnIndex(MonAnContract.CL_DIEM_DANH_GIA)) != -1) {
+        if ((index = cursor.getColumnIndex(CL_DIEM_DANH_GIA)) != -1) {
             monAn.mDiemDanhGia = cursor.getFloat(index);
         }
-        if ((index = cursor.getColumnIndex(MonAnContract.CL_SO_LUOT_RATE)) != -1) {
+        if ((index = cursor.getColumnIndex(CL_SO_LUOT_RATE)) != -1) {
             monAn.mSoLuotDanhGia = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(MonAnContract.CL_DEFAULT_UNIT_ID)) != -1) {
+        if ((index = cursor.getColumnIndex(CL_DEFAULT_UNIT_ID)) != -1) {
             monAn.mMaDonViTinhMacDinh = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(MonAnContract.CL_MA_DANH_MUC)) != -1) {
+        if ((index = cursor.getColumnIndex(CL_MA_DANH_MUC)) != -1) {
             monAn.mMaDanhMuc = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(MonAnContract.CL_NGUNG_BAN)) != -1) {
+        if ((index = cursor.getColumnIndex(CL_NGUNG_BAN)) != -1) {
             monAn.mNgungBan = Boolean.valueOf(cursor.getString(index));
         }
 

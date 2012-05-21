@@ -1,33 +1,43 @@
 package client.menu.db.dto;
 
-import client.menu.db.contract.MonAnDaNgonNguContract;
 import android.database.Cursor;
+import android.provider.BaseColumns;
 
 public class MonAnDaNgonNguDTO {
 
-    Integer mId;
-    Integer mMaMonAn;
-    Integer mMaNgonNgu;
-    String mTenMonAn;
-    String mMoTaMonAn;
+    public static final String TABLE_NAME = "ChiTietMonAnDaNgonNgu";
+
+    public static final String CL_ID = BaseColumns._ID;
+    public static final String CL_MA_MON = "MaMonAn";
+    public static final String CL_MA_MON_QN = TABLE_NAME + ".MaMonAn";
+    public static final String CL_MA_NGON_NGU = "MaNgonNgu";
+    public static final String CL_MA_NGON_NGU_QN = TABLE_NAME + ".MaNgonNgu";
+    public static final String CL_TEN_MON = "TenMonAn";
+    public static final String CL_MO_TA_MON = "MoTaMonAn";
+
+    private Integer mId;
+    private Integer mMaMonAn;
+    private Integer mMaNgonNgu;
+    private String mTenMonAn;
+    private String mMoTaMonAn;
 
     public static MonAnDaNgonNguDTO extractFrom(Cursor cursor) {
         MonAnDaNgonNguDTO obj = new MonAnDaNgonNguDTO();
 
         int index;
-        if ((index = cursor.getColumnIndex(MonAnDaNgonNguContract.CL_ID)) != -1) {
+        if ((index = cursor.getColumnIndex(CL_ID)) != -1) {
             obj.mId = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(MonAnDaNgonNguContract.CL_MA_MON)) != -1) {
+        if ((index = cursor.getColumnIndex(CL_MA_MON)) != -1) {
             obj.mMaMonAn = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(MonAnDaNgonNguContract.CL_MA_NGON_NGU)) != -1) {
+        if ((index = cursor.getColumnIndex(CL_MA_NGON_NGU)) != -1) {
             obj.mMaNgonNgu = cursor.getInt(index);
         }
-        if ((index = cursor.getColumnIndex(MonAnDaNgonNguContract.CL_TEN_MON)) != -1) {
+        if ((index = cursor.getColumnIndex(CL_TEN_MON)) != -1) {
             obj.mTenMonAn = cursor.getString(index);
         }
-        if ((index = cursor.getColumnIndex(MonAnDaNgonNguContract.CL_MO_TA_MON)) != -1) {
+        if ((index = cursor.getColumnIndex(CL_MO_TA_MON)) != -1) {
             obj.mMoTaMonAn = cursor.getString(index);
         }
 

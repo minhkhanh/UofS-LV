@@ -9,6 +9,10 @@ import client.menu.R;
 import client.menu.app.MyAppLocale;
 import client.menu.db.contract.DonViTinhDaNgonNguContract;
 import client.menu.db.contract.DonViTinhMonAnContract;
+import client.menu.db.dao.DonViTinhDAO;
+import client.menu.db.dto.DonViTinhDaNgonNguDTO;
+import client.menu.db.dto.DonViTinhMonAnDTO;
+import client.menu.db.dto.NgonNguDTO;
 
 public class LoadDishUnitsAsyncTask extends AsyncTask<Void, Integer, SimpleCursorAdapter> {
 
@@ -39,24 +43,16 @@ public class LoadDishUnitsAsyncTask extends AsyncTask<Void, Integer, SimpleCurso
 
     @Override
     protected SimpleCursorAdapter doInBackground(Void... params) {
-        String[] projection = null;
+        NgonNguDTO ngonNgu = MyAppLocale.getCurrentLanguage(mHostActivity);
+        Cursor cursor = DonViTinhDAO.getInstance().cursorByMonAn(mMaMonAn,
+                ngonNgu.getMaNgonNgu());
 
-        String selection = DonViTinhMonAnContract.CL_MA_MON_AN + "=? and "
-                + DonViTinhDaNgonNguContract.CL_MA_NGON_NGU + "=?";
-
-        String[] selArgs = new String[] { mMaMonAn.toString(),
-                MyAppLocale.getCurrentLanguage(mHostActivity).getMaNgonNgu().toString() };
-
-        Cursor cursor = mHostActivity.getContentResolver().query(
-                DonViTinhMonAnContract.URI_DONVITINHMONAN_INNER_DANGONNGU, projection,
-                selection, selArgs, null);
-
-        if (cursor == null || mMaDonViTinhChon == null) {
+        if (mMaDonViTinhChon == null) {
             mSelectedIndex = -1;
         } else {
             while (cursor.moveToNext()) {
                 if (cursor.getInt(cursor
-                        .getColumnIndex(DonViTinhMonAnContract.CL_MA_DON_VI)) == mMaDonViTinhChon) {
+                        .getColumnIndex(DonViTinhMonAnDTO.CL_MA_DON_VI)) == mMaDonViTinhChon) {
                     mSelectedIndex = cursor.getPosition();
                     break;
                 }
@@ -69,7 +65,7 @@ public class LoadDishUnitsAsyncTask extends AsyncTask<Void, Integer, SimpleCurso
 
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(mHostActivity,
                 R.layout.item_dish_units_spinner, cursor, new String[] {
-                        DonViTinhDaNgonNguContract.CL_TEN_DON_VI,
+                        DonViTinhDaNgonNguDTO.CL_TEN_DON_VI,
                         DonViTinhMonAnContract.CL_DON_GIA }, new int[] {
                         R.id.textUnitName, R.id.textUnitPrice }, 0);
         adapter.setDropDownViewResource(R.layout.item_dish_units_spinner);

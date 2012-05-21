@@ -1,11 +1,20 @@
 package client.menu.db.dao;
 
+import android.database.sqlite.SQLiteDatabase;
 import client.menu.db.util.MyDatabaseHelper;
 
 public abstract class AbstractDAO {
-    protected MyDatabaseHelper mDbHelper = null;
+    private MyDatabaseHelper mDbHelper = null;
     
-    protected AbstractDAO(MyDatabaseHelper dbHelper) {
+    public AbstractDAO(MyDatabaseHelper dbHelper) {
         mDbHelper = dbHelper;
+    }
+    
+    protected SQLiteDatabase open() {
+        return mDbHelper.getWritableDatabase();
+    }
+    
+    protected void close() {
+        mDbHelper.close();
     }
 }

@@ -37,6 +37,7 @@
         <provider android:name=".db.provider.MyContentProvider" android:authorities="client.menu.db.provider"></provider>
         <activity android:name=".ui.activity.TestActivity"></activity>
         <activity android:name=".ui.activity.OrderActivity"></activity>
+        <activity android:name=".ui.activity.BillActivity"></activity>
     </application>
 
 </manifest>

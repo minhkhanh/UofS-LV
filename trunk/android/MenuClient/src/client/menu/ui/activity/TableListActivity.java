@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import client.menu.R;
 import client.menu.ui.fragment.AreaListFragment;
 

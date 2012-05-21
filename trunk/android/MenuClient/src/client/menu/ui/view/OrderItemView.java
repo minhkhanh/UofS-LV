@@ -1,7 +1,7 @@
 package client.menu.ui.view;
 
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.AttributeSet;
@@ -135,8 +135,7 @@ public class OrderItemView extends RelativeLayout {
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
                                             ServiceOrder order = SessionManager
-                                                    .loadCurrentSession(
-                                                            (Activity) getContext())
+                                                    .getInstance().loadCurrentSession()
                                                     .getOrder();
                                             order.removeItem(mChiTietOrder);
                                             order.notifyChanged();
@@ -157,8 +156,7 @@ public class OrderItemView extends RelativeLayout {
                     break;
             }
 
-            SessionManager.loadCurrentSession((Activity) getContext()).getOrder()
-                    .debugLogItems();
+            SessionManager.getInstance().loadCurrentSession().getOrder().debugLogItems();
         }
     };
 
@@ -186,8 +184,7 @@ public class OrderItemView extends RelativeLayout {
         inflater.inflate(R.layout.item_order, this);
     }
 
-    public void bindData(ChiTietOrderDTO chiTietOrder, MonAnDaNgonNguDTO monAnDaNgonNgu,
-            DonViTinhDaNgonNguDTO donViTinhDaNgonNgu, DonViTinhMonAnDTO donViTinhMonAn) {
+    public void bindData(ChiTietOrderDTO chiTietOrder, ContentValues values) {
         mChiTietOrder = chiTietOrder;
 
         mButtonPlus = (Button) findViewById(R.id.btnPlus);
@@ -205,12 +202,12 @@ public class OrderItemView extends RelativeLayout {
         dishNote.setText(mChiTietOrder.getGhiChu());
 
         TextView dishName = (TextView) findViewById(R.id.textDishName);
-        dishName.setText(monAnDaNgonNgu.getTenMonAn());
+        dishName.setText(values.getAsString(MonAnDaNgonNguDTO.CL_TEN_MON));
 
         TextView unitName = (TextView) findViewById(R.id.textUnitName);
-        unitName.setText(donViTinhDaNgonNgu.getTenDonViTinh());
+        unitName.setText(values.getAsString(DonViTinhDaNgonNguDTO.CL_TEN_DON_VI));
 
         TextView unitPrice = (TextView) findViewById(R.id.textUnitPrice);
-        unitPrice.setText(donViTinhMonAn.getDonGia().toString());
+        unitPrice.setText(values.getAsInteger(DonViTinhMonAnDTO.CL_DON_GIA).toString());
     }
 }

@@ -1,10 +1,20 @@
 package client.menu.db.dto;
 
-import java.util.Map;
-
-import client.menu.db.contract.ChiTietOrderContract;
+import android.provider.BaseColumns;
 
 public class ChiTietOrderDTO {
+    public static final String TABLE_NAME = "ChiTietOrder";
+
+    public static final String CL_ID = BaseColumns._ID;
+    public static final String CL_SID = "MaChiTietOrder";
+    public static final String CL_MA_ORDER = "MaOrder";
+    public static final String CL_SO_LUONG = "SoLuong";
+    public static final String CL_GHI_CHU = "GhiChu";
+    public static final String CL_MA_BO_PHAN_CHE_BIEN = "MaBoPhanCheBien";
+    public static final String CL_TINH_TRANG = "TinhTrang";
+    public static final String CL_MA_MON_AN = "MaMonAn";
+    public static final String CL_MA_DON_VI_TINH = "MaDonViTinh";
+
     private Integer mId;
     private Integer mMaChiTiet;
     private Integer mMaOrder;
@@ -14,18 +24,6 @@ public class ChiTietOrderDTO {
     private Integer mTinhTrang = 0;
     private Integer mMaMonAn;
     private Integer mMaDonViTinh;
-
-    public void extractTo(Map<String, Object> map) {
-        map.put(ChiTietOrderContract.CL_ID, mId);
-        map.put(ChiTietOrderContract.CL_SID, mMaChiTiet);
-        map.put(ChiTietOrderContract.CL_MA_ORDER, mMaOrder);
-        map.put(ChiTietOrderContract.CL_SO_LUONG, mSoLuong);
-        map.put(ChiTietOrderContract.CL_GHI_CHU, mGhiChu);
-        map.put(ChiTietOrderContract.CL_MA_BO_PHAN_CHE_BIEN, mMaBoPhanCheBien);
-        map.put(ChiTietOrderContract.CL_TINH_TRANG, mTinhTrang);
-        map.put(ChiTietOrderContract.CL_MA_MON_AN, mMaMonAn);
-        map.put(ChiTietOrderContract.CL_MA_DON_VI_TINH, mMaDonViTinh);
-    }
 
     public Integer getId() {
         return mId;

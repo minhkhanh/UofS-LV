@@ -13,14 +13,6 @@ public final class MyAppSettings {
         return settings.mLocale;
     }
 
-    public Application getApplication() {
-        return mApplication;
-    }
-
-    public void setApplication(Application application) {
-        mApplication = application;
-    }
-
     public MyAppLocale getLocale() {
         return mLocale;
     }
@@ -31,7 +23,6 @@ public final class MyAppSettings {
 
     public MyAppSettings(Application application) {
         mApplication = application;
-        mLocale = MyAppLocale.createWithDefaultLanguage(mApplication
-                .getContentResolver());
+        mLocale = MyAppLocale.createWithDefaultLanguage();
     }
 }

@@ -17,19 +17,22 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import client.menu.R;
+import client.menu.app.MyAppSettings;
 import client.menu.app.MyApplication;
 import client.menu.bus.LoadDishUnitsAsyncTask;
 import client.menu.db.contract.MonAnContract;
 import client.menu.db.contract.MonAnDaNgonNguContract;
+import client.menu.db.dao.MonAnDAO;
 import client.menu.db.dto.DonViTinhDaNgonNguDTO;
 import client.menu.db.dto.DonViTinhMonAnDTO;
 import client.menu.db.dto.MonAnDTO;
 import client.menu.db.dto.MonAnDaNgonNguDTO;
+import client.menu.db.dto.NgonNguDTO;
 import client.menu.util.U;
 
 public class DishListFragment extends ListFragment {
 
-    private static final int LOADER_ID_DISH_LIST = 0;
+    // private static final int LOADER_ID_DISH_LIST = 0;
 
     private int mMaDanhMuc;
     private SimpleCursorAdapter mListAdapter;
@@ -37,11 +40,33 @@ public class DishListFragment extends ListFragment {
 
     private boolean mHaveExtendPane;
 
-    private void cancelAsyncTasks() {
+    LoadDishListTask mLoadDishListTask;
+
+    class LoadDishListTask extends AsyncTask<Integer, Integer, Cursor> {
+
+        @Override
+        protected void onPostExecute(Cursor result) {
+            super.onPostExecute(result);
+
+            mListAdapter.changeCursor(result);
+            setListShown(true);
+        }
+
+        @Override
+        protected Cursor doInBackground(Integer... params) {
+            NgonNguDTO ngonNgu = MyAppSettings.getCurrentAppLocale(getActivity())
+                    .getLanguage();
+            return MonAnDAO.getInstance().cursorByMaDanhMuc(params[0],
+                    ngonNgu.getMaNgonNgu());
+        }
+
+    };
+
+    private void cancelLoadDishUnitsTasks() {
         // ArrayList<Integer> savedIndices = new ArrayList<Integer>();
         for (int i = 0; i < mDishUnitsLoadTaskList.size(); ++i) {
             LoadDishUnitsAsyncTask task = mDishUnitsLoadTaskList.get(i);
-            if (task != null && task.getStatus() != AsyncTask.Status.FINISHED) {
+            if (task.getStatus() != AsyncTask.Status.FINISHED) {
                 // savedIndices.add(task.getIndex());
                 task.cancel(true);
                 // mDishUnitsLoadTaskList.set(i, null);
@@ -66,7 +91,7 @@ public class DishListFragment extends ListFragment {
             Cursor cursor = mListAdapter.getCursor();
             if (cursor.moveToPosition(index)) {
                 Integer maMonAn = cursor.getInt(cursor
-                        .getColumnIndex(MonAnContract.CL_MA_MON_AN));
+                        .getColumnIndex(MonAnDTO.CL_MA_MON_AN));
 
                 LoadDishUnitsAsyncTask task = new LoadDishUnitsAsyncTask(
                         DishListFragment.this.getActivity(), spinner, maMonAn, null);
@@ -77,56 +102,80 @@ public class DishListFragment extends ListFragment {
         }
     };
 
-    private LoaderCallbacks<Cursor> mLoaderCallbacks = new LoaderCallbacks<Cursor>() {
+    // private LoaderCallbacks<Cursor> mLoaderCallbacks = new
+    // LoaderCallbacks<Cursor>() {
+    //
+    // @Override
+    // public void onLoaderReset(Loader<Cursor> loader) {
+    // switch (loader.getId()) {
+    // case LOADER_ID_DISH_LIST:
+    // // Cursor c = mListAdapter.getCursor();
+    // mListAdapter.swapCursor(null);
+    // // Cursor c = ((SimpleCursorAdapter)
+    // // getListAdapter()).getCursor();
+    // // c = mListAdapter.getCursor();
+    //
+    // // Log.d(C.TAG, "onLoaderReset : id = " +
+    // // LOADER_ID_DISH_LIST);
+    // break;
+    // }
+    // }
+    //
+    // @Override
+    // public void onLoadFinished(Loader<Cursor> loader, Cursor loadedCursor) {
+    // switch (loader.getId()) {
+    // case LOADER_ID_DISH_LIST:
+    // mListAdapter.swapCursor(loadedCursor);
+    // break;
+    // }
+    // }
+    //
+    // @Override
+    // public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    // switch (id) {
+    // case LOADER_ID_DISH_LIST:
+    // String[] proj = null;
+    //
+    // String selection = MonAnContract.CL_MA_DANH_MUC + "=? and "
+    // + MonAnDaNgonNguContract.CL_MA_NGON_NGU + "=?";
+    //
+    // Integer sid = MyApplication.getSettings(getActivity()).getLocale()
+    // .getLanguage().getMaNgonNgu();
+    //
+    // CursorLoader loader = new CursorLoader(getActivity(),
+    // MonAnContract.URI_MONAN_INNER_DANGONNGU, proj, selection,
+    // new String[] { String.valueOf(mMaDanhMuc), sid.toString() },
+    // null);
+    //
+    // return loader;
+    // }
+    //
+    // return null;
+    // }
+    // };
 
-        @Override
-        public void onLoaderReset(Loader<Cursor> loader) {
-            switch (loader.getId()) {
-                case LOADER_ID_DISH_LIST:
-                    // Cursor c = mListAdapter.getCursor();
-                    mListAdapter.swapCursor(null);
-                    // Cursor c = ((SimpleCursorAdapter)
-                    // getListAdapter()).getCursor();
-                    // c = mListAdapter.getCursor();
+    @Override
+    public void onResume() {
+        super.onResume();
 
-                    // Log.d(C.TAG, "onLoaderReset : id = " +
-                    // LOADER_ID_DISH_LIST);
-                    break;
-            }
+        mLoadDishListTask = new LoadDishListTask();
+        mLoadDishListTask.execute(mMaDanhMuc);
+
+        setListShown(false);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if (mLoadDishListTask.getStatus() != AsyncTask.Status.FINISHED) {
+            mLoadDishListTask.cancel(true);
+        } else {
+            mListAdapter.changeCursor(null);
         }
 
-        @Override
-        public void onLoadFinished(Loader<Cursor> loader, Cursor loadedCursor) {
-            switch (loader.getId()) {
-                case LOADER_ID_DISH_LIST:
-                    mListAdapter.swapCursor(loadedCursor);
-                    break;
-            }
-        }
-
-        @Override
-        public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-            switch (id) {
-                case LOADER_ID_DISH_LIST:
-                    String[] proj = null;
-
-                    String selection = MonAnContract.CL_MA_DANH_MUC + "=? and "
-                            + MonAnDaNgonNguContract.CL_MA_NGON_NGU + "=?";
-
-                    Integer sid = MyApplication.getSettings(getActivity()).getLocale()
-                            .getLanguage().getMaNgonNgu();
-
-                    CursorLoader loader = new CursorLoader(getActivity(),
-                            MonAnContract.URI_MONAN_INNER_DANGONNGU, proj, selection,
-                            new String[] { String.valueOf(mMaDanhMuc), sid.toString() },
-                            null);
-
-                    return loader;
-            }
-
-            return null;
-        }
-    };
+        cancelLoadDishUnitsTasks();
+    }
 
     public int getMaDanhMuc() {
         return mMaDanhMuc;
@@ -147,8 +196,6 @@ public class DishListFragment extends ListFragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("mMaDanhMuc", mMaDanhMuc);
-
-        cancelAsyncTasks();
     }
 
     @Override
@@ -163,8 +210,8 @@ public class DishListFragment extends ListFragment {
 
         setHasOptionsMenu(true);
 
-        String[] from = new String[] { MonAnDaNgonNguContract.CL_TEN_MON,
-                MonAnDaNgonNguContract.CL_MO_TA_MON };
+        String[] from = new String[] { MonAnDaNgonNguDTO.CL_TEN_MON,
+                MonAnDaNgonNguDTO.CL_MO_TA_MON };
         int[] to = new int[] { R.id.textDishName, R.id.textDishDescription };
         mListAdapter = new SimpleCursorAdapter(getActivity(), R.layout.item_dish_list,
                 null, from, to, 0);
@@ -174,7 +221,8 @@ public class DishListFragment extends ListFragment {
 
         getListView().setOnHierarchyChangeListener(mOnListItemChange);
 
-        getLoaderManager().initLoader(LOADER_ID_DISH_LIST, null, mLoaderCallbacks);
+        // getLoaderManager().initLoader(LOADER_ID_DISH_LIST, null,
+        // mLoaderCallbacks);
 
         View orderPreview = getActivity().findViewById(R.id.ExtendPaneHolder);
         mHaveExtendPane = orderPreview != null

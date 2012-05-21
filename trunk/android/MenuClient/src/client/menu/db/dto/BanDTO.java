@@ -1,39 +1,85 @@
 package client.menu.db.dto;
 
+import client.menu.db.dao.BanDAO;
+import client.menu.db.dao.KhuVucDAO;
+import android.database.Cursor;
+import android.provider.BaseColumns;
+
 public class BanDTO
 // implements Parcelable
 {
+    public static final String TABLE_NAME = "Ban";
 
-    int mId;
-    int mMaBan;
-    int mMaKhuVuc;
-    int mMaBanChinh;
+    public static final String CL_ID = BaseColumns._ID;
+    public static final String CL_MA_BAN = "MaBan";
+    public static final String CL_MA_KHU_VUC = "MaKhuVuc";
+    public static final String CL_TEN_BAN = "TenBan";
+    public static final String CL_GHI_CHU = "GhiChu";
+    public static final String CL_ACTIVE = "Active";
+    public static final String CL_TINH_TRANG = "TinhTrang";
+    public static final String CL_MA_BAN_CHINH = "MaBanChinh";
+
+    private Integer mId;
+    Integer mMaBan;
+    Integer mMaKhuVuc;
+    Integer mMaBanChinh;
     String mTenBan;
     String mGhiChu;
-    boolean mActive;
-    boolean mTinhTrang;
+    Integer mActive;
+    Integer mTinhTrang;
+    
+    public static final BanDTO extractFrom(Cursor cursor) {
+        BanDTO obj = new BanDTO();
+        int i;
+        if ((i = cursor.getColumnIndex(CL_ID)) != -1) {
+            obj.mId = cursor.getInt(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_MA_BAN)) != -1) {
+            obj.mMaBan = cursor.getInt(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_MA_KHU_VUC)) != -1) {
+            obj.mMaKhuVuc = cursor.getInt(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_MA_BAN_CHINH)) != -1) {
+            obj.mMaBanChinh = cursor.getInt(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_TEN_BAN)) != -1) {
+            obj.mTenBan = cursor.getString(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_GHI_CHU)) != -1) {
+            obj.mGhiChu = cursor.getString(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_ACTIVE)) != -1) {
+            obj.mActive = cursor.getInt(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_TINH_TRANG)) != -1) {
+            obj.mTinhTrang = cursor.getInt(i);
+        }
 
-    public int getId() {
+        return obj;
+    }
+
+    public Integer getId() {
         return mId;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         mId = id;
     }
 
-    public int getMaBan() {
+    public Integer getMaBan() {
         return mMaBan;
     }
 
-    public void setMaBan(int maBan) {
+    public void setMaBan(Integer maBan) {
         this.mMaBan = maBan;
     }
 
-    public int getMaKhuVuc() {
+    public Integer getMaKhuVuc() {
         return mMaKhuVuc;
     }
 
-    public void setMaKhuVuc(int maKhuVuc) {
+    public void setMaKhuVuc(Integer maKhuVuc) {
         this.mMaKhuVuc = maKhuVuc;
     }
 
@@ -53,27 +99,27 @@ public class BanDTO
         this.mGhiChu = ghiChu;
     }
 
-    public boolean isActive() {
+    public Integer isActive() {
         return mActive;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Integer active) {
         this.mActive = active;
     }
 
-    public boolean getTinhTrang() {
+    public Integer getTinhTrang() {
         return mTinhTrang;
     }
 
-    public void setTinhTrang(boolean tinhTrang) {
+    public void setTinhTrang(Integer tinhTrang) {
         this.mTinhTrang = tinhTrang;
     }
 
-    public int getMaBanChinh() {
+    public Integer getMaBanChinh() {
         return mMaBanChinh;
     }
 
-    public void setMaBanChinh(int maBanChinh) {
+    public void setMaBanChinh(Integer maBanChinh) {
         this.mMaBanChinh = maBanChinh;
     }
 
@@ -83,12 +129,12 @@ public class BanDTO
     }
 
     // @Override
-    // public int describeContents() {
+    // public Integer describeContents() {
     // return 0;
     // }
     //
     // @Override
-    // public void writeToParcel(Parcel dest, int flags) {
+    // public void writeToParcel(Parcel dest, Integer flags) {
     // dest.writeValue(mActive);
     // dest.writeValue(mGhiChu);
     // dest.writeValue(mId);
@@ -118,7 +164,7 @@ public class BanDTO
     // BanDTO ban = new BanDTO();
     //
     // Object[] data = source.readArray(Object.class.getClassLoader());
-    // int i = 0;
+    // Integer i = 0;
     // ban.mActive = (Boolean) data[i++];
     // ban.mGhiChu = (String) data[i++];
     // ban.mId = (Integer) data[i++];
@@ -132,7 +178,7 @@ public class BanDTO
     // }
     //
     // @Override
-    // public BanDTO[] newArray(int size) {
+    // public BanDTO[] newArray(Integer size) {
     // return new BanDTO[size];
     // }
     // };

@@ -1,5 +1,6 @@
 package client.menu.db.util;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import android.content.Context;
@@ -26,6 +27,12 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         InputStream stream = mContext.getResources().openRawResource(R.raw.create_db);
         String sqlCreate = U.convertStreamToString(stream);
         db.execSQL(sqlCreate);
+        
+        try {
+            stream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         U.logOwnTag("MyDatabaseHelper.onCreate");
     }

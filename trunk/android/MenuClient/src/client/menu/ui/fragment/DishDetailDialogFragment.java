@@ -19,9 +19,9 @@ import android.widget.TextView;
 import client.menu.R;
 import client.menu.bus.SessionManager;
 import client.menu.bus.SessionManager.ServiceOrder;
-import client.menu.db.contract.DonViTinhContract;
-import client.menu.db.contract.DonViTinhDaNgonNguContract;
-import client.menu.db.contract.DonViTinhMonAnContract;
+import client.menu.db.dto.DonViTinhDTO;
+import client.menu.db.dto.DonViTinhDaNgonNguDTO;
+import client.menu.db.dto.DonViTinhMonAnDTO;
 import client.menu.db.dto.MonAnDTO;
 import client.menu.db.dto.MonAnDaNgonNguDTO;
 
@@ -46,7 +46,7 @@ public class DishDetailDialogFragment extends DialogFragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btnOK:
-                    ServiceOrder order = SessionManager.loadCurrentSession(getActivity())
+                    ServiceOrder order = SessionManager.getInstance().loadCurrentSession()
                             .getOrder();
 
                     order.addItem(mMonAn.getMaMonAn(), mMaDonViTinh, mNpickerQuantity
@@ -83,6 +83,7 @@ public class DishDetailDialogFragment extends DialogFragment {
             Bundle savedInstanceState) {
         // getDialog().setTitle(getString(R.string.title_dialog_auth));
         getDialog().setCanceledOnTouchOutside(false);
+        
 
         View layout = inflater.inflate(R.layout.dialog_dish_detail, container, false);
 
@@ -93,16 +94,17 @@ public class DishDetailDialogFragment extends DialogFragment {
         Cursor cursor = mUnitsAdapter.getCursor();
         if (cursor.moveToPosition(pos)) {
             String unitName = cursor.getString(cursor
-                    .getColumnIndex(DonViTinhDaNgonNguContract.CL_TEN_DON_VI));
+                    .getColumnIndex(DonViTinhDaNgonNguDTO.CL_TEN_DON_VI));
             Integer unitPrice = cursor.getInt(cursor
-                    .getColumnIndex(DonViTinhMonAnContract.CL_DON_GIA));
+                    .getColumnIndex(DonViTinhMonAnDTO.CL_DON_GIA));
 
             mUnitNameTextView.setText(unitName);
             mUnitPriceTextView.setText(unitPrice.toString());
 
             mMaDonViTinh = cursor.getInt(cursor
-                    .getColumnIndex(DonViTinhContract.CL_MA_DON_VI_TINH));
+                    .getColumnIndex(DonViTinhDTO.CL_MA_DON_VI_TINH));
         }
+        
     }
 
     private void prepareListPrices() {
@@ -121,7 +123,7 @@ public class DishDetailDialogFragment extends DialogFragment {
         cursor.moveToPosition(-1);
         int pos = -1;
         while (cursor.moveToNext()) {
-            if (cursor.getInt(cursor.getColumnIndex(DonViTinhMonAnContract.CL_MA_DON_VI)) == mMaDonViTinh) {
+            if (cursor.getInt(cursor.getColumnIndex(DonViTinhMonAnDTO.CL_MA_DON_VI)) == mMaDonViTinh) {
                 pos = cursor.getPosition();
                 break;
             }
