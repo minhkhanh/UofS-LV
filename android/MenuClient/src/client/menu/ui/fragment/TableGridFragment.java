@@ -3,13 +3,9 @@ package client.menu.ui.fragment;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.app.LoaderManager.LoaderCallbacks;
-import android.content.CursorLoader;
-import android.content.Loader;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,11 +19,8 @@ import android.widget.GridView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 import client.menu.R;
-import client.menu.app.MyAppRepository;
-import client.menu.db.contract.BanContract;
 import client.menu.db.dao.BanDAO;
 import client.menu.db.dto.BanDTO;
-import client.menu.util.C;
 import client.menu.util.U;
 
 public class TableGridFragment extends Fragment {

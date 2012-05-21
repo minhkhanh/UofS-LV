@@ -9,9 +9,6 @@ import android.app.ListFragment;
 import android.os.Bundle;
 import android.widget.SimpleAdapter;
 import client.menu.R;
-import client.menu.db.contract.ChiTietOrderContract;
-import client.menu.db.contract.DonViTinhDaNgonNguContract;
-import client.menu.db.contract.MonAnDaNgonNguContract;
 import client.menu.db.dto.ChiTietOrderDTO;
 import client.menu.db.dto.DonViTinhDaNgonNguDTO;
 import client.menu.db.dto.MonAnDaNgonNguDTO;
@@ -49,7 +46,7 @@ public class OrderPreviewFragment extends ListFragment {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put(MonAnDaNgonNguDTO.CL_TEN_MON, monAn.getTenMonAn());
         map.put(DonViTinhDaNgonNguDTO.CL_TEN_DON_VI, donViTinh.getTenDonViTinh());
-        map.put(ChiTietOrderContract.CL_SO_LUONG, 1);
+        map.put(ChiTietOrderDTO.CL_SO_LUONG, 1);
 
         adapterData.add(map);
     }
@@ -67,7 +64,7 @@ public class OrderPreviewFragment extends ListFragment {
         mListAdapter = new SimpleAdapter(getActivity(), adapterData,
                 R.layout.item_order_preview, new String[] { MonAnDaNgonNguDTO.CL_TEN_MON,
                         ChiTietOrderDTO.CL_SO_LUONG,
-                        DonViTinhDaNgonNguContract.CL_TEN_DON_VI }, new int[] {
+                        DonViTinhDaNgonNguDTO.CL_TEN_DON_VI }, new int[] {
                         R.id.textDishName, R.id.textQuantity, R.id.textUnitName });
 
         setListAdapter(mListAdapter);

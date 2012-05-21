@@ -7,8 +7,6 @@ import android.widget.AdapterView;
 import android.widget.SimpleCursorAdapter;
 import client.menu.R;
 import client.menu.app.MyAppLocale;
-import client.menu.db.contract.DonViTinhDaNgonNguContract;
-import client.menu.db.contract.DonViTinhMonAnContract;
 import client.menu.db.dao.DonViTinhDAO;
 import client.menu.db.dto.DonViTinhDaNgonNguDTO;
 import client.menu.db.dto.DonViTinhMonAnDTO;
@@ -66,7 +64,7 @@ public class LoadDishUnitsAsyncTask extends AsyncTask<Void, Integer, SimpleCurso
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(mHostActivity,
                 R.layout.item_dish_units_spinner, cursor, new String[] {
                         DonViTinhDaNgonNguDTO.CL_TEN_DON_VI,
-                        DonViTinhMonAnContract.CL_DON_GIA }, new int[] {
+                        DonViTinhMonAnDTO.CL_DON_GIA }, new int[] {
                         R.id.textUnitName, R.id.textUnitPrice }, 0);
         adapter.setDropDownViewResource(R.layout.item_dish_units_spinner);
 

@@ -5,9 +5,6 @@ import java.util.List;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteQueryBuilder;
-import android.provider.BaseColumns;
-import client.menu.db.contract.NgonNguContract;
 import client.menu.db.dto.NgonNguDTO;
 import client.menu.db.util.MyDatabaseHelper;
 
