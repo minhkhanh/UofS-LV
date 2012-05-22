@@ -1,5 +1,6 @@
 package client.menu.db.dto;
 
+import android.content.ContentValues;
 import android.provider.BaseColumns;
 
 public class ChiTietOrderDTO {
@@ -24,6 +25,18 @@ public class ChiTietOrderDTO {
     private Integer mTinhTrang = 0;
     private Integer mMaMonAn;
     private Integer mMaDonViTinh;
+
+    public void to(ContentValues values) {
+        values.put(CL_ID, mId);
+        values.put(CL_SID, mMaChiTiet);
+        values.put(CL_MA_ORDER, mMaOrder);
+        values.put(CL_SO_LUONG, mSoLuong);
+        values.put(CL_GHI_CHU, mGhiChu);
+        values.put(CL_MA_BO_PHAN_CHE_BIEN, mMaBoPhanCheBien);
+        values.put(CL_TINH_TRANG, mTinhTrang);
+        values.put(CL_MA_MON_AN, mMaMonAn);
+        values.put(CL_MA_DON_VI_TINH, mMaDonViTinh);
+    }
 
     public Integer getId() {
         return mId;

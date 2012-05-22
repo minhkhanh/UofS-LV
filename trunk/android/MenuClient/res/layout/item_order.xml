@@ -90,7 +90,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_toLeftOf="@+id/textView1"
-            layout="@layout/item_dish_units_spinner" />
+            layout="@layout/item_dish_units" />
 
     </RelativeLayout>
 

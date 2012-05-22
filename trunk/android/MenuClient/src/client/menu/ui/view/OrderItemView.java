@@ -21,87 +21,11 @@ import client.menu.db.dto.MonAnDaNgonNguDTO;
 
 public class OrderItemView extends RelativeLayout {
     private ChiTietOrderDTO mChiTietOrder;
-    // private MonAnDaNgonNguDTO mMonAnDaNgonNgu;
-    // private DonViTinhDaNgonNguDTO mDonViTinhDaNgonNgu;
-    // private DonViTinhMonAnDTO mDonViTinhMonAn;
 
     private Button mButtonRemove;
     private Button mButtonPlus;
     private Button mButtonMinus;
     private TextView mTextQuantity;
-    // private Spinner mUnitSpinner;
-    // private TextView mDishNameTextView;
-    // private EditText mDishNoteEditText;
-    // private TextView mUnitNameTextView;
-    // private TextView mUnitPriceTextView;
-
-    // private SimpleCursorAdapter mUnitSpinnerAdapter;
-
-    // private class LoadOrderItemAsyncTask extends AsyncTask<Void, Integer,
-    // Void> {
-    // private ChiTietOrderDTO mChiTietOrder;
-    // private Cursor mDonViTinhCursor;
-    // private MonAnDaNgonNguDTO mMonAn;
-    // // private int mSelectedIndex = -1;
-    // private String mTenDonViTinh;
-    // private Integer mGiaDonViTinh;
-    //
-    // public LoadOrderItemAsyncTask(ChiTietOrderDTO chiTietOrder) {
-    // mChiTietOrder = chiTietOrder;
-    // }
-    //
-    // @Override
-    // protected void onPostExecute(Void result) {
-    // super.onPostExecute(result);
-    //
-    // mMonAnDaNgonNgu = mMonAn;
-    // mDishNameTextView.setText(mMonAn.getTenMonAn());
-    //
-    // mUnitNameTextView.setText(mTenDonViTinh);
-    // mUnitPriceTextView.setText(mGiaDonViTinh.toString());
-    // }
-    //
-    // @Override
-    // protected Void doInBackground(Void... params) {
-    // String[] projection = null;
-    // String selection = MonAnContract.CL_MA_MON_AN_QN + "=? and "
-    // + MonAnDaNgonNguContract.CL_MA_NGON_NGU + "=?";
-    // String[] selectionArgs = {
-    // mChiTietOrder.getMaMonAn().toString(),
-    // MyAppLocale.getCurrentLanguage((Activity) getContext())
-    // .getMaNgonNgu().toString() };
-    //
-    // Cursor cursor = getContext().getContentResolver().query(
-    // MonAnContract.URI_MONAN_INNER_DANGONNGU, projection, selection,
-    // selectionArgs, null);
-    //
-    // cursor.moveToFirst();
-    // mMonAn = MonAnDaNgonNguDTO.extractFrom(cursor);
-    //
-    // selection = DonViTinhMonAnContract.CL_MA_MON_AN + "=? and "
-    // + DonViTinhDaNgonNguContract.CL_MA_NGON_NGU + "=? and "
-    // + DonViTinhMonAnContract.TABLE_NAME + "."
-    // + DonViTinhMonAnContract.CL_MA_DON_VI + "=?";
-    //
-    // selectionArgs = new String[] {
-    // mMonAn.getMaMonAn().toString(),
-    // MyAppLocale.getCurrentLanguage((Activity) getContext())
-    // .getMaNgonNgu().toString(),
-    // mChiTietOrder.getMaDonViTinh().toString() };
-    //
-    // mDonViTinhCursor = getContext().getContentResolver().query(
-    // DonViTinhMonAnContract.URI_DONVITINHMONAN_INNER_DANGONNGU,
-    // projection, selection, selectionArgs, null);
-    //
-    // mDonViTinhCursor.moveToFirst();
-    // mTenDonViTinh = mDonViTinhCursor.getString(mDonViTinhCursor
-    // .getColumnIndex(DonViTinhDaNgonNguContract.CL_TEN_DON_VI));
-    // mGiaDonViTinh = mDonViTinhCursor.getInt(mDonViTinhCursor
-    // .getColumnIndex(DonViTinhMonAnContract.CL_DON_GIA));
-    //
-    // return null;
-    // }
-    // }
 
     private OnClickListener mOnClickListener = new OnClickListener() {
 
@@ -163,30 +87,26 @@ public class OrderItemView extends RelativeLayout {
     public OrderItemView(Context context) {
         super(context);
 
-        inflatView(context);
+        prepareViews(context);
     }
 
     public OrderItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        inflatView(context);
+        prepareViews(context);
     }
 
     public OrderItemView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        inflatView(context);
+        prepareViews(context);
     }
 
-    private void inflatView(Context context) {
+    private void prepareViews(Context context) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.item_order, this);
-    }
-
-    public void bindData(ChiTietOrderDTO chiTietOrder, ContentValues values) {
-        mChiTietOrder = chiTietOrder;
-
+        
         mButtonPlus = (Button) findViewById(R.id.btnPlus);
         mButtonMinus = (Button) findViewById(R.id.btnMinus);
         mButtonPlus.setOnClickListener(mOnClickListener);
@@ -196,6 +116,11 @@ public class OrderItemView extends RelativeLayout {
         mButtonRemove.setOnClickListener(mOnClickListener);
 
         mTextQuantity = (TextView) findViewById(R.id.textQuantity);
+    }
+
+    public void bindData(ChiTietOrderDTO chiTietOrder, ContentValues values) {
+        mChiTietOrder = chiTietOrder;
+
         mTextQuantity.setText(mChiTietOrder.getSoLuong().toString());
 
         EditText dishNote = (EditText) findViewById(R.id.editDishNote);

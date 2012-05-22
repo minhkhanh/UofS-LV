@@ -3,12 +3,15 @@ package client.menu.db.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
+import android.util.Log;
 import client.menu.db.dto.MonAnDTO;
 import client.menu.db.dto.MonAnDaNgonNguDTO;
 import client.menu.db.util.MyDatabaseHelper;
+import client.menu.util.U;
 
 public final class MonAnDAO extends AbstractDAO {
     private static MonAnDAO mInstance;
@@ -26,6 +29,64 @@ public final class MonAnDAO extends AbstractDAO {
 
     public MonAnDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
+    }
+
+    public int updateByMaMonAn(Integer maMonAn, MonAnDTO monAn) {
+        int nRow = 0;
+
+        try {
+            SQLiteDatabase db = open();
+
+            ContentValues values = new ContentValues();
+            monAn.to(values);
+
+            String where = MonAnDTO.CL_MA_MON_AN + "=?";
+            String[] whereArgs = { maMonAn.toString() };
+
+            nRow = db.update(MonAnDTO.TABLE_NAME, values, where, whereArgs);
+        } catch (Exception e) {
+            e.printStackTrace();
+            nRow = -1;
+        } finally {
+            close();
+        }
+
+        return nRow;
+    }
+
+    public int updateDiemDanhGia(Integer maMonAn, Float diemDanhGia) {
+        MonAnDTO monAn = getByMaMonAn(maMonAn);
+        float total = monAn.getDiemDanhGia() * monAn.getSoLuotDanhGia() + diemDanhGia;
+        int count = monAn.getSoLuotDanhGia() + 1;
+        monAn.setDiemDanhGia(total / count);
+        monAn.setSoLuotDanhGia(count);
+
+        U.logOwnTag(String.valueOf(total / count));
+
+        return updateByMaMonAn(maMonAn, monAn);
+    }
+
+    public MonAnDTO getByMaMonAn(Integer maMonAn) {
+        MonAnDTO monAn = null;
+
+        try {
+            SQLiteDatabase db = open();
+
+            String selection = MonAnDTO.CL_MA_MON_AN + "=?";
+            String[] selectionArgs = { maMonAn.toString() };
+
+            Cursor cursor = db.query(MonAnDTO.TABLE_NAME, null, selection, selectionArgs,
+                    null, null, null);
+            if (cursor.moveToNext()) {
+                monAn = MonAnDTO.from(cursor);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return monAn;
     }
 
     public Cursor cursorByMaDanhMuc(Integer maDanhMuc, Integer maNgonNgu) {

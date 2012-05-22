@@ -3,7 +3,9 @@ package client.menu.db.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import client.menu.db.dto.DonViTinhDaNgonNguDTO;
@@ -29,26 +31,50 @@ public class DonViTinhDAO extends AbstractDAO {
         super(dbHelper);
     }
 
+    public ContentValues contentByDonViTinhMonAn(Integer maMonAn, Integer maDonViTinh,
+            Integer maNgonNgu) {
+        ContentValues values = null;
+        Cursor cursor = cursorByDonViTinhMonAn(maMonAn, maDonViTinh, maNgonNgu);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                values = new ContentValues();
+                DatabaseUtils.cursorRowToContentValues(cursor, values);
+            }
+
+            cursor.close();
+        }
+
+        return values;
+    }
+
     public Cursor cursorByDonViTinhMonAn(Integer maMonAn, Integer maDonViTinh,
             Integer maNgonNgu) {
-        SQLiteDatabase db = open();
-        SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+        Cursor cursor;
+        try {
+            SQLiteDatabase db = open();
+            SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 
-        queryBuilder.setTables(MonAnDaNgonNguDTO.TABLE_NAME + " INNER JOIN "
-                + DonViTinhMonAnDTO.TABLE_NAME + " ON (" + MonAnDaNgonNguDTO.CL_MA_MON_QN
-                + "=" + DonViTinhMonAnDTO.CL_MA_MON_AN_QN + ")" + "INNER JOIN "
-                + DonViTinhDaNgonNguDTO.TABLE_NAME + " ON ("
-                + DonViTinhMonAnDTO.CL_MA_DON_VI_QN + "="
-                + DonViTinhDaNgonNguDTO.CL_MA_DON_VI_QN + ")");
+            queryBuilder.setTables(MonAnDaNgonNguDTO.TABLE_NAME + " INNER JOIN "
+                    + DonViTinhMonAnDTO.TABLE_NAME + " ON ("
+                    + MonAnDaNgonNguDTO.CL_MA_MON_QN + "="
+                    + DonViTinhMonAnDTO.CL_MA_MON_AN_QN + ")" + "INNER JOIN "
+                    + DonViTinhDaNgonNguDTO.TABLE_NAME + " ON ("
+                    + DonViTinhMonAnDTO.CL_MA_DON_VI_QN + "="
+                    + DonViTinhDaNgonNguDTO.CL_MA_DON_VI_QN + ")");
 
-        String selection = DonViTinhDaNgonNguDTO.CL_MA_NGON_NGU_QN + "=? and "
-                + DonViTinhMonAnDTO.CL_MA_MON_AN_QN + "=? and "
-                + DonViTinhMonAnDTO.CL_MA_DON_VI_QN + "=?";
-        String[] selectionArgs = { maNgonNgu.toString(), maMonAn.toString(),
-                maDonViTinh.toString() };
-        
-        Cursor cursor = queryBuilder.query(db, null, selection, selectionArgs, null, null, null);
-        
+            String selection = DonViTinhDaNgonNguDTO.CL_MA_NGON_NGU_QN + "=? and "
+                    + DonViTinhMonAnDTO.CL_MA_MON_AN_QN + "=? and "
+                    + DonViTinhMonAnDTO.CL_MA_DON_VI_QN + "=?";
+            String[] selectionArgs = { maNgonNgu.toString(), maMonAn.toString(),
+                    maDonViTinh.toString() };
+
+            cursor = queryBuilder.query(db, null, selection, selectionArgs, null, null,
+                    null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
         return cursor;
     }
 

@@ -39,7 +39,7 @@ public class SessionManager {
                 }
             }
         }
-        
+
         public List<ChiTietOrderDTO> getContent() {
             return mOrderItems;
         }
@@ -87,10 +87,14 @@ public class SessionManager {
     public class ServiceSession {
 
         private Integer mMaBan;
-        private ServiceOrder mOrder = new ServiceOrder();
+        private ServiceOrder mOrder;
 
         protected ServiceSession(Integer maBan) {
             mMaBan = maBan;
+            mOrder = new ServiceOrder();
+
+            mOrder.addItem(1, 1, 1, null);
+            mOrder.addItem(2, 2, 2, null);
         }
 
         public ServiceOrder getOrder() {
