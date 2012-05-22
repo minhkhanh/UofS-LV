@@ -122,7 +122,7 @@
             android:layout_alignLeft="@+id/listDishUnits"
             android:layout_alignRight="@+id/listDishUnits"
             android:layout_below="@+id/listDishUnits"
-            layout="@layout/item_dish_units_spinner" />
+            layout="@layout/item_dish_units" />
 
         <TextView
             android:id="@+id/textSelectedQuantity"

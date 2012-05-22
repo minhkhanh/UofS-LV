@@ -25,7 +25,7 @@
         android:id="@+id/include1"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        layout="@layout/item_dish_units_spinner" />
+        layout="@layout/item_dish_units" />
 
     <TextView
         android:id="@+id/TextView02"
