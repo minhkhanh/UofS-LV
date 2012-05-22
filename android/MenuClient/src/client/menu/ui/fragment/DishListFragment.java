@@ -268,7 +268,7 @@ public class DishListFragment extends ListFragment {
     private MonAnDTO extractMonAnDTO(int pos) {
         Cursor cursor = mListAdapter.getCursor();
         if (cursor != null && cursor.moveToPosition(pos)) {
-            return MonAnDTO.extractFrom(cursor);
+            return MonAnDTO.from(cursor);
         }
 
         return null;

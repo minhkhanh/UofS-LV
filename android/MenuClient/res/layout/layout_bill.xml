@@ -7,14 +7,34 @@
     <ListView
         android:id="@+id/listBill"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
     </ListView>
 
-    <TextView
-        android:id="@+id/textView1"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_total" />
+
+        <TextView
+            android:id="@+id/textBillTotal"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <ViewStub
+        android:id="@+id/stubEqualSplit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:inflatedId="@id/relativeEqualSplit"
+        android:layout="@layout/frame_equal_split_bill" />
 
 </LinearLayout>

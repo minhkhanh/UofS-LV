@@ -1,5 +1,6 @@
 package client.menu.db.dto;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.provider.BaseColumns;
 
@@ -25,7 +26,18 @@ public class MonAnDTO {
     private Integer mMaDanhMuc;
     private Boolean mNgungBan;
 
-    public static MonAnDTO extractFrom(Cursor cursor) {
+    public void to(ContentValues values) {
+        values.put(CL_ID, mId);
+        values.put(CL_MA_MON_AN, mMaMonAn);
+        values.put(CL_HINH_ANH, mHinhAnh);
+        values.put(CL_DIEM_DANH_GIA, mDiemDanhGia);
+        values.put(CL_SO_LUOT_RATE, mSoLuotDanhGia);
+        values.put(CL_DEFAULT_UNIT_ID, mMaDonViTinhMacDinh);
+        values.put(CL_MA_DANH_MUC, mMaDanhMuc);
+        values.put(CL_NGUNG_BAN, mNgungBan);
+    }
+
+    public static MonAnDTO from(Cursor cursor) {
         MonAnDTO monAn = new MonAnDTO();
 
         int index;

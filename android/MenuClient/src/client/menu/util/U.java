@@ -18,16 +18,14 @@ import android.widget.Toast;
 
 public final class U {
     
-    @SuppressWarnings("rawtypes")
-    public static final void cancelAsyncTasks(ArrayList<AsyncTask> tasks) {
-        for (int i = 0; i < tasks.size(); ++i) {
-            AsyncTask task = tasks.get(i);
-            if (task != null && task.getStatus() != AsyncTask.Status.FINISHED) {
-                task.cancel(true);
-            }
+    
+    public static final boolean cancelAsyncTask(AsyncTask task) {
+        if (task != null && task.getStatus() != AsyncTask.Status.FINISHED) {
+            task.cancel(true);
+            return true;
         }
         
-        tasks.clear();
+        return false;
     }
     
     public static final int showDlgFragment(Fragment host, DialogFragment dlg, String tag) {

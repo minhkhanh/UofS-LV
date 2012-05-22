@@ -1,7 +1,5 @@
 package client.menu.db.dto;
 
-import client.menu.db.dao.BanDAO;
-import client.menu.db.dao.KhuVucDAO;
 import android.database.Cursor;
 import android.provider.BaseColumns;
 
@@ -27,7 +25,7 @@ public class BanDTO
     String mGhiChu;
     Integer mActive;
     Integer mTinhTrang;
-    
+
     public static final BanDTO extractFrom(Cursor cursor) {
         BanDTO obj = new BanDTO();
         int i;

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import client.menu.R;
+import client.menu.db.dao.DanhMucDAO;
 import client.menu.db.dao.KhuVucDAO;
 import client.menu.db.dto.KhuVucDTO;
 
@@ -44,57 +45,6 @@ public class AreaListFragment extends ListFragment {
         }
 
     };
-
-    // private Handler handler = new Handler() {
-    // public void handleMessage(Message msg) {
-    // if (msg.what == MSG_LOADER_FINISHED_AREA_LIST) {
-    // if (mIsDualPane) {
-    // getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-    // showDetails(mSelIndex);
-    // }
-    // }
-    // };
-    // };
-
-    // private LoaderCallbacks<Cursor> mLoaderCallbacks = new
-    // LoaderCallbacks<Cursor>() {
-    //
-    // @Override
-    // public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    // switch (id) {
-    // case LOADER_ID_AREA_LIST:
-    // String[] proj = new String[] { KhuVucContract.CL_ID,
-    // KhuVucContract.CL_MA_KHU_VUC, KhuVucContract.CL_TEN_KHU_VUC };
-    // CursorLoader loader = new CursorLoader(getActivity(),
-    // KhuVucContract.CONTENT_URI, proj, null, null, null);
-    //
-    // return loader;
-    // }
-    //
-    // return null;
-    // }
-    //
-    // @Override
-    // public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-    // switch (loader.getId()) {
-    // case LOADER_ID_AREA_LIST:
-    // mAdapter.swapCursor(cursor);
-    // handler.sendEmptyMessage(MSG_LOADER_FINISHED_AREA_LIST);
-    //
-    // break;
-    // }
-    //
-    // }
-    //
-    // @Override
-    // public void onLoaderReset(Loader<Cursor> arg0) {
-    // switch (arg0.getId()) {
-    // case LOADER_ID_AREA_LIST:
-    // mAdapter.swapCursor(null);
-    // break;
-    // }
-    // }
-    // };
 
     @Override
     public void onPause() {
