@@ -62,11 +62,11 @@ public class LoadDishUnitsAsyncTask extends AsyncTask<Void, Integer, SimpleCurso
         // U.logOwnTag("selIndex " + String.valueOf(mSelectedIndex));
 
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(mHostActivity,
-                R.layout.item_dish_units_spinner, cursor, new String[] {
+                R.layout.item_dish_units, cursor, new String[] {
                         DonViTinhDaNgonNguDTO.CL_TEN_DON_VI,
                         DonViTinhMonAnDTO.CL_DON_GIA }, new int[] {
                         R.id.textUnitName, R.id.textUnitPrice }, 0);
-        adapter.setDropDownViewResource(R.layout.item_dish_units_spinner);
+        adapter.setDropDownViewResource(R.layout.item_dish_units);
 
         return adapter;
     }
