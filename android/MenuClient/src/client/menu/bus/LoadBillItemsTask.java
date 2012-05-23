@@ -3,15 +3,13 @@ package client.menu.bus;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
+import android.content.ContentValues;
+import android.os.AsyncTask;
 import client.menu.app.MyAppLocale;
 import client.menu.db.dao.DonViTinhDAO;
 import client.menu.db.dto.ChiTietOrderDTO;
 import client.menu.db.dto.NgonNguDTO;
-import client.menu.ui.activity.BillActivity;
-
-import android.app.Activity;
-import android.content.ContentValues;
-import android.os.AsyncTask;
 
 public class LoadBillItemsTask extends AsyncTask<Void, Integer, List<ContentValues>> {
     private Activity mHost;
