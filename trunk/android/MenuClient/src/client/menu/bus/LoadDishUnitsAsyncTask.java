@@ -49,8 +49,7 @@ public class LoadDishUnitsAsyncTask extends AsyncTask<Void, Integer, SimpleCurso
             mSelectedIndex = -1;
         } else {
             while (cursor.moveToNext()) {
-                if (cursor.getInt(cursor
-                        .getColumnIndex(DonViTinhMonAnDTO.CL_MA_DON_VI)) == mMaDonViTinhChon) {
+                if (cursor.getInt(cursor.getColumnIndex(DonViTinhMonAnDTO.CL_MA_DON_VI)) == mMaDonViTinhChon) {
                     mSelectedIndex = cursor.getPosition();
                     break;
                 }
@@ -62,10 +61,10 @@ public class LoadDishUnitsAsyncTask extends AsyncTask<Void, Integer, SimpleCurso
         // U.logOwnTag("selIndex " + String.valueOf(mSelectedIndex));
 
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(mHostActivity,
-                R.layout.item_dish_units, cursor, new String[] {
-                        DonViTinhDaNgonNguDTO.CL_TEN_DON_VI,
-                        DonViTinhMonAnDTO.CL_DON_GIA }, new int[] {
-                        R.id.textUnitName, R.id.textUnitPrice }, 0);
+                R.layout.item_dish_units, cursor,
+                new String[] { DonViTinhDaNgonNguDTO.CL_TEN_DON_VI,
+                        DonViTinhMonAnDTO.CL_DON_GIA }, new int[] { R.id.textUnitName,
+                        R.id.textUnitPrice }, 0);
         adapter.setDropDownViewResource(R.layout.item_dish_units);
 
         return adapter;

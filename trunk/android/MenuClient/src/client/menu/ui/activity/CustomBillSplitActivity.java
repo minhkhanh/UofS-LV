@@ -1,6 +1,5 @@
 package client.menu.ui.activity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -8,28 +7,29 @@ import android.content.ContentValues;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.HorizontalScrollView;
+import android.widget.ScrollView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.TextView;
 import client.menu.R;
 import client.menu.bus.LoadBillItemsTask;
 import client.menu.bus.SessionManager;
 import client.menu.bus.SessionManager.ServiceOrder;
 import client.menu.db.dto.ChiTietOrderDTO;
-import client.menu.ui.adapter.MiniBillAdapter;
+import client.menu.ui.view.MiniBillView;
 import client.menu.util.U;
 
 public class CustomBillSplitActivity extends Activity {
+    private MiniBillView mMainBillView;
+    private MiniBillView mSubBillView;
     private List<ChiTietOrderDTO> mChiTietOrderList;
-    private List<ContentValues> mContentListMain = new ArrayList<ContentValues>();
-    private List<ContentValues> mContentListSub = new ArrayList<ContentValues>();
+    
+    private HorizontalScrollView mScrollView;
 
-    private MiniBillAdapter mMainAdapter;
-    private MiniBillAdapter mSubAdapter;
     private CustomLoadBillItemsTask mLoadBillItemsTask;
-    private TextView mMainTotal;
-    private TextView mSubTotal;
 
     private class CustomLoadBillItemsTask extends LoadBillItemsTask {
 
@@ -41,12 +41,7 @@ public class CustomBillSplitActivity extends Activity {
         protected void onPostExecute(List<ContentValues> result) {
             super.onPostExecute(result);
 
-            mContentListMain.clear();
-            mContentListMain.addAll(result);
-            mMainAdapter.notifyDataSetChanged();
-
-            Integer total = mMainAdapter.getBillTotal();
-            mMainTotal.setText(total.toString());
+            mMainBillView.bindItems(result);
         }
     };
 
@@ -66,79 +61,44 @@ public class CustomBillSplitActivity extends Activity {
         mLoadBillItemsTask.execute();
     }
 
-    private void swapSingle(int pos, List<ContentValues> sender,
-            List<ContentValues> receiver) {
-        ContentValues values = sender.get(pos);
-        Integer soLuongMain = values.getAsInteger(ChiTietOrderDTO.CL_SO_LUONG);
-        soLuongMain -= 1;
-
-        if (soLuongMain == 0) {
-            sender.remove(pos);
-        } else if (soLuongMain > 0) {
-            values.put(ChiTietOrderDTO.CL_SO_LUONG, soLuongMain);
-        }
-
-        for (ContentValues c : receiver) {
-            if (c.getAsInteger(ChiTietOrderDTO.CL_MA_MON_AN) == values
-                    .getAsInteger(ChiTietOrderDTO.CL_MA_MON_AN)
-                    && c.getAsInteger(ChiTietOrderDTO.CL_MA_DON_VI_TINH) == values
-                            .getAsInteger(ChiTietOrderDTO.CL_MA_DON_VI_TINH)) {
-                Integer soLuongSub = c.getAsInteger(ChiTietOrderDTO.CL_SO_LUONG) + 1;
-                c.put(ChiTietOrderDTO.CL_SO_LUONG, soLuongSub);
-
-                return;
-            }
-        }
-
-        ContentValues c = new ContentValues();
-        c.putAll(values);
-        c.put(ChiTietOrderDTO.CL_SO_LUONG, 1);
-        receiver.add(c);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_custom_bill_split);
-
-        mSubAdapter = new MiniBillAdapter(this, mContentListSub);
-        View paneSub = findViewById(R.id.paneSub);
-        ListView listSub = (ListView) paneSub.findViewById(R.id.listBill);
-        listSub.setAdapter(mSubAdapter);
-        listSub.setOnItemClickListener(new OnItemClickListener() {
-
+        
+//        mScrollView = (HorizontalScrollView) findViewById(R.id.horizontalScrollView1);
+        final ViewGroup scrollBill = (ViewGroup) findViewById(R.id.scrollBill);
+        
+        Button btnSplit = (Button) findViewById(R.id.btnSplit);
+        btnSplit.setOnClickListener(new OnClickListener() {
+            
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                swapSingle(arg2, mContentListSub, mContentListMain);
-                mMainAdapter.notifyDataSetChanged();
-                mSubAdapter.notifyDataSetChanged();
-                Integer total = mMainAdapter.getBillTotal();
-                mMainTotal.setText(total.toString());
+            public void onClick(View v) {
+                MiniBillView newBill = mSubBillView.clone();
+                scrollBill.addView(newBill);
                 
-                total = mSubAdapter.getBillTotal();
-                mSubTotal.setText(total.toString());
+                mSubBillView.bindItems(null);
             }
         });
-        mSubTotal = (TextView) paneSub.findViewById(R.id.textBillTotal);
 
-        mMainAdapter = new MiniBillAdapter(this, mContentListMain);
-        View paneMain = findViewById(R.id.paneMain);
-        ListView listMain = (ListView) paneMain.findViewById(R.id.listBill);
-        listMain.setAdapter(mMainAdapter);
+        mMainBillView = (MiniBillView) findViewById(R.id.billMain);
+        ListView listMain = mMainBillView.getBillList();
         listMain.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                swapSingle(arg2, mContentListMain, mContentListSub);
-                mMainAdapter.notifyDataSetChanged();
-                mSubAdapter.notifyDataSetChanged();
-                Integer total = mMainAdapter.getBillTotal();
-                mMainTotal.setText(total.toString());
-                
-                total = mSubAdapter.getBillTotal();
-                mSubTotal.setText(total.toString());
+                mMainBillView.swapItem(mSubBillView, arg2);
             }
         });
-        mMainTotal = (TextView) paneMain.findViewById(R.id.textBillTotal);        
+
+        mSubBillView = (MiniBillView) findViewById(R.id.billSub);
+        ListView listSub = mSubBillView.getBillList();
+        listSub.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                mSubBillView.swapItem(mMainBillView, arg2);
+            }
+        });
     }
 }

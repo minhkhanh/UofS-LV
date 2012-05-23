@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -13,11 +14,11 @@ import client.menu.ui.view.BillItemView;
 
 public class BillItemsAdapter extends BaseAdapter {
 
-    protected List<ContentValues> mData;
-    protected Activity mActivity;
+    private List<ContentValues> mData;
+    private Context mContext;
 
-    public BillItemsAdapter(Activity activity, List<ContentValues> data) {
-        mActivity = activity;
+    public BillItemsAdapter(Context context, List<ContentValues> data) {
+        mContext = context;
         mData = data;
     }
 
@@ -40,7 +41,7 @@ public class BillItemsAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         BillItemView v = (BillItemView) convertView;
         if (v == null) {
-            v = new BillItemView(mActivity);
+            v = new BillItemView(mContext);
         }
         v.bindData(mData.get(position));
 
@@ -58,5 +59,13 @@ public class BillItemsAdapter extends BaseAdapter {
         }
 
         return total;
+    }
+
+    public List<ContentValues> getData() {
+        return mData;
+    }
+
+    public Context getContext() {
+        return mContext;
     }
 }
