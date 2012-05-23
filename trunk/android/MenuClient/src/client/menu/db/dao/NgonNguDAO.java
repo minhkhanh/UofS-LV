@@ -1,14 +1,17 @@
 package client.menu.db.dao;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import client.menu.db.dto.NgonNguDTO;
 import client.menu.db.util.MyDatabaseHelper;
+import client.menu.util.U;
 
 public final class NgonNguDAO extends AbstractDAO {
+
+    private Cursor mCursorAll;
 
     private static NgonNguDAO mInstance;
 
@@ -27,7 +30,7 @@ public final class NgonNguDAO extends AbstractDAO {
         return mInstance;
     }
 
-    public NgonNguDTO getNgonNguMacDinh() {
+    public NgonNguDTO objNgonNguMacDinh() {
         NgonNguDTO obj = null;
 
         try {
@@ -51,39 +54,23 @@ public final class NgonNguDAO extends AbstractDAO {
         return obj;
     }
 
-    public Cursor cursorAll() {
-        Cursor cursor = null;
-        SQLiteDatabase db = open();
-        cursor = db
-                .query(NgonNguDTO.TABLE_NAME, null, null, null, null, null, null, null);
+    public List<Map<String, Object>> mapAll() {
+        Cursor cursor = cursorAll();
 
-        return cursor;
+        return U.toMapList(cursor);
     }
 
-    public List<NgonNguDTO> all() {
-        List<NgonNguDTO> list = new ArrayList<NgonNguDTO>();
-
-        try {
+    public Cursor cursorAll() {
+        if (mCursorAll == null || mCursorAll.isClosed()) {
             SQLiteDatabase db = open();
-
-            Cursor cursor = db.query(NgonNguDTO.TABLE_NAME, null, null, null, null, null,
+            mCursorAll = db.query(NgonNguDTO.TABLE_NAME, null, null, null, null, null,
                     null, null);
-
-            while (cursor.moveToNext()) {
-                NgonNguDTO ngonNgu = NgonNguDTO.extractFrom(cursor);
-                list.add(ngonNgu);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            close();
         }
 
-        return list;
+        return mCursorAll;
     }
 
-    public NgonNguDTO getByMaNgonNgu(Integer maNgonNgu) {
+    public NgonNguDTO objByMaNgonNgu(Integer maNgonNgu) {
         NgonNguDTO obj = null;
 
         try {
