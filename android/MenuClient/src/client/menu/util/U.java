@@ -2,14 +2,22 @@ package client.menu.util;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +25,31 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 public final class U {
-    
+    public static final List<Map<String, Object>> toMapList(Cursor cursor) {
+        if (cursor == null) {
+            return null;
+        }
+        
+        List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+        
+        cursor.move(-1);
+        while (cursor.moveToNext()) {
+            ContentValues values = new ContentValues();
+            DatabaseUtils.cursorRowToContentValues(cursor, values);
+            
+            Set<Entry<String, Object>> setValues = values.valueSet();
+            Object[] entryArray = setValues.toArray();
+            Map<String, Object> map = new Hashtable<String, Object>();
+            for (int i = 0; i < entryArray.length; ++i) {
+                Entry<String, Object> entry = (Entry<String, Object>) entryArray[i];
+                map.put(entry.getKey(), entry.getValue());
+            }
+            
+            list.add(map);
+        }
+        
+        return list;
+    }
     
     public static final boolean cancelAsyncTask(AsyncTask task) {
         if (task != null && task.getStatus() != AsyncTask.Status.FINISHED) {

@@ -30,7 +30,7 @@ public class MyAppLocale {
 //            cursor.close();
 //        }
         
-        NgonNguDTO obj = NgonNguDAO.getInstance().getNgonNguMacDinh();
+        NgonNguDTO obj = NgonNguDAO.getInstance().objNgonNguMacDinh();
         locale.setLanguage(obj);        
 
         return locale;

@@ -41,6 +41,8 @@
     <string name="text_split">Tách</string>
     <string name="text_quantity">Số lượng</string>
     <string name="text_select">Chọn</string>
+    <string name="caption_go_to_main_menu">Chọn món</string>
+    <string name="caption_payment">Thanh toán</string>
     
 
 </resources>

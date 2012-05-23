@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/itemOrder" android:title="@string/context_table_item_order"></item>
-    <item android:id="@+id/itemCheckOut" android:title="@string/context_table_item_check"></item>
-    <item android:id="@+id/itemSplitTable" android:title="@string/context_table_item_split"></item>
+    <item android:id="@+id/miOrder" android:title="@string/context_table_item_order"></item>
+    <item android:id="@+id/miCheckOut" android:title="@string/context_table_item_check"></item>
+    <item android:id="@+id/miSplitTable" android:title="@string/context_table_item_split"></item>
     
 
 </menu>

@@ -9,12 +9,11 @@
     <application
         android:name=".app.MyApplication"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name" android:uiOptions="splitActionBarWhenNarrow">
+        android:label="@string/app_name" android:uiOptions="splitActionBarWhenNarrow" android:theme="@android:style/Theme.DeviceDefault.Light.DarkActionBar">
         <activity
             android:name=".ui.activity.MenuClientActivity"
             android:configChanges="locale"
-            android:label="@string/app_name" >
-            <intent-filter>
+            android:label="@string/app_name" ><intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -38,6 +37,7 @@
         <activity android:name=".ui.activity.OrderActivity"></activity>
         <activity android:name=".ui.activity.BillActivity"></activity>
         <activity android:name=".ui.activity.CustomBillSplitActivity"></activity>
+        <activity android:name=".ui.activity.WelcomeActivity"></activity>
     </application>
 
 </manifest>

@@ -24,7 +24,7 @@ public class MenuClientActivity extends Activity implements OnItemSelectedListen
     int mSelIndex;
 
     Spinner mSpinner;
-    SimpleCursorAdapter langAdapter;
+    SimpleCursorAdapter mLanguageAdapter;
 
     LoadLanguageListTask mLoadLanguageListTask;
 
@@ -33,7 +33,7 @@ public class MenuClientActivity extends Activity implements OnItemSelectedListen
         @Override
         protected void onPostExecute(Cursor result) {
             super.onPostExecute(result);
-            langAdapter.changeCursor(result);
+            mLanguageAdapter.swapCursor(result);
             mSpinner.setSelection(mSelIndex);
         }
 
@@ -56,12 +56,12 @@ public class MenuClientActivity extends Activity implements OnItemSelectedListen
         mSpinner = (Spinner) findViewById(R.id.spinner1);
         String[] from = new String[] { NgonNguDTO.CL_TEN_NGON_NGU };
         int[] to = new int[] { android.R.id.text1 };
-        langAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item,
+        mLanguageAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item,
                 null, from, to, 0);
-        langAdapter
+        mLanguageAdapter
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        mSpinner.setAdapter(langAdapter);
+        mSpinner.setAdapter(mLanguageAdapter);
         mSpinner.setOnItemSelectedListener(this);
 
         // new LoadLanguageListTask().execute();
@@ -83,7 +83,7 @@ public class MenuClientActivity extends Activity implements OnItemSelectedListen
         if (mLoadLanguageListTask.getStatus() != AsyncTask.Status.FINISHED) {
             mLoadLanguageListTask.cancel(true);
         } else {
-            langAdapter.changeCursor(null);
+            mLanguageAdapter.swapCursor(null);
         }
     }
 
@@ -102,41 +102,6 @@ public class MenuClientActivity extends Activity implements OnItemSelectedListen
             startActivity(intent);
         }
     }
-
-    // @Override
-    // public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    // switch (id) {
-    // case LOADER_ID_LANGUAGE_LIST:
-    // String[] proj = new String[] { NgonNguContract.CL_ID,
-    // NgonNguContract.CL_MA_NGON_NGU, NgonNguContract.CL_TEN_NGON_NGU,
-    // NgonNguContract.CL_KI_HIEU };
-    // CursorLoader loader = new CursorLoader(MenuClientActivity.this,
-    // NgonNguContract.CONTENT_URI, proj, null, null, null);
-    //
-    // return loader;
-    // }
-    //
-    // return null;
-    // }
-    //
-    // @Override
-    // public void onLoadFinished(Loader<Cursor> arg0, Cursor cursor) {
-    // switch (arg0.getId()) {
-    // case LOADER_ID_LANGUAGE_LIST:
-    // langAdapter.swapCursor(cursor);
-    // break;
-    // }
-    // }
-    //
-    // @Override
-    // public void onLoaderReset(Loader<Cursor> arg0) {
-    // U.logOwnTag("onLoaderReset");
-    // switch (arg0.getId()) {
-    // case LOADER_ID_LANGUAGE_LIST:
-    // langAdapter.swapCursor(null);
-    // break;
-    // }
-    // }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

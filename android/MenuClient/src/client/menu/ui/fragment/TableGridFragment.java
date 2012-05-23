@@ -3,6 +3,7 @@ package client.menu.ui.fragment;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import client.menu.R;
 import client.menu.db.dao.BanDAO;
 import client.menu.db.dto.BanDTO;
+import client.menu.ui.activity.WelcomeActivity;
 import client.menu.util.U;
 
 public class TableGridFragment extends Fragment {
@@ -75,7 +77,7 @@ public class TableGridFragment extends Fragment {
             // Toast.makeText(getActivity(), "Đang xây dựng",
             // Toast.LENGTH_SHORT).show();
             switch (item.getItemId()) {
-                case R.id.itemOrder:
+                case R.id.miOrder:
 
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
                     Fragment prev = getFragmentManager().findFragmentByTag("dialog");
@@ -97,6 +99,14 @@ public class TableGridFragment extends Fragment {
         }
     };
 
+    private OnItemClickListener mOnTableClickListener = new OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
+            Intent intent = new Intent(getActivity(), WelcomeActivity.class);
+            startActivity(intent);
+        }
+    };
+
     private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
@@ -109,46 +119,6 @@ public class TableGridFragment extends Fragment {
             }
         }
     };
-
-    // private LoaderCallbacks<Cursor> mLoaderCallbacks = new
-    // LoaderCallbacks<Cursor>() {
-    //
-    // @Override
-    // public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    // switch (id) {
-    // case LOADER_ID_TABLE_LIST:
-    // String[] proj = new String[] { BanContract.CL_ID, BanContract.CL_SID,
-    // BanContract.CL_TEN_BAN };
-    // CursorLoader loader = new CursorLoader(getActivity(),
-    // BanContract.CONTENT_URI, proj, BanContract.CL_MA_KHU_VUC
-    // + " = ?", new String[] { String.valueOf(mMaKhuVuc) },
-    // null);
-    //
-    // return loader;
-    // }
-    //
-    // return null;
-    // }
-    //
-    // @Override
-    // public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-    // switch (loader.getId()) {
-    // case LOADER_ID_TABLE_LIST:
-    // mAdapter.swapCursor(cursor);
-    // Log.d(C.TAG, "onLoadFinished : adapter.swapCursor(arg1);");
-    // break;
-    // }
-    // }
-    //
-    // @Override
-    // public void onLoaderReset(Loader<Cursor> loader) {
-    // switch (loader.getId()) {
-    // case LOADER_ID_TABLE_LIST:
-    // mAdapter.swapCursor(null);
-    // break;
-    // }
-    // }
-    // };
 
     public int getMaKhuVuc() {
         return mMaKhuVuc;
@@ -236,7 +206,7 @@ public class TableGridFragment extends Fragment {
 
         mTableGrid = (GridView) getView().findViewById(R.id.TableGrid);
         mTableGrid.setAdapter(mGridAdapter);
-        mTableGrid.setOnItemClickListener(mOnItemClickListener);
+        mTableGrid.setOnItemClickListener(mOnTableClickListener);
     }
 
     @Override
