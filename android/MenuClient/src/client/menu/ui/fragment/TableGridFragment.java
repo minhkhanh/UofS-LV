@@ -20,6 +20,7 @@ import android.widget.GridView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 import client.menu.R;
+import client.menu.bus.loader.CustomAsyncTaskLoader;
 import client.menu.db.dao.BanDAO;
 import client.menu.db.dto.BanDTO;
 import client.menu.ui.activity.WelcomeActivity;
@@ -77,18 +78,11 @@ public class TableGridFragment extends Fragment {
             // Toast.makeText(getActivity(), "Đang xây dựng",
             // Toast.LENGTH_SHORT).show();
             switch (item.getItemId()) {
-                case R.id.miOrder:
-
-                    FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    Fragment prev = getFragmentManager().findFragmentByTag("dialog");
-                    if (prev != null) {
-                        ft.remove(prev);
-                    }
-                    ft.addToBackStack(null);
-
-                    // Create and show the dialog.
+                case R.id.miSelectTable:
+                    
                     DialogFragment newFragment = AuthDialogFragment.newInstance();
-                    newFragment.show(ft, "dialog");
+                    U.showDlgFragment(TableGridFragment.this, newFragment, "dialog");
+                    
                     break;
 
                 default:
@@ -96,14 +90,6 @@ public class TableGridFragment extends Fragment {
             }
             mode.finish();
             return true;
-        }
-    };
-
-    private OnItemClickListener mOnTableClickListener = new OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
-            Intent intent = new Intent(getActivity(), WelcomeActivity.class);
-            startActivity(intent);
         }
     };
 
@@ -206,7 +192,7 @@ public class TableGridFragment extends Fragment {
 
         mTableGrid = (GridView) getView().findViewById(R.id.TableGrid);
         mTableGrid.setAdapter(mGridAdapter);
-        mTableGrid.setOnItemClickListener(mOnTableClickListener);
+        mTableGrid.setOnItemClickListener(mOnItemClickListener);
     }
 
     @Override

@@ -2,5 +2,6 @@
 <resources>
     <color name="red">#ffff0000</color>
     <color name="transparent">#0000</color>
+    <color name="_99acacac">#99acacac</color>
     
 </resources>

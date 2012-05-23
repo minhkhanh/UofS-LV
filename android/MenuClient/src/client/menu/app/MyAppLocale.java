@@ -49,32 +49,32 @@ public class MyAppLocale {
     // mAppSettings = settings;
     // }
 
-    public String loadLangAbbr() {
-        return mLanguage.getKiHieu();
-    }
-
-    public void storeLangAbbr(String abbr) {
-        mLanguage.setKiHieu(abbr);
-    }
+//    public String loadLangAbbr() {
+//        return mLanguage.getKiHieu();
+//    }
+//
+//    public void storeLangAbbr(String abbr) {
+//        mLanguage.setKiHieu(abbr);
+//    }
 
     public boolean applyLanguage(Context context) {
-        return applyLanguage(loadLangAbbr(), context);
+        return applyLanguage(mLanguage, context);
     }
 
-    public boolean applyLanguage(String lang, Context context) {
-        if (lang == null) {
+    public boolean applyLanguage(NgonNguDTO ngonNgu, Context context) {
+        if (ngonNgu == null) {
             return false;
         }
 
         Resources res = context.getResources();
         Configuration conf = res.getConfiguration();
 
-        if (conf.locale.getLanguage().equals(lang) == false) {
-            Locale loc = new Locale(lang);
+        if (conf.locale.getLanguage().equals(ngonNgu.getKiHieu()) == false) {
+            Locale loc = new Locale(ngonNgu.getKiHieu());
             conf.locale = loc;
             res.updateConfiguration(conf, null);
 
-            storeLangAbbr(lang);
+            mLanguage = ngonNgu;
 
             return true;
         }

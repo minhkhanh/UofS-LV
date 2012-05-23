@@ -7,7 +7,7 @@
     <string name="main_menu_caption">Thực đơn</string>
     <string name="split_table_caption">Tách bàn</string>
     <string name="title_dialog_auth">Chọn công việc</string>
-    <string name="context_table_item_order">Gọi món</string>
+    <string name="context_select_table">Chọn bàn</string>
     <string name="context_table_item_check">Thanh toán</string>
     <string name="context_table_item_split">Tách bàn</string><string name="construct_merge_table">Nhấn giữ lâu để ghép bàn</string>
     <string name="options_item_merge_table">Ghép bàn</string>
@@ -41,7 +41,7 @@
     <string name="text_split">Tách</string>
     <string name="text_quantity">Số lượng</string>
     <string name="text_select">Chọn</string>
-    <string name="caption_go_to_main_menu">Chọn món</string>
+    <string name="caption_go_to_main_menu">Thực đơn</string>
     <string name="caption_payment">Thanh toán</string>
     
 
