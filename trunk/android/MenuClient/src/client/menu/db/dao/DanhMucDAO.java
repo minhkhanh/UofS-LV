@@ -3,16 +3,23 @@ package client.menu.db.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import client.menu.app.MyAppLocale;
+import client.menu.bus.loader.CustomAsyncTaskLoader;
 import client.menu.db.dto.DanhMucDaNgonNguDTO;
+import client.menu.db.dto.NgonNguDTO;
 import client.menu.db.util.MyDatabaseHelper;
 
 public class DanhMucDAO extends AbstractDAO {
+
+    private Cursor mCached;
+
     private static DanhMucDAO mInstance;
 
-    public DanhMucDAO(MyDatabaseHelper dbHelper) {
+    private DanhMucDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
     }
 
@@ -27,7 +34,7 @@ public class DanhMucDAO extends AbstractDAO {
         return mInstance;
     }
 
-    public Cursor cursorByMaNgonNgu(Integer maNgonNgu) {
+    public Cursor cursorAll(Integer maNgonNgu) {
         Cursor cursor = null;
         SQLiteDatabase db = open();
         String selection = DanhMucDaNgonNguDTO.CL_MA_NGON_NGU + "=?";

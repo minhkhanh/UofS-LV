@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import client.menu.R;
 import client.menu.ui.activity.MainMenuActivity;
+import client.menu.ui.activity.WelcomeActivity;
 import client.menu.util.U;
 
 public class AuthDialogFragment extends DialogFragment {
@@ -26,16 +27,14 @@ public class AuthDialogFragment extends DialogFragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btnOK:
-                    U.toastText(getActivity(), "Xác thực thành công!");
+                    U.toastText(getActivity(), "Đang xây dựng!");
 
-                    Intent intent = new Intent(getActivity(), MainMenuActivity.class);
+                    Intent intent = new Intent(getActivity(), WelcomeActivity.class);
                     startActivity(intent);
 
                     dismiss();
                     break;
                 case R.id.btnCancel:
-                    // Utilitiy.toastText(getActivity(),
-                    // "Xác thực thành công!");
                     dismiss();
                     break;
             }
@@ -60,7 +59,7 @@ public class AuthDialogFragment extends DialogFragment {
         getDialog().setTitle(getString(R.string.title_dialog_auth));
         getDialog().setCanceledOnTouchOutside(false);
 
-        View layout = inflater.inflate(R.layout.dialog_auth, container, false);
+        View layout = inflater.inflate(R.layout.dialog_authentication, container, false);
 
         return layout;
     }

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import client.menu.R;
 import client.menu.ui.fragment.CategoryListFragment;
 
@@ -41,6 +42,10 @@ public class MainMenuActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_three_panes);
+		
+		View v = findViewById(android.R.id.content);
+		v.setBackgroundResource(R.drawable.french_food_photo_eu030);
+//		v.setb
 
 		FragmentManager fm = getFragmentManager();
 		CategoryListFragment f = (CategoryListFragment) fm

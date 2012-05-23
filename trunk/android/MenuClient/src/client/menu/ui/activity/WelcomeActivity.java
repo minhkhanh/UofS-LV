@@ -1,68 +1,28 @@
 package client.menu.ui.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Intent;
 import android.content.Loader;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
-import android.widget.SimpleAdapter;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import client.menu.R;
-import client.menu.bus.LanguageListLoader;
+import client.menu.app.MyAppLocale;
+import client.menu.app.MyAppSettings;
+import client.menu.bus.loader.LanguageListLoader;
 import client.menu.db.dto.NgonNguDTO;
+import client.menu.util.U;
 
-public class WelcomeActivity extends Activity {
-    private static final int LD_LANGUAGE_LIST = 0;
-
-    SimpleAdapter mLanguageAdapter;
-    List<Map<String, Object>> mLanguageAdapterData = new ArrayList<Map<String, Object>>();
-
-    LoaderCallbacks<List<Map<String, Object>>> mLanguageListLoaderCallbacks = new LoaderCallbacks<List<Map<String, Object>>>() {
-
-        @Override
-        public void onLoaderReset(Loader<List<Map<String, Object>>> arg0) {
-            mLanguageAdapterData.clear();
-            mLanguageAdapter.notifyDataSetChanged();
-        }
-
-        @Override
-        public void onLoadFinished(Loader<List<Map<String, Object>>> arg0,
-                List<Map<String, Object>> arg1) {
-            mLanguageAdapterData.clear();
-            mLanguageAdapterData.addAll(arg1);
-            mLanguageAdapter.notifyDataSetChanged();
-        }
-
-        @Override
-        public Loader<List<Map<String, Object>>> onCreateLoader(int id, Bundle args) {
-            return new LanguageListLoader(WelcomeActivity.this);
-        }
-    };
-
-    OnClickListener mOnClickListener = new OnClickListener() {
-
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.btnMainMenu:
-
-                    break;
-
-                case R.id.btnPayment:
-
-                    break;
-
-                default:
-                    break;
-            }
-        }
-    };
+public class WelcomeActivity extends Activity implements OnClickListener,
+        OnItemSelectedListener, LoaderCallbacks<Cursor> {
+    SimpleCursorAdapter mLanguageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,19 +32,73 @@ public class WelcomeActivity extends Activity {
         Button btnMainMenu = (Button) findViewById(R.id.btnMainMenu);
         Button btnPayment = (Button) findViewById(R.id.btnPayment);
 
-        btnMainMenu.setOnClickListener(mOnClickListener);
-        btnPayment.setOnClickListener(mOnClickListener);
+        btnMainMenu.setOnClickListener(this);
+        btnPayment.setOnClickListener(this);
 
         String[] from = new String[] { NgonNguDTO.CL_TEN_NGON_NGU };
         int[] to = new int[] { android.R.id.text1 };
-        mLanguageAdapter = new SimpleAdapter(WelcomeActivity.this, mLanguageAdapterData,
-                android.R.layout.simple_spinner_item, from, to);
+        mLanguageAdapter = new SimpleCursorAdapter(this,
+                android.R.layout.simple_spinner_item, null, from, to, 0);
         mLanguageAdapter
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinLanguage = (Spinner) findViewById(R.id.spinLanguage);
         spinLanguage.setAdapter(mLanguageAdapter);
+        spinLanguage.setOnItemSelectedListener(this);
 
-        getLoaderManager().initLoader(LD_LANGUAGE_LIST, null,
-                mLanguageListLoaderCallbacks);
+        getLoaderManager().initLoader(0, null, this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnMainMenu:
+                Intent intent = new Intent(this, MainMenuActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.btnPayment:
+                intent = new Intent(this, BillActivity.class);
+                startActivity(intent);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+        switch (arg0.getId()) {
+            case R.id.spinLanguage:
+                Cursor cursor = (Cursor) arg0.getItemAtPosition(arg2);
+                NgonNguDTO ngonNgu = NgonNguDTO.valueOf(cursor);
+                MyAppLocale locale = MyAppSettings.getCurrentAppLocale(this);
+                if (locale.applyLanguage(ngonNgu, this)) {
+                    U.restartActivity(this);
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> arg0) {
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> arg0) {
+        mLanguageAdapter.swapCursor(null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> arg0, Cursor arg1) {
+        mLanguageAdapter.swapCursor(arg1);
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new LanguageListLoader(this);
     }
 }

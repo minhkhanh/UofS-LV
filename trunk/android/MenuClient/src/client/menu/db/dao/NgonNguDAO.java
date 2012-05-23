@@ -31,27 +31,10 @@ public final class NgonNguDAO extends AbstractDAO {
     }
 
     public NgonNguDTO objNgonNguMacDinh() {
-        NgonNguDTO obj = null;
+        Cursor cursor = cursorAll();
+        cursor.moveToFirst();
 
-        try {
-            SQLiteDatabase db = open();
-            String limit = "1";
-            String orderBy = NgonNguDTO.CL_MA_NGON_NGU + " asc";
-
-            Cursor cursor = db.query(NgonNguDTO.TABLE_NAME, null, null, null, null, null,
-                    orderBy, limit);
-
-            if (cursor.moveToFirst()) {
-                obj = NgonNguDTO.extractFrom(cursor);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            close();
-        }
-
-        return obj;
+        return NgonNguDTO.valueOf(cursor);
     }
 
     public List<Map<String, Object>> mapAll() {
@@ -63,33 +46,11 @@ public final class NgonNguDAO extends AbstractDAO {
     public Cursor cursorAll() {
         if (mCursorAll == null || mCursorAll.isClosed()) {
             SQLiteDatabase db = open();
+            String orderBy = NgonNguDTO.CL_MA_NGON_NGU + " asc";
             mCursorAll = db.query(NgonNguDTO.TABLE_NAME, null, null, null, null, null,
-                    null, null);
+                    orderBy, null);
         }
 
         return mCursorAll;
-    }
-
-    public NgonNguDTO objByMaNgonNgu(Integer maNgonNgu) {
-        NgonNguDTO obj = null;
-
-        try {
-            SQLiteDatabase db = open();
-            String selection = NgonNguDTO.CL_MA_NGON_NGU + "=?";
-            String[] selectionArgs = { maNgonNgu.toString() };
-
-            Cursor cursor = db.query(NgonNguDTO.TABLE_NAME, null, selection,
-                    selectionArgs, null, null, null, null);
-
-            cursor.moveToFirst();
-            obj = NgonNguDTO.extractFrom(cursor);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            close();
-        }
-
-        return obj;
     }
 }

@@ -125,6 +125,9 @@ public class BillActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_bill);
+        
+        View v = findViewById(android.R.id.content);
+        v.setBackgroundResource(R.drawable.p1575_1920x1200);
 
         ListView listBill = (ListView) findViewById(R.id.listBill);
         mBillAdapter = new BillItemsAdapter(this, mContentList);

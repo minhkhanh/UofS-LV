@@ -123,17 +123,10 @@ public class MenuClientActivity extends Activity implements OnItemSelectedListen
             mSelIndex = pos;
             Cursor cursor = ((SimpleCursorAdapter) arg0.getAdapter()).getCursor();
             if (cursor.moveToPosition(pos)) {
-                String abbr = cursor.getString(cursor
-                        .getColumnIndex(NgonNguDTO.CL_KI_HIEU));
-
+                NgonNguDTO ngonNgu = NgonNguDTO.valueOf(cursor);
                 MyAppLocale locale = MyApplication.getSettings(this).getLocale();
-                String settAbbr = locale.loadLangAbbr();
-                if (settAbbr == null || !settAbbr.equals(abbr)) {
-                    locale.setLanguage(NgonNguDTO.extractFrom(cursor));
-
-                    if (!locale.loadLangAbbr().equals(settAbbr)) {
-                        U.restartActivity(MenuClientActivity.this);
-                    }
+                if (locale.applyLanguage(ngonNgu, this)) {
+                    U.restartActivity(this);
                 }
             }
         }

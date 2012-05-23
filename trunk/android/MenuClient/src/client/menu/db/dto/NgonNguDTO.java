@@ -17,7 +17,7 @@ public class NgonNguDTO {
     private String mTenNgonNgu;
     private String mKiHieu;
 
-    public static NgonNguDTO extractFrom(Cursor cursor) {
+    public static NgonNguDTO valueOf(Cursor cursor) {
         NgonNguDTO obj = new NgonNguDTO();
 
         int index;

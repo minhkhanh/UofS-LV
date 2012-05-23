@@ -195,12 +195,11 @@ public class DishListFragment extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        // restoreDishUnitsLoadTaskList(savedInstanceState);
-
         if (savedInstanceState != null) {
             mMaDanhMuc = savedInstanceState.getInt("mMaDanhMuc");
         }
+        
+        getView().setBackgroundResource(R.color._99acacac);
 
         setHasOptionsMenu(true);
 
