@@ -19,6 +19,7 @@ import client.menu.bus.loader.CustomAsyncTaskLoader;
 import client.menu.db.dao.DanhMucDAO;
 import client.menu.db.dao.KhuVucDAO;
 import client.menu.db.dto.KhuVucDTO;
+import client.menu.util.U;
 
 public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cursor> {
 
@@ -67,8 +68,8 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        getView().setBackgroundResource(R.color.red);
-        getView().setAlpha(0.35f);
+        getView().setBackgroundResource(R.color._99f5f5f5);
+//        getView().setAlpha(0.35f);
 
         String[] from = new String[] { KhuVucDTO.CL_TEN_KHU_VUC };
         int[] to = new int[] { android.R.id.text1 };
@@ -126,6 +127,7 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        U.logOwnTag("load create");
         return new AreaListLoader(getActivity());
     }
 
@@ -133,10 +135,14 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
     public void onLoadFinished(Loader<Cursor> arg0, Cursor arg1) {
         mAreaAdapter.swapCursor(arg1);
         mHandler.sendEmptyMessage(0);
+        
+        U.logOwnTag("load finish");
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> arg0) {
         mAreaAdapter.swapCursor(null);
+        
+        U.logOwnTag("load reset");
     }
 }

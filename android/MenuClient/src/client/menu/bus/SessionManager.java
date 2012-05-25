@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.database.DataSetObservable;
+import client.menu.db.dto.BanDTO;
 import client.menu.db.dto.ChiTietOrderDTO;
 import client.menu.util.U;
 
@@ -86,11 +87,11 @@ public class SessionManager {
 
     public class ServiceSession {
 
-        private Integer mMaBan;
+        private BanDTO mBan;
         private ServiceOrder mOrder;
 
-        protected ServiceSession(Integer maBan) {
-            mMaBan = maBan;
+        protected ServiceSession(BanDTO ban) {
+            mBan = ban;
             mOrder = new ServiceOrder();
 
             mOrder.addItem(1, 1, 1, null);
@@ -101,12 +102,8 @@ public class SessionManager {
             return mOrder;
         }
 
-        public Integer getMaBan() {
-            return mMaBan;
-        }
-
-        public void setMaBan(Integer maBan) {
-            mMaBan = maBan;
+        public BanDTO getBan() {
+            return mBan;
         }
     }
 
@@ -120,7 +117,6 @@ public class SessionManager {
 
     public static final void createInstance() {
         mInstance = new SessionManager();
-        mInstance.loadSession(1);
     }
 
     public static final SessionManager getInstance() {
@@ -136,15 +132,15 @@ public class SessionManager {
         return mSessionList.get(mIndexCurrent);
     }
 
-    private ServiceSession createSession(Integer maBan) {
+    private ServiceSession createSession(BanDTO ban) {
         for (ServiceSession s : mSessionList) {
-            if (s.getMaBan() == maBan) {
+            if (s.getBan().getMaBan() == ban.getMaBan()) {
                 throw new IllegalArgumentException("Duplicated session identification: "
-                        + maBan);
+                        + ban.getMaBan());
             }
         }
 
-        ServiceSession session = new ServiceSession(maBan);
+        ServiceSession session = new ServiceSession(ban);
 
         mSessionList.add(session);
 
@@ -154,14 +150,14 @@ public class SessionManager {
         return session;
     }
 
-    public ServiceSession loadSession(Integer maBan) {
+    public ServiceSession loadSession(BanDTO ban) {
         for (int i = 0; i < mSessionList.size(); ++i) {
-            if (mSessionList.get(i).getMaBan() == maBan) {
+            if (mSessionList.get(i).getBan().getMaBan() == ban.getMaBan()) {
                 mIndexCurrent = i;
                 return mSessionList.get(i);
             }
         }
 
-        return createSession(maBan);
+        return createSession(ban);
     }
 }

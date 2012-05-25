@@ -4,12 +4,13 @@
     <string name="hello">Chào cả thế giới, MenuClientActivity!</string>
     <string name="app_name">MenuClient</string>
     <string name="table_list_caption">Chọn bàn</string>
-    <string name="main_menu_caption">Thực đơn</string>
+    <string name="caption_main_menu">Thực đơn</string>
     <string name="split_table_caption">Tách bàn</string>
     <string name="title_dialog_auth">Chọn công việc</string>
     <string name="context_select_table">Chọn bàn</string>
     <string name="context_table_item_check">Thanh toán</string>
-    <string name="context_table_item_split">Tách bàn</string><string name="construct_merge_table">Nhấn giữ lâu để ghép bàn</string>
+    <string name="context_table_item_split">Tách bàn</string>
+    <string name="construct_merge_table">Nhấn giữ lâu để ghép bàn</string>
     <string name="options_item_merge_table">Ghép bàn</string>
     <string name="caption_waiter_username">Tên đăng nhập</string>
     <string name="caption_waiter_password">Mật khẩu</string>
@@ -30,7 +31,7 @@
     <string name="text_choose_a_price">Chọn giá</string>
     <string name="caption_exit">Thoát</string>
     <string name="option_confirm_order">Xác nhận Order</string>
-    <string name="msg_confirm_order_item_deletion">Bạn có chắc muốn bỏ món này?</string>
+    <string name="message_confirm_order_item_deletion">Bạn có chắc muốn bỏ món này?</string>
     <string name="caption_yes">Có</string>
     <string name="caption_no">Không</string>
     <string name="text_total">Tổng cộng</string>
@@ -41,8 +42,7 @@
     <string name="text_split">Tách</string>
     <string name="text_quantity">Số lượng</string>
     <string name="text_select">Chọn</string>
-    <string name="caption_go_to_main_menu">Thực đơn</string>
     <string name="caption_payment">Thanh toán</string>
-    
+    <string name="message_connect_server_failed">Kết nối server không thành công</string>
 
 </resources>

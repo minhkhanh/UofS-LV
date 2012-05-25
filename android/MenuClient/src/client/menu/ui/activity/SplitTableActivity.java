@@ -22,16 +22,7 @@ public class SplitTableActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				FragmentTransaction ft = getFragmentManager()
-						.beginTransaction();
-				Fragment prev = getFragmentManager()
-						.findFragmentByTag("dialog");
-				if (prev != null) {
-					ft.remove(prev);
-				}
-
-				DialogFragment newFragment = AuthDialogFragment.newInstance();
-				newFragment.show(ft, "dialog");
+				
 			}
 		});
 	}

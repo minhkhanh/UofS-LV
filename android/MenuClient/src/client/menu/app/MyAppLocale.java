@@ -22,16 +22,17 @@ public class MyAppLocale {
     public static final MyAppLocale createWithDefaultLanguage() {
         MyAppLocale locale = new MyAppLocale();
 
-//        Cursor cursor = resolver.query(NgonNguContract.URI_NGONNGU_MACDINH, null, null,
-//                null, null);
-//        if (cursor.moveToFirst()) {
-//            locale.mLanguage = NgonNguDTO.extractFrom(cursor);
-//
-//            cursor.close();
-//        }
-        
+        // Cursor cursor = resolver.query(NgonNguContract.URI_NGONNGU_MACDINH,
+        // null, null,
+        // null, null);
+        // if (cursor.moveToFirst()) {
+        // locale.mLanguage = NgonNguDTO.extractFrom(cursor);
+        //
+        // cursor.close();
+        // }
+
         NgonNguDTO obj = NgonNguDAO.getInstance().objNgonNguMacDinh();
-        locale.setLanguage(obj);        
+        locale.setLanguage(obj);
 
         return locale;
     }
@@ -49,24 +50,24 @@ public class MyAppLocale {
     // mAppSettings = settings;
     // }
 
-//    public String loadLangAbbr() {
-//        return mLanguage.getKiHieu();
-//    }
-//
-//    public void storeLangAbbr(String abbr) {
-//        mLanguage.setKiHieu(abbr);
-//    }
+    // public String loadLangAbbr() {
+    // return mLanguage.getKiHieu();
+    // }
+    //
+    // public void storeLangAbbr(String abbr) {
+    // mLanguage.setKiHieu(abbr);
+    // }
 
     public boolean applyLanguage(Context context) {
         return applyLanguage(mLanguage, context);
     }
 
-    public boolean applyLanguage(NgonNguDTO ngonNgu, Context context) {
+    public boolean applyLanguage(NgonNguDTO ngonNgu, Context appContext) {
         if (ngonNgu == null) {
             return false;
         }
 
-        Resources res = context.getResources();
+        Resources res = appContext.getResources();
         Configuration conf = res.getConfiguration();
 
         if (conf.locale.getLanguage().equals(ngonNgu.getKiHieu()) == false) {

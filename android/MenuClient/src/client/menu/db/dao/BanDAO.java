@@ -1,17 +1,37 @@
 package client.menu.db.dao;
 
+import java.io.InputStream;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.StatusLine;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+import org.xmlpull.v1.XmlSerializer;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.BaseColumns;
+import client.menu.app.MyAppRepository;
 import client.menu.db.dto.BanDTO;
-import client.menu.db.dto.BanDTO;
-import client.menu.db.dto.NgonNguDTO;
 import client.menu.db.util.MyDatabaseHelper;
+import client.menu.util.U;
 
 public class BanDAO extends AbstractDAO {
+    private static final String GET_BY_KHU_VUC_URL = MyAppRepository.LOCAL_SERVER_URL
+            + "layDanhSachBanTheoKhuVuc?maKhuVuc=";
+    private static final String PUT_UPDATE_URL = MyAppRepository.LOCAL_SERVER_URL
+            + "capNhatBan";
+
     private static BanDAO mInstance;
 
     private BanDAO(MyDatabaseHelper dbHelper) {
@@ -29,7 +49,7 @@ public class BanDAO extends AbstractDAO {
         return mInstance;
     }
 
-    public Cursor cursorByMaKhuVuc(Integer maKhuVuc) {
+    public Cursor cursorByKhuVuc(Integer maKhuVuc) {
         Cursor cursor = null;
         SQLiteDatabase db = open();
         String selection = BanDTO.CL_MA_KHU_VUC + "=?";
@@ -40,7 +60,38 @@ public class BanDAO extends AbstractDAO {
         return cursor;
     }
 
-    public List<BanDTO> all() {
+    public boolean putUpdate(BanDTO ban) {
+        String xmlData = ban.toXml();
+        String respString = U.loadPutResponse(PUT_UPDATE_URL, xmlData);
+        
+        return U.deserializeXml(respString);
+    }
+
+    public List<BanDTO> getByKhuVuc(Integer maKhuVuc) {
+        List<BanDTO> list = new ArrayList<BanDTO>();
+        String xmlData = U.loadGetResponse(GET_BY_KHU_VUC_URL + maKhuVuc.toString());
+
+        try {
+            XmlPullParserFactory parserFactory = XmlPullParserFactory.newInstance();
+            XmlPullParser parser = parserFactory.newPullParser();
+            parser.setInput(new StringReader(xmlData));
+            int type = parser.getEventType();
+            while (type != XmlPullParser.END_DOCUMENT) {
+                BanDTO obj = BanDTO.fromXml(parser);
+                if (obj != null) {
+                    list.add(obj);
+                }
+
+                type = parser.next();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public List<BanDTO> objAll() {
         List<BanDTO> list = new ArrayList<BanDTO>();
 
         try {

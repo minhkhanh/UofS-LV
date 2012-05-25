@@ -1,5 +1,15 @@
 package client.menu.ui.activity;
 
+import java.io.IOException;
+import java.io.InputStream;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,6 +22,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import client.menu.R;
 import client.menu.app.MyAppLocale;
+import client.menu.app.MyAppRepository;
 import client.menu.app.MyApplication;
 import client.menu.db.dao.NgonNguDAO;
 import client.menu.db.dto.NgonNguDTO;
@@ -49,23 +60,20 @@ public class MenuClientActivity extends Activity implements OnItemSelectedListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        MyApplication.getSettings(this).getLocale().applyLanguage(this);
+        MyApplication.getSettings(this).getLocale().applyLanguage(getApplicationContext());
 
         setContentView(R.layout.layout_main);
 
         mSpinner = (Spinner) findViewById(R.id.spinner1);
         String[] from = new String[] { NgonNguDTO.CL_TEN_NGON_NGU };
         int[] to = new int[] { android.R.id.text1 };
-        mLanguageAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item,
-                null, from, to, 0);
+        mLanguageAdapter = new SimpleCursorAdapter(this,
+                android.R.layout.simple_spinner_item, null, from, to, 0);
         mLanguageAdapter
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         mSpinner.setAdapter(mLanguageAdapter);
         mSpinner.setOnItemSelectedListener(this);
-
-        // new LoadLanguageListTask().execute();
-        // getLoaderManager().initLoader(LOADER_ID_LANGUAGE_LIST, null, this);
     }
 
     @Override
@@ -125,7 +133,7 @@ public class MenuClientActivity extends Activity implements OnItemSelectedListen
             if (cursor.moveToPosition(pos)) {
                 NgonNguDTO ngonNgu = NgonNguDTO.valueOf(cursor);
                 MyAppLocale locale = MyApplication.getSettings(this).getLocale();
-                if (locale.applyLanguage(ngonNgu, this)) {
+                if (locale.applyLanguage(ngonNgu, getApplicationContext())) {
                     U.restartActivity(this);
                 }
             }

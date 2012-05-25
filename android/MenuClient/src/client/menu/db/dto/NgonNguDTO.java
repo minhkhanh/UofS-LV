@@ -1,5 +1,12 @@
 package client.menu.db.dto;
 
+import java.io.IOException;
+import java.io.StringReader;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
 import android.database.Cursor;
 import android.provider.BaseColumns;
 
@@ -16,6 +23,57 @@ public class NgonNguDTO {
     private Integer mMaNgonNgu;
     private String mTenNgonNgu;
     private String mKiHieu;
+
+    public static NgonNguDTO valueOf(XmlPullParser parser) {
+        NgonNguDTO obj = null;
+
+        try {
+            int type = parser.getEventType();
+            String tag = "";
+            String text;
+
+            while (type != XmlPullParser.END_DOCUMENT) {
+                switch (type) {
+                    case XmlPullParser.START_TAG:
+                        tag = parser.getName();
+                        if (tag.compareTo(TABLE_NAME) == 0) {
+                            obj = new NgonNguDTO();
+                        }
+                        break;
+
+                    case XmlPullParser.END_TAG:
+                        tag = parser.getName();
+                        if (tag.compareTo(TABLE_NAME) == 0) {
+                            return obj;
+                        }
+                        break;
+
+                    case XmlPullParser.TEXT:
+                        text = parser.getText();
+                        if (text.trim().length() == 0) {
+                            break;
+                        }
+                        if (tag.compareTo(CL_MA_NGON_NGU) == 0) {
+                            obj.mMaNgonNgu = Integer.valueOf(text);
+                        } else if (tag.compareTo(CL_TEN_NGON_NGU) == 0) {
+                            obj.mTenNgonNgu = text;
+                        } else if (tag.compareTo(CL_KI_HIEU) == 0) {
+                            obj.mKiHieu = text;
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+
+                type = parser.next();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
     public static NgonNguDTO valueOf(Cursor cursor) {
         NgonNguDTO obj = new NgonNguDTO();
