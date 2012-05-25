@@ -1,25 +1,66 @@
 package client.menu.ui.fragment;
 
+import android.app.AlertDialog;
 import android.app.DialogFragment;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import client.menu.R;
-import client.menu.ui.activity.MainMenuActivity;
+import client.menu.bus.SessionManager;
+import client.menu.db.dao.BanDAO;
+import client.menu.db.dto.BanDTO;
 import client.menu.ui.activity.WelcomeActivity;
 import client.menu.util.U;
 
 public class AuthDialogFragment extends DialogFragment {
 
+    public static final int ACT_SELECTING_TABLE = 0;
+
     private Button mBtnOK;
     private Button mBtnCancel;
+    private int mAction;
+
+    private ProgressDialog mWatingDlg;
+
+    class PutTableTask extends AsyncTask<BanDTO, Void, Void> {
+
+        boolean mResult;
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            mWatingDlg.dismiss();
+            if (mResult) {
+                Intent intent = new Intent(getActivity(), WelcomeActivity.class);
+                startActivity(intent);
+                dismiss();
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage(getActivity().getResources().getString(
+                        R.string.message_connect_server_failed));
+
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        }
+
+        @Override
+        protected Void doInBackground(BanDTO... params) {
+            mResult = BanDAO.getInstance().putUpdate(params[0]);
+            return null;
+        }
+
+    };
+
+    public AuthDialogFragment(int action) {
+        mAction = action;
+    }
 
     private OnClickListener mOnClickListener = new OnClickListener() {
 
@@ -27,12 +68,16 @@ public class AuthDialogFragment extends DialogFragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btnOK:
-                    U.toastText(getActivity(), "Đang xây dựng!");
+                    U.toastText(getActivity(), "Xác thực thành công!");
+                    if (mAction == ACT_SELECTING_TABLE) {
+                        BanDTO ban = SessionManager.getInstance().loadCurrentSession()
+                                .getBan();
+                        ban.setActive(false);
 
-                    Intent intent = new Intent(getActivity(), WelcomeActivity.class);
-                    startActivity(intent);
+                        mWatingDlg = ProgressDialog.show(getActivity(), "", "Wating...");
+                        new PutTableTask().execute(ban);
+                    }
 
-                    dismiss();
                     break;
                 case R.id.btnCancel:
                     dismiss();
@@ -40,12 +85,6 @@ public class AuthDialogFragment extends DialogFragment {
             }
         }
     };
-
-    public static AuthDialogFragment newInstance() {
-        AuthDialogFragment f = new AuthDialogFragment();
-
-        return f;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

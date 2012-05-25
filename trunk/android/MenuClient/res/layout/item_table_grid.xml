@@ -3,15 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" android:gravity="center">
-
+
     <ImageView
-        android:id="@+id/TableImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/imgTableImage"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:src="@drawable/green_square" />
-
+
     <TextView
-        android:id="@+id/TableCaption"
+        android:id="@+id/textTableName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView" />

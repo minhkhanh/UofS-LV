@@ -51,7 +51,7 @@ public class OrderItemView extends RelativeLayout {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                     builder.setMessage(
                             getContext().getResources().getString(
-                                    R.string.msg_confirm_order_item_deletion))
+                                    R.string.message_confirm_order_item_deletion))
                             .setCancelable(false)
                             .setPositiveButton(
                                     getContext().getResources().getString(

@@ -11,6 +11,9 @@ import client.menu.db.dao.OrderDAO;
 import client.menu.db.util.MyDatabaseHelper;
 
 public final class MyAppRepository {
+    
+    public static final String LOCAL_SERVER_URL = "http://192.168.1.4/RestService/LocalService.svc/";
+//    public static final String LOCAL_SERVER_URL = "http://10.0.2.2:5252/LocalService.svc/";
 
     private static MyAppRepository mInstance;
 

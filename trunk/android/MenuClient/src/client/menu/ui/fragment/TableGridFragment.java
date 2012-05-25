@@ -1,11 +1,13 @@
 package client.menu.ui.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.content.Intent;
-import android.database.Cursor;
-import android.os.AsyncTask;
+import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Loader;
 import android.os.Bundle;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -17,38 +19,36 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 import client.menu.R;
+import client.menu.bus.SessionManager;
 import client.menu.bus.loader.CustomAsyncTaskLoader;
 import client.menu.db.dao.BanDAO;
 import client.menu.db.dto.BanDTO;
-import client.menu.ui.activity.WelcomeActivity;
+import client.menu.ui.adapter.TableListAdapter;
 import client.menu.util.U;
 
-public class TableGridFragment extends Fragment {
-
-    // public static final int LOADER_ID_TABLE_LIST = 0;
+public class TableGridFragment extends Fragment implements LoaderCallbacks<List<BanDTO>> {
 
     private Integer mMaKhuVuc;
-
-    private SimpleCursorAdapter mGridAdapter;
+    private TableListAdapter mTableAdapter;
     private GridView mTableGrid;
     private ActionMode mActionMode;
 
-    LoadTableListTask mLoadTableListTask;
+    private BanDTO mBan;
 
-    class LoadTableListTask extends AsyncTask<Integer, Integer, Cursor> {
+    static class TableListLoader extends CustomAsyncTaskLoader<List<BanDTO>> {
 
-        @Override
-        protected void onPostExecute(Cursor result) {
-            super.onPostExecute(result);
-            mGridAdapter.changeCursor(result);
+        private Integer mAreaId;
+
+        public TableListLoader(Activity context, Integer maKhuVuc) {
+            super(context);
+            mAreaId = maKhuVuc;
         }
 
         @Override
-        protected Cursor doInBackground(Integer... maKhuVuc) {
-            return BanDAO.getInstance().cursorByMaKhuVuc(maKhuVuc[0]);
+        public List<BanDTO> loadInBackground() {
+            return BanDAO.getInstance().getByKhuVuc(mAreaId);
         }
 
     };
@@ -75,14 +75,15 @@ public class TableGridFragment extends Fragment {
 
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            // Toast.makeText(getActivity(), "Đang xây dựng",
-            // Toast.LENGTH_SHORT).show();
             switch (item.getItemId()) {
                 case R.id.miSelectTable:
-                    
-                    DialogFragment newFragment = AuthDialogFragment.newInstance();
+
+                    SessionManager.getInstance().loadSession(mBan);
+
+                    DialogFragment newFragment = new AuthDialogFragment(
+                            AuthDialogFragment.ACT_SELECTING_TABLE);
                     U.showDlgFragment(TableGridFragment.this, newFragment, "dialog");
-                    
+
                     break;
 
                 default:
@@ -100,6 +101,8 @@ public class TableGridFragment extends Fragment {
                 if (mActionMode != null) {
                     return;
                 }
+
+                mBan = (BanDTO) parent.getItemAtPosition(pos);
 
                 mActionMode = getActivity().startActionMode(mActionModeCallback);
             }
@@ -142,25 +145,6 @@ public class TableGridFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-
-        mLoadTableListTask = new LoadTableListTask();
-        mLoadTableListTask.execute(mMaKhuVuc);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        if (mLoadTableListTask.getStatus() != AsyncTask.Status.FINISHED) {
-            mLoadTableListTask.cancel(true);
-        } else {
-            mGridAdapter.changeCursor(null);
-        }
-    }
-
-    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("mMaKhuVuc", mMaKhuVuc);
@@ -176,22 +160,17 @@ public class TableGridFragment extends Fragment {
 
         setHasOptionsMenu(true);
 
-        String[] from = new String[] { BanDTO.CL_TEN_BAN };
-        int[] to = new int[] { R.id.TableCaption };
-        mGridAdapter = new SimpleCursorAdapter(getActivity(), R.layout.item_table_grid,
-                null, from, to, 0);
+        mTableAdapter = new TableListAdapter(getActivity(), new ArrayList<BanDTO>());
 
-        // getLoaderManager().initLoader(LOADER_ID_TABLE_LIST, null,
-        // mLoaderCallbacks);
+        getLoaderManager().initLoader(0, null, this);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        // getActivity().getActionBar().setSubtitle(R.string.construct_merge_table);
 
         mTableGrid = (GridView) getView().findViewById(R.id.TableGrid);
-        mTableGrid.setAdapter(mGridAdapter);
+        mTableGrid.setAdapter(mTableAdapter);
         mTableGrid.setOnItemClickListener(mOnItemClickListener);
     }
 
@@ -203,5 +182,20 @@ public class TableGridFragment extends Fragment {
         GridView grid = (GridView) U.extractViewFromParent(frame, R.id.TableGrid);
 
         return grid;
+    }
+
+    @Override
+    public Loader<List<BanDTO>> onCreateLoader(int id, Bundle args) {
+        return new TableListLoader(getActivity(), mMaKhuVuc);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<BanDTO>> arg0, List<BanDTO> arg1) {
+        mTableAdapter.addAll(arg1);
+        mTableAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<BanDTO>> arg0) {
     }
 }

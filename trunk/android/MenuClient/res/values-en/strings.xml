@@ -7,4 +7,6 @@
     <string name="main_menu_caption">Restaurent menu</string>
     <string name="split_table_caption">Spliting table</string>
     <string name="title_dialog_auth">Choose one task</string>
+    <string name="caption_main_menu">Menu</string>
+    <string name="caption_payment">Payment</string>
 </resources>
