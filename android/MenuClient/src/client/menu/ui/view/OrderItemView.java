@@ -106,7 +106,7 @@ public class OrderItemView extends RelativeLayout {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.item_order, this);
-        
+
         mButtonPlus = (Button) findViewById(R.id.btnPlus);
         mButtonMinus = (Button) findViewById(R.id.btnMinus);
         mButtonPlus.setOnClickListener(mOnClickListener);
@@ -134,5 +134,9 @@ public class OrderItemView extends RelativeLayout {
 
         TextView unitPrice = (TextView) findViewById(R.id.textUnitPrice);
         unitPrice.setText(values.getAsInteger(DonViTinhMonAnDTO.CL_DON_GIA).toString());
+
+        if (mChiTietOrder.getMaOrder() != null && mChiTietOrder.getMaOrder() > 0) {
+            setBackgroundResource(R.color._99acacac);
+        }
     }
 }

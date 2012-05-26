@@ -41,18 +41,17 @@ public class MainMenuActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.layout_three_panes);
+		setContentView(R.layout.layout_two_panes);
 		
 		View v = findViewById(android.R.id.content);
 		v.setBackgroundResource(R.drawable.french_food_photo_eu030);
-//		v.setb
 
 		FragmentManager fm = getFragmentManager();
 		CategoryListFragment f = (CategoryListFragment) fm
 				.findFragmentByTag("CategoryListFragment");
 		if (f == null) {
 			FragmentTransaction ft = fm.beginTransaction();
-			ft.replace(R.id.GroupPaneHolder,
+			ft.replace(R.id.LeftPaneHolder,
 					new CategoryListFragment(), "CategoryListFragment");
 			ft.commit();
 		}

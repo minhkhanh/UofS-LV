@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" android:gravity="center">
+    android:orientation="vertical" android:gravity="center" android:padding="10dp">
 
     <ImageView
         android:id="@+id/imgTableImage"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
         android:src="@drawable/green_square" />
 
     <TextView

@@ -1,18 +1,20 @@
-package client.menu.ui.activity;
+package client.menu.ui.fragment;
 
 import java.util.List;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.ContentValues;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.HorizontalScrollView;
-import android.widget.ScrollView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import client.menu.R;
 import client.menu.bus.LoadBillItemsTask;
@@ -22,13 +24,9 @@ import client.menu.db.dto.ChiTietOrderDTO;
 import client.menu.ui.view.MiniBillView;
 import client.menu.util.U;
 
-public class CustomBillSplitActivity extends Activity {
+public class CustomBillSplitDialog extends DialogFragment {
+    protected MiniBillView mSubBillView;
     private MiniBillView mMainBillView;
-    private MiniBillView mSubBillView;
-    private List<ChiTietOrderDTO> mChiTietOrderList;
-    
-    private HorizontalScrollView mScrollView;
-
     private CustomLoadBillItemsTask mLoadBillItemsTask;
 
     private class CustomLoadBillItemsTask extends LoadBillItemsTask {
@@ -46,42 +44,64 @@ public class CustomBillSplitActivity extends Activity {
     };
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
 
         U.cancelAsyncTask(mLoadBillItemsTask);
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         ServiceOrder order = SessionManager.getInstance().loadCurrentSession().getOrder();
-        mLoadBillItemsTask = new CustomLoadBillItemsTask(this, order.getContent());
+        mLoadBillItemsTask = new CustomLoadBillItemsTask(getActivity(),
+                order.getContent());
         mLoadBillItemsTask.execute();
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dialog_custom_bill_split);
+
+//        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Holo_Dialog);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        getDialog().setTitle(getString(R.string.title_dialog_bill_split));
+
+        View v = inflater.inflate(R.layout.dialog_custom_bill_split, container, false);
+        return v;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         
-//        mScrollView = (HorizontalScrollView) findViewById(R.id.horizontalScrollView1);
-        final ViewGroup scrollBill = (ViewGroup) findViewById(R.id.scrollBill);
-        
-        Button btnSplit = (Button) findViewById(R.id.btnSplit);
+        final ViewGroup scrollBill = (ViewGroup) getView().findViewById(R.id.scrollBill);
+
+        Button btnSplit = (Button) getView().findViewById(R.id.btnSplit);
         btnSplit.setOnClickListener(new OnClickListener() {
-            
+
             @Override
             public void onClick(View v) {
-                MiniBillView newBill = mSubBillView.clone();
-                scrollBill.addView(newBill);
-                
-                mSubBillView.bindItems(null);
+                if (mSubBillView.getBillList().getCount() > 0) {
+                    MiniBillView newBill = mSubBillView.clone();
+                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
+                            LayoutParams.MATCH_PARENT);
+                    lp.setMargins(10, 10, 10, 10);
+                    newBill.setLayoutParams(lp);
+//                    newBill.set
+                    scrollBill.addView(newBill);
+
+                    mSubBillView.bindItems(null);
+                }
             }
         });
 
-        mMainBillView = (MiniBillView) findViewById(R.id.billMain);
+        mMainBillView = (MiniBillView) getView().findViewById(R.id.billMain);
         ListView listMain = mMainBillView.getBillList();
         listMain.setOnItemClickListener(new OnItemClickListener() {
 
@@ -91,7 +111,7 @@ public class CustomBillSplitActivity extends Activity {
             }
         });
 
-        mSubBillView = (MiniBillView) findViewById(R.id.billSub);
+        mSubBillView = (MiniBillView) getView().findViewById(R.id.billSub);
         ListView listSub = mSubBillView.getBillList();
         listSub.setOnItemClickListener(new OnItemClickListener() {
 

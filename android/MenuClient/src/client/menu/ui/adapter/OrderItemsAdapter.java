@@ -1,5 +1,6 @@
 package client.menu.ui.adapter;
 
+import java.util.Collection;
 import java.util.List;
 
 import client.menu.db.dto.ChiTietOrderDTO;
@@ -13,32 +14,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-public class OrderItemsAdapter extends BaseAdapter {
-    List<ContentValues> mData;
+public class OrderItemsAdapter extends CustomArrayAdapter<ContentValues>{
     List<ChiTietOrderDTO> mChiTietOrderList;
-
-    Context mContext;
 
     public OrderItemsAdapter(Context context, List<ContentValues> data,
             List<ChiTietOrderDTO> chiTietOrderList) {
-        mContext = context;
-        mData = data;
+        super(context, data);
         mChiTietOrderList = chiTietOrderList;
     }
-
+    
     @Override
-    public int getCount() {
-        return mChiTietOrderList.size();
+    public void clear() {
+        super.clear();
+        
+        mChiTietOrderList.clear();
     }
-
-    @Override
-    public Object getItem(int position) {
-        return mChiTietOrderList.get(position);
+    
+    public void addAllExtra(Collection<ChiTietOrderDTO> addition) {
+        mChiTietOrderList.addAll(addition);
     }
-
-    @Override
-    public long getItemId(int position) {
-        return 0;
+    
+    public void addExtra(ChiTietOrderDTO object) {
+        mChiTietOrderList.add(object);
     }
 
     @Override
@@ -46,10 +43,10 @@ public class OrderItemsAdapter extends BaseAdapter {
         OrderItemView v = (OrderItemView) convertView;
 
         if (v == null) {
-            v = new OrderItemView(mContext);
+            v = new OrderItemView(getContext());
         }
 
-        v.bindData(mChiTietOrderList.get(position), mData.get(position));
+        v.bindData(mChiTietOrderList.get(position), getData().get(position));
 
         return v;
     }

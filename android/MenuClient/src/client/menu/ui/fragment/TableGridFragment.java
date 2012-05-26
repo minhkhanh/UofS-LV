@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 import client.menu.R;
 import client.menu.bus.SessionManager;
@@ -30,6 +31,7 @@ import client.menu.util.U;
 
 public class TableGridFragment extends Fragment implements LoaderCallbacks<List<BanDTO>> {
 
+    private String mTenKhuVuc;
     private Integer mMaKhuVuc;
     private TableListAdapter mTableAdapter;
     private GridView mTableGrid;
@@ -82,7 +84,7 @@ public class TableGridFragment extends Fragment implements LoaderCallbacks<List<
 
                     DialogFragment newFragment = new AuthDialogFragment(
                             AuthDialogFragment.ACT_SELECTING_TABLE);
-                    U.showDlgFragment(TableGridFragment.this, newFragment, "dialog");
+                    U.showDlgFragment(getActivity(), newFragment, "dialog");
 
                     break;
 
@@ -117,9 +119,10 @@ public class TableGridFragment extends Fragment implements LoaderCallbacks<List<
         mMaKhuVuc = maKhuVuc;
     }
 
-    public static TableGridFragment newInstance(int areaId) {
+    public static TableGridFragment newInstance(int areaId, String areaName) {
         TableGridFragment f = new TableGridFragment();
         f.mMaKhuVuc = areaId;
+        f.mTenKhuVuc = areaName;
 
         return f;
     }
@@ -162,16 +165,22 @@ public class TableGridFragment extends Fragment implements LoaderCallbacks<List<
 
         mTableAdapter = new TableListAdapter(getActivity(), new ArrayList<BanDTO>());
 
-        getLoaderManager().initLoader(0, null, this);
+//        getLoaderManager().initLoader(0, null, this);
+        getLoaderManager().restartLoader(0, null, this);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        
+        getView().setBackgroundResource(R.color._55f5f5f5);
 
         mTableGrid = (GridView) getView().findViewById(R.id.TableGrid);
         mTableGrid.setAdapter(mTableAdapter);
         mTableGrid.setOnItemClickListener(mOnItemClickListener);
+        
+        TextView areaName = (TextView) getView().findViewById(R.id.textAreaName);
+        areaName.setText(mTenKhuVuc);
     }
 
     @Override
@@ -179,9 +188,9 @@ public class TableGridFragment extends Fragment implements LoaderCallbacks<List<
             Bundle savedInstanceState) {
 
         ViewGroup frame = (ViewGroup) inflater.inflate(R.layout.frame_table_grid, null);
-        GridView grid = (GridView) U.extractViewFromParent(frame, R.id.TableGrid);
+//        GridView grid = (GridView) U.extractViewFromParent(frame, R.id.TableGrid);
 
-        return grid;
+        return frame;
     }
 
     @Override

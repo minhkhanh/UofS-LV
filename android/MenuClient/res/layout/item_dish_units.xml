@@ -11,13 +11,13 @@
         android:id="@+id/textUnitName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.75"
+        android:layout_weight="1.25"
         android:text="@string/text_choose_a_price" />
 
     <TextView
         android:id="@+id/textUnitPrice"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1.25" />
+        android:layout_weight="0.75" />
 
 </LinearLayout>

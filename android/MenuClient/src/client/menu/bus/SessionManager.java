@@ -6,13 +6,80 @@ import java.util.List;
 import android.database.DataSetObservable;
 import client.menu.db.dto.BanDTO;
 import client.menu.db.dto.ChiTietOrderDTO;
+import client.menu.db.dto.HoaDonDTO;
+import client.menu.db.dto.OrderDTO;
 import client.menu.util.U;
 
 public class SessionManager {
 
     public class ServiceOrder extends DataSetObservable {
 
-        List<ChiTietOrderDTO> mOrderItems = new ArrayList<ChiTietOrderDTO>();
+        private ServiceSession mSession;
+        private List<ChiTietOrderDTO> mOrderItems = new ArrayList<ChiTietOrderDTO>();
+        private Integer mOrderId = -1;
+
+        public ServiceOrder(ServiceSession session) {
+            mSession = session;
+        }
+
+        public List<ChiTietOrderDTO> getUnbindedItems() {
+            List<ChiTietOrderDTO> items = new ArrayList<ChiTietOrderDTO>();
+            for (ChiTietOrderDTO c : mOrderItems) {
+                if (c.getMaOrder() == null) {
+                    items.add(c);
+                }
+            }
+
+            return items;
+        }
+
+        public List<ChiTietOrderDTO> getBindedItems() {
+            List<ChiTietOrderDTO> items = new ArrayList<ChiTietOrderDTO>();
+            for (ChiTietOrderDTO c : mOrderItems) {
+                if (c.getMaOrder() != null) {
+                    items.add(c);
+                }
+            }
+
+            return items;
+        }
+
+        // public void bindOrderId(Integer orderId) {
+        // for (ChiTietOrderDTO c : mOrderItems) {
+        // c.setMaOrder(orderId);
+        // }
+        //
+        // mOrderId = orderId;
+        // }
+        //
+        // public void unbindOrderId() {
+        // for (ChiTietOrderDTO c : mOrderItems) {
+        // c.setMaOrder(null);
+        // }
+        // }
+        //
+        // public boolean isBindedOrderId() {
+        // return (mOrderId != -1);
+        // }
+
+        public void setOrderId(Integer orderId) {
+            mOrderId = orderId;
+        }
+
+        public HoaDonDTO makeHoaDon() {
+            HoaDonDTO hoaDon = new HoaDonDTO();
+            hoaDon.setMaBanChinh(mSession.getBan().getMaBan());
+
+            return hoaDon;
+        }
+
+        public OrderDTO makeOrder() {
+            OrderDTO order = new OrderDTO();
+            order.setMaBan(mSession.getBan().getMaBan());
+            order.setMaOrder(mOrderId);
+
+            return order;
+        }
 
         public final void debugLogItems() {
             for (int i = 0; i < mOrderItems.size(); ++i) {
@@ -92,7 +159,7 @@ public class SessionManager {
 
         protected ServiceSession(BanDTO ban) {
             mBan = ban;
-            mOrder = new ServiceOrder();
+            mOrder = new ServiceOrder(this);
 
             mOrder.addItem(1, 1, 1, null);
             mOrder.addItem(2, 2, 2, null);
@@ -121,6 +188,13 @@ public class SessionManager {
 
     public static final SessionManager getInstance() {
         return mInstance;
+    }
+
+    public void destroyCurrentSession() {
+        if (mIndexCurrent != -1) {
+            mSessionList.remove(mIndexCurrent);
+            mIndexCurrent = -1;
+        }
     }
 
     public ServiceSession loadCurrentSession() {

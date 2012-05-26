@@ -199,7 +199,7 @@ public class DishListFragment extends ListFragment {
             mMaDanhMuc = savedInstanceState.getInt("mMaDanhMuc");
         }
         
-        getView().setBackgroundResource(R.color._99acacac);
+        getView().setBackgroundResource(R.color._55f5f5f5);
 
         setHasOptionsMenu(true);
 
@@ -284,7 +284,7 @@ public class DishListFragment extends ListFragment {
 
         DishDetailDialogFragment newFragment = new DishDetailDialogFragment(monAn,
                 monAnDaNgonNgu, donViTinhMonAn.getMaDonViTinh(), adapter);
-        U.showDlgFragment(this, newFragment, "dialog");
+        U.showDlgFragment(getActivity(), newFragment, "dialog");
 
         // if (mHaveExtendPane) {
         // OrderPreviewFragment orderPreview = (OrderPreviewFragment)

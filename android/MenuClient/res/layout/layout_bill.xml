@@ -29,12 +29,5 @@
             android:gravity="right"
             android:text="TextView" />
     </LinearLayout>
-
-    <ViewStub
-        android:id="@+id/stubEqualSplit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inflatedId="@id/relativeEqualSplit"
-        android:layout="@layout/frame_equal_split_bill" />
 
 </LinearLayout>
