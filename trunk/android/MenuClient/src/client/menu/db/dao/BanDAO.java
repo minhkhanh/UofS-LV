@@ -23,6 +23,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import client.menu.app.MyAppRepository;
 import client.menu.db.dto.BanDTO;
+import client.menu.db.dto.BanDTO;
 import client.menu.db.util.MyDatabaseHelper;
 import client.menu.util.U;
 
@@ -63,9 +64,32 @@ public class BanDAO extends AbstractDAO {
     public boolean putUpdate(BanDTO ban) {
         String xmlData = ban.toXml();
         String respString = U.loadPutResponse(PUT_UPDATE_URL, xmlData);
-        
+
         return U.deserializeXml(respString);
     }
+
+//    public List<BanDTO> listFromXml(String xmlData) {
+//        List<BanDTO> list = new ArrayList<BanDTO>();
+//
+//        try {
+//            XmlPullParserFactory parserFactory = XmlPullParserFactory.newInstance();
+//            XmlPullParser parser = parserFactory.newPullParser();
+//            parser.setInput(new StringReader(xmlData));
+//            int type = parser.getEventType();
+//            while (type != XmlPullParser.END_DOCUMENT) {
+//                BanDTO obj = BanDTO.fromXml(parser);
+//                if (obj != null) {
+//                    list.add(obj);
+//                }
+//
+//                type = parser.next();
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        return list;
+//    }
 
     public List<BanDTO> getByKhuVuc(Integer maKhuVuc) {
         List<BanDTO> list = new ArrayList<BanDTO>();

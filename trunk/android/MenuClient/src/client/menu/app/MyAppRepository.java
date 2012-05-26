@@ -4,6 +4,7 @@ import android.content.Context;
 import client.menu.db.dao.BanDAO;
 import client.menu.db.dao.DanhMucDAO;
 import client.menu.db.dao.DonViTinhDAO;
+import client.menu.db.dao.HoaDonDAO;
 import client.menu.db.dao.KhuVucDAO;
 import client.menu.db.dao.MonAnDAO;
 import client.menu.db.dao.NgonNguDAO;
@@ -27,6 +28,7 @@ public final class MyAppRepository {
         DonViTinhDAO.createInstance(dbHelper);
         OrderDAO.createInstance(dbHelper);
         KhuVucDAO.createInstance(dbHelper);
+        HoaDonDAO.createInstance(dbHelper);
     }
 
     public static final void createInstance(Context context) {

@@ -1,16 +1,11 @@
 package client.menu.db.dto;
 
-import java.io.StringWriter;
-
 import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlSerializer;
-
-import client.menu.util.U;
-import client.menu.util.XmlSerializerWrapper;
 
 import android.database.Cursor;
 import android.provider.BaseColumns;
-import android.util.Xml;
+import client.menu.util.U;
+import client.menu.util.XmlSerializerWrapper;
 
 public class BanDTO
 // implements Parcelable

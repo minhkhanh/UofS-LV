@@ -27,12 +27,16 @@ public class MiniBillView extends LinearLayout {
 
     public MiniBillView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        prepareViews();
+        if (!isInEditMode()) {
+            prepareViews();
+        }
     }
 
     public MiniBillView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        prepareViews();
+        if (!isInEditMode()) {
+            prepareViews();
+        }
     }
 
     public MiniBillView clone() {
@@ -46,6 +50,8 @@ public class MiniBillView extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.frame_mini_bill, this);
+        
+        setBackgroundResource(R.color._99acacac);
 
         mBillTotalText = (TextView) findViewById(R.id.textBillTotal);
 

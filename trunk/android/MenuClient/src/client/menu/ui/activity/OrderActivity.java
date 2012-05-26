@@ -3,8 +3,12 @@ package client.menu.ui.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.database.DatabaseUtils;
@@ -18,8 +22,10 @@ import client.menu.app.MyAppLocale;
 import client.menu.bus.SessionManager;
 import client.menu.bus.SessionManager.ServiceOrder;
 import client.menu.db.dao.DonViTinhDAO;
+import client.menu.db.dao.OrderDAO;
 import client.menu.db.dto.ChiTietOrderDTO;
 import client.menu.db.dto.NgonNguDTO;
+import client.menu.db.dto.OrderDTO;
 import client.menu.ui.adapter.OrderItemsAdapter;
 import client.menu.util.U;
 
@@ -31,11 +37,65 @@ public class OrderActivity extends ListActivity {
         };
     };
 
+    private class PostOrderTask extends AsyncTask<Void, Void, Boolean> {
+        private List<ChiTietOrderDTO> mItemToPost;// = new
+                                                  // ArrayList<ChiTietOrderDTO>();
+        private OrderDTO mOrder;
+
+        public PostOrderTask() {
+            ServiceOrder servOrder = SessionManager.getInstance().loadCurrentSession()
+                    .getOrder();
+            OrderDTO order = servOrder.makeOrder();
+            mItemToPost = servOrder.getUnbindedItems();
+            mOrder = order;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+            mWatingDlg.cancel();
+            if (result == true) {
+                U.toastText(OrderActivity.this, OrderActivity.this.getResources()
+                        .getString(R.string.message_order_sent));
+
+                SessionManager.getInstance().loadCurrentSession().getOrder()
+                        .setOrderId(mOrder.getMaOrder());
+
+                excuteLoadData();
+            } else {
+                AlertDialog.Builder builder = new Builder(OrderActivity.this)
+                        .setMessage(getResources().getString(
+                                R.string.message_connect_server_failed));
+                builder.create().show();
+            }
+        };
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            if (mOrder.getMaOrder() <= 0) {
+                mOrder = OrderDAO.getInstance().postNewOrder(mOrder);
+                if (mOrder == null) {
+                    return false;
+                }
+            }
+
+            for (ChiTietOrderDTO c : mItemToPost) {
+                c.setMaOrder(mOrder.getMaOrder());
+            }
+
+            List<ChiTietOrderDTO> list = OrderDAO.getInstance().postChiTietOrderArray(
+                    mItemToPost);
+            if (list == null) {
+                return false;
+            }
+
+            return true;
+        }
+    };
+
     private OrderItemsAdapter mListAdapter;
     List<LoadOrderItemAsyncTask> mLoadOrderItemTasks = new ArrayList<OrderActivity.LoadOrderItemAsyncTask>();
-
-    private List<ChiTietOrderDTO> mChiTietOrderList = new ArrayList<ChiTietOrderDTO>();
-    private List<ContentValues> mContentValuesList = new ArrayList<ContentValues>();
+    protected ProgressDialog mWatingDlg;
 
     private class LoadOrderItemAsyncTask extends
             AsyncTask<ChiTietOrderDTO, Integer, Void> {
@@ -47,8 +107,8 @@ public class OrderActivity extends ListActivity {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
-            mContentValuesList.add(mValues);
-            mChiTietOrderList.add(mItem);
+            mListAdapter.add(mValues);
+            mListAdapter.addExtra(mItem);
             mListAdapter.notifyDataSetChanged();
         }
 
@@ -80,7 +140,30 @@ public class OrderActivity extends ListActivity {
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         switch (item.getItemId()) {
             case R.id.miConfirmOrder:
-                U.toastText(this, "Gửi order: Đang xây dựng");
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage(
+                        this.getResources().getString(R.string.message_confirm_order))
+                        .setCancelable(false)
+                        .setPositiveButton(
+                                this.getResources().getString(R.string.caption_ok),
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        mWatingDlg = ProgressDialog.show(
+                                                OrderActivity.this, "", "Wating...");
+                                        new PostOrderTask().execute();
+                                    }
+                                })
+                        .setNegativeButton(
+                                this.getResources().getString(R.string.caption_cancel),
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
                 break;
 
             default:
@@ -105,12 +188,10 @@ public class OrderActivity extends ListActivity {
         ServiceOrder order = SessionManager.getInstance().loadCurrentSession().getOrder();
         order.registerObserver(mOrderObserver);
 
-        // mChiTietOrderList = order.getContent();
-
-        mListAdapter = new OrderItemsAdapter(this, mContentValuesList, mChiTietOrderList);
+        mListAdapter = new OrderItemsAdapter(this, new ArrayList<ContentValues>(),
+                new ArrayList<ChiTietOrderDTO>());
         setListAdapter(mListAdapter);
 
-        // excuteLoadData();
     }
 
     private void cleanTasks() {
@@ -139,8 +220,7 @@ public class OrderActivity extends ListActivity {
     }
 
     private void excuteLoadData() {
-        mContentValuesList.clear();
-        mChiTietOrderList.clear();
+        mListAdapter.clear();
         mListAdapter.notifyDataSetChanged();
 
         ServiceOrder order = SessionManager.getInstance().loadCurrentSession().getOrder();

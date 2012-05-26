@@ -3,6 +3,7 @@
     <color name="red">#ffff0000</color>
     <color name="transparent">#0000</color>
     <color name="_99acacac">#99acacac</color>
-    <color name="_99f5f5f5">#99f5f5f5</color>
+    <color name="_55f5f5f5">#55f5f5f5</color>
+    <color name="_550000ff">#550000ff</color>
     
 </resources>

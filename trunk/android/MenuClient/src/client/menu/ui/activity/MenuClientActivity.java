@@ -1,15 +1,5 @@
 package client.menu.ui.activity;
 
-import java.io.IOException;
-import java.io.InputStream;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -22,7 +12,6 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import client.menu.R;
 import client.menu.app.MyAppLocale;
-import client.menu.app.MyAppRepository;
 import client.menu.app.MyApplication;
 import client.menu.db.dao.NgonNguDAO;
 import client.menu.db.dto.NgonNguDTO;

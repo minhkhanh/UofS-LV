@@ -36,6 +36,7 @@ public class AuthDialogFragment extends DialogFragment {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             mWatingDlg.dismiss();
+
             if (mResult) {
                 Intent intent = new Intent(getActivity(), WelcomeActivity.class);
                 startActivity(intent);

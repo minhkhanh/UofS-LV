@@ -2,6 +2,10 @@ package client.menu.util;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.xmlpull.v1.XmlSerializer;
 
@@ -41,6 +45,28 @@ public class XmlSerializerWrapper {
         mSerializer.startDocument("UTF-8", null);
         mSerializer.setPrefix("i", mNamespace);
     }
+    
+//    public void sortThenWrite(Map<String, Object> elements)
+//            throws IllegalArgumentException, IllegalStateException, IOException {
+//        Set<String> keySet = elements.keySet();
+////        keySet.
+//        keySet.
+//        for (int i = 0; i < elements.size() - 1; ++i) {
+//            for (int j = i + 1; j < elements.size(); ++j) {
+//                Map<String, Object> e1 = elements..get(i);
+//                Map<String, Object> ej = elements.get(j);
+//                if (e1..getKey().compareTo(ej.getKey()) > 0) {
+//                    Entry<String, Object> t = e1;
+//                    elements.set(i, ej);
+//                    elements.set(j, t);
+//                }
+//            }
+//        }
+//        
+//        for (Entry<String, Object> e : elements) {
+//            writeSimpleElement(e.getKey(), e.getValue());
+//        }
+//    }
 
     public void writeSimpleElement(String name, Object value)
             throws IllegalArgumentException, IllegalStateException, IOException {

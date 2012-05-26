@@ -3,6 +3,7 @@ package client.menu.ui.adapter;
 import java.util.Collection;
 import java.util.List;
 
+import client.menu.db.dto.ChiTietOrderDTO;
 import client.menu.db.dto.NgonNguDTO;
 
 import android.content.Context;
@@ -16,6 +17,10 @@ public abstract class CustomArrayAdapter<T> extends BaseAdapter {
     public CustomArrayAdapter(Context context, List<T> data) {
         mData = data;
         mContext = context;
+    }
+    
+    public void add(T object) {
+        mData.add(object);
     }
     
     public void addAll(Collection<T> addition) {

@@ -93,7 +93,7 @@ public class CategoryListFragment extends ListFragment implements LoaderCallback
             mSelIndex = savedInstanceState.getInt("mSelIndex", 0);
         }
         
-        getView().setBackgroundResource(R.color._99acacac);
+        getView().setBackgroundResource(R.color._55f5f5f5);
 //        getView().setAlpha(0.35f);
 
         String[] from = new String[] { DanhMucDaNgonNguDTO.CL_TEN_DANH_MUC };
@@ -104,7 +104,7 @@ public class CategoryListFragment extends ListFragment implements LoaderCallback
 
         getLoaderManager().initLoader(LOADER_ID_CAT_LIST, null, this);
 
-        View dishList = getActivity().findViewById(R.id.ContentPaneHolder);
+        View dishList = getActivity().findViewById(R.id.RightPaneHolder);
         mIsDualPane = dishList != null && dishList.getVisibility() == View.VISIBLE;
     }
 
@@ -122,13 +122,13 @@ public class CategoryListFragment extends ListFragment implements LoaderCallback
             getListView().setItemChecked(index, true);
 
             DishListFragment dishList = (DishListFragment) getFragmentManager()
-                    .findFragmentById(R.id.ContentPaneHolder);
+                    .findFragmentById(R.id.RightPaneHolder);
 
             if (dishList == null || dishList.getMaDanhMuc() != maDanhMuc) {
                 dishList = DishListFragment.newInstance(maDanhMuc);
 
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.ContentPaneHolder, dishList);
+                ft.replace(R.id.RightPaneHolder, dishList);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.commit();
             }
@@ -137,7 +137,7 @@ public class CategoryListFragment extends ListFragment implements LoaderCallback
             DishListFragment dishList = DishListFragment.newInstance(maDanhMuc);
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.GroupPaneHolder, dishList);
+            ft.replace(R.id.LeftPaneHolder, dishList);
             ft.addToBackStack(null);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();

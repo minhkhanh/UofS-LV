@@ -14,22 +14,29 @@ import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlSerializer;
 
+import client.menu.R;
+import client.menu.bus.SessionManager;
+import client.menu.bus.SessionManager.ServiceOrder;
 import client.menu.db.dto.NgonNguDTO;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -85,6 +92,27 @@ public final class U {
         return Boolean.valueOf(String.valueOf(c.getInt(i)));
     }
 
+    public static final String loadPostResponse(String url, String xmlData) {
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost httpPost = new HttpPost(url);
+
+        try {
+            StringEntity postObj = new StringEntity(xmlData, HTTP.UTF_8);
+            postObj.setContentType("text/xml");
+            httpPost.setHeader("Content-Type", "application/xml; charset=UTF-8");
+            httpPost.setEntity(postObj);
+
+            HttpResponse response = httpclient.execute(httpPost);
+            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                return EntityUtils.toString(response.getEntity());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     public static final String loadPutResponse(String url, String xmlData) {
         HttpClient httpclient = new DefaultHttpClient();
         HttpPut httpPut = new HttpPut(url);
@@ -100,11 +128,12 @@ public final class U {
             HttpResponse response = httpclient.execute(httpPut);
             if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                 HttpEntity entity = response.getEntity();
-                if (entity != null) {
-                    InputStream instream = entity.getContent();
-                    result = U.convertStreamToString(instream);
-                    instream.close();
-                }
+                result = EntityUtils.toString(entity);
+                // if (entity != null) {
+                // InputStream instream = entity.getContent();
+                // result = U.convertStreamToString(instream);
+                // instream.close();
+                // }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -116,23 +145,17 @@ public final class U {
     public static final String loadGetResponse(String url) {
         HttpClient httpclient = new DefaultHttpClient();
         HttpGet httpget = new HttpGet(url);
-        HttpResponse response;
-        String result = null;
+
         try {
-            response = httpclient.execute(httpget);
+            HttpResponse response = httpclient.execute(httpget);
             if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-                HttpEntity entity = response.getEntity();
-                if (entity != null) {
-                    InputStream instream = entity.getContent();
-                    result = U.convertStreamToString(instream);
-                    instream.close();
-                }
+                return EntityUtils.toString(response.getEntity());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return result;
+        return null;
     }
 
     public static final List<Map<String, Object>> toMapList(Cursor cursor) {
@@ -170,7 +193,7 @@ public final class U {
         return false;
     }
 
-    public static final int showDlgFragment(Fragment host, DialogFragment dlg, String tag) {
+    public static final int showDlgFragment(Activity host, DialogFragment dlg, String tag) {
         FragmentTransaction ft = host.getFragmentManager().beginTransaction();
         Fragment prev = host.getFragmentManager().findFragmentByTag(tag);
         if (prev != null) {
