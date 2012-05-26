@@ -79,6 +79,11 @@ namespace LocalServerWeb.Codes
             if (!IsUserLogin(session) || ((TaiKhoan) session["taiKhoan"]).NhomTaiKhoan.TenNhom!="Admin") return false;
             return true;
         }
+        public static bool IsManagerLogin(HttpSessionStateBase session)
+        {
+            if (!IsUserLogin(session) || ((TaiKhoan)session["taiKhoan"]).NhomTaiKhoan.TenNhom != "Manager") return false;
+            return true;
+        }
         public static TaiKhoan GetTaiKhoan(HttpSessionStateBase session)
         {
             return session["taiKhoan"] as TaiKhoan;

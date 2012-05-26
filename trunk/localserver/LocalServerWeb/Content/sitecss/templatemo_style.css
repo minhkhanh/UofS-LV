@@ -12,7 +12,7 @@ body {
     background: #67d2f4  url(../../Images/siteimages/templatemo_body_top.png) top repeat-x;
 }
 
-a:link, a:visited { color: #0683ab; text-decoration: none; font-weight: normal; } 
+a:link, a:visited { text-decoration: none; font-weight: normal; } 
 a:active, a:hover { color: #CC0066; text-decoration: underline; }
 
 .button_01 a {
