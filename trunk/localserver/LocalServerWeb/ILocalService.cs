@@ -356,6 +356,10 @@ namespace LocalServerWeb
         [OperationContract]
         List<DanhMuc> LayDanhSachDanhMucJson(string junk);
 
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachBan?junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        List<Ban> LayDanhSachBanJson(string junk);
+
         /*END OF JSON SERVICE AREA*/
     }
 }
