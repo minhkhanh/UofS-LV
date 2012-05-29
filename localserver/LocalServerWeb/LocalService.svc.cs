@@ -941,5 +941,14 @@ namespace LocalServerWeb
             return listMonAn;
         }
 
+        /*JSON SERVICE AREA*/
+
+        // Danh Muc
+        public List<DanhMuc> LayDanhSachDanhMucJson(string junk)
+        {
+            return LayDanhSachDanhMuc(junk);
+        }
+
+        /*END OF JSON SERVICE AREA*/
     }
 }
