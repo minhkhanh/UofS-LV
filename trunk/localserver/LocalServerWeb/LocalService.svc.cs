@@ -943,15 +943,114 @@ namespace LocalServerWeb
 
         /*JSON SERVICE AREA*/
 
-        // Danh Muc
+        public List<Ban> LayDanhSachBanJson(string junk)
+        {
+            return LayDanhSachBan(junk);
+        }
+
+        public List<KhuVuc> LayDanhSachKhuVucJson(string junk)
+        {
+            return LayDanhKhuVuc(junk);
+        }
+
         public List<DanhMuc> LayDanhSachDanhMucJson(string junk)
         {
             return LayDanhSachDanhMuc(junk);
         }
 
-        public List<Ban> LayDanhSachBanJson(string junk)
+        public List<ChiTietDanhMucDaNgonNgu> LayDanhSachChiTietDanhMucDaNgonNguJson(string junk)
         {
-            return LayDanhSachBan(junk);
+            return LayDanhSachChiTietDanhMucDaNgonNgu(junk);
+        }
+
+        public List<DonViTinh> LayDanhSachDonViTinhJson(string junk)
+        {
+            return LayDanhSachDonViTinh(junk);
+        }
+
+        public List<ChiTietDonViTinhDaNgonNgu> LayDanhSachChiTietDonViTinhDaNgonNguJson(string junk)
+        {
+            return LayDanhSachChiTietDonViTinhDaNgonNgu(junk);
+        }
+
+        public List<MonAn> LayDanhSachMonAnJson(string junk)
+        {
+            return LayDanhSachMonAn(junk);
+        }
+
+        public List<ChiTietMonAnDaNgonNgu> LayDanhSachChiTietMonAnDaNgonNguJson(string junk)
+        {
+            return LayDanhSachChiTietMonAnDaNgonNgu(junk);
+        }
+
+        public List<ChiTietMonAnDonViTinh> LayDanhSachChiTietMonAnDonViTinhJson(string junk)
+        {
+            return LayDanhSachChiTietMonAnDonViTinh(junk);
+        }
+                
+        public List<KhuVuc> LayDanhKhuVucJson(string junk)
+        {
+            return LayDanhKhuVuc(junk);
+        }
+
+        public List<ChiTietMonLienQuan> LayDanhSachChiTietMonLienQuanJson(string junk)
+        {
+            return LayDanhSachChiTietMonLienQuan(junk);
+        }
+
+        public List<KhuyenMai> LayDanhSachKhuyenMaiJson(string junk)
+        {
+            return LayDanhSachKhuyenMai(junk);
+        }
+
+        public List<KhuyenMaiKhuVuc> LayDanhSachKhuyenMaiKhuVucJson(string junk)
+        {
+            return LayDanhSachKhuyenMaiKhuVuc(junk);
+        }
+
+        public List<KhuyenMaiDanhMuc> LayDanhSachKhuyenMaiDanhMucJson(string junk)
+        {
+            return LayDanhSachKhuyenMaiDanhMuc(junk);
+        }
+
+        public List<KhuyenMaiMon> LayDanhSachKhuyenMaiMonJson(string junk)
+        {
+            return LayDanhSachKhuyenMaiMon(junk);
+        }
+
+        public List<KhuyenMaiHoaDon> LayDanhSachKhuyenMaiHoaDonJson(string junk)
+        {
+            return LayDanhSachKhuyenMaiHoaDon(junk);
+        }
+
+        public List<NgonNgu> LayDanhSachNgonNguJson(string junk)
+        {
+            return LayDanhSachNgonNgu(junk);
+        }
+
+        public List<NhomTaiKhoan> LayDanhSachNhomTaiKhoanJson(string junk)
+        {
+            return LayDanhSachNhomTaiKhoan(junk);
+        }
+
+        public List<TaiKhoan> LayDanhSachTaiKhoanJson(string junk)
+        {
+            return LayDanhSachTaiKhoan(junk);
+        }
+
+        public List<TiGia> LayDanhSachTiGiaJson(string junk)
+        {
+            return LayDanhSachTiGia(junk);
+        }
+
+        public List<PhuThu> LayDanhSachPhuThuJson(string junk)
+        {
+            return LayDanhSachPhuThu(junk);
+        }
+
+        public List<PhuThuKhuVuc> LayDanhSachPhuThuKhuVucJson(string junk)
+        {
+            return LayDanhSachPhuThuKhuVuc(junk);
         }
 
         /*END OF JSON SERVICE AREA*/
