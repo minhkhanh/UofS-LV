@@ -949,6 +949,11 @@ namespace LocalServerWeb
             return LayDanhSachDanhMuc(junk);
         }
 
+        public List<Ban> LayDanhSachBanJson(string junk)
+        {
+            return LayDanhSachBan(junk);
+        }
+
         /*END OF JSON SERVICE AREA*/
     }
 }
