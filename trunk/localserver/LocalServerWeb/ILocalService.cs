@@ -349,6 +349,13 @@ namespace LocalServerWeb
         [OperationContract]
         string TestPUT();
 
-        
+        /*JSON SERVICE AREA*/
+
+        // Danh Muc
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachDanhMucJson?junk={junk}", RequestFormat=WebMessageFormat.Json, ResponseFormat=WebMessageFormat.Json)]
+        [OperationContract]
+        List<DanhMuc> LayDanhSachDanhMucJson(string junk);
+
+        /*END OF JSON SERVICE AREA*/
     }
 }
