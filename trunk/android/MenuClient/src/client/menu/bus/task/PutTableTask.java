@@ -1,4 +1,4 @@
-package client.menu.bus;
+package client.menu.bus.task;
 
 import client.menu.db.dto.BanDTO;
 import android.os.AsyncTask;

@@ -1,4 +1,4 @@
-package client.menu.bus;
+package client.menu.bus.task;
 
 import java.util.ArrayList;
 import java.util.List;

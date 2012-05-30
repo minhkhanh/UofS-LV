@@ -15,7 +15,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import client.menu.R;
 import client.menu.app.MyAppSettings;
-import client.menu.bus.LoadDishUnitsAsyncTask;
+import client.menu.bus.task.LoadDishUnitsAsyncTask;
 import client.menu.dao.MonAnDAO;
 import client.menu.db.dto.DonViTinhDaNgonNguDTO;
 import client.menu.db.dto.DonViTinhMonAnDTO;

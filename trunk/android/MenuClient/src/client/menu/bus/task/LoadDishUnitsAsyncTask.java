@@ -1,4 +1,4 @@
-package client.menu.bus;
+package client.menu.bus.task;
 
 import android.app.Activity;
 import android.database.Cursor;
@@ -29,7 +29,7 @@ public class LoadDishUnitsAsyncTask extends AsyncTask<Void, Integer, SimpleCurso
         mMaMonAn = maMonAn;
         mMaDonViTinhChon = maDonViTinh;
     }
-
+    
     @Override
     protected void onPostExecute(SimpleCursorAdapter result) {
         super.onPostExecute(result);
