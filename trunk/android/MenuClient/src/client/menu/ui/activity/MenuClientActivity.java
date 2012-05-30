@@ -13,7 +13,7 @@ import android.widget.Spinner;
 import client.menu.R;
 import client.menu.app.MyAppLocale;
 import client.menu.app.MyApplication;
-import client.menu.db.dao.NgonNguDAO;
+import client.menu.dao.NgonNguDAO;
 import client.menu.db.dto.NgonNguDTO;
 import client.menu.util.U;
 

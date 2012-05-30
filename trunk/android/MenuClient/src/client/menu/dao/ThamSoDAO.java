@@ -1,4 +1,4 @@
-package client.menu.db.dao;
+package client.menu.dao;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

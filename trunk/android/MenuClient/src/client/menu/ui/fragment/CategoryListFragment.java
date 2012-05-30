@@ -19,7 +19,7 @@ import client.menu.R;
 import client.menu.app.MyAppLocale;
 import client.menu.app.MyApplication;
 import client.menu.bus.loader.CustomAsyncTaskLoader;
-import client.menu.db.dao.DanhMucDAO;
+import client.menu.dao.DanhMucDAO;
 import client.menu.db.dto.DanhMucDTO;
 import client.menu.db.dto.DanhMucDaNgonNguDTO;
 import client.menu.db.dto.NgonNguDTO;

@@ -24,7 +24,7 @@ import android.widget.Toast;
 import client.menu.R;
 import client.menu.bus.SessionManager;
 import client.menu.bus.loader.CustomAsyncTaskLoader;
-import client.menu.db.dao.BanDAO;
+import client.menu.dao.BanDAO;
 import client.menu.db.dto.BanDTO;
 import client.menu.ui.adapter.TableListAdapter;
 import client.menu.util.U;

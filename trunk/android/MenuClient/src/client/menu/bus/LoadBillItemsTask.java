@@ -7,7 +7,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.os.AsyncTask;
 import client.menu.app.MyAppLocale;
-import client.menu.db.dao.DonViTinhDAO;
+import client.menu.dao.DonViTinhDAO;
 import client.menu.db.dto.ChiTietOrderDTO;
 import client.menu.db.dto.NgonNguDTO;
 

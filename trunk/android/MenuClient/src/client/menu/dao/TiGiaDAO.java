@@ -1,34 +1,34 @@
-package client.menu.db.dao;
+package client.menu.dao;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
-import client.menu.db.dto.MonAnDaNgonNguDTO;
+import client.menu.db.dto.TiGiaDTO;
 
 import client.menu.db.util.MyDatabaseHelper;
 import client.menu.util.U;
 
-public class MonAnDaNgonNguDAO extends AbstractDAO {
+public class TiGiaDAO extends AbstractDAO {
 
     private static final String GET_ALL_JSON_URL = LOCAL_SERVER_URL
-            + "layDanhSachMonAnDaNgonNguJson";
+            + "layDanhSachTiGiaJson";
     
-    private static MonAnDaNgonNguDAO mInstance;
+    private static TiGiaDAO mInstance;
 
     public static final void createInstance(MyDatabaseHelper dbHelper) {
-        mInstance = new MonAnDaNgonNguDAO(dbHelper);
+        mInstance = new TiGiaDAO(dbHelper);
     }
 
-    public static final MonAnDaNgonNguDAO getInstance() {
+    public static final TiGiaDAO getInstance() {
         if (mInstance == null) {
             throw new NullPointerException("Singleton instance not created yet.");
         }
         return mInstance;
     }
 
-    private MonAnDaNgonNguDAO(MyDatabaseHelper dbHelper) {
+    private TiGiaDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
     }
 
@@ -41,11 +41,11 @@ public class MonAnDaNgonNguDAO extends AbstractDAO {
             JSONArray jsonArray = new JSONArray(jsonData);
 
             db.beginTransaction();
-            db.delete(MonAnDaNgonNguDTO.TABLE_NAME, "1", null);
+            db.delete(TiGiaDTO.TABLE_NAME, "1", null);
             for (int i = 0; i < jsonArray.length(); ++i) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
-                ContentValues values = MonAnDaNgonNguDTO.toContentValues(jsonObj);
-                db.insert(MonAnDaNgonNguDTO.TABLE_NAME, null, values);
+                ContentValues values = TiGiaDTO.toContentValues(jsonObj);
+                db.insert(TiGiaDTO.TABLE_NAME, null, values);
             }
 
             db.setTransactionSuccessful();
@@ -61,6 +61,6 @@ public class MonAnDaNgonNguDAO extends AbstractDAO {
 
     @Override
     public String getSyncTaskName() {
-        return "Danh sách món ăn";
+        return "Tỉ giá";
     }
 }

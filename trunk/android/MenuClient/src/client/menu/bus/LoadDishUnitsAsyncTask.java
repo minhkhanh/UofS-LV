@@ -7,7 +7,7 @@ import android.widget.AdapterView;
 import android.widget.SimpleCursorAdapter;
 import client.menu.R;
 import client.menu.app.MyAppLocale;
-import client.menu.db.dao.DonViTinhDAO;
+import client.menu.dao.DonViTinhDAO;
 import client.menu.db.dto.DonViTinhDaNgonNguDTO;
 import client.menu.db.dto.DonViTinhMonAnDTO;
 import client.menu.db.dto.NgonNguDTO;
