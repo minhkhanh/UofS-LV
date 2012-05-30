@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -23,46 +22,31 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
-import org.xmlpull.v1.XmlSerializer;
-
-import client.menu.R;
-import client.menu.bus.SessionManager;
-import client.menu.bus.SessionManager.ServiceOrder;
-import client.menu.db.dto.NgonNguDTO;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.os.AsyncTask;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 public final class U {
-
-    // public static final ContentValues toContentValues(JSONObject jsonObj) {
-    // ContentValues values = new ContentValues();
-    // Iterator iter = jsonObj.keys();
-    // while (iter.hasNext()) {
-    // String name = iter.next().toString();
-    // values.put(name, jsonObj.get(name));
-    // }
-    //
-    // return values;
-    // }
+    
+    public static final String formatDateTime(String format, long currentMilis) {
+        return DateFormat.format(format, currentMilis).toString();
+    }
 
     public static final Boolean deserializeXml(String xmlData) {
         Boolean obj = null;
@@ -218,7 +202,7 @@ public final class U {
 
     public static final String convertStreamToString(InputStream is) {
         try {
-            return new java.util.Scanner(is).useDelimiter("\\A").next();
+            return new java.util.Scanner(is, "utf-8").useDelimiter("\\A").next();
         } catch (java.util.NoSuchElementException e) {
             return "";
         }
@@ -226,6 +210,10 @@ public final class U {
 
     public static final void logOwnTag(String msg) {
         Log.d(C.TAG, msg);
+    }
+    
+    public static final void toastText(Context context, int resId) {
+        Toast.makeText(context, resId, Toast.LENGTH_SHORT).show();
     }
 
     public static final void toastText(Context context, String message) {

@@ -52,5 +52,16 @@
     <string name="text_splited_bill_part">Các khẩu phần đã chia:</string>
     <string name="title_dialog_bill_split">Chia hóa đơn</string>    <string name="message_confirm_send_bill">Bạn có chắc chắn muốn thanh toán bây giờ không?</string>
     <string name="text_welcome_people">Kính chào quý khách!</string>
+    <string name="text_auto_sync">Tự động đồng bộ mỗi khi khởi động ứng dụng</string>
+    <string name="text_sync_now">Đồng bộ ngay bây giờ</string>
+    <string name="message_sync_succeed">Đồng bộ dữ liệu thành công</string>
+    <string name="message_sync_failed">Đồng bộ dữ liệu không thành công</string>
+    <string name="key_pref_sync_now">key_pref_sync_now</string>
+    <string name="key_pref_auto_sync">key_pref_auto_sync</string>
+    <string name="caption_syncing">Đồng bộ dữ liệu</string>
+    <string name="text_unsync">Chưa đồng bộ dữ liệu</string>
+    <string name="text_at">vào lúc</string>
+    <string name="text_loading">Đang tải</string>
+    <string name="message_confirm_sync_db">Chuẩn bị đồng bộ dữ liệu với Server</string>
 
 </resources>
