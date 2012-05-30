@@ -2,41 +2,88 @@ package client.menu.db.dto;
 
 import java.sql.Date;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.ContentValues;
 import android.provider.BaseColumns;
 
 public class TaiKhoanDTO {
-    public static final String TABLE_NAME = "NgonNgu";
+    public static final String TABLE_NAME = "TaiKhoan";
 
     public static final String CL_ID = BaseColumns._ID;
-    public static final String CL_MA_NGON_NGU = "MaNgonNgu";
-    public static final String CL_TEN_NGON_NGU = "TenNgonNgu";
-    public static final String CL_KI_HIEU = "KiHieu";
-    
-    private int mId;
-    private int mMaTaiKhoan;
+    public static final String CL_MA_TAI_KHOAN = "MaTaiKhoan";
+    public static final String CL_TEN_TAI_KHOAN = "TenTaiKhoan";
+    public static final String CL_MAT_KHAU = "MatKhau";
+    public static final String CL_HO_TEN = "HoTen";
+    public static final String CL_NGAY_SINH = "NgaySinh";
+    public static final String CL_GIOI_TINH = "GioiTinh";
+    public static final String CL_CMND = "CMND";
+    public static final String CL_AVATAR = "Avatar";
+    public static final String CL_ACTIVE = "Active";
+    public static final String CL_MA_NHOM_TAI_KHOAN = "MaNhomTaiKhoan";
+
+    private Integer mId;
+    private Integer mMaTaiKhoan;
     private String mTenTaiKhoan;
     private String mMatKhau;
     private String mHoTen;
     private Date mNgaySinh;
-    private int mGioiTinh;
+    private Integer mGioiTinh;
     private String mCMND;
     private String mAvatar;
-    private boolean mActive;
-    private int mMaNhomTaiKhoan;
+    private Boolean mActive;
+    private Integer mMaNhomTaiKhoan;
 
-    public int getId() {
+    public static ContentValues toContentValues(JSONObject jsonObj) throws JSONException {
+        ContentValues values = new ContentValues();
+        if (!jsonObj.isNull(CL_MA_TAI_KHOAN)) {
+            values.put(CL_MA_TAI_KHOAN, jsonObj.getInt(CL_MA_TAI_KHOAN));
+        }
+        if (!jsonObj.isNull(CL_TEN_TAI_KHOAN)) {
+            values.put(CL_TEN_TAI_KHOAN, jsonObj.getString(CL_TEN_TAI_KHOAN));
+        }
+        if (!jsonObj.isNull(CL_MAT_KHAU)) {
+            values.put(CL_MAT_KHAU, jsonObj.getString(CL_MAT_KHAU));
+        }
+        if (!jsonObj.isNull(CL_HO_TEN)) {
+            values.put(CL_HO_TEN, jsonObj.getString(CL_HO_TEN));
+        }
+        if (!jsonObj.isNull(CL_NGAY_SINH)) {
+//            values.put(CL_NGAY_SINH, jsonObj.getString(CL_NGAY_SINH));
+        }
+        if (!jsonObj.isNull(CL_GIOI_TINH)) {
+            values.put(CL_GIOI_TINH, jsonObj.getInt(CL_GIOI_TINH));
+        }
+        if (!jsonObj.isNull(CL_CMND)) {
+            values.put(CL_CMND, jsonObj.getString(CL_CMND));
+        }
+        if (!jsonObj.isNull(CL_AVATAR)) {
+            values.put(CL_AVATAR, jsonObj.getString(CL_AVATAR));
+        }
+        if (!jsonObj.isNull(CL_ACTIVE)) {
+            values.put(CL_ACTIVE, jsonObj.getBoolean(CL_ACTIVE));
+        }
+        if (!jsonObj.isNull(CL_MA_NHOM_TAI_KHOAN)) {
+            values.put(CL_MA_NHOM_TAI_KHOAN, jsonObj.getInt(CL_MA_NHOM_TAI_KHOAN));
+        }
+
+        return values;
+    }
+
+    public Integer getId() {
         return mId;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         mId = id;
     }
 
-    public int getMaTaiKhoan() {
+    public Integer getMaTaiKhoan() {
         return mMaTaiKhoan;
     }
 
-    public void setMaTaiKhoan(int maTaiKhoan) {
+    public void setMaTaiKhoan(Integer maTaiKhoan) {
         mMaTaiKhoan = maTaiKhoan;
     }
 
@@ -72,11 +119,11 @@ public class TaiKhoanDTO {
         mNgaySinh = ngaySinh;
     }
 
-    public int getGioiTinh() {
+    public Integer getGioiTinh() {
         return mGioiTinh;
     }
 
-    public void setGioiTinh(int gioiTinh) {
+    public void setGioiTinh(Integer gioiTinh) {
         mGioiTinh = gioiTinh;
     }
 
@@ -96,19 +143,19 @@ public class TaiKhoanDTO {
         mAvatar = avatar;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return mActive;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         mActive = active;
     }
 
-    public int getMaNhomTaiKhoan() {
+    public Integer getMaNhomTaiKhoan() {
         return mMaNhomTaiKhoan;
     }
 
-    public void setMaNhomTaiKhoan(int maNhomTaiKhoan) {
+    public void setMaNhomTaiKhoan(Integer maNhomTaiKhoan) {
         mMaNhomTaiKhoan = maNhomTaiKhoan;
     }
 

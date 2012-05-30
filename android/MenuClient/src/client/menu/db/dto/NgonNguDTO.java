@@ -1,12 +1,10 @@
 package client.menu.db.dto;
 
-import java.io.IOException;
-import java.io.StringReader;
-
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.provider.BaseColumns;
 
@@ -23,6 +21,20 @@ public class NgonNguDTO {
     private Integer mMaNgonNgu;
     private String mTenNgonNgu;
     private String mKiHieu;
+
+    public static ContentValues toContentValues(JSONObject jsonObj) throws JSONException {
+        ContentValues values = new ContentValues();
+        if (!jsonObj.isNull(CL_MA_NGON_NGU)) {
+            values.put(CL_MA_NGON_NGU, jsonObj.getInt(CL_MA_NGON_NGU));
+        }
+        if (!jsonObj.isNull(CL_TEN_NGON_NGU)) {
+            values.put(CL_TEN_NGON_NGU, jsonObj.getString(CL_TEN_NGON_NGU));
+        }
+        if (!jsonObj.isNull(CL_KI_HIEU)) {
+            values.put(CL_KI_HIEU, jsonObj.getString(CL_KI_HIEU));
+        }
+        return values;
+    }
 
     public static NgonNguDTO valueOf(XmlPullParser parser) {
         NgonNguDTO obj = null;

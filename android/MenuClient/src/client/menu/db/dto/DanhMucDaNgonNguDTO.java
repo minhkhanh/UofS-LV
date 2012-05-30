@@ -1,5 +1,9 @@
 package client.menu.db.dto;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.provider.BaseColumns;
 
@@ -17,6 +21,25 @@ public class DanhMucDaNgonNguDTO {
     private Integer mMaNgonNgu;
     private String mTenDanhMuc;
     private String mMoTaDanhMuc;
+
+    public static final ContentValues toContentValues(JSONObject jsonObj)
+            throws JSONException {
+        ContentValues values = new ContentValues();
+        if (!jsonObj.isNull(CL_MA_DANH_MUC)) {
+            values.put(CL_MA_DANH_MUC, jsonObj.getInt(CL_MA_DANH_MUC));
+        }
+        if (!jsonObj.isNull(CL_MA_NGON_NGU)) {
+            values.put(CL_MA_NGON_NGU, jsonObj.getInt(CL_MA_NGON_NGU));
+        }
+        if (!jsonObj.isNull(CL_TEN_DANH_MUC)) {
+            values.put(CL_TEN_DANH_MUC, jsonObj.getString(CL_TEN_DANH_MUC));
+        }
+        if (!jsonObj.isNull(CL_MO_TA_DANH_MUC)) {
+            values.put(CL_MO_TA_DANH_MUC, jsonObj.getString(CL_MO_TA_DANH_MUC));
+        }
+
+        return values;
+    }
 
     public static final DanhMucDaNgonNguDTO extractFrom(Cursor cursor) {
         DanhMucDaNgonNguDTO obj = new DanhMucDaNgonNguDTO();

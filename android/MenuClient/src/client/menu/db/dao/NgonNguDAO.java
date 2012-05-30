@@ -1,31 +1,29 @@
 package client.menu.db.dao;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import client.menu.app.MyAppRepository;
 import client.menu.db.dto.NgonNguDTO;
+
 import client.menu.db.util.MyDatabaseHelper;
 import client.menu.util.U;
 
 public final class NgonNguDAO extends AbstractDAO {
-    public static final String GET_ALL_URL = MyAppRepository.LOCAL_SERVER_URL
+    public static final String GET_ALL_URL = LOCAL_SERVER_URL
             + "layDanhSachNgonNgu";
+
+    private static final String GET_ALL_JSON_URL = LOCAL_SERVER_URL
+            + "layDanhSachNgonNguJson";
 
     private Cursor mCursorAll;
 
@@ -46,6 +44,33 @@ public final class NgonNguDAO extends AbstractDAO {
         return mInstance;
     }
 
+    public boolean syncAll() {
+        SQLiteDatabase db = open();
+        boolean result = true;
+
+        try {
+            String jsonData = U.loadGetResponse(GET_ALL_JSON_URL);
+            JSONArray jsonArray = new JSONArray(jsonData);
+
+            db.beginTransaction();
+            db.delete(NgonNguDTO.TABLE_NAME, "1", null);
+            for (int i = 0; i < jsonArray.length(); ++i) {
+                JSONObject jsonObj = jsonArray.getJSONObject(i);
+                ContentValues values = NgonNguDTO.toContentValues(jsonObj);
+                db.insert(NgonNguDTO.TABLE_NAME, null, values);
+            }
+
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = false;
+        } finally {
+            db.endTransaction();
+        }
+
+        return result;
+    }
+
     public NgonNguDTO objNgonNguMacDinh() {
         Cursor cursor = cursorAll();
         cursor.moveToFirst();
@@ -55,9 +80,9 @@ public final class NgonNguDAO extends AbstractDAO {
 
     public List<NgonNguDTO> getAll() {
         List<NgonNguDTO> list = new ArrayList<NgonNguDTO>();
-        String xmlData = U.loadGetResponse(GET_ALL_URL);
 
         try {
+            String xmlData = U.loadGetResponse(GET_ALL_URL);
             XmlPullParserFactory parserFactory = XmlPullParserFactory.newInstance();
             XmlPullParser parser = parserFactory.newPullParser();
             parser.setInput(new StringReader(xmlData));
@@ -67,7 +92,7 @@ public final class NgonNguDAO extends AbstractDAO {
                 if (obj != null) {
                     list.add(obj);
                 }
-                
+
                 type = parser.next();
             }
         } catch (Exception e) {
@@ -92,5 +117,10 @@ public final class NgonNguDAO extends AbstractDAO {
         }
 
         return mCursorAll;
+    }
+
+    @Override
+    public String getSyncTaskName() {
+        return "Danh sách ngôn ngữ";
     }
 }

@@ -20,7 +20,7 @@ public class SplashScreenActivity extends Activity {
         findViewById(android.R.id.content).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SplashScreenActivity.this, TableListActivity.class);
+                Intent intent = new Intent(SplashScreenActivity.this, BeginningActivity.class);
                 startActivity(intent);
             }
         });

@@ -1,36 +1,27 @@
 package client.menu.db.dao;
 
-import java.io.InputStream;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.StatusLine;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.protocol.HTTP;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
-import org.xmlpull.v1.XmlSerializer;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import client.menu.app.MyAppRepository;
-import client.menu.db.dto.BanDTO;
 import client.menu.db.dto.BanDTO;
 import client.menu.db.util.MyDatabaseHelper;
 import client.menu.util.U;
 
 public class BanDAO extends AbstractDAO {
-    private static final String GET_BY_KHU_VUC_URL = MyAppRepository.LOCAL_SERVER_URL
+    private static final String GET_ALL_JSON_URL = LOCAL_SERVER_URL
+            + "layDanhSachBanJson";
+    private static final String GET_BY_KHU_VUC_URL = LOCAL_SERVER_URL
             + "layDanhSachBanTheoKhuVuc?maKhuVuc=";
-    private static final String PUT_UPDATE_URL = MyAppRepository.LOCAL_SERVER_URL
+    private static final String PUT_UPDATE_URL = LOCAL_SERVER_URL
             + "capNhatBan";
 
     private static BanDAO mInstance;
@@ -68,34 +59,38 @@ public class BanDAO extends AbstractDAO {
         return U.deserializeXml(respString);
     }
 
-//    public List<BanDTO> listFromXml(String xmlData) {
-//        List<BanDTO> list = new ArrayList<BanDTO>();
-//
-//        try {
-//            XmlPullParserFactory parserFactory = XmlPullParserFactory.newInstance();
-//            XmlPullParser parser = parserFactory.newPullParser();
-//            parser.setInput(new StringReader(xmlData));
-//            int type = parser.getEventType();
-//            while (type != XmlPullParser.END_DOCUMENT) {
-//                BanDTO obj = BanDTO.fromXml(parser);
-//                if (obj != null) {
-//                    list.add(obj);
-//                }
-//
-//                type = parser.next();
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        return list;
-//    }
+    public boolean syncAll() {
+        SQLiteDatabase db = open();
+        boolean result = true;
+
+        try {
+            String jsonData = U.loadGetResponse(GET_ALL_JSON_URL);
+            JSONArray jsonArray = new JSONArray(jsonData);
+
+            db.beginTransaction();
+            db.delete(BanDTO.TABLE_NAME, "1", null);
+            for (int i = 0; i < jsonArray.length(); ++i) {
+                JSONObject jsonObj = jsonArray.getJSONObject(i);
+                ContentValues values = BanDTO.toContentValues(jsonObj);
+                db.insert(BanDTO.TABLE_NAME, null, values);
+            }
+
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = false;
+        } finally {
+            db.endTransaction();
+        }
+
+        return result;
+    }
 
     public List<BanDTO> getByKhuVuc(Integer maKhuVuc) {
         List<BanDTO> list = new ArrayList<BanDTO>();
-        String xmlData = U.loadGetResponse(GET_BY_KHU_VUC_URL + maKhuVuc.toString());
 
         try {
+            String xmlData = U.loadGetResponse(GET_BY_KHU_VUC_URL + maKhuVuc.toString());
             XmlPullParserFactory parserFactory = XmlPullParserFactory.newInstance();
             XmlPullParser parser = parserFactory.newPullParser();
             parser.setInput(new StringReader(xmlData));
@@ -136,5 +131,10 @@ public class BanDAO extends AbstractDAO {
         }
 
         return list;
+    }
+
+    @Override
+    public String getSyncTaskName() {
+        return "Danh sách bàn";
     }
 }

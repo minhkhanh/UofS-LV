@@ -3,12 +3,9 @@ package client.menu.db.dao;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import client.menu.db.dto.ThamSoDTO;
-import client.menu.db.dto.ThamSoDTO;
 import client.menu.db.util.MyDatabaseHelper;
 
 public class ThamSoDAO extends AbstractDAO {
-    
-//    public static final String PARAM_MA_NGON_NGU_MAC_DINH = "'MaNgonNguMacDinh'";
 
     public ThamSoDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
@@ -35,5 +32,15 @@ public class ThamSoDAO extends AbstractDAO {
         }
 
         return obj;
+    }
+
+    @Override
+    public boolean syncAll() {
+        return false;
+    }
+
+    @Override
+    public String getSyncTaskName() {
+        return null;
     }
 }

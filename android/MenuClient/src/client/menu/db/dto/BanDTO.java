@@ -1,7 +1,15 @@
 package client.menu.db.dto;
 
-import org.xmlpull.v1.XmlPullParser;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.provider.BaseColumns;
 import client.menu.util.U;
@@ -30,6 +38,49 @@ public class BanDTO
     private Boolean mActive;
     private Boolean mTinhTrang;
 
+    public static final ContentValues toContentValues(JSONObject jsonObj)
+            throws JSONException {
+        ContentValues values = new ContentValues();
+        if (!jsonObj.isNull(CL_TINH_TRANG)) {
+            values.put(CL_TINH_TRANG, jsonObj.getBoolean(CL_TINH_TRANG));
+        }
+        if (!jsonObj.isNull(CL_TEN_BAN)) {
+            values.put(CL_TEN_BAN, jsonObj.getString(CL_TEN_BAN));
+        }
+        if (!jsonObj.isNull(CL_GHI_CHU)) {
+            values.put(CL_GHI_CHU, jsonObj.getString(CL_GHI_CHU));
+        }
+        if (!jsonObj.isNull(CL_ACTIVE)) {
+            values.put(CL_ACTIVE, jsonObj.getBoolean(CL_ACTIVE));
+        }
+        if (!jsonObj.isNull(CL_MA_BAN)) {
+            values.put(CL_MA_BAN, jsonObj.getInt(CL_MA_BAN));
+        }
+        if (!jsonObj.isNull(CL_MA_BAN_CHINH)) {
+            values.put(CL_MA_BAN_CHINH, jsonObj.getInt(CL_MA_BAN_CHINH));
+        }
+        if (!jsonObj.isNull(CL_MA_KHU_VUC)) {
+            values.put(CL_MA_KHU_VUC, jsonObj.getInt(CL_MA_KHU_VUC));
+        }
+
+        return values;
+    }
+
+    public ContentValues toContentValues() {
+        ContentValues values = new ContentValues();
+
+        values.put(CL_ID, mId);
+        values.put(CL_MA_BAN, mMaBan);
+        values.put(CL_MA_KHU_VUC, mMaKhuVuc);
+        values.put(CL_MA_BAN_CHINH, mMaBanChinh);
+        values.put(CL_TEN_BAN, mTenBan);
+        values.put(CL_GHI_CHU, mGhiChu);
+        values.put(CL_ACTIVE, mActive);
+        values.put(CL_TINH_TRANG, mTinhTrang);
+
+        return values;
+    }
+
     public String toXml() {
         XmlSerializerWrapper serializer = new XmlSerializerWrapper();
 
@@ -50,6 +101,29 @@ public class BanDTO
         }
 
         return serializer.toString();
+    }
+
+    public static final List<BanDTO> fromXmlArray(String xmlData) {
+        List<BanDTO> list = new ArrayList<BanDTO>();
+
+        try {
+            XmlPullParserFactory parserFactory = XmlPullParserFactory.newInstance();
+            XmlPullParser parser = parserFactory.newPullParser();
+            parser.setInput(new StringReader(xmlData));
+            int type = parser.getEventType();
+            while (type != XmlPullParser.END_DOCUMENT) {
+                BanDTO obj = BanDTO.fromXml(parser);
+                if (obj != null) {
+                    list.add(obj);
+                }
+
+                type = parser.next();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
     }
 
     public static final BanDTO fromXml(XmlPullParser parser) {

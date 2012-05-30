@@ -1,5 +1,8 @@
 package client.menu.db.dto;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.provider.BaseColumns;
@@ -25,6 +28,32 @@ public class MonAnDTO {
     private Integer mMaDonViTinhMacDinh;
     private Integer mMaDanhMuc;
     private Boolean mNgungBan;
+
+    public static ContentValues toContentValues(JSONObject jsonObj) throws JSONException {
+        ContentValues values = new ContentValues();
+        if (!jsonObj.isNull(CL_MA_MON_AN)) {
+            values.put(CL_MA_MON_AN, jsonObj.getInt(CL_MA_MON_AN));
+        }
+        if (!jsonObj.isNull(CL_HINH_ANH)) {
+            values.put(CL_HINH_ANH, jsonObj.getString(CL_HINH_ANH));
+        }
+        if (!jsonObj.isNull(CL_DIEM_DANH_GIA)) {
+            values.put(CL_DIEM_DANH_GIA, jsonObj.getDouble(CL_DIEM_DANH_GIA));
+        }
+        if (!jsonObj.isNull(CL_SO_LUOT_RATE)) {
+            values.put(CL_SO_LUOT_RATE, jsonObj.getInt(CL_SO_LUOT_RATE));
+        }
+        if (!jsonObj.isNull(CL_DEFAULT_UNIT_ID)) {
+            values.put(CL_DEFAULT_UNIT_ID, jsonObj.getInt(CL_DEFAULT_UNIT_ID));
+        }
+        if (!jsonObj.isNull(CL_MA_DANH_MUC)) {
+            values.put(CL_MA_DANH_MUC, jsonObj.getInt(CL_MA_DANH_MUC));
+        }
+        if (!jsonObj.isNull(CL_NGUNG_BAN)) {
+            values.put(CL_NGUNG_BAN, jsonObj.getBoolean(CL_NGUNG_BAN));
+        }
+        return values;
+    }
 
     public void to(ContentValues values) {
         values.put(CL_ID, mId);
@@ -137,5 +166,4 @@ public class MonAnDTO {
     public Boolean getNgungBan() {
         return mNgungBan;
     }
-
 }

@@ -6,17 +6,17 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 
-import client.menu.app.MyAppRepository;
 import client.menu.db.dto.ChiTietOrderDTO;
 import client.menu.db.dto.DonViTinhMonAnDTO;
 import client.menu.db.dto.OrderDTO;
+
 import client.menu.db.util.MyDatabaseHelper;
 import client.menu.util.U;
 
 public class OrderDAO extends AbstractDAO {
-    public static final String POST_NEW_ORDER = MyAppRepository.LOCAL_SERVER_URL
+    public static final String POST_NEW_ORDER = LOCAL_SERVER_URL
             + "themOrder";
-    public static final String POST_MANY_ORDER_ITEMS = MyAppRepository.LOCAL_SERVER_URL
+    public static final String POST_MANY_ORDER_ITEMS = LOCAL_SERVER_URL
             + "themNhieuChiTietOrder";
 
     private static OrderDAO mInstance;
@@ -80,5 +80,15 @@ public class OrderDAO extends AbstractDAO {
         String respString = U.loadPostResponse(POST_NEW_ORDER, xmlData);
 
         return OrderDTO.fromXml(respString);
+    }
+
+    @Override
+    public boolean syncAll() {
+        return false;
+    }
+
+    @Override
+    public String getSyncTaskName() {
+        return null;
     }
 }

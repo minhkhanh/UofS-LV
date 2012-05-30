@@ -1,5 +1,9 @@
 package client.menu.db.dto;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.provider.BaseColumns;
 
@@ -10,15 +14,30 @@ public class KhuVucDTO {
     public static final String CL_MA_KHU_VUC = "MaKhuVuc";
     public static final String CL_TEN_KHU_VUC = "TenKhuVuc";
     public static final String CL_MO_TA = "MoTa";
-    
-    int mId;
-    int mMaKhuVuc;
-    String mTenKhuVuc;
-    String mMoTa;
+
+    private Integer mId;
+    private Integer mMaKhuVuc;
+    private String mTenKhuVuc;
+    private String mMoTa;
+
+    public static ContentValues toContentValues(JSONObject jsonObj) throws JSONException {
+        ContentValues values = new ContentValues();
+        if (!jsonObj.isNull(CL_MA_KHU_VUC)) {
+            values.put(CL_MA_KHU_VUC, jsonObj.getInt(CL_MA_KHU_VUC));
+        }
+        if (!jsonObj.isNull(CL_TEN_KHU_VUC)) {
+            values.put(CL_TEN_KHU_VUC, jsonObj.getString(CL_TEN_KHU_VUC));
+        }
+        if (!jsonObj.isNull(CL_MO_TA)) {
+            values.put(CL_MO_TA, jsonObj.getString(CL_MO_TA));
+        }
+
+        return values;
+    }
 
     public static final KhuVucDTO extractFrom(Cursor cursor) {
         KhuVucDTO obj = new KhuVucDTO();
-        int i;
+        Integer i;
         if ((i = cursor.getColumnIndex(CL_ID)) != -1) {
             obj.mId = cursor.getInt(i);
         }
@@ -35,11 +54,11 @@ public class KhuVucDTO {
         return obj;
     }
 
-    public int getMaKhuVuc() {
+    public Integer getMaKhuVuc() {
         return mMaKhuVuc;
     }
 
-    public void setMaKhuVuc(int maKhuVuc) {
+    public void setMaKhuVuc(Integer maKhuVuc) {
         this.mMaKhuVuc = maKhuVuc;
     }
 
@@ -59,11 +78,11 @@ public class KhuVucDTO {
         this.mMoTa = moTa;
     }
 
-    public int getId() {
+    public Integer getId() {
         return mId;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         mId = id;
     }
 

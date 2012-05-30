@@ -3,6 +3,9 @@ package client.menu.db.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
@@ -10,10 +13,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import client.menu.db.dto.DonViTinhDaNgonNguDTO;
 import client.menu.db.dto.DonViTinhMonAnDTO;
+import client.menu.db.dto.DonViTinhDTO;
 import client.menu.db.dto.MonAnDaNgonNguDTO;
+
 import client.menu.db.util.MyDatabaseHelper;
+import client.menu.util.U;
 
 public class DonViTinhDAO extends AbstractDAO {
+    private static final String GET_ALL_JSON_URL = LOCAL_SERVER_URL
+            + "layDanhSachDonViTinhJson";
     private static DonViTinhDAO mInstance;
 
     public static final void createInstance(MyDatabaseHelper dbHelper) {
@@ -27,8 +35,35 @@ public class DonViTinhDAO extends AbstractDAO {
         return mInstance;
     }
 
-    public DonViTinhDAO(MyDatabaseHelper dbHelper) {
+    private DonViTinhDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
+    }
+
+    public boolean syncAll() {
+        SQLiteDatabase db = open();
+        boolean result = true;
+
+        try {
+            String jsonData = U.loadGetResponse(GET_ALL_JSON_URL);
+            JSONArray jsonArray = new JSONArray(jsonData);
+
+            db.beginTransaction();
+            db.delete(DonViTinhDTO.TABLE_NAME, "1", null);
+            for (int i = 0; i < jsonArray.length(); ++i) {
+                JSONObject jsonObj = jsonArray.getJSONObject(i);
+                ContentValues values = DonViTinhDTO.toContentValues(jsonObj);
+                db.insert(DonViTinhDTO.TABLE_NAME, null, values);
+            }
+
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = false;
+        } finally {
+            db.endTransaction();
+        }
+
+        return result;
     }
 
     public ContentValues contentByDonViTinhMonAn(Integer maMonAn, Integer maDonViTinh,
@@ -122,5 +157,10 @@ public class DonViTinhDAO extends AbstractDAO {
         }
 
         return list;
+    }
+
+    @Override
+    public String getSyncTaskName() {
+        return "Các đơn vị tính của món ăn";
     }
 }

@@ -3,17 +3,22 @@ package client.menu.db.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
-import android.util.Log;
 import client.menu.db.dto.MonAnDTO;
 import client.menu.db.dto.MonAnDaNgonNguDTO;
+
 import client.menu.db.util.MyDatabaseHelper;
 import client.menu.util.U;
 
 public final class MonAnDAO extends AbstractDAO {
+    private static final String GET_ALL_JSON_URL = LOCAL_SERVER_URL
+            + "layDanhSachMonAnJson";
     private static MonAnDAO mInstance;
 
     public static final void createInstance(MyDatabaseHelper dbHelper) {
@@ -27,8 +32,35 @@ public final class MonAnDAO extends AbstractDAO {
         return mInstance;
     }
 
-    public MonAnDAO(MyDatabaseHelper dbHelper) {
+    private MonAnDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
+    }
+
+    public boolean syncAll() {
+        SQLiteDatabase db = open();
+        boolean result = true;
+
+        try {
+            String jsonData = U.loadGetResponse(GET_ALL_JSON_URL);
+            JSONArray jsonArray = new JSONArray(jsonData);
+
+            db.beginTransaction();
+            db.delete(MonAnDTO.TABLE_NAME, "1", null);
+            for (int i = 0; i < jsonArray.length(); ++i) {
+                JSONObject jsonObj = jsonArray.getJSONObject(i);
+                ContentValues values = MonAnDTO.toContentValues(jsonObj);
+                db.insert(MonAnDTO.TABLE_NAME, null, values);
+            }
+
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = false;
+        } finally {
+            db.endTransaction();
+        }
+
+        return result;
     }
 
     public int updateByMaMonAn(Integer maMonAn, MonAnDTO monAn) {
@@ -140,5 +172,10 @@ public final class MonAnDAO extends AbstractDAO {
         }
 
         return list;
+    }
+
+    @Override
+    public String getSyncTaskName() {
+        return "Danh sách món ăn";
     }
 }

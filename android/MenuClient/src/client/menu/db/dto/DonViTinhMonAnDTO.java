@@ -1,5 +1,9 @@
 package client.menu.db.dto;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.provider.BaseColumns;
 
@@ -18,6 +22,21 @@ public class DonViTinhMonAnDTO {
     private Integer mMaMonAn;
     private Integer mMaDonViTinh;
     private Integer mDonGia;
+
+    public static ContentValues toContentValues(JSONObject jsonObj) throws JSONException {
+        ContentValues values = new ContentValues();
+        if (!jsonObj.isNull(CL_MA_DON_VI)) {
+            values.put(CL_MA_DON_VI, jsonObj.getInt(CL_MA_DON_VI));
+        }
+        if (!jsonObj.isNull(CL_MA_MON_AN)) {
+            values.put(CL_MA_MON_AN, jsonObj.getInt(CL_MA_MON_AN));
+        }
+        if (!jsonObj.isNull(CL_DON_GIA)) {
+            values.put(CL_DON_GIA, jsonObj.getInt(CL_DON_GIA));
+        }
+
+        return values;
+    }
 
     public static DonViTinhMonAnDTO extractFrom(Cursor cursor) {
         DonViTinhMonAnDTO obj = new DonViTinhMonAnDTO();

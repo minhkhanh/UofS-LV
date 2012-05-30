@@ -1,5 +1,9 @@
 package client.menu.db.dto;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.provider.BaseColumns;
 
@@ -20,6 +24,23 @@ public class MonAnDaNgonNguDTO {
     private Integer mMaNgonNgu;
     private String mTenMonAn;
     private String mMoTaMonAn;
+    
+    public static ContentValues toContentValues(JSONObject jsonObj) throws JSONException {
+        ContentValues values = new ContentValues();
+        if (!jsonObj.isNull(CL_MA_MON)) {
+            values.put(CL_MA_MON, jsonObj.getInt(CL_MA_MON));
+        }
+        if (!jsonObj.isNull(CL_MA_NGON_NGU)) {
+            values.put(CL_MA_NGON_NGU, jsonObj.getInt(CL_MA_NGON_NGU));
+        }
+        if (!jsonObj.isNull(CL_TEN_MON)) {
+            values.put(CL_TEN_MON, jsonObj.getString(CL_TEN_MON));
+        }
+        if (!jsonObj.isNull(CL_MO_TA_MON)) {
+            values.put(CL_MO_TA_MON, jsonObj.getString(CL_MO_TA_MON));
+        }
+        return values;
+    }
 
     public static MonAnDaNgonNguDTO extractFrom(Cursor cursor) {
         MonAnDaNgonNguDTO obj = new MonAnDaNgonNguDTO();
@@ -83,5 +104,4 @@ public class MonAnDaNgonNguDTO {
     public void setMoTaMonAn(String moTaMonAn) {
         this.mMoTaMonAn = moTaMonAn;
     }
-
 }
