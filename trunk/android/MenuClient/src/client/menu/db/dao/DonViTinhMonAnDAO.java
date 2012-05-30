@@ -5,29 +5,30 @@ import org.json.JSONObject;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
-import client.menu.db.dto.TaiKhoanDTO;
+import client.menu.db.dto.DonViTinhMonAnDTO;
+
 import client.menu.db.util.MyDatabaseHelper;
 import client.menu.util.U;
 
-public class TaiKhoanDAO extends AbstractDAO {
+public class DonViTinhMonAnDAO extends AbstractDAO {
 
     private static final String GET_ALL_JSON_URL = LOCAL_SERVER_URL
-            + "layDanhSachTaiKhoanJson";
+            + "layDanhSachDonViTinhMonAnJson";
     
-    private static TaiKhoanDAO mInstance;
+    private static DonViTinhMonAnDAO mInstance;
 
     public static final void createInstance(MyDatabaseHelper dbHelper) {
-        mInstance = new TaiKhoanDAO(dbHelper);
+        mInstance = new DonViTinhMonAnDAO(dbHelper);
     }
 
-    public static final TaiKhoanDAO getInstance() {
+    public static final DonViTinhMonAnDAO getInstance() {
         if (mInstance == null) {
             throw new NullPointerException("Singleton instance not created yet.");
         }
         return mInstance;
     }
 
-    private TaiKhoanDAO(MyDatabaseHelper dbHelper) {
+    private DonViTinhMonAnDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
     }
 
@@ -40,11 +41,11 @@ public class TaiKhoanDAO extends AbstractDAO {
             JSONArray jsonArray = new JSONArray(jsonData);
 
             db.beginTransaction();
-            db.delete(TaiKhoanDTO.TABLE_NAME, "1", null);
+            db.delete(DonViTinhMonAnDTO.TABLE_NAME, "1", null);
             for (int i = 0; i < jsonArray.length(); ++i) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
-                ContentValues values = TaiKhoanDTO.toContentValues(jsonObj);
-                db.insert(TaiKhoanDTO.TABLE_NAME, null, values);
+                ContentValues values = DonViTinhMonAnDTO.toContentValues(jsonObj);
+                db.insert(DonViTinhMonAnDTO.TABLE_NAME, null, values);
             }
 
             db.setTransactionSuccessful();
@@ -60,6 +61,6 @@ public class TaiKhoanDAO extends AbstractDAO {
 
     @Override
     public String getSyncTaskName() {
-        return "Tài khoản";
+        return "Các đơn vị tính của món ăn";
     }
 }

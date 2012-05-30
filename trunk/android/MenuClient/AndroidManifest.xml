@@ -43,7 +43,9 @@
         </activity>
         <activity android:name=".ui.activity.WelcomeActivity" >
         </activity>
-        <activity android:name=".ui.activity.SplashScreenActivity"><intent-filter>
+        <activity android:name=".ui.activity.SplashScreenActivity" android:theme="@android:style/Theme.DeviceDefault.Wallpaper.NoTitleBar"></activity>
+        <service android:name=".svc.SyncService"></service>
+        <activity android:name=".ui.activity.BeginningActivity"><intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

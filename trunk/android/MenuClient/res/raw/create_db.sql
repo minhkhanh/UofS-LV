@@ -179,4 +179,19 @@ CREATE TABLE ChiTietOrder (
 );
 
 
+-- Table: TiGia
+CREATE TABLE TiGia ( 
+    MaTiGia INTEGER PRIMARY KEY,
+    KiHieu  TEXT,
+    GiaTri  REAL,
+	ThoiDiemCapNhat DATETIME 
+);
+
+
+-- Table: ChiTietMonLienQuan
+CREATE TABLE ChiTietMonLienQuan ( 
+    MaMonAn         INTEGER REFERENCES MonAn ( MaMonAn ),
+    MaMonAnLienQuan INTEGER REFERENCES MonAn ( MaMonAn ),
+    PRIMARY KEY ( MaMonAn, MaMonAnLienQuan ) 
+);
 

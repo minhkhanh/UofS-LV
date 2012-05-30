@@ -3,17 +3,22 @@ package client.menu.db.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
-import client.menu.app.MyAppLocale;
-import client.menu.bus.loader.CustomAsyncTaskLoader;
+import client.menu.db.dto.DanhMucDTO;
 import client.menu.db.dto.DanhMucDaNgonNguDTO;
-import client.menu.db.dto.NgonNguDTO;
+
 import client.menu.db.util.MyDatabaseHelper;
+import client.menu.util.U;
 
 public class DanhMucDAO extends AbstractDAO {
+
+    public static final String GET_ALL_JSON_URL = LOCAL_SERVER_URL
+            + "layDanhSachDanhMucJson";
 
     private Cursor mCached;
 
@@ -32,6 +37,32 @@ public class DanhMucDAO extends AbstractDAO {
             throw new NullPointerException("Singleton instance not created yet.");
         }
         return mInstance;
+    }
+
+    public boolean syncAll() {
+        SQLiteDatabase db = open();
+        boolean result = true;
+        try {
+            String jsonData = U.loadGetResponse(GET_ALL_JSON_URL);
+            JSONArray jsonArray = new JSONArray(jsonData);
+
+            db.beginTransaction();
+            db.delete(DanhMucDTO.TABLE_NAME, "1", null);
+            for (int i = 0; i < jsonArray.length(); ++i) {
+                JSONObject jsonObj = jsonArray.getJSONObject(i);
+                ContentValues values = DanhMucDTO.toContentValues(jsonObj);
+                db.insert(DanhMucDTO.TABLE_NAME, null, values);
+            }
+
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = false;
+        } finally {
+            db.endTransaction();
+        }
+
+        return result;
     }
 
     public Cursor cursorAll(Integer maNgonNgu) {
@@ -69,5 +100,10 @@ public class DanhMucDAO extends AbstractDAO {
         }
 
         return list;
+    }
+
+    @Override
+    public String getSyncTaskName() {
+        return "Danh muc món";
     }
 }

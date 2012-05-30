@@ -1,9 +1,11 @@
 package client.menu.util;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -12,6 +14,7 @@ import java.util.Set;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -20,6 +23,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlSerializer;
@@ -48,6 +52,17 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 public final class U {
+
+    // public static final ContentValues toContentValues(JSONObject jsonObj) {
+    // ContentValues values = new ContentValues();
+    // Iterator iter = jsonObj.keys();
+    // while (iter.hasNext()) {
+    // String name = iter.next().toString();
+    // values.put(name, jsonObj.get(name));
+    // }
+    //
+    // return values;
+    // }
 
     public static final Boolean deserializeXml(String xmlData) {
         Boolean obj = null;
@@ -142,17 +157,14 @@ public final class U {
         return result;
     }
 
-    public static final String loadGetResponse(String url) {
+    public static final String loadGetResponse(String url)
+            throws ClientProtocolException, IOException {
         HttpClient httpclient = new DefaultHttpClient();
         HttpGet httpget = new HttpGet(url);
 
-        try {
-            HttpResponse response = httpclient.execute(httpget);
-            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-                return EntityUtils.toString(response.getEntity());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        HttpResponse response = httpclient.execute(httpget);
+        if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+            return EntityUtils.toString(response.getEntity());
         }
 
         return null;

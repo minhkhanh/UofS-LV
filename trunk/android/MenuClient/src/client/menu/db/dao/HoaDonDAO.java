@@ -5,17 +5,17 @@ import java.util.List;
 
 import android.database.sqlite.SQLiteDatabase;
 
-import client.menu.app.MyAppRepository;
 import client.menu.db.dto.ChiTietHoaDonDTO;
 import client.menu.db.dto.ChiTietOrderDTO;
 import client.menu.db.dto.HoaDonDTO;
+
 import client.menu.db.util.MyDatabaseHelper;
 import client.menu.util.U;
 
 public class HoaDonDAO extends AbstractDAO {
-    public static final String POST_BILL = MyAppRepository.LOCAL_SERVER_URL
+    public static final String POST_BILL = LOCAL_SERVER_URL
             + "themHoaDon";
-    public static final String POST_BILL_ITEMS = MyAppRepository.LOCAL_SERVER_URL
+    public static final String POST_BILL_ITEMS = LOCAL_SERVER_URL
             + "themNhieuChiTietHoaDon";
 
     private static HoaDonDAO mInstance;
@@ -66,5 +66,16 @@ public class HoaDonDAO extends AbstractDAO {
         String respString = U.loadPostResponse(POST_BILL, xmlData);
 
         return HoaDonDTO.fromXml(respString);
+    }
+
+    @Override
+    public boolean syncAll() {
+        return false;
+    }
+
+    @Override
+    public String getSyncTaskName() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

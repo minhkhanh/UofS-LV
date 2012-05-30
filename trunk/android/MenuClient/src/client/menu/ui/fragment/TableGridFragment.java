@@ -137,7 +137,6 @@ public class TableGridFragment extends Fragment implements LoaderCallbacks<List<
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-
             case R.id.OptItemMergeTable:
                 Toast.makeText(getActivity(), "Đang xây dựng", Toast.LENGTH_SHORT).show();
                 return true;
@@ -166,7 +165,15 @@ public class TableGridFragment extends Fragment implements LoaderCallbacks<List<
         mTableAdapter = new TableListAdapter(getActivity(), new ArrayList<BanDTO>());
 
 //        getLoaderManager().initLoader(0, null, this);
-        getLoaderManager().restartLoader(0, null, this);
+//        getLoaderManager().restartLoader(0, null, this);
+        U.logOwnTag("table list create");
+    }
+    
+    @Override
+    public void onResume() {
+        super.onResume();
+        U.logOwnTag("table list resume");
+        getLoaderManager().initLoader(0, null, this);
     }
 
     @Override
@@ -195,16 +202,20 @@ public class TableGridFragment extends Fragment implements LoaderCallbacks<List<
 
     @Override
     public Loader<List<BanDTO>> onCreateLoader(int id, Bundle args) {
+        U.logOwnTag("table list create : " + mTableAdapter.getCount());
         return new TableListLoader(getActivity(), mMaKhuVuc);
     }
 
     @Override
     public void onLoadFinished(Loader<List<BanDTO>> arg0, List<BanDTO> arg1) {
+        U.logOwnTag("table list finish : " + mTableAdapter.getCount());
+        mTableAdapter.clear();
         mTableAdapter.addAll(arg1);
         mTableAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onLoaderReset(Loader<List<BanDTO>> arg0) {
+        U.logOwnTag("table list reset : " + mTableAdapter.getCount());
     }
 }
