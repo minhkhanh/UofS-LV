@@ -16,7 +16,7 @@ import android.widget.Spinner;
 import client.menu.R;
 import client.menu.app.MyAppSettings;
 import client.menu.bus.LoadDishUnitsAsyncTask;
-import client.menu.db.dao.MonAnDAO;
+import client.menu.dao.MonAnDAO;
 import client.menu.db.dto.DonViTinhDaNgonNguDTO;
 import client.menu.db.dto.DonViTinhMonAnDTO;
 import client.menu.db.dto.MonAnDTO;

@@ -1,34 +1,36 @@
-package client.menu.db.dao;
+package client.menu.dao;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import client.menu.db.dto.MonLienQuanDTO;
+import client.menu.db.dto.KhuVucDTO;
 
 import client.menu.db.util.MyDatabaseHelper;
 import client.menu.util.U;
 
-public class MonLienQuanDAO extends AbstractDAO {
-
+public class KhuVucDAO extends AbstractDAO {
     private static final String GET_ALL_JSON_URL = LOCAL_SERVER_URL
-            + "layDanhSachMonLienQuanJson";
-    
-    private static MonLienQuanDAO mInstance;
+            + "layDanhSachKhuVucJson";
+
+    private Cursor mCached;
+
+    private static KhuVucDAO mInstance;
 
     public static final void createInstance(MyDatabaseHelper dbHelper) {
-        mInstance = new MonLienQuanDAO(dbHelper);
+        mInstance = new KhuVucDAO(dbHelper);
     }
 
-    public static final MonLienQuanDAO getInstance() {
+    public static final KhuVucDAO getInstance() {
         if (mInstance == null) {
             throw new NullPointerException("Singleton instance not created yet.");
         }
         return mInstance;
     }
 
-    private MonLienQuanDAO(MyDatabaseHelper dbHelper) {
+    private KhuVucDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
     }
 
@@ -41,11 +43,11 @@ public class MonLienQuanDAO extends AbstractDAO {
             JSONArray jsonArray = new JSONArray(jsonData);
 
             db.beginTransaction();
-            db.delete(MonLienQuanDTO.TABLE_NAME, "1", null);
+            db.delete(KhuVucDTO.TABLE_NAME, "1", null);
             for (int i = 0; i < jsonArray.length(); ++i) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
-                ContentValues values = MonLienQuanDTO.toContentValues(jsonObj);
-                db.insert(MonLienQuanDTO.TABLE_NAME, null, values);
+                ContentValues values = KhuVucDTO.toContentValues(jsonObj);
+                db.insert(KhuVucDTO.TABLE_NAME, null, values);
             }
 
             db.setTransactionSuccessful();
@@ -59,8 +61,18 @@ public class MonLienQuanDAO extends AbstractDAO {
         return result;
     }
 
+    public Cursor cursorAll() {
+        if (mCached == null || mCached.isClosed()) {
+            SQLiteDatabase db = open();
+            mCached = db.query(KhuVucDTO.TABLE_NAME, null, null, null, null, null, null,
+                    null);
+        }
+
+        return mCached;
+    }
+
     @Override
     public String getSyncTaskName() {
-        return "Danh sách món ăn";
+        return "Danh sách khu vực";
     }
 }

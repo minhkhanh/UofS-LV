@@ -1,4 +1,4 @@
-package client.menu.db.dao;
+package client.menu.dao;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

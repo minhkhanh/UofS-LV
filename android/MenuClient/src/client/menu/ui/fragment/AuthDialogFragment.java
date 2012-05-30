@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import client.menu.R;
 import client.menu.bus.SessionManager;
-import client.menu.db.dao.BanDAO;
+import client.menu.dao.BanDAO;
 import client.menu.db.dto.BanDTO;
 import client.menu.ui.activity.WelcomeActivity;
 import client.menu.util.U;

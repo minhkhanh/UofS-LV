@@ -1,4 +1,4 @@
-package client.menu.db.dao;
+package client.menu.dao;
 
 import java.io.StringReader;
 import java.util.ArrayList;

@@ -14,7 +14,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import client.menu.R;
 import client.menu.bus.loader.CustomAsyncTaskLoader;
-import client.menu.db.dao.KhuVucDAO;
+import client.menu.dao.KhuVucDAO;
 import client.menu.db.dto.KhuVucDTO;
 import client.menu.util.U;
 

@@ -7,7 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import client.menu.R;
-import client.menu.db.dao.DanhMucDAO;
+import client.menu.dao.DanhMucDAO;
 import client.menu.ui.activity.SplashScreenActivity;
 
 public class SyncService extends IntentService {

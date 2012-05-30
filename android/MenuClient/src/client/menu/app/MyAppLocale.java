@@ -6,7 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import client.menu.db.dao.NgonNguDAO;
+import client.menu.dao.NgonNguDAO;
 import client.menu.db.dto.NgonNguDTO;
 
 public class MyAppLocale {

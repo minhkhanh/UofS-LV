@@ -1,7 +1,7 @@
 package client.menu.ui.view;
 
 import client.menu.R;
-import client.menu.db.dao.MonAnDAO;
+import client.menu.dao.MonAnDAO;
 import client.menu.db.dto.ChiTietOrderDTO;
 import client.menu.db.dto.DonViTinhDaNgonNguDTO;
 import client.menu.db.dto.DonViTinhMonAnDTO;
