@@ -367,7 +367,7 @@
                                 <%: AdminFoodString.FoodDescription%>
                             </td>
                             <td>
-                                <%: chiTietMonAnDaNgonNgu.MoTaMonAn%>
+                                <%= chiTietMonAnDaNgonNgu.MoTaMonAn%>
                             </td>
                         </tr>
                     </table>

@@ -709,6 +709,20 @@ namespace LocalServerWeb
             return ChiTietOrder;
         }
 
+        public List<ChiTietOrder> LayNhieuChiTietOrder(int maOrder, string junk)
+        {
+            var listChiTietOrder = new List<ChiTietOrder>();
+            try
+            {
+                listChiTietOrder = ChiTietOrderBUS.LayNhieuChiTietOrder(maOrder);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listChiTietOrder;
+        }
+
         public ChiTietOrder ThemChiTietOrder(ChiTietOrder _chiTietOrder)
         {
             try
@@ -805,6 +819,20 @@ namespace LocalServerWeb
             return hoaDon;
         }
 
+        public List<HoaDon> LayDanhSachHoaDon(string junk)
+        {
+            var listHoaDon = new List<HoaDon>();
+            try
+            {
+                listHoaDon = HoaDonBUS.LayDanhSachHoaDon();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listHoaDon;
+        }
+
         public HoaDon ThemHoaDon(HoaDon _hoaDon)
         {
             try
@@ -845,6 +873,20 @@ namespace LocalServerWeb
                 Console.Error.WriteLine(e.Message);
             }
             return ChiTietHoaDon;
+        }
+
+        public List<ChiTietHoaDon> LayNhieuChiTietHoaDon(int maHoaDon, string junk)
+        {
+            var listChiTietHoaDon = new List<ChiTietHoaDon>();
+            try
+            {
+                listChiTietHoaDon = ChiTietHoaDonBUS.LayNhieuChiTietHoaDon(maHoaDon);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listChiTietHoaDon;
         }
 
         public ChiTietHoaDon ThemChiTietHoaDon(ChiTietHoaDon _chiTietHoaDon)

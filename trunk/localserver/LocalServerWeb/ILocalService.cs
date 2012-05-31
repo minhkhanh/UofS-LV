@@ -255,6 +255,10 @@ namespace LocalServerWeb
         [OperationContract]
         ChiTietOrder LayChiTietOrder(int maChiTietOrder, string junk);
 
+        [WebInvoke(Method = "GET", UriTemplate = "layNhieuChiTietOrder?maOrder={maOrder}&junk={junk}")]
+        [OperationContract]
+        List<ChiTietOrder> LayNhieuChiTietOrder(int maOrder, string junk);
+
         [WebInvoke(Method = "POST", UriTemplate = "themChiTietOrder")]
         [OperationContract]
         ChiTietOrder ThemChiTietOrder(ChiTietOrder _chiTietOrder);
@@ -286,6 +290,10 @@ namespace LocalServerWeb
         [OperationContract]
         HoaDon LayHoaDon(int maHoaDon, string junk);
 
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachHoaDon?junk={junk}")]
+        [OperationContract]
+        List<HoaDon> LayDanhSachHoaDon(string junk);
+
         [WebInvoke(Method = "POST", UriTemplate = "themHoaDon")]
         [OperationContract]
         HoaDon ThemHoaDon(HoaDon _hoaDon);
@@ -299,6 +307,10 @@ namespace LocalServerWeb
         [WebInvoke(Method = "GET", UriTemplate = "layChiTietHoaDon?maChiTietHoaDon={maChiTietHoaDon}&junk={junk}")]
         [OperationContract]
         ChiTietHoaDon LayChiTietHoaDon(int maChiTietHoaDon, string junk);
+
+        [WebInvoke(Method = "GET", UriTemplate = "layNhieuChiTietHoaDon?maHoaDon={maHoaDon}&junk={junk}")]
+        [OperationContract]
+        List<ChiTietHoaDon> LayNhieuChiTietHoaDon(int maHoaDon, string junk);
 
         [WebInvoke(Method = "POST", UriTemplate = "themChiTietHoaDon")]
         [OperationContract]
