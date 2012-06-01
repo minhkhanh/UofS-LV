@@ -77,7 +77,9 @@ namespace LocalServerDTO
         /// 1 - dang che bien
         /// 2 - khoa, ko duoc che bien tiep
         /// 3 - da xong
+        /// 4 - da thanh toan
         /// </summary>
+        [DataMember(Name = "TinhTrang")]
         [Column(Name = "TinhTrang")]
         public int TinhTrang { get; set; }
 
