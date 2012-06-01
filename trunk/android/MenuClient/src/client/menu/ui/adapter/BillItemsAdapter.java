@@ -44,7 +44,7 @@ public class BillItemsAdapter extends BaseAdapter {
             v = new BillItemView(mContext);
         }
         v.bindData(mData.get(position));
-
+        
         return v;
     }
 

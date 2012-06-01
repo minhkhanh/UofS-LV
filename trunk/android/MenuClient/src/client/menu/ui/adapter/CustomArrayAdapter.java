@@ -7,6 +7,8 @@ import client.menu.db.dto.ChiTietOrderDTO;
 import client.menu.db.dto.NgonNguDTO;
 
 import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 public abstract class CustomArrayAdapter<T> extends BaseAdapter {

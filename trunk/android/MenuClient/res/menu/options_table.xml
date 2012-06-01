@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/OptItemMergeTable"
-        android:showAsAction="ifRoom|withText" android:title="@string/options_item_merge_table">
+        android:showAsAction="ifRoom|withText" android:title="@string/option_merge_table">
     </item>
 
 </menu>
