@@ -2,7 +2,6 @@ package client.menu.bus.loader;
 
 import android.app.Activity;
 import android.content.AsyncTaskLoader;
-import android.content.Context;
 
 public abstract class CustomAsyncTaskLoader<T> extends AsyncTaskLoader<T> {
 

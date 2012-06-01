@@ -11,7 +11,7 @@
     <string name="context_table_item_check">Thanh toán</string>
     <string name="context_table_item_split">Tách bàn</string>
     <string name="construct_merge_table">Nhấn giữ lâu để ghép bàn</string>
-    <string name="options_item_merge_table">Ghép bàn</string>
+    <string name="option_merge_table">Ghép bàn</string>
     <string name="caption_waiter_username">Tên đăng nhập</string>
     <string name="caption_waiter_password">Mật khẩu</string>
     <string name="caption_ok">Đồng ý</string>
@@ -63,5 +63,9 @@
     <string name="text_at">vào lúc</string>
     <string name="text_loading">Đang tải</string>
     <string name="message_confirm_sync_db">Chuẩn bị đồng bộ dữ liệu với Server</string>
+    <string name="caption_table_map">Danh sách bàn</string>
+    <string name="caption_preferences">Thiết lập</string>
+    <string name="option_back">Quay lại</string>
+    <string name="message_select_table_merging_failed">Không thể chọn bàn đang có khách để ghép.</string>
 
 </resources>

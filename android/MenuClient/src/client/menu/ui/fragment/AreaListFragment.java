@@ -1,6 +1,5 @@
 package client.menu.ui.fragment;
 
-import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -9,14 +8,15 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import client.menu.R;
-import client.menu.bus.loader.CustomAsyncTaskLoader;
-import client.menu.dao.KhuVucDAO;
+import client.menu.bus.loader.AreaListLoader;
 import client.menu.db.dto.KhuVucDTO;
-import client.menu.util.U;
 
 public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cursor> {
 
@@ -25,27 +25,16 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
     private boolean mIsDualPane;
     private int mSelIndex;
 
+    private boolean mMergingMode = false;
+
     private SimpleCursorAdapter mAreaAdapter;
 
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             if (mIsDualPane) {
-                getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
                 showDetails(mSelIndex);
             }
-        }
-    };
-
-    static class AreaListLoader extends CustomAsyncTaskLoader<Cursor> {
-
-        public AreaListLoader(Activity context) {
-            super(context);
-        }
-
-        @Override
-        public Cursor loadInBackground() {
-            return KhuVucDAO.getInstance().cursorAll();
         }
     };
 
@@ -53,26 +42,32 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("mSelIndex", mSelIndex);
-
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
         showDetails(position);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-//        getView().setBackgroundResource(R.color._99f5f5f5);
         getView().setBackgroundResource(R.drawable.wood_white_oak);
-//        getView().set
+        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
         String[] from = new String[] { KhuVucDTO.CL_TEN_KHU_VUC };
         int[] to = new int[] { R.id.textAreaName };
-        mAreaAdapter = new SimpleCursorAdapter(getActivity(),
-                R.layout.item_area_list, null, from, to, 0);
+        mAreaAdapter = new SimpleCursorAdapter(getActivity(), R.layout.item_area_list,
+                null, from, to, 0);
         setListAdapter(mAreaAdapter);
 
         getLoaderManager().initLoader(0, null, this);
@@ -93,31 +88,47 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
         if (cursor == null || // in case of loader not finished yet
                 !cursor.moveToPosition(index))
             return;
-        
+
         int areaId = cursor.getInt(cursor.getColumnIndex(KhuVucDTO.CL_MA_KHU_VUC));
-        String areaName = cursor.getString(cursor.getColumnIndex(KhuVucDTO.CL_TEN_KHU_VUC));
+        String areaName = cursor.getString(cursor
+                .getColumnIndex(KhuVucDTO.CL_TEN_KHU_VUC));
 
         if (mIsDualPane) {
             getListView().setItemChecked(index, true);
-            // getListView().set
+        }
 
-            TableGridFragment tableGrid = (TableGridFragment) getFragmentManager()
-                    .findFragmentById(R.id.RightPaneHolder);
+        TableInAreaFragment f;
+        if (mIsDualPane) {
+            f = (TableInAreaFragment) getFragmentManager().findFragmentById(
+                    R.id.RightPaneHolder);
+            if (mMergingMode && !(f instanceof TableMergingFragment)) {
+                f = null;
+            } else if (!mMergingMode && (f instanceof TableMergingFragment)) {
+                f = null;
+            }
 
-            if (tableGrid == null || tableGrid.getMaKhuVuc() != areaId) {
-                tableGrid = TableGridFragment.newInstance(areaId, areaName);
+            if (f == null || f.getMaKhuVuc() != areaId) {
+                if (mMergingMode) {
+                    f = new TableMergingFragment(areaId, areaName);
+                } else {
+                    f = new TableMapFragment(areaId, areaName);
+                }
 
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.RightPaneHolder, tableGrid);
+                ft.replace(R.id.RightPaneHolder, f);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.commit();
             }
 
         } else {
-            TableGridFragment tableGrid = TableGridFragment.newInstance(areaId, areaName);
+            if (mMergingMode) {
+                f = new TableMergingFragment(areaId, areaName);
+            } else {
+                f = new TableMapFragment(areaId, areaName);
+            }
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.LeftPaneHolder, tableGrid);
+            ft.replace(R.id.LeftPaneHolder, f);
             ft.addToBackStack(null);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
@@ -125,8 +136,33 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        inflater.inflate(R.menu.options_table, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.OptItemMergeTable:
+                mMergingMode = !mMergingMode;
+                if (mMergingMode) {
+                    item.setTitle(R.string.option_back);
+                } else {
+                    item.setTitle(R.string.option_merge_table);
+                }
+
+                showDetails(mSelIndex);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        U.logOwnTag("load create");
         return new AreaListLoader(getActivity());
     }
 
@@ -134,14 +170,10 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
     public void onLoadFinished(Loader<Cursor> arg0, Cursor arg1) {
         mAreaAdapter.swapCursor(arg1);
         mHandler.sendEmptyMessage(0);
-        
-        U.logOwnTag("load finish");
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> arg0) {
         mAreaAdapter.swapCursor(null);
-        
-        U.logOwnTag("load reset");
     }
 }

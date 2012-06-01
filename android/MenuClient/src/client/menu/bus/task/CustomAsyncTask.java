@@ -3,7 +3,7 @@ package client.menu.bus.task;
 import android.content.Context;
 import android.os.AsyncTask;
 
-public class CustomAsyncTask<Params, Progress, Result> extends
+public abstract class CustomAsyncTask<Params, Progress, Result> extends
         AsyncTask<Params, Progress, Result> {
 
     public interface OnPreExecuteAsyncTaskListener<Params, Progress, Result> {
@@ -31,9 +31,7 @@ public class CustomAsyncTask<Params, Progress, Result> extends
     }
 
     @Override
-    protected Result doInBackground(Params... params) {
-        return null;
-    }
+    protected abstract Result doInBackground(Params... params);
 
     @Override
     protected void onPostExecute(Result result) {

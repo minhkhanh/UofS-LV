@@ -37,6 +37,7 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.os.AsyncTask;
 import android.text.format.DateFormat;
+import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,6 +91,27 @@ public final class U {
     public static final Boolean getCursorBool(Cursor c, int i) {
         return Boolean.valueOf(String.valueOf(c.getInt(i)));
     }
+    
+    public static final String loadPostResponseJson(String url, String jsonData) {
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost httpPost = new HttpPost(url);
+
+        try {
+            StringEntity postObj = new StringEntity(jsonData, HTTP.UTF_8);
+//            postObj.setContentType("application/json");
+            httpPost.setHeader("Content-Type", "application/json; charset=UTF-8");
+            httpPost.setEntity(postObj);
+
+            HttpResponse response = httpclient.execute(httpPost);
+            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                return EntityUtils.toString(response.getEntity());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
     public static final String loadPostResponse(String url, String xmlData) {
         HttpClient httpclient = new DefaultHttpClient();
@@ -128,11 +150,6 @@ public final class U {
             if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                 HttpEntity entity = response.getEntity();
                 result = EntityUtils.toString(entity);
-                // if (entity != null) {
-                // InputStream instream = entity.getContent();
-                // result = U.convertStreamToString(instream);
-                // instream.close();
-                // }
             }
         } catch (Exception e) {
             e.printStackTrace();

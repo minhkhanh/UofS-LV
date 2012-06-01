@@ -3,16 +3,14 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bitmap_splash_background" android:animateLayoutChanges="false">
+    android:animateLayoutChanges="false"
+    android:background="@drawable/bitmap_splash_background" >
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="42dp"
-        android:layout_marginTop="142dp"
+        android:layout_marginTop="44dp"
         android:text="@string/text_splash_screen"
         android:textAllCaps="false"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -26,9 +24,27 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
-        android:layout_marginLeft="65dp"
-        android:layout_marginTop="21dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="24dp"
         android:text="@string/text_welcome_people"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/btnTableMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="64dp"
+        android:text="@string/caption_table_map"/>
+
+    <Button
+        android:id="@+id/btnPreferences"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnTableMap"
+        android:layout_alignRight="@+id/btnTableMap"
+        android:layout_below="@+id/btnTableMap"
+        android:text="@string/caption_preferences"/>
 
 </RelativeLayout>
