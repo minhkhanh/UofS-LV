@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/imgTableImage"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
+        android:layout_width="80dp"
+        android:layout_height="68dp"
         android:src="@drawable/green_square" />
 
     <TextView

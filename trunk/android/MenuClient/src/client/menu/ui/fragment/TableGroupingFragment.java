@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.AlertDialog;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.Loader;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
@@ -21,17 +22,21 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.TextView;
 import client.menu.R;
+import client.menu.bus.SessionManager;
 import client.menu.bus.loader.TableListLoader;
 import client.menu.bus.task.CustomAsyncTask;
 import client.menu.bus.task.PostTableMergingTask;
 import client.menu.bus.task.CustomAsyncTask.OnPostExecuteAsyncTaskListener;
 import client.menu.db.dto.BanDTO;
 import client.menu.db.dto.YeuCauGhepBan;
+import client.menu.ui.activity.MainMenuActivity;
+import client.menu.ui.activity.WelcomeActivity;
 import client.menu.ui.adapter.TableListAdapter;
+import client.menu.util.U;
 
-public class TableMergingFragment extends TableInAreaFragment implements
+public class TableGroupingFragment extends TableInAreaFragment implements
         LoaderCallbacks<List<BanDTO>>, OnItemClickListener,
-        OnPostExecuteAsyncTaskListener<YeuCauGhepBan, Integer, Boolean> {
+        OnPostExecuteAsyncTaskListener<Void, Integer, Integer> {
     private GridView mTableGrid;
     private TableListAdapter mTableAdapter;
 
@@ -47,13 +52,14 @@ public class TableMergingFragment extends TableInAreaFragment implements
         @Override
         public void onDestroyActionMode(ActionMode mode) {
             mActionMode = null;
-            mTableGrid.setSelection(-1);
+
+            U.uncheckAllItems(mTableGrid);
         }
 
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             MenuInflater inflater = mode.getMenuInflater();
-            inflater.inflate(R.menu.context_table_merging, menu);
+            inflater.inflate(R.menu.context_table_grouping, menu);
 
             return true;
         }
@@ -61,23 +67,28 @@ public class TableMergingFragment extends TableInAreaFragment implements
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.miMerge:
-                    SparseBooleanArray boolArray = mTableGrid.getCheckedItemPositions();
-                    List<Integer> listBanPhu = new ArrayList<Integer>();
-                    for (int i = 0; i < boolArray.size(); ++i) {
-                        if (boolArray.valueAt(i)) {
-                            int pos = boolArray.keyAt(i);
+                case R.id.miGroup:
+                    SparseBooleanArray chkArray = mTableGrid.getCheckedItemPositions();
+                    List<Integer> listBan = new ArrayList<Integer>();
+                    for (int i = 0; i < chkArray.size(); ++i) {
+                        if (chkArray.valueAt(i)) {
+                            int pos = chkArray.keyAt(i);
                             BanDTO ban = mTableAdapter.getItem(pos);
-                            listBanPhu.add(ban.getMaBan());
+                            listBan.add(ban.getMaBan());
                         }
                     }
-                    YeuCauGhepBan yc = new YeuCauGhepBan();
-                    yc.setMaBanChinh(listBanPhu.get(0));
-                    yc.setMaBanPhuList(listBanPhu);
 
-                    PostTableMergingTask task = new PostTableMergingTask(getActivity(), 0);
-                    task.setOnPostExecuteListener(TableMergingFragment.this);
-                    task.execute(yc);
+                    if (listBan.size() >= 2) {
+                        YeuCauGhepBan yc = new YeuCauGhepBan();
+                        yc.setMaBanChinh(listBan.get(0));
+                        listBan.remove(0);
+                        yc.setMaBanPhuList(listBan);
+
+                        PostTableMergingTask task = new PostTableMergingTask(
+                                getActivity(), 0, yc);
+                        task.setOnPostExecuteListener(TableGroupingFragment.this);
+                        task.execute();
+                    }
 
                     break;
 
@@ -89,7 +100,7 @@ public class TableMergingFragment extends TableInAreaFragment implements
         }
     };
 
-    public TableMergingFragment(int areaId, String areaName) {
+    public TableGroupingFragment(int areaId, String areaName) {
         super(areaId, areaName);
     }
 
@@ -104,6 +115,8 @@ public class TableMergingFragment extends TableInAreaFragment implements
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        getView().setBackgroundResource(R.color._55f5f5f5);
 
         mTableAdapter = new TableListAdapter(getActivity(), new ArrayList<BanDTO>());
 
@@ -152,15 +165,7 @@ public class TableMergingFragment extends TableInAreaFragment implements
         BanDTO ban = mTableAdapter.getItem(arg2);
         if (!ban.getActive()) {
             mTableGrid.setItemChecked(arg2, false);
-            new AlertDialog.Builder(getActivity())
-                    .setMessage(R.string.message_select_table_merging_failed)
-                    .setNeutralButton(R.string.caption_ok,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            }).create().show();
+            U.toastText(getActivity(), R.string.message_busy_table_grouping_failed);
         } else {
             if (mActionMode == null && mTableGrid.getCheckedItemCount() == 2) {
                 mActionMode = getActivity().startActionMode(mActionModeCallback);
@@ -173,8 +178,25 @@ public class TableMergingFragment extends TableInAreaFragment implements
     }
 
     @Override
-    public void onPostExecuteAsyncTask(
-            CustomAsyncTask<YeuCauGhepBan, Integer, Boolean> task, Boolean result) {
-        getLoaderManager().restartLoader(0, null, this);
+    public void onPostExecuteAsyncTask(CustomAsyncTask<Void, Integer, Integer> task,
+            Integer result) {
+
+        if (result != -1) {
+            // getLoaderManager().restartLoader(0, null, this);
+
+            SessionManager.getInstance().loadSession(result);
+            Intent intent = new Intent(getActivity(), MainMenuActivity.class);
+            startActivity(intent);
+        } else {
+            new AlertDialog.Builder(getActivity())
+                    .setMessage(R.string.message_table_grouping_failed)
+                    .setNeutralButton(R.string.caption_ok,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            }).create().show();
+        }
     }
 }

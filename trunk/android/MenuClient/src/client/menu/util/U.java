@@ -39,12 +39,24 @@ import android.os.AsyncTask;
 import android.text.format.DateFormat;
 import android.util.JsonReader;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.Toast;
 
 public final class U {
-    
+
+    public static final void uncheckAllItems(AbsListView view) {
+        SparseBooleanArray chkArray = view.getCheckedItemPositions();
+        for (int i = 0; i < chkArray.size(); ++i) {
+            if (chkArray.valueAt(i)) {
+                int pos = chkArray.keyAt(i);
+                view.setItemChecked(pos, false);
+            }
+        }
+    }
+
     public static final String formatDateTime(String format, long currentMilis) {
         return DateFormat.format(format, currentMilis).toString();
     }
@@ -91,14 +103,14 @@ public final class U {
     public static final Boolean getCursorBool(Cursor c, int i) {
         return Boolean.valueOf(String.valueOf(c.getInt(i)));
     }
-    
+
     public static final String loadPostResponseJson(String url, String jsonData) {
         HttpClient httpclient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(url);
 
         try {
             StringEntity postObj = new StringEntity(jsonData, HTTP.UTF_8);
-//            postObj.setContentType("application/json");
+            // postObj.setContentType("application/json");
             httpPost.setHeader("Content-Type", "application/json; charset=UTF-8");
             httpPost.setEntity(postObj);
 
@@ -228,7 +240,7 @@ public final class U {
     public static final void logOwnTag(String msg) {
         Log.d(C.TAG, msg);
     }
-    
+
     public static final void toastText(Context context, int resId) {
         Toast.makeText(context, resId, Toast.LENGTH_SHORT).show();
     }

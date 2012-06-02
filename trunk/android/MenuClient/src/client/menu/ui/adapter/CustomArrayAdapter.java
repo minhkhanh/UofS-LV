@@ -47,7 +47,7 @@ public abstract class CustomArrayAdapter<T> extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return mData.get(position).hashCode();
+        return position;
     }   
     
     public Context getContext() {

@@ -89,9 +89,9 @@ public class BillActivity extends Activity {
             if (result) {
                 U.toastText(BillActivity.this, BillActivity.this.getResources()
                         .getString(R.string.message_bill_sent));
-                BanDTO ban = SessionManager.getInstance().loadCurrentSession().getBan();
-                ban.setActive(true);
-                new PutTableTask().execute(ban);
+//                BanDTO ban = SessionManager.getInstance().loadCurrentSession().getMaBanChinh();
+//                ban.setActive(true);
+//                new PutTableTask().execute(ban);
                 SessionManager.getInstance().destroyCurrentSession();
             } else {
                 AlertDialog.Builder builder = new Builder(BillActivity.this)

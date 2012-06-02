@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
 import client.menu.db.dto.DanhMucDTO;
 import client.menu.db.dto.DanhMucDaNgonNguDTO;
 
@@ -37,6 +38,53 @@ public class DanhMucDAO extends AbstractDAO {
             throw new NullPointerException("Singleton instance not created yet.");
         }
         return mInstance;
+    }
+
+    public List<DanhMucDaNgonNguDTO> listDanhMucGoc(Integer maNgonNgu) {
+        Cursor cursor = null;
+        SQLiteDatabase db = open();
+        SQLiteQueryBuilder query = new SQLiteQueryBuilder();
+
+        query.setTables(DanhMucDTO.TABLE_NAME + " INNER JOIN "
+                + DanhMucDaNgonNguDTO.TABLE_NAME + " ON(" + DanhMucDTO.CL_MA_DANH_MUC_QN
+                + "=" + DanhMucDaNgonNguDTO.CL_MA_DANH_MUC_QN + ")");
+
+        String selection = DanhMucDaNgonNguDTO.CL_MA_NGON_NGU + "=?" + " and "
+                + DanhMucDTO.CL_MA_DANH_MUC_CHA + " is null";
+        String[] selectionArgs = { maNgonNgu.toString() };
+        cursor = query.query(db, DanhMucDaNgonNguDTO.allColumns(), selection,
+                selectionArgs, null, null, null);
+
+        List<DanhMucDaNgonNguDTO> list = new ArrayList<DanhMucDaNgonNguDTO>();
+        while (cursor.moveToNext()) {
+            list.add(DanhMucDaNgonNguDTO.fromCursor(cursor));
+        }
+
+        return list;
+    }
+
+    public List<DanhMucDaNgonNguDTO> listDanhMucCon(Integer maNgonNgu,
+            Integer maDanhMucCha) {
+        Cursor cursor = null;
+        SQLiteDatabase db = open();
+        SQLiteQueryBuilder query = new SQLiteQueryBuilder();
+
+        query.setTables(DanhMucDTO.TABLE_NAME + " INNER JOIN "
+                + DanhMucDaNgonNguDTO.TABLE_NAME + " ON(" + DanhMucDTO.CL_MA_DANH_MUC_QN
+                + "=" + DanhMucDaNgonNguDTO.CL_MA_DANH_MUC_QN + ")");
+
+        String selection = DanhMucDaNgonNguDTO.CL_MA_NGON_NGU + "=?" + " and "
+                + DanhMucDTO.CL_MA_DANH_MUC_CHA + "=?";
+        String[] selectionArgs = { maNgonNgu.toString(), maDanhMucCha.toString() };
+        cursor = query.query(db, DanhMucDaNgonNguDTO.allColumns(), selection,
+                selectionArgs, null, null, null);
+
+        List<DanhMucDaNgonNguDTO> list = new ArrayList<DanhMucDaNgonNguDTO>();
+        while (cursor.moveToNext()) {
+            list.add(DanhMucDaNgonNguDTO.fromCursor(cursor));
+        }
+
+        return list;
     }
 
     public boolean syncAll() {
@@ -89,7 +137,7 @@ public class DanhMucDAO extends AbstractDAO {
                     selectionArgs, null, null, null, null);
 
             while (cursor.moveToNext()) {
-                DanhMucDaNgonNguDTO obj = DanhMucDaNgonNguDTO.extractFrom(cursor);
+                DanhMucDaNgonNguDTO obj = DanhMucDaNgonNguDTO.fromCursor(cursor);
                 list.add(obj);
             }
 

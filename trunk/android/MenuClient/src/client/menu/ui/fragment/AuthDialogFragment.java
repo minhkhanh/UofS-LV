@@ -71,12 +71,12 @@ public class AuthDialogFragment extends DialogFragment {
                 case R.id.btnOK:
                     U.toastText(getActivity(), "Xác thực thành công!");
                     if (mAction == ACT_SELECTING_TABLE) {
-                        BanDTO ban = SessionManager.getInstance().loadCurrentSession()
-                                .getBan();
-                        ban.setActive(false);
-
-                        mWatingDlg = ProgressDialog.show(getActivity(), "", "Wating...");
-                        new PutTableTask().execute(ban);
+//                        BanDTO ban = SessionManager.getInstance().loadCurrentSession()
+//                                .getMaBanChinh();
+//                        ban.setActive(false);
+//
+//                        mWatingDlg = ProgressDialog.show(getActivity(), "", "Wating...");
+//                        new PutTableTask().execute(ban);
                     }
 
                     break;

@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/OptItemMergeTable"
-        android:showAsAction="ifRoom|withText" android:title="@string/option_merge_table">
+        android:id="@+id/miGroupTable"
+        android:showAsAction="ifRoom|withText" android:title="@string/option_group_table">
     </item>
 
 </menu>

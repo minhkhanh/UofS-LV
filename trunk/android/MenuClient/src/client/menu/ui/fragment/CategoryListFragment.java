@@ -1,14 +1,13 @@
 package client.menu.ui.fragment;
 
-import android.app.Activity;
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.Context;
-import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,38 +15,17 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import client.menu.R;
-import client.menu.app.MyAppLocale;
-import client.menu.app.MyApplication;
-import client.menu.bus.loader.CustomAsyncTaskLoader;
-import client.menu.dao.DanhMucDAO;
+import client.menu.bus.loader.RootCategoryListLoader;
 import client.menu.db.dto.DanhMucDTO;
 import client.menu.db.dto.DanhMucDaNgonNguDTO;
-import client.menu.db.dto.NgonNguDTO;
+import client.menu.ui.adapter.ExpandableCategoryListAdapter;
 
-public class CategoryListFragment extends ListFragment implements LoaderCallbacks<Cursor> {
-
-    public static final int LOADER_ID_CAT_LIST = 0;
-
-    public static final int MSG_LOADER_FINISHED_CAT_LIST = 0;
+public class CategoryListFragment extends ListFragment implements
+        LoaderCallbacks<List<DanhMucDaNgonNguDTO>> {
 
     private boolean mIsDualPane;
     private int mSelIndex;
-    private SimpleCursorAdapter mAdapter;
-
-    static class CategoryListLoader extends CustomAsyncTaskLoader<Cursor> {
-
-        public CategoryListLoader(Activity context) {
-            super(context);
-        }
-
-        @Override
-        public Cursor loadInBackground() {
-            NgonNguDTO ngonNgu = MyAppLocale.getCurrentLanguage(mHost);
-            return DanhMucDAO.getInstance().cursorAll(ngonNgu.getMaNgonNgu());
-
-        }
-
-    };
+    private ExpandableCategoryListAdapter mAdapter;
 
     private Handler handler = new Handler() {
         @Override
@@ -60,19 +38,25 @@ public class CategoryListFragment extends ListFragment implements LoaderCallback
     };
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        mAdapter.swapCursor(null);
+    public void onLoaderReset(Loader<List<DanhMucDaNgonNguDTO>> loader) {
+        // mAdapter.swapCursor(null);
+        mAdapter.clear();
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        mAdapter.swapCursor(cursor);
-        handler.sendEmptyMessage(0);
+    public void onLoadFinished(Loader<List<DanhMucDaNgonNguDTO>> loader,
+            List<DanhMucDaNgonNguDTO> result) {
+        // mAdapter.swapCursor(cursor);
+        mAdapter.clear();
+        mAdapter.addAll(result);
+        mAdapter.notifyDataSetChanged();
+        // handler.sendEmptyMessage(0);
     }
 
     @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CategoryListLoader(getActivity());
+    public Loader<List<DanhMucDaNgonNguDTO>> onCreateLoader(int id, Bundle args) {
+        return new RootCategoryListLoader(getActivity());
     }
 
     @Override
@@ -92,17 +76,19 @@ public class CategoryListFragment extends ListFragment implements LoaderCallback
         if (savedInstanceState != null) {
             mSelIndex = savedInstanceState.getInt("mSelIndex", 0);
         }
-        
-        getView().setBackgroundResource(R.color._55f5f5f5);
-//        getView().setAlpha(0.35f);
 
-        String[] from = new String[] { DanhMucDaNgonNguDTO.CL_TEN_DANH_MUC };
-        int[] to = new int[] { android.R.id.text1 };
-        mAdapter = new SimpleCursorAdapter(getActivity(),
-                android.R.layout.simple_list_item_activated_1, null, from, to, 0);
+        getView().setBackgroundResource(R.color._55f5f5f5);
+        // getView().setAlpha(0.35f);
+
+        // String[] from = new String[] { DanhMucDaNgonNguDTO.CL_TEN_DANH_MUC };
+        // int[] to = new int[] { android.R.id.text1 };
+        // mAdapter = new SimpleCursorAdapter(getActivity(),
+        // android.R.layout.simple_list_item_activated_1, null, from, to, 0);
+        mAdapter = new ExpandableCategoryListAdapter(getActivity(),
+                new ArrayList<DanhMucDaNgonNguDTO>());
         setListAdapter(mAdapter);
 
-        getLoaderManager().initLoader(LOADER_ID_CAT_LIST, null, this);
+        getLoaderManager().initLoader(0, null, this);
 
         View dishList = getActivity().findViewById(R.id.RightPaneHolder);
         mIsDualPane = dishList != null && dishList.getVisibility() == View.VISIBLE;

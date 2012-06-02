@@ -65,8 +65,8 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
         getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
         String[] from = new String[] { KhuVucDTO.CL_TEN_KHU_VUC };
-        int[] to = new int[] { R.id.textAreaName };
-        mAreaAdapter = new SimpleCursorAdapter(getActivity(), R.layout.item_area_list,
+        int[] to = new int[] { R.id.textItemTitle };
+        mAreaAdapter = new SimpleCursorAdapter(getActivity(), R.layout.item_center_aligned_text,
                 null, from, to, 0);
         setListAdapter(mAreaAdapter);
 
@@ -101,15 +101,15 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
         if (mIsDualPane) {
             f = (TableInAreaFragment) getFragmentManager().findFragmentById(
                     R.id.RightPaneHolder);
-            if (mMergingMode && !(f instanceof TableMergingFragment)) {
+            if (mMergingMode && !(f instanceof TableGroupingFragment)) {
                 f = null;
-            } else if (!mMergingMode && (f instanceof TableMergingFragment)) {
+            } else if (!mMergingMode && (f instanceof TableGroupingFragment)) {
                 f = null;
             }
 
             if (f == null || f.getMaKhuVuc() != areaId) {
                 if (mMergingMode) {
-                    f = new TableMergingFragment(areaId, areaName);
+                    f = new TableGroupingFragment(areaId, areaName);
                 } else {
                     f = new TableMapFragment(areaId, areaName);
                 }
@@ -122,7 +122,7 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
 
         } else {
             if (mMergingMode) {
-                f = new TableMergingFragment(areaId, areaName);
+                f = new TableGroupingFragment(areaId, areaName);
             } else {
                 f = new TableMapFragment(areaId, areaName);
             }
@@ -145,12 +145,12 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.OptItemMergeTable:
+            case R.id.miGroupTable:
                 mMergingMode = !mMergingMode;
                 if (mMergingMode) {
                     item.setTitle(R.string.option_back);
                 } else {
-                    item.setTitle(R.string.option_merge_table);
+                    item.setTitle(R.string.option_group_table);
                 }
 
                 showDetails(mSelIndex);

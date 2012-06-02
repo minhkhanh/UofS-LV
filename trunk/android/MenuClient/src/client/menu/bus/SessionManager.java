@@ -68,14 +68,14 @@ public class SessionManager {
 
         public HoaDonDTO makeHoaDon() {
             HoaDonDTO hoaDon = new HoaDonDTO();
-            hoaDon.setMaBanChinh(mSession.getBan().getMaBan());
+            hoaDon.setMaBanChinh(mSession.getMaBanChinh());
 
             return hoaDon;
         }
 
         public OrderDTO makeOrder() {
             OrderDTO order = new OrderDTO();
-            order.setMaBan(mSession.getBan().getMaBan());
+            order.setMaBan(mSession.getMaBanChinh());
             order.setMaOrder(mOrderId);
 
             return order;
@@ -154,11 +154,11 @@ public class SessionManager {
 
     public class ServiceSession {
 
-        private BanDTO mBan;
+        private Integer mMaBanChinh;
         private ServiceOrder mOrder;
 
-        protected ServiceSession(BanDTO ban) {
-            mBan = ban;
+        protected ServiceSession(Integer maBanChinh) {
+            mMaBanChinh = maBanChinh;
             mOrder = new ServiceOrder(this);
 
             mOrder.addItem(1, 1, 1, null);
@@ -169,8 +169,8 @@ public class SessionManager {
             return mOrder;
         }
 
-        public BanDTO getBan() {
-            return mBan;
+        public Integer getMaBanChinh() {
+            return mMaBanChinh;
         }
     }
 
@@ -206,32 +206,35 @@ public class SessionManager {
         return mSessionList.get(mIndexCurrent);
     }
 
-    private ServiceSession createSession(BanDTO ban) {
+    private ServiceSession createSession(Integer maBanChinh) {
         for (ServiceSession s : mSessionList) {
-            if (s.getBan().getMaBan() == ban.getMaBan()) {
+            if (s.getMaBanChinh() == maBanChinh) {
                 throw new IllegalArgumentException("Duplicated session identification: "
-                        + ban.getMaBan());
+                        + maBanChinh);
             }
         }
 
-        ServiceSession session = new ServiceSession(ban);
+        ServiceSession session = new ServiceSession(maBanChinh);
 
         mSessionList.add(session);
 
         // set the latest added session as current session
         mIndexCurrent = mSessionList.size() - 1;
 
+        U.logOwnTag("create session " + maBanChinh);
         return session;
     }
 
-    public ServiceSession loadSession(BanDTO ban) {
+    public ServiceSession loadSession(Integer maBanChinh) {
         for (int i = 0; i < mSessionList.size(); ++i) {
-            if (mSessionList.get(i).getBan().getMaBan() == ban.getMaBan()) {
+            if (mSessionList.get(i).getMaBanChinh() == maBanChinh) {
                 mIndexCurrent = i;
+                
+                U.logOwnTag("load session " + maBanChinh);
                 return mSessionList.get(i);
             }
         }
 
-        return createSession(ban);
+        return createSession(maBanChinh);
     }
 }
