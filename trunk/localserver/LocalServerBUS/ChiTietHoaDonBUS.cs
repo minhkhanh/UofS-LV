@@ -29,25 +29,24 @@ namespace LocalServerBUS
         {
             bool ketQua = true;
             // Khi thanh toan xong, thay doi TinhTrang = 4 cua cac ct Order tuong ung
-            if (ChiTietHoaDonDAO.ThemNhieuChiTietHoaDon(_listChiTietHoaDon) != null)
+            if (ChiTietHoaDonDAO.ThemNhieuChiTietHoaDon(_listChiTietHoaDon) == null)
             {
-                int maBan = 0;
-                if (_listChiTietHoaDon.Count > 0)
-                    maBan = _listChiTietHoaDon[0].HoaDon.Ban.MaBan;
-                List<ChiTietOrder> listChiTietOrder = ChiTietOrderBUS.LayNhieuChiTietOrderChuaThanhToan(maBan);
-                foreach (ChiTietOrder ctOrder in listChiTietOrder)
+                return false;
+            }
+
+            int maBan = 0;
+            if (_listChiTietHoaDon.Count > 0)
+                maBan = _listChiTietHoaDon[0].HoaDon.Ban.MaBan;
+            List<ChiTietOrder> listChiTietOrder = ChiTietOrderBUS.LayNhieuChiTietOrderChuaThanhToan(maBan);
+            foreach (ChiTietOrder ctOrder in listChiTietOrder)
+            {
+                ctOrder.TinhTrang = 4;
+                if (!ChiTietOrderBUS.SuaChiTietOrder(ctOrder))
                 {
-                    ctOrder.TinhTrang = 4;
-                    if (!ChiTietOrderBUS.SuaChiTietOrder(ctOrder))
-                    {
-                        ketQua = false;
-                    }
+                    ketQua = false;
                 }
             }
-            else
-            {
-                ketQua = false;
-            }
+
 
             return ketQua;
         }
