@@ -29,5 +29,10 @@ namespace LocalServerBUS
         {
             return HoaDonDAO.SuaHoaDon(_hoaDon);
         }
+
+        public static void LapHoaDon()
+        {
+
+        }
     }
 }

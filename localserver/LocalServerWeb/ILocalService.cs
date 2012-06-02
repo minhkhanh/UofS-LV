@@ -249,6 +249,10 @@ namespace LocalServerWeb
         [OperationContract]
         bool SuaOrder(Order _order);
 
+        [WebInvoke(Method = "POST", UriTemplate = "lapOrder?maTaiKhoan={maTaiKhoan}&maBan={maBan}&junk={junk}")]
+        [OperationContract]
+        List<ChiTietOrder> LapOrder(int maTaiKhoan, int maBan, string junk, List<ChiTietOrder> _listChiTietOrder);
+
 
         // Chi Tiet Order
         [WebInvoke(Method = "GET", UriTemplate = "layChiTietOrder?maChiTietOrder={maChiTietOrder}&junk={junk}")]
@@ -258,6 +262,10 @@ namespace LocalServerWeb
         [WebInvoke(Method = "GET", UriTemplate = "layNhieuChiTietOrder?maOrder={maOrder}&junk={junk}")]
         [OperationContract]
         List<ChiTietOrder> LayNhieuChiTietOrder(int maOrder, string junk);
+
+        [WebInvoke(Method = "GET", UriTemplate = "layNhieuChiTietOrderChuaThanhToan?maBan={maBan}&junk={junk}")]
+        [OperationContract]
+        List<ChiTietOrder> LayNhieuChiTietOrderChuaThanhToan(int maBan, string junk);
 
         [WebInvoke(Method = "POST", UriTemplate = "themChiTietOrder")]
         [OperationContract]
