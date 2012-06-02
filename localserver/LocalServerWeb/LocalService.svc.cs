@@ -928,7 +928,7 @@ namespace LocalServerWeb
             return null;
         }
 
-        public List<ChiTietHoaDon> ThemNhieuChiTietHoaDon(List<ChiTietHoaDon> _listChiTietHoaDon)
+        public bool ThemNhieuChiTietHoaDon(List<ChiTietHoaDon> _listChiTietHoaDon)
         {
             try
             {
@@ -938,7 +938,7 @@ namespace LocalServerWeb
             {
                 Console.Error.WriteLine(e.Message);
             }
-            return null;
+            return false;
         }
 
         public bool SuaChiTietHoaDon(ChiTietHoaDon _chiTietHoaDon)

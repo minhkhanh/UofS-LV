@@ -326,7 +326,7 @@ namespace LocalServerWeb
 
         [WebInvoke(Method = "POST", UriTemplate = "themNhieuChiTietHoaDon")]
         [OperationContract]
-        List<ChiTietHoaDon> ThemNhieuChiTietHoaDon(List<ChiTietHoaDon> _listChiTietHoaDon);
+        bool ThemNhieuChiTietHoaDon(List<ChiTietHoaDon> _listChiTietHoaDon);
 
         [WebInvoke(Method = "PUT", UriTemplate = "suaChiTietHoaDon")]
         [OperationContract]
