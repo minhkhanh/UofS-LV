@@ -29,6 +29,17 @@ namespace LocalServerDAO
             return null;
         }
 
+        public static BoPhanCheBien LayBoPhanCheBienTheoDanhMuc(int maDanhMuc)
+        {
+            var temp = ThucDonDienTu.DataContext.ChiTietDanhMucBoPhanCheBiens.Where(c => c.DanhMuc.MaDanhMuc == maDanhMuc);
+            if (temp.Count() > 0)
+            {
+                ChiTietDanhMucBoPhanCheBien ct = temp.First();
+                return ct.BoPhanCheBien;
+            }
+            return null;
+        }
+
         public static bool Xoa(ChiTietDanhMucBoPhanCheBien chiTietDanhMucBoPhanCheBien)
         {
             try

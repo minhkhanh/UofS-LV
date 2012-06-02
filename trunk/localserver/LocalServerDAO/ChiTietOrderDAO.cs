@@ -24,6 +24,11 @@ namespace LocalServerDAO
             return ThucDonDienTu.DataContext.ChiTietOrders.Where(m => m.Order.MaOrder == maOrder).ToList();
         }
 
+        public static List<ChiTietOrder> LayNhieuChiTietOrderChuaThanhToan(int maBan)
+        {
+            return ThucDonDienTu.DataContext.ChiTietOrders.Where(m => m.TinhTrang != 4 && m.Order.Ban.MaBan == maBan).ToList();
+        }
+
         public static ChiTietOrder ThemChiTietOrder(ChiTietOrder _chiTietOrder)
         {
             ThucDonDienTu.DataContext.ChiTietOrders.InsertOnSubmit(_chiTietOrder);
@@ -83,5 +88,7 @@ namespace LocalServerDAO
 
             return result;
         }
+
+
     }
 }

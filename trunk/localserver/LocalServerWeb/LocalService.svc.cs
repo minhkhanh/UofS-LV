@@ -694,6 +694,19 @@ namespace LocalServerWeb
             return false;
         }
 
+        public List<ChiTietOrder> LapOrder(int maTaiKhoan, int maBan, string junk, List<ChiTietOrder> _listChiTietOrder)
+        {
+            try
+            {
+                return OrderBUS.LapOrder(maTaiKhoan, maBan, _listChiTietOrder);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return null;
+        }
+
         // Chi Tiet Order
         public ChiTietOrder LayChiTietOrder(int maChiTietOrder, string junk)
         {
@@ -721,6 +734,19 @@ namespace LocalServerWeb
                 Console.Error.WriteLine(e.Message);
             }
             return listChiTietOrder;
+        }
+
+        public List<ChiTietOrder> LayNhieuChiTietOrderChuaThanhToan(int maBan, string junk)
+        {
+            try
+            {
+                return ChiTietOrderBUS.LayNhieuChiTietOrderChuaThanhToan(maBan);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return null;
         }
 
         public ChiTietOrder ThemChiTietOrder(ChiTietOrder _chiTietOrder)
