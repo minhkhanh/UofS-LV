@@ -3,8 +3,10 @@ package client.menu.ui.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.DialogFragment;
+import android.app.AlertDialog;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.Loader;
 import android.os.Bundle;
 import android.view.ActionMode;
@@ -21,20 +23,23 @@ import android.widget.TextView;
 import client.menu.R;
 import client.menu.bus.SessionManager;
 import client.menu.bus.loader.TableListLoader;
+import client.menu.bus.task.CustomAsyncTask;
+import client.menu.bus.task.CustomAsyncTask.OnPostExecuteAsyncTaskListener;
+import client.menu.bus.task.PostTableSplitingTask;
 import client.menu.db.dto.BanDTO;
+import client.menu.ui.activity.MainMenuActivity;
 import client.menu.ui.adapter.TableListAdapter;
 import client.menu.util.U;
 
 public class TableMapFragment extends TableInAreaFragment implements
-        LoaderCallbacks<List<BanDTO>> {
+        LoaderCallbacks<List<BanDTO>>,
+        OnPostExecuteAsyncTaskListener<Void, Void, Boolean> {
 
-    // private String mTenKhuVuc;
-    // private Integer mMaKhuVuc;
     private TableListAdapter mTableAdapter;
     private GridView mTableGrid;
     private ActionMode mActionMode;
 
-    private BanDTO mBan;
+    // private Integer mMaBanChinh;
 
     private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
@@ -46,6 +51,8 @@ public class TableMapFragment extends TableInAreaFragment implements
         @Override
         public void onDestroyActionMode(ActionMode mode) {
             mActionMode = null;
+            
+            U.uncheckAllItems(mTableGrid);
         }
 
         @Override
@@ -58,15 +65,29 @@ public class TableMapFragment extends TableInAreaFragment implements
 
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            int pos = mTableGrid.getCheckedItemPosition();
+            BanDTO ban = mTableAdapter.getItem(pos);
+
             switch (item.getItemId()) {
                 case R.id.miSelectTable:
+                    Integer maBan = ban.getMaBan();
+                    SessionManager.getInstance().loadSession(maBan);
 
-                    SessionManager.getInstance().loadSession(mBan);
+                    Intent intent = new Intent(getActivity(), MainMenuActivity.class);
+                    startActivity(intent);
+                    break;
 
-                    DialogFragment newFragment = new AuthDialogFragment(
-                            AuthDialogFragment.ACT_SELECTING_TABLE);
-                    U.showDlgFragment(getActivity(), newFragment, "dialog");
-
+                case R.id.miSplitTable:
+                    Integer maBanChinh = ban.getMaBanChinh();
+                    if (maBanChinh != null) {
+                        PostTableSplitingTask task = new PostTableSplitingTask(
+                                getActivity(), 0, maBanChinh);
+                        task.setOnPostExecuteListener(TableMapFragment.this);
+                        task.execute();
+                    } else {
+                        U.toastText(getActivity(),
+                                R.string.message_single_table_spliting_failed);
+                    }
                     break;
 
                 default:
@@ -84,8 +105,6 @@ public class TableMapFragment extends TableInAreaFragment implements
                 if (mActionMode != null) {
                     return;
                 }
-
-                mBan = (BanDTO) parent.getItemAtPosition(pos);
 
                 mActionMode = getActivity().startActionMode(mActionModeCallback);
             }
@@ -137,6 +156,7 @@ public class TableMapFragment extends TableInAreaFragment implements
         mTableGrid = (GridView) getView().findViewById(R.id.gridTable);
         mTableGrid.setAdapter(mTableAdapter);
         mTableGrid.setOnItemClickListener(mOnItemClickListener);
+        mTableGrid.setChoiceMode(GridView.CHOICE_MODE_SINGLE);
 
         TextView areaName = (TextView) getView().findViewById(R.id.textAreaName);
         areaName.setText(mTenKhuVuc);
@@ -158,7 +178,6 @@ public class TableMapFragment extends TableInAreaFragment implements
 
     @Override
     public void onLoadFinished(Loader<List<BanDTO>> arg0, List<BanDTO> arg1) {
-        U.logOwnTag("table list finish : " + mTableAdapter.getCount());
         mTableAdapter.clear();
         mTableAdapter.addAll(arg1);
         mTableAdapter.notifyDataSetChanged();
@@ -166,6 +185,23 @@ public class TableMapFragment extends TableInAreaFragment implements
 
     @Override
     public void onLoaderReset(Loader<List<BanDTO>> arg0) {
-        U.logOwnTag("table list reset : " + mTableAdapter.getCount());
+    }
+
+    @Override
+    public void onPostExecuteAsyncTask(CustomAsyncTask<Void, Void, Boolean> task,
+            Boolean result) {
+        if (result) {
+            getLoaderManager().restartLoader(0, null, this);
+        } else {
+            new AlertDialog.Builder(getActivity())
+                    .setMessage(R.string.message_table_spliting_failed)
+                    .setNeutralButton(R.string.caption_ok,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            }).create().show();
+        }
     }
 }

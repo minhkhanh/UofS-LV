@@ -42,7 +42,12 @@ public class TableListAdapter extends CustomArrayAdapter<BanDTO> {
         }
 
         BanDTO ban = getData().get(pos);
-        holder.mName.setText(ban.getTenBan());
+        if (ban.getMaBanChinh() == null) {
+            holder.mName.setText(ban.getTenBan());    
+        } else {
+            holder.mName.setText(ban.getTenBan() + " - Nhóm " + ban.getMaBanChinh());
+        }
+        
         if (ban.getActive()) {
             holder.mImage.setImageResource(R.drawable.alarm_tick_icon);
         } else if (!ban.getActive()) {

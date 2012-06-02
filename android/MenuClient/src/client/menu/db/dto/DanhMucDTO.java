@@ -19,6 +19,8 @@ public class DanhMucDTO {
     public static final String CL_ID = BaseColumns._ID;
     public static final String CL_MA_DANH_MUC = "MaDanhMuc";
     public static final String CL_MA_DANH_MUC_CHA = "MaDanhMucCha";
+    
+    public static final String CL_MA_DANH_MUC_QN = TABLE_NAME + ".MaDanhMuc";
 
     Integer mId;
     Integer mMaDanhMuc;

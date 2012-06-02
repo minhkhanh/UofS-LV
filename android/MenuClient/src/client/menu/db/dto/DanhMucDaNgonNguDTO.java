@@ -16,6 +16,17 @@ public class DanhMucDaNgonNguDTO {
     public static final String CL_TEN_DANH_MUC = "TenDanhMuc";
     public static final String CL_MO_TA_DANH_MUC = "MoTaDanhMuc";
 
+    public static final String CL_ID_QN = TABLE_NAME + "." + BaseColumns._ID;
+    public static final String CL_MA_DANH_MUC_QN = TABLE_NAME + ".MaDanhMuc";
+    public static final String CL_MA_NGON_NGU_QN = TABLE_NAME + "." + "MaNgonNgu";
+    public static final String CL_TEN_DANH_MUC_QN = TABLE_NAME + "." + "TenDanhMuc";
+    public static final String CL_MO_TA_DANH_MUC_QN = TABLE_NAME + "." + "MoTaDanhMuc";
+
+    public static final String[] allColumns() {
+        return new String[] { CL_ID_QN, CL_MA_DANH_MUC_QN, CL_MA_NGON_NGU_QN,
+                CL_TEN_DANH_MUC_QN, CL_MO_TA_DANH_MUC_QN };
+    }
+
     private Integer mId;
     private Integer mMaDanhMuc;
     private Integer mMaNgonNgu;
@@ -41,7 +52,7 @@ public class DanhMucDaNgonNguDTO {
         return values;
     }
 
-    public static final DanhMucDaNgonNguDTO extractFrom(Cursor cursor) {
+    public static final DanhMucDaNgonNguDTO fromCursor(Cursor cursor) {
         DanhMucDaNgonNguDTO obj = new DanhMucDaNgonNguDTO();
         int i;
         if ((i = cursor.getColumnIndex(CL_ID)) != -1) {
