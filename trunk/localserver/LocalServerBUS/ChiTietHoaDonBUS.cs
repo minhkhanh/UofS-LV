@@ -25,23 +25,31 @@ namespace LocalServerBUS
             return ChiTietHoaDonDAO.ThemChiTietHoaDon(_chiTietHoaDon);
         }
 
-        public static List<ChiTietHoaDon> ThemNhieuChiTietHoaDon(List<ChiTietHoaDon> _listChiTietHoaDon)
+        public static bool ThemNhieuChiTietHoaDon(List<ChiTietHoaDon> _listChiTietHoaDon)
         {
+            bool ketQua = true;
             // Khi thanh toan xong, thay doi TinhTrang = 4 cua cac ct Order tuong ung
             if (ChiTietHoaDonDAO.ThemNhieuChiTietHoaDon(_listChiTietHoaDon) != null)
             {
                 int maBan = 0;
-                if(_listChiTietHoaDon.Count > 0)
+                if (_listChiTietHoaDon.Count > 0)
                     maBan = _listChiTietHoaDon[0].HoaDon.Ban.MaBan;
                 List<ChiTietOrder> listChiTietOrder = ChiTietOrderBUS.LayNhieuChiTietOrderChuaThanhToan(maBan);
                 foreach (ChiTietOrder ctOrder in listChiTietOrder)
                 {
                     ctOrder.TinhTrang = 4;
-                    ChiTietOrderBUS.SuaChiTietOrder(ctOrder);
+                    if (!ChiTietOrderBUS.SuaChiTietOrder(ctOrder))
+                    {
+                        ketQua = false;
+                    }
                 }
             }
+            else
+            {
+                ketQua = false;
+            }
 
-            return _listChiTietHoaDon;
+            return ketQua;
         }
 
         public static bool SuaChiTietHoaDon(ChiTietHoaDon _chiTietHoaDon)
