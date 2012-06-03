@@ -29,6 +29,17 @@ namespace LocalServerDAO
             return null;
         }
 
+        public static KhuyenMai LayKhuyenMai(int maMon)
+        {
+            var temp = ThucDonDienTu.DataContext.KhuyenMaiMons.Where(c => c.MonAn.MaMonAn == maMon);
+            if (temp.Count() > 0)
+            {
+                KhuyenMaiMon ct = temp.First();
+                return ct.KhuyenMai;
+            }
+            return null;
+        }
+
         public static bool Xoa(KhuyenMaiMon khuyenMaiMon)
         {
             try

@@ -52,7 +52,7 @@ namespace LocalServerBUS
                 MonAn monAn = MonAnBUS.LayMonAn(maMonAn);
                 if (monAn != null)
                 {
-                    BoPhanCheBien boPhanCheBien = ChiTietDanhMucBoPhanCheBienBUS.LayBoPhanCheBienTheoDanhMuc(monAn.DanhMuc.MaDanhMuc);
+                    BoPhanCheBien boPhanCheBien = ChiTietDanhMucBoPhanCheBienBUS.LayBoPhanCheBien(monAn.DanhMuc.MaDanhMuc);
                     ct._maBoPhanCheBien = (boPhanCheBien != null) ? boPhanCheBien.MaBoPhanCheBien : 0;
                 }
             }

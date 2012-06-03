@@ -859,6 +859,19 @@ namespace LocalServerWeb
             return listHoaDon;
         }
 
+        public HoaDon LapHoaDon(int maOrder, string junk)
+        {
+            try
+            {
+                return HoaDonBUS.LapHoaDon(maOrder);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return null;
+        }
+
         public HoaDon ThemHoaDon(HoaDon _hoaDon)
         {
             try
@@ -928,7 +941,7 @@ namespace LocalServerWeb
             return null;
         }
 
-        public bool ThemNhieuChiTietHoaDon(List<ChiTietHoaDon> _listChiTietHoaDon)
+        public int ThemNhieuChiTietHoaDon(List<ChiTietHoaDon> _listChiTietHoaDon)
         {
             try
             {
@@ -938,7 +951,7 @@ namespace LocalServerWeb
             {
                 Console.Error.WriteLine(e.Message);
             }
-            return false;
+            return 1;
         }
 
         public bool SuaChiTietHoaDon(ChiTietHoaDon _chiTietHoaDon)
@@ -1119,6 +1132,16 @@ namespace LocalServerWeb
         public List<PhuThuKhuVuc> LayDanhSachPhuThuKhuVucJson(string junk)
         {
             return LayDanhSachPhuThuKhuVuc(junk);
+        }
+
+        public HoaDon LapHoaDonJSon(int maOrder, string junk)
+        {
+            return LapHoaDon(maOrder, junk);
+        }
+
+        public List<ChiTietOrder> LapOrderJSon(int maTaiKhoan, int maBan, string junk, List<ChiTietOrder> _listChiTietOrder)
+        {
+            return LapOrder(maTaiKhoan, maBan, junk, _listChiTietOrder);
         }
 
         /*END OF JSON SERVICE AREA*/

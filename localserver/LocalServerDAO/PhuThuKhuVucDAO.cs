@@ -29,6 +29,17 @@ namespace LocalServerDAO
             return null;
         }
 
+        public static PhuThu LayPhuThu(int maKhuVuc)
+        {
+            var temp = ThucDonDienTu.DataContext.PhuThuKhuVucs.Where(c => c.KhuVuc.MaKhuVuc == maKhuVuc);
+            if (temp.Count() > 0)
+            {
+                PhuThuKhuVuc ct = temp.First();
+                return ct.PhuThu;
+            }
+            return null;
+        }
+
         public static bool Xoa(PhuThuKhuVuc phuThuKhuVuc)
         {
             try

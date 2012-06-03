@@ -50,5 +50,29 @@ namespace LocalServerBUS
         {
             return ChiTietOrderDAO.SuaChiTietOrder(_chiTietOrder);
         }
+
+        // Lay ra cac ct Order chua thanh toan cua Ban
+        // Thay doi TinhTrang = 4, tuc la xac nhan da thanh toan
+        public static bool ThayDoiTinhTrangDaThanhToan(int maBan)
+        {
+            bool ketQua = true;
+
+            // Thay doi Tinh Trang cua cac ct Order tuong ung
+            List<ChiTietOrder> listChiTietOrder = ChiTietOrderBUS.LayNhieuChiTietOrderChuaThanhToan(maBan);
+            foreach (ChiTietOrder ctOrder in listChiTietOrder)
+            {
+                ctOrder.TinhTrang = 4;
+                if (!ChiTietOrderBUS.SuaChiTietOrder(ctOrder))
+                {
+                    ketQua = false;
+                }
+            }
+
+            // Tach ban
+            BanBUS.TachBan(maBan);
+
+            return ketQua;
+
+        }
     }
 }

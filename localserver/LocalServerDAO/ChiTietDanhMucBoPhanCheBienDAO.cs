@@ -29,7 +29,7 @@ namespace LocalServerDAO
             return null;
         }
 
-        public static BoPhanCheBien LayBoPhanCheBienTheoDanhMuc(int maDanhMuc)
+        public static BoPhanCheBien LayBoPhanCheBien(int maDanhMuc)
         {
             var temp = ThucDonDienTu.DataContext.ChiTietDanhMucBoPhanCheBiens.Where(c => c.DanhMuc.MaDanhMuc == maDanhMuc);
             if (temp.Count() > 0)
