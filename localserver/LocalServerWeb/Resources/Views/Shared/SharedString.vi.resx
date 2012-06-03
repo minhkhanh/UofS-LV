@@ -159,6 +159,9 @@
   <data name="Back" xml:space="preserve">
     <value>Trở về</value>
   </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Chọn file</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Bỏ qua</value>
   </data>
