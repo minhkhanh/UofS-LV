@@ -2,29 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
-
+    android:orientation="vertical" android:focusable="false">
+
     <TextView
         android:id="@+id/textCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/activated_background"
+        android:padding="10dp"
         android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" android:padding="10dp"/>
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageView
+        android:id="@+id/imgAboveDivider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/listDivider"/>
 
     <LinearLayout
         android:id="@+id/linearExpandable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="fill_horizontal"
         android:orientation="vertical"
-        android:visibility="gone" >
-
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/list_selector_background_focused_selected" />
+        android:paddingLeft="20dp"
+        android:visibility="visible" >
     </LinearLayout>
 
 </LinearLayout>

@@ -3,71 +3,37 @@ package client.menu.ui.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.FragmentTransaction;
-import android.app.ListFragment;
-import android.app.LoaderManager.LoaderCallbacks;
-import android.content.Loader;
-import android.database.Cursor;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.view.View;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import client.menu.R;
 import client.menu.bus.loader.RootCategoryListLoader;
 import client.menu.db.dto.DanhMucDTO;
 import client.menu.db.dto.DanhMucDaNgonNguDTO;
 import client.menu.ui.adapter.ExpandableCategoryListAdapter;
+import client.menu.ui.view.ExpandableCategoryList;
+import client.menu.ui.view.ExpandableCategoryView;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Loader;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ScrollView;
+import android.widget.SimpleCursorAdapter;
 
-public class CategoryListFragment extends ListFragment implements
+public class CategoryListFragment extends Fragment implements
         LoaderCallbacks<List<DanhMucDaNgonNguDTO>> {
-
-    private boolean mIsDualPane;
     private int mSelIndex;
-    private ExpandableCategoryListAdapter mAdapter;
+    private boolean mIsDualPane;
 
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (mIsDualPane) {
-                getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-                showDetails(mSelIndex);
-            }
-        };
-    };
+    private ExpandableCategoryList mCategoryList;
+    private ExpandableCategoryListAdapter mListAdapter;
 
     @Override
-    public void onLoaderReset(Loader<List<DanhMucDaNgonNguDTO>> loader) {
-        // mAdapter.swapCursor(null);
-        mAdapter.clear();
-        mAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onLoadFinished(Loader<List<DanhMucDaNgonNguDTO>> loader,
-            List<DanhMucDaNgonNguDTO> result) {
-        // mAdapter.swapCursor(cursor);
-        mAdapter.clear();
-        mAdapter.addAll(result);
-        mAdapter.notifyDataSetChanged();
-        // handler.sendEmptyMessage(0);
-    }
-
-    @Override
-    public Loader<List<DanhMucDaNgonNguDTO>> onCreateLoader(int id, Bundle args) {
-        return new RootCategoryListLoader(getActivity());
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt("mSelIndex", mSelIndex);
-    }
-
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        showDetails(position);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        return new ExpandableCategoryList(getActivity());
     }
 
     @Override
@@ -78,15 +44,11 @@ public class CategoryListFragment extends ListFragment implements
         }
 
         getView().setBackgroundResource(R.color._55f5f5f5);
-        // getView().setAlpha(0.35f);
 
-        // String[] from = new String[] { DanhMucDaNgonNguDTO.CL_TEN_DANH_MUC };
-        // int[] to = new int[] { android.R.id.text1 };
-        // mAdapter = new SimpleCursorAdapter(getActivity(),
-        // android.R.layout.simple_list_item_activated_1, null, from, to, 0);
-        mAdapter = new ExpandableCategoryListAdapter(getActivity(),
+        mListAdapter = new ExpandableCategoryListAdapter(getActivity(),
                 new ArrayList<DanhMucDaNgonNguDTO>());
-        setListAdapter(mAdapter);
+        mCategoryList = (ExpandableCategoryList) getView();
+        mCategoryList.setCategoryAdapter(mListAdapter);
 
         getLoaderManager().initLoader(0, null, this);
 
@@ -94,39 +56,66 @@ public class CategoryListFragment extends ListFragment implements
         mIsDualPane = dishList != null && dishList.getVisibility() == View.VISIBLE;
     }
 
-    void showDetails(int index) {
-        mSelIndex = index;
-
-        Cursor cursor = ((SimpleCursorAdapter) getListAdapter()).getCursor();
-        if (cursor == null || // in case of loader not finished yet
-                !cursor.moveToPosition(index))
-            return;
-
-        int maDanhMuc = cursor.getInt(cursor.getColumnIndex(DanhMucDTO.CL_MA_DANH_MUC));
-
-        if (mIsDualPane) {
-            getListView().setItemChecked(index, true);
-
-            DishListFragment dishList = (DishListFragment) getFragmentManager()
-                    .findFragmentById(R.id.RightPaneHolder);
-
-            if (dishList == null || dishList.getMaDanhMuc() != maDanhMuc) {
-                dishList = DishListFragment.newInstance(maDanhMuc);
-
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.RightPaneHolder, dishList);
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                ft.commit();
-            }
-
-        } else {
-            DishListFragment dishList = DishListFragment.newInstance(maDanhMuc);
-
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.LeftPaneHolder, dishList);
-            ft.addToBackStack(null);
-            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            ft.commit();
-        }
+    @Override
+    public void onLoaderReset(Loader<List<DanhMucDaNgonNguDTO>> loader) {
+        mListAdapter.clear();
+        mListAdapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void onLoadFinished(Loader<List<DanhMucDaNgonNguDTO>> loader,
+            List<DanhMucDaNgonNguDTO> result) {
+        // for (DanhMucDaNgonNguDTO d : result) {
+        // ExpandableCategoryView item = new
+        // ExpandableCategoryView(getActivity(), mCategoryList);
+        // item.bindData(d);
+        //
+        // mCategoryList.addCategory(item);
+        // }
+        mListAdapter.clear();
+        mListAdapter.addAll(result);
+        mListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public Loader<List<DanhMucDaNgonNguDTO>> onCreateLoader(int id, Bundle args) {
+        return new RootCategoryListLoader(getActivity());
+    }
+
+    // void showDetails(int index) {
+    // mSelIndex = index;
+    //
+    // Cursor cursor = ((SimpleCursorAdapter) getListAdapter()).getCursor();
+    // if (cursor == null || // in case of loader not finished yet
+    // !cursor.moveToPosition(index))
+    // return;
+    //
+    // int maDanhMuc =
+    // cursor.getInt(cursor.getColumnIndex(DanhMucDTO.CL_MA_DANH_MUC));
+    //
+    // if (mIsDualPane) {
+    // getListView().setItemChecked(index, true);
+    //
+    // DishListFragment dishList = (DishListFragment) getFragmentManager()
+    // .findFragmentById(R.id.RightPaneHolder);
+    //
+    // if (dishList == null || dishList.getMaDanhMuc() != maDanhMuc) {
+    // dishList = DishListFragment.newInstance(maDanhMuc);
+    //
+    // FragmentTransaction ft = getFragmentManager().beginTransaction();
+    // ft.replace(R.id.RightPaneHolder, dishList);
+    // ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+    // ft.commit();
+    // }
+    //
+    // } else {
+    // DishListFragment dishList = DishListFragment.newInstance(maDanhMuc);
+    //
+    // FragmentTransaction ft = getFragmentManager().beginTransaction();
+    // ft.replace(R.id.LeftPaneHolder, dishList);
+    // ft.addToBackStack(null);
+    // ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+    // ft.commit();
+    // }
+    // }
 }
