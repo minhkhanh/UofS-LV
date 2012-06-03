@@ -6,21 +6,25 @@
 <%@ Import Namespace="LocalServerWeb.Resources.Views.Shared" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    <%:AdminUserString.AddTitle %>
+    <%:AdminUserString.EditTitle %>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="PageHeadingContent" runat="server">
-    <%:AdminUserString.AddTitle %>
+    <%:AdminUserString.EditTitle %>
+    <%: Url.RequestContext.RouteData.Values["id"] %>
 </asp:Content>
 
+
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <!--  Error message: Cannot add user  -->
-    <% if (TempData["errorCannotAdd"] != null)
+    <!--  Error message: Cannot edit user  -->
+    <% if (TempData["errorCannotEdit"] != null)
        {
-           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotAdd"]);
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotEdit"]);
        } 
     %>
-    <% Html.BeginForm("Add", "AdminUser", FormMethod.Post, new { enctype = "multipart/form-data" }); %>
+
+    <% Html.BeginForm("Edit", "AdminUser", FormMethod.Post, new { enctype = "multipart/form-data" }); %>
     <!-- start id-form -->
+    <input type="hidden" name="maTaiKhoan" value="<%:Url.RequestContext.RouteData.Values["id"] %>" />
     <table border="0" cellpadding="0" cellspacing="0" id="id-form">
         <tr>
             <th valign="top">
@@ -46,7 +50,7 @@
             </th>
             <td>
                 <input type="password" class="inp-form<%:(((Dictionary<string, string>) TempData["checkDic"]).ContainsKey("matKhau") && ((Dictionary<string, string>) TempData["checkDic"])["matKhau"]!=null) ? "-error" : ""%>"
-                    name="matKhau" />
+                    name="matKhau" value="<%:TempData["matKhau"] ?? ""%>"/>
             </td>
             <td>
                 <% if (((Dictionary<string, string>)TempData["checkDic"]).ContainsKey("matKhau") && ((Dictionary<string, string>)TempData["checkDic"])["matKhau"] != null)
@@ -64,7 +68,7 @@
             </th>
             <td>
                 <input type="password" class="inp-form<%:(((Dictionary<string, string>) TempData["checkDic"]).ContainsKey("xacNhanMatKhau") && ((Dictionary<string, string>) TempData["checkDic"])["xacNhanMatKhau"]!=null) ? "-error" : ""%>"
-                    name="xacNhanMatKhau" />
+                    name="xacNhanMatKhau" value="<%:TempData["matKhau"] ?? ""%>"/>
             </td>
             <td>
                 <% if (((Dictionary<string, string>)TempData["checkDic"]).ContainsKey("xacNhanMatKhau") && ((Dictionary<string, string>)TempData["checkDic"])["xacNhanMatKhau"] != null)
@@ -196,7 +200,7 @@
                 &nbsp;
             </th>
             <td valign="top">
-                <input type="submit" value="<%: SharedString.Add %>"/>
+                <input type="submit" value="<%: SharedString.Edit %>"/>
                 <input type="reset" value="<%: SharedString.Reset %>" />
                 <input type="button" value="<%: SharedString.Back %>"  onclick="window.location.href='<%: Url.Action("Index", "AdminUser") %>';"/>
             </td>
