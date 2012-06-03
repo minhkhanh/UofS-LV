@@ -69,7 +69,7 @@ namespace LocalServerBUS
             }
 
             // Tach ban
-            BanBUS.TachBan(maBan);
+            //BanBUS.TachBan(maBan);
 
             return ketQua;
 
