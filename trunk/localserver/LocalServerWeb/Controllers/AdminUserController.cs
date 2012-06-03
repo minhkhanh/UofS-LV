@@ -113,7 +113,7 @@ namespace LocalServerWeb.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult AddUser()
+        public ActionResult Add()
         {
             SharedCode.FillAdminMainMenu(ViewData, 1, 1);
             ViewData["listNhomTaiKhoan"] = NhomTaiKhoanBUS.LayDanhSachNhomTaiKhoan();
@@ -126,7 +126,7 @@ namespace LocalServerWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddUser(string tenTaiKhoan, string matKhau, string xacNhanMatKhau, string hoTen, int day, int month, int year, int gioiTinh, int nhomTaiKhoan, string cmnd, object picture)
+        public ActionResult Add(string tenTaiKhoan, string matKhau, string xacNhanMatKhau, string hoTen, int day, int month, int year, int gioiTinh, int nhomTaiKhoan, string cmnd, object picture)
         {
             TempData["tenTaiKhoan"] = tenTaiKhoan;
             TempData["hoTen"] = hoTen;
@@ -208,7 +208,7 @@ namespace LocalServerWeb.Controllers
                 }                
             }
             TempData["checkDic"] = checkDic;
-            return RedirectToAction("AddUser");
+            return RedirectToAction("Add");
         }
     }
 }
