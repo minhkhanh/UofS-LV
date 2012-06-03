@@ -30,7 +30,7 @@ namespace LocalServerBUS
             return HoaDonDAO.SuaHoaDon(_hoaDon);
         }
 
-        public static HoaDon LapHoaDon(int maOrder, int maBan)
+        public static HoaDon LapHoaDon(int maOrder)
         {
 
             Order order = OrderBUS.LayOrder(maOrder);

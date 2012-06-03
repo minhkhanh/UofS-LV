@@ -859,11 +859,11 @@ namespace LocalServerWeb
             return listHoaDon;
         }
 
-        public HoaDon LapHoaDon(int maOrder, int maBan, string junk)
+        public HoaDon LapHoaDon(int maOrder, string junk)
         {
             try
             {
-                return HoaDonBUS.LapHoaDon(maOrder, maBan);
+                return HoaDonBUS.LapHoaDon(maOrder);
             }
             catch (Exception e)
             {
@@ -1134,9 +1134,9 @@ namespace LocalServerWeb
             return LayDanhSachPhuThuKhuVuc(junk);
         }
 
-        public HoaDon LapHoaDonJson(int maOrder, int maBan, string junk)
+        public HoaDon LapHoaDonJson(int maOrder, string junk)
         {
-            return LapHoaDon(maOrder, maBan, junk);
+            return LapHoaDon(maOrder, junk);
         }
 
         public List<ChiTietOrder> LapOrderJson(int maTaiKhoan, int maBan, string junk, List<ChiTietOrder> _listChiTietOrder)
