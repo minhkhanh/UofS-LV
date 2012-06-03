@@ -39,7 +39,7 @@ namespace LocalServerBUS
                 return 1;
             }
 
-            // B2: thay doi Tinh Trang cua cac ct Order tuong ung & Tach ban
+            // B2: thay doi Tinh Trang cua cac ct Order tuong ung
             int maBan = 0;
             if (_listChiTietHoaDon.Count > 0)
                 maBan = _listChiTietHoaDon[0].HoaDon.Ban.MaBan;
