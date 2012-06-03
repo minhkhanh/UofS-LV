@@ -234,6 +234,10 @@ namespace LocalServerWeb.Controllers
                         TempData["infoAddSuccess"] = AdminUserString.InfoAddSuccess;
                         return RedirectToAction("Index", "AdminUser");
                     }
+                    else
+                    {
+                        TempData["errorCannotAdd"] = AdminUserString.ErrorCannotAdd;
+                    }
                 }
                 catch (Exception e)
                 {
