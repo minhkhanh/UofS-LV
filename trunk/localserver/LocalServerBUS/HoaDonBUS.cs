@@ -60,6 +60,8 @@ namespace LocalServerBUS
             if (phuThu != null && phuThu.BatDau <= hoaDon.ThoiDiemLap && hoaDon.ThoiDiemLap <= phuThu.KetThuc)
                 giaTriPhuThu = phuThu.GiaTang;
 
+            hoaDon.TongTien += giaTriPhuThu;
+
             // B4: Them nhieu ct Hoa Don
             List<ChiTietOrder> listCTOrder = ChiTietOrderBUS.LayNhieuChiTietOrder(maOrder);
             List<ChiTietHoaDon> listCTHoaDon = new List<ChiTietHoaDon>();
@@ -81,23 +83,42 @@ namespace LocalServerBUS
             // Tinh tong tien cho hoa don
             foreach (ChiTietHoaDon ctHoaDon in listCTHoaDon)
             {
+                if (ctHoaDon.DonGiaLuuTru == -1)
+                    continue;
+
                 KhuyenMai kmMon = KhuyenMaiMonBUS.LayKhuyenMai(ctHoaDon.MonAn.MaMonAn);
                 if (kmMon != null && kmMon.BatDau <= hoaDon.ThoiDiemLap && hoaDon.ThoiDiemLap <= kmMon.KetThuc)
                 {
                     if (kmMon.GiaGiam != 0)
                     {
-                        ctHoaDon.ThanhTien = ctHoaDon.DonGiaLuuTru * ctHoaDon.SoLuong - kmMon.GiaGiam;
+                        ctHoaDon.GiaTriKhuyenMaiLuuTru = kmMon.GiaGiam;
+                        ctHoaDon.ThanhTien = ctHoaDon.DonGiaLuuTru * ctHoaDon.SoLuong - ctHoaDon.GiaTriKhuyenMaiLuuTru;
+                        
                     }
                     else
                     {
-                        ctHoaDon.ThanhTien = (ctHoaDon.DonGiaLuuTru * ctHoaDon.SoLuong) * (100-kmMon.TiLeGiam) / 100;
+                        ctHoaDon.GiaTriKhuyenMaiLuuTru = (ctHoaDon.DonGiaLuuTru * ctHoaDon.SoLuong) * (kmMon.TiLeGiam) / 100;
+                        ctHoaDon.ThanhTien = (ctHoaDon.DonGiaLuuTru * ctHoaDon.SoLuong) - ctHoaDon.GiaTriKhuyenMaiLuuTru;
+
                     }
                 }
                 hoaDon.TongTien += ctHoaDon.ThanhTien;
+                
             }
 
             // B6: Ap dung khuyen mai Hoa Don
-
+            KhuyenMai kmHoaDon = KhuyenMaiHoaDonBUS.LayKhuyenMai(hoaDon.TongTien);
+            if (kmHoaDon != null && kmHoaDon.BatDau <= hoaDon.ThoiDiemLap && hoaDon.ThoiDiemLap <= kmHoaDon.KetThuc)
+            {
+                if (kmHoaDon.GiaGiam != 0)
+                {
+                    hoaDon.TongTien -= kmHoaDon.GiaGiam;
+                }
+                else
+                {
+                    hoaDon.TongTien -= (hoaDon.TongTien) * (100 - kmHoaDon.TiLeGiam) / 100;
+                }
+            }
 
             // B7: Cap nhat Hoa don
             HoaDonBUS.SuaHoaDon(hoaDon);

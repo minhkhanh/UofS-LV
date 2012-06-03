@@ -18,13 +18,20 @@ namespace LocalServerDAO
             return ThucDonDienTu.DataContext.KhuyenMaiHoaDons.Where(k => k.KhuyenMai.MaKhuyenMai == maKhuyenMai).ToList();
         }
 
-        public static KhuyenMai LayKhuyenMai(int tongTien)
+        public static KhuyenMai LayKhuyenMai(float tongTien)
         {
             var temp = ThucDonDienTu.DataContext.KhuyenMaiHoaDons.Where(c => c.MucGiaApDung <= tongTien);
+            KhuyenMaiHoaDon kmLonNhat;
             if (temp.Count() > 0)
             {
-                KhuyenMaiHoaDon ct = temp.First();
-                return ct.KhuyenMai;
+                kmLonNhat = temp.First();
+                foreach (KhuyenMaiHoaDon kmHoaDon in temp)
+                {
+                    if (kmHoaDon.MucGiaApDung > kmLonNhat.MucGiaApDung)
+                        kmLonNhat = kmHoaDon;
+                }
+
+                return kmLonNhat.KhuyenMai;
             }
             return null;
         }
