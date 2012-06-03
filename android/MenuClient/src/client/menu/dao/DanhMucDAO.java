@@ -73,9 +73,15 @@ public class DanhMucDAO extends AbstractDAO {
                 + DanhMucDaNgonNguDTO.TABLE_NAME + " ON(" + DanhMucDTO.CL_MA_DANH_MUC_QN
                 + "=" + DanhMucDaNgonNguDTO.CL_MA_DANH_MUC_QN + ")");
 
-        String selection = DanhMucDaNgonNguDTO.CL_MA_NGON_NGU + "=?" + " and "
-                + DanhMucDTO.CL_MA_DANH_MUC_CHA + "=?";
-        String[] selectionArgs = { maNgonNgu.toString(), maDanhMucCha.toString() };
+        String selection = DanhMucDaNgonNguDTO.CL_MA_NGON_NGU + "=?" + " and ";
+        String[] selectionArgs;
+        if (maDanhMucCha != null) {
+            selection += DanhMucDTO.CL_MA_DANH_MUC_CHA + "=?";
+            selectionArgs = new String[] { maNgonNgu.toString(), maDanhMucCha.toString() };
+        } else {
+            selection += DanhMucDTO.CL_MA_DANH_MUC_CHA + " is null";
+            selectionArgs = new String[] { maNgonNgu.toString() };
+        }
         cursor = query.query(db, DanhMucDaNgonNguDTO.allColumns(), selection,
                 selectionArgs, null, null, null);
 
