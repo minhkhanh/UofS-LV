@@ -18,6 +18,18 @@ namespace LocalServerDAO
             return ThucDonDienTu.DataContext.KhuyenMaiHoaDons.Where(k => k.KhuyenMai.MaKhuyenMai == maKhuyenMai).ToList();
         }
 
+        public static KhuyenMai LayKhuyenMai(int tongTien)
+        {
+            var temp = ThucDonDienTu.DataContext.KhuyenMaiHoaDons.Where(c => c.MucGiaApDung <= tongTien);
+            if (temp.Count() > 0)
+            {
+                KhuyenMaiHoaDon ct = temp.First();
+                return ct.KhuyenMai;
+            }
+            return null;
+        }
+        
+
         public static KhuyenMaiHoaDon LayKhuyenMaiHoaDon(int maKhuyenMai)
         {
             var temp = ThucDonDienTu.DataContext.KhuyenMaiHoaDons.Where(c => c.KhuyenMai.MaKhuyenMai == maKhuyenMai);
