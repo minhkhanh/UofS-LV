@@ -35,9 +35,9 @@ namespace LocalServerBUS
             return ChiTietDanhMucBoPhanCheBienDAO.Them(chiTietDanhMucBoPhanCheBien);
         }
 
-        public static BoPhanCheBien LayBoPhanCheBienTheoDanhMuc(int maDanhMuc)
+        public static BoPhanCheBien LayBoPhanCheBien(int maDanhMuc)
         {
-            return ChiTietDanhMucBoPhanCheBienDAO.LayBoPhanCheBienTheoDanhMuc(maDanhMuc);
+            return ChiTietDanhMucBoPhanCheBienDAO.LayBoPhanCheBien(maDanhMuc);
         }
     }
 }

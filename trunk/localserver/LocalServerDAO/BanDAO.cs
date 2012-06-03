@@ -28,7 +28,8 @@ namespace LocalServerDAO
         {
             //lấy về đối tượng cần tách
             var temp = ThucDonDienTu.DataContext.Bans.Where(b => b.MaBan == maBan);
-            if (temp.Count() == 0) return false;
+            if (temp.Count() == 0) 
+                return false;
             Ban banChinh = temp.First();
             banChinh.Active = true;
 

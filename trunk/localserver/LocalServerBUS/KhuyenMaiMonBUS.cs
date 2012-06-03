@@ -24,6 +24,11 @@ namespace LocalServerBUS
             return KhuyenMaiMonDAO.LayKhuyenMaiMon(maKhuyenMai, maMon);
         }
 
+        public static KhuyenMai LayKhuyenMai(int maMon)
+        {
+            return KhuyenMaiMonDAO.LayKhuyenMai(maMon);
+        }
+
         public static bool Xoa(KhuyenMaiMon khuyenMaiMon)
         {
             return KhuyenMaiMonDAO.Xoa(khuyenMaiMon);
