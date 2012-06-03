@@ -79,11 +79,11 @@ namespace LocalServerWeb.Resources.Views.AdminUser {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add user.
+        ///   Looks up a localized string similar to Add new user.
         /// </summary>
-        public static string AddUser {
+        public static string AddTitle {
             get {
-                return ResourceManager.GetString("AddUser", resourceCulture);
+                return ResourceManager.GetString("AddTitle", resourceCulture);
             }
         }
         
@@ -160,11 +160,56 @@ namespace LocalServerWeb.Resources.Views.AdminUser {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit user.
+        /// </summary>
+        public static string EditTitle {
+            get {
+                return ResourceManager.GetString("EditTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t add.
+        /// </summary>
+        public static string ErrorCannotAdd {
+            get {
+                return ResourceManager.GetString("ErrorCannotAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t delete.
+        /// </summary>
+        public static string ErrorCannotDelete {
+            get {
+                return ResourceManager.GetString("ErrorCannotDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t edit.
+        /// </summary>
+        public static string ErrorCannotEdit {
+            get {
+                return ResourceManager.GetString("ErrorCannotEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t lock/unlock.
+        /// </summary>
+        public static string ErrorCannotLockUnlock {
+            get {
+                return ResourceManager.GetString("ErrorCannotLockUnlock", resourceCulture);
             }
         }
         
@@ -196,6 +241,33 @@ namespace LocalServerWeb.Resources.Views.AdminUser {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add successfully.
+        /// </summary>
+        public static string InfoAddSuccess {
+            get {
+                return ResourceManager.GetString("InfoAddSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete successfully.
+        /// </summary>
+        public static string InfoDeleteSuccess {
+            get {
+                return ResourceManager.GetString("InfoDeleteSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit succesfully.
+        /// </summary>
+        public static string InfoEditSuccess {
+            get {
+                return ResourceManager.GetString("InfoEditSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your input is wrong..
         /// </summary>
         public static string InputWrong {
@@ -210,6 +282,15 @@ namespace LocalServerWeb.Resources.Views.AdminUser {
         public static string Lock {
             get {
                 return ResourceManager.GetString("Lock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lock/Unlock successfully.
+        /// </summary>
+        public static string LockUnLockSuccess {
+            get {
+                return ResourceManager.GetString("LockUnLockSuccess", resourceCulture);
             }
         }
         

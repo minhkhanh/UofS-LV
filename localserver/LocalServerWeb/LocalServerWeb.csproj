@@ -957,6 +957,7 @@
     <Content Include="Views\AdminUnit\Edit.aspx" />
     <Content Include="Views\AdminUnit\Index.aspx" />
     <Content Include="Views\AdminUser\Add.aspx" />
+    <Content Include="Views\AdminUser\Edit.aspx" />
     <Content Include="Views\AdminUser\Index.aspx" />
     <Content Include="Views\Error\Index.aspx" />
     <Content Include="Views\FoodCategory\Category.aspx" />

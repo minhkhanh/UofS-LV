@@ -218,7 +218,6 @@ namespace LocalServerWeb.Controllers
 
         public ActionResult Edit(int? id)
         {
-            SharedCode.FillAdminMainMenu(ViewData, 3, 6);
             if (TempData["checkDic"] == null)
             {
                 //TempData.Clear();
