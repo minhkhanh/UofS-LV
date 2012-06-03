@@ -24,6 +24,11 @@ namespace LocalServerBUS
             return KhuyenMaiHoaDonDAO.LayKhuyenMaiHoaDon(maKhuyenMai);
         }
 
+        public static KhuyenMai LayKhuyenMai(float tongTien)
+        {
+            return KhuyenMaiHoaDonDAO.LayKhuyenMai(tongTien);
+        }
+
         public static bool CapNhat(KhuyenMaiHoaDon khuyenMaiHoaDon)
         {
             return KhuyenMaiHoaDonDAO.CapNhat(khuyenMaiHoaDon);
