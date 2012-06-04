@@ -18,7 +18,6 @@ namespace LocalServerWeb.Controllers
 
         public ActionResult Index(string page)
         {
-            SharedCode.FillAdminMainMenu(ViewData, 2, 0);
             ViewData["listDanhMuc"] = LayDanhSachDanhMucLevelThapNhat();
 
             int _page = 1;
@@ -32,7 +31,6 @@ namespace LocalServerWeb.Controllers
 
         public ActionResult Add()
         {
-            SharedCode.FillAdminMainMenu(ViewData, 2, 1);
             ViewData["listDanhMuc"] = LayDanhSachDanhMucLevelThapNhat();
             return View();
         }
@@ -94,8 +92,6 @@ namespace LocalServerWeb.Controllers
                 TempData["maDanhMuc"] = (monAn.DanhMuc != null) ? monAn.DanhMuc.MaDanhMuc : 1;
                 ViewData["status"] = monAn.NgungBan;
             }
-
-            SharedCode.FillAdminMainMenu(ViewData, 2, 0);
 
             ViewData["listDanhMuc"] = LayDanhSachDanhMucLevelThapNhat();
             ViewData["monAn"] = monAn;
@@ -499,25 +495,6 @@ namespace LocalServerWeb.Controllers
         {
             int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
             return MonAnBUS.LayDanhSachMonAnTheoMaNgonNgu(maNgonNgu, SharedString.NoInformation);
-        }
-
-        private List<DanhMuc> LayDanhSachDanhMuc()
-        {
-            int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
-            List<DanhMuc> listDanhMuc =  DanhMucBUS.LayDanhSachDanhMucTheoMaNgonNgu(maNgonNgu, SharedString.NoInformation);
-            if (listDanhMuc != null && listDanhMuc.Count > 0)
-            {
-                foreach (DanhMuc danhMuc in listDanhMuc)
-                {
-                    if (danhMuc.MaDanhMuc == 1)
-                    {
-                        listDanhMuc.Remove(danhMuc);
-                        break;
-                    }
-                }
-            }
-
-            return listDanhMuc;
         }
 
         private List<DanhMuc> LayDanhSachDanhMucLevelThapNhat()
