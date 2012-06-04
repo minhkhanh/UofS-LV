@@ -14,7 +14,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.listDanhMucCha').selectbox({ inputClass: "styledselect_pages", debug: true });
+            $('.listDanhMuc').selectbox({ inputClass: "styledselect_pages", debug: true });
         });
     </script>
 </asp:Content>
@@ -57,7 +57,7 @@
     %>
     <!--  Main code  --------------------------------------------------------------------------->
     <!--  start table-content  -->
-    <% if (ViewData["listDanhMuc"] != null && ((List<DanhMuc>)ViewData["listDanhMuc"]).Count > 0)
+    <% if (ViewData["listDanhMucThat"] != null && ((List<DanhMuc>)ViewData["listDanhMucThat"]).Count > 0)
        {
     %>
     <div id="table-content">
@@ -86,7 +86,7 @@
                 </th>
             </tr>
             <% int iCount = 0; %>
-            <% foreach (var danhMuc in (List<DanhMuc>)ViewData["listDanhMuc"])
+            <% foreach (var danhMuc in (List<DanhMuc>)ViewData["listDanhMucThat"])
                {
             %>
             <tr <%: (iCount++%2==0)?"":"class=alternate-row" %>>
@@ -101,7 +101,7 @@
                 </td>
                 <td>
                     <% Html.BeginForm("ChangeParentCategory", "AdminCategory", FormMethod.Post); %>
-                    <%= Html.DropDownList("maDanhMucCha", new SelectList(ViewData["listDanhMuc"] as List<DanhMuc>, "MaDanhMuc", "TenDanhMuc", (danhMuc.DanhMucCha!=null)?danhMuc.DanhMucCha.MaDanhMuc:0), new { onchange = "submit();", Class = "listDanhMucCha" })%>
+                    <%= Html.DropDownList("maDanhMucCha", new SelectList(ViewData["listDanhMuc"] as List<DanhMuc>, "MaDanhMuc", "TenDanhMuc", (danhMuc.DanhMucCha!=null)?danhMuc.DanhMucCha.MaDanhMuc:0), new { onchange = "submit();", Class = "listDanhMuc" })%>
                     <input type="hidden" name="maDanhMuc" value="<%: danhMuc.MaDanhMuc %>" id="maDanhMuc<%:iCount %>" />
                     <input type="hidden" name="previous_action" value="Index" />
                     <% Html.EndForm(); %>

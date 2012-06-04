@@ -12,7 +12,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.listDanhMucCha').selectbox({ inputClass: "styledselect_pages", debug: true });
+            $('.listDanhMuc').selectbox({ inputClass: "styledselect_pages", debug: true });
         });
     </script>
 </asp:Content>
@@ -51,7 +51,7 @@
                     <%: SharedString.Step %> 1
                 </th>
                 <td>
-                    <%= Html.DropDownList("maDanhMucCha", new SelectList(ViewData["listDanhMuc"] as List<DanhMuc>, "MaDanhMuc", "TenDanhMuc", 1), new { Class = "listDanhMucCha" })%>
+                    <%= Html.DropDownList("maDanhMucCha", new SelectList(ViewData["listDanhMuc"] as List<DanhMuc>, "MaDanhMuc", "TenDanhMuc", 1), new { Class = "listDanhMuc" })%>
                 </td>
                 <td>
                     &nbsp;

@@ -40,16 +40,6 @@ namespace LocalServerBUS
             return dsDanhMuc;
         }
 
-        private List<DanhMuc> DeQuiLayDanhMuc(int maDanhMucCha)
-        {
-            List<DanhMuc> dsDanhMuc = DanhMucBUS.LayDanhSachDanhMucTheoDanhMucCha(maDanhMucCha);
-            if (dsDanhMuc != null)
-            {
-                for (int i = 0; i < dsDanhMuc.Count; ++i)
-                    dsDanhMuc.AddRange(DeQuiLayDanhMuc(dsDanhMuc[i].MaDanhMuc));
-            }
-            return dsDanhMuc;
-        }
 
         private static List<DanhMuc> LayDanhSachDanhMucLevelThapNhat()
         {

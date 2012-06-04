@@ -229,7 +229,7 @@
     <value>Đăng nhập</value>
   </data>
   <data name="NoInformation" xml:space="preserve">
-    <value>Chưa có thông tin</value>
+    <value>N/A</value>
   </data>
   <data name="Order" xml:space="preserve">
     <value>Order</value>
