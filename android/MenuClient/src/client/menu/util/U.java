@@ -34,6 +34,7 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.database.CursorWrapper;
 import android.database.DatabaseUtils;
 import android.os.AsyncTask;
 import android.text.format.DateFormat;
@@ -46,6 +47,20 @@ import android.widget.AbsListView;
 import android.widget.Toast;
 
 public final class U {
+
+    public static final List<ContentValues> toContentValuesList(Cursor cursor) {
+        List<ContentValues> list = new ArrayList<ContentValues>();
+
+        cursor.moveToPosition(-1);
+        while (cursor.moveToNext()) {
+            ContentValues c = new ContentValues();
+            DatabaseUtils.cursorRowToContentValues(cursor, c);
+            
+            list.add(c);
+        }
+        
+        return list;
+    }
 
     public static final void uncheckAllItems(AbsListView view) {
         SparseBooleanArray chkArray = view.getCheckedItemPositions();

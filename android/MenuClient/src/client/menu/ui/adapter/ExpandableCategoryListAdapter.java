@@ -29,7 +29,7 @@ public class ExpandableCategoryListAdapter extends
             view = (ExpandableCategoryView) convertView;
         }
 
-        view.bindData(getData().get(position));
+        view.bindData(getItem(position));
         
         return view;
     }

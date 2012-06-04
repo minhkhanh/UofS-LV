@@ -113,6 +113,36 @@ public class DonViTinhDAO extends AbstractDAO {
         return cursor;
     }
 
+    public List<ContentValues> contentByMaMonAn(Integer maNgonNgu, Integer maMonAn) {
+        SQLiteDatabase db = open();
+        SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+
+        queryBuilder.setTables(DonViTinhMonAnDTO.TABLE_NAME + " INNER JOIN "
+                + DonViTinhDaNgonNguDTO.TABLE_NAME + " ON ("
+                + DonViTinhMonAnDTO.TABLE_NAME + "." + DonViTinhMonAnDTO.CL_MA_DON_VI
+                + " = " + DonViTinhDaNgonNguDTO.TABLE_NAME + "."
+                + DonViTinhDaNgonNguDTO.CL_MA_DON_VI + ")");
+
+        String selection = DonViTinhDaNgonNguDTO.CL_MA_NGON_NGU + "=? and "
+                + DonViTinhMonAnDTO.CL_MA_MON_AN + "=?";
+        String[] selectionArgs = { maNgonNgu.toString(), maMonAn.toString() };
+
+        Cursor cursor = queryBuilder.query(db, null, selection, selectionArgs, null,
+                null, null);
+
+        List<ContentValues> list = new ArrayList<ContentValues>();
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                ContentValues c = new ContentValues();
+                DatabaseUtils.cursorRowToContentValues(cursor, c);
+                list.add(c);
+            }
+        }
+        cursor.close();
+
+        return list;
+    }
+
     public Cursor cursorByMonAn(Integer maMonAn, Integer maNgonNgu) {
         SQLiteDatabase db = open();
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();

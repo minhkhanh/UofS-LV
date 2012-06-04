@@ -1,6 +1,7 @@
 package client.menu.ui.fragment;
 
 import android.app.DialogFragment;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,10 +10,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.NumberPicker;
+import android.widget.RatingBar;
 import android.widget.NumberPicker.OnValueChangeListener;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -24,21 +27,24 @@ import client.menu.db.dto.DonViTinhDaNgonNguDTO;
 import client.menu.db.dto.DonViTinhMonAnDTO;
 import client.menu.db.dto.MonAnDTO;
 import client.menu.db.dto.MonAnDaNgonNguDTO;
+import client.menu.ui.adapter.DishUnitsAdapter;
 
-public class DishDetailDialogFragment extends DialogFragment {
-
-    private MonAnDTO mMonAn; // for further info
-    private MonAnDaNgonNguDTO mMonAnDaNgonNgu;
-    private SimpleCursorAdapter mUnitsAdapter;
-    // private DonViTinhMonAnDTO mDonViTinhMonAn;
-    private Integer mMaDonViTinh;
+public class DishDetailDlgFragment extends DialogFragment {
 
     private TextView mSelectedQuantityTextView;
-    private TextView mUnitNameTextView;
-    private TextView mUnitPriceTextView;
+    private TextView mUnitName;
+    private TextView mUnitPrice;
     private ListView mUnitsList;
-    private EditText mNoteEditText;
-    NumberPicker mNpickerQuantity;
+    private EditText mNoteEdit;
+    private NumberPicker mNpickerQuantity;
+    private TextView mDishName;
+    private TextView mDishDescript;
+    private RatingBar mDishRate;
+
+    private ContentValues mValues;
+    private DishUnitsAdapter mUnitsAdapter;
+
+    private int mSelectedUnit;
 
     private OnClickListener mOnClickListener = new OnClickListener() {
 
@@ -46,11 +52,14 @@ public class DishDetailDialogFragment extends DialogFragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btnOK:
-                    ServiceOrder order = SessionManager.getInstance().loadCurrentSession()
-                            .getOrder();
+                    ContentValues c = (ContentValues) mUnitsList.getSelectedItem();
 
-                    order.addItem(mMonAn.getMaMonAn(), mMaDonViTinh, mNpickerQuantity
-                            .getValue(), mNoteEditText.getText().toString());
+                    ServiceOrder order = SessionManager.getInstance()
+                            .loadCurrentSession().getOrder();
+
+                    order.addItem(mValues.getAsInteger(MonAnDTO.CL_MA_MON_AN),
+                            c.getAsInteger(DonViTinhDTO.CL_MA_DON_VI_TINH),
+                            mNpickerQuantity.getValue(), mNoteEdit.getText().toString());
 
                     dismiss();
                     break;
@@ -62,20 +71,18 @@ public class DishDetailDialogFragment extends DialogFragment {
         }
     };
 
-    public DishDetailDialogFragment(MonAnDTO monAn, MonAnDaNgonNguDTO monAnDaNgonNgu,
-            Integer maDonViTinh, SimpleCursorAdapter unitsAdapter) {
-        mMonAn = monAn;
-        mMonAnDaNgonNgu = monAnDaNgonNgu;
+    public DishDetailDlgFragment(ContentValues v, DishUnitsAdapter unitsAdapter,
+            int selectedUnit) {
+        mValues = v;
         mUnitsAdapter = unitsAdapter;
-        mMaDonViTinh = maDonViTinh;
-        // mDonViTinhMonAn = maDonViTinh;
+        mSelectedUnit = selectedUnit;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL,
-                android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
+                android.R.style.Theme_Holo_Light_Dialog_NoActionBar);
     }
 
     @Override
@@ -83,7 +90,6 @@ public class DishDetailDialogFragment extends DialogFragment {
             Bundle savedInstanceState) {
         // getDialog().setTitle(getString(R.string.title_dialog_auth));
         getDialog().setCanceledOnTouchOutside(false);
-        
 
         View layout = inflater.inflate(R.layout.dialog_dish_detail, container, false);
 
@@ -91,47 +97,22 @@ public class DishDetailDialogFragment extends DialogFragment {
     }
 
     private void showDishPriceInfo(int pos) {
-        Cursor cursor = mUnitsAdapter.getCursor();
-        if (cursor.moveToPosition(pos)) {
-            String unitName = cursor.getString(cursor
-                    .getColumnIndex(DonViTinhDaNgonNguDTO.CL_TEN_DON_VI));
-            Integer unitPrice = cursor.getInt(cursor
-                    .getColumnIndex(DonViTinhMonAnDTO.CL_DON_GIA));
+        ContentValues c = mUnitsAdapter.getItem(pos);
 
-            mUnitNameTextView.setText(unitName);
-            mUnitPriceTextView.setText(unitPrice.toString());
+        String unitName = c.getAsString(DonViTinhDaNgonNguDTO.CL_TEN_DON_VI);
+        Integer unitPrice = c.getAsInteger(DonViTinhMonAnDTO.CL_DON_GIA);
 
-            mMaDonViTinh = cursor.getInt(cursor
-                    .getColumnIndex(DonViTinhDTO.CL_MA_DON_VI_TINH));
-        }
-        
+        mUnitName.setText(unitName);
+        mUnitPrice.setText(unitPrice.toString());
     }
 
-    private void prepareListPrices() {
-        mUnitsList = (ListView) getView().findViewById(R.id.listDishUnits);
+    private void bindData() {
+        mDishName.setText(mValues.getAsString(MonAnDaNgonNguDTO.CL_TEN_MON));
+        mDishDescript.setText(mValues.getAsString(MonAnDaNgonNguDTO.CL_MO_TA_MON));
+        mDishRate.setRating(mValues.getAsFloat(MonAnDTO.CL_DIEM_DANH_GIA));
+
         mUnitsList.setAdapter(mUnitsAdapter);
-        mUnitsList.setOnItemClickListener(new OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                showDishPriceInfo(arg2);
-            }
-
-        });
-
-        Cursor cursor = mUnitsAdapter.getCursor();
-        cursor.moveToPosition(-1);
-        int pos = -1;
-        while (cursor.moveToNext()) {
-            if (cursor.getInt(cursor.getColumnIndex(DonViTinhMonAnDTO.CL_MA_DON_VI)) == mMaDonViTinh) {
-                pos = cursor.getPosition();
-                break;
-            }
-        }
-
-        if (pos != -1) {
-            showDishPriceInfo(pos);
-        }
+        showDishPriceInfo(mSelectedUnit);
     }
 
     private void prepareViews() {
@@ -145,31 +126,33 @@ public class DishDetailDialogFragment extends DialogFragment {
         mSelectedQuantityTextView.setText(String.valueOf(mNpickerQuantity.getValue()));
 
         mNpickerQuantity.setOnValueChangedListener(new OnValueChangeListener() {
-
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                 mSelectedQuantityTextView.setText(String.valueOf(newVal));
             }
         });
 
-        mUnitNameTextView = (TextView) getView().findViewById(R.id.textUnitName);
-        mUnitPriceTextView = (TextView) getView().findViewById(R.id.textUnitPrice);
+        mUnitsList = (ListView) getView().findViewById(R.id.listDishUnits);
+        mUnitsList.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                showDishPriceInfo(arg2);
+            }
+        });
 
-        prepareListPrices();
+        mUnitName = (TextView) getView().findViewById(R.id.textUnitName);
+        mUnitPrice = (TextView) getView().findViewById(R.id.textUnitPrice);
 
-        TextView dishNameView = (TextView) getView().findViewById(R.id.textDishName);
-        dishNameView.setText(mMonAnDaNgonNgu.getTenMonAn());
-
-        TextView dishDescriptionView = (TextView) getView().findViewById(
-                R.id.textDishDescription);
-        dishDescriptionView.setText(mMonAnDaNgonNgu.getMoTaMonAn());
+        mDishName = (TextView) getView().findViewById(R.id.textDishName);
+        mDishDescript = (TextView) getView().findViewById(R.id.textDishDescription);
 
         Button btnOK = (Button) getView().findViewById(R.id.btnOK);
         btnOK.setOnClickListener(mOnClickListener);
         Button btnCancel = (Button) getView().findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(mOnClickListener);
 
-        mNoteEditText = (EditText) getView().findViewById(R.id.editDishNote);
+        mNoteEdit = (EditText) getView().findViewById(R.id.editDishNote);
+        mDishRate = (RatingBar) getView().findViewById(R.id.rateDish);
     }
 
     @Override
@@ -177,5 +160,6 @@ public class DishDetailDialogFragment extends DialogFragment {
         super.onActivityCreated(savedInstanceState);
 
         prepareViews();
+        bindData();
     }
 }

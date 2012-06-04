@@ -1,35 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/itemDishList"
-    android:layout_width="fill_parent"
-    android:layout_height="128dp"
-    android:minHeight="128dp" >
-
-    <ImageView
-        android:id="@+id/imgDishAvatar"
-        android:layout_width="128dp"
-        android:layout_height="fill_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/dish_sample" />
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp" >
+
     <RelativeLayout
         android:id="@+id/relativeLayout1"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_toRightOf="@+id/imgDishAvatar"
-        android:paddingLeft="5dp"
-        android:paddingTop="3dp" >
-
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
         <TextView
             android:id="@+id/textDishName"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:gravity="top|left"
+            android:layout_toLeftOf="@+id/spinDishUnits"
             android:maxLines="1"
             android:text="Tôm nướng"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Spinner
+            android:id="@+id/spinDishUnits"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true" />
 
         <RatingBar
             android:id="@+id/rateDish"
@@ -38,27 +33,62 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/textDishName"
-            android:numStars="5" android:isIndicator="true"/>
+            android:isIndicator="true"
+            android:numStars="5" />
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/relativeLayout1" >
+
+        <ImageView
+            android:id="@+id/imgDishAvatar"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/dish_sample" />
+
         <TextView
             android:id="@+id/textDishDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/rateDish"
-            android:layout_marginTop="10dp"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:maxLength="100"
-            android:maxLines="2"
+            android:layout_above="@+id/ibtnAdd"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/imgDishAvatar"
+            android:lines="4"
+            android:padding="10dp"
             android:text="@string/sample_long" />
 
-        <Spinner
-            android:id="@+id/spinDishPrices"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true" android:contentDescription="@string/text_select_one_unit"/>
+        <ImageButton
+            android:id="@+id/ibtnAdd"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/accept_icon" android:layout_alignBottom="@id/imgDishAvatar"/>
+
+        <ImageButton
+            android:id="@+id/ibtnMore"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginRight="23dp"
+            android:layout_toLeftOf="@+id/ibtnAdd"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/comments_icon" android:layout_alignBottom="@id/imgDishAvatar"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/relativeLayout2">
 
     </RelativeLayout>
 
