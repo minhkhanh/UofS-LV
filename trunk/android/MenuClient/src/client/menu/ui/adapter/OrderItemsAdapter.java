@@ -46,7 +46,7 @@ public class OrderItemsAdapter extends CustomArrayAdapter<ContentValues>{
             v = new OrderItemView(getContext());
         }
 
-        v.bindData(mChiTietOrderList.get(position), getData().get(position));
+        v.bindData(mChiTietOrderList.get(position), getItem(position));
 
         return v;
     }

@@ -28,7 +28,8 @@ public class ExpandableCategoryView extends LinearLayout implements
     private LinearLayout mExpandableLinear;
 
     private LoadChildCategoryListTask mTask;
-    private DanhMucDaNgonNguDTO mDanhMucCha;
+    private DanhMucDaNgonNguDTO mDanhMuc;
+
     private boolean mHavingChilden;
     private boolean mExpanded;
     private boolean mFocused;
@@ -112,13 +113,13 @@ public class ExpandableCategoryView extends LinearLayout implements
     }
 
     public void bindData(DanhMucDaNgonNguDTO danhMuc) {
-        if (mDanhMucCha == null || danhMuc.getMaDanhMuc() != mDanhMucCha.getMaDanhMuc()) {
-            mDanhMucCha = danhMuc;
+        if (mDanhMuc == null || danhMuc.getMaDanhMuc() != mDanhMuc.getMaDanhMuc()) {
+            mDanhMuc = danhMuc;
             mTask = new LoadChildCategoryListTask(getContext(), 0,
-                    mDanhMucCha.getMaDanhMuc());
+                    mDanhMuc.getMaDanhMuc());
             mTask.setOnPostExecuteListener(ExpandableCategoryView.this);
 
-            mCategoryText.setText(mDanhMucCha.getTenDanhMuc());
+            mCategoryText.setText(mDanhMuc.getTenDanhMuc());
         }
     }
 
@@ -148,7 +149,7 @@ public class ExpandableCategoryView extends LinearLayout implements
         return mRoot;
     }
 
-    public void setRoot(ExpandableCategoryList root) {
-        mRoot = root;
+    public DanhMucDaNgonNguDTO getDanhMuc() {
+        return mDanhMuc;
     }
 }

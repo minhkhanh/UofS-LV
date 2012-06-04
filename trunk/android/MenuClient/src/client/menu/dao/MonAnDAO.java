@@ -121,7 +121,29 @@ public final class MonAnDAO extends AbstractDAO {
         return monAn;
     }
 
-    public Cursor cursorByMaDanhMuc(Integer maDanhMuc, Integer maNgonNgu) {
+    public List<ContentValues> contentByMaDanhMuc(Integer maNgonNgu, Integer maDanhMuc) {
+        SQLiteDatabase db = open();
+        SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+
+        queryBuilder.setTables(MonAnDTO.TABLE_NAME + " INNER JOIN "
+                + MonAnDaNgonNguDTO.TABLE_NAME + " ON (" + MonAnDTO.TABLE_NAME + "."
+                + MonAnDTO.CL_MA_MON_AN + " = " + MonAnDaNgonNguDTO.TABLE_NAME + "."
+                + MonAnDaNgonNguDTO.CL_MA_MON + ")");
+
+        String selection = MonAnDaNgonNguDTO.CL_MA_NGON_NGU + "=? and "
+                + MonAnDTO.CL_MA_DANH_MUC + "=?";
+        String[] selectionArgs = { maNgonNgu.toString(), maDanhMuc.toString() };
+
+        Cursor cursor = queryBuilder.query(db, null, selection, selectionArgs, null,
+                null, null);
+
+        List<ContentValues> list = U.toContentValuesList(cursor);
+        cursor.close();
+
+        return list;
+    }
+
+    public Cursor cursorByMaDanhMuc(Integer maNgonNgu, Integer maDanhMuc) {
         SQLiteDatabase db = open();
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 

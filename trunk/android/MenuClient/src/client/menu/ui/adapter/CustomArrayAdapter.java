@@ -63,4 +63,7 @@ public abstract class CustomArrayAdapter<T> extends BaseAdapter {
     public List<T> getData() {
         return mData;
     }
+    
+    @Override
+    public abstract View getView(int position, View convertView, ViewGroup parent);
 }

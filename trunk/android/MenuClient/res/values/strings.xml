@@ -69,5 +69,10 @@
     <string name="message_table_grouping_failed">Ghép bàn không thành công</string>
     <string name="message_table_spliting_failed">Tách bàn không thành công</string>
     <string name="message_single_table_spliting_failed">Không thể thực hiện tách bàn trên bàn đơn</string>
+    <string name="caption_plus_one">+1</string>
+    <string name="caption_3_dot">...</string>
+    <string name="text_please_select_unit">Chọn giá</string>
+    <string name="text_dish_name_sample">Tên món ăn mẫu</string>
+    <string name="message_order_item_added">Đã thêm một món vào order</string>
 
 </resources>

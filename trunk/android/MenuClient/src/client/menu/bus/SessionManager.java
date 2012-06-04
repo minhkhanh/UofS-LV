@@ -199,8 +199,7 @@ public class SessionManager {
 
     public ServiceSession loadCurrentSession() {
         if (mIndexCurrent < 0 || mIndexCurrent >= mSessionList.size()) {
-            throw new ArrayIndexOutOfBoundsException(
-                    "Session list index is out of bound: " + mIndexCurrent);
+            throw new ArrayIndexOutOfBoundsException("Current session not created");
         }
 
         return mSessionList.get(mIndexCurrent);
@@ -229,7 +228,7 @@ public class SessionManager {
         for (int i = 0; i < mSessionList.size(); ++i) {
             if (mSessionList.get(i).getMaBanChinh() == maBanChinh) {
                 mIndexCurrent = i;
-                
+
                 U.logOwnTag("load session " + maBanChinh);
                 return mSessionList.get(i);
             }

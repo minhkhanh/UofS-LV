@@ -3,27 +3,24 @@ package client.menu.ui.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import client.menu.R;
-import client.menu.bus.loader.RootCategoryListLoader;
-import client.menu.db.dto.DanhMucDTO;
-import client.menu.db.dto.DanhMucDaNgonNguDTO;
-import client.menu.ui.adapter.ExpandableCategoryListAdapter;
-import client.menu.ui.view.ExpandableCategoryList;
-import client.menu.ui.view.ExpandableCategoryView;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Loader;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
-import android.widget.SimpleCursorAdapter;
+import client.menu.R;
+import client.menu.bus.loader.RootCategoryListLoader;
+import client.menu.db.dto.DanhMucDaNgonNguDTO;
+import client.menu.ui.adapter.ExpandableCategoryListAdapter;
+import client.menu.ui.view.ExpandableCategoryList;
+import client.menu.ui.view.ExpandableCategoryList.OnCategoryClickListener;
+import client.menu.ui.view.ExpandableCategoryView;
 
 public class CategoryListFragment extends Fragment implements
-        LoaderCallbacks<List<DanhMucDaNgonNguDTO>> {
+        LoaderCallbacks<List<DanhMucDaNgonNguDTO>>, OnCategoryClickListener {
     private int mSelIndex;
     private boolean mIsDualPane;
 
@@ -49,6 +46,7 @@ public class CategoryListFragment extends Fragment implements
                 new ArrayList<DanhMucDaNgonNguDTO>());
         mCategoryList = (ExpandableCategoryList) getView();
         mCategoryList.setCategoryAdapter(mListAdapter);
+        mCategoryList.setOnCategoryClickListener(this);
 
         getLoaderManager().initLoader(0, null, this);
 
@@ -65,13 +63,6 @@ public class CategoryListFragment extends Fragment implements
     @Override
     public void onLoadFinished(Loader<List<DanhMucDaNgonNguDTO>> loader,
             List<DanhMucDaNgonNguDTO> result) {
-        // for (DanhMucDaNgonNguDTO d : result) {
-        // ExpandableCategoryView item = new
-        // ExpandableCategoryView(getActivity(), mCategoryList);
-        // item.bindData(d);
-        //
-        // mCategoryList.addCategory(item);
-        // }
         mListAdapter.clear();
         mListAdapter.addAll(result);
         mListAdapter.notifyDataSetChanged();
@@ -82,40 +73,34 @@ public class CategoryListFragment extends Fragment implements
         return new RootCategoryListLoader(getActivity());
     }
 
-    // void showDetails(int index) {
-    // mSelIndex = index;
-    //
-    // Cursor cursor = ((SimpleCursorAdapter) getListAdapter()).getCursor();
-    // if (cursor == null || // in case of loader not finished yet
-    // !cursor.moveToPosition(index))
-    // return;
-    //
-    // int maDanhMuc =
-    // cursor.getInt(cursor.getColumnIndex(DanhMucDTO.CL_MA_DANH_MUC));
-    //
-    // if (mIsDualPane) {
-    // getListView().setItemChecked(index, true);
-    //
-    // DishListFragment dishList = (DishListFragment) getFragmentManager()
-    // .findFragmentById(R.id.RightPaneHolder);
-    //
-    // if (dishList == null || dishList.getMaDanhMuc() != maDanhMuc) {
-    // dishList = DishListFragment.newInstance(maDanhMuc);
-    //
-    // FragmentTransaction ft = getFragmentManager().beginTransaction();
-    // ft.replace(R.id.RightPaneHolder, dishList);
-    // ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-    // ft.commit();
-    // }
-    //
-    // } else {
-    // DishListFragment dishList = DishListFragment.newInstance(maDanhMuc);
-    //
-    // FragmentTransaction ft = getFragmentManager().beginTransaction();
-    // ft.replace(R.id.LeftPaneHolder, dishList);
-    // ft.addToBackStack(null);
-    // ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-    // ft.commit();
-    // }
-    // }
+    @Override
+    public void onCategoryItemClick(ExpandableCategoryList list,
+            ExpandableCategoryView item) {
+        showDetails(item.getDanhMuc().getMaDanhMuc());
+    }
+
+    void showDetails(Integer maDanhMuc) {
+        if (mIsDualPane) {
+            DishListFragment dishList = (DishListFragment) getFragmentManager()
+                    .findFragmentById(R.id.RightPaneHolder);
+
+            if (dishList == null || dishList.getMaDanhMuc() != maDanhMuc) {
+                dishList = new DishListFragment(maDanhMuc);
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.RightPaneHolder, dishList);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.commit();
+            }
+
+        } else {
+            DishListFragment dishList = new DishListFragment(maDanhMuc);
+
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.LeftPaneHolder, dishList);
+            ft.addToBackStack(null);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.commit();
+        }
+    }
 }
