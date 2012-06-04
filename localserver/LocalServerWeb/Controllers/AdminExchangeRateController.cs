@@ -11,6 +11,7 @@ using LocalServerWeb.Resources.Views.Shared;
 using LocalServerDTO;
 using LocalServerWeb.ViewModels;
 using Webdiyer.WebControls.Mvc;
+using System.Xml;
 
 namespace LocalServerWeb.Controllers
 {
@@ -227,15 +228,58 @@ namespace LocalServerWeb.Controllers
             }
 
             // Need to GET from vnexpress.net
-            objTiGia.GiaTri = 333;
-
-
-            if (!TiGiaBUS.CapNhat(objTiGia))
+            float giaTri = CapNhatTiGia(objTiGia.KiHieu);
+            if (giaTri != 0)
+            {
+                objTiGia.GiaTri = giaTri;
+                if (!TiGiaBUS.CapNhat(objTiGia))
+                {
+                    TempData["errorCannotUpdate"] = AdminExchangeRateString.ErrorCannotUpdate;
+                }
+                else
+                {
+                    TempData["infoUpdateSuccess"] = AdminExchangeRateString.InfoUpdateSuccess;
+                }
+            }
+            else
             {
                 TempData["errorCannotUpdate"] = AdminExchangeRateString.ErrorCannotUpdate;
             }
 
             return RedirectToAction("Index");
+        }
+
+        private float CapNhatTiGia(string kiHieu)
+        {
+            float tiGia = 0;
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load("http://www.vietcombank.com.vn/ExchangeRates/ExrateXML.aspx");
+                XmlNodeList elemList = doc.SelectNodes("//ExrateList/Exrate");
+                for (int i = 0; i < elemList.Count; i++)
+                {
+                    if (elemList[i].Attributes["CurrencyCode"].Value.Equals(kiHieu))
+                    {
+                        string transfer = elemList[i].Attributes["Transfer"].Value;
+                        int lastIndexOf = transfer.LastIndexOf('.');
+                        if (lastIndexOf != -1)
+                        {
+                            transfer = transfer.Remove(lastIndexOf);
+                        }
+ 
+                        float.TryParse(transfer, out tiGia);
+                        break;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                tiGia = 0;
+            }
+
+            return tiGia;
+            
         }
     }
 }
