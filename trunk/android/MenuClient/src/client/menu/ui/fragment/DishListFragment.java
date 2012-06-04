@@ -7,35 +7,18 @@ import android.app.ListFragment;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentValues;
 import android.content.Loader;
-import android.database.Cursor;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewGroup.OnHierarchyChangeListener;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
-import android.widget.Spinner;
 import client.menu.R;
-import client.menu.app.MyAppSettings;
 import client.menu.bus.loader.DishListLoader;
-import client.menu.bus.task.CustomAsyncTask;
-import client.menu.bus.task.CustomAsyncTask.OnPostExecuteAsyncTaskListener;
 import client.menu.bus.task.LoadDishUnitsAsyncTask;
-import client.menu.bus.task.LoadDishUnitsAsyncTask2;
-import client.menu.dao.MonAnDAO;
-import client.menu.db.dto.DonViTinhDaNgonNguDTO;
-import client.menu.db.dto.DonViTinhMonAnDTO;
-import client.menu.db.dto.MonAnDTO;
-import client.menu.db.dto.MonAnDaNgonNguDTO;
-import client.menu.db.dto.NgonNguDTO;
 import client.menu.ui.adapter.DishListAdapter;
 import client.menu.util.U;
 
 public class DishListFragment extends ListFragment {
 
     private Integer mMaDanhMuc;
-    List<LoadDishUnitsAsyncTask2> mDishUnitsLoadTaskList = new ArrayList<LoadDishUnitsAsyncTask2>();
+    List<LoadDishUnitsAsyncTask> mDishUnitsLoadTaskList = new ArrayList<LoadDishUnitsAsyncTask>();
     private DishListAdapter mListAdapter;
 
     private boolean mHaveExtendPane;
@@ -67,7 +50,7 @@ public class DishListFragment extends ListFragment {
 
     private void cancelLoadDishUnitsTasks() {
         for (int i = 0; i < mDishUnitsLoadTaskList.size(); ++i) {
-            LoadDishUnitsAsyncTask2 task = mDishUnitsLoadTaskList.get(i);
+            LoadDishUnitsAsyncTask task = mDishUnitsLoadTaskList.get(i);
             U.cancelAsyncTask(task);
         }
         mDishUnitsLoadTaskList.clear();
