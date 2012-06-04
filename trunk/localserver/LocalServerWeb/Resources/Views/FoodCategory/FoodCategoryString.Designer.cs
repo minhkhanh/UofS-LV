@@ -61,6 +61,15 @@ namespace LocalServerWeb.Resources.Views.FoodCategory {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Detail.
         /// </summary>
         public static string Detail {
@@ -70,11 +79,38 @@ namespace LocalServerWeb.Resources.Views.FoodCategory {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Food information.
+        /// </summary>
+        public static string FoodInformation {
+            get {
+                return ResourceManager.GetString("FoodInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Index.
         /// </summary>
         public static string Index {
             get {
                 return ResourceManager.GetString("Index", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price.
+        /// </summary>
+        public static string Price {
+            get {
+                return ResourceManager.GetString("Price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Related food.
+        /// </summary>
+        public static string RelatedFood {
+            get {
+                return ResourceManager.GetString("RelatedFood", resourceCulture);
             }
         }
         
