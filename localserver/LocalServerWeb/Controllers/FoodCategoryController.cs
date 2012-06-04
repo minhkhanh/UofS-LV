@@ -73,7 +73,9 @@ namespace LocalServerWeb.Controllers
             viewModel.Ids = new List<int>();
             viewModel.IsCategories = new List<bool>();
 
-            if (id == 0)
+            // Neu Id = 0
+            // Hoac la chon vo danh muc None
+            if (id == 0 || id == 1)
             {
                 viewModel.Names.Insert(0, FoodCategoryString.Index);
                 viewModel.Ids.Insert(0, 0);
@@ -140,10 +142,9 @@ namespace LocalServerWeb.Controllers
                 Console.WriteLine(e.Message);
             }
 
-            // Alwasy has Index at the beginning
-            viewModel.Names.Insert(0, FoodCategoryString.Index);
-            viewModel.Ids.Insert(0, 0);
-            viewModel.IsCategories.Insert(0, true);
+            // Link item dau tien la Index
+            viewModel.Names[0] = FoodCategoryString.Index;
+
 
             return viewModel;
         }
@@ -158,7 +159,8 @@ namespace LocalServerWeb.Controllers
 
             try
             {
-                if(id == 0)
+                // Neu ID = 0 hoac la danh Muc None
+                if(id == 0 || id == 1)
                 {
                     viewModel.ParentName = FoodCategoryString.Index;
                     viewModel.ParentId = 0;
@@ -167,7 +169,14 @@ namespace LocalServerWeb.Controllers
                     for (int i = 0; i < listDanhMuc.Count; ++i)
                     {
                         ChiTietDanhMucDaNgonNgu ct = ChiTietDanhMucDaNgonNguBUS.LayChiTietDanhMucDaNgonNgu(listDanhMuc[i].MaDanhMuc, maNgonNgu);
-                        viewModel.Names.Add(ct.TenDanhMuc);
+                        if (ct != null)
+                        {
+                            viewModel.Names.Add(ct.TenDanhMuc);
+                        }
+                        else
+                        {
+                            viewModel.Names.Add(SharedString.NoInformation);
+                        }
                         viewModel.Ids.Add(listDanhMuc[i].MaDanhMuc);
                     }
                 }
@@ -180,14 +189,29 @@ namespace LocalServerWeb.Controllers
                         danhMuc = MonAnBUS.LayMonAn(id).DanhMuc;
 
                     ChiTietDanhMucDaNgonNgu ctDanhMucDaNgonNgu = ChiTietDanhMucDaNgonNguBUS.LayChiTietDanhMucDaNgonNgu(danhMuc.MaDanhMuc, maNgonNgu);
-                    viewModel.ParentName = ctDanhMucDaNgonNgu.TenDanhMuc;
+                    if (ctDanhMucDaNgonNgu != null)
+                    {
+                        viewModel.ParentName = ctDanhMucDaNgonNgu.TenDanhMuc;
+                    }
+                    else
+                    {
+                        viewModel.ParentName = SharedString.NoInformation;
+                    }
                     viewModel.ParentId = danhMuc.MaDanhMuc;
 
                     List<DanhMuc> listDanhMuc = DanhMucBUS.LayDanhSachDanhMucTheoDanhMucCha(danhMuc.MaDanhMuc);
                     for (int i = 0; i < listDanhMuc.Count; ++i)
                     {
                         ChiTietDanhMucDaNgonNgu ct = ChiTietDanhMucDaNgonNguBUS.LayChiTietDanhMucDaNgonNgu(listDanhMuc[i].MaDanhMuc, maNgonNgu);
-                        viewModel.Names.Add(ct.TenDanhMuc);
+                        if (ct != null)
+                        {
+                            viewModel.Names.Add(ct.TenDanhMuc);
+                        }
+                        else
+                        {
+                            viewModel.Names.Add(SharedString.NoInformation);
+                        }
+                        
                         viewModel.Ids.Add(listDanhMuc[i].MaDanhMuc);
                     }
                 }
@@ -267,6 +291,44 @@ namespace LocalServerWeb.Controllers
             return viewModels;
         }
 
+        // Get ViewModel for displaying Food Gallery Item, get by MonAn
+        private FoodGalleryItemViewModel GetFoodGalleryItemViewModel(MonAn monAn, int maNgonNgu)
+        {
+            FoodGalleryItemViewModel viewModel = new FoodGalleryItemViewModel();
+            viewModel.HinhAnh = monAn.HinhAnh;
+            viewModel.MaMonAn = monAn.MaMonAn;
+
+            // Hien thi Ten mon an theo ngon ngu
+            ChiTietMonAnDaNgonNgu ctMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(monAn.MaMonAn, maNgonNgu);
+            if (ctMonAnDaNgonNgu != null)
+            {
+                viewModel.TenMonAn = ctMonAnDaNgonNgu.TenMonAn;
+            }
+            else
+            {
+                viewModel.TenMonAn = SharedString.NoInformation;
+            }
+
+            // Hien thi ten don vi tinh
+            List<ChiTietMonAnDonViTinh> listCTMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayDanhSachChiTietMonAnDonViTinhTheoMonAn(monAn.MaMonAn);
+            if (listCTMonAnDonViTinh != null && listCTMonAnDonViTinh[0] != null)
+            {
+                viewModel.DonGia = listCTMonAnDonViTinh[0].DonGia;
+
+                ChiTietDonViTinhDaNgonNgu ctDonViTinhDaNgonNgu = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(listCTMonAnDonViTinh[0].DonViTinh.MaDonViTinh, maNgonNgu);
+                if (ctDonViTinhDaNgonNgu != null)
+                {
+                    viewModel.TenDonViTinh = ctDonViTinhDaNgonNgu.TenDonViTinh;
+                }
+                else
+                {
+                    viewModel.TenDonViTinh = SharedString.NoInformation;
+                }
+            }
+
+            return viewModel;
+        }
+
         // Get ViewModel for displaying Food Detail, get by Ma Mon An
         private FoodDetailViewModel GetFoodDetailViewModel(int id)
         {
@@ -277,39 +339,46 @@ namespace LocalServerWeb.Controllers
             {
                 viewModel = new FoodDetailViewModel();
                 MonAn monAn = MonAnBUS.LayMonAn(id);
-                ChiTietMonAnDaNgonNgu ctMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(monAn.MaMonAn, maNgonNgu);
-
-                ChiTietMonAnDonViTinh ctMonAnDonViTinhMacDinh = ChiTietMonAnDonViTinhBUS.LayChiTietMonAnDonViTinh(monAn.MaMonAn, monAn.DonViTinhMacDinh.MaDonViTinh);               
-                ChiTietDonViTinhDaNgonNgu ctDonViTinhDaNgonNguMacDinh = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(monAn.DonViTinhMacDinh.MaDonViTinh, maNgonNgu);
-
-                DanhMuc danhMuc = monAn.DanhMuc;
-                ChiTietDanhMucDaNgonNgu ctDanhMucDaNgonNgu = ChiTietDanhMucDaNgonNguBUS.LayChiTietDanhMucDaNgonNgu(danhMuc.MaDanhMuc, maNgonNgu);
-
                 viewModel.HinhAnh = monAn.HinhAnh;
                 viewModel.MaMonAn = monAn.MaMonAn;
-                viewModel.TenMonAn = ctMonAnDaNgonNgu.TenMonAn;
-                viewModel.MoTaMonAn = ctMonAnDaNgonNgu.MoTaMonAn;
-
                 viewModel.SoLuotDanhGia = monAn.SoLuotDanhGia;
                 viewModel.DiemDanhGia = monAn.DiemDanhGia;
 
-                viewModel.DonGiaMacDinh = ctMonAnDonViTinhMacDinh.DonGia;
-                viewModel.TenDonViTinhMacDinh = ctDonViTinhDaNgonNguMacDinh.TenDonViTinh;
+                // Hien thi ten mon an theo Ngon ngu hien tai
+                ChiTietMonAnDaNgonNgu ctMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(monAn.MaMonAn, maNgonNgu);
+                if (ctMonAnDaNgonNgu != null)
+                {
+                    viewModel.TenMonAn = ctMonAnDaNgonNgu.TenMonAn;
+                    viewModel.MoTaMonAn = ctMonAnDaNgonNgu.MoTaMonAn;
+                }
+                else
+                {
+                    viewModel.TenMonAn = SharedString.NoInformation;
+                    viewModel.MoTaMonAn = SharedString.NoInformation;
+                }
 
+                
+                // Hien thi danh sach don vi tinh
                 viewModel.listTenDonViTinh = new List<string>();
                 viewModel.listDonGia = new List<float>();
 
                 List<ChiTietMonAnDonViTinh> listCTMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayDanhSachChiTietMonAnDonViTinhTheoMonAn(monAn.MaMonAn);
-                if (listCTMonAnDonViTinh != null)
+                foreach (ChiTietMonAnDonViTinh ctMonAnDonViTinh in listCTMonAnDonViTinh)
                 {
-                    for (int i = 0; i < listCTMonAnDonViTinh.Count; ++i)
+                    viewModel.listDonGia.Add(ctMonAnDonViTinh.DonGia);
+                    ChiTietDonViTinhDaNgonNgu ctDonViTinhDaNgonNgu = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(ctMonAnDonViTinh.DonViTinh.MaDonViTinh, maNgonNgu);
+                    if (ctDonViTinhDaNgonNgu != null)
                     {
-                        viewModel.listDonGia.Add(listCTMonAnDonViTinh[i].DonGia);
-                        ChiTietDonViTinhDaNgonNgu ctDonViTinhDaNgonNgu = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(listCTMonAnDonViTinh[i].DonViTinh.MaDonViTinh, maNgonNgu);
                         viewModel.listTenDonViTinh.Add(ctDonViTinhDaNgonNgu.TenDonViTinh);
+                    }
+                    else
+                    {
+                        viewModel.listTenDonViTinh.Add(SharedString.NoInformation);
                     }
                 }
 
+
+                // Hien thi danh sach mon lien quan
                 viewModel.listMonLienQuan = new List<FoodGalleryItemViewModel>();
 
                 List<ChiTietMonLienQuan> listCTMonLienQuan = ChiTietMonLienQuanBUS.LayDanhSachChiTietMonLienQuan(monAn.MaMonAn);
@@ -330,7 +399,6 @@ namespace LocalServerWeb.Controllers
                     }
                 }
 
-                
             }
             catch (Exception e)
             {
@@ -342,22 +410,7 @@ namespace LocalServerWeb.Controllers
             return viewModel;
         }
 
-        // Get ViewModel for displaying Food Gallery Item, get by MonAn
-        private FoodGalleryItemViewModel GetFoodGalleryItemViewModel(MonAn monAn, int maNgonNgu)
-        {
-            ChiTietMonAnDonViTinh ctMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayChiTietMonAnDonViTinh(monAn.MaMonAn, monAn.DonViTinhMacDinh.MaDonViTinh);
-            ChiTietMonAnDaNgonNgu ctMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(monAn.MaMonAn, maNgonNgu);
-            ChiTietDonViTinhDaNgonNgu ctDonViTinhDaNgonNgu = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(monAn.DonViTinhMacDinh.MaDonViTinh, maNgonNgu);
-
-            FoodGalleryItemViewModel viewModel = new FoodGalleryItemViewModel();
-            viewModel.HinhAnh = monAn.HinhAnh;
-            viewModel.MaMonAn = monAn.MaMonAn;
-            viewModel.TenMonAn = ctMonAnDaNgonNgu.TenMonAn;
-            viewModel.DonGia = ctMonAnDonViTinh.DonGia;
-            viewModel.TenDonViTinhMacDinh = ctDonViTinhDaNgonNgu.TenDonViTinh;
-
-            return viewModel;
-        }
+        
 
     }
 }

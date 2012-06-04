@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
 <%@ Import Namespace = "LocalServerWeb.ViewModels" %>
+<%@ Import Namespace="LocalServerWeb.Codes" %>
 
 
 <div id = "food_detail">
@@ -11,7 +12,7 @@
            <table width="100%">
                 <tr>
                     <td>
-                        <img src =" <%: viewModel.HinhAnh %> "  alt="food_image" />
+                        <img src ="<%:SharedCode.GetHostApplicationAddress(Request)+ viewModel.HinhAnh %>"  alt="food_image" />
                     </td>
                     <td>
                        <%: viewModel.TenMonAn %>
@@ -29,8 +30,6 @@
                     </td>
                 </tr>
            </table>
-
-
            
            <%
        }
