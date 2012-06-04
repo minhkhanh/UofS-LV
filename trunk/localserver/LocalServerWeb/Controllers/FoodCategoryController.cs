@@ -343,6 +343,11 @@ namespace LocalServerWeb.Controllers
                 viewModel.MaMonAn = monAn.MaMonAn;
                 viewModel.SoLuotDanhGia = monAn.SoLuotDanhGia;
                 viewModel.DiemDanhGia = monAn.DiemDanhGia;
+                if (monAn.SoLuotDanhGia != 0)
+                {
+                    viewModel.DiemTrungBinh = monAn.DiemDanhGia / monAn.SoLuotDanhGia;
+                }
+                
 
                 // Hien thi ten mon an theo Ngon ngu hien tai
                 ChiTietMonAnDaNgonNgu ctMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(monAn.MaMonAn, maNgonNgu);
@@ -410,7 +415,36 @@ namespace LocalServerWeb.Controllers
             return viewModel;
         }
 
-        
+        [AcceptVerbs("post")]
+        public ActionResult RateFood(FormCollection form)
+        {
+            var rate = Convert.ToInt32(form["score"]);
+            var maMonAn = Convert.ToInt32(form["maMonAn"]);
+            if (Request.Cookies["rating" + maMonAn] != null)
+                return Content("false");
+            Response.Cookies["rating" + maMonAn].Value = DateTime.Now.ToString();
+            Response.Cookies["rating" + maMonAn].Expires = DateTime.Now.AddYears(1);
+            
+            // Cap nhat danh gia Mon an
+            MonAn monAn = MonAnBUS.LayMonAn(maMonAn);
+            if (monAn != null)
+            {
+                monAn.SoLuotDanhGia++;
+                monAn.DiemDanhGia += rate;
+                MonAnBUS.CapNhat(monAn);
+            }
 
+            FoodDetailViewModel viewModel = GetFoodDetailViewModel(maMonAn);
+            if (viewModel.SoLuotDanhGia != 0)
+            {
+                viewModel.DiemTrungBinh = viewModel.DiemDanhGia / viewModel.SoLuotDanhGia;
+            }
+            return Json(viewModel);
+        }
+
+        public static string Check(double lower, double upper, double toCheck)
+        {
+            return toCheck > lower && toCheck <= upper ? " checked=\"checked\"" : null;
+        }
     }
 }
