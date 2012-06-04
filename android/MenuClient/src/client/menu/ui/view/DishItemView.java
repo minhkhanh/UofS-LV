@@ -5,7 +5,7 @@ import client.menu.bus.SessionManager;
 import client.menu.bus.SessionManager.ServiceOrder;
 import client.menu.bus.task.CustomAsyncTask;
 import client.menu.bus.task.CustomAsyncTask.OnPostExecuteAsyncTaskListener;
-import client.menu.bus.task.LoadDishUnitsAsyncTask2;
+import client.menu.bus.task.LoadDishUnitsAsyncTask;
 import client.menu.db.dto.DonViTinhDTO;
 import client.menu.db.dto.MonAnDTO;
 import client.menu.db.dto.MonAnDaNgonNguDTO;
@@ -39,7 +39,7 @@ public class DishItemView extends RelativeLayout implements
     private ImageButton mAddButton;
     private ImageButton mDetailButton;
 
-    private LoadDishUnitsAsyncTask2 mTask;
+    private LoadDishUnitsAsyncTask mTask;
 
     public DishItemView(Context context) {
         super(context);
@@ -70,7 +70,7 @@ public class DishItemView extends RelativeLayout implements
             mDescript.setText(mValues.getAsString(MonAnDaNgonNguDTO.CL_MO_TA_MON));
             mRate.setRating(mValues.getAsFloat(MonAnDTO.CL_DIEM_DANH_GIA));
 
-            mTask = new LoadDishUnitsAsyncTask2(getContext(), 0,
+            mTask = new LoadDishUnitsAsyncTask(getContext(), 0,
                     mValues.getAsInteger(MonAnDTO.CL_MA_MON_AN));
             mTask.setOnPostExecuteListener(this);
             mTask.execute();
