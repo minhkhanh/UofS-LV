@@ -18,15 +18,14 @@ namespace LocalServerWeb.Controllers
     {
         public ActionResult Index(string page)
         {
-            SharedCode.FillAdminMainMenu(ViewData, 3, 0);
-
             int _page = 1;
             int.TryParse(page ?? "1", out _page);
-            PagedList<DanhMuc> pageListDanhMuc = LayDanhSachDanhMuc().AsQueryable().ToPagedList(_page, 10);
-            ViewData["listDanhMuc"] = pageListDanhMuc;
+            PagedList<DanhMuc> pageListDanhMucThat = LayDanhSachDanhMucThat().AsQueryable().ToPagedList(_page, 10);
+            ViewData["listDanhMucThat"] = pageListDanhMucThat;
+            ViewData["listDanhMuc"] = LayDanhSachDanhMuc();
             ViewData["_page"] = _page;
 
-            return View(pageListDanhMuc);
+            return View(pageListDanhMucThat);
         }
 
         [HttpPost]
@@ -82,10 +81,10 @@ namespace LocalServerWeb.Controllers
             return RedirectToAction(previous_action, new { id = maDanhMuc });
         }
 
-        private List<DanhMuc> LayDanhSachDanhMuc()
+        // Lay tat cac danh muc, ko co danh muc None
+        private List<DanhMuc> LayDanhSachDanhMucThat()
         {
-            int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
-            List<DanhMuc> listDanhMuc = DanhMucBUS.LayDanhSachDanhMucTheoMaNgonNgu(maNgonNgu, SharedString.NoInformation);
+            List<DanhMuc> listDanhMuc = LayDanhSachDanhMuc();
             foreach(DanhMuc dm in listDanhMuc)
             {
                 // DanhMuc co ID = 1 la danh muc ao, Khong Co, nen khong show
@@ -97,6 +96,13 @@ namespace LocalServerWeb.Controllers
             }
 
             return listDanhMuc;
+        }
+
+        // Lay tat ca danh muc
+        private List<DanhMuc> LayDanhSachDanhMuc()
+        {
+            int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
+            return DanhMucBUS.LayDanhSachDanhMucTheoMaNgonNgu(maNgonNgu, SharedString.NoInformation);
         }
 
         public ActionResult Delete(int? id)
@@ -128,7 +134,6 @@ namespace LocalServerWeb.Controllers
 
         public ActionResult Add()
         {
-            SharedCode.FillAdminMainMenu(ViewData, 3, 1);
             ViewData["listDanhMuc"] = LayDanhSachDanhMuc();
 
             return View();
@@ -179,7 +184,6 @@ namespace LocalServerWeb.Controllers
 
         public ActionResult Edit(int? id)
         {
-            SharedCode.FillAdminMainMenu(ViewData, 3, 0);
 
             if (id == null || id <= 0)
             {

@@ -385,7 +385,7 @@ namespace LocalServerWeb.Resources.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No information.
+        ///   Looks up a localized string similar to N/A.
         /// </summary>
         public static string NoInformation {
             get {

@@ -226,7 +226,7 @@
     <value>Log On</value>
   </data>
   <data name="NoInformation" xml:space="preserve">
-    <value>No information</value>
+    <value>N/A</value>
   </data>
   <data name="Order" xml:space="preserve">
     <value>Order</value>

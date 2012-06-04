@@ -9,6 +9,7 @@ using LocalServerDTO;
 using LocalServerBUS;
 using LocalServerWeb.Resources.Views.FoodCategory;
 using Webdiyer.WebControls.Mvc;
+using LocalServerWeb.Resources.Views.Shared;
 
 namespace LocalServerWeb.Controllers
 {
@@ -87,27 +88,45 @@ namespace LocalServerWeb.Controllers
 
             try
             {
+                // Neu day la Mon An, hien thi no o cuoi links
                 if (isCategory == false)
                 {
                     MonAn monAn = MonAnBUS.LayMonAn(id); 
                     ChiTietMonAnDaNgonNgu ctMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(monAn.MaMonAn, maNgonNgu);
-                    
-                    viewModel.Names.Add(ctMonAnDaNgonNgu.TenMonAn);
+                    if (ctMonAnDaNgonNgu != null)
+                    {
+                        viewModel.Names.Add(ctMonAnDaNgonNgu.TenMonAn);
+                    }
+                    else
+                    {
+                        viewModel.Names.Add(SharedString.NoInformation);
+                    }
+
                     viewModel.Ids.Add(id);
                     viewModel.IsCategories.Add(false);
-
+ 
                     maDanhMuc = monAn.DanhMuc.MaDanhMuc;
                 }
 
+                // De qui tim cac danh muc cap cha
                 while (DanhMucBUS.LayDanhMuc(maDanhMuc) != null)
                 {
                     DanhMuc temp = DanhMucBUS.LayDanhMuc(maDanhMuc);
                     ChiTietDanhMucDaNgonNgu ctDanhMucDaNgonNgu = ChiTietDanhMucDaNgonNguBUS.LayChiTietDanhMucDaNgonNgu(maDanhMuc, maNgonNgu);
 
-                    viewModel.Names.Insert(0, ctDanhMucDaNgonNgu.TenDanhMuc);
+                    if (ctDanhMucDaNgonNgu != null)
+                    {
+                        viewModel.Names.Insert(0, ctDanhMucDaNgonNgu.TenDanhMuc);
+                    }
+                    else
+                    {
+                        viewModel.Names.Insert(0, SharedString.NoInformation);
+                    }
+
                     viewModel.Ids.Insert(0, maDanhMuc);
                     viewModel.IsCategories.Insert(0, true);
 
+                    // Lay danh muc Cha
                     maDanhMuc = (temp.DanhMucCha != null) ? temp.DanhMucCha.MaDanhMuc : 0;
                 }
     
