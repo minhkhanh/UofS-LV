@@ -115,7 +115,7 @@ namespace LocalServerWeb.Resources.Views.FoodCategory {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Food Category.
+        ///   Looks up a localized string similar to Food category.
         /// </summary>
         public static string Title {
             get {

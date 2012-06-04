@@ -7,7 +7,7 @@
     <table width="100%">
         <tr>
             <td colspan="2">
-                Category
+                <h1><%: FoodCategoryString.Title %></h1>
             </td>
         </tr>
         <tr>

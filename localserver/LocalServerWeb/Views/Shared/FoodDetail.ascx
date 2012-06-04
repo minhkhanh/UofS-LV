@@ -5,7 +5,6 @@
 
 
 <div id = "food_detail">
-    <h2><%: FoodCategoryString.FoodInformation %></h2>
     <% if (ViewData["foodDetailViewModel"] != null)
        {
            FoodDetailViewModel viewModel = (FoodDetailViewModel)ViewData["foodDetailViewModel"];
@@ -25,7 +24,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    
+                                    <% Html.RenderPartial("FoodRating", viewModel); %>
                                 </td>
                             </tr>
                         </table>

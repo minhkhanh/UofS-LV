@@ -731,6 +731,7 @@
     <Content Include="Content\foodcategorycss\foodgallery.css" />
     <Content Include="Content\foodcategorycss\foodgalleryitem.css" />
     <Content Include="Content\foodcategorycss\foodrelate.css" />
+    <Content Include="Content\foodcategorycss\jquery.rating.css" />
     <Content Include="Content\sitecss\Login.css" />
     <Content Include="Content\sitecss\templatemo_style.css" />
     <Content Include="Content\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
@@ -888,6 +889,9 @@
     <Content Include="Images\siteimages\templatmeo_header.jpg" />
     <Content Include="LocalService.svc" />
     <Content Include="ReportForms\BillReportForm.aspx" />
+    <Content Include="Scripts\foodcategory\jquery.MetaData.js" />
+    <Content Include="Scripts\foodcategory\jquery.rating.js" />
+    <Content Include="Scripts\foodcategory\jquery.rating.pack.js" />
     <Content Include="Scripts\foodcategory\slider.js" />
     <Content Include="Scripts\jquery\Copy of custom_jquery.js" />
     <Content Include="Scripts\jquery\custom_jquery.js" />
@@ -976,6 +980,7 @@
     <Content Include="Views\Shared\FoodDetail.ascx" />
     <Content Include="Views\Shared\FoodGallery.ascx" />
     <Content Include="Views\Shared\FoodGalleryItem.ascx" />
+    <Content Include="Views\Shared\FoodRating.ascx" />
     <Content Include="Views\Shared\FoodRelate.ascx" />
     <Content Include="Views\Shared\LanguageUserControl.ascx" />
     <Content Include="Views\Shared\LatestSlider.ascx" />
@@ -1020,6 +1025,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\foodcategory\foodrating\" />
     <Folder Include="Images\foodcategory\foodrelate\" />
     <Folder Include="Uploads\FoodImages\" />
   </ItemGroup>
