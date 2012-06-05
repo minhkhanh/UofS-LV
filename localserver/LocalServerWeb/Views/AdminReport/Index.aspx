@@ -18,6 +18,7 @@
                     newwindow.focus();
                 }
             });
+            
         });
     </script>
 </asp:Content>

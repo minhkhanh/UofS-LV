@@ -25,6 +25,9 @@ namespace LocalServerWeb.Controllers
             ViewData["listHoaDon"] = pageListHoaDon;
             ViewData["_page"] = _page;
 
+            int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
+            ViewData["maNgonNgu"] = maNgonNgu;
+
             return View(pageListHoaDon);
         }
 
@@ -35,6 +38,9 @@ namespace LocalServerWeb.Controllers
                 return View();
 
             int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
+            ViewData["maNgonNgu"] = maNgonNgu;
+            ViewData["maHoaDon"] = id;
+
             List<ChiTietHoaDon> listChiTietHoaDOn = ChiTietHoaDonBUS.LayNhieuChiTietHoaDon(id ?? 1);
 
             foreach (ChiTietHoaDon ct in listChiTietHoaDOn)
@@ -49,14 +55,6 @@ namespace LocalServerWeb.Controllers
         }
 
         public bool Print(int maHoaDon)
-        {
-            HoaDon hoaDon = HoaDonBUS.LayHoaDon(maHoaDon);
-            if (hoaDon == null)
-                return false;
-            return Reports.ReportManager.PrintBill(hoaDon.MaHoaDon, SharedCode.GetCurrentLanguage(Session).MaNgonNgu);
-        }
-
-        public bool Preview(int maHoaDon)
         {
             HoaDon hoaDon = HoaDonBUS.LayHoaDon(maHoaDon);
             if (hoaDon == null)
