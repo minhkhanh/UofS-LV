@@ -15,10 +15,10 @@ namespace LocalServerWeb.Controllers
 
         public ActionResult Index()
         {
-            SharedCode.FillAdminMainMenu(ViewData, 4, 0);
             var thamSoBillPrinter = ThamSoBUS.LayThamSo("BillPrinter");
             var billPrinter = "";
-            if (thamSoBillPrinter!=null) billPrinter = thamSoBillPrinter.GiaTri;
+            if (thamSoBillPrinter!=null) 
+                billPrinter = thamSoBillPrinter.GiaTri;
             ViewData["billPrinter"] = billPrinter;
             return View();
         }
@@ -26,10 +26,13 @@ namespace LocalServerWeb.Controllers
         [HttpPost]
         public bool ChangeBillPrinter(string billPrinter)
         {
-            if (billPrinter == null || billPrinter.Length <= 0) return false;
+            if (billPrinter == null || billPrinter.Length <= 0) 
+                return false;
             var thamSoBillPrinter = ThamSoBUS.LayThamSo("BillPrinter");
-            if (thamSoBillPrinter == null) return false;
+            if (thamSoBillPrinter == null)
+                return false;
             thamSoBillPrinter.GiaTri = billPrinter;
+
             return ThamSoBUS.CapNhat(thamSoBillPrinter);
         }
     }

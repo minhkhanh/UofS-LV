@@ -153,6 +153,9 @@
   <data name="Print" xml:space="preserve">
     <value>In hóa đơn</value>
   </data>
+  <data name="PrintPreview" xml:space="preserve">
+    <value>Xem trước khi in hóa đơn</value>
+  </data>
   <data name="Promotion" xml:space="preserve">
     <value>Khuyến mãi</value>
   </data>

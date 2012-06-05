@@ -4,6 +4,7 @@
 <%@ Import Namespace="LocalServerWeb.ViewModels" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.AdminInvoice" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.Shared" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%: AdminInvoiceString.DetailTitle %>
 </asp:Content>
@@ -50,10 +51,6 @@
                     <a>
                         <%: AdminInvoiceString.Promotion %></a>
                 </th>
-                <th class="table-header-repeat line-left">
-                    <a>
-                        <%: AdminInvoiceString.Option %></a>
-                </th>
             </tr>
             <% int iCount = 0; %>
             <% foreach (var ct in (List<ChiTietHoaDon>)ViewData["listChiTietHoaDon"])
@@ -79,9 +76,6 @@
                 </td>
                 <td>
                     <%: ct.KhuyenMai.TenKhuyenMai %>
-                </td>
-                <td class="options-width">
-                    <a href="" title="" class="icon-3 info-tooltip"></a>
                 </td>
             </tr>
             <% } %>
@@ -109,5 +103,7 @@
         </table>
     </div>
     <%} %>
+    <input type="button" value="<%: AdminInvoiceString.Print %>"  onclick="window.location.href='<%: Url.Action("Print", "AdminInvoice", new { maHoaDon = Url.RequestContext.RouteData.Values["id"] }) %>';"/>
+    <input type="button" value="<%: AdminInvoiceString.PrintPreview %>"  onclick="window.location.href='<%: Url.Action("PrintPreview", "AdminInvoice", new { maHoaDon = Url.RequestContext.RouteData.Values["id"] }) %>';"/>
     <input type="button" value="<%: SharedString.Back %>"  onclick="window.location.href='<%: Url.Action("Index", "AdminInvoice") %>';"/>
 </asp:Content>

@@ -22,7 +22,7 @@
     $(document).ready(function () {
         bTimerOn = true;
         timer = setTimeout("getKitchenOrderTable()", 1);
-
+        
         $("#dialog-form-che-bien").dialog({
             autoOpen: false,
             width: 350,

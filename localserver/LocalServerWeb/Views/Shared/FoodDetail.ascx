@@ -37,7 +37,7 @@
                         <% for (int i = 0; i < viewModel.listDonGia.Count; ++i)
                            {
                         %>
-                        <%: viewModel.listDonGia[i].ToString() %>
+                        <%: viewModel.listDonGia[i].ToString() %> VND
                         /
                         <%: viewModel.listTenDonViTinh[i] %>
                         <br />

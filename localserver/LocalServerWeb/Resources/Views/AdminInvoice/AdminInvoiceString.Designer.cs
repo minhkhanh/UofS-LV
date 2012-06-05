@@ -169,6 +169,15 @@ namespace LocalServerWeb.Resources.Views.AdminInvoice {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Print preview this invoice.
+        /// </summary>
+        public static string PrintPreview {
+            get {
+                return ResourceManager.GetString("PrintPreview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Promotion.
         /// </summary>
         public static string Promotion {

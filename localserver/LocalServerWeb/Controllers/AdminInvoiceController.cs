@@ -47,5 +47,22 @@ namespace LocalServerWeb.Controllers
             ViewData["listChiTietHoaDon"] = listChiTietHoaDOn;
             return View();
         }
+
+        public bool Print(int maHoaDon)
+        {
+            HoaDon hoaDon = HoaDonBUS.LayHoaDon(maHoaDon);
+            if (hoaDon == null)
+                return false;
+            return Reports.ReportManager.PrintBill(hoaDon.MaHoaDon, SharedCode.GetCurrentLanguage(Session).MaNgonNgu);
+        }
+
+        public bool Preview(int maHoaDon)
+        {
+            HoaDon hoaDon = HoaDonBUS.LayHoaDon(maHoaDon);
+            if (hoaDon == null)
+                return false;
+            return Reports.ReportManager.PrintBill(hoaDon.MaHoaDon, SharedCode.GetCurrentLanguage(Session).MaNgonNgu);
+        }
+        
     }
 }

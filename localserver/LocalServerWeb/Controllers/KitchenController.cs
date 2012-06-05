@@ -21,7 +21,7 @@ namespace LocalServerWeb.Controllers
             if (maBoPhanCheBien == null) return RedirectToAction("Index", "Error");
             var boPhanCheBien = BoPhanCheBienBUS.LayBoPhanCheBienTheoMa((int) maBoPhanCheBien);
             if (boPhanCheBien == null) return RedirectToAction("Index", "Error");
-            SharedCode.FillAdminMainMenu(ViewData, 3, 0);
+
             ViewData["iTimerTick"] = TIMER_TICK;
             ViewData["boPhanCheBien"] = boPhanCheBien;
             return View();

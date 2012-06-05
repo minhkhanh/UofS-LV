@@ -22,7 +22,8 @@ namespace LocalServerWeb.Controllers
         public bool TestPrintBill(int maHoaDon)
         {
             var hoaDon = HoaDonBUS.LayHoaDon(maHoaDon);
-            if (hoaDon == null) return false;
+            if (hoaDon == null) 
+                return false;
             return Reports.ReportManager.PrintBill(hoaDon.MaHoaDon, SharedCode.GetCurrentLanguage(Session).MaNgonNgu);
         }
     }

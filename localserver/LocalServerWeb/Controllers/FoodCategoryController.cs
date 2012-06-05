@@ -75,7 +75,7 @@ namespace LocalServerWeb.Controllers
 
             // Neu Id = 0
             // Hoac la chon vo danh muc None
-            if (id == 0 || id == 1)
+            if (id == 0)
             {
                 viewModel.Names.Insert(0, FoodCategoryString.Index);
                 viewModel.Ids.Insert(0, 0);

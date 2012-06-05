@@ -20,7 +20,7 @@ namespace LocalServerWeb.Controllers
         {
             int maHoaDon = 1; //du lieu gia
             int maNgonNgu = SharedCode.GetCurrentLanguage(Session).MaNgonNgu;
-            SharedCode.FillAdminMainMenu(ViewData, 2, -1);
+
             ViewData["maHoaDon"] = maHoaDon;
             ViewData["maNgonNgu"] = maNgonNgu;
             return View();
