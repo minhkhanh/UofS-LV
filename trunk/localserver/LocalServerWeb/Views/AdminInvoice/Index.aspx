@@ -104,7 +104,7 @@
                 <td class="options-width">
                     <%:Html.ActionLink(" ", "InvoiceDetail", "AdminInvoice", new { id = hoaDon.MaHoaDon }, new { title = AdminInvoiceString.DetailTitle, Class = "icon-3 info-tooltip" })%>
                     <%:Html.ActionLink(" ", "Print", "AdminInvoice", new { maHoaDon = hoaDon.MaHoaDon }, new { title = AdminInvoiceString.Print, Class = "icon-4 info-tooltip" })%>
-                    <%:Html.ActionLink(" ", "PrintPreview", "AdminInvoice", new { maHoaDon = hoaDon.MaHoaDon }, new { title = AdminInvoiceString.PrintPreview, Class = "icon-4 info-tooltip" })%>
+                    <a title = "<%:AdminInvoiceString.PrintPreview %>" class="icon-4 info-tooltip" onclick="previewInvoice('<%:hoaDon.MaHoaDon%>');"></a>
                 </td>
             </tr>
             <% } %>
