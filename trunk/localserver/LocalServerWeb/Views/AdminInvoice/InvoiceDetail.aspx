@@ -9,6 +9,14 @@
     <%: AdminInvoiceString.DetailTitle %>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
+<script type="text/javascript">
+    function previewInvoice() {
+        var newwindow = window.open('../../ReportForms/BillReportForm?maHoaDon=<%:ViewData["maHoaDon"] %>&maNgonNgu=<%:ViewData["maNgonNgu"] %>', 'name', 'height=800,width=600');
+        if (window.focus) {
+            newwindow.focus();
+        }
+    }
+</script>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="PageHeadingContent" runat="server">
     <%: AdminInvoiceString.DetailTitle %>
@@ -104,6 +112,6 @@
     </div>
     <%} %>
     <input type="button" value="<%: AdminInvoiceString.Print %>"  onclick="window.location.href='<%: Url.Action("Print", "AdminInvoice", new { maHoaDon = Url.RequestContext.RouteData.Values["id"] }) %>';"/>
-    <input type="button" value="<%: AdminInvoiceString.PrintPreview %>"  onclick="window.location.href='<%: Url.Action("PrintPreview", "AdminInvoice", new { maHoaDon = Url.RequestContext.RouteData.Values["id"] }) %>';"/>
+    <input type="button" value="<%: AdminInvoiceString.PrintPreview %>"  onclick="previewInvoice();"/>
     <input type="button" value="<%: SharedString.Back %>"  onclick="window.location.href='<%: Url.Action("Index", "AdminInvoice") %>';"/>
 </asp:Content>
