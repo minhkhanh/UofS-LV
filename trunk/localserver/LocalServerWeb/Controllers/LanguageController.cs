@@ -16,7 +16,8 @@ namespace LocalServerWeb.Controllers
             try
             {
                 var ngonNgu = NgonNguBUS.LayNgonNguTheoKiHieu(kiHieuNgonNgu);
-                if (ngonNgu != null && Session != null) Session["ngonNgu"] = ngonNgu;
+                if (ngonNgu != null && Session != null) 
+                    Session["ngonNgu"] = ngonNgu;
                 //if (Request.UrlReferrer != null)
                 return Redirect(returnUrlLanguage);
                     //return new RedirectResult(Request.UrlReferrer.ToString());

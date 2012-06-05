@@ -232,6 +232,7 @@ namespace LocalServerWeb.Controllers
             if (giaTri != 0)
             {
                 objTiGia.GiaTri = giaTri;
+                objTiGia.ThoiDiemCapNhat = DateTime.Now;
                 if (!TiGiaBUS.CapNhat(objTiGia))
                 {
                     TempData["errorCannotUpdate"] = AdminExchangeRateString.ErrorCannotUpdate;

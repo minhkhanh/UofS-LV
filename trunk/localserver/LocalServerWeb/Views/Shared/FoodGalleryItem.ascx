@@ -10,8 +10,8 @@
     <p>
         <%: Model.TenMonAn %></p>
     <p>
-        <%: Model.DonGia %>
-        &nbsp; / &nbsp;
+        <%: Model.DonGia %> VND
+        /
         <%: Model.TenDonViTinh %>
     </p>
 </div>
