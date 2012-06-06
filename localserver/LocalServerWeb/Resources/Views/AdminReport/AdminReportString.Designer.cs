@@ -61,7 +61,97 @@ namespace LocalServerWeb.Resources.Views.AdminReport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Income report.
+        ///   Looks up a localized string similar to Choose date.
+        /// </summary>
+        public static string ChooseDate {
+            get {
+                return ResourceManager.GetString("ChooseDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To.
+        /// </summary>
+        public static string ChooseEndDate {
+            get {
+                return ResourceManager.GetString("ChooseEndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose month.
+        /// </summary>
+        public static string ChooseMonth {
+            get {
+                return ResourceManager.GetString("ChooseMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose report.
+        /// </summary>
+        public static string ChooseReport {
+            get {
+                return ResourceManager.GetString("ChooseReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From.
+        /// </summary>
+        public static string ChooseStartDate {
+            get {
+                return ResourceManager.GetString("ChooseStartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Print report.
+        /// </summary>
+        public static string Print {
+            get {
+                return ResourceManager.GetString("Print", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Print preview.
+        /// </summary>
+        public static string PrintPreview {
+            get {
+                return ResourceManager.GetString("PrintPreview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Daily report.
+        /// </summary>
+        public static string RevenueDayReport {
+            get {
+                return ResourceManager.GetString("RevenueDayReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monthly report.
+        /// </summary>
+        public static string RevenueMonthReport {
+            get {
+                return ResourceManager.GetString("RevenueMonthReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Period report.
+        /// </summary>
+        public static string RevenuePeriodReport {
+            get {
+                return ResourceManager.GetString("RevenuePeriodReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Revenue report.
         /// </summary>
         public static string Title {
             get {

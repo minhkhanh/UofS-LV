@@ -117,6 +117,36 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ChooseDate" xml:space="preserve">
+    <value>Chọn ngày</value>
+  </data>
+  <data name="ChooseEndDate" xml:space="preserve">
+    <value>Đến ngày</value>
+  </data>
+  <data name="ChooseMonth" xml:space="preserve">
+    <value>Chọn tháng</value>
+  </data>
+  <data name="ChooseReport" xml:space="preserve">
+    <value>Chọn loại báo cáo</value>
+  </data>
+  <data name="ChooseStartDate" xml:space="preserve">
+    <value>Từ ngày</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>In báo cáo</value>
+  </data>
+  <data name="PrintPreview" xml:space="preserve">
+    <value>Xem trước khi in</value>
+  </data>
+  <data name="RevenueDayReport" xml:space="preserve">
+    <value>Báo cáo ngày</value>
+  </data>
+  <data name="RevenueMonthReport" xml:space="preserve">
+    <value>Báo cáo tháng</value>
+  </data>
+  <data name="RevenuePeriodReport" xml:space="preserve">
+    <value>Báo cáo theo khoảng thời gian</value>
+  </data>
   <data name="Title" xml:space="preserve">
     <value>Báo cáo doanh thu</value>
   </data>
