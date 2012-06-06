@@ -42,7 +42,7 @@ public class SplashScreenActivity extends Activity implements
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.cancel();
                                     SyncDbTask task = new SyncDbTask(
-                                            SplashScreenActivity.this, 0);
+                                            SplashScreenActivity.this);
                                     task.setOnPostExecuteListener(SplashScreenActivity.this);
                                     task.execute();
                                 }

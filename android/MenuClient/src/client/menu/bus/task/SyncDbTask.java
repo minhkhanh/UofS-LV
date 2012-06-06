@@ -33,8 +33,8 @@ public class SyncDbTask extends CustomAsyncTask<Void, String, Boolean> {
     List<AbstractDAO> mDaoList = new ArrayList<AbstractDAO>();
     ProgressDialog mDlg;
 
-    public SyncDbTask(Context context, int id) {
-        super(context, id);
+    public SyncDbTask(Context context) {
+        super(context);
     }
 
     @Override

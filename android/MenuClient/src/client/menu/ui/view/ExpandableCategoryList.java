@@ -1,12 +1,14 @@
 package client.menu.ui.view;
 
 import client.menu.R;
-import client.menu.ui.adapter.ExpandableCategoryListAdapter;
+import client.menu.ui.adapter.ExpandableCategoryAdapter;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
 
@@ -20,14 +22,23 @@ public class ExpandableCategoryList extends ListView {
     }
 
     OnCategoryClickListener mOnCategoryClickListener;
+    
+//    OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
+//        @Override
+//        public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+//            
+//        }
+//    };
 
     public ExpandableCategoryList(Context context) {
         super(context);
+//        setOnItemClickListener(mOnItemClickListener);
 //        prepareViews();
     }
 
     public ExpandableCategoryList(Context context, AttributeSet attrs) {
         super(context, attrs);
+//        setOnItemClickListener(mOnItemClickListener);
 //        if (!isInEditMode()) {
 //            prepareViews();
 //        }
@@ -35,6 +46,7 @@ public class ExpandableCategoryList extends ListView {
 
     public ExpandableCategoryList(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+//        setOnItemClickListener(mOnItemClickListener);
 //        if (!isInEditMode()) {
 //            prepareViews();
 //        }
@@ -52,10 +64,15 @@ public class ExpandableCategoryList extends ListView {
 //        mContainer.addView(view);        
 //    }
     
-    public void setCategoryAdapter(ExpandableCategoryListAdapter adapter) {
+    public void setExpandableCategoryAdapter(ExpandableCategoryAdapter adapter) {
         adapter.setListView(this);
         setAdapter(adapter);
     }
+    
+//    @Override
+//    public void setAdapter(ListAdapter adapter) {
+//        throw new UnsupportedOperationException("Use setCategoryAdapter() instead.");
+//    }
 
     public void setOnCategoryClickListener(
             OnCategoryClickListener onCategoryItemClickListener) {

@@ -70,7 +70,7 @@ public class SyncPrefFragment extends PreferenceFragment implements
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.cancel();
-                                    SyncDbTask task = new SyncDbTask(getActivity(), 0);
+                                    SyncDbTask task = new SyncDbTask(getActivity());
                                     task.setOnPostExecuteListener(SyncPrefFragment.this);
                                     task.execute();
                                 }

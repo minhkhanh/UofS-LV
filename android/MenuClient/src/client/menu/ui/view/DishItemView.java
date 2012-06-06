@@ -70,7 +70,7 @@ public class DishItemView extends RelativeLayout implements
             mDescript.setText(mValues.getAsString(MonAnDaNgonNguDTO.CL_MO_TA_MON));
             mRate.setRating(mValues.getAsFloat(MonAnDTO.CL_DIEM_DANH_GIA));
 
-            mTask = new LoadDishUnitsAsyncTask(getContext(), 0,
+            mTask = new LoadDishUnitsAsyncTask(getContext(),
                     mValues.getAsInteger(MonAnDTO.CL_MA_MON_AN));
             mTask.setOnPostExecuteListener(this);
             mTask.execute();

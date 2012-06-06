@@ -45,8 +45,6 @@
         </activity>
         <activity android:name=".ui.activity.CustomBillSplitActivity" >
         </activity>
-        <activity android:name=".ui.activity.WelcomeActivity" >
-        </activity>
         <activity android:name=".ui.activity.SplashScreenActivity" android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"></activity>
         <service android:name=".svc.SyncService"></service>
         <activity android:name=".ui.activity.BeginningActivity"></activity>

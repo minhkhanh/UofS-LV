@@ -11,12 +11,12 @@ import client.menu.db.dto.DanhMucDaNgonNguDTO;
 import client.menu.ui.view.ExpandableCategoryList;
 import client.menu.ui.view.ExpandableCategoryView;
 
-public class ExpandableCategoryListAdapter extends
+public class ExpandableCategoryAdapter extends
         CustomArrayAdapter<DanhMucDaNgonNguDTO> {
     
     ExpandableCategoryList mListView;
 
-    public ExpandableCategoryListAdapter(Context context, List<DanhMucDaNgonNguDTO> data) {
+    public ExpandableCategoryAdapter(Context context, List<DanhMucDaNgonNguDTO> data) {
         super(context, data);
     }
 
