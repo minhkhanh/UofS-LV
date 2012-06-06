@@ -115,7 +115,7 @@ public class ExpandableCategoryView extends LinearLayout implements
     public void bindData(DanhMucDaNgonNguDTO danhMuc) {
         if (mDanhMuc == null || danhMuc.getMaDanhMuc() != mDanhMuc.getMaDanhMuc()) {
             mDanhMuc = danhMuc;
-            mTask = new LoadChildCategoryListTask(getContext(), 0,
+            mTask = new LoadChildCategoryListTask(getContext(),
                     mDanhMuc.getMaDanhMuc());
             mTask.setOnPostExecuteListener(ExpandableCategoryView.this);
 

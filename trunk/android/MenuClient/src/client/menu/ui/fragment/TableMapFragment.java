@@ -81,7 +81,7 @@ public class TableMapFragment extends TableInAreaFragment implements
                     Integer maBanChinh = ban.getMaBanChinh();
                     if (maBanChinh != null) {
                         PostTableSplitingTask task = new PostTableSplitingTask(
-                                getActivity(), 0, maBanChinh);
+                                getActivity(), maBanChinh);
                         task.setOnPostExecuteListener(TableMapFragment.this);
                         task.execute();
                     } else {

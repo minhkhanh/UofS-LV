@@ -20,8 +20,8 @@ public class LoadDishUnitsAsyncTask extends
 
     Integer mMaMonAn;
 
-    public LoadDishUnitsAsyncTask(Context context, int id, Integer maMonAn) {
-        super(context, id);
+    public LoadDishUnitsAsyncTask(Context context, Integer maMonAn) {
+        super(context);
         mMaMonAn = maMonAn;
     }
 

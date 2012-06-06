@@ -14,8 +14,9 @@ import android.view.ViewGroup;
 import client.menu.R;
 import client.menu.bus.loader.RootCategoryListLoader;
 import client.menu.db.dto.DanhMucDaNgonNguDTO;
-import client.menu.ui.adapter.ExpandableCategoryListAdapter;
+import client.menu.ui.adapter.ExpandableCategoryAdapter3;
 import client.menu.ui.view.ExpandableCategoryList;
+import client.menu.ui.view.ExpandableCategoryList3;
 import client.menu.ui.view.ExpandableCategoryList.OnCategoryClickListener;
 import client.menu.ui.view.ExpandableCategoryView;
 
@@ -24,13 +25,20 @@ public class CategoryListFragment extends Fragment implements
     private int mSelIndex;
     private boolean mIsDualPane;
 
-    private ExpandableCategoryList mCategoryList;
-    private ExpandableCategoryListAdapter mListAdapter;
+    private ExpandableCategoryList3 mCategoryList;
+    private ExpandableCategoryAdapter3 mListAdapter;
+
+    public static class CategoryNode {
+        public DanhMucDaNgonNguDTO danhMuc;
+        public int indent;
+    }
+
+    private List<CategoryNode> mCategoryTree = new ArrayList<CategoryListFragment.CategoryNode>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        return new ExpandableCategoryList(getActivity());
+        return new ExpandableCategoryList3(getActivity());
     }
 
     @Override
@@ -42,11 +50,12 @@ public class CategoryListFragment extends Fragment implements
 
         getView().setBackgroundResource(R.color._55f5f5f5);
 
-        mListAdapter = new ExpandableCategoryListAdapter(getActivity(),
-                new ArrayList<DanhMucDaNgonNguDTO>());
-        mCategoryList = (ExpandableCategoryList) getView();
-        mCategoryList.setCategoryAdapter(mListAdapter);
-        mCategoryList.setOnCategoryClickListener(this);
+        mListAdapter = new ExpandableCategoryAdapter3(getActivity(),
+                new ArrayList<CategoryNode>());
+        mCategoryList = (ExpandableCategoryList3) getView();
+        mCategoryList.setAdapter(mListAdapter);
+        // mCategoryList.setExpandableCategoryAdapter(mListAdapter);
+        // mCategoryList.setOnCategoryClickListener3(this);
 
         getLoaderManager().initLoader(0, null, this);
 
@@ -58,13 +67,31 @@ public class CategoryListFragment extends Fragment implements
     public void onLoaderReset(Loader<List<DanhMucDaNgonNguDTO>> loader) {
         mListAdapter.clear();
         mListAdapter.notifyDataSetChanged();
+
+        mCategoryTree.clear();
     }
 
     @Override
     public void onLoadFinished(Loader<List<DanhMucDaNgonNguDTO>> loader,
             List<DanhMucDaNgonNguDTO> result) {
+        mCategoryTree.clear();
+//        List<CategoryNode> adapterData = new ArrayList<CategoryListFragment.CategoryNode>();
+        for (DanhMucDaNgonNguDTO d : result) {
+            CategoryNode node = new CategoryNode();
+            node.danhMuc = d;
+            node.indent = 0;
+            mCategoryTree.add(node);
+            
+//            node = new CategoryNode();
+//            node.danhMuc = d;
+//            node.indent = 0;
+//            adapterData.add(node);
+        }
+
         mListAdapter.clear();
-        mListAdapter.addAll(result);
+        mListAdapter.addAll(mCategoryTree);
+        mListAdapter.setTreeData(mCategoryTree);
+        // mListAdapter.addGroupAll(result);
         mListAdapter.notifyDataSetChanged();
     }
 

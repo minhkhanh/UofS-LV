@@ -3,7 +3,6 @@ package client.menu.ui.fragment;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,10 +11,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import client.menu.R;
-import client.menu.bus.SessionManager;
 import client.menu.dao.BanDAO;
 import client.menu.db.dto.BanDTO;
-import client.menu.ui.activity.WelcomeActivity;
 import client.menu.util.U;
 
 public class AuthDialogFragment extends DialogFragment {
@@ -38,8 +35,8 @@ public class AuthDialogFragment extends DialogFragment {
             mWatingDlg.dismiss();
 
             if (mResult) {
-                Intent intent = new Intent(getActivity(), WelcomeActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), WelcomeActivity.class);
+//                startActivity(intent);
                 dismiss();
             } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

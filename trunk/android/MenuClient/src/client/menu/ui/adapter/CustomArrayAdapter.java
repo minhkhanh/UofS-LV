@@ -21,6 +21,14 @@ public abstract class CustomArrayAdapter<T> extends BaseAdapter {
         mContext = context;
     }
 
+    public void remove(int position) {
+        mData.remove(position);
+    }
+
+    public void add(int position, T object) {
+        mData.add(position, object);
+    }
+
     public void add(T object) {
         mData.add(object);
     }
@@ -63,7 +71,7 @@ public abstract class CustomArrayAdapter<T> extends BaseAdapter {
     public List<T> getData() {
         return mData;
     }
-    
+
     @Override
     public abstract View getView(int position, View convertView, ViewGroup parent);
 }

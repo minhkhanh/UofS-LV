@@ -15,8 +15,8 @@ public class LoadChildCategoryListTask extends
 
     private Integer mMaDanhMucCha;
 
-    public LoadChildCategoryListTask(Context context, int id, Integer maDanhMucCha) {
-        super(context, id);
+    public LoadChildCategoryListTask(Context context, Integer maDanhMucCha) {
+        super(context);
 
         mMaDanhMucCha = maDanhMucCha;
     }

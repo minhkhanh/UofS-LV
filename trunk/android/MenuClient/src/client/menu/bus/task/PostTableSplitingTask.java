@@ -9,8 +9,8 @@ public class PostTableSplitingTask extends CustomAsyncTask<Void, Void, Boolean> 
 
     Integer mMaBanChinh;
 
-    public PostTableSplitingTask(Context context, int id, Integer maBanChinh) {
-        super(context, id);
+    public PostTableSplitingTask(Context context, Integer maBanChinh) {
+        super(context);
         mMaBanChinh = maBanChinh;
     }
 

@@ -12,8 +12,8 @@ public class PostTableMergingTask extends CustomAsyncTask<Void, Integer, Integer
 
     YeuCauGhepBan mYeuCau;
 
-    public PostTableMergingTask(Context context, int id, YeuCauGhepBan yc) {
-        super(context, id);
+    public PostTableMergingTask(Context context, YeuCauGhepBan yc) {
+        super(context);
         mYeuCau = yc;
     }
 

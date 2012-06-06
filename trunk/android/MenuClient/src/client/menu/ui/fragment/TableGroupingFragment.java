@@ -30,7 +30,6 @@ import client.menu.bus.task.CustomAsyncTask.OnPostExecuteAsyncTaskListener;
 import client.menu.db.dto.BanDTO;
 import client.menu.db.dto.YeuCauGhepBan;
 import client.menu.ui.activity.MainMenuActivity;
-import client.menu.ui.activity.WelcomeActivity;
 import client.menu.ui.adapter.TableListAdapter;
 import client.menu.util.U;
 
@@ -85,7 +84,7 @@ public class TableGroupingFragment extends TableInAreaFragment implements
                         yc.setMaBanPhuList(listBan);
 
                         PostTableMergingTask task = new PostTableMergingTask(
-                                getActivity(), 0, yc);
+                                getActivity(), yc);
                         task.setOnPostExecuteListener(TableGroupingFragment.this);
                         task.execute();
                     }

@@ -2,6 +2,7 @@ package client.menu.bus.task;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Bundle;
 
 public abstract class CustomAsyncTask<Params, Progress, Result> extends
         AsyncTask<Params, Progress, Result> {
@@ -11,7 +12,8 @@ public abstract class CustomAsyncTask<Params, Progress, Result> extends
     }
 
     public interface OnPostExecuteAsyncTaskListener<Params, Progress, Result> {
-        void onPostExecuteAsyncTask(CustomAsyncTask<Params, Progress, Result> task, Result result);
+        void onPostExecuteAsyncTask(CustomAsyncTask<Params, Progress, Result> task,
+                Result result);
     }
 
     public interface OnProgressUpdateAsyncTaskListener<Params, Progress, Result> {
@@ -19,15 +21,14 @@ public abstract class CustomAsyncTask<Params, Progress, Result> extends
                 Progress... values);
     }
 
+    private Bundle mExtras;
     private Context mContext;
-    private int mId;
     private OnPostExecuteAsyncTaskListener<Params, Progress, Result> mOnPostExecuteListener;
     private OnPreExecuteAsyncTaskListener<Params, Progress, Result> mOnPreExecuteListener;
     private OnProgressUpdateAsyncTaskListener<Params, Progress, Result> mOnProgressUpdateListener;
 
-    public CustomAsyncTask(Context context, int id) {
+    public CustomAsyncTask(Context context) {
         mContext = context;
-        mId = id;
     }
 
     @Override
@@ -60,10 +61,6 @@ public abstract class CustomAsyncTask<Params, Progress, Result> extends
         }
     }
 
-    public int getId() {
-        return mId;
-    }
-
     public Context getContext() {
         return mContext;
     }
@@ -81,6 +78,14 @@ public abstract class CustomAsyncTask<Params, Progress, Result> extends
     public void setOnProgressUpdateListener(
             OnProgressUpdateAsyncTaskListener<Params, Progress, Result> onProgressUpdateListener) {
         mOnProgressUpdateListener = onProgressUpdateListener;
+    }
+
+    public Bundle getExtras() {
+        return mExtras;
+    }
+
+    public void setExtras(Bundle extras) {
+        mExtras = extras;
     }
 
 }
