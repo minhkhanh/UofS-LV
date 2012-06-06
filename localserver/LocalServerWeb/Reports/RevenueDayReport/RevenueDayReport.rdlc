@@ -67,9 +67,7 @@
             <TextRuns>
               <TextRun>
                 <Value>=Parameters!PhuThu.Value</Value>
-                <Style>
-                  <Format>#,0 'VND';(#,0 'VND')</Format>
-                </Style>
+                <Style />
               </TextRun>
             </TextRuns>
             <Style />
@@ -130,9 +128,7 @@
             <TextRuns>
               <TextRun>
                 <Value>=Parameters!KhuyenMai.Value</Value>
-                <Style>
-                  <Format>#,0 'VND';(#,0 'VND')</Format>
-                </Style>
+                <Style />
               </TextRun>
             </TextRuns>
             <Style />
@@ -162,9 +158,7 @@
             <TextRuns>
               <TextRun>
                 <Value>=Parameters!TongTien.Value</Value>
-                <Style>
-                  <Format>#,0 'VND';(#,0 'VND')</Format>
-                </Style>
+                <Style />
               </TextRun>
             </TextRuns>
             <Style />
@@ -695,7 +689,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
