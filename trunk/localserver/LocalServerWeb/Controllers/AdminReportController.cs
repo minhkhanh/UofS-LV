@@ -22,6 +22,12 @@ namespace LocalServerWeb.Controllers
 
             ViewData["maHoaDon"] = maHoaDon;
             ViewData["maNgonNgu"] = maNgonNgu;
+
+
+            TaiKhoan taiKhoan = (TaiKhoan)Session["taiKhoan"];
+            string nguoiLap = (taiKhoan != null) ? taiKhoan.HoTen : " ";
+
+            ViewData["nguoiLap"] = nguoiLap;
             return View();
         }
 

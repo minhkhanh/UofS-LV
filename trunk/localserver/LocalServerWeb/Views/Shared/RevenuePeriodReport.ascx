@@ -2,10 +2,41 @@
 <%@ Import Namespace="LocalServerWeb.Resources.Views.AdminReport" %>
 <%@ Import Namespace="System.Globalization" %>
 <script type="text/javascript">
-    function printPreview() {
-        var day = $('#sd').val();
-        var month = $('#sm').val();
-        var year = $('#sy').val();
+    function daysInMonth(month, year) {
+        return new Date(year, month, 0).getDate();
+    }
+    $(document).ready(function () {
+        // Thoi diem bat dau =====================================   
+        $('#sd').find('option').remove();
+        var day = daysInMonth($('#sm').val(), $('#sy').val());
+        for (var i = 1; i <= day; i++) {
+            $('#sd').find('option').end().append("<option value='" + i + "'" + ">" + i + "</option");
+        }
+        // Thoi diem ket thuc ===================================
+        $('#ed').find('option').remove();
+        var day = daysInMonth($('#em').val(), $('#ey').val());
+        for (var i = 1; i <= day; i++) {
+            $('#ed').find('option').end().append("<option value='" + i + "'" + ">" + i + "</option");
+        }
+    });
+
+    function printPeriodPreview() {
+        var ngayBatDau = $('#sd').val();
+        var thangBatDau = $('#sm').val();
+        var namBatDau = $('#sy').val();
+        var ngayKetThuc = $('#ed').val();
+        var thangKetThuc = $('#em').val();
+        var namKetThuc = $('#ey').val();
+        var nguoiLap = '<%: ViewData["nguoiLap"] %>';
+
+        var period_url = 'ReportForms/RevenuePeriodReportForm?p=' + nguoiLap
+                                         + '&sd=' + ngayBatDau + '&sm=' + thangBatDau + '&sy=' + namBatDau
+                                         + '&ed=' + ngayKetThuc + '&em=' + thangKetThuc + '&ey=' + namKetThuc + '';
+                                                                    
+        var newwindow = window.open(period_url, 'name', 'height=800,width=600');
+        if (window.focus) {
+            newwindow.focus();
+        }
     }   
 </script>
 <div id="revenue_period_report">
@@ -22,7 +53,7 @@
                             <%: AdminReportString.ChooseStartDate %>
                         </th>
                         <td>
-                            <select id="period_sd" class="styledselect-day" name="ngayBatDau">
+                            <select id="sd" class="styledselect-day" name="ngayBatDau">
                             </select>
                         </td>
                         <td>
@@ -88,5 +119,5 @@
     </table>
     <input type="submit" value="<%: AdminReportString.Print %>" />
     <% Html.EndForm(); %>
-    <input type="button" value="<%: AdminReportString.PrintPreview %>" onclick="printPreview();" />
+    <input type="button" value="<%: AdminReportString.PrintPreview %>" onclick="printPeriodPreview();" />
 </div>

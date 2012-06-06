@@ -121,6 +121,20 @@
     <Compile Include="ReportForms\BillReportForm.aspx.designer.cs">
       <DependentUpon>BillReportForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ReportForms\RevenueDayReportForm.aspx.cs">
+      <DependentUpon>RevenueDayReportForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportForms\RevenueDayReportForm.aspx.designer.cs">
+      <DependentUpon>RevenueDayReportForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForms\RevenuePeriodReportForm.aspx.cs">
+      <DependentUpon>RevenuePeriodReportForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportForms\RevenuePeriodReportForm.aspx.designer.cs">
+      <DependentUpon>RevenuePeriodReportForm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports\RevenueMonthReport\RevenueMonthReportData.cs" />
     <Compile Include="Reports\RevenuePeriodReport\RevenuePeriodReportData.cs" />
     <Compile Include="ReportForms\WebFormReport.Master.cs">
@@ -144,6 +158,13 @@
       <DependentUpon>AccountModelString.vi.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ReportForms\RevenueMonthReportForm.aspx.cs">
+      <DependentUpon>RevenueMonthReportForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportForms\RevenueMonthReportForm.aspx.designer.cs">
+      <DependentUpon>RevenueMonthReportForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Resources\Views\Account\AccountString.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -902,6 +923,9 @@
     <Content Include="Images\siteimages\templatmeo_header.jpg" />
     <Content Include="LocalService.svc" />
     <Content Include="ReportForms\BillReportForm.aspx" />
+    <Content Include="ReportForms\RevenueDayReportForm.aspx" />
+    <Content Include="ReportForms\RevenueMonthReportForm.aspx" />
+    <Content Include="ReportForms\RevenuePeriodReportForm.aspx" />
     <Content Include="Scripts\foodcategory\jquery.MetaData.js" />
     <Content Include="Scripts\foodcategory\jquery.rating.js" />
     <Content Include="Scripts\foodcategory\jquery.rating.pack.js" />
@@ -1043,9 +1067,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Images\foodcategory\foodrating\" />
     <Folder Include="Images\foodcategory\foodrelate\" />
-    <Folder Include="ReportForms\RevenueDayReportForm\" />
-    <Folder Include="ReportForms\RevenueMonthReportForm\" />
-    <Folder Include="ReportForms\RevenuePeriodReportForm\" />
     <Folder Include="Uploads\FoodImages\" />
   </ItemGroup>
   <ItemGroup>
