@@ -136,6 +136,19 @@ namespace LocalServerWeb
             return false;
         }
 
+        public bool ChuyenBan(int maBanChuyenDi, int maBanChuyenDen, string junk)
+        {
+            try
+            {
+                return BanBUS.ChuyenBan(maBanChuyenDi, maBanChuyenDen);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return false;
+        }
+
 
 
         // Mon An

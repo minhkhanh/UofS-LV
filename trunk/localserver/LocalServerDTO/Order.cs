@@ -45,6 +45,7 @@ namespace LocalServerDTO
         /// 0 - binh thuong vua moi order
         /// 1 - dang che bien
         /// 2 - khoa ko duoc che bien tiep
+        /// 4 - da thanh toan
         /// </summary>
         [DataMember(Name = "TinhTrang")]
         [Column(Name = "TinhTrang")]

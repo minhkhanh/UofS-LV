@@ -1,14 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
-
+<%@ Import Namespace="LocalServerWeb.Resources.Views.AdminReport" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	Index
+    <%: AdminReportString.Title %>
 </asp:Content>
-
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <button id="open-report-demo">Open report</button>
+<asp:Content ID="Content4" ContentPlaceHolderID="PageHeadingContent" runat="server">
 </asp:Content>
-
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
     <script type="text/javascript">
         $(document).ready(function () {
@@ -18,11 +15,13 @@
                     newwindow.focus();
                 }
             });
-            
+
         });
     </script>
 </asp:Content>
-
-<asp:Content ID="Content4" ContentPlaceHolderID="PageHeadingContent" runat="server">
-
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <div id="table-content">
+        <button id="open-report-demo">
+            Open report</button>
+    </div>
 </asp:Content>
