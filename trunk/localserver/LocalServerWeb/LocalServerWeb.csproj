@@ -86,7 +86,7 @@
     <Compile Include="Controllers\AdminExchangeRateController.cs" />
     <Compile Include="Controllers\AdminFoodController.cs" />
     <Compile Include="Controllers\AdminHomeController.cs" />
-    <Compile Include="Controllers\AdminInvoiceController.cs" />
+    <Compile Include="Controllers\AdminBillController.cs" />
     <Compile Include="Controllers\AdminLanguageController.cs" />
     <Compile Include="Controllers\AdminOrderController.cs" />
     <Compile Include="Controllers\AdminProcessorController.cs" />
@@ -121,6 +121,8 @@
     <Compile Include="ReportForms\BillReportForm.aspx.designer.cs">
       <DependentUpon>BillReportForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\RevenueMonthReport\RevenueMonthReportData.cs" />
+    <Compile Include="Reports\RevenuePeriodReport\RevenuePeriodReportData.cs" />
     <Compile Include="ReportForms\WebFormReport.Master.cs">
       <DependentUpon>WebFormReport.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -129,9 +131,10 @@
       <DependentUpon>WebFormReport.Master</DependentUpon>
     </Compile>
     <Compile Include="Reports\BillReportData.cs" />
-    <Compile Include="Reports\BillReportDataBinding.cs" />
     <Compile Include="Reports\PrintReport.cs" />
+    <Compile Include="Reports\ReportDataBinding.cs" />
     <Compile Include="Reports\ReportManager.cs" />
+    <Compile Include="Reports\RevenueDayReport\RevenueDayReportData.cs" />
     <Compile Include="Resources\Models\AccountModelString.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -202,15 +205,15 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\Views\AdminInvoice\AdminInvoiceString.Designer.cs">
+    <Compile Include="Resources\Views\AdminBill\AdminBillString.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AdminInvoiceString.resx</DependentUpon>
+      <DependentUpon>AdminBillString.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Views\AdminInvoice\AdminInvoiceString.vi.Designer.cs">
+    <Compile Include="Resources\Views\AdminBill\AdminBillString.vi.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AdminInvoiceString.vi.resx</DependentUpon>
+      <DependentUpon>AdminBillString.vi.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\Views\AdminLanguage\AdminLanguageString.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -944,8 +947,8 @@
     <Content Include="Views\AdminFood\Edit.aspx" />
     <Content Include="Views\AdminFood\RelatedFood.aspx" />
     <Content Include="Views\AdminHome\Index.aspx" />
-    <Content Include="Views\AdminInvoice\Index.aspx" />
-    <Content Include="Views\AdminInvoice\InvoiceDetail.aspx" />
+    <Content Include="Views\AdminBill\Index.aspx" />
+    <Content Include="Views\AdminBill\BillDetail.aspx" />
     <Content Include="Views\AdminLanguage\Add.aspx" />
     <Content Include="Views\AdminLanguage\Edit.aspx" />
     <Content Include="Views\AdminLanguage\Index.aspx" />
@@ -1037,6 +1040,9 @@
     <Folder Include="App_Data\" />
     <Folder Include="Images\foodcategory\foodrating\" />
     <Folder Include="Images\foodcategory\foodrelate\" />
+    <Folder Include="ReportForms\RevenueDayReportForm\" />
+    <Folder Include="ReportForms\RevenueMonthReportForm\" />
+    <Folder Include="ReportForms\RevenuePeriodReportForm\" />
     <Folder Include="Uploads\FoodImages\" />
   </ItemGroup>
   <ItemGroup>
@@ -1051,6 +1057,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reports\BillReport.rdlc" />
+    <EmbeddedResource Include="Reports\RevenueDayReport\RevenueDayReport.rdlc" />
+    <EmbeddedResource Include="Reports\RevenueMonthReport\RevenueMonthReport.rdlc" />
+    <EmbeddedResource Include="Reports\RevenuePeriodReport\RevenuePeriodReport.rdlc" />
     <EmbeddedResource Include="Resources\Models\AccountModelString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AccountModelString.Designer.cs</LastGenOutput>
@@ -1107,13 +1116,13 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AdminHomeString.vi.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Views\AdminInvoice\AdminInvoiceString.resx">
+    <EmbeddedResource Include="Resources\Views\AdminBill\AdminBillString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AdminInvoiceString.Designer.cs</LastGenOutput>
+      <LastGenOutput>AdminBillString.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Views\AdminInvoice\AdminInvoiceString.vi.resx">
+    <EmbeddedResource Include="Resources\Views\AdminBill\AdminBillString.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AdminInvoiceString.vi.Designer.cs</LastGenOutput>
+      <LastGenOutput>AdminBillString.vi.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\AdminLanguage\AdminLanguageString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LocalServerWeb.Resources.Views.AdminInvoice {
+namespace LocalServerWeb.Resources.Views.AdminBill {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace LocalServerWeb.Resources.Views.AdminInvoice {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class AdminInvoiceString {
+    public class AdminBillString {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AdminInvoiceString() {
+        internal AdminBillString() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace LocalServerWeb.Resources.Views.AdminInvoice {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LocalServerWeb.Resources.Views.AdminInvoice.AdminInvoiceString", typeof(AdminInvoiceString).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LocalServerWeb.Resources.Views.AdminBill.AdminBillString", typeof(AdminBillString).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -70,6 +70,15 @@ namespace LocalServerWeb.Resources.Views.AdminInvoice {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bill ID.
+        /// </summary>
+        public static string BillID {
+            get {
+                return ResourceManager.GetString("BillID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Created at.
         /// </summary>
         public static string CreatedAt {
@@ -79,7 +88,7 @@ namespace LocalServerWeb.Resources.Views.AdminInvoice {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is no invoice detail information.
+        ///   Looks up a localized string similar to There is no bill detail information.
         /// </summary>
         public static string DetailNoData {
             get {
@@ -88,7 +97,7 @@ namespace LocalServerWeb.Resources.Views.AdminInvoice {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invoice detail.
+        ///   Looks up a localized string similar to Bill detail.
         /// </summary>
         public static string DetailTitle {
             get {
@@ -102,15 +111,6 @@ namespace LocalServerWeb.Resources.Views.AdminInvoice {
         public static string FoodName {
             get {
                 return ResourceManager.GetString("FoodName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Invoice ID.
-        /// </summary>
-        public static string InvoiceID {
-            get {
-                return ResourceManager.GetString("InvoiceID", resourceCulture);
             }
         }
         
@@ -133,7 +133,7 @@ namespace LocalServerWeb.Resources.Views.AdminInvoice {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are no invoices.
+        ///   Looks up a localized string similar to There are no bills.
         /// </summary>
         public static string NoData {
             get {
@@ -160,7 +160,7 @@ namespace LocalServerWeb.Resources.Views.AdminInvoice {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Print this invoice.
+        ///   Looks up a localized string similar to Print this bill.
         /// </summary>
         public static string Print {
             get {
@@ -169,7 +169,7 @@ namespace LocalServerWeb.Resources.Views.AdminInvoice {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Print preview this invoice.
+        ///   Looks up a localized string similar to Print preview this bill.
         /// </summary>
         public static string PrintPreview {
             get {
@@ -232,7 +232,7 @@ namespace LocalServerWeb.Resources.Views.AdminInvoice {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invoice list.
+        ///   Looks up a localized string similar to Bill list.
         /// </summary>
         public static string Title {
             get {

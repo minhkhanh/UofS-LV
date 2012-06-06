@@ -1,16 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<PagedList<HoaDon>>" %>
 
 <%@ Import Namespace="LocalServerDTO" %>
-<%@ Import Namespace="LocalServerWeb.Resources.Views.AdminInvoice" %>
+<%@ Import Namespace="LocalServerWeb.Resources.Views.AdminBill" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.Shared" %>
 <%@ Import Namespace="Webdiyer.WebControls.Mvc" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    <%: AdminInvoiceString.Title %>
+    <%: AdminBillString.Title %>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
 <script type="text/javascript">
-    function previewInvoice(maHoaDon) {
+    function previewBill(maHoaDon) {
         var newwindow = window.open('../../ReportForms/BillReportForm?maHoaDon='+maHoaDon+'&maNgonNgu=<%:ViewData["maNgonNgu"] %>', 'name', 'height=800,width=600');
         if (window.focus) {
             newwindow.focus();
@@ -19,7 +19,7 @@
 </script>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="PageHeadingContent" runat="server">
-    <%: AdminInvoiceString.Title %>
+    <%: AdminBillString.Title %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <% if (ViewData["listHoaDOn"] != null && ((List<HoaDon>)ViewData["listHoaDon"]).Count > 0)
@@ -31,43 +31,43 @@
             <tr>
                 <th class="table-header-repeat line-left">
                     <a>
-                        <%: AdminInvoiceString.NumberOrdinary %></a>
+                        <%: AdminBillString.NumberOrdinary %></a>
                 </th>
                 <th class="table-header-repeat line-left minwidth-1">
                     <a>
-                        <%: AdminInvoiceString.InvoiceID %></a>
+                        <%: AdminBillString.BillID %></a>
                 </th>
                 <th class="table-header-repeat line-left minwidth-1">
                     <a>
-                        <%: AdminInvoiceString.CreatedAt %></a>
+                        <%: AdminBillString.CreatedAt %></a>
                 </th>
                 <th class="table-header-repeat line-left minwidth-1">
                     <a>
-                        <%: AdminInvoiceString.AccountName %></a>
+                        <%: AdminBillString.AccountName %></a>
                 </th>
                 <th class="table-header-repeat line-left minwidth-1">
                     <a>
-                        <%: AdminInvoiceString.Total %></a>
+                        <%: AdminBillString.Total %></a>
                 </th>
                 <th class="table-header-repeat line-left minwidth-1">
                     <a>
-                        <%: AdminInvoiceString.MainTable %></a>
+                        <%: AdminBillString.MainTable %></a>
                 </th>
                 <th class="table-header-repeat line-left minwidth-1">
                     <a>
-                        <%: AdminInvoiceString.JoinedTables %></a>
+                        <%: AdminBillString.JoinedTables %></a>
                 </th>
                 <th class="table-header-repeat line-left minwidth-1">
                     <a>
-                        <%: AdminInvoiceString.SurchargeName %></a>
+                        <%: AdminBillString.SurchargeName %></a>
                 </th>
                 <th class="table-header-repeat line-left minwidth-1">
                     <a>
-                        <%: AdminInvoiceString.SurchargeValue %></a>
+                        <%: AdminBillString.SurchargeValue %></a>
                 </th>
                 <th class="table-header-repeat line-left minwidth-1">
                     <a>
-                        <%: AdminInvoiceString.Option %></a>
+                        <%: AdminBillString.Option %></a>
                 </th>
             </tr>
             <% int iCount = 0; %>
@@ -102,9 +102,9 @@
                     <%: (hoaDon.PhuThu.GiaTang != 0)?hoaDon.PhuThu.GiaTang.ToString():hoaDon.PhuThu.TiLeTang.ToString()+"%" %>
                 </td>
                 <td class="options-width">
-                    <%:Html.ActionLink(" ", "InvoiceDetail", "AdminInvoice", new { id = hoaDon.MaHoaDon }, new { title = AdminInvoiceString.DetailTitle, Class = "icon-3 info-tooltip" })%>
-                    <%:Html.ActionLink(" ", "Print", "AdminInvoice", new { maHoaDon = hoaDon.MaHoaDon }, new { title = AdminInvoiceString.Print, Class = "icon-4 info-tooltip" })%>
-                    <a title = "<%:AdminInvoiceString.PrintPreview %>" class="icon-4 info-tooltip" onclick="previewInvoice('<%:hoaDon.MaHoaDon%>');"></a>
+                    <%:Html.ActionLink(" ", "BillDetail", "AdminBill", new { id = hoaDon.MaHoaDon }, new { title = AdminBillString.DetailTitle, Class = "icon-3 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "Print", "AdminBill", new { maHoaDon = hoaDon.MaHoaDon }, new { title = AdminBillString.Print, Class = "icon-4 info-tooltip" })%>
+                    <a title = "<%:AdminBillString.PrintPreview %>" class="icon-4 info-tooltip" onclick="previewBill('<%:hoaDon.MaHoaDon%>');"></a>
                 </td>
             </tr>
             <% } %>
@@ -122,7 +122,7 @@
                     <td class="red-left">
                         <%:SharedString.Error %>
                         <a href="">
-                            <%: AdminInvoiceString.NoData %></a>
+                            <%: AdminBillString.NoData %></a>
                     </td>
                     <td class="red-right">
                         <a class="close-red">

@@ -120,6 +120,9 @@
   <data name="AccountName" xml:space="preserve">
     <value>Người lập</value>
   </data>
+  <data name="BillID" xml:space="preserve">
+    <value>Mã hóa đơn</value>
+  </data>
   <data name="CreatedAt" xml:space="preserve">
     <value>Thời điểm lập</value>
   </data>
@@ -131,9 +134,6 @@
   </data>
   <data name="FoodName" xml:space="preserve">
     <value>Món ăn</value>
-  </data>
-  <data name="InvoiceID" xml:space="preserve">
-    <value>Mã hóa đơn</value>
   </data>
   <data name="JoinedTables" xml:space="preserve">
     <value>DS bàn ghép</value>
