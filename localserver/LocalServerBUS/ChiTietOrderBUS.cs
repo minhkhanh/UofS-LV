@@ -57,8 +57,10 @@ namespace LocalServerBUS
         {
             bool ketQua = true;
 
-            // Thay doi Tinh Trang cua cac ct Order tuong ung
             List<ChiTietOrder> listChiTietOrder = ChiTietOrderBUS.LayNhieuChiTietOrderChuaThanhToan(maBan);
+
+
+            // Thay doi Tinh Trang cua cac ct Order tuong ung
             foreach (ChiTietOrder ctOrder in listChiTietOrder)
             {
                 ctOrder.TinhTrang = 4;
@@ -66,7 +68,16 @@ namespace LocalServerBUS
                 {
                     ketQua = false;
                 }
+
+                Order order = ctOrder.Order;
+                if (order != null && order.TinhTrang != 4)
+                {
+                    order.TinhTrang = 4;
+                    OrderBUS.SuaOrder(order);
+                }
             }
+
+
 
             // Tach ban
             //BanBUS.TachBan(maBan);

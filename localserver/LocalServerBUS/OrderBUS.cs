@@ -63,8 +63,20 @@ namespace LocalServerBUS
             }
 
             return _listChiTietOrder;
+        }
 
+        public static bool ChuyenBan(int maBanChuyenDi, int maBanChuyenDen)
+        {
+            bool ketQua = true;
+            List<Order> orders = OrderDAO.LayNhieuOrderChuaThanhToan(maBanChuyenDi);
+            foreach (Order order in orders)
+            {
+                order._maBan = maBanChuyenDen;
+                if (!OrderBUS.SuaOrder(order))
+                    ketQua = false;
+            }
 
+            return ketQua;
         }
     }
 }

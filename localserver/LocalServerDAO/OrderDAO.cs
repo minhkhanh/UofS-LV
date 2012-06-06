@@ -24,6 +24,11 @@ namespace LocalServerDAO
             return null;
         }
 
+        public static List<Order> LayNhieuOrderChuaThanhToan(int maBan)
+        {
+            return ThucDonDienTu.DataContext.Orders.Where(o => o.Ban.MaBan == maBan && o.TinhTrang != 4).ToList();
+        }
+
         public static Order ThemOrder(Order _order)
         {
             ThucDonDienTu.DataContext.Orders.InsertOnSubmit(_order);

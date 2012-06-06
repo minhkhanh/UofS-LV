@@ -59,5 +59,35 @@ namespace LocalServerBUS
         {
             return BanDAO.CapNhat(ban);
         }
+
+        public static bool ChuyenBan(int maBanChuyenDi, int maBanChuyenDen)
+        {
+            bool ketQua = true;
+
+            Ban banChuyenDi = BanBUS.LayBan(maBanChuyenDi);
+            Ban banChuyenDen = BanBUS.LayBan(maBanChuyenDen);
+
+            // Neu Ban chuyen di chua co khach 
+            // Neu Ban chuyen den dang co khach 
+            if (banChuyenDi == null || banChuyenDen == null || banChuyenDi.Active == false || banChuyenDen.Active == true)
+                return false;
+
+            // B1: Lay Order cua banChuyenDi
+            // Doi MaBan thanh maBanChuyenDen
+            if (!OrderBUS.ChuyenBan(maBanChuyenDi, maBanChuyenDen))
+                ketQua = false;
+
+
+            // B2: Tach banChuyenDi
+            if (!BanBUS.TachBan(maBanChuyenDi))
+                ketQua = false;
+
+            // B3: Doi tinh trang banChuyenDen
+            banChuyenDen.Active = true;
+            if (!BanBUS.CapNhat(banChuyenDen))
+                ketQua = false;
+
+            return ketQua;
+        }
     }
 }

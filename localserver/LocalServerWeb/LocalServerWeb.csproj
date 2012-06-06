@@ -252,6 +252,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AdminPromotionString.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Views\AdminReport\AdminReportString.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminReportString.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\AdminReport\AdminReportString.vi.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminReportString.vi.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Views\AdminSurcharge\AdminSurchargeString.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1136,6 +1146,14 @@
     <EmbeddedResource Include="Resources\Views\AdminPromotion\AdminPromotionString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AdminPromotionString.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminReport\AdminReportString.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminReportString.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminReport\AdminReportString.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminReportString.vi.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\AdminSurcharge\AdminSurchargeString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

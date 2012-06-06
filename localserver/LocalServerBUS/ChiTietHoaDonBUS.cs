@@ -40,12 +40,15 @@ namespace LocalServerBUS
             }
 
             // B2: thay doi Tinh Trang cua cac ct Order tuong ung
+            // Thay doi Tinh Trang Order
             int maBan = 0;
             if (_listChiTietHoaDon.Count > 0)
                 maBan = _listChiTietHoaDon[0].HoaDon.Ban.MaBan;
 
             if (ChiTietOrderBUS.ThayDoiTinhTrangDaThanhToan(maBan) == false)
                 ketQua = 2;
+
+            
 
             return ketQua;
         }
