@@ -4,6 +4,7 @@
 <%@ Import Namespace="LocalServerDTO" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.AdminPromotion" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.Shared" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%: AdminPromotionString.AddTitle %>
 </asp:Content>

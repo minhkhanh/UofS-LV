@@ -1002,6 +1002,9 @@
     <Content Include="Views\Shared\InfoMessageTooltip.ascx" />
     <Content Include="Views\Shared\ManagerMenu.ascx" />
     <Content Include="Views\Shared\OrderDetailCancelStatus.ascx" />
+    <Content Include="Views\Shared\RevenueDayReport.ascx" />
+    <Content Include="Views\Shared\RevenueMonthReport.ascx" />
+    <Content Include="Views\Shared\RevenuePeriodReport.ascx" />
     <Content Include="Views\Shared\WarningMessageTooltip.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
