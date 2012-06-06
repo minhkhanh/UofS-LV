@@ -13,6 +13,22 @@ namespace LocalServerDAO
             return ThucDonDienTu.DataContext.HoaDons.ToList();
         }
 
+        public static List<HoaDon> LayDanhSachHoaDonTheoNgay(DateTime ngay)
+        {
+            return ThucDonDienTu.DataContext.HoaDons.Where(h => h.ThoiDiemLap.Date == ngay.Date).ToList();
+        }
+
+        public static List<HoaDon> LayDanhSachHoaDonTheoThang(DateTime ngay)
+        {
+            return ThucDonDienTu.DataContext.HoaDons.Where(h => h.ThoiDiemLap.Month == ngay.Month && h.ThoiDiemLap.Year == ngay.Year).OrderBy(h => h.ThoiDiemLap).ToList();
+        }
+
+        public static List<HoaDon> LayDanhSachHoaDonTheoThoiGian(DateTime ngayBatDau, DateTime ngayKetThuc)
+        {
+            return ThucDonDienTu.DataContext.HoaDons.Where(h => h.ThoiDiemLap.Date >= ngayBatDau.Date && h.ThoiDiemLap.Date <= ngayKetThuc).OrderBy(h => h.ThoiDiemLap).ToList();
+        }
+
+
         public static HoaDon LayHoaDon(int maHoaDon)
         {
             var temp = ThucDonDienTu.DataContext.HoaDons.Where(h => h.MaHoaDon == maHoaDon);

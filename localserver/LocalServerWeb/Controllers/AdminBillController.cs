@@ -13,7 +13,7 @@ using Webdiyer.WebControls.Mvc;
 
 namespace LocalServerWeb.Controllers
 {
-    public class AdminInvoiceController : BaseController
+    public class AdminBillController : BaseController
     {
         public ActionResult Index(string page)
         {
@@ -31,7 +31,7 @@ namespace LocalServerWeb.Controllers
             return View(pageListHoaDon);
         }
 
-        public ActionResult InvoiceDetail(int? id)
+        public ActionResult BillDetail(int? id)
         {
             SharedCode.FillAdminMainMenu(ViewData, 3, 1);
             if (id == null || id < 1)

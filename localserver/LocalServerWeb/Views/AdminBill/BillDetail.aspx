@@ -2,15 +2,15 @@
 
 <%@ Import Namespace="LocalServerDTO" %>
 <%@ Import Namespace="LocalServerWeb.ViewModels" %>
-<%@ Import Namespace="LocalServerWeb.Resources.Views.AdminInvoice" %>
+<%@ Import Namespace="LocalServerWeb.Resources.Views.AdminBill" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.Shared" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    <%: AdminInvoiceString.DetailTitle %>
+    <%: AdminBillString.DetailTitle %>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
 <script type="text/javascript">
-    function previewInvoice() {
+    function previewBill() {
         var newwindow = window.open('../../ReportForms/BillReportForm?maHoaDon=<%:ViewData["maHoaDon"] %>&maNgonNgu=<%:ViewData["maNgonNgu"] %>', 'name', 'height=800,width=600');
         if (window.focus) {
             newwindow.focus();
@@ -19,7 +19,7 @@
 </script>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="PageHeadingContent" runat="server">
-    <%: AdminInvoiceString.DetailTitle %>
+    <%: AdminBillString.DetailTitle %>
     <%= Url.RequestContext.RouteData.Values["id"]%>
 </asp:Content>
 
@@ -33,31 +33,31 @@
             <tr>
                 <th class="table-header-repeat line-left">
                     <a>
-                        <%: AdminInvoiceString.NumberOrdinary %></a>
+                        <%: AdminBillString.NumberOrdinary %></a>
                 </th>
                 <th class="table-header-repeat line-left minwidth-1">
                     <a>
-                        <%: AdminInvoiceString.Quantity %></a>
+                        <%: AdminBillString.Quantity %></a>
                 </th>
                 <th class="table-header-repeat line-left minwidth-1">
                     <a>
-                        <%: AdminInvoiceString.UnitPrice %></a>
+                        <%: AdminBillString.UnitPrice %></a>
                 </th>
                 <th class="table-header-repeat line-left minwidth-1">
                     <a>
-                        <%: AdminInvoiceString.FoodName %></a>
+                        <%: AdminBillString.FoodName %></a>
                 </th>
                 <th class="table-header-repeat line-left minwidth-1">
                     <a>
-                        <%: AdminInvoiceString.Sum %></a>
+                        <%: AdminBillString.Sum %></a>
                 </th>
                 <th class="table-header-repeat line-left minwidth-1">
                     <a>
-                        <%: AdminInvoiceString.PromotionValue %></a>
+                        <%: AdminBillString.PromotionValue %></a>
                 </th>
                 <th class="table-header-repeat line-left minwidth-1">
                     <a>
-                        <%: AdminInvoiceString.Promotion %></a>
+                        <%: AdminBillString.Promotion %></a>
                 </th>
             </tr>
             <% int iCount = 0; %>
@@ -100,7 +100,7 @@
                 <tr>
                     <td class="red-left">
                         <%: SharedString.Error %> <a href="">
-                            <%: AdminInvoiceString.DetailNoData %></a>
+                            <%: AdminBillString.DetailNoData %></a>
                     </td>
                     <td class="red-right">
                         <a class="close-red">
@@ -111,7 +111,7 @@
         </table>
     </div>
     <%} %>
-    <input type="button" value="<%: AdminInvoiceString.Print %>"  onclick="window.location.href='<%: Url.Action("Print", "AdminInvoice", new { maHoaDon = Url.RequestContext.RouteData.Values["id"] }) %>';"/>
-    <input type="button" value="<%: AdminInvoiceString.PrintPreview %>"  onclick="previewInvoice();"/>
-    <input type="button" value="<%: SharedString.Back %>"  onclick="window.location.href='<%: Url.Action("Index", "AdminInvoice") %>';"/>
+    <input type="button" value="<%: AdminBillString.Print %>"  onclick="window.location.href='<%: Url.Action("Print", "AdminBill", new { maHoaDon = Url.RequestContext.RouteData.Values["id"] }) %>';"/>
+    <input type="button" value="<%: AdminBillString.PrintPreview %>"  onclick="previewBill();"/>
+    <input type="button" value="<%: SharedString.Back %>"  onclick="window.location.href='<%: Url.Action("Index", "AdminBill") %>';"/>
 </asp:Content>

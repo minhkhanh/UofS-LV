@@ -120,20 +120,20 @@
   <data name="AccountName" xml:space="preserve">
     <value>Account name</value>
   </data>
+  <data name="BillID" xml:space="preserve">
+    <value>Bill ID</value>
+  </data>
   <data name="CreatedAt" xml:space="preserve">
     <value>Created at</value>
   </data>
   <data name="DetailNoData" xml:space="preserve">
-    <value>There is no invoice detail information</value>
+    <value>There is no bill detail information</value>
   </data>
   <data name="DetailTitle" xml:space="preserve">
-    <value>Invoice detail</value>
+    <value>Bill detail</value>
   </data>
   <data name="FoodName" xml:space="preserve">
     <value>Food</value>
-  </data>
-  <data name="InvoiceID" xml:space="preserve">
-    <value>Invoice ID</value>
   </data>
   <data name="JoinedTables" xml:space="preserve">
     <value>Joined tables</value>
@@ -142,7 +142,7 @@
     <value>Main table</value>
   </data>
   <data name="NoData" xml:space="preserve">
-    <value>There are no invoices</value>
+    <value>There are no bills</value>
   </data>
   <data name="NumberOrdinary" xml:space="preserve">
     <value>No.</value>
@@ -151,10 +151,10 @@
     <value>Option</value>
   </data>
   <data name="Print" xml:space="preserve">
-    <value>Print this invoice</value>
+    <value>Print this bill</value>
   </data>
   <data name="PrintPreview" xml:space="preserve">
-    <value>Print preview this invoice</value>
+    <value>Print preview this bill</value>
   </data>
   <data name="Promotion" xml:space="preserve">
     <value>Promotion</value>
@@ -175,7 +175,7 @@
     <value>Surcharge value</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Invoice list</value>
+    <value>Bill list</value>
   </data>
   <data name="Total" xml:space="preserve">
     <value>Total</value>

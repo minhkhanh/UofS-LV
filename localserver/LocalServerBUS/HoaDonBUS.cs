@@ -15,6 +15,21 @@ namespace LocalServerBUS
             return HoaDonDAO.LayDanhSachHoaDon();
         }
 
+        public static List<HoaDon> LayDanhSachHoaDonTheoNgay(DateTime ngay)
+        {
+            return HoaDonDAO.LayDanhSachHoaDonTheoNgay(ngay);
+        }
+
+        public static List<HoaDon> LayDanhSachHoaDonTheoThang(DateTime ngay)
+        {
+            return HoaDonDAO.LayDanhSachHoaDonTheoThang(ngay);
+        }
+
+        public static List<HoaDon> LayDanhSachHoaDonTheoThoiGian(DateTime ngayBatDau, DateTime ngayKetThuc)
+        {
+            return HoaDonDAO.LayDanhSachHoaDonTheoThoiGian(ngayBatDau, ngayKetThuc);
+        }
+
         public static HoaDon LayHoaDon(int maHoaDon)
         {
             return HoaDonDAO.LayHoaDon(maHoaDon);
@@ -131,6 +146,20 @@ namespace LocalServerBUS
 
 
             return hoaDon;
+        }
+
+        public static float LayTongKhuyenMai(int maHoaDon)
+        {
+
+            float tongKhuyenMai = 0;
+            List<ChiTietHoaDon> listCTHoaDon = ChiTietHoaDonBUS.LayNhieuChiTietHoaDon(maHoaDon);
+            foreach (ChiTietHoaDon ct in listCTHoaDon)
+            {
+                tongKhuyenMai += ct.GiaTriKhuyenMaiLuuTru;
+            }
+
+            return tongKhuyenMai;
+
         }
     }
 }
