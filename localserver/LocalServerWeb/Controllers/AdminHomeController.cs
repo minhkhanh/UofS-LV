@@ -14,7 +14,6 @@ namespace LocalServerWeb.Controllers
 
         public ActionResult Index()
         {
-            SharedCode.FillAdminMainMenu(ViewData, 0, 0);
             return View();
         }
 

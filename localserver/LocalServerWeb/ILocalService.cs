@@ -45,7 +45,7 @@ namespace LocalServerWeb
         [OperationContract]
         bool CapNhatBan(Ban ban);
 
-        [WebInvoke(Method = "GET", UriTemplate = "chuyenBan?maBanChuyenDi={maBanChuyenDen}&maBanChuyenDen={maBanChuyenDen}&junk={junk}")]
+        [WebInvoke(Method = "GET", UriTemplate = "chuyenBan?maBanChuyenDi={maBanChuyenDi}&maBanChuyenDen={maBanChuyenDen}&junk={junk}")]
         [OperationContract]
         bool ChuyenBan(int maBanChuyenDi, int maBanChuyenDen, string junk);
 
