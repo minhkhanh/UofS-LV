@@ -489,6 +489,24 @@ namespace LocalServerWeb
         [OperationContract]
         List<ChiTietOrder> LapOrderJson(int maTaiKhoan, int maBan, List<ChiTietOrder> _listChiTietOrder);
 
+        // ghep ban
+        [WebInvoke(Method = "POST", UriTemplate = "ghepBanJson", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        int GhepBanJson(RequestGhepBan request);
+
+        // tach ban
+        [WebInvoke(Method = "POST", UriTemplate = "tachBanJson", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        bool TachBanJson(int maBan);
+
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachOrderChuaThanhToanJson?maBan={maBan}junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        List<Order> LayDanhSachOrderChuaThanhToanJson(int maBan, string junk);
+        
+        //[WebInvoke(Method = "GET", UriTemplate = "layDanhSachBanChinhJson?junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        //[OperationContract]
+        //List<Ban> LayDanhSachBanChinhJson(string junk);
+
         /*==============END OF JSON SERVICES AREA==============*/
     }
 }

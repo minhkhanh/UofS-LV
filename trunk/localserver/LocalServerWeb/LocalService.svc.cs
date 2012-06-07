@@ -1157,6 +1157,21 @@ namespace LocalServerWeb
             return LapOrder(maTaiKhoan, maBan, _listChiTietOrder);
         }
 
+        public int GhepBanJson(RequestGhepBan request)
+        {
+            return BanBUS.GhepBanJson(request);
+        }
+
+        public bool TachBanJson(int maBan)
+        {
+            return BanBUS.TachBan(maBan);
+        }
+
+        public List<Order> LayDanhSachOrderChuaThanhToanJson(int maBan, string junk)
+        {
+            return OrderBUS.LayNhieuOrderChuaThanhToan(maBan);
+        }
+        
         /*END OF JSON SERVICE AREA*/
     }
 }
