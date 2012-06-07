@@ -83,7 +83,7 @@ namespace LocalServerBUS
                 ketQua = false;
 
             // B3: Doi tinh trang banChuyenDen
-            banChuyenDen.Active = true;
+            banChuyenDen.Active = false;
             if (!BanBUS.CapNhat(banChuyenDen))
                 ketQua = false;
 
