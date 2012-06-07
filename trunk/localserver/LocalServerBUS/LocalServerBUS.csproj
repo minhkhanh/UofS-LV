@@ -54,6 +54,7 @@
     <Compile Include="ChiTietMonLienQuanBUS.cs" />
     <Compile Include="ChiTietOrderBUS.cs" />
     <Compile Include="ChiTietKhongCheBienOrderBUS.cs" />
+    <Compile Include="ChiTietVoucherBUS.cs" />
     <Compile Include="ThamSoBUS.cs" />
     <Compile Include="DanhMucBUS.cs" />
     <Compile Include="DonViTinhBUS.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="TaiKhoanBUS.cs" />
     <Compile Include="ThucDonDienTuBUS.cs" />
     <Compile Include="TiGiaBUS.cs" />
+    <Compile Include="VoucherBUS.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LocalServerDAO\LocalServerDAO.csproj">
