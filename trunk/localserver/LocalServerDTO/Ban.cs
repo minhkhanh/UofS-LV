@@ -36,6 +36,9 @@ namespace LocalServerDTO
         [Column(Name = "GhiChu")]
         public string GhiChu { get; set; }
 
+
+        // true: San dang phuc vu, Ko co khach
+        // false: Dang co khach
         [DataMember]
         [Column(Name = "Active")]
         public bool Active { get; set; }

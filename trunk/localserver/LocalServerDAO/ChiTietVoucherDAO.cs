@@ -9,28 +9,43 @@ namespace LocalServerDAO
 {
     public class ChiTietVoucherDAO
     {
-        public static List<Voucher> LayDanhSachVoucher()
+        public static List<ChiTietVoucher> LayNhieuChiTietVoucher(int maVoucher)
         {
-            return ThucDonDienTu.DataContext.Vouchers.ToList();
+            return ThucDonDienTu.DataContext.ChiTietVouchers.Where(c => c._maVoucher == maVoucher).ToList();
         }
 
-        public static Voucher LayVoucher(int maVoucher)
+        public static ChiTietVoucher LayChiTietVoucher(int maChiTietVoucher)
         {
-            var temp = ThucDonDienTu.DataContext.Vouchers.Where(v => v.MaVoucher == maVoucher);
+            var temp = ThucDonDienTu.DataContext.ChiTietVouchers.Where(c => c.MaChiTietVoucher == maChiTietVoucher);
             if (temp.Count() > 0)
             {
-                Voucher ban = temp.First();
+                ChiTietVoucher ban = temp.First();
                 return ban;
             }
             return null;
         }
 
-        public static bool Xoa(int maVoucher)
+        public static List<ChiTietVoucher> ThemNhieuChiTietVoucher(List<ChiTietVoucher> _listChiTietVoucher)
+        {
+            ThucDonDienTu.DataContext.ChiTietVouchers.InsertAllOnSubmit(_listChiTietVoucher);
+            try
+            {
+                ThucDonDienTu.DataContext.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                _listChiTietVoucher = null;
+            }
+
+            return _listChiTietVoucher;
+        }
+
+        public static bool Xoa(int maChiTietVoucher)
         {
             try
             {
-                var objVoucher = LayVoucher(maVoucher);
-                ThucDonDienTu.DataContext.Vouchers.DeleteOnSubmit(objVoucher);
+                var objChiTietVoucher = LayChiTietVoucher(maChiTietVoucher);
+                ThucDonDienTu.DataContext.ChiTietVouchers.DeleteOnSubmit(objChiTietVoucher);
                 ThucDonDienTu.DataContext.SubmitChanges();
                 return true;
             }
@@ -41,11 +56,11 @@ namespace LocalServerDAO
             return false;
         }
 
-        public static bool Them(Voucher voucher)
+        public static bool Them(ChiTietVoucher ctVoucher)
         {
             try
             {
-                ThucDonDienTu.DataContext.Vouchers.InsertOnSubmit(voucher);
+                ThucDonDienTu.DataContext.ChiTietVouchers.InsertOnSubmit(ctVoucher);
                 ThucDonDienTu.DataContext.SubmitChanges();
                 return true;
             }
@@ -56,7 +71,7 @@ namespace LocalServerDAO
             return false;
         }
 
-        public static bool CapNhat(Voucher voucher)
+        public static bool CapNhat(ChiTietVoucher ctVoucher)
         {
             bool result = true;
             try
