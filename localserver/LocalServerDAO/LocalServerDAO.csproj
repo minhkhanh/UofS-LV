@@ -57,6 +57,7 @@
     <Compile Include="ChiTietMonLienQuanDAO.cs" />
     <Compile Include="ChiTietOrderDAO.cs" />
     <Compile Include="ChiTietKhongCheBienOrderDAO.cs" />
+    <Compile Include="ChiTietVoucherDAO.cs" />
     <Compile Include="ThamSoDAO.cs" />
     <Compile Include="DanhMucDAO.cs" />
     <Compile Include="DonViTinhDAO.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="ThucDonDienTuDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TiGiaDAO.cs" />
+    <Compile Include="VoucherDAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LocalServerDTO\LocalServerDTO.csproj">

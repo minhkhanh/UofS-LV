@@ -55,6 +55,7 @@
     <Compile Include="ChiTietMonLienQuan.cs" />
     <Compile Include="ChiTietOrder.cs" />
     <Compile Include="ChiTietKhongCheBienOrder.cs" />
+    <Compile Include="ChiTietVoucher.cs" />
     <Compile Include="ThamSo.cs" />
     <Compile Include="DanhMuc.cs" />
     <Compile Include="DonViTinh.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="RequestGhepBan.cs" />
     <Compile Include="TaiKhoan.cs" />
     <Compile Include="TiGia.cs" />
+    <Compile Include="Voucher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
