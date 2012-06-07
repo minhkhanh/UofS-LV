@@ -45,9 +45,9 @@ namespace LocalServerWeb
         [OperationContract]
         bool CapNhatBan(Ban ban);
 
-        [WebInvoke(Method = "GET", UriTemplate = "chuyenBan?maBanChuyenDi={maBanChuyenDi}&maBanChuyenDen={maBanChuyenDen}&junk={junk}")]
+        [WebInvoke(Method = "POST", UriTemplate = "chuyenBan?maBanChuyenDi={maBanChuyenDi}&maBanChuyenDen={maBanChuyenDen}")]
         [OperationContract]
-        bool ChuyenBan(int maBanChuyenDi, int maBanChuyenDen, string junk);
+        bool ChuyenBan(int maBanChuyenDi, int maBanChuyenDen);
 
         /// <summary>
         /// Tách bàn đã ghép ra thành các bàn rời nhau
@@ -252,9 +252,9 @@ namespace LocalServerWeb
         [OperationContract]
         bool SuaOrder(Order _order);
 
-        [WebInvoke(Method = "POST", UriTemplate = "lapOrder?maTaiKhoan={maTaiKhoan}&maBan={maBan}&junk={junk}")]
+        [WebInvoke(Method = "POST", UriTemplate = "lapOrder?maTaiKhoan={maTaiKhoan}&maBan={maBan}")]
         [OperationContract]
-        List<ChiTietOrder> LapOrder(int maTaiKhoan, int maBan, string junk, List<ChiTietOrder> _listChiTietOrder);
+        List<ChiTietOrder> LapOrder(int maTaiKhoan, int maBan, List<ChiTietOrder> _listChiTietOrder);
 
 
         // Chi Tiet Order
@@ -309,9 +309,9 @@ namespace LocalServerWeb
         [OperationContract]
         HoaDon ThemHoaDon(HoaDon _hoaDon);
 
-        [WebInvoke(Method = "GET", UriTemplate = "lapHoaDon?maOrder={maOrder}&junk={junk}")]
+        [WebInvoke(Method = "GET", UriTemplate = "lapHoaDon?maOrder={maOrder}")]
         [OperationContract]
-        HoaDon LapHoaDon(int maOrder, string junk);
+        HoaDon LapHoaDon(int maOrder);
 
         [WebInvoke(Method = "PUT", UriTemplate = "suaHoaDon")]
         [OperationContract]
@@ -480,14 +480,14 @@ namespace LocalServerWeb
         List<PhuThuKhuVuc> LayDanhSachPhuThuKhuVucJson(string junk);
 
         // Hoa Don
-        [WebInvoke(Method = "GET", UriTemplate = "lapHoaDonJson?maOrder={maOrder}&junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "POST", UriTemplate = "lapHoaDonJson?maOrder={maOrder}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        HoaDon LapHoaDonJson(int maOrder, string junk);
+        HoaDon LapHoaDonJson(int maOrder);
 
         // Order
-        [WebInvoke(Method = "POST", UriTemplate = "lapOrderJson?maTaiKhoan={maTaiKhoan}&maBan={maBan}&junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "POST", UriTemplate = "lapOrderJson?maTaiKhoan={maTaiKhoan}&maBan={maBan}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        List<ChiTietOrder> LapOrderJson(int maTaiKhoan, int maBan, string junk, List<ChiTietOrder> _listChiTietOrder);
+        List<ChiTietOrder> LapOrderJson(int maTaiKhoan, int maBan, List<ChiTietOrder> _listChiTietOrder);
 
         /*==============END OF JSON SERVICES AREA==============*/
     }

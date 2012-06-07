@@ -61,7 +61,7 @@ namespace LocalServerWeb.Resources.Views.AdminRestaurant {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Địa chỉ.
+        ///   Looks up a localized string similar to Address.
         /// </summary>
         public static string Address {
             get {
@@ -70,11 +70,29 @@ namespace LocalServerWeb.Resources.Views.AdminRestaurant {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mô tả.
+        ///   Looks up a localized string similar to Choose logo.
+        /// </summary>
+        public static string ChooseLogo {
+            get {
+                return ResourceManager.GetString("ChooseLogo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Description {
             get {
                 return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t update.
+        /// </summary>
+        public static string ErrorCannotUpdate {
+            get {
+                return ResourceManager.GetString("ErrorCannotUpdate", resourceCulture);
             }
         }
         
@@ -88,6 +106,15 @@ namespace LocalServerWeb.Resources.Views.AdminRestaurant {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update successfully.
+        /// </summary>
+        public static string InfoUpdateSuccess {
+            get {
+                return ResourceManager.GetString("InfoUpdateSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Logo.
         /// </summary>
         public static string Logo {
@@ -97,7 +124,7 @@ namespace LocalServerWeb.Resources.Views.AdminRestaurant {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tên.
+        ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string Name {
             get {
@@ -106,7 +133,7 @@ namespace LocalServerWeb.Resources.Views.AdminRestaurant {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Điện thoại.
+        ///   Looks up a localized string similar to Tel.
         /// </summary>
         public static string Tel {
             get {

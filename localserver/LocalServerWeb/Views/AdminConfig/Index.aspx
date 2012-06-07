@@ -2,7 +2,10 @@
 <%@ Import Namespace="LocalServerWeb.Resources.Views.AdminConfig" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	Index
+	<%: AdminConfigString.Title %>
+</asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="PageHeadingContent" runat="server">
+<%: AdminConfigString.Title %>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -38,7 +41,7 @@
             });
         })
     </script>
-    <style>
+    <style type="text/css">
         .title-content 
         {
             padding: 5px 5px 15px;
@@ -61,5 +64,4 @@
     </style>
 </asp:Content>
 
-<asp:Content ID="Content4" ContentPlaceHolderID="PageHeadingContent" runat="server">
-</asp:Content>
+

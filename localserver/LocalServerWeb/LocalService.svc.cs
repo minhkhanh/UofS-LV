@@ -136,7 +136,7 @@ namespace LocalServerWeb
             return false;
         }
 
-        public bool ChuyenBan(int maBanChuyenDi, int maBanChuyenDen, string junk)
+        public bool ChuyenBan(int maBanChuyenDi, int maBanChuyenDen)
         {
             try
             {
@@ -707,7 +707,7 @@ namespace LocalServerWeb
             return false;
         }
 
-        public List<ChiTietOrder> LapOrder(int maTaiKhoan, int maBan, string junk, List<ChiTietOrder> _listChiTietOrder)
+        public List<ChiTietOrder> LapOrder(int maTaiKhoan, int maBan, List<ChiTietOrder> _listChiTietOrder)
         {
             try
             {
@@ -872,7 +872,7 @@ namespace LocalServerWeb
             return listHoaDon;
         }
 
-        public HoaDon LapHoaDon(int maOrder, string junk)
+        public HoaDon LapHoaDon(int maOrder)
         {
             try
             {
@@ -1147,14 +1147,14 @@ namespace LocalServerWeb
             return LayDanhSachPhuThuKhuVuc(junk);
         }
 
-        public HoaDon LapHoaDonJson(int maOrder, string junk)
+        public HoaDon LapHoaDonJson(int maOrder)
         {
-            return LapHoaDon(maOrder, junk);
+            return LapHoaDon(maOrder);
         }
 
-        public List<ChiTietOrder> LapOrderJson(int maTaiKhoan, int maBan, string junk, List<ChiTietOrder> _listChiTietOrder)
+        public List<ChiTietOrder> LapOrderJson(int maTaiKhoan, int maBan,  List<ChiTietOrder> _listChiTietOrder)
         {
-            return LapOrder(maTaiKhoan, maBan, junk, _listChiTietOrder);
+            return LapOrder(maTaiKhoan, maBan, _listChiTietOrder);
         }
 
         /*END OF JSON SERVICE AREA*/
