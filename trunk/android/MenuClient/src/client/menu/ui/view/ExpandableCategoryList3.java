@@ -1,92 +1,91 @@
 package client.menu.ui.view;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import client.menu.bus.task.CustomAsyncTask;
-import client.menu.bus.task.CustomAsyncTask.OnPostExecuteAsyncTaskListener;
-import client.menu.bus.task.LoadChildCategoryListTask;
-import client.menu.db.dto.DanhMucDaNgonNguDTO;
-import client.menu.ui.adapter.ExpandableCategoryAdapter3;
 import android.content.Context;
-import android.os.Bundle;
 import android.util.AttributeSet;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
+import client.menu.ui.adapter.ExpandableCategoryAdapter3;
 
-public class ExpandableCategoryList3 extends ListView implements
-        OnPostExecuteAsyncTaskListener<Void, Integer, List<DanhMucDaNgonNguDTO>> {
 
-    ExpandableCategoryAdapter3 mAdapter;
+@Deprecated
+public class ExpandableCategoryList3 extends ListView {
 
-    OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-            DanhMucDaNgonNguDTO danhMucCha = mAdapter.getItem(arg2).danhMuc;
-            int treePosition = mAdapter.getTreePosition(danhMucCha.getMaDanhMuc());
+    private ExpandableCategoryView mFocusedItem;
 
-            if (mAdapter.isExpanded(arg2)) {
-                mAdapter.collapse(arg2);
-                mAdapter.notifyDataSetChanged();
-            } else {
-                if (mAdapter.isChildrenLoaded(treePosition)) {
-                    mAdapter.expand(arg2, treePosition);
-                    mAdapter.notifyDataSetChanged();
-                } else {
-                    Bundle extras = new Bundle();
-                    extras.putInt("position", arg2);
-                    extras.putInt("treePosition", treePosition);
+    // private LinearLayout mContainer;
 
-                    LoadChildCategoryListTask task = new LoadChildCategoryListTask(
-                            getContext(), danhMucCha.getMaDanhMuc());
-                    task.setOnPostExecuteListener(ExpandableCategoryList3.this);
-                    task.setExtras(extras);
-                    task.execute();
-                }
-            }
-        }
-    };
+    public interface OnCategoryClickListener {
+        void onCategoryItemClick(ExpandableCategoryList3 list, ExpandableCategoryView item);
+    }
+
+    OnCategoryClickListener mOnCategoryClickListener;
+
+    // OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
+    // @Override
+    // public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long
+    // arg3) {
+    //
+    // }
+    // };
 
     public ExpandableCategoryList3(Context context) {
         super(context);
-        setOnItemClickListener(mOnItemClickListener);
+        // setOnItemClickListener(mOnItemClickListener);
+        // prepareViews();
     }
 
     public ExpandableCategoryList3(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setOnItemClickListener(mOnItemClickListener);
+        // setOnItemClickListener(mOnItemClickListener);
+        // if (!isInEditMode()) {
+        // prepareViews();
+        // }
     }
 
     public ExpandableCategoryList3(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        setOnItemClickListener(mOnItemClickListener);
+        // setOnItemClickListener(mOnItemClickListener);
+        // if (!isInEditMode()) {
+        // prepareViews();
+        // }
     }
 
-    @Override
-    public void setAdapter(ListAdapter adapter) {
-        if (!(adapter instanceof ExpandableCategoryAdapter3)) {
-            throw new UnsupportedOperationException(
-                    "This method only supports ExpandableCategoryAdapter3.");
-        }
+    // private void prepareViews() {
+    // LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(
+    // Context.LAYOUT_INFLATER_SERVICE);
+    // View v = inflater.inflate(R.layout.frame_category_list, this);
+    // mContainer = (LinearLayout) v.findViewById(R.id.linearContainer);
+    // }
 
-        super.setAdapter(adapter);
-        mAdapter = (ExpandableCategoryAdapter3) adapter;
+    // public void addCategory(ExpandableCategoryView view) {
+    // view.setRoot(this);
+    // mContainer.addView(view);
+    // }
+
+    public void setExpandableCategoryAdapter(ExpandableCategoryAdapter3 adapter) {
+        adapter.setListView(this);
+        setAdapter(adapter);
     }
 
-    @Override
-    public void onPostExecuteAsyncTask(
-            CustomAsyncTask<Void, Integer, List<DanhMucDaNgonNguDTO>> task,
-            List<DanhMucDaNgonNguDTO> result) {
-        if (result.size() > 0) {
-            Bundle ex = task.getExtras();
-            int position = ex.getInt("position");
-            int treePosition = ex.getInt("treePosition");
-            mAdapter.expand(position, treePosition, result);
-            mAdapter.notifyDataSetChanged();
-        }
+    // @Override
+    // public void setAdapter(ListAdapter adapter) {
+    // throw new
+    // UnsupportedOperationException("Use setCategoryAdapter() instead.");
+    // }
+
+    public void setOnCategoryClickListener(
+            OnCategoryClickListener onCategoryItemClickListener) {
+        mOnCategoryClickListener = onCategoryItemClickListener;
     }
 
+    public OnCategoryClickListener getOnCategoryClickListener() {
+        return mOnCategoryClickListener;
+    }
+
+    public ExpandableCategoryView getFocusedItem() {
+        return mFocusedItem;
+    }
+
+    public void setFocusedItem(ExpandableCategoryView focusedItem) {
+        mFocusedItem = focusedItem;
+    }
 }

@@ -8,7 +8,7 @@ import client.menu.bus.task.CustomAsyncTask;
 import client.menu.bus.task.CustomAsyncTask.OnPostExecuteAsyncTaskListener;
 import client.menu.bus.task.LoadChildCategoryListTask;
 import client.menu.db.dto.DanhMucDaNgonNguDTO;
-import client.menu.ui.view.ExpandableCategoryList.OnCategoryClickListener;
+import client.menu.ui.view.ExpandableCategoryList3.OnCategoryClickListener;
 import client.menu.util.U;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -22,7 +22,7 @@ import android.widget.TextView;
 public class ExpandableCategoryView extends LinearLayout implements
         OnPostExecuteAsyncTaskListener<Void, Integer, List<DanhMucDaNgonNguDTO>> {
 
-    private ExpandableCategoryList mRoot;
+    private ExpandableCategoryList3 mRoot;
 
     private TextView mCategoryText;
     private LinearLayout mExpandableLinear;
@@ -34,7 +34,7 @@ public class ExpandableCategoryView extends LinearLayout implements
     private boolean mExpanded;
     private boolean mFocused;
 
-    public ExpandableCategoryView(Context context, ExpandableCategoryList root) {
+    public ExpandableCategoryView(Context context, ExpandableCategoryList3 root) {
         super(context);
         prepareViews();
         mRoot = root;
@@ -145,7 +145,7 @@ public class ExpandableCategoryView extends LinearLayout implements
         }
     }
 
-    public ExpandableCategoryList getRoot() {
+    public ExpandableCategoryList3 getRoot() {
         return mRoot;
     }
 
