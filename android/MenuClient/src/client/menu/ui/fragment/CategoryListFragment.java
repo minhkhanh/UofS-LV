@@ -3,43 +3,40 @@ package client.menu.ui.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.ListFragment;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Loader;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ListView;
 import client.menu.R;
 import client.menu.bus.loader.RootCategoryListLoader;
+import client.menu.bus.task.CustomAsyncTask;
+import client.menu.bus.task.CustomAsyncTask.OnPostExecuteAsyncTaskListener;
+import client.menu.bus.task.LoadChildCategoryListTask;
 import client.menu.db.dto.DanhMucDaNgonNguDTO;
-import client.menu.ui.adapter.ExpandableCategoryAdapter3;
-import client.menu.ui.view.ExpandableCategoryList;
-import client.menu.ui.view.ExpandableCategoryList3;
-import client.menu.ui.view.ExpandableCategoryList.OnCategoryClickListener;
-import client.menu.ui.view.ExpandableCategoryView;
+import client.menu.ui.adapter.ExpandableCategoryAdapter;
 
-public class CategoryListFragment extends Fragment implements
-        LoaderCallbacks<List<DanhMucDaNgonNguDTO>>, OnCategoryClickListener {
+public class CategoryListFragment extends ListFragment implements
+        LoaderCallbacks<List<DanhMucDaNgonNguDTO>>,
+        OnPostExecuteAsyncTaskListener<Void, Integer, List<DanhMucDaNgonNguDTO>> {
     private int mSelIndex;
     private boolean mIsDualPane;
 
-    private ExpandableCategoryList3 mCategoryList;
-    private ExpandableCategoryAdapter3 mListAdapter;
+    private ExpandableCategoryAdapter mListAdapter;
 
     public static class CategoryNode {
+        public static final int EXPANDED = 1;
+        public static final int COLLAPSED = -1;
+        public static final int NORMAL = 0;
+
         public DanhMucDaNgonNguDTO danhMuc;
-        public int indent;
+        public int indent = 0;
+        public int state = NORMAL;
     }
 
     private List<CategoryNode> mCategoryTree = new ArrayList<CategoryListFragment.CategoryNode>();
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        return new ExpandableCategoryList3(getActivity());
-    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -50,12 +47,12 @@ public class CategoryListFragment extends Fragment implements
 
         getView().setBackgroundResource(R.color._55f5f5f5);
 
-        mListAdapter = new ExpandableCategoryAdapter3(getActivity(),
+        mListAdapter = new ExpandableCategoryAdapter(getActivity(),
                 new ArrayList<CategoryNode>());
-        mCategoryList = (ExpandableCategoryList3) getView();
-        mCategoryList.setAdapter(mListAdapter);
-        // mCategoryList.setExpandableCategoryAdapter(mListAdapter);
-        // mCategoryList.setOnCategoryClickListener3(this);
+        setListAdapter(mListAdapter);
+        getListView().setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
+        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+//        getListView().setSelector(R.drawable.activated_background);
 
         getLoaderManager().initLoader(0, null, this);
 
@@ -75,23 +72,15 @@ public class CategoryListFragment extends Fragment implements
     public void onLoadFinished(Loader<List<DanhMucDaNgonNguDTO>> loader,
             List<DanhMucDaNgonNguDTO> result) {
         mCategoryTree.clear();
-//        List<CategoryNode> adapterData = new ArrayList<CategoryListFragment.CategoryNode>();
         for (DanhMucDaNgonNguDTO d : result) {
             CategoryNode node = new CategoryNode();
             node.danhMuc = d;
-            node.indent = 0;
             mCategoryTree.add(node);
-            
-//            node = new CategoryNode();
-//            node.danhMuc = d;
-//            node.indent = 0;
-//            adapterData.add(node);
         }
 
         mListAdapter.clear();
         mListAdapter.addAll(mCategoryTree);
         mListAdapter.setTreeData(mCategoryTree);
-        // mListAdapter.addGroupAll(result);
         mListAdapter.notifyDataSetChanged();
     }
 
@@ -101,9 +90,33 @@ public class CategoryListFragment extends Fragment implements
     }
 
     @Override
-    public void onCategoryItemClick(ExpandableCategoryList list,
-            ExpandableCategoryView item) {
-        showDetails(item.getDanhMuc().getMaDanhMuc());
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        
+        DanhMucDaNgonNguDTO danhMucCha = mListAdapter.getItem(position).danhMuc;
+        int treePosition = mListAdapter.getTreePosition(danhMucCha.getMaDanhMuc());
+
+        if (mListAdapter.getItem(position).state == CategoryNode.EXPANDED) {
+            mListAdapter.collapse(position, treePosition);
+            mListAdapter.notifyDataSetChanged();
+        } else {
+            if (mListAdapter.isChildrenLoaded(treePosition)) {
+                mListAdapter.expand(position, treePosition);
+                mListAdapter.notifyDataSetChanged();
+            } else {
+                Bundle extras = new Bundle();
+                extras.putInt("position", position);
+                extras.putInt("treePosition", treePosition);
+
+                LoadChildCategoryListTask task = new LoadChildCategoryListTask(
+                        getActivity(), danhMucCha.getMaDanhMuc());
+                task.setOnPostExecuteListener(CategoryListFragment.this);
+                task.setExtras(extras);
+                task.execute();
+            }
+        }
+
+        showDetails(danhMucCha.getMaDanhMuc());
     }
 
     void showDetails(Integer maDanhMuc) {
@@ -128,6 +141,19 @@ public class CategoryListFragment extends Fragment implements
             ft.addToBackStack(null);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
+        }
+    }
+
+    @Override
+    public void onPostExecuteAsyncTask(
+            CustomAsyncTask<Void, Integer, List<DanhMucDaNgonNguDTO>> task,
+            List<DanhMucDaNgonNguDTO> result) {
+        if (result.size() > 0) {
+            Bundle ex = task.getExtras();
+            int position = ex.getInt("position");
+            int treePosition = ex.getInt("treePosition");
+            mListAdapter.expand(position, treePosition, result);
+            mListAdapter.notifyDataSetChanged();
         }
     }
 }
