@@ -69,7 +69,7 @@ namespace LocalServerBUS
 
             // Neu Ban chuyen di chua co khach 
             // Neu Ban chuyen den dang co khach 
-            if (banChuyenDi == null || banChuyenDen == null || banChuyenDi.Active == false || banChuyenDen.Active == true)
+            if (banChuyenDi == null || banChuyenDen == null || banChuyenDi.Active == true || banChuyenDen.Active == false)
                 return false;
 
             // B1: Lay Order cua banChuyenDi
