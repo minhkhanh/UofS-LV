@@ -11,7 +11,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
 <script type="text/javascript">
     function previewBill() {
-        var newwindow = window.open('../../ReportForms/BillReportForm?maHoaDon=<%:ViewData["maHoaDon"] %>&maNgonNgu=<%:ViewData["maNgonNgu"] %>', 'name', 'height=800,width=600');
+        var newwindow = window.open('../../ReportForms/BillReportForm?maHoaDon=<%:ViewData["maHoaDon"] %>&maNgonNgu=<%:ViewData["maNgonNgu"] %>', 'name', 'height=800,width=750');
         if (window.focus) {
             newwindow.focus();
         }
@@ -37,6 +37,10 @@
                 </th>
                 <th class="table-header-repeat line-left minwidth-1">
                     <a>
+                        <%: AdminBillString.FoodName %></a>
+                </th>
+                <th class="table-header-repeat line-left minwidth-1">
+                    <a>
                         <%: AdminBillString.Quantity %></a>
                 </th>
                 <th class="table-header-repeat line-left minwidth-1">
@@ -45,19 +49,15 @@
                 </th>
                 <th class="table-header-repeat line-left minwidth-1">
                     <a>
-                        <%: AdminBillString.FoodName %></a>
-                </th>
-                <th class="table-header-repeat line-left minwidth-1">
-                    <a>
-                        <%: AdminBillString.Sum %></a>
-                </th>
-                <th class="table-header-repeat line-left minwidth-1">
-                    <a>
                         <%: AdminBillString.PromotionValue %></a>
                 </th>
                 <th class="table-header-repeat line-left minwidth-1">
                     <a>
                         <%: AdminBillString.Promotion %></a>
+                </th>
+                <th class="table-header-repeat line-left minwidth-1">
+                    <a>
+                        <%: AdminBillString.Sum %></a>
                 </th>
             </tr>
             <% int iCount = 0; %>
@@ -68,22 +68,22 @@
                     <%: iCount++ %>
                 </td>
                 <td>
+                    <%: ct.MonAn.TenMonAn %>
+                </td>
+                <td>
                     <%: ct.SoLuong %>
                 </td>
                 <td>
                     <%: ct.DonGiaLuuTru %>
                 </td>
                 <td>
-                    <%: ct.MonAn.TenMonAn %>
-                </td>
-                <td>
-                    <%: ct.ThanhTien %>
-                </td>
-                <td>
                     <%: ct.GiaTriKhuyenMaiLuuTru %>
                 </td>
                 <td>
                     <%: ct.KhuyenMai.TenKhuyenMai %>
+                </td>
+                <td>
+                    <%: ct.ThanhTien %>
                 </td>
             </tr>
             <% } %>
@@ -111,7 +111,7 @@
         </table>
     </div>
     <%} %>
-    <input type="button" value="<%: AdminBillString.Print %>"  onclick="window.location.href='<%: Url.Action("Print", "AdminBill", new { maHoaDon = Url.RequestContext.RouteData.Values["id"] }) %>';"/>
+    <input type="button" value="<%: AdminBillString.Print %>"  onclick="window.location.href='<%: Url.Action("Print2", "AdminBill", new { maHoaDon = Url.RequestContext.RouteData.Values["id"] }) %>';"/>
     <input type="button" value="<%: AdminBillString.PrintPreview %>"  onclick="previewBill();"/>
     <input type="button" value="<%: SharedString.Back %>"  onclick="window.location.href='<%: Url.Action("Index", "AdminBill") %>';"/>
 </asp:Content>

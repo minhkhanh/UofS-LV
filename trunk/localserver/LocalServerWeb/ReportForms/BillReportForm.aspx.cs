@@ -57,7 +57,7 @@ namespace LocalServerWeb.ReportsForm
 
                 
                 rvReport.Reset();
-                rvReport.LocalReport.ReportPath = Path.Combine(MapPath("/Reports"), "BillReport.rdlc");  //"LocalServerWeb.Reports.BillReport1.rdlc";//reportPath;
+                rvReport.LocalReport.ReportPath = Path.Combine(MapPath("/Reports/BillReport"), "BillReport.rdlc");  //"LocalServerWeb.Reports.BillReport1.rdlc";//reportPath;
                 rvReport.LocalReport.SetParameters(listParameter);
                 rvReport.LocalReport.DataSources.Clear();
                 rvReport.LocalReport.DataSources.Add(new ReportDataSource("BillReportData", datas));

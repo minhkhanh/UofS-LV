@@ -92,6 +92,7 @@
     <Compile Include="Controllers\AdminProcessorController.cs" />
     <Compile Include="Controllers\AdminPromotionController.cs" />
     <Compile Include="Controllers\AdminReportController.cs" />
+    <Compile Include="Controllers\AdminRestaurantController.cs" />
     <Compile Include="Controllers\AdminSurchargeController.cs" />
     <Compile Include="Controllers\AdminTableController.cs" />
     <Compile Include="Controllers\AdminUnitController.cs" />
@@ -144,7 +145,7 @@
     <Compile Include="ReportForms\WebFormReport.Master.designer.cs">
       <DependentUpon>WebFormReport.Master</DependentUpon>
     </Compile>
-    <Compile Include="Reports\BillReportData.cs" />
+    <Compile Include="Reports\BillReport\BillReportData.cs" />
     <Compile Include="Reports\PrintReport.cs" />
     <Compile Include="Reports\ReportDataBinding.cs" />
     <Compile Include="Reports\ReportManager.cs" />
@@ -392,6 +393,16 @@
     <Compile Include="ViewModels\FoodDetailViewModel.cs" />
     <Compile Include="ViewModels\FoodGalleryItemViewModel.cs" />
     <Compile Include="ViewModels\OrderDetailViewModel.cs" />
+    <Compile Include="Resources\Views\AdminRestaurant\AdminRestaurantString.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminRestaurantString.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\AdminRestaurant\AdminRestaurantString.vi.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminRestaurantString.vi.resx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Shared\Admin.Master.cs">
       <DependentUpon>Admin.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -987,6 +998,7 @@
     <Content Include="Views\AdminPromotion\Index.aspx" />
     <Content Include="Views\AdminPromotion\InvoicePromotion.aspx" />
     <Content Include="Views\AdminReport\Index.aspx" />
+    <Content Include="Views\AdminRestaurant\Index.aspx" />
     <Content Include="Views\AdminSurcharge\Add.aspx" />
     <Content Include="Views\AdminSurcharge\AreaSurcharge.aspx" />
     <Content Include="Views\AdminSurcharge\Edit.aspx" />
@@ -1080,7 +1092,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reports\BillReport.rdlc" />
+    <EmbeddedResource Include="Reports\BillReport\BillReport.rdlc" />
     <EmbeddedResource Include="Reports\RevenueDayReport\RevenueDayReport.rdlc" />
     <EmbeddedResource Include="Reports\RevenueMonthReport\RevenueMonthReport.rdlc" />
     <EmbeddedResource Include="Reports\RevenuePeriodReport\RevenuePeriodReport.rdlc" />
@@ -1266,6 +1278,14 @@
     <EmbeddedResource Include="Resources\Views\Shared\SharedString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SharedString.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminRestaurant\AdminRestaurantString.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminRestaurantString.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminRestaurant\AdminRestaurantString.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminRestaurantString.vi.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

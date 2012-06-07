@@ -106,6 +106,15 @@ namespace LocalServerWeb.Resources.Views.AdminReport {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t print.
+        /// </summary>
+        public static string ErrorCannotPrint {
+            get {
+                return ResourceManager.GetString("ErrorCannotPrint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Print report.
         /// </summary>
         public static string Print {

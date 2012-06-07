@@ -19,7 +19,7 @@
         var nam = $('#day_y').val();
         var nguoiLap = '<%: ViewData["nguoiLap"] %>';
 
-        var newwindow = window.open('ReportForms/RevenueDayReportForm?p='+nguoiLap+'&d='+ngay+'&m='+thang+'&y='+nam+'', 'name', 'height=800,width=600');
+        var newwindow = window.open('ReportForms/RevenueDayReportForm?p='+nguoiLap+'&d='+ngay+'&m='+thang+'&y='+nam+'', 'name', 'height=800,width=750');
         if (window.focus) {
             newwindow.focus();
         }

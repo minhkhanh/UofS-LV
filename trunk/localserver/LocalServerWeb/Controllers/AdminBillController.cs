@@ -10,6 +10,7 @@ using LocalServerWeb.Resources.Views.AdminOrder;
 using LocalServerDTO;
 using LocalServerWeb.ViewModels;
 using Webdiyer.WebControls.Mvc;
+using LocalServerWeb.Resources.Views.Shared;
 
 namespace LocalServerWeb.Controllers
 {
@@ -54,12 +55,36 @@ namespace LocalServerWeb.Controllers
             return View();
         }
 
-        public bool Print(int maHoaDon)
+        public ActionResult Print(int maHoaDon)
         {
             HoaDon hoaDon = HoaDonBUS.LayHoaDon(maHoaDon);
             if (hoaDon == null)
-                return false;
-            return Reports.ReportManager.PrintBill(hoaDon.MaHoaDon, SharedCode.GetCurrentLanguage(Session).MaNgonNgu);
+                return RedirectToAction("Index");
+
+            if (!Reports.ReportManager.PrintBill(hoaDon.MaHoaDon, SharedCode.GetCurrentLanguage(Session).MaNgonNgu))
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+                
+            }
+            return RedirectToAction("Index");
+            
+        }
+
+        public ActionResult Print2(int maHoaDon)
+        {
+            HoaDon hoaDon = HoaDonBUS.LayHoaDon(maHoaDon);
+            if (hoaDon == null)
+                return RedirectToAction("Index");
+
+            if (!Reports.ReportManager.PrintBill(hoaDon.MaHoaDon, SharedCode.GetCurrentLanguage(Session).MaNgonNgu))
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
+
+            return RedirectToAction("BillDetail", new { id = maHoaDon });
+            
         }
         
     }

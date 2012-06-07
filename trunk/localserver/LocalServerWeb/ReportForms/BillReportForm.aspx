@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
-    <rsweb:ReportViewer ID="rvReport" runat="server" Height="700" Width="600">
+    <rsweb:ReportViewer ID="rvReport" runat="server" Height="700" Width="1000">
 
     </rsweb:ReportViewer>
 </asp:Content>

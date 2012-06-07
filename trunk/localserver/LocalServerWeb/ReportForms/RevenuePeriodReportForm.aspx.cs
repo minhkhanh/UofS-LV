@@ -35,8 +35,6 @@ namespace LocalServerWeb.ReportsForm
                 DateTime tuNgay = new DateTime(namBatDau, thangBatDau, ngayBatDau);
                 DateTime denNgay = new DateTime(namKetThuc, thangKetThuc, ngayKetThuc);
 
-                var thamSoBillPrinter = ThamSoBUS.LayThamSo("BillPrinter");
-                if (thamSoBillPrinter == null || thamSoBillPrinter.GiaTri.Length <= 0) Response.Write("<script> window.close();</script>");
 
                 List<RevenuePeriodReportData> listData = new List<RevenuePeriodReportData>();
                 List<HoaDon> listHoaDon = HoaDonBUS.LayDanhSachHoaDonTheoThoiGian(tuNgay, denNgay);
