@@ -159,5 +159,22 @@ namespace LocalServerDAO
 
             return result;
         }
+
+        public static int GhepBanJson(RequestGhepBan request)
+        {
+            bool result = GhepBan(request);
+
+            if (result)
+            {
+                var temp = ThucDonDienTu.DataContext.Bans.Where(b => b.MaBan == request.MaBanChinh);
+                Ban banChinh = temp.First();
+                banChinh.BanChinh = banChinh;
+                ThucDonDienTu.DataContext.SubmitChanges();
+
+                return banChinh.MaBan;
+            }
+
+            return -1;
+        }
     }
 }

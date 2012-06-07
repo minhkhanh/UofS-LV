@@ -89,5 +89,10 @@ namespace LocalServerBUS
 
             return ketQua;
         }
+
+        public static int GhepBanJson(RequestGhepBan request)
+        {
+            return BanDAO.GhepBanJson(request);
+        }
     }
 }

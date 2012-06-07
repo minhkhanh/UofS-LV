@@ -65,6 +65,11 @@ namespace LocalServerBUS
             return _listChiTietOrder;
         }
 
+        public static List<Order> LayNhieuOrderChuaThanhToan(int maBan)
+        {
+            return OrderDAO.LayNhieuOrderChuaThanhToan(maBan);
+        }
+
         public static bool ChuyenBan(int maBanChuyenDi, int maBanChuyenDen)
         {
             bool ketQua = true;
