@@ -33,7 +33,7 @@
                                          + '&sd=' + ngayBatDau + '&sm=' + thangBatDau + '&sy=' + namBatDau
                                          + '&ed=' + ngayKetThuc + '&em=' + thangKetThuc + '&ey=' + namKetThuc + '';
                                                                     
-        var newwindow = window.open(period_url, 'name', 'height=800,width=600');
+        var newwindow = window.open(period_url, 'name', 'height=800,width=750');
         if (window.focus) {
             newwindow.focus();
         }

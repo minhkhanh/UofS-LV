@@ -11,7 +11,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
 <script type="text/javascript">
     function previewBill(maHoaDon) {
-        var newwindow = window.open('../../ReportForms/BillReportForm?maHoaDon='+maHoaDon+'&maNgonNgu=<%:ViewData["maNgonNgu"] %>', 'name', 'height=800,width=600');
+        var newwindow = window.open('../../ReportForms/BillReportForm?maHoaDon='+maHoaDon+'&maNgonNgu=<%:ViewData["maNgonNgu"] %>', 'name', 'height=800,width=750');
         if (window.focus) {
             newwindow.focus();
         }

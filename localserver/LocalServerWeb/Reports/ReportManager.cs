@@ -36,7 +36,7 @@ namespace LocalServerWeb.Reports
                 var thamSoBillPrinter = ThamSoBUS.LayThamSo("BillPrinter");
                 if (thamSoBillPrinter==null || thamSoBillPrinter.GiaTri.Length<=0) return false;
 
-                var printReport = new PrintReport(@"LocalServerWeb.Reports.BillReport.rdlc", thamSoBillPrinter.GiaTri, deviceInfo);
+                var printReport = new PrintReport(@"LocalServerWeb.Reports.BillReport.BillReport.rdlc", thamSoBillPrinter.GiaTri, deviceInfo);
 
                 var datas = new List<BillReportData>();
                 var listChiTietHoaDon = ChiTietHoaDonBUS.LayNhieuChiTietHoaDon(hoaDon.MaHoaDon);

@@ -9,6 +9,8 @@ using LocalServerDTO;
 using LocalServerWeb.Codes;
 using LocalServerWeb.Reports;
 using Microsoft.Reporting.WebForms;
+using LocalServerWeb.Resources.Views.AdminReport;
+using LocalServerWeb.Resources.Views.Shared;
 
 namespace LocalServerWeb.Controllers
 {
@@ -17,13 +19,6 @@ namespace LocalServerWeb.Controllers
 
         public ActionResult Index()
         {
-            int maHoaDon = 1; //du lieu gia
-            int maNgonNgu = SharedCode.GetCurrentLanguage(Session).MaNgonNgu;
-
-            ViewData["maHoaDon"] = maHoaDon;
-            ViewData["maNgonNgu"] = maNgonNgu;
-
-
             TaiKhoan taiKhoan = (TaiKhoan)Session["taiKhoan"];
             string nguoiLap = (taiKhoan != null) ? taiKhoan.HoTen : " ";
 
@@ -31,42 +26,57 @@ namespace LocalServerWeb.Controllers
             return View();
         }
 
-        public bool PrintRevenueDayReport(int ngay, int thang, int nam)
+        public ActionResult PrintRevenueDayReport(int ngay, int thang, int nam)
         {
             DateTime ngayLap;
             try
             {
                 ngayLap = new DateTime(nam, thang, ngay);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return false;
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
             }
             
             TaiKhoan taiKhoan = (TaiKhoan)Session["taiKhoan"];
             string nguoiLap = (taiKhoan != null) ? taiKhoan.HoTen : " ";
 
-            return Reports.ReportManager.PrintRevenueDayReport(ngayLap, nguoiLap);
+            if (!Reports.ReportManager.PrintRevenueDayReport(ngayLap, nguoiLap))
+            {
+                TempData["error"] = AdminReportString.ErrorCannotPrint;
+                return RedirectToAction("Index", "Error");
+            }
+
+            return RedirectToAction("Index");
+
         }
 
-        public bool PrintRevenueMonthReport(int thang, int nam)
+        public ActionResult PrintRevenueMonthReport(int thang, int nam)
         {
             DateTime ngayLap;
             try
             {
                 ngayLap = new DateTime(nam, thang, 1);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return false;
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
             }
             TaiKhoan taiKhoan = (TaiKhoan)Session["taiKhoan"];
             string nguoiLap = (taiKhoan != null) ? taiKhoan.HoTen : " ";
 
-            return Reports.ReportManager.PrintRevenueMonthReport(ngayLap, nguoiLap);
+            if(!Reports.ReportManager.PrintRevenueMonthReport(ngayLap, nguoiLap))
+            {
+                TempData["error"] = AdminReportString.ErrorCannotPrint;
+                return RedirectToAction("Index", "Error");
+            }
+
+            return RedirectToAction("Index");
         }
 
-        public bool PrintRevenuePeriodReport(int ngayBatDau, int thangBatDau, int namBatDau, int ngayKetThuc, int thangKetThuc, int namKetThuc)
+        public ActionResult PrintRevenuePeriodReport(int ngayBatDau, int thangBatDau, int namBatDau, int ngayKetThuc, int thangKetThuc, int namKetThuc)
         {
             DateTime tuNgay;
             DateTime denNgay;
@@ -76,15 +86,22 @@ namespace LocalServerWeb.Controllers
                 tuNgay = new DateTime(namBatDau, thangBatDau, ngayBatDau);
                 denNgay = new DateTime(namKetThuc, thangKetThuc, ngayKetThuc);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return false;
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
             }
 
             TaiKhoan taiKhoan = (TaiKhoan)Session["taiKhoan"];
             string nguoiLap = (taiKhoan != null) ? taiKhoan.HoTen : " ";
 
-            return Reports.ReportManager.PrintRevenuePeriodReport(tuNgay, denNgay, nguoiLap);
+            if(!Reports.ReportManager.PrintRevenuePeriodReport(tuNgay, denNgay, nguoiLap))
+            {
+                TempData["error"] = AdminReportString.ErrorCannotPrint;
+                return RedirectToAction("Index", "Error");
+            }
+
+            return RedirectToAction("Index");
         }
 
     }
