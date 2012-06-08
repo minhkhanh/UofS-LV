@@ -383,7 +383,7 @@ namespace LocalServerWeb.Controllers
             }
 
             TempData["checkDic"] = checkDic;
-            return RedirectToAction("Add");
+            return RedirectToAction("Edit");
 
         }
 

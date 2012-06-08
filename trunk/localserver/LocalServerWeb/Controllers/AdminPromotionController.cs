@@ -18,8 +18,6 @@ namespace LocalServerWeb.Controllers
     {
         public ActionResult Index(string page)
         {
-            SharedCode.FillAdminMainMenu(ViewData, 3, 2);
-
             int _page = 1;
             int.TryParse(page ?? "1", out _page);
             PagedList<KhuyenMai> pageListKhuyenMai = KhuyenMaiBUS.LayDanhSachKhuyenMai().AsQueryable().ToPagedList(_page, 10);
@@ -58,7 +56,6 @@ namespace LocalServerWeb.Controllers
 
         public ActionResult Add()
         {
-            SharedCode.FillAdminMainMenu(ViewData, 3, 6);
             if (TempData["checkDic"] == null)
             {
                 //TempData.Clear();
@@ -388,7 +385,7 @@ namespace LocalServerWeb.Controllers
             }
 
             TempData["checkDic"] = checkDic;
-            return RedirectToAction("Add");
+            return RedirectToAction("Edit");
 
         }
 
@@ -434,7 +431,6 @@ namespace LocalServerWeb.Controllers
             }
 
             // Begin invoice promotion
-            SharedCode.FillAdminMainMenu(ViewData, 3, 6);
             if (TempData["checkDic"] == null)
             {
                 //TempData.Clear();
