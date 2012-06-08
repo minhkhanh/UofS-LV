@@ -23,12 +23,19 @@ namespace LocalServerWeb.ReportsForm
                 // lay input
                 int maHoaDon = int.Parse(Request.QueryString["maHoaDon"]);
                 int maNgonNgu = int.Parse(Request.QueryString["maNgonNgu"]);
-                //string reportPath = Request.QueryString["reportPath"];
+                //string reportPath = Request.QueryString["reportPath"];              
 
                 var hoaDon = HoaDonBUS.LayHoaDon(maHoaDon);
                 if (hoaDon == null) Response.Write("<script> window.close();</script>");
                 var thamSoBillPrinter = ThamSoBUS.LayThamSo("BillPrinter");
                 if (thamSoBillPrinter == null || thamSoBillPrinter.GiaTri.Length <= 0) Response.Write("<script> window.close();</script>");
+
+                // Thong tin nha hang
+                var tsTenNhaHang = ThamSoBUS.LayThamSo("TenNhaHang");
+                var tsDiaChiNhaHang = ThamSoBUS.LayThamSo("DiaChiNhaHang");
+                string tenNhaHang = (tsTenNhaHang != null) ? tsTenNhaHang.GiaTri : " ";
+                string diaChiNhaHang = (tsDiaChiNhaHang != null) ? tsDiaChiNhaHang.GiaTri : " ";
+
 
                 var datas = new List<BillReportData>();
                 var listChiTietHoaDon = ChiTietHoaDonBUS.LayNhieuChiTietHoaDon(hoaDon.MaHoaDon);
@@ -54,6 +61,8 @@ namespace LocalServerWeb.ReportsForm
                 listParameter.Add(new ReportParameter("TongTien", hoaDon.TongTien.ToString()));
                 listParameter.Add(new ReportParameter("TenBan", hoaDon.Ban.TenBan));
                 listParameter.Add(new ReportParameter("PhuThu", hoaDon.PhuThu.TenPhuThu));
+                listParameter.Add(new ReportParameter("TenNhaHang", tenNhaHang));
+                listParameter.Add(new ReportParameter("DiaChiNhaHang", diaChiNhaHang));
 
                 
                 rvReport.Reset();

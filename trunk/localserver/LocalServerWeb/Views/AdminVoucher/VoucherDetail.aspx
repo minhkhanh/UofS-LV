@@ -120,7 +120,8 @@
                     <%: (ctVoucher.Active==true)?AdminVoucherString.Active:AdminVoucherString.NotActive %>
                 </td>
                 <td class="options-width">
-                    <%:Html.ActionLink(" ", "DeleteVoucherDetail", "AdminVoucher", new { id = ctVoucher.MaChiTietVoucher, maVoucher = Url.RequestContext.RouteData.Values["id"] }, new { title = AdminVoucherString.Delete, Class = "icon-2 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "Print", "AdminVoucher", new { maChiTietVoucher = ctVoucher.MaChiTietVoucher, maVoucher = Url.RequestContext.RouteData.Values["id"] }, new { title = AdminVoucherString.Print, Class = "icon-4 info-tooltip" })%>
+                    <%:Html.ActionLink(" ", "DeleteVoucherDetail", "AdminVoucher", new { id = ctVoucher.MaChiTietVoucher, maVoucher = Url.RequestContext.RouteData.Values["id"] }, new { title = AdminVoucherString.Delete, Class = "icon-2 info-tooltip" })%>  
                 </td>
             </tr>
             <% } %>

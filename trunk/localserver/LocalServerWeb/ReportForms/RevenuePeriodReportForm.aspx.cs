@@ -39,6 +39,12 @@ namespace LocalServerWeb.ReportsForm
                 List<RevenuePeriodReportData> listData = new List<RevenuePeriodReportData>();
                 List<HoaDon> listHoaDon = HoaDonBUS.LayDanhSachHoaDonTheoThoiGian(tuNgay, denNgay);
 
+                // Thong tin nha hang
+                var tsTenNhaHang = ThamSoBUS.LayThamSo("TenNhaHang");
+                var tsDiaChiNhaHang = ThamSoBUS.LayThamSo("DiaChiNhaHang");
+                string tenNhaHang = (tsTenNhaHang != null) ? tsTenNhaHang.GiaTri : " ";
+                string diaChiNhaHang = (tsDiaChiNhaHang != null) ? tsDiaChiNhaHang.GiaTri : " ";
+
                 // Report parameters
                 float khuyenMai = 0;
                 float phuThu = 0;
@@ -75,17 +81,15 @@ namespace LocalServerWeb.ReportsForm
                     khuyenMai += data.KhuyenMai;
                 }
 
-
-                string strTongTien = String.Format("{0:0,0}", tongTien).Replace('.', ',') + " VND";
-                string strKhuyenMai = String.Format("{0:0,0}", khuyenMai).Replace('.', ',') + " VND";
-                string strPhuThu = String.Format("{0:0,0}", phuThu).Replace('.', ',') + " VND";
-
+                // Tham so
                 List<ReportParameter> listParameter = new List<ReportParameter>();
                 listParameter.Add(new ReportParameter("ThoiDiemLap", thoiDiemLap));
                 listParameter.Add(new ReportParameter("NguoiLap", nguoiLap));
-                listParameter.Add(new ReportParameter("TongTien", strTongTien));
-                listParameter.Add(new ReportParameter("KhuyenMai", strKhuyenMai));
-                listParameter.Add(new ReportParameter("PhuThu", strPhuThu));
+                listParameter.Add(new ReportParameter("TongTien", tongTien.ToString()));
+                listParameter.Add(new ReportParameter("KhuyenMai", khuyenMai.ToString()));
+                listParameter.Add(new ReportParameter("PhuThu", phuThu.ToString()));
+                listParameter.Add(new ReportParameter("TenNhaHang", tenNhaHang));
+                listParameter.Add(new ReportParameter("DiaChiNhaHang", diaChiNhaHang));
 
 
                 

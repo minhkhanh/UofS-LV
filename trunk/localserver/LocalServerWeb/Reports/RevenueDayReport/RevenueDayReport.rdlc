@@ -67,14 +67,16 @@
             <TextRuns>
               <TextRun>
                 <Value>=Parameters!PhuThu.Value</Value>
-                <Style />
+                <Style>
+                  <Format>#,0 'VND';(#,0 'VND')</Format>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox72</rd:DefaultName>
-        <Top>1.22742in</Top>
+        <Top>0.97742in</Top>
         <Left>6.00688in</Left>
         <Height>0.25in</Height>
         <Width>1.24257in</Width>
@@ -89,7 +91,7 @@
         </Style>
       </Textbox>
       <Line Name="Line2">
-        <Top>0.89062in</Top>
+        <Top>0.76562in</Top>
         <Left>0.25in</Left>
         <Height>0in</Height>
         <Width>6.99944in</Width>
@@ -128,14 +130,16 @@
             <TextRuns>
               <TextRun>
                 <Value>=Parameters!KhuyenMai.Value</Value>
-                <Style />
+                <Style>
+                  <Format>#,0 'VND';(#,0 'VND')</Format>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox72</rd:DefaultName>
-        <Top>1.61458in</Top>
+        <Top>1.36458in</Top>
         <Left>6.00688in</Left>
         <Height>0.25in</Height>
         <Width>1.24257in</Width>
@@ -158,14 +162,16 @@
             <TextRuns>
               <TextRun>
                 <Value>=Parameters!TongTien.Value</Value>
-                <Style />
+                <Style>
+                  <Format>#,0 'VND';(#,0 'VND')</Format>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox72</rd:DefaultName>
-        <Top>1.97916in</Top>
+        <Top>1.72916in</Top>
         <Left>6.00688in</Left>
         <Height>0.25in</Height>
         <Width>1.24257in</Width>
@@ -195,7 +201,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox72</rd:DefaultName>
-        <Top>2.61458in</Top>
+        <Top>2.36458in</Top>
         <Left>5.04556in</Left>
         <Height>0.25in</Height>
         <Width>2.20388in</Width>
@@ -225,7 +231,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox72</rd:DefaultName>
-        <Top>3.32292in</Top>
+        <Top>3.07292in</Top>
         <Left>5.04556in</Left>
         <Height>0.25in</Height>
         <Width>1.47917in</Width>
@@ -241,7 +247,7 @@
         </Style>
       </Textbox>
       <Line Name="Line4">
-        <Top>2.35416in</Top>
+        <Top>2.10416in</Top>
         <Left>4.21542in</Left>
         <Height>0in</Height>
         <Width>3.03403in</Width>
@@ -818,7 +824,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox347</rd:DefaultName>
-        <Top>1.22742in</Top>
+        <Top>0.97742in</Top>
         <Left>4.21542in</Left>
         <Height>0.25in</Height>
         <Width>1.375in</Width>
@@ -857,7 +863,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox347</rd:DefaultName>
-        <Top>1.61458in</Top>
+        <Top>1.36458in</Top>
         <Left>4.21542in</Left>
         <Height>0.25in</Height>
         <Width>1.49979in</Width>
@@ -896,7 +902,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox347</rd:DefaultName>
-        <Top>1.97916in</Top>
+        <Top>1.72916in</Top>
         <Left>4.21542in</Left>
         <Height>0.25in</Height>
         <Width>1.49979in</Width>
@@ -925,54 +931,37 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="TongTien">
-      <DataType>String</DataType>
+      <DataType>Float</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="KhuyenMai">
-      <DataType>String</DataType>
+      <DataType>Float</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="PhuThu">
+      <DataType>Float</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="TenNhaHang">
       <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DiaChiNhaHang">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
   <Width>7.83278in</Width>
   <Page>
     <PageHeader>
-      <Height>1.79875in</Height>
+      <Height>1.99667in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
-        <Textbox Name="Textbox2">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>Thông tin nhà hàng</Value>
-                  <Style />
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox2</rd:DefaultName>
-          <Top>0.16333in</Top>
-          <Left>0.25in</Left>
-          <Height>0.29167in</Height>
-          <Width>1.39583in</Width>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
         <Textbox Name="Textbox3">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
@@ -991,11 +980,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox3</rd:DefaultName>
-          <Top>0.58in</Top>
-          <Left>3.09021in</Left>
+          <Top>1.0175in</Top>
+          <Left>2.96542in</Left>
           <Height>0.25in</Height>
           <Width>2.625in</Width>
-          <ZIndex>1</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1021,10 +1009,40 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox26</rd:DefaultName>
-          <Top>1.05916in</Top>
-          <Left>3.42354in</Left>
+          <Top>1.43416in</Top>
+          <Left>3.53812in</Left>
           <Height>0.25in</Height>
           <Width>1.44792in</Width>
+          <ZIndex>1</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox27">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Parameters!TenNhaHang.Value</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox26</rd:DefaultName>
+          <Top>0.22229in</Top>
+          <Left>0.25in</Left>
+          <Height>0.25in</Height>
+          <Width>1.83334in</Width>
           <ZIndex>2</ZIndex>
           <Style>
             <Border>
@@ -1036,38 +1054,36 @@
             <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
-        <Line Name="Line1">
-          <Top>1.58in</Top>
+        <Textbox Name="Textbox28">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Parameters!DiaChiNhaHang.Value</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox26</rd:DefaultName>
+          <Top>0.58in</Top>
           <Left>0.25in</Left>
-          <Height>0in</Height>
-          <Width>6.99944in</Width>
+          <Height>0.25in</Height>
+          <Width>1.83334in</Width>
           <ZIndex>3</ZIndex>
           <Style>
             <Border>
-              <Style>Dashed</Style>
+              <Style>None</Style>
             </Border>
-            <TopBorder>
-              <Color>Black</Color>
-              <Style>Dashed</Style>
-              <Width>1pt</Width>
-            </TopBorder>
-            <BottomBorder>
-              <Color>Black</Color>
-              <Style>Dashed</Style>
-              <Width>1pt</Width>
-            </BottomBorder>
-            <LeftBorder>
-              <Color>Black</Color>
-              <Style>Dashed</Style>
-              <Width>1pt</Width>
-            </LeftBorder>
-            <RightBorder>
-              <Color>Black</Color>
-              <Style>Dashed</Style>
-              <Width>1pt</Width>
-            </RightBorder>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
           </Style>
-        </Line>
+        </Textbox>
       </ReportItems>
       <Style>
         <Border>
