@@ -138,8 +138,14 @@
   <data name="DetailTitle" xml:space="preserve">
     <value>Order detail</value>
   </data>
+  <data name="FinishProcessing" xml:space="preserve">
+    <value>Finish processing</value>
+  </data>
   <data name="FoodName" xml:space="preserve">
     <value>Food name</value>
+  </data>
+  <data name="LockProcessing" xml:space="preserve">
+    <value>Lock processing</value>
   </data>
   <data name="NoData" xml:space="preserve">
     <value>There are no orders</value>
@@ -156,6 +162,12 @@
   <data name="OrderID" xml:space="preserve">
     <value>Order ID</value>
   </data>
+  <data name="Paid" xml:space="preserve">
+    <value>Paid</value>
+  </data>
+  <data name="Processing" xml:space="preserve">
+    <value>Processing</value>
+  </data>
   <data name="ProcessorName" xml:space="preserve">
     <value>Processor name</value>
   </data>
@@ -168,10 +180,19 @@
   <data name="QuantityRequired" xml:space="preserve">
     <value>Quantity required</value>
   </data>
+  <data name="Serving" xml:space="preserve">
+    <value>Serving</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
   <data name="TableName" xml:space="preserve">
     <value>Table name</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Order list</value>
+  </data>
+  <data name="WaitProcessing" xml:space="preserve">
+    <value>Wait processing</value>
   </data>
 </root>

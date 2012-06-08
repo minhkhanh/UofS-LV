@@ -43,6 +43,10 @@
                     <a>
                         <%:AdminOrderString.Note%></a>
                 </th>
+                <th class="table-header-repeat line-left minwidth-1">
+                    <a>
+                        <%:AdminOrderString.Status%></a>
+                </th>
                 <th class="table-header-repeat line-left">
                     <a>
                         <%:AdminOrderString.Option%></a>
@@ -66,6 +70,9 @@
                 </td>
                 <td>
                     <%:model.GhiChu %>
+                </td>
+                <td>
+                    <%:model.TenTinhTrang %>
                 </td>
                 <td class="options-width">
                     <a href="" title=" <% Html.RenderPartial("OrderDetailCancelStatus", model); %> " class="icon-3 info-tooltip"></a>
