@@ -67,7 +67,7 @@ namespace LocalServerWeb.Reports
         public void Print()
         {
             Export(report);
-
+            
             if (m_streams == null || m_streams.Count == 0) throw new Exception("Error: no stream to print.");
             m_currentPageIndex = 0;
             printDoc.Print();
@@ -79,6 +79,10 @@ namespace LocalServerWeb.Reports
             report = new LocalReport();
             report.ReportEmbeddedResource = reportPath;
             report.DataSources.Clear();
+
+            // Su dung external image
+            //report.EnableExternalImages = true;
+
             printDoc = new PrintDocument();
             printDoc.PrinterSettings.PrinterName = printer;
             printDoc.PrintPage += new PrintPageEventHandler(PrintPage);            

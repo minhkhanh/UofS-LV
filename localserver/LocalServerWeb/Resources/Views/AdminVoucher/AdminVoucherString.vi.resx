@@ -225,4 +225,7 @@
   <data name="InputAmount" xml:space="preserve">
     <value>Số lượng phiếu</value>
   </data>
+  <data name="Print" xml:space="preserve">
+    <value>In</value>
+  </data>
 </root>

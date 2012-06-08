@@ -454,8 +454,23 @@ namespace LocalServerWeb.Controllers
 
             return strMaVoucher + result;
         }
-        
-        
+
+        public ActionResult Print(int maChiTietVoucher, int maVoucher)
+        {
+            ChiTietVoucher ctVoucher = ChiTietVoucherBUS.LayChiTietVoucher(maChiTietVoucher);
+            if (ctVoucher == null)
+                return RedirectToAction("Index");
+
+            if (!Reports.ReportManager.PrintVoucherReport(maChiTietVoucher))
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+
+            }
+
+            return RedirectToAction("VoucherDetail", new { id = maVoucher });
+
+        }
 
     }
 }

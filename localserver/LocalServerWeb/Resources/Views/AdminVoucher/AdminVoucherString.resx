@@ -225,4 +225,7 @@
   <data name="InputAmount" xml:space="preserve">
     <value>Amount of codes</value>
   </data>
+  <data name="Print" xml:space="preserve">
+    <value>Print</value>
+  </data>
 </root>

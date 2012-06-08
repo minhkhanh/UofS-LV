@@ -36,6 +36,12 @@ namespace LocalServerWeb.Reports
                 var thamSoBillPrinter = ThamSoBUS.LayThamSo("BillPrinter");
                 if (thamSoBillPrinter==null || thamSoBillPrinter.GiaTri.Length<=0) return false;
 
+                var tsTenNhaHang = ThamSoBUS.LayThamSo("TenNhaHang");
+                var tsDiaChiNhaHang = ThamSoBUS.LayThamSo("DiaChiNhaHang");
+                string tenNhaHang = (tsTenNhaHang != null) ? tsTenNhaHang.GiaTri : " ";
+                string diaChiNhaHang = (tsDiaChiNhaHang != null) ? tsDiaChiNhaHang.GiaTri : " ";
+              
+
                 var printReport = new PrintReport(@"LocalServerWeb.Reports.BillReport.BillReport.rdlc", thamSoBillPrinter.GiaTri, deviceInfo);
 
                 var datas = new List<BillReportData>();
@@ -56,15 +62,16 @@ namespace LocalServerWeb.Reports
                 }
                 printReport.AddDataSoruce(new ReportDataSource("BillReportData", datas));
 
-                string strTongTien = String.Format("{0:0,0}", hoaDon.TongTien).Replace('.', ',') + " VND";
 
                 var listParameter = new List<ReportParameter>();
                 listParameter.Add(new ReportParameter("MaHoaDon", hoaDon.MaHoaDon.ToString()));
                 listParameter.Add(new ReportParameter("ThoiDiemLap", hoaDon.ThoiDiemLap.ToString("dd/MM/yyyy H:mm:ss")));
                 listParameter.Add(new ReportParameter("TenNguoiLap", hoaDon.TaiKhoan.HoTen));
-                listParameter.Add(new ReportParameter("TongTien", strTongTien));
+                listParameter.Add(new ReportParameter("TongTien", hoaDon.TongTien.ToString()));
                 listParameter.Add(new ReportParameter("TenBan", hoaDon.Ban.TenBan));
                 listParameter.Add(new ReportParameter("PhuThu", hoaDon.PhuThu.TenPhuThu));
+                listParameter.Add(new ReportParameter("TenNhaHang", tenNhaHang));
+                listParameter.Add(new ReportParameter("DiaChiNhaHang", diaChiNhaHang));
                 printReport.SetParameters(listParameter.ToArray());
 
                 printReport.Print();
@@ -84,6 +91,11 @@ namespace LocalServerWeb.Reports
                 var thamSoBillPrinter = ThamSoBUS.LayThamSo("BillPrinter");
                 if (thamSoBillPrinter == null || thamSoBillPrinter.GiaTri.Length <= 0) 
                     return false;
+
+                var tsTenNhaHang = ThamSoBUS.LayThamSo("TenNhaHang");
+                var tsDiaChiNhaHang = ThamSoBUS.LayThamSo("DiaChiNhaHang");
+                string tenNhaHang = (tsTenNhaHang != null) ? tsTenNhaHang.GiaTri : " ";
+                string diaChiNhaHang = (tsDiaChiNhaHang != null) ? tsDiaChiNhaHang.GiaTri : " ";
    
                 PrintReport printReport = new PrintReport(@"LocalServerWeb.Reports.RevenueDayReport.RevenueDayReport.rdlc", thamSoBillPrinter.GiaTri, deviceInfo);
 
@@ -117,17 +129,16 @@ namespace LocalServerWeb.Reports
                 }
 
                 printReport.AddDataSoruce(new ReportDataSource("RevenueDayReportData", listData));
-           
-                string strTongTien = String.Format("{0:0,0}", tongTien).Replace('.', ',') + " VND";
-                string strKhuyenMai = String.Format("{0:0,0}", khuyenMai).Replace('.', ',') + " VND";
-                string strPhuThu = String.Format("{0:0,0}", phuThu).Replace('.', ',') + " VND";
+
 
                 List<ReportParameter> listParameter = new List<ReportParameter>();
                 listParameter.Add(new ReportParameter("ThoiDiemLap", thoiDiemLap));
                 listParameter.Add(new ReportParameter("NguoiLap", nguoiLap));
-                listParameter.Add(new ReportParameter("TongTien", strTongTien));
-                listParameter.Add(new ReportParameter("KhuyenMai", strKhuyenMai));
-                listParameter.Add(new ReportParameter("PhuThu", strPhuThu));
+                listParameter.Add(new ReportParameter("TongTien", tongTien.ToString()));
+                listParameter.Add(new ReportParameter("KhuyenMai", khuyenMai.ToString()));
+                listParameter.Add(new ReportParameter("PhuThu", phuThu.ToString()));
+                listParameter.Add(new ReportParameter("TenNhaHang", tenNhaHang));
+                listParameter.Add(new ReportParameter("DiaChiNhaHang", diaChiNhaHang));
 
                 printReport.SetParameters(listParameter.ToArray());
 
@@ -149,6 +160,11 @@ namespace LocalServerWeb.Reports
                 var thamSoBillPrinter = ThamSoBUS.LayThamSo("BillPrinter");
                 if (thamSoBillPrinter == null || thamSoBillPrinter.GiaTri.Length <= 0)
                     return false;
+
+                var tsTenNhaHang = ThamSoBUS.LayThamSo("TenNhaHang");
+                var tsDiaChiNhaHang = ThamSoBUS.LayThamSo("DiaChiNhaHang");
+                string tenNhaHang = (tsTenNhaHang != null) ? tsTenNhaHang.GiaTri : " ";
+                string diaChiNhaHang = (tsDiaChiNhaHang != null) ? tsDiaChiNhaHang.GiaTri : " ";
 
                 PrintReport printReport = new PrintReport(@"LocalServerWeb.Reports.RevenueMonthReport.RevenueMonthReport.rdlc", thamSoBillPrinter.GiaTri, deviceInfo);
 
@@ -192,16 +208,16 @@ namespace LocalServerWeb.Reports
 
                 printReport.AddDataSoruce(new ReportDataSource("RevenueMonthReportData", listData));
 
-                string strTongTien = String.Format("{0:0,0}", tongTien).Replace('.', ',') + " VND";
-                string strKhuyenMai = String.Format("{0:0,0}", khuyenMai).Replace('.', ',') + " VND";
-                string strPhuThu = String.Format("{0:0,0}", phuThu).Replace('.', ',') + " VND";
 
                 List<ReportParameter> listParameter = new List<ReportParameter>();
                 listParameter.Add(new ReportParameter("ThoiDiemLap", thoiDiemLap));
                 listParameter.Add(new ReportParameter("NguoiLap", nguoiLap));
-                listParameter.Add(new ReportParameter("TongTien", strTongTien));
-                listParameter.Add(new ReportParameter("KhuyenMai", strKhuyenMai));
-                listParameter.Add(new ReportParameter("PhuThu", strPhuThu));
+                listParameter.Add(new ReportParameter("TongTien", tongTien.ToString()));
+                listParameter.Add(new ReportParameter("KhuyenMai", khuyenMai.ToString()));
+                listParameter.Add(new ReportParameter("PhuThu", phuThu.ToString()));
+                listParameter.Add(new ReportParameter("TenNhaHang", tenNhaHang));
+                listParameter.Add(new ReportParameter("DiaChiNhaHang", diaChiNhaHang));
+
 
                 printReport.SetParameters(listParameter.ToArray());
 
@@ -223,6 +239,11 @@ namespace LocalServerWeb.Reports
                 var thamSoBillPrinter = ThamSoBUS.LayThamSo("BillPrinter");
                 if (thamSoBillPrinter == null || thamSoBillPrinter.GiaTri.Length <= 0)
                     return false;
+
+                var tsTenNhaHang = ThamSoBUS.LayThamSo("TenNhaHang");
+                var tsDiaChiNhaHang = ThamSoBUS.LayThamSo("DiaChiNhaHang");
+                string tenNhaHang = (tsTenNhaHang != null) ? tsTenNhaHang.GiaTri : " ";
+                string diaChiNhaHang = (tsDiaChiNhaHang != null) ? tsDiaChiNhaHang.GiaTri : " ";
 
                 PrintReport printReport = new PrintReport(@"LocalServerWeb.Reports.RevenuePeriodReport.RevenuePeriodReport.rdlc", thamSoBillPrinter.GiaTri, deviceInfo);
 
@@ -267,16 +288,16 @@ namespace LocalServerWeb.Reports
 
                 printReport.AddDataSoruce(new ReportDataSource("RevenuePeriodReportData", listData));
 
-                string strTongTien = String.Format("{0:0,0}", tongTien).Replace('.', ',') + " VND";
-                string strKhuyenMai = String.Format("{0:0,0}", khuyenMai).Replace('.', ',') + " VND";
-                string strPhuThu = String.Format("{0:0,0}", phuThu).Replace('.', ',') + " VND";
+
 
                 List<ReportParameter> listParameter = new List<ReportParameter>();
                 listParameter.Add(new ReportParameter("ThoiDiemLap", thoiDiemLap));
                 listParameter.Add(new ReportParameter("NguoiLap", nguoiLap));
-                listParameter.Add(new ReportParameter("TongTien", strTongTien));
-                listParameter.Add(new ReportParameter("KhuyenMai", strKhuyenMai));
-                listParameter.Add(new ReportParameter("PhuThu", strPhuThu));
+                listParameter.Add(new ReportParameter("TongTien", tongTien.ToString()));
+                listParameter.Add(new ReportParameter("KhuyenMai", khuyenMai.ToString()));
+                listParameter.Add(new ReportParameter("PhuThu", phuThu.ToString()));
+                listParameter.Add(new ReportParameter("TenNhaHang", tenNhaHang));
+                listParameter.Add(new ReportParameter("DiaChiNhaHang", diaChiNhaHang));
 
                 printReport.SetParameters(listParameter.ToArray());
 
@@ -291,6 +312,66 @@ namespace LocalServerWeb.Reports
             return false;
         }
 
+        public static bool PrintVoucherReport(int maChiTietVoucher)
+        {
+            try
+            {
+                var thamSoBillPrinter = ThamSoBUS.LayThamSo("BillPrinter");
+                if (thamSoBillPrinter == null || thamSoBillPrinter.GiaTri.Length <= 0)
+                    return false;
+
+                var tsTenNhaHang = ThamSoBUS.LayThamSo("TenNhaHang");
+                var tsDiaChiNhaHang = ThamSoBUS.LayThamSo("DiaChiNhaHang");
+                string tenNhaHang = (tsTenNhaHang != null) ? tsTenNhaHang.GiaTri : " ";
+                string diaChiNhaHang = (tsDiaChiNhaHang != null) ? tsDiaChiNhaHang.GiaTri : " ";
+
+                string deviceInfoVoucher = @"<DeviceInfo>
+                    <OutputFormat>EMF</OutputFormat>
+                    <PageWidth>6in</PageWidth>
+                    <PageHeight>5in</PageHeight>
+                    <MarginTop>0.25in</MarginTop>
+                    <MarginLeft>0.25in</MarginLeft>
+                    <MarginRight>0.25in</MarginRight>
+                    <MarginBottom>0.25in</MarginBottom>
+                </DeviceInfo>";
+
+                PrintReport printReport = new PrintReport(@"LocalServerWeb.Reports.VoucherReport.VoucherReport.rdlc", thamSoBillPrinter.GiaTri, deviceInfoVoucher);
+
+                ChiTietVoucher ctVoucher = ChiTietVoucherBUS.LayChiTietVoucher(maChiTietVoucher);
+                if (ctVoucher == null)
+                    return false;
+                Voucher voucher = ctVoucher.Voucher;
+                if (voucher == null)
+                    return false;
+
+                string soPhieu = ctVoucher.SoPhieu;
+                string giaGiam = voucher.GiaGiam.ToString();
+                string mucGiaApDung = voucher.MucGiaApDung.ToString();
+                string ngayBatDau = voucher.BatDau.ToShortDateString();
+                string ngayKetThuc = voucher.KetThuc.ToShortDateString();
+
+
+                List<ReportParameter> listParameter = new List<ReportParameter>();
+                listParameter.Add(new ReportParameter("SoPhieu", soPhieu));
+                listParameter.Add(new ReportParameter("GiaGiam", giaGiam));
+                listParameter.Add(new ReportParameter("MucGiaApDung", mucGiaApDung));
+                listParameter.Add(new ReportParameter("NgayBatDau", ngayBatDau));
+                listParameter.Add(new ReportParameter("NgayKetThuc", ngayKetThuc));
+                listParameter.Add(new ReportParameter("TenNhaHang", tenNhaHang));
+                listParameter.Add(new ReportParameter("DiaChiNhaHang", diaChiNhaHang));
+
+                printReport.SetParameters(listParameter.ToArray());
+
+                // Print this report now
+                printReport.Print();
+                return true;
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.StackTrace);
+            }
+            return false;
+        }
         
     }
 }

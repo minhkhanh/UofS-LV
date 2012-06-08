@@ -1113,6 +1113,7 @@
     <EmbeddedResource Include="Reports\RevenueDayReport\RevenueDayReport.rdlc" />
     <EmbeddedResource Include="Reports\RevenueMonthReport\RevenueMonthReport.rdlc" />
     <EmbeddedResource Include="Reports\RevenuePeriodReport\RevenuePeriodReport.rdlc" />
+    <EmbeddedResource Include="Reports\VoucherReport\VoucherReport.rdlc" />
     <EmbeddedResource Include="Resources\Models\AccountModelString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AccountModelString.Designer.cs</LastGenOutput>
