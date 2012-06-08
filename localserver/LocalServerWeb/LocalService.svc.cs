@@ -980,6 +980,32 @@ namespace LocalServerWeb
             return false;
         }
 
+        // Voucher
+        public float KiemTraVoucher(string soPhieu, float tongHoaDon)
+        {
+            try
+            {
+                return VoucherBUS.KiemTraVoucher(soPhieu, tongHoaDon);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return 0;
+        }
+
+        public bool SuDungVoucher(string soPhieu)
+        {
+            try
+            {
+                return ChiTietVoucherBUS.SuDungVoucher(soPhieu);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return false;
+        }
 
 
         // Picture

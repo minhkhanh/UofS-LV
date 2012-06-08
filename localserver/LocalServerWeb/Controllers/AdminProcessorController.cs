@@ -18,7 +18,6 @@ namespace LocalServerWeb.Controllers
     {
         public ActionResult Index(string page)
         {
-            SharedCode.FillAdminMainMenu(ViewData, 3, 2);
 
             int _page = 1;
             int.TryParse(page ?? "1", out _page);
@@ -35,6 +34,12 @@ namespace LocalServerWeb.Controllers
             {
                 TempData["error"] = SharedString.InputWrong;
                 return RedirectToAction("Index", "Error");
+            }
+
+            if (id == 1)
+            { 
+                TempData["errorCannotDelete"] = AdminProcessorString.ErrorCannotDelete;
+                return RedirectToAction("Index");
             }
 
             BoPhanCheBien boPhanCheBien = BoPhanCheBienBUS.LayBoPhanCheBienTheoMa(id ?? 0);

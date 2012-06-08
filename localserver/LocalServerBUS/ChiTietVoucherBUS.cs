@@ -43,5 +43,23 @@ namespace LocalServerBUS
         {
             return ChiTietVoucherDAO.KiemTraTonTai(soPhieu);
         }
+
+        public static ChiTietVoucher LayChiTietSanSang(string soPhieu)
+        {
+            return ChiTietVoucherDAO.LayChiTietSanSang(soPhieu);
+        }
+
+        public static bool SuDungVoucher(string soPhieu)
+        {
+            ChiTietVoucher ctVoucher = ChiTietVoucherBUS.LayChiTietSanSang(soPhieu);
+            if (ctVoucher == null || ctVoucher.Active == false)
+                return false;
+
+            ctVoucher.Active = false;
+            if (ChiTietVoucherBUS.CapNhat(ctVoucher))
+                return true;
+
+            return false;
+        }
     }
 }
