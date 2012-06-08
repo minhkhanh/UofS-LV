@@ -388,6 +388,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>KitchenString.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Views\Menu\MenuString.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MenuString.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\Menu\MenuString.vi.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MenuString.vi.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Views\Shared\SharedString.vi.Designer.cs">
       <DependentUpon>SharedString.vi.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1296,6 +1306,14 @@
     <EmbeddedResource Include="Resources\Views\Kitchen\KitchenString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>KitchenString.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Menu\MenuString.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MenuString.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\Menu\MenuString.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MenuString.vi.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Shared\SharedString.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
