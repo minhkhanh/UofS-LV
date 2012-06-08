@@ -14,6 +14,7 @@ namespace LocalServerWeb.ViewModels
         public int MaBoPhanCheBien { get; set; }
         public string TenBoPhanCheBien { get; set; }
         public string GhiChu { get; set; }
+        public string TenTinhTrang { get; set; }
 
         public bool CoThongTinHuy { get; set; }
 

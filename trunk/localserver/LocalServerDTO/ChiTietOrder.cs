@@ -86,5 +86,6 @@ namespace LocalServerDTO
         public int SoLuongDaCheBien { get; set; }
         public int SoLuongDangCheBien { get; set; }
 
+        public string TenTinhTrang { get; set; }
     }
 }

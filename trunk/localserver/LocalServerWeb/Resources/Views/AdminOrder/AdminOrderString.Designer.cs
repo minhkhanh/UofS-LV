@@ -124,11 +124,29 @@ namespace LocalServerWeb.Resources.Views.AdminOrder {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Finish processing.
+        /// </summary>
+        public static string FinishProcessing {
+            get {
+                return ResourceManager.GetString("FinishProcessing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Food name.
         /// </summary>
         public static string FoodName {
             get {
                 return ResourceManager.GetString("FoodName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lock processing.
+        /// </summary>
+        public static string LockProcessing {
+            get {
+                return ResourceManager.GetString("LockProcessing", resourceCulture);
             }
         }
         
@@ -178,6 +196,24 @@ namespace LocalServerWeb.Resources.Views.AdminOrder {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Paid.
+        /// </summary>
+        public static string Paid {
+            get {
+                return ResourceManager.GetString("Paid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processing.
+        /// </summary>
+        public static string Processing {
+            get {
+                return ResourceManager.GetString("Processing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Processor name.
         /// </summary>
         public static string ProcessorName {
@@ -214,6 +250,24 @@ namespace LocalServerWeb.Resources.Views.AdminOrder {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Serving.
+        /// </summary>
+        public static string Serving {
+            get {
+                return ResourceManager.GetString("Serving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string Status {
+            get {
+                return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Table name.
         /// </summary>
         public static string TableName {
@@ -228,6 +282,15 @@ namespace LocalServerWeb.Resources.Views.AdminOrder {
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wait processing.
+        /// </summary>
+        public static string WaitProcessing {
+            get {
+                return ResourceManager.GetString("WaitProcessing", resourceCulture);
             }
         }
     }

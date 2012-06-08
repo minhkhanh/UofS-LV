@@ -36,6 +36,10 @@
                     <a>
                         <%:AdminOrderString.TableName%></a>
                 </th>
+                <th class="table-header-repeat line-left minwidth-1">
+                    <a>
+                        <%:AdminOrderString.Status%></a>
+                </th>
                 <th class="table-header-repeat line-left">
                     <a>
                         <%:AdminOrderString.Option%></a>
@@ -56,6 +60,9 @@
                 </td>
                 <td>
                     <%:order.Ban.TenBan %>
+                </td>
+                <td>
+                    <%: (order.TinhTrang==4)?AdminOrderString.Paid:AdminOrderString.Serving %>
                 </td>
                 <td class="options-width">
                     <%:Html.ActionLink(" ", "OrderDetail", "AdminOrder", new { id = order.MaOrder }, new { title = AdminOrderString.DetailTitle, Class = "icon-3 info-tooltip" })%>

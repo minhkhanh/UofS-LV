@@ -54,6 +54,17 @@ namespace LocalServerWeb.Controllers
                     viewModel.GhiChu = ct.GhiChu;
                     viewModel.CoThongTinHuy = false;
 
+                    if (ct.TinhTrang == 0)
+                        viewModel.TenTinhTrang = AdminOrderString.WaitProcessing;
+                    else if (ct.TinhTrang == 1)
+                        viewModel.TenTinhTrang = AdminOrderString.Processing;
+                    else if (ct.TinhTrang == 2)
+                        viewModel.TenTinhTrang = AdminOrderString.LockProcessing;
+                    else if (ct.TinhTrang == 3)
+                        viewModel.TenTinhTrang = AdminOrderString.FinishProcessing;
+                    else if (ct.TinhTrang == 4)
+                        viewModel.TenTinhTrang = AdminOrderString.Paid;
+
                     ChiTietHuyOrder ctHuyOrder = ChiTietHuyOrderBUS.LayChiTietHuyOrder(ct.MaChiTietOrder);
                     if (ctHuyOrder != null)
                     {

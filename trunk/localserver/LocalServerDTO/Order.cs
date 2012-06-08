@@ -50,5 +50,8 @@ namespace LocalServerDTO
         [DataMember(Name = "TinhTrang")]
         [Column(Name = "TinhTrang")]
         public int TinhTrang { get; set; }
+
+        public string TenTinhTrang { get; set; }
+
     }
 }
