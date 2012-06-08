@@ -7,10 +7,11 @@
 <head runat="server">
     <title><%:ErrorString.Title %></title>
 </head>
-<body>
+<body background="../../Images/error_page.jpg">
     <div align="center">
-        <%: TempData["error"] ?? "" %>
-        <%: TempData["errorNotFound"] ?? "" %>
+        <h2><%: TempData["error"] ?? "" %></h2>
+        <h2><%: TempData["errorNotFound"] ?? "" %></h2>
     </div>
+    
 </body>
 </html>
