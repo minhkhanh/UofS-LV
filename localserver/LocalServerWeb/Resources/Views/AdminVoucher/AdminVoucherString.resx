@@ -117,26 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Add" xml:space="preserve">
-    <value>Add</value>
-  </data>
-  <data name="AddFoodPromotion" xml:space="preserve">
-    <value>Add food promotion</value>
+  <data name="Active" xml:space="preserve">
+    <value>Available</value>
   </data>
   <data name="AddTitle" xml:space="preserve">
-    <value>Promotion list</value>
+    <value>Add new voucher</value>
+  </data>
+  <data name="AddVoucherDetail" xml:space="preserve">
+    <value>Add new code</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Code</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
-  </data>
-  <data name="Discount" xml:space="preserve">
-    <value>Discount</value>
-  </data>
-  <data name="DiscountPercent" xml:space="preserve">
-    <value>Discount percent</value>
-  </data>
-  <data name="DiscountType" xml:space="preserve">
-    <value>Discount type</value>
   </data>
   <data name="DiscountValue" xml:space="preserve">
     <value>Discount value</value>
@@ -144,14 +138,11 @@
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
-  <data name="EditFoodPromotion" xml:space="preserve">
-    <value>Edit food promotion</value>
-  </data>
-  <data name="EditInvoicePromotion" xml:space="preserve">
-    <value>Edit invoice promotion</value>
-  </data>
   <data name="EditTitle" xml:space="preserve">
-    <value>Edit promotion</value>
+    <value>Edit voucher</value>
+  </data>
+  <data name="EditVoucherDetail" xml:space="preserve">
+    <value>Edit code</value>
   </data>
   <data name="EndDate" xml:space="preserve">
     <value>End date</value>
@@ -163,7 +154,10 @@
     <value>Can't delete</value>
   </data>
   <data name="ErrorCannotEdit" xml:space="preserve">
-    <value>Can't edit</value>
+    <value>Can't update</value>
+  </data>
+  <data name="ErrorCodeExist" xml:space="preserve">
+    <value>Code already exist</value>
   </data>
   <data name="ErrorDateWrong" xml:space="preserve">
     <value>Either start date or end date is not accepted</value>
@@ -171,23 +165,11 @@
   <data name="ErrorEndDateAfter" xml:space="preserve">
     <value>End date must be after start date</value>
   </data>
-  <data name="ErrorFoodPromotionExist" xml:space="preserve">
-    <value>Food promotion already exist</value>
-  </data>
-  <data name="ErrorFoodPromotionNotFound" xml:space="preserve">
-    <value>Food promotion not found</value>
-  </data>
-  <data name="ErrorInvoicePromotionNotFound" xml:space="preserve">
-    <value>Invoice promotion not found</value>
-  </data>
-  <data name="ErrorPromotionNotFound" xml:space="preserve">
-    <value>Requested promotion not found</value>
-  </data>
-  <data name="FoodName" xml:space="preserve">
-    <value>Food name</value>
+  <data name="ErrorVoucherNotFound" xml:space="preserve">
+    <value>Requested voucher not found</value>
   </data>
   <data name="InfoAddSuccess" xml:space="preserve">
-    <value>Delete successfully</value>
+    <value>Add successfully</value>
   </data>
   <data name="InfoDeleteSuccess" xml:space="preserve">
     <value>Delete successfully</value>
@@ -196,7 +178,13 @@
     <value>Edit successfully</value>
   </data>
   <data name="NoData" xml:space="preserve">
-    <value>There are no promotions</value>
+    <value>There are no vouchers</value>
+  </data>
+  <data name="NotActive" xml:space="preserve">
+    <value>Used</value>
+  </data>
+  <data name="NoVoucherDetail" xml:space="preserve">
+    <value>There are not codes</value>
   </data>
   <data name="NumberOrdinary" xml:space="preserve">
     <value>No.</value>
@@ -204,19 +192,37 @@
   <data name="Option" xml:space="preserve">
     <value>Option</value>
   </data>
-  <data name="PromotionDescription" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="PromotionName" xml:space="preserve">
-    <value>Promotion name</value>
-  </data>
   <data name="StartDate" xml:space="preserve">
     <value>Start date</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
   </data>
   <data name="Threshold" xml:space="preserve">
     <value>For bill total</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Promotion list</value>
+    <value>Voucher list</value>
+  </data>
+  <data name="VoucherDescription" xml:space="preserve">
+    <value>VoucherDescription</value>
+  </data>
+  <data name="VoucherDetail" xml:space="preserve">
+    <value>Voucher detail</value>
+  </data>
+  <data name="VoucherID" xml:space="preserve">
+    <value>Voucher ID</value>
+  </data>
+  <data name="VoucherName" xml:space="preserve">
+    <value>Voucher name</value>
+  </data>
+  <data name="ErrorVoucherDetailNotFound" xml:space="preserve">
+    <value>Voucher detail not found</value>
+  </data>
+  <data name="AddManyVoucherDetail" xml:space="preserve">
+    <value>Add automatically</value>
+  </data>
+  <data name="InputAmount" xml:space="preserve">
+    <value>Amount of codes</value>
   </data>
 </root>

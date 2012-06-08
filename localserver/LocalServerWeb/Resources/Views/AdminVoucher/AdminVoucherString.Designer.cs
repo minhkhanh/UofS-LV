@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LocalServerWeb.Resources.Views.AdminPromotion {
+namespace LocalServerWeb.Resources.Views.AdminVoucher {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace LocalServerWeb.Resources.Views.AdminPromotion {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class AdminPromotionString {
+    public class AdminVoucherString {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AdminPromotionString() {
+        internal AdminVoucherString() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace LocalServerWeb.Resources.Views.AdminPromotion {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LocalServerWeb.Resources.Views.AdminPromotion.AdminPromotionString", typeof(AdminPromotionString).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LocalServerWeb.Resources.Views.AdminVoucher.AdminVoucherString", typeof(AdminVoucherString).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,47 @@ namespace LocalServerWeb.Resources.Views.AdminPromotion {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add.
+        ///   Looks up a localized string similar to Available.
         /// </summary>
-        public static string Add {
+        public static string Active {
             get {
-                return ResourceManager.GetString("Add", resourceCulture);
+                return ResourceManager.GetString("Active", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add food promotion.
+        ///   Looks up a localized string similar to Add automatically.
         /// </summary>
-        public static string AddFoodPromotion {
+        public static string AddManyVoucherDetail {
             get {
-                return ResourceManager.GetString("AddFoodPromotion", resourceCulture);
+                return ResourceManager.GetString("AddManyVoucherDetail", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Promotion list.
+        ///   Looks up a localized string similar to Add new voucher.
         /// </summary>
         public static string AddTitle {
             get {
                 return ResourceManager.GetString("AddTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new code.
+        /// </summary>
+        public static string AddVoucherDetail {
+            get {
+                return ResourceManager.GetString("AddVoucherDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code.
+        /// </summary>
+        public static string Code {
+            get {
+                return ResourceManager.GetString("Code", resourceCulture);
             }
         }
         
@@ -93,33 +111,6 @@ namespace LocalServerWeb.Resources.Views.AdminPromotion {
         public static string Delete {
             get {
                 return ResourceManager.GetString("Delete", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Discount.
-        /// </summary>
-        public static string Discount {
-            get {
-                return ResourceManager.GetString("Discount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Discount percent.
-        /// </summary>
-        public static string DiscountPercent {
-            get {
-                return ResourceManager.GetString("DiscountPercent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Discount type.
-        /// </summary>
-        public static string DiscountType {
-            get {
-                return ResourceManager.GetString("DiscountType", resourceCulture);
             }
         }
         
@@ -142,29 +133,20 @@ namespace LocalServerWeb.Resources.Views.AdminPromotion {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit food promotion.
-        /// </summary>
-        public static string EditFoodPromotion {
-            get {
-                return ResourceManager.GetString("EditFoodPromotion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Edit invoice promotion.
-        /// </summary>
-        public static string EditInvoicePromotion {
-            get {
-                return ResourceManager.GetString("EditInvoicePromotion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Edit promotion.
+        ///   Looks up a localized string similar to Edit voucher.
         /// </summary>
         public static string EditTitle {
             get {
                 return ResourceManager.GetString("EditTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit code.
+        /// </summary>
+        public static string EditVoucherDetail {
+            get {
+                return ResourceManager.GetString("EditVoucherDetail", resourceCulture);
             }
         }
         
@@ -196,11 +178,20 @@ namespace LocalServerWeb.Resources.Views.AdminPromotion {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can&apos;t edit.
+        ///   Looks up a localized string similar to Can&apos;t update.
         /// </summary>
         public static string ErrorCannotEdit {
             get {
                 return ResourceManager.GetString("ErrorCannotEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code already exist.
+        /// </summary>
+        public static string ErrorCodeExist {
+            get {
+                return ResourceManager.GetString("ErrorCodeExist", resourceCulture);
             }
         }
         
@@ -223,52 +214,25 @@ namespace LocalServerWeb.Resources.Views.AdminPromotion {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Food promotion already exist.
+        ///   Looks up a localized string similar to Voucher detail not found.
         /// </summary>
-        public static string ErrorFoodPromotionExist {
+        public static string ErrorVoucherDetailNotFound {
             get {
-                return ResourceManager.GetString("ErrorFoodPromotionExist", resourceCulture);
+                return ResourceManager.GetString("ErrorVoucherDetailNotFound", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Food promotion not found.
+        ///   Looks up a localized string similar to Requested voucher not found.
         /// </summary>
-        public static string ErrorFoodPromotionNotFound {
+        public static string ErrorVoucherNotFound {
             get {
-                return ResourceManager.GetString("ErrorFoodPromotionNotFound", resourceCulture);
+                return ResourceManager.GetString("ErrorVoucherNotFound", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invoice promotion not found.
-        /// </summary>
-        public static string ErrorInvoicePromotionNotFound {
-            get {
-                return ResourceManager.GetString("ErrorInvoicePromotionNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Requested promotion not found.
-        /// </summary>
-        public static string ErrorPromotionNotFound {
-            get {
-                return ResourceManager.GetString("ErrorPromotionNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Food name.
-        /// </summary>
-        public static string FoodName {
-            get {
-                return ResourceManager.GetString("FoodName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete successfully.
+        ///   Looks up a localized string similar to Add successfully.
         /// </summary>
         public static string InfoAddSuccess {
             get {
@@ -295,11 +259,38 @@ namespace LocalServerWeb.Resources.Views.AdminPromotion {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are no promotions.
+        ///   Looks up a localized string similar to Amount of codes.
+        /// </summary>
+        public static string InputAmount {
+            get {
+                return ResourceManager.GetString("InputAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no vouchers.
         /// </summary>
         public static string NoData {
             get {
                 return ResourceManager.GetString("NoData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Used.
+        /// </summary>
+        public static string NotActive {
+            get {
+                return ResourceManager.GetString("NotActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are not codes.
+        /// </summary>
+        public static string NoVoucherDetail {
+            get {
+                return ResourceManager.GetString("NoVoucherDetail", resourceCulture);
             }
         }
         
@@ -322,29 +313,20 @@ namespace LocalServerWeb.Resources.Views.AdminPromotion {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Description.
-        /// </summary>
-        public static string PromotionDescription {
-            get {
-                return ResourceManager.GetString("PromotionDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Promotion name.
-        /// </summary>
-        public static string PromotionName {
-            get {
-                return ResourceManager.GetString("PromotionName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Start date.
         /// </summary>
         public static string StartDate {
             get {
                 return ResourceManager.GetString("StartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string Status {
+            get {
+                return ResourceManager.GetString("Status", resourceCulture);
             }
         }
         
@@ -358,11 +340,47 @@ namespace LocalServerWeb.Resources.Views.AdminPromotion {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Promotion list.
+        ///   Looks up a localized string similar to Voucher list.
         /// </summary>
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VoucherDescription.
+        /// </summary>
+        public static string VoucherDescription {
+            get {
+                return ResourceManager.GetString("VoucherDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Voucher detail.
+        /// </summary>
+        public static string VoucherDetail {
+            get {
+                return ResourceManager.GetString("VoucherDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Voucher ID.
+        /// </summary>
+        public static string VoucherID {
+            get {
+                return ResourceManager.GetString("VoucherID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Voucher name.
+        /// </summary>
+        public static string VoucherName {
+            get {
+                return ResourceManager.GetString("VoucherName", resourceCulture);
             }
         }
     }

@@ -86,5 +86,15 @@ namespace LocalServerDAO
 
             return result;
         }
+
+        public static bool KiemTraTonTai(string soPhieu)
+        {
+            var temp = ThucDonDienTu.DataContext.ChiTietVouchers.Where(c => c.SoPhieu == soPhieu);
+            if (temp.Count() > 0)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

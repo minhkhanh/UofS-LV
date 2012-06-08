@@ -38,5 +38,10 @@ namespace LocalServerBUS
         {
             return ChiTietVoucherDAO.CapNhat(ctVoucher);
         }
+
+        public static bool KiemTraTonTai(string soPhieu)
+        {
+            return ChiTietVoucherDAO.KiemTraTonTai(soPhieu);
+        }
     }
 }

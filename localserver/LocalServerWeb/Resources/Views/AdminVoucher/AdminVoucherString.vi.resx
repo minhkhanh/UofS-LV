@@ -117,106 +117,112 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Add" xml:space="preserve">
-    <value>Add</value>
-  </data>
-  <data name="AddFoodPromotion" xml:space="preserve">
-    <value>Add food promotion</value>
+  <data name="Active" xml:space="preserve">
+    <value>Sẵn sàng</value>
   </data>
   <data name="AddTitle" xml:space="preserve">
-    <value>Promotion list</value>
+    <value>Thêm voucher mới</value>
+  </data>
+  <data name="AddVoucherDetail" xml:space="preserve">
+    <value>Thêm phiếu</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Số phiếu</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="Discount" xml:space="preserve">
-    <value>Discount</value>
-  </data>
-  <data name="DiscountPercent" xml:space="preserve">
-    <value>Discount percent</value>
-  </data>
-  <data name="DiscountType" xml:space="preserve">
-    <value>Discount type</value>
+    <value>Xóa</value>
   </data>
   <data name="DiscountValue" xml:space="preserve">
-    <value>Discount value</value>
+    <value>Giá giảm</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="EditFoodPromotion" xml:space="preserve">
-    <value>Edit food promotion</value>
-  </data>
-  <data name="EditInvoicePromotion" xml:space="preserve">
-    <value>Edit invoice promotion</value>
+    <value>Cập nhật</value>
   </data>
   <data name="EditTitle" xml:space="preserve">
-    <value>Edit promotion</value>
+    <value>Cập nhật voucher</value>
+  </data>
+  <data name="EditVoucherDetail" xml:space="preserve">
+    <value>Cập nhật phiếu</value>
   </data>
   <data name="EndDate" xml:space="preserve">
-    <value>End date</value>
+    <value>Kết thúc</value>
   </data>
   <data name="ErrorCannotAdd" xml:space="preserve">
-    <value>Can't add</value>
+    <value>Không thể thêm</value>
   </data>
   <data name="ErrorCannotDelete" xml:space="preserve">
-    <value>Can't delete</value>
+    <value>Không thể xóa</value>
   </data>
   <data name="ErrorCannotEdit" xml:space="preserve">
-    <value>Can't edit</value>
+    <value>Không thể cập nhật</value>
+  </data>
+  <data name="ErrorCodeExist" xml:space="preserve">
+    <value>Số phiếu đã tồn tại</value>
   </data>
   <data name="ErrorDateWrong" xml:space="preserve">
-    <value>Either start date or end date is not accepted</value>
+    <value>Thời điểm bắt đầu hoặc kết thúc không hợp lệ</value>
   </data>
   <data name="ErrorEndDateAfter" xml:space="preserve">
-    <value>End date must be after start date</value>
+    <value>Thời điểm kết thúc phải sau thời điểm bắt đầu</value>
   </data>
-  <data name="ErrorFoodPromotionExist" xml:space="preserve">
-    <value>Food promotion already exist</value>
-  </data>
-  <data name="ErrorFoodPromotionNotFound" xml:space="preserve">
-    <value>Food promotion not found</value>
-  </data>
-  <data name="ErrorInvoicePromotionNotFound" xml:space="preserve">
-    <value>Invoice promotion not found</value>
-  </data>
-  <data name="ErrorPromotionNotFound" xml:space="preserve">
-    <value>Requested promotion not found</value>
-  </data>
-  <data name="FoodName" xml:space="preserve">
-    <value>Food name</value>
+  <data name="ErrorVoucherNotFound" xml:space="preserve">
+    <value>Voucher không tồn tại</value>
   </data>
   <data name="InfoAddSuccess" xml:space="preserve">
-    <value>Delete successfully</value>
+    <value>Thêm thành công</value>
   </data>
   <data name="InfoDeleteSuccess" xml:space="preserve">
-    <value>Delete successfully</value>
+    <value>Xóa thành công</value>
   </data>
   <data name="InfoEditSuccess" xml:space="preserve">
-    <value>Edit successfully</value>
+    <value>Cập nhật thành công</value>
   </data>
   <data name="NoData" xml:space="preserve">
-    <value>There are no promotions</value>
+    <value>Hiện không có voucher nào</value>
+  </data>
+  <data name="NotActive" xml:space="preserve">
+    <value>Đã sử dụng</value>
+  </data>
+  <data name="NoVoucherDetail" xml:space="preserve">
+    <value>Hiện không có phiếu nào</value>
   </data>
   <data name="NumberOrdinary" xml:space="preserve">
-    <value>No.</value>
+    <value>STT</value>
   </data>
   <data name="Option" xml:space="preserve">
-    <value>Option</value>
-  </data>
-  <data name="PromotionDescription" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="PromotionName" xml:space="preserve">
-    <value>Promotion name</value>
+    <value>Tùy chọn</value>
   </data>
   <data name="StartDate" xml:space="preserve">
-    <value>Start date</value>
+    <value>Bắt đầu</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Tình trạng</value>
   </data>
   <data name="Threshold" xml:space="preserve">
-    <value>For bill total</value>
+    <value>Mức giá áp dụng</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Promotion list</value>
+    <value>Danh sách voucher</value>
+  </data>
+  <data name="VoucherDescription" xml:space="preserve">
+    <value>Mô tả</value>
+  </data>
+  <data name="VoucherDetail" xml:space="preserve">
+    <value>Chi tiết voucher</value>
+  </data>
+  <data name="VoucherID" xml:space="preserve">
+    <value>Mã voucher</value>
+  </data>
+  <data name="VoucherName" xml:space="preserve">
+    <value>Tên voucher</value>
+  </data>
+  <data name="ErrorVoucherDetailNotFound" xml:space="preserve">
+    <value>Chi tiết voucher không tồn tại</value>
+  </data>
+  <data name="AddManyVoucherDetail" xml:space="preserve">
+    <value>Thêm tự động</value>
+  </data>
+  <data name="InputAmount" xml:space="preserve">
+    <value>Số lượng phiếu</value>
   </data>
 </root>
