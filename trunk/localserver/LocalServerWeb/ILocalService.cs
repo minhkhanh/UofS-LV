@@ -339,6 +339,17 @@ namespace LocalServerWeb
         [OperationContract]
         bool SuaChiTietHoaDon(ChiTietHoaDon _chiTietHoaDon);
 
+
+        // Voucher
+        [WebInvoke(Method = "POST", UriTemplate = "kiemTraVoucher?soPhieu={soPhieu}&tongHoaDon={tongHoaDon}")]
+        [OperationContract]
+        float KiemTraVoucher(string soPhieu, float tongHoaDon);
+
+        [WebInvoke(Method = "POST", UriTemplate = "suDungVoucher?soPhieu={soPhieu}")]
+        [OperationContract]
+        bool SuDungVoucher(string soPhieu);
+
+
         
         // Picture 
         [OperationContract]
@@ -499,7 +510,7 @@ namespace LocalServerWeb
         [OperationContract]
         bool TachBanJson(int maBan);
 
-        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachOrderChuaThanhToanJson?maBan={maBan}junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachOrderChuaThanhToanJson?maBan={maBan}&junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         List<Order> LayDanhSachOrderChuaThanhToanJson(int maBan, string junk);
         
