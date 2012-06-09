@@ -17,6 +17,9 @@ namespace LocalServerDAO
             
         }
 
+
+        public Table<NgonNgu> NgonNgus;
+
         public Table<Ban> Bans;
         public Table<KhuVuc> KhuVucs;
         public Table<MonAn> MonAns;
@@ -55,7 +58,7 @@ namespace LocalServerDAO
         public Table<BoPhanCheBien> BoPhanCheBiens;
         public Table<ChiTietDanhMucBoPhanCheBien> ChiTietDanhMucBoPhanCheBiens;
 
-        public Table<NgonNgu> NgonNgus;
+        
 
         public Table<ThamSo> ThamSos;
 

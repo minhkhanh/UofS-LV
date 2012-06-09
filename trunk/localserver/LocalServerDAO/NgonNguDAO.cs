@@ -10,8 +10,15 @@ namespace LocalServerDAO
     {
         public static List<NgonNgu> LayDanhSachNgonNgu()
         {
-            //return ThucDonDienTu.DataContext.GetTable<NgonNgu>().ToList();
-            return ThucDonDienTu.DataContext.NgonNgus.ToList();
+            if(ThucDonDienTu.DataContext != null)
+                return ThucDonDienTu.DataContext.NgonNgus.ToList();
+
+            NgonNgu ngonNgu = new NgonNgu();
+            ngonNgu.KiHieu = "vi";
+            ngonNgu.TenNgonNgu = "Tieng Viet";
+            List<NgonNgu> listNgonNgu = new List<NgonNgu>();
+            listNgonNgu.Add(ngonNgu);
+            return listNgonNgu;
         }
 
         public static NgonNgu LayNgonNguTheoMa(int maNgonNgu)
