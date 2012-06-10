@@ -4,12 +4,16 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import client.menu.util.XmlSerializerWrapper;
 
 import android.content.ContentValues;
+import android.database.DatabaseUtils;
 import android.provider.BaseColumns;
 
 public class ChiTietOrderDTO {
@@ -37,6 +41,87 @@ public class ChiTietOrderDTO {
     private Integer mTinhTrang = 0;
     private Integer mMaMonAn;
     private Integer mMaDonViTinh;
+
+    public static final List<ChiTietOrderDTO> fromArrayJson(JSONArray jsonArray)
+            throws JSONException {
+        List<ChiTietOrderDTO> list = new ArrayList<ChiTietOrderDTO>();
+
+        for (int i = 0; i < jsonArray.length(); ++i) {
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            ChiTietOrderDTO obj = ChiTietOrderDTO.fromJson(jsonObject);
+            list.add(obj);
+        }
+
+        return list;
+    }
+
+    public static final ChiTietOrderDTO fromJson(JSONObject jsonObject)
+            throws JSONException {
+        ChiTietOrderDTO obj = new ChiTietOrderDTO();
+
+        if (!jsonObject.isNull(CL_GHI_CHU)) {
+            obj.mGhiChu = jsonObject.getString(CL_GHI_CHU);
+        }
+        if (!jsonObject.isNull(CL_MA_BO_PHAN_CHE_BIEN)) {
+            obj.mMaBoPhanCheBien = jsonObject.getInt(CL_MA_BO_PHAN_CHE_BIEN);
+        }
+        if (!jsonObject.isNull(CL_MA_CHI_TIET)) {
+            obj.mMaChiTiet = jsonObject.getInt(CL_MA_CHI_TIET);
+        }
+        if (!jsonObject.isNull(CL_MA_DON_VI_TINH)) {
+            obj.mMaDonViTinh = jsonObject.getInt(CL_MA_DON_VI_TINH);
+        }
+        if (!jsonObject.isNull(CL_MA_MON_AN)) {
+            obj.mMaMonAn = jsonObject.getInt(CL_MA_MON_AN);
+        }
+        if (!jsonObject.isNull(CL_MA_ORDER)) {
+            obj.mMaOrder = jsonObject.getInt(CL_MA_ORDER);
+        }
+        if (!jsonObject.isNull(CL_SO_LUONG)) {
+            obj.mSoLuong = jsonObject.getInt(CL_SO_LUONG);
+        }
+        if (!jsonObject.isNull(CL_TINH_TRANG)) {
+            obj.mTinhTrang = jsonObject.getInt(CL_TINH_TRANG);
+        }
+
+        return obj;
+    }
+
+    public static final List<ContentValues> jsonToContentValuesArray(JSONArray jsonArray)
+            throws JSONException {
+        List<ContentValues> list = new ArrayList<ContentValues>();
+
+        for (int i = 0; i < jsonArray.length(); ++i) {
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            ContentValues c = jsonToContentValues(jsonObject);
+
+            list.add(c);
+        }
+
+        return list;
+    }
+
+    public static ContentValues jsonToContentValues(JSONObject jsonObject)
+            throws JSONException {
+        ChiTietOrderDTO obj = fromJson(jsonObject);
+
+        return obj.toContentValues();
+    }
+
+    public ContentValues toContentValues() {
+        ContentValues c = new ContentValues();
+        c.put(CL_ID, mId);
+        c.put(CL_MA_CHI_TIET, mMaChiTiet);
+        c.put(CL_MA_ORDER, mMaOrder);
+        c.put(CL_SO_LUONG, mSoLuong);
+        c.put(CL_GHI_CHU, mGhiChu);
+        c.put(CL_MA_BO_PHAN_CHE_BIEN, mMaBoPhanCheBien);
+        c.put(CL_TINH_TRANG, mTinhTrang);
+        c.put(CL_MA_MON_AN, mMaMonAn);
+        c.put(CL_MA_DON_VI_TINH, mMaDonViTinh);
+
+        return c;
+    }
 
     public static final String toXmlArray(List<ChiTietOrderDTO> list) {
         XmlSerializerWrapper serializer = new XmlSerializerWrapper();

@@ -28,10 +28,7 @@ import client.menu.dao.TiGiaDAO;
 import client.menu.util.C;
 import client.menu.util.U;
 
-public class SyncDbTask extends CustomAsyncTask<Void, String, Boolean> {
-
-    List<AbstractDAO> mDaoList = new ArrayList<AbstractDAO>();
-    ProgressDialog mDlg;
+public class SyncDbTask extends DataPreparingTask {
 
     public SyncDbTask(Context context) {
         super(context);
@@ -40,7 +37,7 @@ public class SyncDbTask extends CustomAsyncTask<Void, String, Boolean> {
     @Override
     protected Boolean doInBackground(Void... params) {
         for (AbstractDAO a : mDaoList) {
-            publishProgress(a.getSyncTaskName());
+            publishProgress(a.getName());
 
             if (a.syncAll() == false) {
                 return false;
@@ -53,8 +50,6 @@ public class SyncDbTask extends CustomAsyncTask<Void, String, Boolean> {
     @Override
     protected void onPostExecute(Boolean result) {
         super.onPostExecute(result);
-
-        mDlg.cancel();
 
         if (result) {
             U.toastText(getContext(), R.string.message_sync_succeed);
@@ -75,31 +70,13 @@ public class SyncDbTask extends CustomAsyncTask<Void, String, Boolean> {
     protected void onPreExecute() {
         super.onPreExecute();
 
-        mDaoList.add(KhuVucDAO.getInstance());
-        mDaoList.add(BanDAO.getInstance());
-        mDaoList.add(NgonNguDAO.getInstance());
-        mDaoList.add(DanhMucDAO.getInstance());
-        mDaoList.add(DonViTinhDAO.getInstance());
-        mDaoList.add(DonViTinhDaNgonNguDAO.getInstance());
-        mDaoList.add(DanhMucDaNgonNguDAO.getInstance());
-        mDaoList.add(MonAnDAO.getInstance());
-        mDaoList.add(DonViTinhMonAnDAO.getInstance());
-        mDaoList.add(MonAnDaNgonNguDAO.getInstance());
-        mDaoList.add(TiGiaDAO.getInstance());
-        mDaoList.add(MonLienQuanDAO.getInstance());
-        mDaoList.add(NhomTaiKhoanDAO.getInstance());
-        mDaoList.add(TaiKhoanDAO.getInstance());
-
-        mDlg = new ProgressDialog(getContext());
-        mDlg.setCancelable(false);
-        mDlg.setMessage(getContext().getString(R.string.text_loading) + " ...");
-        mDlg.show();
+        getProgessDialog().setMessage(
+                getContext().getString(R.string.text_loading) + " ...");
+        getProgessDialog().show();
     }
 
     @Override
-    protected void onProgressUpdate(String... values) {
-        super.onProgressUpdate(values);
-
-        mDlg.setMessage(values[0] + " ...");
+    protected boolean workCore(AbstractDAO dao) {
+        return dao.syncAll();
     }
 }

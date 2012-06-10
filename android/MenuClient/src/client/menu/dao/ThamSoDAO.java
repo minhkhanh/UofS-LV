@@ -1,5 +1,7 @@
 package client.menu.dao;
 
+import java.util.List;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import client.menu.db.dto.ThamSoDTO;
@@ -7,7 +9,22 @@ import client.menu.db.util.MyDatabaseHelper;
 
 public class ThamSoDAO extends AbstractDAO {
 
-    public ThamSoDAO(MyDatabaseHelper dbHelper) {
+    private static ThamSoDAO mInstance;
+
+    public static final void createInstance(MyDatabaseHelper dbHelper) {
+        mInstance = new ThamSoDAO(dbHelper);
+    }
+
+    public static final ThamSoDAO getInstance() {
+        if (mInstance == null) {
+            throw new NullPointerException("Singleton instance not created yet.");
+        }
+        return mInstance;
+    }
+
+    private List<ThamSoDTO> mCached;
+
+    private ThamSoDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
     }
 
@@ -23,7 +40,7 @@ public class ThamSoDAO extends AbstractDAO {
                     selectionArgs, null, null, null, null);
 
             cursor.moveToFirst();
-            obj = ThamSoDTO.extractFrom(cursor);
+            obj = ThamSoDTO.fromCursor(cursor);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -40,7 +57,12 @@ public class ThamSoDAO extends AbstractDAO {
     }
 
     @Override
-    public String getSyncTaskName() {
+    public String getName() {
         return null;
+    }
+
+    @Override
+    protected void createCache(Cursor cursor) {
+        mCached = ThamSoDTO.fromArrayCursor(cursor);
     }
 }

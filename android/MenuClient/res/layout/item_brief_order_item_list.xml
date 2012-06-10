@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:weightSum="2" android:padding="5dp">
+    android:weightSum="3" android:padding="5dp">
 
     <TextView
         android:id="@+id/textDishName"
@@ -18,5 +18,11 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
         android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textUnitName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="TextView" android:layout_weight="1"/>
 
 </LinearLayout>

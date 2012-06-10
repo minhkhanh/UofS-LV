@@ -11,6 +11,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.provider.BaseColumns;
 
 public class DanhMucDTO {
@@ -96,5 +97,32 @@ public class DanhMucDTO {
     @Override
     public String toString() {
         return getMaDanhMuc() + "";
+    }
+
+    public static List<DanhMucDTO> fromArrayCursor(Cursor cursor) {
+        List<DanhMucDTO> list = new ArrayList<DanhMucDTO>();
+        
+        while (cursor.moveToNext()) {
+            DanhMucDTO obj = DanhMucDTO.fromCursor(cursor);
+            list.add(obj);
+        }
+        
+        return list;
+    }
+
+    private static DanhMucDTO fromCursor(Cursor cursor) {
+        DanhMucDTO obj = new DanhMucDTO();
+        int i;
+        if ((i = cursor.getColumnIndex(CL_ID)) != -1) {
+            obj.mId = cursor.getInt(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_MA_DANH_MUC)) != -1) {
+            obj.mMaDanhMuc = cursor.getInt(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_MA_DANH_MUC_CHA)) != -1) {
+            obj.mMaDanhMucCha = cursor.getInt(i);
+        }
+
+        return obj;
     }
 }

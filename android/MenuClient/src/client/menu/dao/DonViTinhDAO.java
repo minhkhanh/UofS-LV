@@ -35,6 +35,8 @@ public class DonViTinhDAO extends AbstractDAO {
         return mInstance;
     }
 
+    private List<DonViTinhDTO> mCached;
+
     private DonViTinhDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
     }
@@ -66,17 +68,38 @@ public class DonViTinhDAO extends AbstractDAO {
         return result;
     }
 
-    public ContentValues contentByDonViTinhMonAn(Integer maMonAn, Integer maDonViTinh,
-            Integer maNgonNgu) {
+    public ContentValues contentByDonViTinhMonAn(Integer maNgonNgu, Integer maMonAn,
+            Integer maDonViTinh) {
         ContentValues values = null;
-        Cursor cursor = cursorByDonViTinhMonAn(maMonAn, maDonViTinh, maNgonNgu);
-        if (cursor != null) {
-            if (cursor.moveToFirst()) {
-                values = new ContentValues();
-                DatabaseUtils.cursorRowToContentValues(cursor, values);
-            }
+        Cursor cursor;
 
-            cursor.close();
+        try {
+            SQLiteDatabase db = open();
+            SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+
+            queryBuilder.setTables(MonAnDaNgonNguDTO.TABLE_NAME + " INNER JOIN "
+                    + DonViTinhMonAnDTO.TABLE_NAME + " ON ("
+                    + MonAnDaNgonNguDTO.CL_MA_MON_QN + "="
+                    + DonViTinhMonAnDTO.CL_MA_MON_AN_QN + ")" + "INNER JOIN "
+                    + DonViTinhDaNgonNguDTO.TABLE_NAME + " ON ("
+                    + DonViTinhMonAnDTO.CL_MA_DON_VI_QN + "="
+                    + DonViTinhDaNgonNguDTO.CL_MA_DON_VI_QN + ")");
+
+            String selection = DonViTinhDaNgonNguDTO.CL_MA_NGON_NGU_QN + "=? and "
+                    + DonViTinhMonAnDTO.CL_MA_MON_AN_QN + "=? and "
+                    + DonViTinhMonAnDTO.CL_MA_DON_VI_QN + "=?";
+            String[] selectionArgs = { maNgonNgu.toString(), maMonAn.toString(),
+                    maDonViTinh.toString() };
+
+            cursor = queryBuilder.query(db, null, selection, selectionArgs, null, null,
+                    null);
+            cursor.moveToFirst();
+            values = new ContentValues();
+            DatabaseUtils.cursorRowToContentValues(cursor, values);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close();
         }
 
         return values;
@@ -176,7 +199,7 @@ public class DonViTinhDAO extends AbstractDAO {
                     selectionArgs, null, null, null, null);
 
             while (cursor.moveToNext()) {
-                DonViTinhDaNgonNguDTO obj = DonViTinhDaNgonNguDTO.extractFrom(cursor);
+                DonViTinhDaNgonNguDTO obj = DonViTinhDaNgonNguDTO.fromCursor(cursor);
                 list.add(obj);
             }
 
@@ -190,7 +213,12 @@ public class DonViTinhDAO extends AbstractDAO {
     }
 
     @Override
-    public String getSyncTaskName() {
+    public String getName() {
         return "Các đơn vị tính của món ăn";
+    }
+
+    @Override
+    protected void createCache(Cursor cursor) {
+        mCached = DonViTinhDTO.fromArrayCursor(cursor);
     }
 }

@@ -15,12 +15,17 @@ public abstract class CustomExpandableListAdapter<G, C> extends BaseExpandableLi
 
     private List<G> mGroupData;
     private List<List<C>> mChildData;
+    
     private Context mContext;
 
     public CustomExpandableListAdapter(Context context, List<G> groupData) {
         mContext = context;
+//        generateChildren();
         mGroupData = groupData;
-        generateChildren();
+        mChildData = new ArrayList<List<C>>();
+        for (int i = 0; i < mGroupData.size(); ++i) {
+            mChildData.add(new ArrayList<C>());
+        }
     }
 
     @Override
@@ -91,21 +96,15 @@ public abstract class CustomExpandableListAdapter<G, C> extends BaseExpandableLi
         }
     }
 
-    private void generateChildren() {
-        mChildData = new ArrayList<List<C>>();
-        for (int i = 0; i < mGroupData.size(); ++i) {
-            mChildData.add(new ArrayList<C>());
-        }
-    }
-
     public void clearChildren(int groupPosition) {
         mChildData.get(groupPosition).clear();
     }
 
-    public void clear() {
+    public void clearGroup() {
         for (int i = 0; i < mGroupData.size(); ++i) {
-            clearChildren(i);
+            mChildData.get(i).clear();
         }
+        mChildData.clear();
         mGroupData.clear();
     }
 

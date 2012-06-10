@@ -1,11 +1,16 @@
 package client.menu.db.dto;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import client.menu.util.U;
+
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.provider.BaseColumns;
 
 public class TaiKhoanDTO {
@@ -34,6 +39,57 @@ public class TaiKhoanDTO {
     private String mAvatar;
     private Boolean mActive;
     private Integer mMaNhomTaiKhoan;
+    
+    public static List<TaiKhoanDTO> fromArrayCursor(Cursor cursor) {
+        List<TaiKhoanDTO> list = new ArrayList<TaiKhoanDTO>();
+        
+        while (cursor.moveToNext()) {
+            TaiKhoanDTO obj = TaiKhoanDTO.fromCursor(cursor);
+            list.add(obj);
+        }
+        
+        return list;
+    }
+
+    public static final TaiKhoanDTO fromCursor(Cursor cursor) {
+        TaiKhoanDTO obj = new TaiKhoanDTO();
+        Integer i;
+        if ((i = cursor.getColumnIndex(CL_ID)) != -1) {
+            obj.mId = cursor.getInt(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_MA_TAI_KHOAN)) != -1) {
+            obj.mMaTaiKhoan = cursor.getInt(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_ACTIVE)) != -1) {
+            obj.mActive = U.getCursorBool(cursor, i);
+        }
+        if ((i = cursor.getColumnIndex(CL_AVATAR)) != -1) {
+            obj.mAvatar = cursor.getString(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_CMND)) != -1) {
+            obj.mCMND = cursor.getString(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_GIOI_TINH)) != -1) {
+            obj.mGioiTinh = cursor.getInt(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_HO_TEN)) != -1) {
+            obj.mHoTen = cursor.getString(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_MA_NHOM_TAI_KHOAN)) != -1) {
+            obj.mMaNhomTaiKhoan = cursor.getInt(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_NGAY_SINH)) != -1) {
+//            obj.mNgaySinh = cursor.get(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_MAT_KHAU)) != -1) {
+            obj.mMatKhau = cursor.getString(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_TEN_TAI_KHOAN)) != -1) {
+            obj.mTenTaiKhoan = cursor.getString(i);
+        }
+
+        return obj;
+    }
 
     public static ContentValues toContentValues(JSONObject jsonObj) throws JSONException {
         ContentValues values = new ContentValues();

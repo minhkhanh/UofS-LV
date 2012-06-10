@@ -1,5 +1,8 @@
 package client.menu.db.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
@@ -86,8 +89,19 @@ public class NgonNguDTO {
 
         return null;
     }
+    
+    public static List<NgonNguDTO> fromArrayCursor(Cursor cursor) {
+        List<NgonNguDTO> list = new ArrayList<NgonNguDTO>();
+        
+        while (cursor.moveToNext()) {
+            NgonNguDTO obj = NgonNguDTO.fromCursor(cursor);
+            list.add(obj);
+        }
+        
+        return list;
+    }
 
-    public static NgonNguDTO valueOf(Cursor cursor) {
+    public static NgonNguDTO fromCursor(Cursor cursor) {
         NgonNguDTO obj = new NgonNguDTO();
 
         int index;

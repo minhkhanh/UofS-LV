@@ -66,7 +66,7 @@ public class TableGroupingFragment extends TableInAreaFragment implements
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.miGroup:
+                case R.id.miGroupTable:
                     SparseBooleanArray chkArray = mTableGrid.getCheckedItemPositions();
                     List<Integer> listBan = new ArrayList<Integer>();
                     for (int i = 0; i < chkArray.size(); ++i) {
@@ -166,11 +166,11 @@ public class TableGroupingFragment extends TableInAreaFragment implements
             mTableGrid.setItemChecked(arg2, false);
             U.toastText(getActivity(), R.string.message_busy_table_grouping_failed);
         } else {
-            if (mActionMode == null && mTableGrid.getCheckedItemCount() == 2) {
+            if (mActionMode == null && mTableGrid.getCheckedItemCount() == 1) {
                 mActionMode = getActivity().startActionMode(mActionModeCallback);
             }
 
-            if (mActionMode != null && mTableGrid.getCheckedItemCount() == 1) {
+            if (mActionMode != null && mTableGrid.getCheckedItemCount() == 0) {
                 mActionMode.finish();
             }
         }

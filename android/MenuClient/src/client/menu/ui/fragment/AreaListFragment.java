@@ -25,8 +25,6 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
     private boolean mIsDualPane;
     private int mSelIndex;
 
-    private boolean mMergingMode = false;
-
     private SimpleCursorAdapter mAreaAdapter;
 
     private Handler mHandler = new Handler() {
@@ -66,8 +64,8 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
 
         String[] from = new String[] { KhuVucDTO.CL_TEN_KHU_VUC };
         int[] to = new int[] { R.id.textItemTitle };
-        mAreaAdapter = new SimpleCursorAdapter(getActivity(), R.layout.item_center_aligned_text,
-                null, from, to, 0);
+        mAreaAdapter = new SimpleCursorAdapter(getActivity(),
+                R.layout.item_center_aligned_text, null, from, to, 0);
         setListAdapter(mAreaAdapter);
 
         getLoaderManager().initLoader(0, null, this);
@@ -97,22 +95,13 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
             getListView().setItemChecked(index, true);
         }
 
-        TableInAreaFragment f;
+        TableMapFragment f;
         if (mIsDualPane) {
-            f = (TableInAreaFragment) getFragmentManager().findFragmentById(
+            f = (TableMapFragment) getFragmentManager().findFragmentById(
                     R.id.RightPaneHolder);
-            if (mMergingMode && !(f instanceof TableGroupingFragment)) {
-                f = null;
-            } else if (!mMergingMode && (f instanceof TableGroupingFragment)) {
-                f = null;
-            }
 
             if (f == null || f.getMaKhuVuc() != areaId) {
-                if (mMergingMode) {
-                    f = new TableGroupingFragment(areaId, areaName);
-                } else {
-                    f = new TableMapFragment(areaId, areaName);
-                }
+                f = new TableMapFragment(areaId, areaName);
 
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.RightPaneHolder, f);
@@ -121,43 +110,13 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
             }
 
         } else {
-            if (mMergingMode) {
-                f = new TableGroupingFragment(areaId, areaName);
-            } else {
-                f = new TableMapFragment(areaId, areaName);
-            }
+            f = new TableMapFragment(areaId, areaName);
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.LeftPaneHolder, f);
             ft.addToBackStack(null);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
-        }
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-
-        inflater.inflate(R.menu.options_table, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.miGroupTable:
-                mMergingMode = !mMergingMode;
-                if (mMergingMode) {
-                    item.setTitle(R.string.option_back);
-                } else {
-                    item.setTitle(R.string.option_group_table);
-                }
-
-                showDetails(mSelIndex);
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
         }
     }
 

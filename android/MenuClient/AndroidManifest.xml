@@ -21,16 +21,16 @@
         <activity
             android:name=".ui.activity.MainMenuActivity"
             android:configChanges="locale"
-            android:label="@string/main_menu_caption" ><intent-filter>
+            android:label="@string/main_menu_caption" >
+        </activity>
+        <activity
+            android:name=".ui.activity.TableMapActivity"
+            android:configChanges="locale"
+            android:label="@string/table_list_caption" ><intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.activity.TableListActivity"
-            android:configChanges="locale"
-            android:label="@string/table_list_caption" >
         </activity>
         <activity
             android:name=".ui.activity.SplitTableActivity"

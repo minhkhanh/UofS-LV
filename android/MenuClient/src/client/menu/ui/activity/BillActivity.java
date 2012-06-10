@@ -51,7 +51,7 @@ public class BillActivity extends Activity {
             super.onPostExecute(result);
 
             if (mResult) {
-                Intent intent = new Intent(BillActivity.this, TableListActivity.class);
+                Intent intent = new Intent(BillActivity.this, TableMapActivity.class);
                 startActivity(intent);
             } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(BillActivity.this);

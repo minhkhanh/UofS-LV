@@ -55,10 +55,10 @@ public final class U {
         while (cursor.moveToNext()) {
             ContentValues c = new ContentValues();
             DatabaseUtils.cursorRowToContentValues(cursor, c);
-            
+
             list.add(c);
         }
-        
+
         return list;
     }
 

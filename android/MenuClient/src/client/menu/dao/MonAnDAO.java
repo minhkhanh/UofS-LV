@@ -31,6 +31,8 @@ public final class MonAnDAO extends AbstractDAO {
         }
         return mInstance;
     }
+    
+    private List<MonAnDTO> mCached;
 
     private MonAnDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
@@ -110,7 +112,7 @@ public final class MonAnDAO extends AbstractDAO {
             Cursor cursor = db.query(MonAnDTO.TABLE_NAME, null, selection, selectionArgs,
                     null, null, null);
             if (cursor.moveToNext()) {
-                monAn = MonAnDTO.from(cursor);
+                monAn = MonAnDTO.fromCursor(cursor);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -183,7 +185,7 @@ public final class MonAnDAO extends AbstractDAO {
                     null, null);
 
             while (cursor.moveToNext()) {
-                MonAnDaNgonNguDTO obj = MonAnDaNgonNguDTO.extractFrom(cursor);
+                MonAnDaNgonNguDTO obj = MonAnDaNgonNguDTO.fromCursor(cursor);
                 list.add(obj);
             }
 
@@ -197,7 +199,12 @@ public final class MonAnDAO extends AbstractDAO {
     }
 
     @Override
-    public String getSyncTaskName() {
+    public String getName() {
         return "Danh sách món ăn";
+    }
+
+    @Override
+    protected void createCache(Cursor cursor) {
+        mCached = MonAnDTO.fromArrayCursor(cursor);
     }
 }

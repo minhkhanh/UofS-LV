@@ -1,5 +1,8 @@
 package client.menu.db.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,7 +27,7 @@ public class MonAnDaNgonNguDTO {
     private Integer mMaNgonNgu;
     private String mTenMonAn;
     private String mMoTaMonAn;
-    
+
     public static ContentValues toContentValues(JSONObject jsonObj) throws JSONException {
         ContentValues values = new ContentValues();
         if (!jsonObj.isNull(CL_MA_MON)) {
@@ -42,7 +45,17 @@ public class MonAnDaNgonNguDTO {
         return values;
     }
 
-    public static MonAnDaNgonNguDTO extractFrom(Cursor cursor) {
+    public static List<MonAnDaNgonNguDTO> fromArrayCursor(Cursor cursor) {
+        List<MonAnDaNgonNguDTO> list = new ArrayList<MonAnDaNgonNguDTO>();
+        while (cursor.moveToNext()) {
+            MonAnDaNgonNguDTO obj = MonAnDaNgonNguDTO.fromCursor(cursor);
+            list.add(obj);
+        }
+
+        return list;
+    }
+
+    public static MonAnDaNgonNguDTO fromCursor(Cursor cursor) {
         MonAnDaNgonNguDTO obj = new MonAnDaNgonNguDTO();
 
         int index;

@@ -1,9 +1,12 @@
 package client.menu.dao;
 
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import client.menu.db.dto.TaiKhoanDTO;
 import client.menu.db.util.MyDatabaseHelper;
@@ -26,6 +29,8 @@ public class TaiKhoanDAO extends AbstractDAO {
         }
         return mInstance;
     }
+    
+    private List<TaiKhoanDTO> mCached;
 
     private TaiKhoanDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
@@ -59,7 +64,12 @@ public class TaiKhoanDAO extends AbstractDAO {
     }
 
     @Override
-    public String getSyncTaskName() {
+    public String getName() {
         return "Tài khoản";
+    }
+
+    @Override
+    protected void createCache(Cursor cursor) {
+        mCached = TaiKhoanDTO.fromArrayCursor(cursor);
     }
 }

@@ -1,5 +1,6 @@
 package client.menu.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.database.Cursor;
@@ -66,7 +67,7 @@ public class OrderDAO extends AbstractDAO {
 
         return total;
     }
-
+    
     public List<ChiTietOrderDTO> postChiTietOrderArray(List<ChiTietOrderDTO> list) {
         List<ChiTietOrderDTO> result = null;
         String xmlData = ChiTietOrderDTO.toXmlArray(list);
@@ -88,7 +89,11 @@ public class OrderDAO extends AbstractDAO {
     }
 
     @Override
-    public String getSyncTaskName() {
+    public String getName() {
         return null;
+    }
+
+    @Override
+    protected void createCache(Cursor cursor) {
     }
 }

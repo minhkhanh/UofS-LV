@@ -1,6 +1,11 @@
 package client.menu.dao;
 
+import java.util.Collection;
+import java.util.List;
+
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import client.menu.db.dto.BanDTO;
 import client.menu.db.util.MyDatabaseHelper;
 
 public abstract class AbstractDAO {
@@ -20,7 +25,34 @@ public abstract class AbstractDAO {
         mDbHelper.close();
     }
 
+    public Cursor cursorAll(String tableName) {
+        SQLiteDatabase db = open();
+        return db.query(tableName, null, null, null, null, null, null, null);
+    }
+
     public abstract boolean syncAll();
 
-    public abstract String getSyncTaskName();
+    public abstract String getName();
+
+    protected abstract void createCache(Cursor cursor);
+
+    public boolean loadCachedData() {
+        boolean flag = true;
+        SQLiteDatabase db = null;
+        try {
+            db = open();
+            Cursor cursorAll = db.query(BanDTO.TABLE_NAME, null, null, null, null, null,
+                    null, null);
+            createCache(cursorAll);
+        } catch (Exception e) {
+            e.printStackTrace();
+            flag = false;
+        } finally {
+            if (db != null) {
+                db.close();
+            }
+        }
+
+        return flag;
+    }
 }

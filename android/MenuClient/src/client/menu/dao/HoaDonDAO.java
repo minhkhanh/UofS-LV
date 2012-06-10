@@ -3,6 +3,7 @@ package client.menu.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import client.menu.db.dto.ChiTietHoaDonDTO;
@@ -74,8 +75,14 @@ public class HoaDonDAO extends AbstractDAO {
     }
 
     @Override
-    public String getSyncTaskName() {
+    public String getName() {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    protected void createCache(Cursor cursor) {
+        // TODO Auto-generated method stub
+        
     }
 }

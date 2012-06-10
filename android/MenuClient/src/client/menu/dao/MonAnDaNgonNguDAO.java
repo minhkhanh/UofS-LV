@@ -1,9 +1,13 @@
 package client.menu.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import client.menu.db.dto.MonAnDaNgonNguDTO;
 
@@ -11,7 +15,7 @@ import client.menu.db.util.MyDatabaseHelper;
 import client.menu.util.U;
 
 public class MonAnDaNgonNguDAO extends AbstractDAO {
-
+    
     private static final String GET_ALL_JSON_URL = LOCAL_SERVER_URL
             + "layDanhSachMonAnDaNgonNguJson";
     
@@ -27,7 +31,9 @@ public class MonAnDaNgonNguDAO extends AbstractDAO {
         }
         return mInstance;
     }
-
+    
+    List<MonAnDaNgonNguDTO> mCached;
+    
     private MonAnDaNgonNguDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
     }
@@ -60,7 +66,12 @@ public class MonAnDaNgonNguDAO extends AbstractDAO {
     }
 
     @Override
-    public String getSyncTaskName() {
+    public String getName() {
         return "Danh sách món ăn";
+    }
+
+    @Override
+    protected void createCache(Cursor cursor) {
+        mCached = MonAnDaNgonNguDTO.fromArrayCursor(cursor);
     }
 }
