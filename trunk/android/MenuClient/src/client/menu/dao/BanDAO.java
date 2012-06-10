@@ -21,10 +21,11 @@ public class BanDAO extends AbstractDAO {
             + "layDanhSachBanJson";
     private static final String GET_BY_KHU_VUC_URL = LOCAL_SERVER_URL
             + "layDanhSachBanTheoKhuVuc?maKhuVuc=";
-    private static final String PUT_UPDATE_URL = LOCAL_SERVER_URL
-            + "capNhatBan";
+    private static final String PUT_UPDATE_URL = LOCAL_SERVER_URL + "capNhatBan";
 
     private static BanDAO mInstance;
+
+    private List<BanDTO> mCached;
 
     private BanDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
@@ -41,6 +42,7 @@ public class BanDAO extends AbstractDAO {
         return mInstance;
     }
 
+    @Deprecated
     public Cursor cursorByKhuVuc(Integer maKhuVuc) {
         Cursor cursor = null;
         SQLiteDatabase db = open();
@@ -110,31 +112,14 @@ public class BanDAO extends AbstractDAO {
         return list;
     }
 
-    public List<BanDTO> objAll() {
-        List<BanDTO> list = new ArrayList<BanDTO>();
-
-        try {
-            SQLiteDatabase db = open();
-
-            Cursor cursor = db.query(BanDTO.TABLE_NAME, null, null, null, null, null,
-                    null, null);
-
-            while (cursor.moveToNext()) {
-                BanDTO ngonNgu = BanDTO.extractFrom(cursor);
-                list.add(ngonNgu);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            close();
-        }
-
-        return list;
+    @Override
+    public String getName() {
+        return "Danh sách bàn";
     }
 
     @Override
-    public String getSyncTaskName() {
-        return "Danh sách bàn";
+    protected void createCache(Cursor cursorAll) {
+        mCached = BanDTO.fromArrayCursor(cursorAll);
     }
+
 }

@@ -2,6 +2,7 @@ package client.menu.ui.view;
 
 import client.menu.R;
 import client.menu.db.dto.ChiTietOrderDTO;
+import client.menu.db.dto.DonViTinhDaNgonNguDTO;
 import client.menu.db.dto.MonAnDaNgonNguDTO;
 import android.content.ContentValues;
 import android.content.Context;
@@ -14,6 +15,7 @@ public class BriefOrderItemView extends LinearLayout {
     private TextView mDishName;
     private TextView mQuantity;
     private ContentValues mValues;
+    private TextView mUnitName;
 
     public BriefOrderItemView(Context context) {
         super(context);
@@ -37,10 +39,11 @@ public class BriefOrderItemView extends LinearLayout {
     private void prepareViews() {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.item_brief_order_item, this);
+        inflater.inflate(R.layout.item_brief_order_item_list, this);
 
         mDishName = (TextView) findViewById(R.id.textDishName);
         mQuantity = (TextView) findViewById(R.id.textQuantity);
+        mUnitName = (TextView) findViewById(R.id.textUnitName);
     }
 
     public void bindData(ContentValues c) {
@@ -50,7 +53,8 @@ public class BriefOrderItemView extends LinearLayout {
             mValues = c;
 
             mDishName.setText(mValues.getAsString(MonAnDaNgonNguDTO.CL_TEN_MON));
-            mQuantity.setText(mValues.getAsInteger(ChiTietOrderDTO.CL_SO_LUONG));
+            mQuantity.setText(mValues.getAsInteger(ChiTietOrderDTO.CL_SO_LUONG).toString());
+            mUnitName.setText(mValues.getAsString(DonViTinhDaNgonNguDTO.CL_TEN_DON_VI));
         }
     }
 

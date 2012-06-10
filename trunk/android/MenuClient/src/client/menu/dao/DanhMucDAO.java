@@ -21,7 +21,7 @@ public class DanhMucDAO extends AbstractDAO {
     public static final String GET_ALL_JSON_URL = LOCAL_SERVER_URL
             + "layDanhSachDanhMucJson";
 
-    private Cursor mCached;
+    private List<DanhMucDTO> mCached;
 
     private static DanhMucDAO mInstance;
 
@@ -157,7 +157,12 @@ public class DanhMucDAO extends AbstractDAO {
     }
 
     @Override
-    public String getSyncTaskName() {
+    public String getName() {
         return "Danh muc món";
+    }
+
+    @Override
+    protected void createCache(Cursor cursor) {
+        mCached = DanhMucDTO.fromArrayCursor(cursor);
     }
 }

@@ -1,5 +1,8 @@
 package client.menu.db.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.database.Cursor;
 import android.provider.BaseColumns;
 
@@ -9,12 +12,23 @@ public class ThamSoDTO {
     public static final String CL_ID = BaseColumns._ID;
     public static final String CL_PARAM_NAME = "Ten";
     public static final String CL_VALUE = "GiaTri";
-    
+
     private Integer mId;
     private String mTenThamSo;
     private String mGiaTri;
-    
-    public static final ThamSoDTO extractFrom(Cursor cursor) {
+
+    public static List<ThamSoDTO> fromArrayCursor(Cursor cursor) {
+        List<ThamSoDTO> list = new ArrayList<ThamSoDTO>();
+
+        while (cursor.moveToNext()) {
+            ThamSoDTO obj = ThamSoDTO.fromCursor(cursor);
+            list.add(obj);
+        }
+
+        return list;
+    }
+
+    public static final ThamSoDTO fromCursor(Cursor cursor) {
         ThamSoDTO obj = new ThamSoDTO();
 
         int index;

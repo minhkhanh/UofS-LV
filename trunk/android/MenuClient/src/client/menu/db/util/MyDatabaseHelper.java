@@ -21,6 +21,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
         mContext = context;
     }
+    
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {

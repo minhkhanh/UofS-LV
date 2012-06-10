@@ -1,5 +1,8 @@
 package client.menu.db.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,8 +37,19 @@ public class KhuVucDTO {
 
         return values;
     }
+    
+    public static List<KhuVucDTO> fromArrayCursor(Cursor cursor) {
+        List<KhuVucDTO> list = new ArrayList<KhuVucDTO>();
+        
+        while (cursor.moveToNext()) {
+            KhuVucDTO obj = KhuVucDTO.fromCursor(cursor);
+            list.add(obj);
+        }
+        
+        return list;
+    }
 
-    public static final KhuVucDTO extractFrom(Cursor cursor) {
+    public static final KhuVucDTO fromCursor(Cursor cursor) {
         KhuVucDTO obj = new KhuVucDTO();
         Integer i;
         if ((i = cursor.getColumnIndex(CL_ID)) != -1) {

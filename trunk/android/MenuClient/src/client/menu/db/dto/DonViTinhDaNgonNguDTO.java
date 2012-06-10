@@ -1,5 +1,8 @@
 package client.menu.db.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,8 +39,19 @@ public class DonViTinhDaNgonNguDTO {
 
         return values;
     }
+    
+    public static List<DonViTinhDaNgonNguDTO> fromArrayCursor(Cursor cursor) {
+        List<DonViTinhDaNgonNguDTO> list = new ArrayList<DonViTinhDaNgonNguDTO>();
+        
+        while (cursor.moveToNext()) {
+            DonViTinhDaNgonNguDTO obj = DonViTinhDaNgonNguDTO.fromCursor(cursor);
+            list.add(obj);
+        }
+        
+        return list;
+    }
 
-    public static DonViTinhDaNgonNguDTO extractFrom(Cursor cursor) {
+    public static DonViTinhDaNgonNguDTO fromCursor(Cursor cursor) {
         DonViTinhDaNgonNguDTO obj = new DonViTinhDaNgonNguDTO();
 
         int index;

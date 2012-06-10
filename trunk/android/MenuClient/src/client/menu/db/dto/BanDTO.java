@@ -185,7 +185,18 @@ public class BanDTO
         return null;
     }
 
-    public static final BanDTO extractFrom(Cursor cursor) {
+    public static final List<BanDTO> fromArrayCursor(Cursor cursor) {
+        List<BanDTO> list = new ArrayList<BanDTO>();
+
+        while (cursor.moveToNext()) {
+            BanDTO ban = BanDTO.fromCursor(cursor);
+            list.add(ban);
+        }
+
+        return list;
+    }
+
+    public static final BanDTO fromCursor(Cursor cursor) {
         BanDTO obj = new BanDTO();
         int i;
         if ((i = cursor.getColumnIndex(CL_ID)) != -1) {

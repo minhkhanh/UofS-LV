@@ -1,9 +1,14 @@
 package client.menu.db.dto;
 
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.transform.stream.StreamResult;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
@@ -17,13 +22,44 @@ public class OrderDTO {
     public static final String CL_MA_ORDER = "MaOrder";
     public static final String CL_MA_TAI_KHOAN = "MaTaiKhoan";
     public static final String CL_MA_BAN = "MaBan";
-//    public static final String CL_TINH_TRANG = "TinhTrang";
+    // public static final String CL_TINH_TRANG = "TinhTrang";
 
     private Integer mId;
     private Integer mMaOrder;
     private Integer mMaTaiKhoan = 1;
     private Integer mMaBan;
-//    private Integer mTinhTrang = 0;
+
+    // private Integer mTinhTrang = 0;
+
+    public static final List<OrderDTO> fromJsonArray(String jsonData)
+            throws JSONException {
+        List<OrderDTO> list = new ArrayList<OrderDTO>();
+
+        JSONArray jsonArray = new JSONArray(jsonData);
+        for (int i = 0; i < jsonArray.length(); ++i) {
+            JSONObject jsonObj = jsonArray.getJSONObject(i);
+            OrderDTO obj = OrderDTO.fromJson(jsonObj);
+            list.add(obj);
+        }
+
+        return list;
+    }
+
+    public static final OrderDTO fromJson(JSONObject jsonObj) throws JSONException {
+        OrderDTO obj = new OrderDTO();
+
+        if (!jsonObj.isNull(CL_MA_BAN)) {
+            obj.mMaBan = jsonObj.getInt(CL_MA_BAN);
+        }
+        if (!jsonObj.isNull(CL_MA_ORDER)) {
+            obj.mMaOrder = jsonObj.getInt(CL_MA_ORDER);
+        }
+        if (!jsonObj.isNull(CL_MA_TAI_KHOAN)) {
+            obj.mMaTaiKhoan = jsonObj.getInt(CL_MA_TAI_KHOAN);
+        }
+
+        return obj;
+    }
 
     public static final OrderDTO fromXml(String xmlData) {
         try {
@@ -74,10 +110,10 @@ public class OrderDTO {
                             obj.mMaTaiKhoan = Integer.valueOf(text);
                         } else if (tag.compareTo(CL_MA_BAN) == 0) {
                             obj.mMaBan = Integer.valueOf(text);
-                        } 
-//                        else if (tag.compareTo(CL_TINH_TRANG) == 0) {
-//                            obj.mTinhTrang = Integer.valueOf(text);
-//                        }
+                        }
+                        // else if (tag.compareTo(CL_TINH_TRANG) == 0) {
+                        // obj.mTinhTrang = Integer.valueOf(text);
+                        // }
                         break;
 
                     default:
@@ -102,7 +138,7 @@ public class OrderDTO {
             serializer.writeSimpleElement(CL_MA_BAN, mMaBan);
             serializer.writeSimpleElement(CL_MA_ORDER, mMaOrder);
             serializer.writeSimpleElement(CL_MA_TAI_KHOAN, mMaTaiKhoan);
-//            serializer.writeSimpleElement(CL_TINH_TRANG, mTinhTrang);
+            // serializer.writeSimpleElement(CL_TINH_TRANG, mTinhTrang);
             serializer.endTag(TABLE_NAME);
             serializer.endDocument();
         } catch (Exception e) {
@@ -112,13 +148,13 @@ public class OrderDTO {
         return serializer.toString();
     }
 
-//    public Integer getTinhTrang() {
-//        return mTinhTrang;
-//    }
-//
-//    public void setTinhTrang(Integer tinhTrang) {
-//        mTinhTrang = tinhTrang;
-//    }
+    // public Integer getTinhTrang() {
+    // return mTinhTrang;
+    // }
+    //
+    // public void setTinhTrang(Integer tinhTrang) {
+    // mTinhTrang = tinhTrang;
+    // }
 
     public Integer getId() {
         return mId;

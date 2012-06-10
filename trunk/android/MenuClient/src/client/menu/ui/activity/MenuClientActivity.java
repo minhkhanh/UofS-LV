@@ -86,7 +86,7 @@ public class MenuClientActivity extends Activity implements OnItemSelectedListen
 
     public void onClick(View v) {
         if (v.getId() == R.id.TableListBtn) {
-            Intent intent = new Intent(this, TableListActivity.class);
+            Intent intent = new Intent(this, TableMapActivity.class);
             startActivity(intent);
         } else if (v == findViewById(R.id.MainMenuBtn)) {
             Intent intent = new Intent(this, MainMenuActivity.class);
@@ -120,7 +120,7 @@ public class MenuClientActivity extends Activity implements OnItemSelectedListen
             mSelIndex = pos;
             Cursor cursor = ((SimpleCursorAdapter) arg0.getAdapter()).getCursor();
             if (cursor.moveToPosition(pos)) {
-                NgonNguDTO ngonNgu = NgonNguDTO.valueOf(cursor);
+                NgonNguDTO ngonNgu = NgonNguDTO.fromCursor(cursor);
                 MyAppLocale locale = MyApplication.getSettings(this).getLocale();
                 if (locale.applyLanguage(ngonNgu, getApplicationContext())) {
                     U.restartActivity(this);

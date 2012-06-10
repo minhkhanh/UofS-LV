@@ -1,5 +1,8 @@
 package client.menu.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -15,7 +18,7 @@ public class KhuVucDAO extends AbstractDAO {
     private static final String GET_ALL_JSON_URL = LOCAL_SERVER_URL
             + "layDanhSachKhuVucJson";
 
-    private Cursor mCached;
+    private List<KhuVucDTO> mCached;
 
     private static KhuVucDAO mInstance;
 
@@ -62,17 +65,18 @@ public class KhuVucDAO extends AbstractDAO {
     }
 
     public Cursor cursorAll() {
-        if (mCached == null || mCached.isClosed()) {
-            SQLiteDatabase db = open();
-            mCached = db.query(KhuVucDTO.TABLE_NAME, null, null, null, null, null, null,
-                    null);
-        }
-
-        return mCached;
+        SQLiteDatabase db = open();
+        return db.query(KhuVucDTO.TABLE_NAME, null, null, null, null, null, null,
+                null);
     }
 
     @Override
-    public String getSyncTaskName() {
+    public String getName() {
         return "Danh sách khu vực";
+    }
+
+    @Override
+    protected void createCache(Cursor cursor) {
+        mCached = KhuVucDTO.fromArrayCursor(cursor);
     }
 }

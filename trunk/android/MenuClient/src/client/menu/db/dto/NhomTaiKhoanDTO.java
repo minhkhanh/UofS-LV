@@ -1,9 +1,13 @@
 package client.menu.db.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.provider.BaseColumns;
 
 public class NhomTaiKhoanDTO {
@@ -31,6 +35,36 @@ public class NhomTaiKhoanDTO {
             values.put(CL_MO_TA_NHOM, jsonObj.getString(CL_MO_TA_NHOM));
         }
         return values;
+    }
+    
+    public static List<NhomTaiKhoanDTO> fromArrayCursor(Cursor cursor) {
+        List<NhomTaiKhoanDTO> list = new ArrayList<NhomTaiKhoanDTO>();
+        
+        while (cursor.moveToNext()) {
+            NhomTaiKhoanDTO obj = NhomTaiKhoanDTO.fromCursor(cursor);
+            list.add(obj);
+        }
+        
+        return list;
+    }
+
+    public static final NhomTaiKhoanDTO fromCursor(Cursor cursor) {
+        NhomTaiKhoanDTO obj = new NhomTaiKhoanDTO();
+        Integer i;
+        if ((i = cursor.getColumnIndex(CL_ID)) != -1) {
+            obj.mId = cursor.getInt(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_MA_NHOM)) != -1) {
+            obj.mMaNhom = cursor.getInt(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_TEN_NHOM)) != -1) {
+            obj.mTenNhom = cursor.getString(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_MO_TA_NHOM)) != -1) {
+            obj.mMoTaNhom = cursor.getString(i);
+        }
+
+        return obj;
     }
 
     public Integer getId() {

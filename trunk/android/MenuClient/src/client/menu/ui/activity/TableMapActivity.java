@@ -8,7 +8,7 @@ import android.view.View;
 import client.menu.R;
 import client.menu.ui.fragment.AreaListFragment;
 
-public class TableListActivity extends Activity {
+public class TableMapActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

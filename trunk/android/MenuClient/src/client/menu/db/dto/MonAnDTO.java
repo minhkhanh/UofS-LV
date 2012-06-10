@@ -1,5 +1,8 @@
 package client.menu.db.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -65,8 +68,19 @@ public class MonAnDTO {
         values.put(CL_MA_DANH_MUC, mMaDanhMuc);
         values.put(CL_NGUNG_BAN, mNgungBan);
     }
+    
+    public static List<MonAnDTO> fromArrayCursor(Cursor cursor) {
+        List<MonAnDTO> list = new ArrayList<MonAnDTO>();
+        
+        while (cursor.moveToNext()) {
+            MonAnDTO obj = MonAnDTO.fromCursor(cursor);
+            list.add(obj);
+        }
+        
+        return list;
+    }
 
-    public static MonAnDTO from(Cursor cursor) {
+    public static MonAnDTO fromCursor(Cursor cursor) {
         MonAnDTO monAn = new MonAnDTO();
 
         int index;

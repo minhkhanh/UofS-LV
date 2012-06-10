@@ -8,6 +8,7 @@ import client.menu.bus.task.SyncDbTask;
 import client.menu.util.C;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,7 +28,7 @@ public class SplashScreenActivity extends Activity implements
                 .applyLanguage(getApplicationContext());
 
         setContentView(R.layout.layout_splash);
-
+        
         SharedPreferences sharedPref = getSharedPreferences(C.SHARED_PREF_FILE, 0);
         boolean syncFlag = sharedPref.getBoolean(getString(R.string.key_pref_auto_sync),
                 false);
@@ -83,7 +84,7 @@ public class SplashScreenActivity extends Activity implements
         switch (v.getId()) {
             case R.id.btnTableMap:
                 Intent intent = new Intent(SplashScreenActivity.this,
-                        TableListActivity.class);
+                        TableMapActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btnPreferences:

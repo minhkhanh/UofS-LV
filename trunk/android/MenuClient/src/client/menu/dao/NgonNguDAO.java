@@ -25,7 +25,7 @@ public final class NgonNguDAO extends AbstractDAO {
     private static final String GET_ALL_JSON_URL = LOCAL_SERVER_URL
             + "layDanhSachNgonNguJson";
 
-    private Cursor mCursorAll;
+    private List<NgonNguDTO> mCached;
 
     private static NgonNguDAO mInstance;
 
@@ -75,7 +75,7 @@ public final class NgonNguDAO extends AbstractDAO {
         Cursor cursor = cursorAll();
         cursor.moveToFirst();
 
-        return NgonNguDTO.valueOf(cursor);
+        return NgonNguDTO.fromCursor(cursor);
     }
 
     public List<NgonNguDTO> getAll() {
@@ -109,18 +109,19 @@ public final class NgonNguDAO extends AbstractDAO {
     }
 
     public Cursor cursorAll() {
-        if (mCursorAll == null || mCursorAll.isClosed()) {
-            SQLiteDatabase db = open();
-            String orderBy = NgonNguDTO.CL_MA_NGON_NGU + " asc";
-            mCursorAll = db.query(NgonNguDTO.TABLE_NAME, null, null, null, null, null,
-                    orderBy, null);
-        }
-
-        return mCursorAll;
+        SQLiteDatabase db = open();
+        String orderBy = NgonNguDTO.CL_MA_NGON_NGU + " asc";
+        return db.query(NgonNguDTO.TABLE_NAME, null, null, null, null, null,
+                orderBy, null);
     }
 
     @Override
-    public String getSyncTaskName() {
+    public String getName() {
         return "Danh sách ngôn ngữ";
+    }
+
+    @Override
+    protected void createCache(Cursor cursor) {
+        mCached = NgonNguDTO.fromArrayCursor(cursor);
     }
 }

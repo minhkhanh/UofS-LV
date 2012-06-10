@@ -1,9 +1,12 @@
 package client.menu.dao;
 
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import client.menu.db.dto.DonViTinhDaNgonNguDTO;
 
@@ -26,6 +29,8 @@ public class DonViTinhDaNgonNguDAO extends AbstractDAO {
         }
         return mInstance;
     }
+    
+    private List<DonViTinhDaNgonNguDTO> mCached;
 
     private DonViTinhDaNgonNguDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
@@ -58,7 +63,12 @@ public class DonViTinhDaNgonNguDAO extends AbstractDAO {
     }
 
     @Override
-    public String getSyncTaskName() {
+    public String getName() {
         return "Các đơn vị tính của món ăn";
+    }
+
+    @Override
+    protected void createCache(Cursor cursor) {
+        mCached = DonViTinhDaNgonNguDTO.fromArrayCursor(cursor);
     }
 }

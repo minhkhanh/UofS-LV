@@ -1,15 +1,20 @@
 package client.menu.db.dto;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.ContentValues;
+import android.database.Cursor;
+import android.provider.BaseColumns;
 
 public class TiGiaDTO {
     public static final String TABLE_NAME = "TiGia";
 
+    public static final String CL_ID = BaseColumns._ID;
     public static final String CL_MA_TI_GIA = "MaTiGia";
     public static final String CL_KI_HIEU = "KiHieu";
     public static final String CL_GIA_TRI = "GiaTri";
@@ -17,8 +22,42 @@ public class TiGiaDTO {
 
     private Integer mId;
     private Integer mMaTiGia;
-    private String mGiaTri;
+    private String mKiHieu;
+    private Float mGiaTri;
     private Date mThoiDiemCapNhat;
+    
+    public static List<TiGiaDTO> fromArrayCursor(Cursor cursor) {
+        List<TiGiaDTO> list = new ArrayList<TiGiaDTO>();
+        
+        while (cursor.moveToNext()) {
+            TiGiaDTO obj = TiGiaDTO.fromCursor(cursor);
+            list.add(obj);
+        }
+        
+        return list;
+    }
+
+    public static final TiGiaDTO fromCursor(Cursor cursor) {
+        TiGiaDTO obj = new TiGiaDTO();
+        Integer i;
+        if ((i = cursor.getColumnIndex(CL_ID)) != -1) {
+            obj.mId = cursor.getInt(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_MA_TI_GIA)) != -1) {
+            obj.mMaTiGia = cursor.getInt(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_KI_HIEU)) != -1) {
+            obj.mKiHieu = cursor.getString(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_GIA_TRI)) != -1) {
+            obj.mGiaTri = cursor.getFloat(i);
+        }
+        if ((i = cursor.getColumnIndex(CL_CAP_NHAT)) != -1) {
+//            obj.mThoiDiemCapNhat = cursor.getString(i);
+        }
+
+        return obj;
+    }
 
     public static ContentValues toContentValues(JSONObject jsonObj) throws JSONException {
         ContentValues values = new ContentValues();
@@ -53,11 +92,11 @@ public class TiGiaDTO {
         mMaTiGia = maTiGia;
     }
 
-    public String getGiaTri() {
+    public Float getGiaTri() {
         return mGiaTri;
     }
 
-    public void setGiaTri(String giaTri) {
+    public void setGiaTri(Float giaTri) {
         mGiaTri = giaTri;
     }
 
@@ -67,6 +106,13 @@ public class TiGiaDTO {
 
     public void setThoiDiemCapNhat(Date thoiDiemCapNhat) {
         mThoiDiemCapNhat = thoiDiemCapNhat;
+    }
+    public String getKiHieu() {
+        return mKiHieu;
+    }
+
+    public void setKiHieu(String kiHieu) {
+        mKiHieu = kiHieu;
     }
 
 }
