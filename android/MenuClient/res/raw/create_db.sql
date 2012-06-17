@@ -81,7 +81,7 @@ CREATE TABLE MonAn (
     _id                INTEGER PRIMARY KEY AUTOINCREMENT,
     MaMonAn            INTEGER NOT NULL
                                UNIQUE,
-    HinhAnh            TEXT,
+    HinhAnh            BLOB,
     DiemDanhGia        REAL    NOT NULL
                                DEFAULT ( 0 ),
     SoLuotDanhGia      INTEGER NOT NULL
