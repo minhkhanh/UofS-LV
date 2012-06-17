@@ -49,8 +49,7 @@
             android:id="@+id/imgDishAvatar"
             android:layout_width="128dp"
             android:layout_height="128dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/dish_sample" />
+            android:scaleType="fitCenter"/>
 
         <TextView
             android:id="@+id/textDishDescription"

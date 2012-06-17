@@ -167,7 +167,6 @@
         android:layout_width="256dp"
         android:layout_height="256dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/dish_sample" />
+        android:layout_alignParentTop="true"/>
 
 </RelativeLayout>
