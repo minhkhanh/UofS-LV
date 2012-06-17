@@ -13,14 +13,14 @@ import android.widget.ListView;
 import client.menu.R;
 import client.menu.bus.loader.RootCategoryListLoader;
 import client.menu.bus.task.CustomAsyncTask;
-import client.menu.bus.task.CustomAsyncTask.OnPostExecuteAsyncTaskListener;
+import client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import client.menu.bus.task.LoadChildCategoryListTask;
 import client.menu.db.dto.DanhMucDaNgonNguDTO;
 import client.menu.ui.adapter.ExpandableCategoryAdapter;
 
 public class CategoryListFragment extends ListFragment implements
         LoaderCallbacks<List<DanhMucDaNgonNguDTO>>,
-        OnPostExecuteAsyncTaskListener<Void, Integer, List<DanhMucDaNgonNguDTO>> {
+        OnPostExecuteListener<Integer, Void, List<DanhMucDaNgonNguDTO>> {
     private int mSelIndex;
     private boolean mIsDualPane;
 
@@ -108,11 +108,10 @@ public class CategoryListFragment extends ListFragment implements
                 extras.putInt("position", position);
                 extras.putInt("treePosition", treePosition);
 
-                LoadChildCategoryListTask task = new LoadChildCategoryListTask(
-                        getActivity(), danhMucCha.getMaDanhMuc());
+                LoadChildCategoryListTask task = new LoadChildCategoryListTask();
                 task.setOnPostExecuteListener(CategoryListFragment.this);
                 task.setExtras(extras);
-                task.execute();
+                task.execute(danhMucCha.getMaDanhMuc());
             }
         }
 
@@ -145,8 +144,8 @@ public class CategoryListFragment extends ListFragment implements
     }
 
     @Override
-    public void onPostExecuteAsyncTask(
-            CustomAsyncTask<Void, Integer, List<DanhMucDaNgonNguDTO>> task,
+    public void onPostExecute(
+            CustomAsyncTask<Integer, Void, List<DanhMucDaNgonNguDTO>> task,
             List<DanhMucDaNgonNguDTO> result) {
         if (result.size() > 0) {
             Bundle ex = task.getExtras();

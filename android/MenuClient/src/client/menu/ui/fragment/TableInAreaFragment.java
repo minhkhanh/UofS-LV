@@ -4,14 +4,14 @@ import android.app.Fragment;
 
 public abstract class TableInAreaFragment extends Fragment {
     protected String mTenKhuVuc;
-    protected Integer mMaKhuVuc;
+    protected Integer mAreaId;
 
     public TableInAreaFragment(Integer areaId, String areaName) {
-        mMaKhuVuc = areaId;
+        mAreaId = areaId;
         mTenKhuVuc = areaName;
     }
 
     public int getMaKhuVuc() {
-        return mMaKhuVuc;
+        return mAreaId;
     }
 }

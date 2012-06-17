@@ -3,6 +3,7 @@ package client.menu.bus.loader;
 import java.util.List;
 
 import client.menu.app.MyAppLocale;
+import client.menu.app.MyApplication;
 import client.menu.dao.DanhMucDAO;
 import client.menu.db.dto.DanhMucDaNgonNguDTO;
 import client.menu.db.dto.NgonNguDTO;
@@ -18,7 +19,7 @@ public class RootCategoryListLoader extends
 
     @Override
     public List<DanhMucDaNgonNguDTO> loadInBackground() {
-        NgonNguDTO ngonNgu = MyAppLocale.getCurrentLanguage(mHost);
+        NgonNguDTO ngonNgu = MyAppLocale.getCurrentLanguage(MyApplication.getInstance());
         return DanhMucDAO.getInstance().listDanhMucGoc(ngonNgu.getMaNgonNgu());
     }
 

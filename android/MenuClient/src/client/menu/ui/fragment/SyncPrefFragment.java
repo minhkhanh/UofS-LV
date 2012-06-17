@@ -1,6 +1,7 @@
 package client.menu.ui.fragment;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,13 +11,13 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import client.menu.R;
 import client.menu.bus.task.CustomAsyncTask;
-import client.menu.bus.task.CustomAsyncTask.OnPostExecuteAsyncTaskListener;
+import client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import client.menu.bus.task.SyncDbTask;
 import client.menu.util.C;
 import client.menu.util.U;
 
 public class SyncPrefFragment extends PreferenceFragment implements
-        OnPostExecuteAsyncTaskListener<Void, String, Boolean> {
+        OnPostExecuteListener<Void, String, Boolean> {
 
     Preference mSyncNowPref;
     CheckBoxPreference mAutoSyncPref;
@@ -70,7 +71,7 @@ public class SyncPrefFragment extends PreferenceFragment implements
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.cancel();
-                                    SyncDbTask task = new SyncDbTask(getActivity());
+                                    SyncDbTask task = new SyncDbTask(new ProgressDialog(getActivity()));
                                     task.setOnPostExecuteListener(SyncPrefFragment.this);
                                     task.execute();
                                 }
@@ -89,7 +90,7 @@ public class SyncPrefFragment extends PreferenceFragment implements
     }
 
     @Override
-    public void onPostExecuteAsyncTask(CustomAsyncTask<Void, String, Boolean> task,
+    public void onPostExecute(CustomAsyncTask<Void, String, Boolean> task,
             Boolean result) {
         if (result) {
             mWhenSyncDone = System.currentTimeMillis();

@@ -3,6 +3,8 @@ package client.menu.db.dto;
 import java.io.StringReader;
 import java.sql.Date;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
@@ -26,7 +28,28 @@ public class HoaDonDTO {
     private Integer mMaTaiKhoan = 1;
     private String mMoTaBanGhep = "";
     private Date mThoiDiemLap = new Date(System.currentTimeMillis());
-    private Integer mTongTien = 0;
+    private Float mTongTien = 0f;
+
+    public static HoaDonDTO fromJson(JSONObject jsonObj) throws JSONException {
+        HoaDonDTO hoaDon = new HoaDonDTO();
+        
+        if (!jsonObj.isNull(CL_MA_BAN_CHINH))
+            hoaDon.mMaBanChinh = jsonObj.getInt(CL_MA_BAN_CHINH);
+        if (!jsonObj.isNull(CL_MA_HOA_DON))
+            hoaDon.mMaHoaDon = jsonObj.getInt(CL_MA_HOA_DON);
+        if (!jsonObj.isNull(CL_MA_PHU_THU))
+            hoaDon.mMaPhuThu = jsonObj.getInt(CL_MA_PHU_THU);
+        if (!jsonObj.isNull(CL_MA_TAI_KHOAN))
+            hoaDon.mMaTaiKhoan = jsonObj.getInt(CL_MA_TAI_KHOAN);
+        if (!jsonObj.isNull(CL_MO_TA_BAN_GHEP))
+            hoaDon.mMoTaBanGhep = jsonObj.getString(CL_MO_TA_BAN_GHEP);
+//        if (!jsonObj.isNull(CL_THOI_DIEM_LAP))
+//            hoaDon.mThoiDiemLap = jsonObj.getString(CL_THOI_DIEM_LAP);
+        if (!jsonObj.isNull(CL_TONG_TIEN))
+            hoaDon.mTongTien = (float) jsonObj.getDouble(CL_TONG_TIEN);
+        
+        return hoaDon;
+    }
 
     public static final HoaDonDTO fromXml(String xmlData) {
         try {
@@ -84,7 +107,7 @@ public class HoaDonDTO {
                         } else if (tag.compareTo(CL_THOI_DIEM_LAP) == 0) {
 //                            obj.mThoiDiemLap = Date.valueOf(text);
                         } else if (tag.compareTo(CL_TONG_TIEN) == 0) {
-                            obj.mTongTien = Integer.valueOf(text);
+                            obj.mTongTien = Float.valueOf(text);
                         }
                         break;
 
@@ -179,11 +202,11 @@ public class HoaDonDTO {
         mThoiDiemLap = thoiDiemLap;
     }
 
-    public Integer getTongTien() {
+    public Float getTongTien() {
         return mTongTien;
     }
 
-    public void setTongTien(Integer tongTien) {
+    public void setTongTien(Float tongTien) {
         mTongTien = tongTien;
     }
 }

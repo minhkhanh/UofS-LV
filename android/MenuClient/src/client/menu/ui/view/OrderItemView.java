@@ -13,14 +13,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import client.menu.R;
 import client.menu.bus.SessionManager;
-import client.menu.bus.SessionManager.ServiceOrder;
+import client.menu.bus.SessionManager.OrderItemId;
 import client.menu.db.dto.ChiTietOrderDTO;
+import client.menu.db.dto.DonViTinhDTO;
 import client.menu.db.dto.DonViTinhDaNgonNguDTO;
 import client.menu.db.dto.DonViTinhMonAnDTO;
+import client.menu.db.dto.MonAnDTO;
 import client.menu.db.dto.MonAnDaNgonNguDTO;
 
 public class OrderItemView extends RelativeLayout {
-    private ChiTietOrderDTO mChiTietOrder;
+    private OrderItemId mItemId;
+    private ContentValues mValues;
 
     private Button mButtonRemove;
     private Button mButtonPlus;
@@ -33,17 +36,18 @@ public class OrderItemView extends RelativeLayout {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btnPlus:
-                    Integer quantity = Integer
-                            .valueOf(mTextQuantity.getText().toString()) + 1;
-                    mTextQuantity.setText(quantity.toString());
-                    mChiTietOrder.setSoLuong(quantity);
+                    int quantity = Integer.valueOf(mTextQuantity.getText().toString()) + 1;
+                    mTextQuantity.setText(quantity + "");
+                    SessionManager.getInstance().loadCurrentSession()
+                            .getOrder().getItem(mItemId).setSoLuong(quantity);
                     break;
 
                 case R.id.btnMinus:
                     quantity = Integer.valueOf(mTextQuantity.getText().toString()) - 1;
                     if (quantity > 0) {
-                        mTextQuantity.setText(quantity.toString());
-                        mChiTietOrder.setSoLuong(quantity);
+                        mTextQuantity.setText(quantity + "");
+                        SessionManager.getInstance().loadCurrentSession()
+                                .getOrder().getItem(mItemId).setSoLuong(quantity);
                     }
                     break;
 
@@ -58,11 +62,10 @@ public class OrderItemView extends RelativeLayout {
                                             R.string.caption_yes),
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
-                                            ServiceOrder order = SessionManager
-                                                    .getInstance().loadCurrentSession()
-                                                    .getOrder();
-                                            order.removeItem(mChiTietOrder);
-                                            order.notifyChanged();
+                                            SessionManager.getInstance()
+                                                    .loadCurrentSession()
+                                                    .getOrder().removeItem(mItemId)
+                                                    .notifyChanged();
                                         }
                                     })
                             .setNegativeButton(
@@ -80,29 +83,30 @@ public class OrderItemView extends RelativeLayout {
                     break;
             }
 
-            SessionManager.getInstance().loadCurrentSession().getOrder().debugLogItems();
+            SessionManager.getInstance().loadCurrentSession().getOrder()
+                    .logItemsDebug();
         }
     };
 
     public OrderItemView(Context context) {
         super(context);
 
-        prepareViews(context);
+        initView(context);
     }
 
     public OrderItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        prepareViews(context);
+        initView(context);
     }
 
     public OrderItemView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        prepareViews(context);
+        initView(context);
     }
 
-    private void prepareViews(Context context) {
+    private void initView(Context context) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.item_order, this);
@@ -118,13 +122,17 @@ public class OrderItemView extends RelativeLayout {
         mTextQuantity = (TextView) findViewById(R.id.textQuantity);
     }
 
-    public void bindData(ChiTietOrderDTO chiTietOrder, ContentValues values) {
-        mChiTietOrder = chiTietOrder;
+    public void bindData(ContentValues values) {
+        mValues = values;
 
-        mTextQuantity.setText(mChiTietOrder.getSoLuong().toString());
+        mItemId = new OrderItemId(mValues.getAsInteger(MonAnDTO.CL_MA_MON_AN),
+                mValues.getAsInteger(DonViTinhDTO.CL_MA_DON_VI_TINH));
+
+        mTextQuantity.setText(mValues.getAsInteger(ChiTietOrderDTO.CL_SO_LUONG)
+                .toString());
 
         EditText dishNote = (EditText) findViewById(R.id.editDishNote);
-        dishNote.setText(mChiTietOrder.getGhiChu());
+        dishNote.setText(mValues.getAsString(ChiTietOrderDTO.CL_GHI_CHU));
 
         TextView dishName = (TextView) findViewById(R.id.textDishName);
         dishName.setText(values.getAsString(MonAnDaNgonNguDTO.CL_TEN_MON));
@@ -135,8 +143,9 @@ public class OrderItemView extends RelativeLayout {
         TextView unitPrice = (TextView) findViewById(R.id.textUnitPrice);
         unitPrice.setText(values.getAsInteger(DonViTinhMonAnDTO.CL_DON_GIA).toString());
 
-        if (mChiTietOrder.getMaOrder() != null && mChiTietOrder.getMaOrder() > 0) {
-            setBackgroundResource(R.color._99acacac);
-        }
+        // if (mChiTietOrder.getMaOrder() != null && mChiTietOrder.getMaOrder()
+        // > 0) {
+        // setBackgroundResource(R.color._99acacac);
+        // }
     }
 }

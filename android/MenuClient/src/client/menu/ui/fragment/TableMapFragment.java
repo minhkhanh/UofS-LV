@@ -3,75 +3,60 @@ package client.menu.ui.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONObject;
-
 import android.app.AlertDialog;
-import android.app.DialogFragment;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
 import android.content.Loader;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.RadioGroup;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.TextView;
 import client.menu.R;
-import client.menu.bus.SessionManager;
 import client.menu.bus.loader.TableListLoader;
 import client.menu.bus.task.CustomAsyncTask;
-import client.menu.bus.task.GetTableGroupsTask;
-import client.menu.bus.task.PostTableMergingTask;
-import client.menu.bus.task.CustomAsyncTask.OnPostExecuteAsyncTaskListener;
-import client.menu.bus.task.PostTableSplitingTask;
+import client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
+import client.menu.bus.task.PostTableSelectionTask;
 import client.menu.db.dto.BanDTO;
-import client.menu.db.dto.YeuCauGhepBan;
-import client.menu.ui.activity.MainMenuActivity;
-import client.menu.ui.adapter.TableGroupsAdapter;
 import client.menu.ui.adapter.TableListAdapter;
 import client.menu.util.U;
 
 public class TableMapFragment extends TableInAreaFragment implements
-        LoaderCallbacks<List<BanDTO>>,
-        OnPostExecuteAsyncTaskListener<Void, Void, Boolean> {
+        LoaderCallbacks<List<BanDTO>>, OnPostExecuteListener<Void, Void, Boolean> {
 
-    private boolean mGroupingMode = false;
+    public static final int SEL_STATE_SINGLE_FREE = 0;
+    public static final int SEL_STATE_SINGLE_BUSY = 1;
+    public static final int SEL_STATE_MANY_FREE = 2;
+    public static final int SEL_STATE_MIXED = 3;
+    public static final int SEL_STATE_MANY_BUSY = 4;
+
+    int mCurrSelectionState;
+
     private TableListAdapter mGridAdapter;
     private GridView mTableGrid;
     private ActionMode mActionMode;
 
-    private OnPostExecuteAsyncTaskListener<Void, Integer, Integer> mOnPostExecuteTableGroupingTask = new OnPostExecuteAsyncTaskListener<Void, Integer, Integer>() {
+    protected OnPostExecuteListener<Void, Void, Boolean> mOnPostExecuteTableSelecting = new OnPostExecuteListener<Void, Void, Boolean>() {
         @Override
-        public void onPostExecuteAsyncTask(CustomAsyncTask<Void, Integer, Integer> task,
-                Integer result) {
-        }
-    };
+        public void onPostExecute(CustomAsyncTask<Void, Void, Boolean> task,
+                Boolean result) {
+            if (!result) {
+                new AlertDialog.Builder(getActivity())
+                        .setMessage(R.string.message_select_table_failed).create().show();
+            } else {
+                Integer groupId = task.getExtras().getInt("groupId");
+                ServingOrderListDlgFragment dlg = new ServingOrderListDlgFragment(groupId);
+                U.showDlgFragment(getActivity(), dlg, "dlg");
 
-    protected OnPostExecuteAsyncTaskListener<Void, Integer, List<JSONObject>> mOnPostExecuteGetTableGroup = new OnPostExecuteAsyncTaskListener<Void, Integer, List<JSONObject>>() {
-        @Override
-        public void onPostExecuteAsyncTask(
-                CustomAsyncTask<Void, Integer, List<JSONObject>> task,
-                List<JSONObject> result) {
-            TableGroupsAdapter adapter = new TableGroupsAdapter(getActivity(), result);
-            // AlertDialog.Builder builder =
-            new AlertDialog.Builder(getActivity())
-                    .setTitle(R.string.caption_select_table_group)
-                    .setSingleChoiceItems(adapter, -1, new OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    }).create().show();
+                getLoaderManager().restartLoader(0, null, TableMapFragment.this);
+            }
         }
     };
 
@@ -91,89 +76,31 @@ public class TableMapFragment extends TableInAreaFragment implements
 
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            MenuInflater inflater = mode.getMenuInflater();
-
-            if (mGroupingMode) {
-                inflater.inflate(R.menu.context_table_grouping, menu);
-            } else {
-                inflater.inflate(R.menu.context_table, menu);
-            }
-
             return true;
         }
 
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            if (mGroupingMode) {
-                switch (item.getItemId()) {
-                    case R.id.miGroup:
-                        SparseBooleanArray chkArray = mTableGrid
-                                .getCheckedItemPositions();
-                        List<BanDTO> listBan = new ArrayList<BanDTO>();
-                        for (int i = 0; i < chkArray.size(); ++i) {
-                            if (chkArray.valueAt(i)) {
-                                int pos = chkArray.keyAt(i);
-                                BanDTO ban = mGridAdapter.getItem(pos);
-                                listBan.add(ban);
-                            }
-                        }
+            List<BanDTO> tabSelection = getTableSelection();
+            Integer groupId = findGroupId(tabSelection);
 
-                        if (listBan.size() >= 1) {
-                            GetTableGroupsTask task = new GetTableGroupsTask(
-                                    getActivity());
-                            task.setOnPostExecuteListener(mOnPostExecuteGetTableGroup);
-                            task.execute();
-                            // DialogFragment dlg = new
-                            // TableGroupingOptionsDlgFragment(
-                            // listBan);
-                            // U.showDlgFragment(getActivity(), dlg, "dlg");
+            switch (item.getItemId()) {
+                case R.id.miGroupTable:
+                case R.id.miSelectTable:
+                    Bundle ext = new Bundle();
+                    ext.putInt("groupId", groupId);
+                    PostTableSelectionTask task = new PostTableSelectionTask(tabSelection);
+                    task.setExtras(ext);
+                    task.setOnPostExecuteListener(mOnPostExecuteTableSelecting);
+                    task.execute();
 
-                            // PostTableMergingTask task = new
-                            // PostTableMergingTask(
-                            // getActivity(), yc);
-                            // task.setOnPostExecuteListener(mOnPostExecuteTableGroupingTask);
-                            // task.execute();
-                        }
+                    break;
 
-                        break;
+                case R.id.miSplitTable:
+                    break;
 
-                    default:
-                        break;
-                }
-            } else {
-                int checkedPos = mTableGrid.getCheckedItemPosition();
-                BanDTO ban = mGridAdapter.getItem(checkedPos);
-
-                switch (item.getItemId()) {
-                    case R.id.miSelectTable:
-                        Integer maBan = ban.getMaBanChinh();
-                        if (maBan == null) {
-                            maBan = ban.getMaBan();
-                        }
-                        SessionManager.getInstance().loadSession(maBan);
-
-                        ServingOrderListDlgFragment f = new ServingOrderListDlgFragment(
-                                ban);
-                        U.showDlgFragment(getActivity(), f, "dlg");
-
-                        break;
-
-                    case R.id.miSplitTable:
-                        Integer maBanChinh = ban.getMaBanChinh();
-                        if (maBanChinh != null) {
-                            PostTableSplitingTask task = new PostTableSplitingTask(
-                                    getActivity(), maBanChinh);
-                            task.setOnPostExecuteListener(TableMapFragment.this);
-                            task.execute();
-                        } else {
-                            U.toastText(getActivity(),
-                                    R.string.message_single_table_spliting_failed);
-                        }
-                        break;
-
-                    default:
-                        break;
-                }
+                default:
+                    break;
             }
 
             mode.finish();
@@ -184,11 +111,50 @@ public class TableMapFragment extends TableInAreaFragment implements
     private OnItemClickListener mOnItemClick = new OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
-            if (mActionMode != null) {
-                return;
+            BanDTO clickTable = mGridAdapter.getItem(pos);
+            if (!clickTable.getActive()) {
+                for (int i = 0; i < mTableGrid.getCount(); ++i) {
+                    BanDTO ban = mGridAdapter.getItem(i);
+                    if (ban.getMaBanChinh() == clickTable.getMaBanChinh()) {
+                        mTableGrid.setItemChecked(i, mTableGrid.isItemChecked(pos));
+                    } else if (!ban.getActive()) {
+                        mTableGrid.setItemChecked(i, false);
+                    }
+                }
             }
 
-            mActionMode = getActivity().startActionMode(mActionModeCallback);
+            List<BanDTO> tabSelection = getTableSelection();
+            mCurrSelectionState = getSelectionState(tabSelection);
+
+            int checkedCount = mTableGrid.getCheckedItemCount();
+            if (checkedCount == 0) {
+                mActionMode.finish();
+            } else if (mActionMode == null) {
+                mActionMode = getActivity().startActionMode(mActionModeCallback);
+            }
+
+            if (mActionMode != null) {
+                Menu menu = mActionMode.getMenu();
+                menu.clear();
+                switch (mCurrSelectionState) {
+                    case SEL_STATE_SINGLE_FREE:
+                    case SEL_STATE_SINGLE_BUSY:
+                        menu.add(Menu.NONE, R.id.miSelectTable, 0,
+                                R.string.context_select_table);
+                        break;
+                    case SEL_STATE_MIXED:
+                    case SEL_STATE_MANY_FREE:
+                        menu.add(Menu.NONE, R.id.miGroupTable, 0,
+                                R.string.option_group_table);
+                        break;
+                    case SEL_STATE_MANY_BUSY:
+                        menu.add(Menu.NONE, R.id.miSelectTable, 0,
+                                R.string.context_select_table);
+                        menu.add(Menu.NONE, R.id.miSplitTable, 0,
+                                R.string.context_table_item_split);
+                        break;
+                }
+            }
         }
     };
 
@@ -196,39 +162,57 @@ public class TableMapFragment extends TableInAreaFragment implements
         super(areaId, tenKhuVuc);
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
+    private Integer findGroupId(List<BanDTO> tabSelection) {
+        for (BanDTO b : tabSelection) {
+            if (b.getMaBanChinh() != null) {
+                return b.getMaBanChinh();
+            }
+        }
 
-        inflater.inflate(R.menu.options_table, menu);
+        return tabSelection.get(0).getMaBan();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.miGroupTable:
-                mGroupingMode = !mGroupingMode;
-                if (mGroupingMode) {
-                    item.setTitle(R.string.option_back);
-                    mTableGrid.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
-                    mActionMode = getActivity().startActionMode(mActionModeCallback);
-                } else {
-                    mTableGrid.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
-                    item.setTitle(R.string.option_group_table);
-                    mActionMode.finish();
-                }
+    private int getSelectionState(List<BanDTO> tabSelection) {
+        if (tabSelection.size() == 1) {
+            if (tabSelection.get(0).getMaBanChinh() == null) {
+                return SEL_STATE_SINGLE_FREE;
+            }
 
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
+            return SEL_STATE_SINGLE_BUSY;
         }
+
+        boolean hasFree = false;
+        for (BanDTO b : tabSelection) {
+            if (b.getMaBanChinh() == null)
+                hasFree = true;
+            else if (hasFree)
+                return SEL_STATE_MIXED;
+        }
+
+        if (hasFree)
+            return SEL_STATE_MANY_FREE;
+
+        return SEL_STATE_MANY_BUSY;
+    }
+
+    private List<BanDTO> getTableSelection() {
+        SparseBooleanArray chkArray = mTableGrid.getCheckedItemPositions();
+        final List<BanDTO> tableSelection = new ArrayList<BanDTO>();
+        for (int i = 0; i < chkArray.size(); ++i) {
+            if (chkArray.valueAt(i)) {
+                int pos = chkArray.keyAt(i);
+                BanDTO ban = mGridAdapter.getItem(pos);
+                tableSelection.add(ban);
+            }
+        }
+
+        return tableSelection;
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt("mMaKhuVuc", mMaKhuVuc);
+        outState.putInt("mMaKhuVuc", mAreaId);
     }
 
     @Override
@@ -236,7 +220,7 @@ public class TableMapFragment extends TableInAreaFragment implements
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState != null) {
-            mMaKhuVuc = savedInstanceState.getInt("mMaKhuVuc");
+            mAreaId = savedInstanceState.getInt("mMaKhuVuc");
         }
 
         mGridAdapter = new TableListAdapter(getActivity(), new ArrayList<BanDTO>());
@@ -246,6 +230,11 @@ public class TableMapFragment extends TableInAreaFragment implements
     public void onResume() {
         super.onResume();
         getLoaderManager().initLoader(0, null, this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 
     @Override
@@ -268,7 +257,7 @@ public class TableMapFragment extends TableInAreaFragment implements
         mTableGrid = (GridView) getView().findViewById(R.id.gridTable);
         mTableGrid.setAdapter(mGridAdapter);
         mTableGrid.setOnItemClickListener(mOnItemClick);
-        mTableGrid.setChoiceMode(GridView.CHOICE_MODE_SINGLE);
+        mTableGrid.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE);
 
         TextView areaName = (TextView) getView().findViewById(R.id.textAreaName);
         areaName.setText(mTenKhuVuc);
@@ -285,7 +274,7 @@ public class TableMapFragment extends TableInAreaFragment implements
 
     @Override
     public Loader<List<BanDTO>> onCreateLoader(int id, Bundle args) {
-        return new TableListLoader(getActivity(), mMaKhuVuc);
+        return new TableListLoader(getActivity(), mAreaId);
     }
 
     @Override
@@ -297,11 +286,12 @@ public class TableMapFragment extends TableInAreaFragment implements
 
     @Override
     public void onLoaderReset(Loader<List<BanDTO>> arg0) {
+        mGridAdapter.clear();
+        mGridAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void onPostExecuteAsyncTask(CustomAsyncTask<Void, Void, Boolean> task,
-            Boolean result) {
+    public void onPostExecute(CustomAsyncTask<Void, Void, Boolean> task, Boolean result) {
         if (result) {
             getLoaderManager().restartLoader(0, null, this);
         } else {

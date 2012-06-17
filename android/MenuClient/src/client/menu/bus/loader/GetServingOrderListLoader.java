@@ -4,23 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
 import client.menu.dao.AbstractDAO;
 import client.menu.db.dto.OrderDTO;
 import client.menu.util.U;
 
 public class GetServingOrderListLoader extends CustomAsyncTaskLoader<List<OrderDTO>> {
 
-    Integer mMaBan;
+    Integer mMaBanChinh;
 
-    public GetServingOrderListLoader(Activity context, Integer maBan) {
+    public GetServingOrderListLoader(Context context, Integer maBan) {
         super(context);
-        mMaBan = maBan;
+        mMaBanChinh = maBan;
     }
 
     @Override
     public List<OrderDTO> loadInBackground() {
         final String url = AbstractDAO.LOCAL_SERVER_URL
-                + "layDanhSachOrderChuaThanhToanJson?maBan=" + mMaBan;
+                + "layDanhSachOrderChuaThanhToanJson?maBan=" + mMaBanChinh;
 
         List<OrderDTO> list = new ArrayList<OrderDTO>();
 

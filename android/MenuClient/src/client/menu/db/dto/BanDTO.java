@@ -4,6 +4,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
@@ -37,6 +38,58 @@ public class BanDTO
     private String mGhiChu;
     private Boolean mActive;
     private Boolean mTinhTrang;
+    
+    public static final List<BanDTO> fromArrayJson(JSONArray jsonArray) throws JSONException {
+        List<BanDTO> list = new ArrayList<BanDTO>();
+        
+        for (int i = 0; i < jsonArray.length(); ++i) {
+            JSONObject jsonObj = jsonArray.getJSONObject(i);
+            BanDTO ban = fromJson(jsonObj);
+            list.add(ban);
+        }
+        
+        return list;
+    }
+
+    public JSONObject toJson() throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put(CL_ACTIVE, mActive);
+        jsonObject.put(CL_GHI_CHU, mGhiChu);
+        jsonObject.put(CL_MA_BAN, mMaBan);
+        jsonObject.put(CL_MA_BAN_CHINH, mMaBanChinh);
+        jsonObject.put(CL_MA_KHU_VUC, mMaKhuVuc);
+        jsonObject.put(CL_TEN_BAN, mTenBan);
+        jsonObject.put(CL_TINH_TRANG, mTinhTrang);
+        
+        return null;
+    }
+
+    public static final BanDTO fromJson(JSONObject jsonObj) throws JSONException {
+        BanDTO ban = new BanDTO();
+        if (!jsonObj.isNull(CL_ACTIVE)) {
+            ban.mActive = jsonObj.getBoolean(CL_ACTIVE);
+        }
+        if (!jsonObj.isNull(CL_GHI_CHU)) {
+            ban.mGhiChu = jsonObj.getString(CL_GHI_CHU);
+        }
+        if (!jsonObj.isNull(CL_MA_BAN)) {
+            ban.mMaBan = jsonObj.getInt(CL_MA_BAN);
+        }
+        if (!jsonObj.isNull(CL_MA_BAN_CHINH)) {
+            ban.mMaBanChinh = jsonObj.getInt(CL_MA_BAN_CHINH);
+        }
+        if (!jsonObj.isNull(CL_MA_KHU_VUC)) {
+            ban.mMaKhuVuc = jsonObj.getInt(CL_MA_KHU_VUC);
+        }
+        if (!jsonObj.isNull(CL_TEN_BAN)) {
+            ban.mTenBan = jsonObj.getString(CL_TEN_BAN);
+        }
+        if (!jsonObj.isNull(CL_TINH_TRANG)) {
+            ban.mTinhTrang = jsonObj.getBoolean(CL_TINH_TRANG);
+        }
+
+        return ban;
+    }
 
     public static final ContentValues toContentValues(JSONObject jsonObj)
             throws JSONException {

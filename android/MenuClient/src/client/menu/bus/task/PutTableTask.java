@@ -1,13 +1,11 @@
 package client.menu.bus.task;
 
+import client.menu.dao.BanDAO;
 import client.menu.db.dto.BanDTO;
-import android.os.AsyncTask;
 
-public class PutTableTask extends AsyncTask<BanDTO, Void, Void> {
-
+public class PutTableTask extends CustomAsyncTask<BanDTO, Void, Boolean> {
     @Override
-    protected Void doInBackground(BanDTO... params) {
-        return null;
+    protected Boolean doInBackground(BanDTO... params) {
+        return BanDAO.getInstance().put(params[0]);
     }
-
 }

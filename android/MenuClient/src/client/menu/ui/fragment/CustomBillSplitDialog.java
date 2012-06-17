@@ -30,11 +30,6 @@ public class CustomBillSplitDialog extends DialogFragment {
     private CustomLoadBillItemsTask mLoadBillItemsTask;
 
     private class CustomLoadBillItemsTask extends LoadBillItemsTask {
-
-        public CustomLoadBillItemsTask(Activity host, List<ChiTietOrderDTO> orderItems) {
-            super(host, orderItems);
-        }
-
         @Override
         protected void onPostExecute(List<ContentValues> result) {
             super.onPostExecute(result);
@@ -55,16 +50,16 @@ public class CustomBillSplitDialog extends DialogFragment {
         super.onResume();
 
         ServiceOrder order = SessionManager.getInstance().loadCurrentSession().getOrder();
-        mLoadBillItemsTask = new CustomLoadBillItemsTask(getActivity(),
-                order.getContent());
-        mLoadBillItemsTask.execute();
+        mLoadBillItemsTask = new CustomLoadBillItemsTask();
+//        mLoadBillItemsTask.execute(order.getContent());
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Holo_Dialog);
+        // setStyle(DialogFragment.STYLE_NORMAL,
+        // android.R.style.Theme_Holo_Dialog);
     }
 
     @Override
@@ -79,7 +74,7 @@ public class CustomBillSplitDialog extends DialogFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        
+
         final ViewGroup scrollBill = (ViewGroup) getView().findViewById(R.id.scrollBill);
 
         Button btnSplit = (Button) getView().findViewById(R.id.btnSplit);
@@ -89,11 +84,11 @@ public class CustomBillSplitDialog extends DialogFragment {
             public void onClick(View v) {
                 if (mSubBillView.getBillList().getCount() > 0) {
                     MiniBillView newBill = mSubBillView.clone();
-                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
-                            LayoutParams.MATCH_PARENT);
+                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                            LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
                     lp.setMargins(10, 10, 10, 10);
                     newBill.setLayoutParams(lp);
-//                    newBill.set
+                    // newBill.set
                     scrollBill.addView(newBill);
 
                     mSubBillView.bindItems(null);

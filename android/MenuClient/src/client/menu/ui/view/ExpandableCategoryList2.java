@@ -3,7 +3,7 @@ package client.menu.ui.view;
 import java.util.List;
 
 import client.menu.bus.task.CustomAsyncTask;
-import client.menu.bus.task.CustomAsyncTask.OnPostExecuteAsyncTaskListener;
+import client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import client.menu.bus.task.LoadChildCategoryListTask;
 import client.menu.db.dto.DanhMucDaNgonNguDTO;
 import client.menu.ui.adapter.ExpandableCategoryAdapter2;
@@ -19,7 +19,7 @@ import android.widget.ExpandableListView;
 
 @Deprecated
 public class ExpandableCategoryList2 extends ExpandableListView implements
-        OnPostExecuteAsyncTaskListener<Void, Integer, List<DanhMucDaNgonNguDTO>> {
+        OnPostExecuteListener<Integer, Void, List<DanhMucDaNgonNguDTO>> {
 
     ExpandableCategoryAdapter2 mAdapter;
 
@@ -68,11 +68,10 @@ public class ExpandableCategoryList2 extends ExpandableListView implements
             extras.putInt("groupPosition", groupPosition);
 
             DanhMucDaNgonNguDTO danhMucCha = mAdapter.getGroup(groupPosition);
-            LoadChildCategoryListTask task = new LoadChildCategoryListTask(getContext(),
-                    danhMucCha.getMaDanhMuc());
+            LoadChildCategoryListTask task = new LoadChildCategoryListTask();
             task.setOnPostExecuteListener(ExpandableCategoryList2.this);
             task.setExtras(extras);
-            task.execute();
+            task.execute(danhMucCha.getMaDanhMuc());
         }
     };
 
@@ -98,8 +97,8 @@ public class ExpandableCategoryList2 extends ExpandableListView implements
     }
 
     @Override
-    public void onPostExecuteAsyncTask(
-            CustomAsyncTask<Void, Integer, List<DanhMucDaNgonNguDTO>> task,
+    public void onPostExecute(
+            CustomAsyncTask<Integer, Void, List<DanhMucDaNgonNguDTO>> task,
             List<DanhMucDaNgonNguDTO> result) {
         Bundle ex = task.getExtras();
         int groupPosition = ex.getInt("groupPosition");

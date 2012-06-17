@@ -24,12 +24,12 @@ import client.menu.dao.TiGiaDAO;
 public abstract class DataPreparingTask extends CustomAsyncTask<Void, String, Boolean> {
 
     List<AbstractDAO> mDaoList = new ArrayList<AbstractDAO>();
-    ProgressDialog mProgessDialog = new ProgressDialog(getContext());
+    ProgressDialog mProgessDialog;
 
-    public DataPreparingTask(Context context) {
-        super(context);
+    public DataPreparingTask(ProgressDialog dlg) {
+        mProgessDialog = dlg;
     }
-    
+
     protected abstract boolean workCore(AbstractDAO dao);
 
     @Override

@@ -1,16 +1,14 @@
 package client.menu.bus.loader;
 
-import android.app.Activity;
 import android.content.AsyncTaskLoader;
+import android.content.Context;
 
 public abstract class CustomAsyncTaskLoader<T> extends AsyncTaskLoader<T> {
 
     protected T mData;
-    protected Activity mHost;
-    
-    public CustomAsyncTaskLoader(Activity context) {
+
+    public CustomAsyncTaskLoader(Context context) {
         super(context);
-        mHost = context;
     }
 
     @Override

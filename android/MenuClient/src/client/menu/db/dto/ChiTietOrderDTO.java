@@ -13,7 +13,6 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import client.menu.util.XmlSerializerWrapper;
 
 import android.content.ContentValues;
-import android.database.DatabaseUtils;
 import android.provider.BaseColumns;
 
 public class ChiTietOrderDTO {
@@ -38,9 +37,35 @@ public class ChiTietOrderDTO {
     private Integer mSoLuong;
     private String mGhiChu = "";
     private Integer mMaBoPhanCheBien;
-    private Integer mTinhTrang = 0;
+    private Integer mTinhTrang = -1;
     private Integer mMaMonAn;
     private Integer mMaDonViTinh;
+
+    public static JSONArray toArrayJson(List<ChiTietOrderDTO> list) throws JSONException {
+        JSONArray jsonArray = new JSONArray();
+        for (ChiTietOrderDTO c : list) {
+            JSONObject jsonObj = new JSONObject();
+            jsonObj = c.toJson();
+
+            jsonArray.put(jsonObj);
+        }
+
+        return jsonArray;
+    }
+
+    public JSONObject toJson() throws JSONException {
+        JSONObject jsonObj = new JSONObject();
+        jsonObj.put(CL_MA_CHI_TIET, mMaChiTiet);
+        jsonObj.put(CL_MA_ORDER, mMaOrder);
+        jsonObj.put(CL_SO_LUONG, mSoLuong);
+        jsonObj.put(CL_GHI_CHU, mGhiChu);
+        jsonObj.put(CL_MA_BO_PHAN_CHE_BIEN, mMaBoPhanCheBien);
+        jsonObj.put(CL_TINH_TRANG, mTinhTrang);
+        jsonObj.put(CL_MA_MON_AN, mMaMonAn);
+        jsonObj.put(CL_MA_DON_VI_TINH, mMaDonViTinh);
+
+        return jsonObj;
+    }
 
     public static final List<ChiTietOrderDTO> fromArrayJson(JSONArray jsonArray)
             throws JSONException {
@@ -323,4 +348,5 @@ public class ChiTietOrderDTO {
     public void setMaDonViTinh(Integer maDonViTinh) {
         mMaDonViTinh = maDonViTinh;
     }
+
 }

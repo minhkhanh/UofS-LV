@@ -2,42 +2,21 @@ package client.menu.bus.task;
 
 import java.util.List;
 
-import client.menu.R;
-import client.menu.app.MyAppLocale;
-import client.menu.dao.DonViTinhDAO;
-import client.menu.db.dto.DonViTinhDaNgonNguDTO;
-import client.menu.db.dto.DonViTinhMonAnDTO;
-import client.menu.db.dto.NgonNguDTO;
-import client.menu.ui.adapter.DishUnitsAdapter;
-import android.app.Activity;
 import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.widget.SimpleCursorAdapter;
+import client.menu.app.MyAppLocale;
+import client.menu.app.MyApplication;
+import client.menu.dao.DonViTinhDAO;
+import client.menu.db.dto.NgonNguDTO;
 
 public class LoadDishUnitsAsyncTask extends
-        CustomAsyncTask<Void, Integer, DishUnitsAdapter> {
-
-    Integer mMaMonAn;
-
-    public LoadDishUnitsAsyncTask(Context context, Integer maMonAn) {
-        super(context);
-        mMaMonAn = maMonAn;
-    }
+        CustomAsyncTask<Integer, Void, List<ContentValues>> {
 
     @Override
-    protected DishUnitsAdapter doInBackground(Void... params) {
-        NgonNguDTO ngonNgu = MyAppLocale.getCurrentLanguage((Activity) getContext());
+    protected List<ContentValues> doInBackground(Integer... params) {
+        NgonNguDTO ngonNgu = MyAppLocale.getCurrentLanguage(MyApplication.getInstance());
         List<ContentValues> list = DonViTinhDAO.getInstance().contentByMaMonAn(
-                ngonNgu.getMaNgonNgu(), mMaMonAn);
+                ngonNgu.getMaNgonNgu(), params[0]);
 
-        DishUnitsAdapter adapter = new DishUnitsAdapter(getContext(), list);
-
-        return adapter;
+        return list;
     }
-
-    public Integer getMaMonAn() {
-        return mMaMonAn;
-    }
-
 }

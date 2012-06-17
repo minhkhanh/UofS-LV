@@ -25,8 +25,8 @@ import client.menu.R;
 import client.menu.bus.SessionManager;
 import client.menu.bus.loader.TableListLoader;
 import client.menu.bus.task.CustomAsyncTask;
-import client.menu.bus.task.PostTableMergingTask;
-import client.menu.bus.task.CustomAsyncTask.OnPostExecuteAsyncTaskListener;
+import client.menu.bus.task.PostTableSelectionTask;
+import client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import client.menu.db.dto.BanDTO;
 import client.menu.db.dto.YeuCauGhepBan;
 import client.menu.ui.activity.MainMenuActivity;
@@ -35,7 +35,7 @@ import client.menu.util.U;
 
 public class TableGroupingFragment extends TableInAreaFragment implements
         LoaderCallbacks<List<BanDTO>>, OnItemClickListener,
-        OnPostExecuteAsyncTaskListener<Void, Integer, Integer> {
+        OnPostExecuteListener<Void, Integer, Integer> {
     private GridView mTableGrid;
     private TableListAdapter mTableAdapter;
 
@@ -83,10 +83,10 @@ public class TableGroupingFragment extends TableInAreaFragment implements
                         listBan.remove(0);
                         yc.setMaBanPhuList(listBan);
 
-                        PostTableMergingTask task = new PostTableMergingTask(
-                                getActivity(), yc);
-                        task.setOnPostExecuteListener(TableGroupingFragment.this);
-                        task.execute();
+//                        PostTableGroupingTask task = new PostTableGroupingTask(
+//                                getActivity(), yc);
+//                        task.setOnPostExecuteListener(TableGroupingFragment.this);
+//                        task.execute();
                     }
 
                     break;
@@ -145,7 +145,7 @@ public class TableGroupingFragment extends TableInAreaFragment implements
 
     @Override
     public Loader<List<BanDTO>> onCreateLoader(int id, Bundle args) {
-        return new TableListLoader(getActivity(), mMaKhuVuc);
+        return new TableListLoader(getActivity(), mAreaId);
     }
 
     @Override
@@ -177,7 +177,7 @@ public class TableGroupingFragment extends TableInAreaFragment implements
     }
 
     @Override
-    public void onPostExecuteAsyncTask(CustomAsyncTask<Void, Integer, Integer> task,
+    public void onPostExecute(CustomAsyncTask<Void, Integer, Integer> task,
             Integer result) {
 
         if (result != -1) {

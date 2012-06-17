@@ -3,6 +3,9 @@ package client.menu.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -14,8 +17,7 @@ import client.menu.db.util.MyDatabaseHelper;
 import client.menu.util.U;
 
 public class HoaDonDAO extends AbstractDAO {
-    public static final String POST_BILL = LOCAL_SERVER_URL
-            + "themHoaDon";
+    public static final String POST_BILL = LOCAL_SERVER_URL + "themHoaDon";
     public static final String POST_BILL_ITEMS = LOCAL_SERVER_URL
             + "themNhieuChiTietHoaDon";
 
@@ -39,7 +41,7 @@ public class HoaDonDAO extends AbstractDAO {
     public List<ChiTietHoaDonDTO> postChiTietHoaDonArray(List<ChiTietHoaDonDTO> list) {
         String xmlData = ChiTietHoaDonDTO.toXmlArray(list);
         String respString = U.loadPostResponse(POST_BILL_ITEMS, xmlData);
-        
+
         return ChiTietHoaDonDTO.fromXmlArray(respString);
     }
 
@@ -60,6 +62,26 @@ public class HoaDonDAO extends AbstractDAO {
         }
 
         return list;
+    }
+
+    public HoaDonDTO postLapHoaDon(Integer orderId, List<String> voucherCodes) {
+        String url = AbstractDAO.LOCAL_SERVER_URL + "lapHoaDonJson?maOrder=" + orderId;
+        HoaDonDTO hoaDon = null;
+
+        try {
+            JSONArray jsonArray = new JSONArray();
+            for (String s : voucherCodes) {
+                jsonArray.put(s);
+            }
+            String response = U.loadPostResponseJson(url, jsonArray.toString());
+            JSONObject jsonObj = new JSONObject(response);
+
+            hoaDon = HoaDonDTO.fromJson(jsonObj);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return hoaDon;
     }
 
     public HoaDonDTO postHoaDon(HoaDonDTO hoaDon) {
@@ -83,6 +105,6 @@ public class HoaDonDAO extends AbstractDAO {
     @Override
     protected void createCache(Cursor cursor) {
         // TODO Auto-generated method stub
-        
+
     }
 }

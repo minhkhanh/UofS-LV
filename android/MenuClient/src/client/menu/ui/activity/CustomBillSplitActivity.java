@@ -26,16 +26,12 @@ public class CustomBillSplitActivity extends Activity {
     private MiniBillView mMainBillView;
     private MiniBillView mSubBillView;
     private List<ChiTietOrderDTO> mChiTietOrderList;
-    
+
     private HorizontalScrollView mScrollView;
 
     private CustomLoadBillItemsTask mLoadBillItemsTask;
 
     private class CustomLoadBillItemsTask extends LoadBillItemsTask {
-
-        public CustomLoadBillItemsTask(Activity host, List<ChiTietOrderDTO> orderItems) {
-            super(host, orderItems);
-        }
 
         @Override
         protected void onPostExecute(List<ContentValues> result) {
@@ -57,26 +53,27 @@ public class CustomBillSplitActivity extends Activity {
         super.onResume();
 
         ServiceOrder order = SessionManager.getInstance().loadCurrentSession().getOrder();
-        mLoadBillItemsTask = new CustomLoadBillItemsTask(this, order.getContent());
-        mLoadBillItemsTask.execute();
+        mLoadBillItemsTask = new CustomLoadBillItemsTask();
+//        mLoadBillItemsTask.execute(order.getContent());
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_custom_bill_split);
-        
-//        mScrollView = (HorizontalScrollView) findViewById(R.id.horizontalScrollView1);
+
+        // mScrollView = (HorizontalScrollView)
+        // findViewById(R.id.horizontalScrollView1);
         final ViewGroup scrollBill = (ViewGroup) findViewById(R.id.scrollBill);
-        
+
         Button btnSplit = (Button) findViewById(R.id.btnSplit);
         btnSplit.setOnClickListener(new OnClickListener() {
-            
+
             @Override
             public void onClick(View v) {
                 MiniBillView newBill = mSubBillView.clone();
                 scrollBill.addView(newBill);
-                
+
                 mSubBillView.bindItems(null);
             }
         });

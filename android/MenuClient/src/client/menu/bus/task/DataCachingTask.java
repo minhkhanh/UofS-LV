@@ -1,12 +1,13 @@
 package client.menu.bus.task;
 
 import client.menu.dao.AbstractDAO;
+import android.app.ProgressDialog;
 import android.content.Context;
 
 public class DataCachingTask extends DataPreparingTask {
 
-    public DataCachingTask(Context context) {
-        super(context);
+    public DataCachingTask(ProgressDialog dlg) {
+        super(dlg);
     }
 
     @Override

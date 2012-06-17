@@ -1,10 +1,12 @@
 package client.menu.ui.view;
 
 import client.menu.R;
+import client.menu.bus.task.CustomAsyncTask;
 import client.menu.dao.MonAnDAO;
 import client.menu.db.dto.ChiTietOrderDTO;
 import client.menu.db.dto.DonViTinhDaNgonNguDTO;
 import client.menu.db.dto.DonViTinhMonAnDTO;
+import client.menu.db.dto.KhuyenMaiDTO;
 import client.menu.db.dto.MonAnDaNgonNguDTO;
 import client.menu.util.U;
 import android.content.ContentValues;
@@ -22,20 +24,19 @@ public class BillItemView extends RelativeLayout {
 
     UpdateDishRateTask mUpdateDishRateTask;
 
-    class UpdateDishRateTask extends AsyncTask<Void, Void, Void> {
+    class UpdateDishRateTask extends CustomAsyncTask<Void, Void, Void> {
 
         Integer mId;
         Float mPoint;
 
-        public UpdateDishRateTask(Integer maMonAn, Float diem) {
+        public UpdateDishRateTask(Integer maMonAn, Float rate) {
             mId = maMonAn;
-            mPoint = diem;
+            mPoint = rate;
         }
 
         @Override
         protected Void doInBackground(Void... params) {
             MonAnDAO.getInstance().updateDiemDanhGia(mId, mPoint);
-
             return null;
         }
 
@@ -44,29 +45,28 @@ public class BillItemView extends RelativeLayout {
     public BillItemView(Context context) {
         super(context);
 
-        prepareViews(context);
+        initView(context);
     }
 
     public BillItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        prepareViews(context);
+        initView(context);
     }
 
     public BillItemView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        prepareViews(context);
+        initView(context);
     }
 
-    private void prepareViews(Context context) {
+    private void initView(Context context) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.item_bill, this);
 
         RatingBar rateDish = (RatingBar) findViewById(R.id.rateDish);
         rateDish.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
-
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating,
                     boolean fromUser) {
@@ -86,8 +86,9 @@ public class BillItemView extends RelativeLayout {
 
     public void bindData(ContentValues values) {
         mMaMonAn = values.getAsInteger(DonViTinhMonAnDTO.CL_MA_MON_AN);
-        Integer soLuong = values.getAsInteger(ChiTietOrderDTO.CL_SO_LUONG);
-        Integer donGia = values.getAsInteger(DonViTinhMonAnDTO.CL_DON_GIA);
+        
+        Integer quantity = values.getAsInteger(ChiTietOrderDTO.CL_SO_LUONG);
+        Integer unitPrice = values.getAsInteger(DonViTinhMonAnDTO.CL_DON_GIA);
 
         TextView dishName = (TextView) findViewById(R.id.textDishName);
         dishName.setText(values.getAsString(MonAnDaNgonNguDTO.CL_TEN_MON));
@@ -95,13 +96,25 @@ public class BillItemView extends RelativeLayout {
         TextView unitName = (TextView) findViewById(R.id.textUnitName);
         unitName.setText(values.getAsString(DonViTinhDaNgonNguDTO.CL_TEN_DON_VI));
 
-        TextView unitPrice = (TextView) findViewById(R.id.textUnitPrice);
-        unitPrice.setText(donGia.toString());
+        TextView textUnitPrice = (TextView) findViewById(R.id.textUnitPrice);
+        textUnitPrice.setText(unitPrice.toString());
 
         TextView textQuantity = (TextView) findViewById(R.id.textQuantity);
-        textQuantity.setText(soLuong.toString());
+        textQuantity.setText(quantity.toString());
 
+        TextView textPromAmt = (TextView) findViewById(R.id.textPromTotal);
+        
+        Float promValue = values.getAsFloat(KhuyenMaiDTO.CL_GIA_GIAM);
+        Float promRate = values.getAsFloat(KhuyenMaiDTO.CL_TI_LE_GIAM);
+        Float promTotal = 0f;
+        if (promValue == null || promRate == null) {
+            textPromAmt.setText(promTotal.toString());
+        } else {
+            promTotal = promValue + (promRate / 100) * unitPrice * quantity;
+            textPromAmt.setText(promTotal.toString());
+        }
+        
         TextView textTotal = (TextView) findViewById(R.id.textItemTotal);
-        textTotal.setText(String.valueOf(soLuong * donGia));
+        textTotal.setText(String.valueOf(quantity * unitPrice - promTotal));
     }
 }

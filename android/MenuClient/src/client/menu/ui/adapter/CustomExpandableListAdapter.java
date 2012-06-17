@@ -13,10 +13,10 @@ import android.widget.BaseExpandableListAdapter;
 
 public abstract class CustomExpandableListAdapter<G, C> extends BaseExpandableListAdapter {
 
-    private List<G> mGroupData;
-    private List<List<C>> mChildData;
+    protected List<G> mGroupData;
+    protected List<List<C>> mChildData;
     
-    private Context mContext;
+    protected Context mContext;
 
     public CustomExpandableListAdapter(Context context, List<G> groupData) {
         mContext = context;
@@ -82,6 +82,11 @@ public abstract class CustomExpandableListAdapter<G, C> extends BaseExpandableLi
 
     public void addChildAll(int groupPosition, Collection<? extends C> childData) {
         mChildData.get(groupPosition).addAll(childData);
+    }
+    
+    public void addGroup(int position, G newGroup) {
+        mGroupData.add(position, newGroup);
+        mChildData.add(position, new ArrayList<C>());
     }
 
     public void addGroup(G newGroup) {

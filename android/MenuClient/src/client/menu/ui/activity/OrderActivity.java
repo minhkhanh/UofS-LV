@@ -3,133 +3,96 @@ package client.menu.ui.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONException;
+
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
-import android.database.Cursor;
 import android.database.DataSetObserver;
-import android.database.DatabaseUtils;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import client.menu.R;
-import client.menu.app.MyAppLocale;
 import client.menu.bus.SessionManager;
 import client.menu.bus.SessionManager.ServiceOrder;
-import client.menu.dao.DonViTinhDAO;
+import client.menu.bus.SessionManager.ServiceSession;
+import client.menu.bus.task.CustomAsyncTask;
+import client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
+import client.menu.bus.task.GetServingOrderItemsTask;
 import client.menu.dao.OrderDAO;
 import client.menu.db.dto.ChiTietOrderDTO;
-import client.menu.db.dto.NgonNguDTO;
-import client.menu.db.dto.OrderDTO;
 import client.menu.ui.adapter.OrderItemsAdapter;
 import client.menu.util.U;
 
 public class OrderActivity extends ListActivity {
+    private OrderItemsAdapter mListAdapter;
+    private ProgressDialog mWatingDlg;
 
     private DataSetObserver mOrderObserver = new DataSetObserver() {
         public void onChanged() {
-            excuteLoadData();
+            refreshList();
         };
     };
 
-    private class PostOrderTask extends AsyncTask<Void, Void, Boolean> {
-        private List<ChiTietOrderDTO> mItemToPost;// = new
-                                                  // ArrayList<ChiTietOrderDTO>();
-        private OrderDTO mOrder;
+    private class PostOrderItemsTask extends CustomAsyncTask<Void, Void, Boolean> {
+        List<ChiTietOrderDTO> mItems;
 
-        public PostOrderTask() {
-            ServiceOrder servOrder = SessionManager.getInstance().loadCurrentSession()
-                    .getOrder();
-            OrderDTO order = servOrder.makeOrder();
-            mItemToPost = servOrder.getUnbindedItems();
-            mOrder = order;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            ServiceSession session = SessionManager.getInstance().loadCurrentSession();
+
+            mItems = session.bindOrder().getOrderItems();
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            try {
+                return OrderDAO.getInstance().postArrayChiTietOrder(mItems);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return false;
+            }
         }
 
         @Override
         protected void onPostExecute(Boolean result) {
             super.onPostExecute(result);
+            ServiceSession session = SessionManager.getInstance().loadCurrentSession();
+
             mWatingDlg.cancel();
-            if (result == true) {
+            if (result) {
                 U.toastText(OrderActivity.this, OrderActivity.this.getResources()
                         .getString(R.string.message_order_sent));
 
-                SessionManager.getInstance().loadCurrentSession().getOrder()
-                        .setOrderId(mOrder.getMaOrder());
+                session.getOrder().clear();
 
-                excuteLoadData();
+                refreshList();
             } else {
-                AlertDialog.Builder builder = new Builder(OrderActivity.this)
-                        .setMessage(getResources().getString(
-                                R.string.message_connect_server_failed));
-                builder.create().show();
+                new AlertDialog.Builder(OrderActivity.this)
+                        .setMessage(R.string.message_connect_server_failed).create()
+                        .show();
+
+                // session.unbindOrder();
             }
         };
 
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            if (mOrder.getMaOrder() <= 0) {
-                mOrder = OrderDAO.getInstance().postNewOrder(mOrder);
-                if (mOrder == null) {
-                    return false;
-                }
-            }
-
-            for (ChiTietOrderDTO c : mItemToPost) {
-                c.setMaOrder(mOrder.getMaOrder());
-            }
-
-            List<ChiTietOrderDTO> list = OrderDAO.getInstance().postChiTietOrderArray(
-                    mItemToPost);
-            if (list == null) {
-                return false;
-            }
-
-            return true;
-        }
     };
 
-    private OrderItemsAdapter mListAdapter;
-    List<LoadOrderItemAsyncTask> mLoadOrderItemTasks = new ArrayList<OrderActivity.LoadOrderItemAsyncTask>();
-    protected ProgressDialog mWatingDlg;
-
-    private class LoadOrderItemAsyncTask extends
-            AsyncTask<ChiTietOrderDTO, Integer, Void> {
-
-        ChiTietOrderDTO mItem;
-        ContentValues mValues;
-
+    private OnPostExecuteListener<Integer, Void, List<ContentValues>> mOnPostGetServingOrderItems = new OnPostExecuteListener<Integer, Void, List<ContentValues>>() {
         @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-
-            mListAdapter.add(mValues);
-            mListAdapter.addExtra(mItem);
+        public void onPostExecute(
+                CustomAsyncTask<Integer, Void, List<ContentValues>> task,
+                List<ContentValues> result) {
+            mListAdapter.clear();
+            mListAdapter.addAll(result);
             mListAdapter.notifyDataSetChanged();
         }
-
-        @Override
-        protected Void doInBackground(ChiTietOrderDTO... params) {
-            mItem = params[0];
-
-            NgonNguDTO ngonNgu = MyAppLocale.getCurrentLanguage(OrderActivity.this);
-
-            Cursor cursor = DonViTinhDAO.getInstance().cursorByDonViTinhMonAn(
-                    mItem.getMaMonAn(), mItem.getMaDonViTinh(), ngonNgu.getMaNgonNgu());
-            cursor.moveToFirst();
-
-            mValues = new ContentValues();
-            DatabaseUtils.cursorRowToContentValues(cursor, mValues);
-
-            cursor.close();
-
-            return null;
-        }
-    }
+    };
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -150,7 +113,7 @@ public class OrderActivity extends ListActivity {
                                     public void onClick(DialogInterface dialog, int id) {
                                         mWatingDlg = ProgressDialog.show(
                                                 OrderActivity.this, "", "Wating...");
-                                        new PostOrderTask().execute();
+                                        new PostOrderItemsTask().execute();
                                     }
                                 })
                         .setNegativeButton(
@@ -185,51 +148,24 @@ public class OrderActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ServiceOrder order = SessionManager.getInstance().loadCurrentSession().getOrder();
+        ServiceSession session = SessionManager.getInstance().loadCurrentSession();
+        ServiceOrder order = session.getOrder();
         order.registerObserver(mOrderObserver);
 
-        mListAdapter = new OrderItemsAdapter(this, new ArrayList<ContentValues>(),
-                new ArrayList<ChiTietOrderDTO>());
+        mListAdapter = new OrderItemsAdapter(this, new ArrayList<ContentValues>());
         setListAdapter(mListAdapter);
-
-    }
-
-    private void cleanTasks() {
-        for (int i = 0; i < mLoadOrderItemTasks.size(); ++i) {
-            LoadOrderItemAsyncTask task = mLoadOrderItemTasks.get(i);
-            if (task.getStatus() != AsyncTask.Status.FINISHED) {
-                mLoadOrderItemTasks.get(i).cancel(true);
-            }
-        }
-
-        mLoadOrderItemTasks.clear();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        cleanTasks();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        excuteLoadData();
+        refreshList();
     }
 
-    private void excuteLoadData() {
-        mListAdapter.clear();
-        mListAdapter.notifyDataSetChanged();
-
-        ServiceOrder order = SessionManager.getInstance().loadCurrentSession().getOrder();
-        for (int i = 0; i < order.getCount(); ++i) {
-            ChiTietOrderDTO c = order.getItem(i);
-            LoadOrderItemAsyncTask task = new LoadOrderItemAsyncTask();
-            mLoadOrderItemTasks.add(task);
-
-            task.execute(c);
-        }
+    private void refreshList() {
+        ServiceSession session = SessionManager.getInstance().loadCurrentSession();
+        new GetServingOrderItemsTask(true).setOnPostExecuteListener(
+                mOnPostGetServingOrderItems).execute(session.getOrderId());
     }
 }
