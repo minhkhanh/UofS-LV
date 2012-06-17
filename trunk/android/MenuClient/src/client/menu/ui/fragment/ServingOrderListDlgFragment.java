@@ -3,77 +3,81 @@ package client.menu.ui.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import client.menu.R;
-import client.menu.bus.loader.GetServingOrderListLoader;
-import client.menu.bus.task.CustomAsyncTask;
-import client.menu.bus.task.CustomAsyncTask.OnPostExecuteAsyncTaskListener;
-import client.menu.bus.task.GetServingOrderItemsTask;
-import client.menu.db.dto.BanDTO;
-import client.menu.db.dto.OrderDTO;
-import client.menu.ui.adapter.BriefOrderListAdapter;
+import org.json.JSONObject;
+
+import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.content.Loader;
 import android.os.Bundle;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
-import android.widget.TextView;
+import client.menu.R;
+import client.menu.bus.SessionManager;
+import client.menu.bus.loader.GetServingOrderListLoader;
+import client.menu.bus.task.CustomAsyncTask;
+import client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
+import client.menu.bus.task.GetServingOrderItemsTask;
+import client.menu.dao.AbstractDAO;
+import client.menu.dao.BanDAO;
+import client.menu.db.dto.BanDTO;
+import client.menu.db.dto.OrderDTO;
+import client.menu.ui.activity.MainMenuActivity;
+import client.menu.ui.adapter.BriefOrderListAdapter;
+import client.menu.util.U;
 
 public class ServingOrderListDlgFragment extends DialogFragment implements
-        LoaderCallbacks<List<OrderDTO>>,
-        OnPostExecuteAsyncTaskListener<Void, Integer, List<ContentValues>> {
+        LoaderCallbacks<List<OrderDTO>> {
 
-    BanDTO mBan;
+    private Integer mGroupId;
 
-    BriefOrderListAdapter mListAdapter;
-    ExpandableListView mOrderList;
+    private BriefOrderListAdapter mListAdapter;
+    private ExpandableListView mOrderList;
 
-    TextView mSelectedOrderText;
+    private int mSelectedOrder;
 
-    int mSelectedOrder;
+    private TargetTableLoadingTask mTargetTableLoadingTask;
+    private PostNewOrderTask mPostNewOrderTask;
+
+    protected OnPostExecuteListener<Integer, Void, List<ContentValues>> mOnPostExecuteGroupExpanding = new OnPostExecuteListener<Integer, Void, List<ContentValues>>() {
+        @Override
+        public void onPostExecute(
+                CustomAsyncTask<Integer, Void, List<ContentValues>> task,
+                List<ContentValues> result) {
+            Bundle extras = task.getExtras();
+            int groupPosition = extras.getInt("groupPosition", -1);
+            if (groupPosition != -1) {
+                mListAdapter.clearChildren(groupPosition);
+                mListAdapter.addChildAll(groupPosition, result);
+                mListAdapter.notifyDataSetChanged();
+            }
+        }
+    };
 
     OnGroupExpandListener mOnGroupExpandListener = new OnGroupExpandListener() {
         @Override
         public void onGroupExpand(int groupPosition) {
-            if (mListAdapter.getChildrenCount(groupPosition) == 0) {
+            if (mListAdapter.getGroup(groupPosition) != null
+                    && mListAdapter.getChildrenCount(groupPosition) == 0) {
                 Bundle extras = new Bundle();
                 extras.putInt("groupPosition", groupPosition);
 
-                GetServingOrderItemsTask task = new GetServingOrderItemsTask(
-                        getActivity(), mListAdapter.getGroup(groupPosition));
-                task.setOnPostExecuteListener(ServingOrderListDlgFragment.this);
+                SessionManager.getInstance().loadSession(
+                        mListAdapter.getGroup(groupPosition).getMaOrder());
+                GetServingOrderItemsTask task = new GetServingOrderItemsTask(true);
+                task.setOnPostExecuteListener(mOnPostExecuteGroupExpanding);
                 task.setExtras(extras);
-                task.execute();
+                task.execute(mListAdapter.getGroup(groupPosition).getMaOrder());
             }
-
-            // for (int i = 0; i < mListAdapter.getGroupCount(); ++i) {
-            // if (i != groupPosition) {
-            // mOrderList.collapseGroup(i);
-            // }
-            // }
-        }
-    };
-
-    private OnChildClickListener mOnChildClickListener = new OnChildClickListener() {
-        @Override
-        public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
-                int childPosition, long id) {
-            selectOrder(groupPosition);
-            return false;
         }
     };
 
@@ -81,7 +85,7 @@ public class ServingOrderListDlgFragment extends DialogFragment implements
         @Override
         public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition,
                 long id) {
-            selectOrder(groupPosition);
+            mSelectedOrder = groupPosition;
             return false;
         }
     };
@@ -91,11 +95,23 @@ public class ServingOrderListDlgFragment extends DialogFragment implements
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btnOK:
-                    
+                    if (mSelectedOrder == 0) {
+                        OrderDTO newOrder = new OrderDTO();
+                        newOrder.setMaBan(mGroupId);
+                        newOrder.setMaTaiKhoan(1);
+
+                        mPostNewOrderTask = new PostNewOrderTask();
+                        mPostNewOrderTask.execute(newOrder);
+                    } else {
+                        OrderDTO order = mListAdapter.getGroup(mSelectedOrder);
+                        SessionManager.getInstance().loadSession(order.getMaOrder());
+                        Intent intent = new Intent(getActivity(), MainMenuActivity.class);
+                        startActivity(intent);
+                    }
                     break;
 
                 case R.id.btnCancel:
-                    
+                    dismiss();
                     break;
                 default:
                     break;
@@ -103,23 +119,70 @@ public class ServingOrderListDlgFragment extends DialogFragment implements
         }
     };
 
-    public ServingOrderListDlgFragment(BanDTO ban) {
-        mBan = ban;
+    class PostNewOrderTask extends CustomAsyncTask<OrderDTO, Void, Integer> {
+        @Override
+        protected Integer doInBackground(OrderDTO... params) {
+            String url = AbstractDAO.LOCAL_SERVER_URL + "themOrderJson";
+            Integer orderId = null;
+
+            try {
+                JSONObject jsonObj = params[0].toJson();
+                String response = U.loadPostResponseJson(url, jsonObj.toString());
+
+                orderId = Integer.valueOf(response);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return -1;
+            }
+
+            return orderId;
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            super.onPostExecute(result);
+
+            if (result != -1) {
+                SessionManager.getInstance().loadSession(result);
+                Intent intent = new Intent(getActivity(), MainMenuActivity.class);
+                startActivity(intent);
+
+                dismiss();
+            } else {
+                new AlertDialog.Builder(getActivity())
+                        .setMessage(R.string.message_create_new_order_failed).create()
+                        .show();
+            }
+        }
     }
 
-    private void selectOrder(int groupPosition) {
-        mSelectedOrderText.setText(getString(R.string.sub_selected_order) + ": "
-                + getString(R.string.sub_order_no) + " " + (groupPosition + 1));
+    class TargetTableLoadingTask extends CustomAsyncTask<Integer, Void, BanDTO> {
+        @Override
+        protected BanDTO doInBackground(Integer... params) {
+            return BanDAO.getInstance().objByMaBan(params[0]);
+        }
 
-        mSelectedOrder = groupPosition;
-
+        @Override
+        protected void onPostExecute(BanDTO result) {
+            if (result != null) {
+                getDialog().setTitle(
+                        getString(R.string.sub_order_list_at) + " " + result.getTenBan());
+            }
+        }
     }
+
+    public ServingOrderListDlgFragment(Integer groupId) {
+        mGroupId = groupId;
+    }
+
+    // private void selectOrder(int groupPosition) {
+    // mSelectedOrder = groupPosition;
+    // }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        getDialog().setTitle(
-                getString(R.string.sub_order_list_at) + " " + mBan.getTenBan());
+        getDialog().setCancelable(false);
         return inflater.inflate(R.layout.layout_brief_order_list, null);
     }
 
@@ -128,33 +191,48 @@ public class ServingOrderListDlgFragment extends DialogFragment implements
         super.onActivityCreated(savedInstanceState);
 
         mOrderList = (ExpandableListView) getView().findViewById(R.id.elistOrder);
+        mOrderList.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+        // mOrderList.setItemsCanFocus(false);
 
         mListAdapter = new BriefOrderListAdapter(getActivity(), new ArrayList<OrderDTO>());
         mOrderList.setAdapter(mListAdapter);
 
         mOrderList.setOnGroupExpandListener(mOnGroupExpandListener);
-        mOrderList.setOnChildClickListener(mOnChildClickListener);
+        // mOrderList.setOnChildClickListener(mOnChildClickListener);
         mOrderList.setOnGroupClickListener(mOnGroupClickListener);
-        // mOrderList.setItemsCanFocus(true);
 
         Button btnOK = (Button) getView().findViewById(R.id.btnOK);
         btnOK.setOnClickListener(mOnClickListener);
         Button btnCancel = (Button) getView().findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(mOnClickListener);
+    }
 
-        mSelectedOrderText = (TextView) getView().findViewById(R.id.textSelectedOrder);
+    @Override
+    public void onResume() {
+        super.onResume();
 
         getLoaderManager().initLoader(0, null, this);
+
+        mTargetTableLoadingTask = new TargetTableLoadingTask();
+        mTargetTableLoadingTask.execute(mGroupId);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        U.cancelAsyncTask(mTargetTableLoadingTask);
     }
 
     @Override
     public Loader<List<OrderDTO>> onCreateLoader(int arg0, Bundle arg1) {
-        return new GetServingOrderListLoader(getActivity(), mBan.getMaBan());
+        return new GetServingOrderListLoader(getActivity(), mGroupId);
     }
 
     @Override
     public void onLoadFinished(Loader<List<OrderDTO>> arg0, List<OrderDTO> arg1) {
         mListAdapter.clearGroup();
+        mListAdapter.addGroup(0, null);
         mListAdapter.addGroupAll(arg1);
         mListAdapter.notifyDataSetChanged();
     }
@@ -163,18 +241,5 @@ public class ServingOrderListDlgFragment extends DialogFragment implements
     public void onLoaderReset(Loader<List<OrderDTO>> arg0) {
         mListAdapter.clearGroup();
         mListAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onPostExecuteAsyncTask(
-            CustomAsyncTask<Void, Integer, List<ContentValues>> task,
-            List<ContentValues> result) {
-        Bundle extras = task.getExtras();
-        int groupPosition = extras.getInt("groupPosition", -1);
-        if (groupPosition != -1) {
-            mListAdapter.clearChildren(groupPosition);
-            mListAdapter.addChildAll(groupPosition, result);
-            mListAdapter.notifyDataSetChanged();
-        }
     }
 }

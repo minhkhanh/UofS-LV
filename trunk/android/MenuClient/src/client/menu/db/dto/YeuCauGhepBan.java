@@ -13,6 +13,22 @@ public class YeuCauGhepBan {
 
     Integer mMaBanChinh;
     List<Integer> mMaBanPhuList;
+    
+    public static final YeuCauGhepBan fromTableList(List<BanDTO> list) {
+        YeuCauGhepBan yc = new YeuCauGhepBan();
+        
+        Integer maBanChinh = list.get(0).getMaBan();
+        list.remove(0);
+        yc.mMaBanChinh = maBanChinh;
+        List<Integer> listMaBanPhu = new ArrayList<Integer>();
+        for (BanDTO b : list) {
+            listMaBanPhu.add(b.getMaBan());
+        }
+        
+        yc.mMaBanPhuList = listMaBanPhu;
+        
+        return yc;
+    }
 
     public String toJsonString() throws JSONException {
         JSONObject jsonObj = new JSONObject();

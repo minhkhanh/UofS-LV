@@ -10,8 +10,11 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import client.menu.R;
+import client.menu.bus.task.CustomAsyncTask;
 import client.menu.db.dto.BanDTO;
 import client.menu.db.util.MyDatabaseHelper;
 import client.menu.util.U;
@@ -19,9 +22,7 @@ import client.menu.util.U;
 public class BanDAO extends AbstractDAO {
     private static final String GET_ALL_JSON_URL = LOCAL_SERVER_URL
             + "layDanhSachBanJson";
-    private static final String GET_BY_KHU_VUC_URL = LOCAL_SERVER_URL
-            + "layDanhSachBanTheoKhuVuc?maKhuVuc=";
-    private static final String PUT_UPDATE_URL = LOCAL_SERVER_URL + "capNhatBan";
+    private static final String PUT_URL = LOCAL_SERVER_URL + "capNhatBan";
 
     private static BanDAO mInstance;
 
@@ -42,6 +43,41 @@ public class BanDAO extends AbstractDAO {
         return mInstance;
     }
 
+    public boolean put(BanDTO ban) {
+        String response = null;
+
+        try {
+            JSONObject jsonObj = ban.toJson();
+            response = U.loadPutResponse(PUT_URL, jsonObj.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return Boolean.valueOf(response);
+    }
+
+    public BanDTO objByMaBan(Integer maBan) {
+        BanDTO ban = null;
+        try {
+            SQLiteDatabase db = open();
+            String selection = BanDTO.CL_MA_BAN + "=?";
+            String[] selectionArgs = { maBan.toString() };
+            Cursor cursor = db.query(BanDTO.TABLE_NAME, null, selection, selectionArgs,
+                    null, null, null, null);
+            if (cursor.moveToFirst()) {
+                ban = BanDTO.fromCursor(cursor);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ban = null;
+        } finally {
+            close();
+        }
+
+        return ban;
+    }
+
     @Deprecated
     public Cursor cursorByKhuVuc(Integer maKhuVuc) {
         Cursor cursor = null;
@@ -56,7 +92,7 @@ public class BanDAO extends AbstractDAO {
 
     public boolean putUpdate(BanDTO ban) {
         String xmlData = ban.toXml();
-        String respString = U.loadPutResponse(PUT_UPDATE_URL, xmlData);
+        String respString = U.loadPutResponse(PUT_URL, xmlData);
 
         return U.deserializeXml(respString);
     }
@@ -89,10 +125,11 @@ public class BanDAO extends AbstractDAO {
     }
 
     public List<BanDTO> getByKhuVuc(Integer maKhuVuc) {
+        String url = LOCAL_SERVER_URL + "layDanhSachBanTheoKhuVuc?maKhuVuc=" + maKhuVuc;
         List<BanDTO> list = new ArrayList<BanDTO>();
 
         try {
-            String xmlData = U.loadGetResponse(GET_BY_KHU_VUC_URL + maKhuVuc.toString());
+            String xmlData = U.loadGetResponse(url);
             XmlPullParserFactory parserFactory = XmlPullParserFactory.newInstance();
             XmlPullParser parser = parserFactory.newPullParser();
             parser.setInput(new StringReader(xmlData));

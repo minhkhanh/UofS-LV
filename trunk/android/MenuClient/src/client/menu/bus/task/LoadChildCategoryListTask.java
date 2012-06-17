@@ -6,26 +6,19 @@ import android.app.Activity;
 import android.content.Context;
 
 import client.menu.app.MyAppLocale;
+import client.menu.app.MyApplication;
 import client.menu.dao.DanhMucDAO;
 import client.menu.db.dto.DanhMucDaNgonNguDTO;
 import client.menu.db.dto.NgonNguDTO;
 
 public class LoadChildCategoryListTask extends
-        CustomAsyncTask<Void, Integer, List<DanhMucDaNgonNguDTO>> {
-
-    private Integer mMaDanhMucCha;
-
-    public LoadChildCategoryListTask(Context context, Integer maDanhMucCha) {
-        super(context);
-
-        mMaDanhMucCha = maDanhMucCha;
-    }
+        CustomAsyncTask<Integer, Void, List<DanhMucDaNgonNguDTO>> {
 
     @Override
-    protected List<DanhMucDaNgonNguDTO> doInBackground(Void... params) {
-        NgonNguDTO ngonNgu = MyAppLocale.getCurrentLanguage((Activity) getContext());
+    protected List<DanhMucDaNgonNguDTO> doInBackground(Integer... params) {
+        NgonNguDTO ngonNgu = MyAppLocale.getCurrentLanguage(MyApplication.getInstance());
         return DanhMucDAO.getInstance().listDanhMucCon(ngonNgu.getMaNgonNgu(),
-                mMaDanhMucCha);
+                params[0]);
     }
 
 }

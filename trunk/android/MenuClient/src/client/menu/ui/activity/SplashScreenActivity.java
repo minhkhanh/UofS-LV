@@ -3,12 +3,13 @@ package client.menu.ui.activity;
 import client.menu.R;
 import client.menu.app.MyApplication;
 import client.menu.bus.task.CustomAsyncTask;
-import client.menu.bus.task.CustomAsyncTask.OnPostExecuteAsyncTaskListener;
+import client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import client.menu.bus.task.SyncDbTask;
 import client.menu.util.C;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,7 +19,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 public class SplashScreenActivity extends Activity implements
-        OnPostExecuteAsyncTaskListener<Void, String, Boolean>, OnClickListener {
+        OnPostExecuteListener<Void, String, Boolean>, OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class SplashScreenActivity extends Activity implements
                 .applyLanguage(getApplicationContext());
 
         setContentView(R.layout.layout_splash);
-        
+
         SharedPreferences sharedPref = getSharedPreferences(C.SHARED_PREF_FILE, 0);
         boolean syncFlag = sharedPref.getBoolean(getString(R.string.key_pref_auto_sync),
                 false);
@@ -42,8 +43,8 @@ public class SplashScreenActivity extends Activity implements
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.cancel();
-                                    SyncDbTask task = new SyncDbTask(
-                                            SplashScreenActivity.this);
+                                    SyncDbTask task = new SyncDbTask(new ProgressDialog(
+                                            SplashScreenActivity.this));
                                     task.setOnPostExecuteListener(SplashScreenActivity.this);
                                     task.execute();
                                 }
@@ -53,14 +54,14 @@ public class SplashScreenActivity extends Activity implements
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.cancel();
-//                                    nextScreen();
+                                    // nextScreen();
                                 }
                             }).create().show();
 
         }
-//        else {
-//            nextScreen();
-//        }
+        // else {
+        // nextScreen();
+        // }
 
         Button btnTableMap = (Button) findViewById(R.id.btnTableMap);
         btnTableMap.setOnClickListener(this);
@@ -68,15 +69,14 @@ public class SplashScreenActivity extends Activity implements
         btnPreferences.setOnClickListener(this);
     }
 
-//    private void nextScreen() {
-//        Intent intent = new Intent(this, AppPreferenceActivity.class);
-//        startActivity(intent);
-//    }
+    // private void nextScreen() {
+    // Intent intent = new Intent(this, AppPreferenceActivity.class);
+    // startActivity(intent);
+    // }
 
     @Override
-    public void onPostExecuteAsyncTask(CustomAsyncTask<Void, String, Boolean> task,
-            Boolean result) {
-//        nextScreen();
+    public void onPostExecute(CustomAsyncTask<Void, String, Boolean> task, Boolean result) {
+        // nextScreen();
     }
 
     @Override

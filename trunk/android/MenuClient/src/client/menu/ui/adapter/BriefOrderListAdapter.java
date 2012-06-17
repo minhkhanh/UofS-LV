@@ -4,26 +4,30 @@ import java.util.List;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckedTextView;
 import android.widget.TextView;
 import client.menu.R;
 import client.menu.db.dto.OrderDTO;
 import client.menu.ui.view.BriefOrderItemView;
+import client.menu.ui.view.CheckableLayout;
+import client.menu.ui.view.SingleChoiceGroup;
 
 public class BriefOrderListAdapter extends
         CustomExpandableListAdapter<OrderDTO, ContentValues> {
 
+    SingleChoiceGroup mGroup;
+
     class GroupHolder {
-        TextView mText1;
+        TextView mOrderTitle;
     }
 
     public BriefOrderListAdapter(Context context, List<OrderDTO> groupData) {
         super(context, groupData);
+        
+        mGroup = new SingleChoiceGroup(0);
     }
-
+    
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild,
             View convertView, ViewGroup parent) {
@@ -44,30 +48,28 @@ public class BriefOrderListAdapter extends
             ViewGroup parent) {
         GroupHolder holder;
         if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(
-                    Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(
-                    android.R.layout.simple_expandable_list_item_1, null);
+            CheckableLayout groupView = new CheckableLayout(getContext(),
+                    R.layout.item_brief_order_list, R.id.cmarkOrderSelection);
+            groupView.joinGroup(mGroup);
 
             holder = new GroupHolder();
-            holder.mText1 = (TextView) convertView.findViewById(android.R.id.text1);
+            holder.mOrderTitle = (TextView) groupView.findViewById(R.id.textOrderTitle);
 
-            convertView.setTag(holder);
+            groupView.setTag(holder);
+
+            convertView = groupView;
         } else {
             holder = (GroupHolder) convertView.getTag();
         }
 
-//        holder.mText1.setBackgroundResource(R.drawable.activated_background);
-        holder.mText1.setText(getContext().getString(R.string.sub_order_no) + " "
-                + (groupPosition + 1));
+        if (groupPosition == 0) {
+            holder.mOrderTitle.setText(R.string.text_create_new_order);
+        } else {
+            holder.mOrderTitle.setText(getContext().getString(R.string.sub_order_no)
+                    + " " + groupPosition);
+        }
 
         return convertView;
-        // TextView view = new TextView(getContext());
-        // view.setBackgroundResource(R.drawable.activated_background);
-        // view.setText(getContext().getString(R.string.sub_order_no) + " "
-        // + (groupPosition + 1));
-        //
-        // return view;
     }
 
 }

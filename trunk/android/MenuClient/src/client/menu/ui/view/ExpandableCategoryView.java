@@ -5,7 +5,7 @@ import java.util.concurrent.ExecutionException;
 
 import client.menu.R;
 import client.menu.bus.task.CustomAsyncTask;
-import client.menu.bus.task.CustomAsyncTask.OnPostExecuteAsyncTaskListener;
+import client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import client.menu.bus.task.LoadChildCategoryListTask;
 import client.menu.db.dto.DanhMucDaNgonNguDTO;
 import client.menu.ui.view.ExpandableCategoryList3.OnCategoryClickListener;
@@ -20,7 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ExpandableCategoryView extends LinearLayout implements
-        OnPostExecuteAsyncTaskListener<Void, Integer, List<DanhMucDaNgonNguDTO>> {
+        OnPostExecuteListener<Integer, Void, List<DanhMucDaNgonNguDTO>> {
 
     private ExpandableCategoryList3 mRoot;
 
@@ -77,7 +77,7 @@ public class ExpandableCategoryView extends LinearLayout implements
             public void onClick(View v) {
                 if (mTask != null) {
                     if (mTask.getStatus() == AsyncTask.Status.PENDING) {
-                        mTask.execute();
+                        mTask.execute(mDanhMuc.getMaDanhMuc());
                     }
 
                     if (mExpanded && !mFocused) {
@@ -96,8 +96,8 @@ public class ExpandableCategoryView extends LinearLayout implements
     }
 
     @Override
-    public void onPostExecuteAsyncTask(
-            CustomAsyncTask<Void, Integer, List<DanhMucDaNgonNguDTO>> task,
+    public void onPostExecute(
+            CustomAsyncTask<Integer, Void, List<DanhMucDaNgonNguDTO>> task,
             List<DanhMucDaNgonNguDTO> result) {
         toggleExpanded();
         if (result.size() > 0) {
@@ -115,8 +115,7 @@ public class ExpandableCategoryView extends LinearLayout implements
     public void bindData(DanhMucDaNgonNguDTO danhMuc) {
         if (mDanhMuc == null || danhMuc.getMaDanhMuc() != mDanhMuc.getMaDanhMuc()) {
             mDanhMuc = danhMuc;
-            mTask = new LoadChildCategoryListTask(getContext(),
-                    mDanhMuc.getMaDanhMuc());
+            mTask = new LoadChildCategoryListTask();
             mTask.setOnPostExecuteListener(ExpandableCategoryView.this);
 
             mCategoryText.setText(mDanhMuc.getTenDanhMuc());

@@ -3,6 +3,8 @@ package client.menu.ui.activity;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,7 +12,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import client.menu.R;
+import client.menu.bus.SessionManager;
+import client.menu.bus.SessionManager.ServiceSession;
 import client.menu.ui.fragment.CategoryListFragment;
+import client.menu.util.U;
 
 public class MainMenuActivity extends Activity {
     @Override
@@ -27,15 +32,37 @@ public class MainMenuActivity extends Activity {
     }
 
     @Override
+    public void onBackPressed() {
+        U.showConfirmDialog(this, R.string.message_you_are_leaving_main_menu,
+                new OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MainMenuActivity.super.onBackPressed();
+                    }
+                });
+    }
+
+    @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
+        ServiceSession session = SessionManager.getInstance().loadCurrentSession();
+
         switch (item.getItemId()) {
             case R.id.miViewOrder:
-                Intent intent = new Intent(this, OrderActivity.class);
-                startActivity(intent);
+
+                if (session.isFinished())
+                    U.toastText(this, R.string.message_your_service_session_finished);
+                else {
+                    Intent intent = new Intent(this, OrderActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.miPayment:
-                intent = new Intent(this, BillActivity.class);
-                startActivity(intent);
+                if (session.isFinished())
+                    U.toastText(this, R.string.message_your_service_session_finished);
+                else {
+                    Intent intent = new Intent(MainMenuActivity.this, BillActivity.class);
+                    startActivity(intent);
+                }
                 break;
         }
 

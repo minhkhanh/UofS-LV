@@ -17,6 +17,7 @@ import client.menu.dao.NhomTaiKhoanDAO;
 import client.menu.dao.OrderDAO;
 import client.menu.dao.TaiKhoanDAO;
 import client.menu.dao.TiGiaDAO;
+import client.menu.dao.VoucherDAO;
 import client.menu.db.util.MyDatabaseHelper;
 import client.menu.util.C;
 import android.app.Activity;
@@ -24,6 +25,8 @@ import android.app.Application;
 
 public class MyApplication extends Application {
     private static final String EX_MSG_01 = "Can not get MyApplication object from the activity parameter.";
+    
+    private static MyApplication mInstance;
 
     private MyAppSettings mSettings;
 
@@ -39,6 +42,8 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        
+        mInstance = this;
 
         initDAOs();
         
@@ -66,5 +71,14 @@ public class MyApplication extends Application {
         TiGiaDAO.createInstance(dbHelper);
         OrderDAO.createInstance(dbHelper);
         HoaDonDAO.createInstance(dbHelper);
+        VoucherDAO.createInstance(dbHelper);
+    }
+
+    public static final MyApplication getInstance() {
+        return mInstance;
+    }
+
+    public MyAppSettings getSettings() {
+        return mSettings;
     }
 }

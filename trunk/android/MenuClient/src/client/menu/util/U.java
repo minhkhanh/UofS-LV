@@ -25,12 +25,18 @@ import org.apache.http.util.EntityUtils;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import client.menu.R;
+
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -47,6 +53,38 @@ import android.widget.AbsListView;
 import android.widget.Toast;
 
 public final class U {
+    
+//    public static final ProgressDialog showWaitingDialog(Context context, String msg) {
+//       ProgressDialog dlg = new ProgressDialog(context);
+//       dlg.setCanceledOnTouchOutside(false);
+//       dlg.setMessage(msg);
+//       
+//       dlg.show
+//       
+//       return dlg;
+//    }
+
+    public static final void showErrorDialog(Context context, int msgResId) {
+        new AlertDialog.Builder(context).setMessage(msgResId)
+                .setNeutralButton(R.string.caption_ok, new OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).create().show();
+    }
+
+    public static final void showConfirmDialog(Context context, int msgResId,
+            DialogInterface.OnClickListener onPositiveClick) {
+        new AlertDialog.Builder(context).setMessage(msgResId).setCancelable(false)
+                .setPositiveButton(R.string.caption_yes, onPositiveClick)
+                .setNegativeButton(R.string.caption_no, new OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).create().show();
+    }
 
     public static final List<ContentValues> toContentValuesList(Cursor cursor) {
         List<ContentValues> list = new ArrayList<ContentValues>();
@@ -151,6 +189,26 @@ public final class U {
             httpPost.setEntity(postObj);
 
             HttpResponse response = httpclient.execute(httpPost);
+            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                return EntityUtils.toString(response.getEntity());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public static final String loadPutResponseJson(String url, String jsonData) {
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPut httpPut = new HttpPut(url);
+
+        try {
+            StringEntity postObj = new StringEntity(jsonData, HTTP.UTF_8);
+            httpPut.setHeader("Content-Type", "application/json; charset=UTF-8");
+            httpPut.setEntity(postObj);
+
+            HttpResponse response = httpclient.execute(httpPut);
             if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                 return EntityUtils.toString(response.getEntity());
             }

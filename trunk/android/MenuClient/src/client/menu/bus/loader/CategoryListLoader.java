@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import client.menu.app.MyAppLocale;
+import client.menu.app.MyApplication;
 import client.menu.dao.DanhMucDAO;
 import client.menu.db.dto.DanhMucDaNgonNguDTO;
 import client.menu.db.dto.NgonNguDTO;
@@ -23,7 +24,7 @@ public class CategoryListLoader extends CustomAsyncTaskLoader<List<DanhMucDaNgon
 
     @Override
     public List<DanhMucDaNgonNguDTO> loadInBackground() {
-        NgonNguDTO ngonNgu = MyAppLocale.getCurrentLanguage((Activity) mHost);
+        NgonNguDTO ngonNgu = MyAppLocale.getCurrentLanguage(MyApplication.getInstance());
         return DanhMucDAO.getInstance().listDanhMucCon(ngonNgu.getMaNgonNgu(),
                 mMaDanhMucCha);
     }

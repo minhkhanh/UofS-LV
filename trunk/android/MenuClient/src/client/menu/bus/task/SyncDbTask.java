@@ -30,8 +30,8 @@ import client.menu.util.U;
 
 public class SyncDbTask extends DataPreparingTask {
 
-    public SyncDbTask(Context context) {
-        super(context);
+    public SyncDbTask(ProgressDialog dlg) {
+        super(dlg);
     }
 
     @Override
@@ -52,16 +52,16 @@ public class SyncDbTask extends DataPreparingTask {
         super.onPostExecute(result);
 
         if (result) {
-            U.toastText(getContext(), R.string.message_sync_succeed);
+            U.toastText(mProgessDialog.getContext(), R.string.message_sync_succeed);
 
-            SharedPreferences.Editor editor = getContext().getSharedPreferences(
+            SharedPreferences.Editor editor = mProgessDialog.getContext().getSharedPreferences(
                     C.SHARED_PREF_FILE, 0).edit();
 
-            String key = getContext().getString(R.string.key_pref_sync_now);
+            String key = mProgessDialog.getContext().getString(R.string.key_pref_sync_now);
             editor.putLong(key, System.currentTimeMillis());
             editor.commit();
         } else {
-            new AlertDialog.Builder(getContext())
+            new AlertDialog.Builder(mProgessDialog.getContext())
                     .setMessage(R.string.message_sync_failed).create().show();
         }
     }
@@ -71,7 +71,7 @@ public class SyncDbTask extends DataPreparingTask {
         super.onPreExecute();
 
         getProgessDialog().setMessage(
-                getContext().getString(R.string.text_loading) + " ...");
+                mProgessDialog.getContext().getString(R.string.text_loading) + " ...");
         getProgessDialog().show();
     }
 

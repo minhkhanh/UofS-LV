@@ -5,12 +5,11 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,80 +18,65 @@ import android.widget.ListView;
 import android.widget.TextView;
 import client.menu.R;
 import client.menu.bus.SessionManager;
-import client.menu.bus.SessionManager.ServiceOrder;
-import client.menu.bus.task.LoadBillItemsTask;
-import client.menu.dao.BanDAO;
+import client.menu.bus.SessionManager.ServiceSession;
+import client.menu.bus.task.CustomAsyncTask;
+import client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
+import client.menu.bus.task.GetServingOrderItemsTask;
 import client.menu.dao.HoaDonDAO;
-import client.menu.dao.OrderDAO;
-import client.menu.db.dto.BanDTO;
-import client.menu.db.dto.ChiTietHoaDonDTO;
-import client.menu.db.dto.ChiTietOrderDTO;
 import client.menu.db.dto.HoaDonDTO;
 import client.menu.ui.adapter.BillItemsAdapter;
+import client.menu.ui.adapter.VoucherItemsAdapter;
 import client.menu.ui.fragment.CustomBillSplitDialog;
 import client.menu.ui.fragment.EqualBillSplitDialog;
+import client.menu.ui.fragment.VoucherSearchDlgFragment;
+import client.menu.ui.fragment.VoucherSearchDlgFragment.OnUseVoucherListener;
 import client.menu.util.U;
 
-public class BillActivity extends Activity {
-    List<ContentValues> mContentList = new ArrayList<ContentValues>();
-    BillItemsAdapter mBillAdapter;
-
-    CustomLoadBillItemsTask mLoadBillItemsTask;
+public class BillActivity extends Activity implements OnUseVoucherListener {
+    private BillItemsAdapter mBillAdapter;
+    private GetServingOrderItemsTask mGetServingOrderItemsTask;
 
     private TextView mBillTotalText;
-    protected ProgressDialog mWatingDlg;
-    
-    class PutTableTask extends AsyncTask<BanDTO, Void, Void> {
+    private ProgressDialog mWatingDlg;
 
-        boolean mResult;
+    private VoucherItemsAdapter mVoucherAdapter;
 
+    private OnPostExecuteListener<Integer, Void, List<ContentValues>> mOnPostGettingServingOrderItems = new OnPostExecuteListener<Integer, Void, List<ContentValues>>() {
         @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
+        public void onPostExecute(
+                CustomAsyncTask<Integer, Void, List<ContentValues>> task,
+                List<ContentValues> result) {
+            mBillAdapter.clear();
+            mBillAdapter.addAll(result);
+            mBillAdapter.notifyDataSetChanged();
 
-            if (mResult) {
-                Intent intent = new Intent(BillActivity.this, TableMapActivity.class);
-                startActivity(intent);
-            } else {
-                AlertDialog.Builder builder = new AlertDialog.Builder(BillActivity.this);
-                builder.setMessage(BillActivity.this.getResources().getString(
-                        R.string.message_connect_server_failed));
-
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
-        }
-
-        @Override
-        protected Void doInBackground(BanDTO... params) {
-            mResult = BanDAO.getInstance().putUpdate(params[0]);
-            return null;
+            updateBillTotalText();
         }
     };
 
-    private class SendBillTask extends AsyncTask<Void, Void, Boolean> {
+    private class PostBillTask extends CustomAsyncTask<Integer, Void, HoaDonDTO> {
 
-        private List<ChiTietOrderDTO> mItems = new ArrayList<ChiTietOrderDTO>();
-        private HoaDonDTO mHoaDon;
+        List<String> mVoucherCodes;
 
-        public SendBillTask() {
-            ServiceOrder order = SessionManager.getInstance().loadCurrentSession()
-                    .getOrder();
-            mItems.addAll(order.getBindedItems());
-            mHoaDon = order.makeHoaDon();
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            mVoucherCodes = mVoucherAdapter.getAllVoucherCodes();
         }
 
         @Override
-        protected void onPostExecute(Boolean result) {
+        protected void onPostExecute(HoaDonDTO result) {
             super.onPostExecute(result);
             mWatingDlg.cancel();
-            if (result) {
+
+            if (result != null) {
                 U.toastText(BillActivity.this, BillActivity.this.getResources()
                         .getString(R.string.message_bill_sent));
-//                BanDTO ban = SessionManager.getInstance().loadCurrentSession().getMaBanChinh();
-//                ban.setActive(true);
-//                new PutTableTask().execute(ban);
-                SessionManager.getInstance().destroyCurrentSession();
+                SessionManager.getInstance().finishCurrentSession();
+
+                Intent intent = new Intent(BillActivity.this, MainMenuActivity.class);
+                startActivity(intent);
             } else {
                 AlertDialog.Builder builder = new Builder(BillActivity.this)
                         .setMessage(getResources().getString(
@@ -102,43 +86,15 @@ public class BillActivity extends Activity {
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
-            int total = OrderDAO.getInstance().queryTongTien(mItems);
-            mHoaDon.setTongTien(total);
-            mHoaDon = HoaDonDAO.getInstance().postHoaDon(mHoaDon);
-
-            List<ChiTietHoaDonDTO> listChiTietHoaDon = HoaDonDAO.getInstance()
-                    .createListChiTietHoaDon(mItems, mHoaDon.getMaHoaDon());
-            listChiTietHoaDon = HoaDonDAO.getInstance().postChiTietHoaDonArray(
-                    listChiTietHoaDon);
-
-            if (listChiTietHoaDon == null) {
-                return false;
-            }
-
-            return true;
-        }
-
-    };
-
-    private class CustomLoadBillItemsTask extends LoadBillItemsTask {
-
-        public CustomLoadBillItemsTask(Activity host, List<ChiTietOrderDTO> orderItems) {
-            super(host, orderItems);
-        }
-
-        @Override
-        protected void onPostExecute(List<ContentValues> result) {
-            super.onPostExecute(result);
-
-            mContentList.clear();
-            mContentList.addAll(result);
-            mBillAdapter.notifyDataSetChanged();
-
-            Integer total = mBillAdapter.getBillTotal();
-            mBillTotalText.setText(total.toString());
+        protected HoaDonDTO doInBackground(Integer... params) {
+            return HoaDonDAO.getInstance().postLapHoaDon(params[0], mVoucherCodes);
         }
     };
+
+    private void updateBillTotalText() {
+        Float total = mBillAdapter.getBillTotal() - mVoucherAdapter.getTotalValue();
+        mBillTotalText.setText(total.toString());
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -160,29 +116,21 @@ public class BillActivity extends Activity {
                 U.showDlgFragment(this, dlgEqual, "dlg");
                 break;
             case R.id.miConfirmBill:
-                AlertDialog.Builder builder = new Builder(this)
-                        .setMessage(
-                                getResources().getString(
-                                        R.string.message_confirm_send_bill))
-                        .setCancelable(false)
-                        .setPositiveButton(
-                                getResources().getString(R.string.caption_yes),
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        mWatingDlg = ProgressDialog.show(
-                                                BillActivity.this, "", "Wating...");
-                                        new SendBillTask().execute();
-                                    }
-                                })
-                        .setNegativeButton(getResources().getString(R.string.caption_no),
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.cancel();
-                                    }
-                                });
-
-                builder.create().show();
+                U.showConfirmDialog(this, R.string.message_confirm_send_bill,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                mWatingDlg = ProgressDialog.show(BillActivity.this, "",
+                                        "Wating...");
+                                Integer orderId = SessionManager.getInstance()
+                                        .loadCurrentSession().getOrderId();
+                                new PostBillTask().execute(orderId);
+                            }
+                        });
+                break;
+            case R.id.miAddVoucher:
+                VoucherSearchDlgFragment dlg = new VoucherSearchDlgFragment(
+                        mBillAdapter.getBillTotal());
+                U.showDlgFragment(this, dlg, "dlg");
                 break;
         }
 
@@ -195,8 +143,12 @@ public class BillActivity extends Activity {
         setContentView(R.layout.layout_bill);
 
         ListView listBill = (ListView) findViewById(R.id.listBill);
-        mBillAdapter = new BillItemsAdapter(this, mContentList);
+        mBillAdapter = new BillItemsAdapter(this, new ArrayList<ContentValues>());
         listBill.setAdapter(mBillAdapter);
+
+        ListView listVoucher = (ListView) findViewById(R.id.listVoucher);
+        mVoucherAdapter = new VoucherItemsAdapter(this, new ArrayList<ContentValues>());
+        listVoucher.setAdapter(mVoucherAdapter);
 
         mBillTotalText = (TextView) findViewById(R.id.textBillTotal);
     }
@@ -205,16 +157,25 @@ public class BillActivity extends Activity {
     protected void onPause() {
         super.onPause();
 
-        U.cancelAsyncTask(mLoadBillItemsTask);
+        U.cancelAsyncTask(mGetServingOrderItemsTask);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        ServiceOrder order = SessionManager.getInstance().loadCurrentSession().getOrder();
+        ServiceSession session = SessionManager.getInstance().loadCurrentSession();
 
-        mLoadBillItemsTask = new CustomLoadBillItemsTask(this, order.getBindedItems());
-        mLoadBillItemsTask.execute();
+        mGetServingOrderItemsTask = new GetServingOrderItemsTask(false);
+        mGetServingOrderItemsTask.setOnPostExecuteListener(
+                mOnPostGettingServingOrderItems).execute(session.getOrderId());
+    }
+
+    @Override
+    public void onUseVoucher(ContentValues values) {
+        mVoucherAdapter.add(values);
+        mVoucherAdapter.notifyDataSetChanged();
+
+        updateBillTotalText();
     }
 }

@@ -3,6 +3,9 @@ package client.menu.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
@@ -15,10 +18,7 @@ import client.menu.db.util.MyDatabaseHelper;
 import client.menu.util.U;
 
 public class OrderDAO extends AbstractDAO {
-    public static final String POST_NEW_ORDER = LOCAL_SERVER_URL
-            + "themOrder";
-    public static final String POST_MANY_ORDER_ITEMS = LOCAL_SERVER_URL
-            + "themNhieuChiTietOrder";
+    public static final String POST_NEW_ORDER = LOCAL_SERVER_URL + "themOrder";
 
     private static OrderDAO mInstance;
 
@@ -48,13 +48,13 @@ public class OrderDAO extends AbstractDAO {
 
         Cursor cursor = db.query(DonViTinhMonAnDTO.TABLE_NAME, projection, selection,
                 selectionArgs, null, null, null);
-        
+
         int gia = 0;
         if (cursor != null && cursor.moveToFirst()) {
             gia = cursor.getInt(0);
         }
         close();
-        
+
         return gia;
     }
 
@@ -67,13 +67,14 @@ public class OrderDAO extends AbstractDAO {
 
         return total;
     }
-    
-    public List<ChiTietOrderDTO> postChiTietOrderArray(List<ChiTietOrderDTO> list) {
-        List<ChiTietOrderDTO> result = null;
-        String xmlData = ChiTietOrderDTO.toXmlArray(list);
-        String respString = U.loadPostResponse(POST_MANY_ORDER_ITEMS, xmlData);
-        result = ChiTietOrderDTO.fromXmlArray(respString);
-        return result;
+
+    public boolean postArrayChiTietOrder(List<ChiTietOrderDTO> list) throws JSONException {
+        String url = LOCAL_SERVER_URL + "themNhieuChiTietOrderJson";
+
+        JSONArray jsonArray = ChiTietOrderDTO.toArrayJson(list);
+        String response = U.loadPostResponseJson(url, jsonArray.toString());
+
+        return Boolean.valueOf(response);
     }
 
     public OrderDTO postNewOrder(OrderDTO order) {

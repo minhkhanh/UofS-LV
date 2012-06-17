@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/welcome_background" >
-
+
     <Button
         android:id="@+id/btnMainMenu"
         android:layout_width="150dp"
@@ -14,7 +14,7 @@
         android:drawableTop="@drawable/dish_sample_small"
         android:text="@string/caption_main_menu"
         android:textSize="20dp" />
-
+
     <Button
         android:id="@+id/btnPayment"
         android:layout_width="150dp"

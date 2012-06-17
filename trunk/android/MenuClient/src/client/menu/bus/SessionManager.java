@@ -3,85 +3,47 @@ package client.menu.bus;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Context;
 import android.database.DataSetObservable;
-import client.menu.db.dto.BanDTO;
+import client.menu.R;
 import client.menu.db.dto.ChiTietOrderDTO;
-import client.menu.db.dto.HoaDonDTO;
-import client.menu.db.dto.OrderDTO;
 import client.menu.util.U;
 
 public class SessionManager {
 
+    public static class OrderItemId {
+        public static final OrderItemId fromOrderItem(ChiTietOrderDTO c) {
+            return new OrderItemId(c.getMaMonAn(), c.getMaDonViTinh());
+        }
+
+        Integer mDishId;
+        Integer mUnitId;
+
+        public OrderItemId(Integer dishId, Integer unitId) {
+            mDishId = dishId;
+            mUnitId = unitId;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (!(o instanceof OrderItemId))
+                return false;
+
+            OrderItemId thatId = (OrderItemId) o;
+
+            return mDishId == thatId.mDishId && mUnitId == thatId.mUnitId;
+        }
+    }
+
     public class ServiceOrder extends DataSetObservable {
 
-        private ServiceSession mSession;
         private List<ChiTietOrderDTO> mOrderItems = new ArrayList<ChiTietOrderDTO>();
-        private Integer mOrderId = -1;
 
-        public ServiceOrder(ServiceSession session) {
-            mSession = session;
+        public void clear() {
+            mOrderItems.clear();
         }
 
-        public List<ChiTietOrderDTO> getUnbindedItems() {
-            List<ChiTietOrderDTO> items = new ArrayList<ChiTietOrderDTO>();
-            for (ChiTietOrderDTO c : mOrderItems) {
-                if (c.getMaOrder() == null) {
-                    items.add(c);
-                }
-            }
-
-            return items;
-        }
-
-        public List<ChiTietOrderDTO> getBindedItems() {
-            List<ChiTietOrderDTO> items = new ArrayList<ChiTietOrderDTO>();
-            for (ChiTietOrderDTO c : mOrderItems) {
-                if (c.getMaOrder() != null) {
-                    items.add(c);
-                }
-            }
-
-            return items;
-        }
-
-        // public void bindOrderId(Integer orderId) {
-        // for (ChiTietOrderDTO c : mOrderItems) {
-        // c.setMaOrder(orderId);
-        // }
-        //
-        // mOrderId = orderId;
-        // }
-        //
-        // public void unbindOrderId() {
-        // for (ChiTietOrderDTO c : mOrderItems) {
-        // c.setMaOrder(null);
-        // }
-        // }
-        //
-        // public boolean isBindedOrderId() {
-        // return (mOrderId != -1);
-        // }
-
-        public void setOrderId(Integer orderId) {
-            mOrderId = orderId;
-        }
-
-        public HoaDonDTO makeHoaDon() {
-            HoaDonDTO hoaDon = new HoaDonDTO();
-            hoaDon.setMaBanChinh(mSession.getMaBanChinh());
-
-            return hoaDon;
-        }
-
-        public OrderDTO makeOrder() {
-            OrderDTO order = new OrderDTO();
-            order.setMaBan(mSession.getMaBanChinh());
-            order.setMaOrder(mOrderId);
-
-            return order;
-        }
-
-        public final void debugLogItems() {
+        public final void logItemsDebug() {
             for (int i = 0; i < mOrderItems.size(); ++i) {
                 U.logOwnTag(i + " : ( MaMonAn: " + mOrderItems.get(i).getMaMonAn()
                         + ", MaDonViTinh: " + mOrderItems.get(i).getMaDonViTinh()
@@ -108,27 +70,30 @@ public class SessionManager {
             }
         }
 
-        public List<ChiTietOrderDTO> getContent() {
+        public List<ChiTietOrderDTO> getOrderItems() {
+
             return mOrderItems;
         }
 
-        public ChiTietOrderDTO getItem(int index) {
-            return mOrderItems.get(index);
-        }
-
-        public int getCount() {
-            return mOrderItems.size();
-        }
-
-        public void removeItem(ChiTietOrderDTO chiTietOrder) {
+        public ChiTietOrderDTO getItem(OrderItemId id) {
             for (int i = 0; i < mOrderItems.size(); ++i) {
                 ChiTietOrderDTO c = mOrderItems.get(i);
-                if (c.getMaMonAn() == chiTietOrder.getMaMonAn()
-                        && c.getMaDonViTinh() == chiTietOrder.getMaDonViTinh()) {
+                if (OrderItemId.fromOrderItem(c).equals(id))
+                    return c;
+            }
+
+            return null;
+        }
+
+        public ServiceOrder removeItem(OrderItemId id) {
+            for (int i = 0; i < mOrderItems.size(); ++i) {
+                if (OrderItemId.fromOrderItem(mOrderItems.get(i)).equals(id)) {
                     mOrderItems.remove(i);
-                    return;
+                    return this;
                 }
             }
+
+            return this;
         }
 
         public ChiTietOrderDTO addItem(Integer maMonAn, Integer maDonViTinh,
@@ -154,30 +119,55 @@ public class SessionManager {
 
     public class ServiceSession {
 
-        private Integer mMaBanChinh;
+        private Integer mOrderId;
         private ServiceOrder mOrder;
 
-        protected ServiceSession(Integer maBanChinh) {
-            mMaBanChinh = maBanChinh;
-            mOrder = new ServiceOrder(this);
-
-            mOrder.addItem(1, 1, 1, null);
-            mOrder.addItem(2, 2, 2, null);
+        protected ServiceSession(Integer orderId) {
+            mOrderId = orderId;
+            mOrder = new ServiceOrder();
+            // mOrder.addItem(1, 1, 1, null);
+            // mOrder.addItem(2, 2, 2, null);
         }
+
+        public ServiceOrder bindOrder() {
+            for (ChiTietOrderDTO c : mOrder.mOrderItems) {
+                c.setMaOrder(mOrderId);
+                c.setTinhTrang(0);
+            }
+
+            return mOrder;
+        }
+
+        // public void unbindOrder() {
+        // for (ChiTietOrderDTO c : mOrder.mOrderItems) {
+        // c.setMaOrder(-1);
+        // c.setTinhTrang(-1);
+        // }
+        // }
 
         public ServiceOrder getOrder() {
             return mOrder;
         }
 
-        public Integer getMaBanChinh() {
-            return mMaBanChinh;
+        public Integer getOrderId() {
+            return mOrderId;
+        }
+
+        public void finish() {
+            mOrderId = -1;
+            mOrder.clear();
+        }
+
+        public boolean isFinished() {
+            return mOrderId == -1;
         }
     }
 
     private static SessionManager mInstance;
 
     List<ServiceSession> mSessionList = new ArrayList<ServiceSession>();
-    int mIndexCurrent = -1;
+    int mCurrentPos = -1;
+    int mLastFinishedPos = -1;
 
     private SessionManager() {
     }
@@ -190,50 +180,50 @@ public class SessionManager {
         return mInstance;
     }
 
-    public void destroyCurrentSession() {
-        if (mIndexCurrent != -1) {
-            mSessionList.remove(mIndexCurrent);
-            mIndexCurrent = -1;
+    public void finishCurrentSession() {
+        if (mCurrentPos < 0 || mCurrentPos >= mSessionList.size()) {
+            throw new ArrayIndexOutOfBoundsException(
+                    "Current session not found with index = " + mCurrentPos);
         }
+
+        mSessionList.get(mCurrentPos).finish();
+        mLastFinishedPos = mCurrentPos;
+
+        U.logOwnTag("finish current session");
     }
 
     public ServiceSession loadCurrentSession() {
-        if (mIndexCurrent < 0 || mIndexCurrent >= mSessionList.size()) {
-            throw new ArrayIndexOutOfBoundsException("Current session not created");
+        if (mCurrentPos < 0 || mCurrentPos >= mSessionList.size()) {
+            throw new ArrayIndexOutOfBoundsException(
+                    "Current session not found with index = " + mCurrentPos);
         }
 
-        return mSessionList.get(mIndexCurrent);
+        return mSessionList.get(mCurrentPos);
     }
 
-    private ServiceSession createSession(Integer maBanChinh) {
-        for (ServiceSession s : mSessionList) {
-            if (s.getMaBanChinh() == maBanChinh) {
-                throw new IllegalArgumentException("Duplicated session identification: "
-                        + maBanChinh);
-            }
-        }
-
-        ServiceSession session = new ServiceSession(maBanChinh);
-
-        mSessionList.add(session);
-
-        // set the latest added session as current session
-        mIndexCurrent = mSessionList.size() - 1;
-
-        U.logOwnTag("create session " + maBanChinh);
-        return session;
-    }
-
-    public ServiceSession loadSession(Integer maBanChinh) {
+    public ServiceSession loadSession(Integer orderId) {
         for (int i = 0; i < mSessionList.size(); ++i) {
-            if (mSessionList.get(i).getMaBanChinh() == maBanChinh) {
-                mIndexCurrent = i;
+            if (mSessionList.get(i).getOrderId() == orderId) {
+                mCurrentPos = i;
 
-                U.logOwnTag("load session " + maBanChinh);
+                U.logOwnTag("load existing session " + orderId);
                 return mSessionList.get(i);
             }
         }
 
-        return createSession(maBanChinh);
+        ServiceSession session = new ServiceSession(orderId);
+
+        if (mLastFinishedPos >= 0) {
+            mSessionList.add(mLastFinishedPos, session);
+            mCurrentPos = mLastFinishedPos;
+            mLastFinishedPos = -1;
+        } else {
+            mSessionList.add(session);
+            // set the latest added session as current session
+            mCurrentPos = mSessionList.size() - 1;
+        }
+
+        U.logOwnTag("load new session " + orderId);
+        return session;
     }
 }

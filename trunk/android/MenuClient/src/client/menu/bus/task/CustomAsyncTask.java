@@ -7,29 +7,24 @@ import android.os.Bundle;
 public abstract class CustomAsyncTask<Params, Progress, Result> extends
         AsyncTask<Params, Progress, Result> {
 
-    public interface OnPreExecuteAsyncTaskListener<Params, Progress, Result> {
-        void onPreExecuteAsyncTask(CustomAsyncTask<Params, Progress, Result> task);
+    public interface OnPreExecuteListener<Params, Progress, Result> {
+        void onPreExecute(CustomAsyncTask<Params, Progress, Result> task);
     }
 
-    public interface OnPostExecuteAsyncTaskListener<Params, Progress, Result> {
-        void onPostExecuteAsyncTask(CustomAsyncTask<Params, Progress, Result> task,
+    public interface OnPostExecuteListener<Params, Progress, Result> {
+        void onPostExecute(CustomAsyncTask<Params, Progress, Result> task,
                 Result result);
     }
 
-    public interface OnProgressUpdateAsyncTaskListener<Params, Progress, Result> {
-        void onProgressUpdateAsyncTask(CustomAsyncTask<Params, Progress, Result> task,
+    public interface OnProgressUpdateListener<Params, Progress, Result> {
+        void onProgressUpdate(CustomAsyncTask<Params, Progress, Result> task,
                 Progress... values);
     }
 
     private Bundle mExtras;
-    private Context mContext;
-    private OnPostExecuteAsyncTaskListener<Params, Progress, Result> mOnPostExecuteListener;
-    private OnPreExecuteAsyncTaskListener<Params, Progress, Result> mOnPreExecuteListener;
-    private OnProgressUpdateAsyncTaskListener<Params, Progress, Result> mOnProgressUpdateListener;
-
-    public CustomAsyncTask(Context context) {
-        mContext = context;
-    }
+    private OnPostExecuteListener<Params, Progress, Result> mOnPostExecuteListener;
+    private OnPreExecuteListener<Params, Progress, Result> mOnPreExecuteListener;
+    private OnProgressUpdateListener<Params, Progress, Result> mOnProgressUpdateListener;
 
     @Override
     protected abstract Result doInBackground(Params... params);
@@ -39,7 +34,7 @@ public abstract class CustomAsyncTask<Params, Progress, Result> extends
         super.onPostExecute(result);
 
         if (mOnPostExecuteListener != null) {
-            mOnPostExecuteListener.onPostExecuteAsyncTask(this, result);
+            mOnPostExecuteListener.onPostExecute(this, result);
         }
     }
 
@@ -48,7 +43,7 @@ public abstract class CustomAsyncTask<Params, Progress, Result> extends
         super.onPreExecute();
 
         if (mOnPreExecuteListener != null) {
-            mOnPreExecuteListener.onPreExecuteAsyncTask(this);
+            mOnPreExecuteListener.onPreExecute(this);
         }
     }
 
@@ -57,26 +52,24 @@ public abstract class CustomAsyncTask<Params, Progress, Result> extends
         super.onProgressUpdate(values);
 
         if (mOnProgressUpdateListener != null) {
-            mOnProgressUpdateListener.onProgressUpdateAsyncTask(this, values);
+            mOnProgressUpdateListener.onProgressUpdate(this, values);
         }
     }
 
-    public Context getContext() {
-        return mContext;
-    }
-
-    public void setOnPostExecuteListener(
-            OnPostExecuteAsyncTaskListener<Params, Progress, Result> onPostExecuteListener) {
+    public CustomAsyncTask<Params, Progress, Result> setOnPostExecuteListener(
+            OnPostExecuteListener<Params, Progress, Result> onPostExecuteListener) {
         mOnPostExecuteListener = onPostExecuteListener;
+        
+        return this;
     }
 
     public void setOnPreExecuteListener(
-            OnPreExecuteAsyncTaskListener<Params, Progress, Result> onPreExecuteListener) {
+            OnPreExecuteListener<Params, Progress, Result> onPreExecuteListener) {
         mOnPreExecuteListener = onPreExecuteListener;
     }
 
     public void setOnProgressUpdateListener(
-            OnProgressUpdateAsyncTaskListener<Params, Progress, Result> onProgressUpdateListener) {
+            OnProgressUpdateListener<Params, Progress, Result> onProgressUpdateListener) {
         mOnProgressUpdateListener = onProgressUpdateListener;
     }
 

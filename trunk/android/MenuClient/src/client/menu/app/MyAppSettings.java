@@ -8,8 +8,8 @@ public final class MyAppSettings {
     private Application mApplication;
     private MyAppLocale mLocale;
     
-    public static final MyAppLocale getCurrentAppLocale(Activity activity) {
-        MyAppSettings settings = MyApplication.getSettings(activity);
+    public static final MyAppLocale getCurrentAppLocale(MyApplication myApp) {
+        MyAppSettings settings = myApp.getSettings();
         return settings.mLocale;
     }
 

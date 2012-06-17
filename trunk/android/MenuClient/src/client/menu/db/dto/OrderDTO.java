@@ -31,6 +31,15 @@ public class OrderDTO {
 
     // private Integer mTinhTrang = 0;
 
+    public JSONObject toJson() throws JSONException {
+        JSONObject jsonObj = new JSONObject();
+        jsonObj.put(CL_MA_ORDER, mMaOrder);
+        jsonObj.put(CL_MA_BAN, mMaBan);
+        jsonObj.put(CL_MA_TAI_KHOAN, mMaTaiKhoan);
+
+        return jsonObj;
+    }
+
     public static final List<OrderDTO> fromJsonArray(String jsonData)
             throws JSONException {
         List<OrderDTO> list = new ArrayList<OrderDTO>();
