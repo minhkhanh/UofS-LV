@@ -341,6 +341,10 @@ namespace LocalServerWeb
 
 
         // Voucher
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachVoucher?junk={junk}")]
+        [OperationContract]
+        List<Voucher> LayDanhSachVoucher(string junk);
+
         [WebInvoke(Method = "POST", UriTemplate = "kiemTraVoucher?soPhieu={soPhieu}&tongHoaDon={tongHoaDon}")]
         [OperationContract]
         float KiemTraVoucher(string soPhieu, float tongHoaDon);
@@ -350,7 +354,17 @@ namespace LocalServerWeb
         bool SuDungVoucher(string soPhieu);
 
 
-        
+        // Bao Cao
+        [WebInvoke(Method = "GET", UriTemplate = "layBaoCaoNgay?ngay={ngay}&thang={thang}&nam={nam}&junk={junk}")]
+        [OperationContract]
+        List<BaoCaoNgay> LayBaoCaoNgay(int ngay, int thang, int nam, string junk);
+
+        [WebInvoke(Method = "GET", UriTemplate = "layBaoCaoThang?thang={thang}&nam={nam}&junk={junk}")]
+        [OperationContract]
+        List<BaoCaoThang> LayBaoCaoThang(int thang, int nam, string junk);
+
+
+
         // Picture 
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "getPicture?path={path}&junk={junk}")]

@@ -394,6 +394,9 @@ namespace LocalServerWeb.Controllers
 
         public ActionResult AddVoucherDetail(int maVoucher, string soPhieu)
         {
+            if(soPhieu == null || soPhieu.Trim().Length <= 0)
+                return RedirectToAction("VoucherDetail", new { id = maVoucher });
+
             if (ChiTietVoucherBUS.KiemTraTonTai(soPhieu))
             {
                 TempData["errorVoucherDetailExist"] = AdminVoucherString.ErrorCodeExist;
@@ -417,8 +420,11 @@ namespace LocalServerWeb.Controllers
             return RedirectToAction("VoucherDetail", new { id = maVoucher });
         }
 
-        public ActionResult AddManyVoucherDetail(int maVoucher, int soLuong)
+        public ActionResult AddManyVoucherDetail(int maVoucher, int? soLuong)
         {
+            if(soLuong == null)
+                return RedirectToAction("VoucherDetail", new { id = maVoucher });
+
             Random rand = new Random();
             for (int i = 0; i < soLuong; ++i)
             {

@@ -981,6 +981,21 @@ namespace LocalServerWeb
         }
 
         // Voucher
+        public List<Voucher> LayDanhSachVoucher(string junk)
+        {
+            var listVoucher = new List<Voucher>();
+            try
+            {
+                listVoucher = VoucherBUS.LayDanhSachVoucher();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listVoucher;
+        }
+
+
         public float KiemTraVoucher(string soPhieu, float tongHoaDon)
         {
             try
@@ -1005,6 +1020,35 @@ namespace LocalServerWeb
                 Console.Error.WriteLine(e.Message);
             }
             return false;
+        }
+
+        // Bao Cao
+        public List<BaoCaoNgay> LayBaoCaoNgay(int ngay, int thang, int nam, string junk)
+        {
+            var listBaoCaoNgay = new List<BaoCaoNgay>();
+            try
+            {
+                listBaoCaoNgay = BaoCaoBUS.LayBaoCaoNgay(ngay, thang, nam);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listBaoCaoNgay;
+        }
+
+        public List<BaoCaoThang> LayBaoCaoThang(int thang, int nam, string junk)
+        {
+            var listBaoCaoThang = new List<BaoCaoThang>();
+            try
+            {
+                listBaoCaoThang = BaoCaoBUS.LayBaoCaoThang(thang, nam);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return listBaoCaoThang;
         }
 
 
