@@ -49,7 +49,7 @@ namespace LocalServerWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                TaiKhoan taiKhoan = TaiKhoanBUS.KiemTraTaiKhoan(model.UserName, SharedCode.MD5Hash(model.Password));
+                TaiKhoan taiKhoan = TaiKhoanBUS.KiemTraTaiKhoan(model.UserName, SharedCode.Hash(model.Password));
                 if (taiKhoan!=null)
                 {
                     Session["taiKhoan"] = taiKhoan;

@@ -115,6 +115,7 @@ namespace LocalServerWeb.Controllers
                 TempData["error"] = AdminUserString.InputWrong;
                 return RedirectToAction("Index", "Error");
             }
+
             if (objTaiKhoan.MaTaiKhoan==SharedCode.GetTaiKhoan(Session).MaTaiKhoan)
             {
                 TempData["error"] = AdminUserString.ChangeYourself;
@@ -223,7 +224,7 @@ namespace LocalServerWeb.Controllers
                     taiKhoan.CMND = cmnd;
                     taiKhoan.GioiTinh = gioiTinh;
                     taiKhoan.HoTen = hoTen;
-                    taiKhoan.MatKhau = SharedCode.MD5Hash(matKhau);
+                    taiKhoan.MatKhau = SharedCode.Hash(matKhau);
                     taiKhoan.NgaySinh = date;
                     taiKhoan.NhomTaiKhoan = NhomTaiKhoanBUS.LayNhomTaiKhoanTheoMa(nhomTaiKhoan);
                     taiKhoan.TenTaiKhoan = tenTaiKhoan;
@@ -364,7 +365,7 @@ namespace LocalServerWeb.Controllers
                     taiKhoan.CMND = cmnd;
                     taiKhoan.GioiTinh = gioiTinh;
                     taiKhoan.HoTen = hoTen;
-                    taiKhoan.MatKhau = SharedCode.MD5Hash(matKhau);
+                    taiKhoan.MatKhau = SharedCode.Hash(matKhau);
                     taiKhoan.NgaySinh = date;
                     taiKhoan.NhomTaiKhoan = NhomTaiKhoanBUS.LayNhomTaiKhoanTheoMa(nhomTaiKhoan);
                     taiKhoan.TenTaiKhoan = tenTaiKhoan;

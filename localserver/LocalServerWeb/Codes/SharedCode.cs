@@ -21,9 +21,10 @@ namespace LocalServerWeb.Codes
             ThucDonDienTuBUS.KhoiTao(strConn);
         }
 
-        public static string MD5Hash(string value)
+        public static string Hash(string value)
         {
-            return Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(value)));
+            return Convert.ToBase64String(new SHA256CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(value)));
+            //return Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(value)));
         }
 
         private static void FillLanguage(ViewDataDictionary viewData, HttpContextBase httpContext)

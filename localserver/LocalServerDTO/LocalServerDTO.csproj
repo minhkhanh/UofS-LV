@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ban.cs" />
+    <Compile Include="BaoCaoNgay.cs" />
+    <Compile Include="BaoCaoThang.cs" />
     <Compile Include="BoPhanCheBien.cs" />
     <Compile Include="ChiTietCheBienOrder.cs" />
     <Compile Include="ChiTietDanhMucBoPhanCheBien.cs" />

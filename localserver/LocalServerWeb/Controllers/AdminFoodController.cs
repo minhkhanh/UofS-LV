@@ -344,7 +344,7 @@ namespace LocalServerWeb.Controllers
                 return RedirectToAction("Edit", new { id = maMonAn });  
             }
             
-            if (tenMonAn == null || moTaMonAn == null || tenMonAn.Length < 5 || moTaMonAn.Length < 5)
+            if (tenMonAn == null || moTaMonAn == null || tenMonAn.Length < 1 || moTaMonAn.Length < 1)
             {
                 TempData["errorCannotAdd"] = AdminFoodString.ErrorCannotAdd;
                 return RedirectToAction("AddLanguageFood", new { maMonAn = monAn.MaMonAn, maNgonNgu = ngonNgu.MaNgonNgu });
@@ -470,7 +470,7 @@ namespace LocalServerWeb.Controllers
                 return RedirectToAction("Edit", new { id = maMonAn });
             }
 
-            if (tenMonAn == null || moTaMonAn == null || tenMonAn.Length < 5 || moTaMonAn.Length < 5)
+            if (tenMonAn == null || moTaMonAn == null || tenMonAn.Length < 1 || moTaMonAn.Length < 1)
             {
                 TempData["errorCannotEdit"] = AdminFoodString.ErrorCannotEdit;
                 return RedirectToAction("EditLanguageFood", new { maMonAn = monAn.MaMonAn, maNgonNgu = ngonNgu.MaNgonNgu });
