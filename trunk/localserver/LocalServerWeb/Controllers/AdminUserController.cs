@@ -305,7 +305,7 @@ namespace LocalServerWeb.Controllers
             }
 
             string fileName = Guid.NewGuid() + Path.GetFileName(picture.FileName);
-            string filePath = Path.Combine(HttpContext.Server.MapPath("../Uploads/UserImages"), fileName);   
+            string filePath = Path.Combine(HttpContext.Server.MapPath("../../Uploads/UserImages"), fileName);   
 
             var checkDic = new Dictionary<string, string>();
             //HashSet<string> checkHash = new HashSet<string>();
