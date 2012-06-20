@@ -23,7 +23,16 @@ namespace LocalServerWeb.Codes
 
         public static string Hash(string value)
         {
-            return Convert.ToBase64String(new SHA256CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(value)));
+            byte[] byteHash = new SHA256CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(value));
+            string hexString = "";
+            foreach (byte i in byteHash)
+            {
+                hexString += String.Format("{0:x2}", i);
+            }
+
+            return hexString;
+
+            //return Convert.ToBase64String(new SHA256CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(value)));
             //return Convert.ToBase64String(new MD5CryptoServiceProvider().ComputeHash(new UTF8Encoding().GetBytes(value)));
         }
 
