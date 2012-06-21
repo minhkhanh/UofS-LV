@@ -1051,6 +1051,32 @@ namespace LocalServerWeb
             return listBaoCaoThang;
         }
 
+        // Chung Thuc
+        public TaiKhoan ChungThucMobilePhucVu(string tenDangNhap, string matKhau)
+        {
+            try
+            {
+                return TaiKhoanBUS.ChungThucMobilePhucVu(tenDangNhap, matKhau);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public TaiKhoan ChungThucMobileQuanLy(string tenDangNhap, string matKhau)
+        {
+            try
+            {
+                return TaiKhoanBUS.ChungThucMobileQuanLy(tenDangNhap, matKhau);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
 
         // Picture
         public Stream GetPicture(string path, string junk)
