@@ -24,12 +24,15 @@ namespace LocalServerBUS
             return TaiKhoanDAO.LayTaiKhoan(maTaiKhoan);
         }
 
-        public static TaiKhoan KiemTraTaiKhoan(string tenKhaiKhoan, string matKhau)
+        public static TaiKhoan KiemTraTaiKhoan(string tenDangNhap, string matKhau)
         {
-            if (String.IsNullOrEmpty(tenKhaiKhoan)) throw new ArgumentException("Value cannot be null or empty.", "tenKhaiKhoan");
-            if (String.IsNullOrEmpty(matKhau)) throw new ArgumentException("Value cannot be null or empty.", "matKhau");
-            TaiKhoan taiKhoan = TaiKhoanDAO.LayTaiKhoanTheoTenTaiKhoan(tenKhaiKhoan);
-            if (taiKhoan == null || taiKhoan.MatKhau != matKhau || !taiKhoan.Active) return null;
+            if (String.IsNullOrEmpty(tenDangNhap)) 
+                throw new ArgumentException("Value cannot be null or empty.", "tenKhaiKhoan");
+            if (String.IsNullOrEmpty(matKhau)) 
+                throw new ArgumentException("Value cannot be null or empty.", "matKhau");
+            TaiKhoan taiKhoan = TaiKhoanDAO.LayTaiKhoanTheoTenTaiKhoan(tenDangNhap);
+            if (taiKhoan == null || taiKhoan.MatKhau != matKhau || !taiKhoan.Active) 
+                return null;
             return taiKhoan;
         }
 
@@ -46,6 +49,32 @@ namespace LocalServerBUS
         public static bool ThemTaiKhoan(TaiKhoan taiKhoan)
         {
             return TaiKhoanDAO.ThemTaiKhoan(taiKhoan);
+        }
+
+        // Chi cho phep Quan ly, Nhan vien phuc vu dang nhap
+        public static TaiKhoan ChungThucMobilePhucVu(string tenDangNhap, string matKhau)
+        {
+            TaiKhoan taiKhoan = KiemTraTaiKhoan(tenDangNhap, matKhau);
+            if (taiKhoan == null)
+                return null;
+
+            if (taiKhoan.NhomTaiKhoan.MaNhomTaiKhoan == 2 || taiKhoan.NhomTaiKhoan.MaNhomTaiKhoan == 3)
+                return taiKhoan;
+
+            return null;
+        }
+
+        // Chi cho phep quan ly dang nhap
+        public static TaiKhoan ChungThucMobileQuanLy(string tenDangNhap, string matKhau)
+        {
+            TaiKhoan taiKhoan = KiemTraTaiKhoan(tenDangNhap, matKhau);
+            if (taiKhoan == null)
+                return null;
+
+            if (taiKhoan.NhomTaiKhoan.MaNhomTaiKhoan == 2)
+                return taiKhoan;
+
+            return null;
         }
     }
 }
