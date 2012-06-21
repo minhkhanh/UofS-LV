@@ -24,6 +24,11 @@ namespace LocalServerBUS
             return BanDAO.TachBan(maBan);
         }
 
+        public static bool TachBanJson(int maBan)
+        {
+            return BanDAO.TachBanJson(maBan);
+        }
+
         public static bool GhepBan(RequestGhepBan request)
         {
             if (request.MaBanPhuList.Count() == 0) return false;
@@ -33,6 +38,11 @@ namespace LocalServerBUS
         public static List<Ban> LayDanhSachBanChinh()
         {
             return BanDAO.LayDanhSachBanChinh();
+        }
+
+        public static List<Ban> LayDanhSachBanChinhJson(int maKhuVuc)
+        {
+            return BanDAO.LayDanhSachBanChinhJson(maKhuVuc);
         }
 
         public static List<Ban> LayDanhSachBanThuocBanChinh(int maBanChinh)
@@ -90,9 +100,9 @@ namespace LocalServerBUS
             return ketQua;
         }
 
-        public static int GhepBanJson(RequestGhepBan request)
+        public static bool GhepBanJson(List<int> listMaBan)
         {
-            return BanDAO.GhepBanJson(request);
+            return BanDAO.GhepBanJson(listMaBan);
         }
     }
 }

@@ -97,7 +97,6 @@
     <Compile Include="Controllers\AdminTableController.cs" />
     <Compile Include="Controllers\AdminUnitController.cs" />
     <Compile Include="Controllers\AdminUserController.cs" />
-    <Compile Include="Controllers\AdminVoucherController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FoodCategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -337,16 +336,6 @@
       <DependentUpon>AdminConfigString.vi.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Views\AdminVoucher\AdminVoucherString.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AdminVoucherString.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Views\AdminVoucher\AdminVoucherString.vi.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AdminVoucherString.vi.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\Views\Error\ErrorString.Designer.cs">
       <DependentUpon>ErrorString.resx</DependentUpon>
@@ -1107,6 +1096,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Images\foodcategory\foodrating\" />
     <Folder Include="Images\foodcategory\foodrelate\" />
+    <Folder Include="Resources\Views\AdminVoucher\" />
     <Folder Include="Uploads\FoodImages\" />
   </ItemGroup>
   <ItemGroup>
@@ -1268,14 +1258,6 @@
     <EmbeddedResource Include="Resources\Views\AdminConfig\AdminConfigString.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AdminConfigString.vi.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Views\AdminVoucher\AdminVoucherString.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AdminVoucherString.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Views\AdminVoucher\AdminVoucherString.vi.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>AdminVoucherString.vi.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Views\Error\ErrorString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -45,9 +45,8 @@ namespace LocalServerBUS
             return HoaDonDAO.SuaHoaDon(_hoaDon);
         }
 
-        public static HoaDon LapHoaDon(int maOrder)
+        public static HoaDon LapHoaDon(int maOrder, List<String> voucherCodes)
         {
-
             Order order = OrderBUS.LayOrder(maOrder);
             if (order == null)
                 return null;
@@ -58,7 +57,8 @@ namespace LocalServerBUS
             hoaDon.TaiKhoan = order.TaiKhoan;
             hoaDon.ThoiDiemLap = DateTime.Now;
 
-            HoaDonBUS.ThemHoaDon(hoaDon);
+            //if (HoaDonBUS.ThemHoaDon(hoaDon) == null)
+            //    return null;
             
             // B2: Mo ta ban ghep
             string moTaBanGhep = "";
@@ -83,7 +83,7 @@ namespace LocalServerBUS
             foreach (ChiTietOrder ctOrder in listCTOrder)
             {
                 ChiTietHoaDon ctHoaDon = new ChiTietHoaDon();
-                ctHoaDon._maHoaDon = hoaDon.MaHoaDon;
+                //ctHoaDon._maHoaDon = hoaDon.MaHoaDon;
                 ctHoaDon.MonAn = ctOrder.MonAn;
 
                 // Can xem xet lai so luong, vi co the Huy Order, doi mon, doi don vi tinh ... o Bep va Khach
@@ -92,6 +92,7 @@ namespace LocalServerBUS
                 // Truong hop donGia = -1, tuc la Mon do ko co Don vi tinh !!!
                 ctHoaDon.DonGiaLuuTru = ChiTietMonAnDonViTinhBUS.LayDonGia(ctHoaDon.MonAn.MaMonAn, ctHoaDon.DonViTinh.MaDonViTinh);
 
+                listCTHoaDon.Add(ctHoaDon);
             }
 
             // B5: Ap dung khuyen mai cho tung ct Hoa Don
@@ -101,49 +102,54 @@ namespace LocalServerBUS
                 if (ctHoaDon.DonGiaLuuTru == -1)
                     continue;
 
+                ctHoaDon.ThanhTien = ctHoaDon.DonGiaLuuTru * ctHoaDon.SoLuong;
                 KhuyenMai kmMon = KhuyenMaiMonBUS.LayKhuyenMai(ctHoaDon.MonAn.MaMonAn);
                 if (kmMon != null && kmMon.BatDau <= hoaDon.ThoiDiemLap && hoaDon.ThoiDiemLap <= kmMon.KetThuc)
                 {
-                    if (kmMon.GiaGiam != 0)
-                    {
-                        ctHoaDon.GiaTriKhuyenMaiLuuTru = kmMon.GiaGiam;
-                        ctHoaDon.ThanhTien = ctHoaDon.DonGiaLuuTru * ctHoaDon.SoLuong - ctHoaDon.GiaTriKhuyenMaiLuuTru;
-                        
-                    }
-                    else
-                    {
-                        ctHoaDon.GiaTriKhuyenMaiLuuTru = (ctHoaDon.DonGiaLuuTru * ctHoaDon.SoLuong) * (kmMon.TiLeGiam) / 100;
-                        ctHoaDon.ThanhTien = (ctHoaDon.DonGiaLuuTru * ctHoaDon.SoLuong) - ctHoaDon.GiaTriKhuyenMaiLuuTru;
-
-                    }
+                    ctHoaDon.GiaTriKhuyenMaiLuuTru = kmMon.GiaGiam + (kmMon.TiLeGiam / 100f)* ctHoaDon.ThanhTien;
+                    ctHoaDon.ThanhTien -= ctHoaDon.GiaTriKhuyenMaiLuuTru;
                 }
-                hoaDon.TongTien += ctHoaDon.ThanhTien;
-                
+
+                hoaDon.TongTien += ctHoaDon.ThanhTien;                
             }
 
             // B6: Ap dung khuyen mai Hoa Don
             KhuyenMai kmHoaDon = KhuyenMaiHoaDonBUS.LayKhuyenMai(hoaDon.TongTien);
             if (kmHoaDon != null && kmHoaDon.BatDau <= hoaDon.ThoiDiemLap && hoaDon.ThoiDiemLap <= kmHoaDon.KetThuc)
             {
-                if (kmHoaDon.GiaGiam != 0)
-                {
-                    hoaDon.TongTien -= kmHoaDon.GiaGiam;
-                }
-                else
-                {
-                    hoaDon.TongTien -= (hoaDon.TongTien) * (100 - kmHoaDon.TiLeGiam) / 100;
-                }
+                hoaDon.TongTien -= kmHoaDon.GiaGiam + hoaDon.TongTien * (kmHoaDon.TiLeGiam / 100f);
             }
 
+            // check voucher
+            foreach (String code in voucherCodes)
+            {
+                Voucher v = VoucherBUS.LayVoucherTheoSoPhieu(code);
+                if (v == null)
+                    return null;
+
+                hoaDon.TongTien -= v.GiaGiam;
+            }
+
+            if (HoaDonBUS.ThemHoaDon(hoaDon) == null)
+                return null;
+
+            foreach (ChiTietHoaDon c in listCTHoaDon)
+                c._maHoaDon = hoaDon.MaHoaDon;
+
             // B7: Cap nhat Hoa don
-            HoaDonBUS.SuaHoaDon(hoaDon);
+            //if (!HoaDonBUS.SuaHoaDon(hoaDon)) return null;
 
             // B8: Them nhieu ct Hoa don
-            ChiTietHoaDonBUS.ThemNhieuChiTietHoaDon(listCTHoaDon);
+            if (ChiTietHoaDonDAO.ThemNhieuChiTietHoaDon(listCTHoaDon) == null)
+                return null;
+            //ChiTietHoaDonBUS.ThemNhieuChiTietHoaDon(listCTHoaDon);
 
             // B9: Doi Tinh trang cac ct Order tuong ung va tach ban
-            ChiTietOrderBUS.ThayDoiTinhTrangDaThanhToan(hoaDon.Ban.MaBan);
+            //ChiTietOrderBUS.ThayDoiTinhTrangDaThanhToan(hoaDon.Ban.MaBan);
 
+            // cap nhat tinh trang Order: da thanh toan
+            order.TinhTrang = 4;
+            OrderBUS.SuaOrder(order);
 
             return hoaDon;
         }

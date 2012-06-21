@@ -89,6 +89,14 @@ namespace LocalServerDAO
             return result;
         }
 
+        public static List<ChiTietOrder> LayDanhSachChiTietOrderChuaThanhToan(int maOrder)
+        {
+            return ThucDonDienTu.DataContext.ChiTietOrders.Where(m => m.TinhTrang != 4 && m.Order.MaOrder == maOrder).ToList();
+        }
 
+        public static List<ChiTietOrder> LayDanhSachChiTietOrderJson(int maOrder)
+        {
+            return ThucDonDienTu.DataContext.ChiTietOrders.Where(m => m.SoLuong != 0 && m.Order.MaOrder == maOrder).ToList();
+        }
     }
 }

@@ -69,5 +69,15 @@ namespace LocalServerDAO
             }
             return false;
         }
+
+        public static KhuyenMai TimKhuyenMai(int maChiTietOrder)
+        {
+            var ctOrderList = ThucDonDienTu.DataContext.ChiTietOrders.Where(c => c.MaChiTietOrder == maChiTietOrder);
+            if (ctOrderList.Count() == 0)
+                return null;
+
+            ChiTietOrder ctOrder = ctOrderList.First();
+            return LayKhuyenMai(ctOrder.MonAn.MaMonAn);
+        }
     }
 }

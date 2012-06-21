@@ -82,6 +82,11 @@ namespace LocalServerDAO
             return ThucDonDienTu.DataContext.Bans.Where(b => b.BanChinh == null).ToList();
         }
 
+        public static List<Ban> LayDanhSachBanChinhJson(int maKhuVuc)
+        {
+            return ThucDonDienTu.DataContext.Bans.Where(b => b.BanChinh == b && b.KhuVuc.MaKhuVuc == maKhuVuc).ToList();
+        }
+
         public static List<Ban> LayDanhSachBanThuocBanChinh(int maBanChinh)
         {
             var temp = ThucDonDienTu.DataContext.Bans.Where(b => b.MaBan == maBanChinh);
@@ -160,21 +165,65 @@ namespace LocalServerDAO
             return result;
         }
 
-        public static int GhepBanJson(RequestGhepBan request)
+        public static bool TachBanJson(int maBan)
         {
-            bool result = GhepBan(request);
+            //lấy về đối tượng cần tách
+            var temp = ThucDonDienTu.DataContext.Bans.Where(b => b.MaBan == maBan);
+            if (temp.Count() == 0)
+                return false;
+            Ban banChinh = temp.First();
+            banChinh.Active = true;
+            banChinh.BanChinh = null;
 
-            if (result)
+            //lấy danh sách các bàn trong nhóm
+            var dsBan = ThucDonDienTu.DataContext.Bans.Where(b => b.BanChinh == banChinh);
+            foreach (var ban in dsBan)
             {
-                var temp = ThucDonDienTu.DataContext.Bans.Where(b => b.MaBan == request.MaBanChinh);
-                Ban banChinh = temp.First();
-                banChinh.BanChinh = banChinh;
-                ThucDonDienTu.DataContext.SubmitChanges();
-
-                return banChinh.MaBan;
+                ban.BanChinh = null;
+                ban.Active = true;
             }
 
-            return -1;
+            //cập nhật csdl
+            ThucDonDienTu.DataContext.SubmitChanges();
+            return true;
+        }
+
+        public static bool GhepBanJson(List<int> listMaBan)
+        {
+            if (listMaBan.Count < 1) return false;
+                
+            List<Ban> listBan = new List<Ban>();
+            Ban banChinh = null;
+            foreach (int maBan in listMaBan)
+            {
+                var tmp = ThucDonDienTu.DataContext.Bans.Where(b => b.MaBan == maBan);
+                if (tmp.Count() == 0) return false;
+                Ban ban = tmp.First();
+                if (ban.BanChinh != null)
+                    if (banChinh == null)
+                    {
+                        banChinh = ban.BanChinh;
+                    }
+                    else if (banChinh.MaBan != ban.BanChinh.MaBan) // detect 2 different groups in 1 list
+                    {
+                        return false;
+                    }
+
+                listBan.Add(ban);
+            }
+
+            if (banChinh == null) // tao nhom ban moi
+                banChinh = listBan[0];
+
+            foreach (Ban ban in listBan)
+            {
+                //cap nhat gia tri ban chinh
+                ban.BanChinh = banChinh;
+                ban.Active = false;
+            }
+
+            ThucDonDienTu.DataContext.SubmitChanges();
+            return true;
         }
     }
 }

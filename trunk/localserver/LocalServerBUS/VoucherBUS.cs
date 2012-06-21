@@ -62,6 +62,18 @@ namespace LocalServerBUS
             return giaGiam;
         }
 
-        
+
+        public static Voucher LayVoucher(string code, float tongHoaDon)
+        {
+            ChiTietVoucher ctVoucher = ChiTietVoucherBUS.LayChiTietSanSang(code);
+            if (ctVoucher == null)
+                return null;
+
+            Voucher voucher = ctVoucher.Voucher;
+            if (voucher != null && voucher.MucGiaApDung <= tongHoaDon)
+                return voucher;
+
+            return null;
+        }
     }
 }

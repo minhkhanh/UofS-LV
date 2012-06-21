@@ -309,9 +309,9 @@ namespace LocalServerWeb
         [OperationContract]
         HoaDon ThemHoaDon(HoaDon _hoaDon);
 
-        [WebInvoke(Method = "GET", UriTemplate = "lapHoaDon?maOrder={maOrder}")]
+        [WebInvoke(Method = "POST", UriTemplate = "lapHoaDon?maOrder={maOrder}")]
         [OperationContract]
-        HoaDon LapHoaDon(int maOrder);
+        HoaDon LapHoaDon(int maOrder, List<String> voucherCodes);
 
         [WebInvoke(Method = "PUT", UriTemplate = "suaHoaDon")]
         [OperationContract]
@@ -507,7 +507,7 @@ namespace LocalServerWeb
         // Hoa Don
         [WebInvoke(Method = "POST", UriTemplate = "lapHoaDonJson?maOrder={maOrder}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        HoaDon LapHoaDonJson(int maOrder);
+        HoaDon LapHoaDonJson(int maOrder, List<String> voucherCodes);
 
         // Order
         [WebInvoke(Method = "POST", UriTemplate = "lapOrderJson?maTaiKhoan={maTaiKhoan}&maBan={maBan}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
@@ -517,7 +517,7 @@ namespace LocalServerWeb
         // ghep ban
         [WebInvoke(Method = "POST", UriTemplate = "ghepBanJson", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        int GhepBanJson(RequestGhepBan request);
+        bool GhepBanJson(List<int> listMaBan);
 
         // tach ban
         [WebInvoke(Method = "POST", UriTemplate = "tachBanJson", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
@@ -527,10 +527,60 @@ namespace LocalServerWeb
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachOrderChuaThanhToanJson?maBan={maBan}&junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         List<Order> LayDanhSachOrderChuaThanhToanJson(int maBan, string junk);
-        
-        //[WebInvoke(Method = "GET", UriTemplate = "layDanhSachBanChinhJson?junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        //[OperationContract]
-        //List<Ban> LayDanhSachBanChinhJson(string junk);
+
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachChiTietOrderJson?maOrder={maOrder}&junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        List<ChiTietOrder> LayDanhSachChiTietOrderJson(int maOrder, string junk);
+
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachBanChinhJson?maKhuVuc={maKhuVuc}&junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        List<Ban> LayDanhSachBanChinhJson(int maKhuVuc, string junk);
+
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachBanThuocBanChinhJson?maBanChinh={maBanChinh}&junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        List<Ban> LayDanhSachBanThuocBanChinhJson(int maBanChinh, string junk);
+
+        [WebInvoke(Method = "POST", UriTemplate = "themOrderJson", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        int ThemOrderJson(Order _order);
+
+        [WebInvoke(Method = "POST", UriTemplate = "themNhieuChiTietOrderJson", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        bool ThemNhieuChiTietOrderJson(List<ChiTietOrder> _listChiTietOrder);
+
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachPhuThuApDungJson?maOrder={maOrder}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        List<PhuThu> LayDanhSachPhuThuApDungJson(int maOrder);
+
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachKhuyenMaiApDungJson?maOrder={maOrder}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        List<KhuyenMai> LayDanhSachKhuyenMaiApDungJson(int maOrder);
+
+        [WebInvoke(Method = "GET", UriTemplate = "timKhuyenMaiMonJson?maChiTietOrder={maChiTietOrder}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        KhuyenMai TimKhuyenMaiMon(int maChiTietOrder);
+
+        [WebInvoke(Method = "GET", UriTemplate = "checkYeuCauHuyChiTietOrderJson?maChiTiet={maChiTiet}&soLuong={soLuong}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        int CheckYeuCauHuyChiTietOrderJson(int maChiTiet, int soLuong);
+
+        // Voucher
+        [WebInvoke(Method = "GET", UriTemplate = "layVoucherJson?code={code}&tongHoaDon={tongHoaDon}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        Voucher LayVoucherJson(string code, float tongHoaDon);
+
+        [WebInvoke(Method = "GET", UriTemplate = "dungVoucherJson?code={code}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        bool DungVoucherJson(string code);
+
+        // Picture 
+        [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "getImageJson?path={path}&junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        string GetImageJson(string path, string junk);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "kiemTraTaiKhoanJson?username={username}&junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        bool KiemTraTaiKhoanJson(string username, string password, string junk);
 
         /*==============END OF JSON SERVICES AREA==============*/
     }

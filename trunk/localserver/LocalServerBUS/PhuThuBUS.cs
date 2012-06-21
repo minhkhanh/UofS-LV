@@ -33,5 +33,10 @@ namespace LocalServerBUS
         {
             return PhuThuDAO.CapNhat(phuThu);
         }
+
+        public static List<PhuThu> LayDanhSachPhuThuApDungJson(int maOrder)
+        {
+            return PhuThuDAO.LayDanhSachPhuThuApDungJson(maOrder);
+        }
     }
 }
