@@ -38,5 +38,10 @@ namespace LocalServerBUS
         {
             return KhuyenMaiMonDAO.Them(khuyenMaiMon);
         }
+
+        public static KhuyenMai TimKhuyenMai(int maChiTietOrder)
+        {
+            return KhuyenMaiMonDAO.TimKhuyenMai(maChiTietOrder);
+        }
     }
 }

@@ -71,5 +71,27 @@ namespace LocalServerDAO
             }
             return false;
         }
+
+        public static List<PhuThu> LayDanhSachPhuThuApDungJson(int maOrder)
+        {
+            List<PhuThu> result = new List<PhuThu>();
+
+            var orderList = ThucDonDienTu.DataContext.Orders.Where(o => o.MaOrder == maOrder);
+            if (orderList.Count() != 1)
+                return new List<PhuThu>();
+
+            Order order = orderList.First();
+
+            var phuthuList = ThucDonDienTu.DataContext.PhuThuKhuVucs.Where(p => p.KhuVuc.MaKhuVuc == order.Ban.KhuVuc.MaKhuVuc);
+            if (phuthuList.Count() > 0)
+            {
+                foreach (PhuThuKhuVuc phuThu in phuthuList)
+                {
+                    result.Add(phuThu.PhuThu);
+                }
+            }            
+
+            return result;
+        }
     }
 }

@@ -33,5 +33,10 @@ namespace LocalServerBUS
         {
             return KhuyenMaiDAO.CapNhat(khuyenMai);
         }
+
+        public static List<KhuyenMai> LayDanhSachKhuyenMaiApDungJson(int maOrder)
+        {
+            return KhuyenMaiDAO.LayDanhSachKhuyenMaiApDung(maOrder);
+        }
     }
 }

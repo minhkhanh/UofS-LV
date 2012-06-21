@@ -872,11 +872,11 @@ namespace LocalServerWeb
             return listHoaDon;
         }
 
-        public HoaDon LapHoaDon(int maOrder)
+        public HoaDon LapHoaDon(int maOrder, List<String> voucherCodes)
         {
             try
             {
-                return HoaDonBUS.LapHoaDon(maOrder);
+                return HoaDonBUS.LapHoaDon(maOrder, voucherCodes);
             }
             catch (Exception e)
             {
@@ -1217,9 +1217,9 @@ namespace LocalServerWeb
             return LayDanhSachPhuThuKhuVuc(junk);
         }
 
-        public HoaDon LapHoaDonJson(int maOrder)
+        public HoaDon LapHoaDonJson(int maOrder, List<String> voucherCodes)
         {
-            return LapHoaDon(maOrder);
+            return LapHoaDon(maOrder, voucherCodes);
         }
 
         public List<ChiTietOrder> LapOrderJson(int maTaiKhoan, int maBan,  List<ChiTietOrder> _listChiTietOrder)
@@ -1227,21 +1227,103 @@ namespace LocalServerWeb
             return LapOrder(maTaiKhoan, maBan, _listChiTietOrder);
         }
 
-        public int GhepBanJson(RequestGhepBan request)
+        public bool GhepBanJson(List<int> listMaBan)
         {
-            return BanBUS.GhepBanJson(request);
+            return BanBUS.GhepBanJson(listMaBan);
         }
 
         public bool TachBanJson(int maBan)
         {
-            return BanBUS.TachBan(maBan);
+            return BanBUS.TachBanJson(maBan);
         }
 
         public List<Order> LayDanhSachOrderChuaThanhToanJson(int maBan, string junk)
         {
             return OrderBUS.LayNhieuOrderChuaThanhToan(maBan);
         }
-        
+
+        public List<ChiTietOrder> LayDanhSachChiTietOrderJson(int maOrder, string junk)
+        {
+            return ChiTietOrderBUS.LayDanhSachChiTietOrderJson(maOrder);
+        }
+
+        public List<Ban> LayDanhSachBanChinhJson(int maKhuVuc, string junk)
+        {
+            return BanBUS.LayDanhSachBanChinhJson(maKhuVuc);
+        }
+
+        public List<Ban> LayDanhSachBanThuocBanChinhJson(int maBanChinh, string junk)
+        {
+            return BanBUS.LayDanhSachBanThuocBanChinh(maBanChinh);
+        }
+
+        public int ThemOrderJson(Order _order)
+        {
+            Order result = OrderBUS.ThemOrder(_order);
+            if (result == null) return -1;
+
+            return result.MaOrder;
+        }
+
+        public bool ThemNhieuChiTietOrderJson(List<ChiTietOrder> _listChiTietOrder)
+        {
+            List<ChiTietOrder> result = ChiTietOrderBUS.ThemNhieuChiTietOrder(_listChiTietOrder);
+            if (result == null) return false;
+
+            return true;
+        }
+
+        public int CheckYeuCauHuyChiTietOrderJson(int maChiTiet, int soLuong)
+        {
+            return -1;
+        }
+
+        public List<PhuThu> LayDanhSachPhuThuApDungJson(int maOrder)
+        {
+            return PhuThuBUS.LayDanhSachPhuThuApDungJson(maOrder);
+        }
+
+        public List<KhuyenMai> LayDanhSachKhuyenMaiApDungJson(int maOrder)
+        {
+            return KhuyenMaiBUS.LayDanhSachKhuyenMaiApDungJson(maOrder);
+        }
+
+        public KhuyenMai TimKhuyenMaiMon(int maChiTietOrder)
+        {
+            return KhuyenMaiMonBUS.TimKhuyenMai(maChiTietOrder);
+        }
+
+        public Voucher LayVoucherJson(string code, float tongHoaDon)
+        {
+            return VoucherBUS.LayVoucher(code, tongHoaDon);
+        }
+
+        public bool DungVoucherJson(string code)
+        {
+            return SuDungVoucher(code);
+        }
+
+        public string GetImageJson(string path, string junk)
+        {
+            return PictureBUS.GetBase64Image(path);
+        }
+
+        public bool KiemTraTaiKhoanJson(string username, string password, string junk)
+        {
+            try
+            {
+                TaiKhoan tk = TaiKhoanBUS.KiemTraTaiKhoan(username, SharedCode.Hash(password));
+                if (tk == null)
+                    return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         /*END OF JSON SERVICE AREA*/
     }
 }

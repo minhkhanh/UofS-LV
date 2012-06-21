@@ -36,6 +36,11 @@ namespace LocalServerBUS
             return ChiTietOrderDAO.LayNhieuChiTietOrderChuaThanhToan(maBan);
         }
 
+        public static List<ChiTietOrder> LayDanhSachChiTietOrderChuaThanhToan(int maOrder)
+        {
+            return ChiTietOrderDAO.LayDanhSachChiTietOrderChuaThanhToan(maOrder);
+        }
+
         public static ChiTietOrder ThemChiTietOrder(ChiTietOrder _chiTietOrder)
         {
             return ChiTietOrderDAO.ThemChiTietOrder(_chiTietOrder);
@@ -84,6 +89,11 @@ namespace LocalServerBUS
 
             return ketQua;
 
+        }
+
+        public static List<ChiTietOrder> LayDanhSachChiTietOrderJson(int maOrder)
+        {
+            return ChiTietOrderDAO.LayDanhSachChiTietOrderJson(maOrder);
         }
     }
 }

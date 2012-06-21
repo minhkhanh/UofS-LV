@@ -71,5 +71,62 @@ namespace LocalServerDAO
             }
             return false;
         }
+
+        public static List<KhuyenMai> LayDanhSachKhuyenMaiApDung(int maOrder)
+        {
+            List<KhuyenMai> result = new List<KhuyenMai>();
+            float giaHoaDon = 0;
+
+            var orderList = ThucDonDienTu.DataContext.Orders.Where(o => o.MaOrder == maOrder);
+            if (orderList.Count() != 1)
+                return new List<KhuyenMai>();
+
+            Order order = orderList.First();
+
+            // lay khuyen mai mon
+            var ctOrderList = ThucDonDienTu.DataContext.ChiTietOrders.Where(c => c.Order.MaOrder == order.MaOrder);
+            foreach (ChiTietOrder c in ctOrderList)
+            {
+                float giaGiam = 0;
+                float donGia = ChiTietMonAnDonViTinhDAO.LayDonGia(c.MonAn.MaMonAn, c.DonViTinh.MaDonViTinh);
+                if (donGia == -1)
+                    donGia = 0;
+
+                var kmMonList = ThucDonDienTu.DataContext.KhuyenMaiMons.Where(k => k.MonAn.MaMonAn == c.MonAn.MaMonAn);
+                foreach (KhuyenMaiMon kmm in kmMonList)
+                {
+                    KhuyenMai km = kmm.KhuyenMai;
+                    result.Add(km);
+
+                    if (km.GiaGiam != 0)
+                        giaGiam = km.GiaGiam;
+                    else
+                        giaGiam = donGia * km.TiLeGiam;
+                }
+
+                giaHoaDon += donGia - giaGiam;
+            }
+
+            //// lay km khu vuc
+            //var kmKhuVucList = ThucDonDienTu.DataContext.KhuyenMaiKhuVucs.Where(k => k.KhuVuc.MaKhuVuc == order.Ban.KhuVuc.MaKhuVuc);
+            //foreach (KhuyenMaiKhuVuc kmkv in kmKhuVucList)
+            //{
+            //    KhuyenMai km = kmkv.KhuyenMai;
+            //    result.Add(km);
+
+            //    if (km.GiaGiam != 0)
+            //        giaHoaDon -= km.GiaGiam;
+            //    else
+            //        giaHoaDon -= giaHoaDon * km.TiLeGiam;
+
+            //}
+
+            // lay km hoa don
+            KhuyenMai kmHoaDon = KhuyenMaiHoaDonDAO.LayKhuyenMai(giaHoaDon);
+            if (kmHoaDon != null)
+                result.Add(kmHoaDon);
+
+            return result;
+        }
     }
 }

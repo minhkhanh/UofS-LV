@@ -19,5 +19,10 @@ namespace LocalServerBUS
         {
             return PictureDAO.AddPicture(path, content);
         }
+
+        public static string GetBase64Image(string path)
+        {
+            return PictureDAO.GetBase64Image(path);
+        }
     }
 }
