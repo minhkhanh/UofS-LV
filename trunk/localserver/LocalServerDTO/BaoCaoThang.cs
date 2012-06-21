@@ -9,6 +9,7 @@ using System.IO;
 
 namespace LocalServerDTO
 {
+    [DataContract(Namespace = "")]
     public class BaoCaoThang
     {
         [DataMember]
