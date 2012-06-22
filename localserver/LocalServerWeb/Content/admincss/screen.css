@@ -24,7 +24,8 @@ body	{
 	}
 #logo	{
 	float: left;
-	margin: 45px 0 0 15px;
+	margin: 15px 0 0 0px;
+    color: blue;
 	}
 #logo	a	{
 	display: block;
@@ -33,10 +34,13 @@ body	{
 	display: inline;
 	float: right;
 	position: relative;
-	margin: 46px 20px 0 0;
+	margin: 15px 0px 0 0;
 	z-index: 20;
+    color: red;
 	}
-	
+#top-search	a {
+    color: blue;
+	}	
  
 .top-search-inp	{
 	background: url(../../Images/adminimages/shared/top_search_inp.gif) no-repeat;
