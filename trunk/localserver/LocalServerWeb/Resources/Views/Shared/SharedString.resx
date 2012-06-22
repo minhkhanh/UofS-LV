@@ -171,6 +171,9 @@
   <data name="Config" xml:space="preserve">
     <value>Config</value>
   </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
   <data name="Detail" xml:space="preserve">
     <value>Detail</value>
   </data>
@@ -201,6 +204,9 @@
   <data name="Guidance" xml:space="preserve">
     <value>Guidance</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
   <data name="InputWrong" xml:space="preserve">
     <value>Input not accepted</value>
   </data>
@@ -224,6 +230,9 @@
   </data>
   <data name="LogOn" xml:space="preserve">
     <value>Log On</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Map</value>
   </data>
   <data name="NoInformation" xml:space="preserve">
     <value>N/A</value>

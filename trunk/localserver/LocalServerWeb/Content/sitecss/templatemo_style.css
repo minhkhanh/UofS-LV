@@ -190,7 +190,7 @@ img { margin: 0px; padding: 0px; border: none; }
 }
 
 #templatemo_slider #latest_product_slider {
-	padding: 40px 10px;
+	padding: 20px 10px;
 }
 
 
@@ -392,7 +392,7 @@ form {
 #SlideItMoo_outer {
 	overflow: hidden;
 	width: 920px; 
-	height: 120px;
+	height: 155px;
 	margin: 0 auto; 
 	background: none; 
 	display:block; 
@@ -406,7 +406,7 @@ form {
 	position:absolute; 
 	cursor:pointer; 
 	width: 45px; 
-	height: 120px; 
+	height: 140px; 
 	bottom:0px; 
 	right: 0px; 
 	background:url(../../Images/siteimages/slideitmoo_forward.png) no-repeat center;  
@@ -422,7 +422,7 @@ form {
 	overflow:hidden ; 
 	width: 900px ; /* set a display width to make the slider look good in case js is disabled */
 	margin:0px auto 0px;
-	padding:10px 0px 10px;
+	/*padding:10px 0px 10px;*/
 	
 }
 /* the thumbnails container; set a width on it so everything will be fine */
@@ -431,7 +431,7 @@ form {
 	position:relative; 
 }
 /* single element design */
-#SlideItMoo_items div.SlideItMoo_element { 
+#SlideItMoo_items li.SlideItMoo_element { 
 	display:block; 
 	position:relative; 
 	float:left; 
@@ -443,4 +443,12 @@ form {
 	color:#000000;
 }
 #SlideItMoo_items a { padding:0px; margin:3px 0px 3px; clear:both; display:block; background:none; padding:2px; }
-#SlideItMoo_items a img{ border:none; }
+#SlideItMoo_items a img {
+    border:none;
+    width: 140px;
+    height: 140px;
+}
+#SlideItMoo_items ul 
+{
+    margin: 0;
+} 

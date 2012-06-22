@@ -12,9 +12,7 @@ namespace LocalServerWeb.Controllers
     {
         public ActionResult Index()
         {
-            ViewData["Message"] = "Welcome to eMenu!";
-
-            return View();
+            return Redirect("/FoodCategory/Category/0");
         }
 
         public ActionResult About()
