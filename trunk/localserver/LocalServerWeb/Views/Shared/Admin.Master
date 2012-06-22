@@ -58,12 +58,14 @@
 
 	<!-- start logo -->
 	<div id="logo">
-	<a href=""><img src="../../Images/adminimages/shared/logo.png" width="156" height="40" alt="" /></a>
+        <% Html.RenderPartial("LanguageUserControl"); %>
+	<%--<a href=""><img src="../../Images/adminimages/shared/logo.png" width="156" height="40" alt="" /></a>--%>
 	</div>
 	<!-- end logo -->
 	
 	<!--  start top-search -->
 	<div id="top-search">
+        <% Html.RenderPartial("LogOnUserControl"); %>
 	</div>
  	<!--  end top-search -->
  	<div class="clear"></div>
@@ -153,8 +155,9 @@
 <div id="footer">
 	<!--  start footer-left -->
 	<div id="footer-left">
-	
-	 All rights reserved.</div>
+	    Copyright © 2012 <a href="/">eMenu</a> | 
+        Designed by <a href="mailto:admin@emenu.com" target="_parent">Mr.Unknown</a> 
+     </div>
 	<!--  end footer-left -->
 	<div class="clear">&nbsp;</div>
 </div>

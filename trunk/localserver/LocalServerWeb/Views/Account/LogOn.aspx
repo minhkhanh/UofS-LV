@@ -13,6 +13,11 @@
 </asp:Content>
 
 <asp:Content ID="loginContent" ContentPlaceHolderID="MainContent" runat="server">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.buttonDangNhap').button();
+        });
+    </script>
     <fieldset>
         <legend><%:AccountString.LoginInfo %></legend>
         <table width="500px" border="1" cellspacing="0" cellpadding="5" align="center">
@@ -46,7 +51,7 @@
 					        </tr>
 					        <tr>
 						        <td></td>
-						        <td align="center"><input type="submit" name="dangNhap"
+						        <td align="center"><input type="submit" name="dangNhap" class="buttonDangNhap"
 							        value="<%: AccountString.Login %>" /></td>
 					        </tr>
 				        </table>
