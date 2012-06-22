@@ -14,6 +14,7 @@ using LocalServerDTO;
 using LocalServerWeb.Codes;
 using LocalServerWeb.Models;
 using LocalServerWeb.Resources.Views.Account;
+using LocalServerWeb.ViewModels;
 
 namespace LocalServerWeb.Controllers
 {
@@ -41,6 +42,9 @@ namespace LocalServerWeb.Controllers
             if (Request.UrlReferrer != null) ViewData["returnUrl"] = Request.UrlReferrer.ToString();
             if (Session["taiKhoan"] != null)
                 if (Request.UrlReferrer != null) return Redirect(Request.UrlReferrer.ToString());
+            int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
+            List<FoodGalleryItemViewModel> foodRandom = SharedCode.GetFoodRandom(20, maNgonNgu);
+            ViewData["randomFoods"] = foodRandom;
             return View();
         }
 

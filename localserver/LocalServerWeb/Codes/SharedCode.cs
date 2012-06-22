@@ -10,6 +10,8 @@ using System.Web;
 using System.Web.Mvc;
 using LocalServerBUS;
 using LocalServerDTO;
+using LocalServerWeb.Resources.Views.Shared;
+using LocalServerWeb.ViewModels;
 
 namespace LocalServerWeb.Codes
 {
@@ -109,6 +111,98 @@ namespace LocalServerWeb.Codes
                 return string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, request.ApplicationPath);
             }
             return "";
+        }
+        // Get a list of ViewModel for displaying Food Gallery (many Food items), get by MaDanhMuc
+        public static List<FoodGalleryItemViewModel> GetFoodRandom(int num, int maNgonNgu)
+        {
+            List<FoodGalleryItemViewModel> viewModels = new List<FoodGalleryItemViewModel>();
+            List<DanhMuc> dsDanhMuc;
+            List<MonAn> dsMonAn = new List<MonAn>();            
+
+            try
+            {
+                dsMonAn = MonAnBUS.LayDanhSachMonAn();
+                if (num <= 0 || dsMonAn.Count <= 0) return new List<FoodGalleryItemViewModel>();
+                if (num > dsMonAn.Count) num = dsMonAn.Count;
+                if (num < dsMonAn.Count)
+                {
+                    HashSet<MonAn> sets = new HashSet<MonAn>();
+                    Random random = new Random();
+                    while (sets.Count < num)
+                    {
+                        sets.Add(dsMonAn[random.Next(dsMonAn.Count)]);
+                    }
+                    dsMonAn = new List<MonAn>(sets);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+
+            if (dsMonAn != null)
+            {
+
+                for (int i = 0; i < dsMonAn.Count; ++i)
+                {
+
+                    try
+                    {
+                        MonAn monAn = dsMonAn[i];
+
+                        FoodGalleryItemViewModel viewModel = GetFoodGalleryItemViewModel(monAn, maNgonNgu);
+
+                        viewModels.Add(viewModel);
+
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+
+                }
+            }
+
+            return viewModels;
+        }
+        // Get ViewModel for displaying Food Gallery Item, get by MonAn
+        private static FoodGalleryItemViewModel GetFoodGalleryItemViewModel(MonAn monAn, int maNgonNgu)
+        {
+            FoodGalleryItemViewModel viewModel = new FoodGalleryItemViewModel();
+            viewModel.HinhAnh = monAn.HinhAnh;
+            viewModel.MaMonAn = monAn.MaMonAn;
+
+            // Hien thi Ten mon an theo ngon ngu
+            ChiTietMonAnDaNgonNgu ctMonAnDaNgonNgu = ChiTietMonAnDaNgonNguBUS.LayChiTietMonAnDaNgonNgu(monAn.MaMonAn, maNgonNgu);
+            if (ctMonAnDaNgonNgu != null)
+            {
+                viewModel.TenMonAn = ctMonAnDaNgonNgu.TenMonAn;
+            }
+            else
+            {
+                viewModel.TenMonAn = SharedString.NoInformation;
+            }
+
+            // Hien thi ten don vi tinh
+            List<ChiTietMonAnDonViTinh> listCTMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayDanhSachChiTietMonAnDonViTinhTheoMonAn(monAn.MaMonAn);
+            if (listCTMonAnDonViTinh != null && listCTMonAnDonViTinh[0] != null)
+            {
+                viewModel.DonGia = listCTMonAnDonViTinh[0].DonGia;
+
+                ChiTietDonViTinhDaNgonNgu ctDonViTinhDaNgonNgu = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(listCTMonAnDonViTinh[0].DonViTinh.MaDonViTinh, maNgonNgu);
+                if (ctDonViTinhDaNgonNgu != null)
+                {
+                    viewModel.TenDonViTinh = ctDonViTinhDaNgonNgu.TenDonViTinh;
+                }
+                else
+                {
+                    viewModel.TenDonViTinh = SharedString.NoInformation;
+                }
+            }
+
+            return viewModel;
         }
     }
 }
