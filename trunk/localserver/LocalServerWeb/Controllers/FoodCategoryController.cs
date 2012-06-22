@@ -32,7 +32,8 @@ namespace LocalServerWeb.Controllers
             FoodCategorySidebarViewModel foodCategorySidebarViewModel = GetFoodCategorySidebarViewModel(id??0, true);
             ViewData["foodCategorySidebarViewModel"] = foodCategorySidebarViewModel;
 
-            List<FoodGalleryItemViewModel> foodRandom = GetFoodRandom(20);
+            int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
+            List<FoodGalleryItemViewModel> foodRandom = SharedCode.GetFoodRandom(20, maNgonNgu);
             ViewData["randomFoods"] = foodRandom;
             //List<FoodGalleryItemViewModel> foodGalleryItemViewModels = GetFoodGalleryItemViewModels(id);
             //ViewData["foodGalleryItemViewModels"] = foodGalleryItemViewModels;
@@ -64,6 +65,10 @@ namespace LocalServerWeb.Controllers
 
             FoodDetailViewModel foodDetailViewModel = GetFoodDetailViewModel(id??1);
             ViewData["foodDetailViewModel"] = foodDetailViewModel;
+
+            int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
+            List<FoodGalleryItemViewModel> foodRandom = SharedCode.GetFoodRandom(20, maNgonNgu);
+            ViewData["randomFoods"] = foodRandom;
 
             return View(id??1);
         }
@@ -232,63 +237,6 @@ namespace LocalServerWeb.Controllers
             return viewModel;
         }
         
-        // Get a list of ViewModel for displaying Food Gallery (many Food items), get by MaDanhMuc
-        private List<FoodGalleryItemViewModel> GetFoodRandom(int num)
-        {
-            List<FoodGalleryItemViewModel> viewModels = new List<FoodGalleryItemViewModel>();
-            List<DanhMuc> dsDanhMuc;
-            List<MonAn> dsMonAn = new List<MonAn>();
-
-            int maNgonNgu = (Session["ngonNgu"] != null) ? ((NgonNgu)Session["ngonNgu"]).MaNgonNgu : 1;
-
-            try
-            {
-                dsMonAn = MonAnBUS.LayDanhSachMonAn();
-                if (num <= 0 || dsMonAn.Count <= 0) return new List<FoodGalleryItemViewModel>();
-                if (num > dsMonAn.Count) num = dsMonAn.Count;
-                if (num < dsMonAn.Count)
-                {
-                    HashSet<MonAn> sets = new HashSet<MonAn>();
-                    Random random = new Random();
-                    while (sets.Count<num)
-                    {
-                        sets.Add(dsMonAn[random.Next(dsMonAn.Count)]);
-                    }
-                    dsMonAn = new List<MonAn>(sets);
-                }
-                
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-
-            if (dsMonAn != null)
-            {
-
-                for (int i = 0; i < dsMonAn.Count; ++i)
-                {
-
-                    try
-                    {
-                        MonAn monAn = dsMonAn[i];
-
-                        FoodGalleryItemViewModel viewModel = GetFoodGalleryItemViewModel(monAn, maNgonNgu);
-
-                        viewModels.Add(viewModel);
-
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                    }
-
-                }
-            }
-
-            return viewModels;
-        }
 
 
         // Get a list of ViewModel for displaying Food Gallery (many Food items), get by MaDanhMuc

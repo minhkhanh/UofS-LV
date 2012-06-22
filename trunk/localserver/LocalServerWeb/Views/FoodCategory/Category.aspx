@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="../../Content/foodcategorycss/foodcategorysidebar.css" type="text/css" />
 <link rel="stylesheet" href="../../Content/foodcategorycss/foodgalleryitem.css" type="text/css" />
 <link rel="stylesheet" href="../../Content/foodcategorycss/foodgallery.css" type="text/css" />
-<script type="text/javascript" src="../../Scripts/jquery/jquery-1.4.1.min.js"></script>
 
 <style type="text/css">    
     .pages { color:red;font-weight:bold; font-size:11px;}
