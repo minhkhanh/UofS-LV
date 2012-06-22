@@ -787,6 +787,11 @@
     <Content Include="Content\foodcategorycss\foodgalleryitem.css" />
     <Content Include="Content\foodcategorycss\foodrelate.css" />
     <Content Include="Content\foodcategorycss\jquery.rating.css" />
+    <Content Include="Content\jcarousel\tango\next-horizontal.png" />
+    <Content Include="Content\jcarousel\tango\next-vertical.png" />
+    <Content Include="Content\jcarousel\tango\prev-horizontal.png" />
+    <Content Include="Content\jcarousel\tango\prev-vertical.png" />
+    <Content Include="Content\jcarousel\tango\skin.css" />
     <Content Include="Content\sitecss\Login.css" />
     <Content Include="Content\sitecss\templatemo_style.css" />
     <Content Include="Content\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
@@ -963,6 +968,8 @@
     <Content Include="Scripts\jquery\jquery.datePicker.js" />
     <Content Include="Scripts\jquery\jquery.dimensions.js" />
     <Content Include="Scripts\jquery\jquery.filestyle.js" />
+    <Content Include="Scripts\jquery\jquery.jcarousel.js" />
+    <Content Include="Scripts\jquery\jquery.jcarousel.min.js" />
     <Content Include="Scripts\jquery\jquery.pngFix.pack.js" />
     <Content Include="Scripts\jquery\jquery.selectbox-0.5.js" />
     <Content Include="Scripts\jquery\jquery.selectbox-0.5_style_2.js" />

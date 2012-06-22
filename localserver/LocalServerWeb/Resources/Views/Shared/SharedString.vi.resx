@@ -174,6 +174,9 @@
   <data name="Config" xml:space="preserve">
     <value>Cấu hình</value>
   </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Liên hệ</value>
+  </data>
   <data name="Detail" xml:space="preserve">
     <value>Chi tiết</value>
   </data>
@@ -204,6 +207,9 @@
   <data name="Guidance" xml:space="preserve">
     <value>Hướng dẫn</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>Trang chủ</value>
+  </data>
   <data name="InputWrong" xml:space="preserve">
     <value>Đầu vào không hợp lệ</value>
   </data>
@@ -227,6 +233,9 @@
   </data>
   <data name="LogOn" xml:space="preserve">
     <value>Đăng nhập</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Bản đồ</value>
   </data>
   <data name="NoInformation" xml:space="preserve">
     <value>N/A</value>
