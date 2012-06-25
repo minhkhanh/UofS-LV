@@ -68,6 +68,7 @@ img { margin: 0px; padding: 0px; border: none; }
 
 #templatemo_top #logindisplay {
     float: right;
+    font-size: 14px;
 }
 
 #templatemo_menu_wrapper {
