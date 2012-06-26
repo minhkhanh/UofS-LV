@@ -107,8 +107,8 @@
             <li class="last_menu"><a href="#"><%:SharedString.Contact %></a></li>
         </ul>
 
-        Copyright © 2012 <a href="/">eMenu</a> | 
-        Designed by <a href="mailto:admin@emenu.com" target="_parent">Mr.Unknown</a> 
+        Copyright © 2012 <a href="/">eMENU</a> | 
+        Designed by <a href="mailto:admin@emenu.com" target="_parent">eMENU</a> 
 
     </div> <!-- end of footer -->
 <%--    </div>--%>
