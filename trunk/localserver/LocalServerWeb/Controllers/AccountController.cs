@@ -57,9 +57,13 @@ namespace LocalServerWeb.Controllers
                 if (taiKhoan!=null)
                 {
                     Session["taiKhoan"] = taiKhoan;
-                    if (SharedCode.IsAdminLogin(Session) || SharedCode.IsManagerLogin(Session))
+                    if (SharedCode.IsAdminLogin(Session) || SharedCode.IsManagerLogin(Session) || SharedCode.IsKitchenLogin(Session))
                     {
                         return RedirectToAction("Index", "AdminHome");
+                    }
+                    if (SharedCode.IsKitchenLogin(Session))
+                    {
+                        return RedirectToAction("Index", "Kitchen");
                     }
                     if (!String.IsNullOrEmpty(returnUrl))
                     {
@@ -87,7 +91,7 @@ namespace LocalServerWeb.Controllers
         public ActionResult LogOff()
         {
             if (Session["taiKhoan"] != null) Session.Remove("taiKhoan");
-            if (Request.UrlReferrer != null) return Redirect(Request.UrlReferrer.ToString());
+            //if (Request.UrlReferrer != null) return Redirect(Request.UrlReferrer.ToString());
             return RedirectToAction("Index", "Home");
         }
 
