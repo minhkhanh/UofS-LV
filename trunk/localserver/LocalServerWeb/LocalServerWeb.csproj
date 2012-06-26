@@ -1050,6 +1050,7 @@
     <Content Include="Views\Shared\AdminMainMenu.ascx" />
     <Content Include="Views\Shared\AdminMenu.ascx" />
     <Content Include="Views\Shared\AjaxCategory.ascx" />
+    <Content Include="Views\Shared\UserMenu.ascx" />
     <Content Include="Views\Shared\FoodCategoryLinks.ascx" />
     <Content Include="Views\Shared\FoodCategorySidebar.ascx" />
     <Content Include="Views\Shared\FoodDetail.ascx" />

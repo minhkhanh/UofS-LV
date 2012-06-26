@@ -80,7 +80,8 @@
 <!--  start nav-outer-repeat................................................................................................. START -->
 <div class="nav-outer-repeat"> 
  <% if (SharedCode.IsManagerLogin(new HttpSessionStateWrapper(Session))) Html.RenderPartial("ManagerMenu");
-    else if (SharedCode.IsAdminLogin(new HttpSessionStateWrapper(Session))) Html.RenderPartial("AdminMenu"); %>
+    else if (SharedCode.IsAdminLogin(new HttpSessionStateWrapper(Session))) Html.RenderPartial("AdminMenu");
+    else Html.RenderPartial("UserMenu"); %>
 <!--  start nav-outer -->
 <%--
 <div class="nav-outer"> 
@@ -154,8 +155,8 @@
 <div id="footer">
 	<!--  start footer-left -->
 	<div id="footer-left">
-	    Copyright © 2012 <a href="/">eMenu</a> | 
-        Designed by <a href="mailto:admin@emenu.com" target="_parent">Mr.Unknown</a> 
+	    Copyright © 2012 <a href="/">eMENU</a> | 
+        Designed by <a href="mailto:admin@emenu.com" target="_parent">eMENU</a> 
      </div>
 	<!--  end footer-left -->
 	<div class="clear">&nbsp;</div>
