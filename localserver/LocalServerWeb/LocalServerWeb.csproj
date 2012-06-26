@@ -775,6 +775,7 @@
     <Content Include="Content\css3menu\food_icon_32.png" />
     <Content Include="Content\css3menu\home.png" />
     <Content Include="Content\css3menu\news.png" />
+    <Content Include="Content\css3menu\register.png" />
     <Content Include="Content\css3menu\report_32.png" />
     <Content Include="Content\css3menu\style.css" />
     <Content Include="Content\css3menu\user.png" />

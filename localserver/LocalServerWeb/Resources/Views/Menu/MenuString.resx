@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Account" xml:space="preserve">
+    <value>Account</value>
+  </data>
   <data name="AddArea" xml:space="preserve">
     <value>Add area</value>
   </data>
@@ -156,6 +159,9 @@
   <data name="Area" xml:space="preserve">
     <value>Area</value>
   </data>
+  <data name="ChangeInfo" xml:space="preserve">
+    <value>Change my infomation</value>
+  </data>
   <data name="Config" xml:space="preserve">
     <value>Configuration</value>
   </data>
@@ -164,6 +170,9 @@
   </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
   </data>
   <data name="ManageArea" xml:space="preserve">
     <value>Manage area</value>

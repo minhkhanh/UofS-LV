@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
+<%@ Import Namespace="LocalServerDTO" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.Menu" %>
 
 <div id="nav-menu">
@@ -127,6 +128,18 @@
                     <img src="../../Content/css3menu/1.png" alt="Manage restaurant" /><%: MenuString.ManageRestaurant %></a></li>
                 <li class="sublast"><a href="<%: Url.Action("Index", "AdminReport") %>">
                     <img src="../../Content/css3menu/2.png" alt="View report" /><%: MenuString.ViewReport %></a></li>
+            </ul>
+        </li>
+        <!-- Account ------------------------------------------------------------------------------------------------------------->
+        <li class="topmenu"><a style="height: 32px; line-height: 32px;"><span>
+            <img src="../../Content/css3menu/register.png" alt="Account" /><%: MenuString.Account %></span></a>
+            <ul>
+                <li class="subfirst"><a href="<%: Url.Action("Edit", "AdminUser", new { id = ((TaiKhoan)Session["taiKhoan"]).MaTaiKhoan}) %>"><span>
+                    <img src="../../Content/css3menu/1.png" alt="Change Info" /><%: MenuString.ChangeInfo %></span></a>
+                </li>
+                <li class="subfirst"><a href="<%: Url.Action("LogOff", "Account") %>"><span>
+                    <img src="../../Content/css3menu/1.png" alt="Logout" /><%: MenuString.Logout %></span></a>
+                </li>
             </ul>
         </li>
     </ul>

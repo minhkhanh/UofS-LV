@@ -58,14 +58,13 @@
 
 	<!-- start logo -->
 	<div id="logo">
-        <% Html.RenderPartial("LanguageUserControl"); %>
 	<%--<a href=""><img src="../../Images/adminimages/shared/logo.png" width="156" height="40" alt="" /></a>--%>
 	</div>
 	<!-- end logo -->
 	
 	<!--  start top-search -->
 	<div id="top-search">
-        <% Html.RenderPartial("LogOnUserControl"); %>
+        <% Html.RenderPartial("LanguageUserControl"); %>
 	</div>
  	<!--  end top-search -->
  	<div class="clear"></div>
