@@ -12,8 +12,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import client.menu.R;
+import emenu.client.db.dto.KhuVucDTO;
 import emenu.client.menu.bus.loader.AreaListLoader;
-import emenu.client.menu.db.dto.KhuVucDTO;
 import emenu.client.menu.ui.fragment.TableMapFragment.OnTableClickedListener;
 
 public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cursor> {

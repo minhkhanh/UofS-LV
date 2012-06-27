@@ -13,9 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import client.menu.R;
+import emenu.client.db.dto.VoucherDTO;
 import emenu.client.menu.bus.task.CustomAsyncTask;
 import emenu.client.menu.dao.VoucherDAO;
-import emenu.client.menu.db.dto.VoucherDTO;
 import emenu.client.menu.util.U;
 
 public class VoucherSearchDlgFragment extends DialogFragment implements OnClickListener {

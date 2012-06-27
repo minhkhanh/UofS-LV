@@ -6,8 +6,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import emenu.client.menu.db.dto.VoucherDTO;
-import emenu.client.menu.db.util.MyDatabaseHelper;
+import emenu.client.db.dto.VoucherDTO;
+import emenu.client.db.util.MyDatabaseHelper;
 import emenu.client.menu.util.U;
 import android.database.Cursor;
 

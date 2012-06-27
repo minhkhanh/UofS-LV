@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import client.menu.R;
-import emenu.client.menu.db.dto.NgonNguDTO;
+import emenu.client.db.dto.NgonNguDTO;
 
 public class LanguageListAdapter extends CustomArrayAdapter<NgonNguDTO> {
 

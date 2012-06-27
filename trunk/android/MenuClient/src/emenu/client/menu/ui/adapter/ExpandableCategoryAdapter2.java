@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView.LayoutParams;
 import android.widget.TextView;
-import emenu.client.menu.db.dto.DanhMucDaNgonNguDTO;
+import emenu.client.db.dto.DanhMucDaNgonNguDTO;
 import emenu.client.menu.ui.view.ExpandableCategoryList2;
 
 @Deprecated

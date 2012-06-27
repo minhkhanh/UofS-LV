@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import client.menu.R;
+import emenu.client.db.dto.BanDTO;
+import emenu.client.db.dto.ChiTietNhomBan;
 import emenu.client.menu.bus.loader.GetTableGroupsLoader;
 import emenu.client.menu.bus.task.CustomAsyncTask;
 import emenu.client.menu.bus.task.PostTableSelectionTask;
 import emenu.client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
-import emenu.client.menu.db.dto.BanDTO;
-import emenu.client.menu.db.dto.ChiTietNhomBan;
 import emenu.client.menu.ui.adapter.TableGroupsAdapter;
 import emenu.client.menu.util.U;
 import android.app.AlertDialog;

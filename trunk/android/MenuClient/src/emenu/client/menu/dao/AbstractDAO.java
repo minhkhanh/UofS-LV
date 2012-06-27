@@ -2,8 +2,8 @@ package emenu.client.menu.dao;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import emenu.client.menu.db.dto.BanDTO;
-import emenu.client.menu.db.util.MyDatabaseHelper;
+import emenu.client.db.dto.BanDTO;
+import emenu.client.db.util.MyDatabaseHelper;
 
 public abstract class AbstractDAO {
     public static String LOCAL_SERVER_URL = "http://192.168.56.1/RestService/LocalService.svc/";

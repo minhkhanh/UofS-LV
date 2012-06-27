@@ -13,8 +13,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import client.menu.R;
-import emenu.client.menu.db.dto.MonAnDTO;
-import emenu.client.menu.db.dto.MonAnDaNgonNguDTO;
+import emenu.client.db.dto.MonAnDTO;
+import emenu.client.db.dto.MonAnDaNgonNguDTO;
 
 public class RelatedDishesAdapter extends CustomArrayAdapter<ContentValues> {
     int mGalleryItemBackground;

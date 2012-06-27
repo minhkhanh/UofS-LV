@@ -1,10 +1,10 @@
 package emenu.client.menu.ui.view;
 
 import client.menu.R;
-import emenu.client.menu.db.dto.ChiTietOrderDTO;
-import emenu.client.menu.db.dto.DonViTinhDaNgonNguDTO;
-import emenu.client.menu.db.dto.DonViTinhMonAnDTO;
-import emenu.client.menu.db.dto.MonAnDaNgonNguDTO;
+import emenu.client.db.dto.ChiTietOrderDTO;
+import emenu.client.db.dto.DonViTinhDaNgonNguDTO;
+import emenu.client.db.dto.DonViTinhMonAnDTO;
+import emenu.client.db.dto.MonAnDaNgonNguDTO;
 import emenu.client.menu.ui.fragment.OrderedItemEditingDlgFragment;
 import emenu.client.menu.util.U;
 import android.app.Activity;

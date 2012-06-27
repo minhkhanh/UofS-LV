@@ -1,4 +1,4 @@
-package emenu.client.menu.db.dto;
+package emenu.client.db.dto;
 
 import java.io.StringReader;
 import java.util.ArrayList;

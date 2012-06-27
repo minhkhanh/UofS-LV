@@ -3,11 +3,11 @@ package emenu.client.menu.bus.loader;
 import java.util.List;
 
 import android.app.Activity;
+import emenu.client.db.dto.DanhMucDaNgonNguDTO;
+import emenu.client.db.dto.NgonNguDTO;
 import emenu.client.menu.app.MyAppLocale;
 import emenu.client.menu.app.MyApplication;
 import emenu.client.menu.dao.DanhMucDAO;
-import emenu.client.menu.db.dto.DanhMucDaNgonNguDTO;
-import emenu.client.menu.db.dto.NgonNguDTO;
 
 public class CategoryListLoader extends CustomAsyncTaskLoader<List<DanhMucDaNgonNguDTO>> {
 

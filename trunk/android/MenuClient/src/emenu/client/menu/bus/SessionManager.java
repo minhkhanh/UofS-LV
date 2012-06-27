@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.database.DataSetObservable;
-import emenu.client.menu.db.dto.ChiTietOrderDTO;
+import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.menu.util.U;
 
 public class SessionManager {

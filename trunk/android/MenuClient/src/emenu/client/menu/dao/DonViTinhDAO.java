@@ -12,11 +12,11 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 
-import emenu.client.menu.db.dto.DonViTinhDTO;
-import emenu.client.menu.db.dto.DonViTinhDaNgonNguDTO;
-import emenu.client.menu.db.dto.DonViTinhMonAnDTO;
-import emenu.client.menu.db.dto.MonAnDaNgonNguDTO;
-import emenu.client.menu.db.util.MyDatabaseHelper;
+import emenu.client.db.dto.DonViTinhDTO;
+import emenu.client.db.dto.DonViTinhDaNgonNguDTO;
+import emenu.client.db.dto.DonViTinhMonAnDTO;
+import emenu.client.db.dto.MonAnDaNgonNguDTO;
+import emenu.client.db.util.MyDatabaseHelper;
 import emenu.client.menu.util.U;
 
 public class DonViTinhDAO extends AbstractDAO {
