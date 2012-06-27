@@ -97,6 +97,7 @@
     <Compile Include="Controllers\AdminTableController.cs" />
     <Compile Include="Controllers\AdminUnitController.cs" />
     <Compile Include="Controllers\AdminUserController.cs" />
+    <Compile Include="Controllers\AdminVoucherController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FoodCategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -337,6 +338,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Resources\Views\AdminVoucher\AdminVoucherString.Designer.cs" />
+    <Compile Include="Resources\Views\AdminVoucher\AdminVoucherString.vi.Designer.cs" />
     <Compile Include="Resources\Views\Error\ErrorString.Designer.cs">
       <DependentUpon>ErrorString.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1106,7 +1109,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Images\foodcategory\foodrating\" />
     <Folder Include="Images\foodcategory\foodrelate\" />
-    <Folder Include="Resources\Views\AdminVoucher\" />
     <Folder Include="Uploads\FoodImages\" />
   </ItemGroup>
   <ItemGroup>
@@ -1269,6 +1271,8 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AdminConfigString.vi.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\AdminVoucher\AdminVoucherString.resx" />
+    <EmbeddedResource Include="Resources\Views\AdminVoucher\AdminVoucherString.vi.resx" />
     <EmbeddedResource Include="Resources\Views\Error\ErrorString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorString.Designer.cs</LastGenOutput>
