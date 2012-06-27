@@ -1,0 +1,16 @@
+package emenu.client.menu.bus.task;
+
+import emenu.client.menu.dao.AbstractDAO;
+import android.app.ProgressDialog;
+
+public class DataCachingTask extends DataPreparingTask {
+
+    public DataCachingTask(ProgressDialog dlg) {
+        super(dlg);
+    }
+
+    @Override
+    protected boolean workCore(AbstractDAO dao) {
+        return dao.loadCachedData();
+    }
+}

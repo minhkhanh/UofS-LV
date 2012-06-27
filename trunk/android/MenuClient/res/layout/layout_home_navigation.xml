@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <Button
+        android:id="@+id/btnTableMap"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_transparent_background"
+        android:drawableTop="@drawable/table_map_button"
+        android:text="@string/caption_table_map" android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/btnPreferences"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_transparent_background"
+        android:drawableTop="@drawable/config_button"
+        android:text="@string/caption_preferences" android:layout_weight="1"/>
+
+</LinearLayout>
