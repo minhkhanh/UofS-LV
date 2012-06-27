@@ -1,0 +1,12 @@
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <header
+        android:fragment="client.menu.ui.fragment.SyncPrefFragment"
+        android:icon="@drawable/sync_pref_icon"
+        android:title="@string/pref_syncing" />
+    <header
+        android:fragment="client.menu.ui.fragment.ConnectionPrefFragment"
+        android:icon="@drawable/connection_pref_icon"
+        android:title="@string/pref_connection" />
+
+</preference-headers>

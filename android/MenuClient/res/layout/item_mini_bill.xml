@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent" android:minWidth="300dp">
+
+    <TextView
+        android:id="@+id/textDishName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <include
+        android:id="@+id/include1"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textDishName"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textDishName"
+        android:layout_toLeftOf="@+id/textQuantity"
+        layout="@layout/item_dish_units" />
+
+    <TextView
+        android:id="@+id/textItemTotal"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/include1"
+        android:layout_below="@+id/textDishName"
+        android:gravity="right"
+        android:padding="5dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textItemTotal"
+        android:layout_alignBottom="@+id/textItemTotal"
+        android:layout_toLeftOf="@+id/textItemTotal"
+        android:text="TextView" android:padding="5dp"/>
+
+</RelativeLayout>
