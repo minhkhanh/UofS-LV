@@ -28,7 +28,7 @@ import emenu.client.db.dto.MonAnDTO;
 import emenu.client.db.dto.MonAnDaNgonNguDTO;
 import emenu.client.menu.ui.adapter.DishUnitsAdapter;
 import emenu.client.menu.ui.fragment.DishDetailDlgFragment;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class DishItemView extends RelativeLayout implements
         OnPostExecuteListener<Integer, Void, List<ContentValues>>, View.OnClickListener {

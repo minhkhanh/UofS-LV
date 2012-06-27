@@ -13,8 +13,8 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.provider.BaseColumns;
-import emenu.client.menu.util.U;
-import emenu.client.menu.util.XmlSerializerWrapper;
+import emenu.client.util.U;
+import emenu.client.util.XmlSerializerWrapper;
 
 public class BanDTO
 // implements Parcelable

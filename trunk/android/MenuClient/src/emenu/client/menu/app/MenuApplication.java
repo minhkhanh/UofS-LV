@@ -19,7 +19,7 @@ import emenu.client.dao.TaiKhoanDAO;
 import emenu.client.dao.TiGiaDAO;
 import emenu.client.dao.VoucherDAO;
 import emenu.client.db.util.MyDatabaseHelper;
-import emenu.client.menu.util.C;
+import emenu.client.util.C;
 import android.app.Activity;
 import android.app.Application;
 

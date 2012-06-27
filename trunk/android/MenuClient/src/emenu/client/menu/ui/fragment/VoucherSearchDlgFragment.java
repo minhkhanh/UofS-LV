@@ -16,7 +16,7 @@ import emenu.client.menu.R;
 import emenu.client.bus.task.CustomAsyncTask;
 import emenu.client.dao.VoucherDAO;
 import emenu.client.db.dto.VoucherDTO;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class VoucherSearchDlgFragment extends DialogFragment implements OnClickListener {
 

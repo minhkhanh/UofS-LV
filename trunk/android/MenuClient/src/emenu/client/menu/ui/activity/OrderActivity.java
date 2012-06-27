@@ -17,7 +17,7 @@ import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.menu.ui.adapter.OrderAdapter;
 import emenu.client.menu.ui.adapter.OrderedAdapter;
 import emenu.client.menu.ui.adapter.UnorderedAdapter;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;

@@ -10,7 +10,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import emenu.client.db.dto.TaiKhoanDTO;
 import emenu.client.db.util.MyDatabaseHelper;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class TaiKhoanDAO extends AbstractDAO {
 

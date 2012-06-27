@@ -7,7 +7,7 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 import android.content.ContentValues;
 import android.database.Cursor;

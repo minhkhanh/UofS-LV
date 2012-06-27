@@ -14,8 +14,8 @@ import emenu.client.bus.task.SyncDbTask;
 import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import emenu.client.menu.R;
 import emenu.client.menu.app.MenuApplication;
-import emenu.client.menu.util.C;
-import emenu.client.menu.util.U;
+import emenu.client.util.C;
+import emenu.client.util.U;
 
 public class SyncPrefFragment extends PreferenceFragment implements
         OnPostExecuteListener<Void, String, Boolean> {

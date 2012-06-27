@@ -8,7 +8,7 @@ import emenu.client.bus.task.GetServingOrderItemsTask;
 import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import emenu.client.menu.R;
 import emenu.client.menu.ui.adapter.SplittingOrderAdapter;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 import android.app.DialogFragment;
 import android.content.ContentValues;
 import android.os.Bundle;

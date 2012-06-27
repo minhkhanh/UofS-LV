@@ -13,7 +13,7 @@ import emenu.client.db.dto.KhuyenMaiDTO;
 import emenu.client.db.dto.NgonNguDTO;
 import emenu.client.menu.app.MyAppLocale;
 import emenu.client.menu.app.MenuApplication;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 import android.content.ContentValues;
 

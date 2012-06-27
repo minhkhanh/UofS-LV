@@ -5,8 +5,8 @@ import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import emenu.client.dao.AbstractDAO;
 import emenu.client.menu.R;
-import emenu.client.menu.util.C;
-import emenu.client.menu.util.U;
+import emenu.client.util.C;
+import emenu.client.util.U;
 
 public class SyncDbTask extends DataPreparingTask {
 

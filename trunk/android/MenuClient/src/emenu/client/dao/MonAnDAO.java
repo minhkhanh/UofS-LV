@@ -15,7 +15,7 @@ import android.util.Base64;
 import emenu.client.db.dto.MonAnDTO;
 import emenu.client.db.dto.MonAnDaNgonNguDTO;
 import emenu.client.db.util.MyDatabaseHelper;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public final class MonAnDAO extends AbstractDAO {
     private static final String GET_ALL_JSON_URL = LOCAL_SERVER_URL

@@ -27,7 +27,7 @@ import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import emenu.client.db.dto.BanDTO;
 import emenu.client.menu.ui.adapter.TableListAdapter;
 import emenu.client.menu.ui.fragment.TableMapFragment.OnTableClickedListener;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class TableMapFragment extends TableInAreaFragment implements
         LoaderCallbacks<List<BanDTO>>, OnPostExecuteListener<Void, Void, Boolean> {

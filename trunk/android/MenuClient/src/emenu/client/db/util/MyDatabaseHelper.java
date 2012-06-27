@@ -7,7 +7,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import emenu.client.menu.R;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 

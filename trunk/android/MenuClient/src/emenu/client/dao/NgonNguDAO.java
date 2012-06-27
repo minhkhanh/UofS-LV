@@ -16,7 +16,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import emenu.client.db.dto.NgonNguDTO;
 import emenu.client.db.util.MyDatabaseHelper;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public final class NgonNguDAO extends AbstractDAO {
     public static final String GET_ALL_URL = LOCAL_SERVER_URL

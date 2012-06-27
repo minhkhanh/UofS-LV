@@ -7,7 +7,7 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import emenu.client.menu.util.XmlSerializerWrapper;
+import emenu.client.util.XmlSerializerWrapper;
 
 public class ChiTietHoaDonDTO {
     public static final String TABLE_NAME = "ChiTietHoaDon";

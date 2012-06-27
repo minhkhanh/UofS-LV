@@ -5,7 +5,7 @@ import emenu.client.db.dto.OrderDTO;
 import emenu.client.menu.ui.activity.BillActivity;
 import emenu.client.menu.ui.activity.TableMapActivity;
 import emenu.client.menu.ui.fragment.OrderSplittingDlgFragment;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;

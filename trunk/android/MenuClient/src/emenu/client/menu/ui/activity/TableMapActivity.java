@@ -15,7 +15,7 @@ import emenu.client.dao.OrderDAO;
 import emenu.client.db.dto.BanDTO;
 import emenu.client.menu.ui.fragment.AreaListFragment;
 import emenu.client.menu.ui.fragment.TableMapFragment.OnTableClickedListener;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class TableMapActivity extends Activity implements Callback,
         OnTableClickedListener {

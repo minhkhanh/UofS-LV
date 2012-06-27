@@ -13,7 +13,7 @@ import emenu.client.db.dto.ChiTietHoaDonDTO;
 import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.db.dto.HoaDonDTO;
 import emenu.client.db.util.MyDatabaseHelper;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class HoaDonDAO extends AbstractDAO {
     public static final String POST_BILL = LOCAL_SERVER_URL + "themHoaDon";

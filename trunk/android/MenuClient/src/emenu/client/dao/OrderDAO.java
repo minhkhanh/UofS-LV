@@ -15,7 +15,7 @@ import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.db.dto.DonViTinhMonAnDTO;
 import emenu.client.db.dto.OrderDTO;
 import emenu.client.db.util.MyDatabaseHelper;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class OrderDAO extends AbstractDAO {
     public static final String POST_NEW_ORDER = LOCAL_SERVER_URL + "themOrder";

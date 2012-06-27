@@ -15,7 +15,7 @@ import emenu.client.bus.SessionManager;
 import emenu.client.bus.SessionManager.ServiceSession;
 import emenu.client.menu.R;
 import emenu.client.menu.ui.fragment.CategoryListFragment;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class MainMenuActivity extends Activity {
     @Override

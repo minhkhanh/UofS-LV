@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 import emenu.client.db.dto.VoucherDTO;
 import emenu.client.db.util.MyDatabaseHelper;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 import android.database.Cursor;
 
 public class VoucherDAO extends AbstractDAO {

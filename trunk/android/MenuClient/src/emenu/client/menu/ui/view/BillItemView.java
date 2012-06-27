@@ -8,7 +8,7 @@ import emenu.client.db.dto.DonViTinhDaNgonNguDTO;
 import emenu.client.db.dto.DonViTinhMonAnDTO;
 import emenu.client.db.dto.KhuyenMaiDTO;
 import emenu.client.db.dto.MonAnDaNgonNguDTO;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 import android.content.ContentValues;
 import android.content.Context;
 import android.util.AttributeSet;
