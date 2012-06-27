@@ -3,8 +3,8 @@
 import java.util.List;
 
 import android.app.Activity;
+import emenu.client.db.dto.NgonNguDTO;
 import emenu.client.menu.dao.NgonNguDAO;
-import emenu.client.menu.db.dto.NgonNguDTO;
 
 public class LanguageListLoader extends CustomAsyncTaskLoader<List<NgonNguDTO>> {
 

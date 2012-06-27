@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import client.menu.R;
+import emenu.client.db.dto.BanDTO;
 import emenu.client.menu.bus.loader.TableListLoader;
 import emenu.client.menu.bus.task.CustomAsyncTask;
 import emenu.client.menu.bus.task.GetTableInGroupTask;
 import emenu.client.menu.bus.task.GetTableSplittingTask;
 import emenu.client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
-import emenu.client.menu.db.dto.BanDTO;
 import emenu.client.menu.ui.adapter.TableListAdapter;
 import emenu.client.menu.util.U;
 import android.app.DialogFragment;

@@ -9,10 +9,10 @@ import org.json.JSONObject;
 import android.database.Cursor;
 
 
-import emenu.client.menu.db.dto.ChiTietHoaDonDTO;
-import emenu.client.menu.db.dto.ChiTietOrderDTO;
-import emenu.client.menu.db.dto.HoaDonDTO;
-import emenu.client.menu.db.util.MyDatabaseHelper;
+import emenu.client.db.dto.ChiTietHoaDonDTO;
+import emenu.client.db.dto.ChiTietOrderDTO;
+import emenu.client.db.dto.HoaDonDTO;
+import emenu.client.db.util.MyDatabaseHelper;
 import emenu.client.menu.util.U;
 
 public class HoaDonDAO extends AbstractDAO {

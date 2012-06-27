@@ -6,9 +6,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import emenu.client.menu.db.dto.ChiTietOrderDTO;
-import emenu.client.menu.db.dto.DonViTinhMonAnDTO;
-import emenu.client.menu.db.dto.KhuyenMaiDTO;
+import emenu.client.db.dto.ChiTietOrderDTO;
+import emenu.client.db.dto.DonViTinhMonAnDTO;
+import emenu.client.db.dto.KhuyenMaiDTO;
 import emenu.client.menu.ui.view.BillItemView;
 
 public class BillAdapter extends CustomArrayAdapter<ContentValues> {

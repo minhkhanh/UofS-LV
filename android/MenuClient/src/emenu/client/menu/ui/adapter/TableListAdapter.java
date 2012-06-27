@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import client.menu.R;
-import emenu.client.menu.db.dto.BanDTO;
+import emenu.client.db.dto.BanDTO;
 
 public class TableListAdapter extends CustomArrayAdapter<BanDTO> {
 

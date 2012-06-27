@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import client.menu.R;
-import emenu.client.menu.db.dto.VoucherDTO;
+import emenu.client.db.dto.VoucherDTO;
 
 import android.content.ContentValues;
 import android.content.Context;

@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
 import client.menu.R;
-import emenu.client.menu.db.dto.BanDTO;
-import emenu.client.menu.db.dto.ChiTietNhomBan;
+import emenu.client.db.dto.BanDTO;
+import emenu.client.db.dto.ChiTietNhomBan;
 
 @Deprecated
 public class TableGroupsAdapter extends CustomArrayAdapter<ChiTietNhomBan> {

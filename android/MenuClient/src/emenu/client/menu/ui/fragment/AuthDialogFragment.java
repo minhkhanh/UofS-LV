@@ -11,8 +11,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import client.menu.R;
+import emenu.client.db.dto.BanDTO;
 import emenu.client.menu.dao.BanDAO;
-import emenu.client.menu.db.dto.BanDTO;
 import emenu.client.menu.util.U;
 
 public class AuthDialogFragment extends DialogFragment {

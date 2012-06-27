@@ -4,8 +4,8 @@ import java.util.List;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import emenu.client.menu.db.dto.ThamSoDTO;
-import emenu.client.menu.db.util.MyDatabaseHelper;
+import emenu.client.db.dto.ThamSoDTO;
+import emenu.client.db.util.MyDatabaseHelper;
 
 public class ThamSoDAO extends AbstractDAO {
 

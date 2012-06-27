@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import client.menu.R;
-import emenu.client.menu.db.dto.ChiTietOrderDTO;
+import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.menu.ui.adapter.MiniBillAdapter;
 
 public class MiniBillView extends LinearLayout {

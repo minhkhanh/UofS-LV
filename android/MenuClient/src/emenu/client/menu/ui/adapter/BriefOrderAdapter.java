@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import client.menu.R;
-import emenu.client.menu.db.dto.OrderDTO;
+import emenu.client.db.dto.OrderDTO;
 import emenu.client.menu.ui.view.BriefOrderChildView;
 import emenu.client.menu.ui.view.BriefOrderGroupView;
 import emenu.client.menu.ui.view.CheckMarkView;

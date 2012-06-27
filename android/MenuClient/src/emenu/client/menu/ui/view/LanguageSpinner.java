@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
-import emenu.client.menu.db.dto.NgonNguDTO;
+import emenu.client.db.dto.NgonNguDTO;
 
 public class LanguageSpinner extends Spinner {
 

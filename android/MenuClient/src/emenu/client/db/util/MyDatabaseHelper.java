@@ -1,4 +1,4 @@
-package emenu.client.menu.db.util;
+package emenu.client.db.util;
 
 import java.io.IOException;
 import java.io.InputStream;

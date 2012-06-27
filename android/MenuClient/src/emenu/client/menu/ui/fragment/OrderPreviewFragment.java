@@ -9,9 +9,9 @@ import android.app.ListFragment;
 import android.os.Bundle;
 import android.widget.SimpleAdapter;
 import client.menu.R;
-import emenu.client.menu.db.dto.ChiTietOrderDTO;
-import emenu.client.menu.db.dto.DonViTinhDaNgonNguDTO;
-import emenu.client.menu.db.dto.MonAnDaNgonNguDTO;
+import emenu.client.db.dto.ChiTietOrderDTO;
+import emenu.client.db.dto.DonViTinhDaNgonNguDTO;
+import emenu.client.db.dto.MonAnDaNgonNguDTO;
 
 public class OrderPreviewFragment extends ListFragment {
     private SimpleAdapter mListAdapter;

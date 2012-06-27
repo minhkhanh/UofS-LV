@@ -9,8 +9,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import emenu.client.menu.db.dto.NhomTaiKhoanDTO;
-import emenu.client.menu.db.util.MyDatabaseHelper;
+import emenu.client.db.dto.NhomTaiKhoanDTO;
+import emenu.client.db.util.MyDatabaseHelper;
 import emenu.client.menu.util.U;
 
 public class NhomTaiKhoanDAO extends AbstractDAO {

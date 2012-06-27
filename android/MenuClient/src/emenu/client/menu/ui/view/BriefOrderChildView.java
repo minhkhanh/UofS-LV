@@ -1,9 +1,9 @@
 package emenu.client.menu.ui.view;
 
 import client.menu.R;
-import emenu.client.menu.db.dto.ChiTietOrderDTO;
-import emenu.client.menu.db.dto.DonViTinhDaNgonNguDTO;
-import emenu.client.menu.db.dto.MonAnDaNgonNguDTO;
+import emenu.client.db.dto.ChiTietOrderDTO;
+import emenu.client.db.dto.DonViTinhDaNgonNguDTO;
+import emenu.client.db.dto.MonAnDaNgonNguDTO;
 import android.content.ContentValues;
 import android.content.Context;
 import android.util.AttributeSet;

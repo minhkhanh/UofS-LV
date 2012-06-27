@@ -1,7 +1,7 @@
 package emenu.client.menu.ui.view;
 
 import client.menu.R;
-import emenu.client.menu.db.dto.OrderDTO;
+import emenu.client.db.dto.OrderDTO;
 import emenu.client.menu.ui.activity.BillActivity;
 import emenu.client.menu.ui.activity.TableMapActivity;
 import emenu.client.menu.ui.fragment.OrderSplittingDlgFragment;
