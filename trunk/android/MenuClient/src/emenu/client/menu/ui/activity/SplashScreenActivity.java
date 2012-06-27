@@ -1,10 +1,10 @@
 package emenu.client.menu.ui.activity;
 
+import emenu.client.bus.task.CustomAsyncTask;
+import emenu.client.bus.task.SyncDbTask;
+import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import emenu.client.menu.R;
 import emenu.client.menu.app.MenuApplication;
-import emenu.client.menu.bus.task.CustomAsyncTask;
-import emenu.client.menu.bus.task.SyncDbTask;
-import emenu.client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import emenu.client.menu.ui.fragment.HomeNavigationDlgFragment;
 import emenu.client.menu.util.C;
 import emenu.client.menu.util.U;

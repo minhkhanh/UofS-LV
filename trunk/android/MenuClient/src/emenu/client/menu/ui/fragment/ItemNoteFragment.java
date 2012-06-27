@@ -1,12 +1,12 @@
 package emenu.client.menu.ui.fragment;
 
 import emenu.client.menu.R;
+import emenu.client.bus.SessionManager;
+import emenu.client.bus.SessionManager.OrderItemId;
 import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.db.dto.DonViTinhDTO;
 import emenu.client.db.dto.MonAnDTO;
 import emenu.client.db.dto.MonAnDaNgonNguDTO;
-import emenu.client.menu.bus.SessionManager;
-import emenu.client.menu.bus.SessionManager.OrderItemId;
 import android.app.DialogFragment;
 import android.content.ContentValues;
 import android.os.Bundle;

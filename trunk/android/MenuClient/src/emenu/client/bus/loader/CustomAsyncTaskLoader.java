@@ -1,4 +1,4 @@
-package emenu.client.menu.bus.loader;
+package emenu.client.bus.loader;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;

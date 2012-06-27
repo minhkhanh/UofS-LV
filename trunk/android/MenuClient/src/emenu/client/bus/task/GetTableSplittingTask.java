@@ -1,4 +1,4 @@
-package emenu.client.menu.bus.task;
+package emenu.client.bus.task;
 
 import emenu.client.dao.AbstractDAO;
 import emenu.client.dao.BanDAO;

@@ -1,4 +1,4 @@
-package emenu.client.menu.bus;
+package emenu.client.bus;
 
 import java.util.ArrayList;
 import java.util.List;

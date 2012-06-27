@@ -1,5 +1,6 @@
 package emenu.client.menu.app;
 
+import emenu.client.bus.SessionManager;
 import emenu.client.dao.BanDAO;
 import emenu.client.dao.DanhMucDAO;
 import emenu.client.dao.DanhMucDaNgonNguDAO;
@@ -18,7 +19,6 @@ import emenu.client.dao.TaiKhoanDAO;
 import emenu.client.dao.TiGiaDAO;
 import emenu.client.dao.VoucherDAO;
 import emenu.client.db.util.MyDatabaseHelper;
-import emenu.client.menu.bus.SessionManager;
 import emenu.client.menu.util.C;
 import android.app.Activity;
 import android.app.Application;

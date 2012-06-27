@@ -1,4 +1,4 @@
-package emenu.client.menu.bus.loader;
+package emenu.client.bus.loader;
 
 import android.app.Activity;
 import android.database.Cursor;
