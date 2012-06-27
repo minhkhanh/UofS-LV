@@ -3,9 +3,7 @@ package client.menu.bus;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Context;
 import android.database.DataSetObservable;
-import client.menu.R;
 import client.menu.db.dto.ChiTietOrderDTO;
 import client.menu.util.U;
 
@@ -47,7 +45,8 @@ public class SessionManager {
             for (int i = 0; i < mOrderItems.size(); ++i) {
                 U.logOwnTag(i + " : ( MaMonAn: " + mOrderItems.get(i).getMaMonAn()
                         + ", MaDonViTinh: " + mOrderItems.get(i).getMaDonViTinh()
-                        + ", SoLuong: " + mOrderItems.get(i).getSoLuong() + ")");
+                        + ", SoLuong: " + mOrderItems.get(i).getSoLuong() + ", GhiChu: "
+                        + mOrderItems.get(i).getGhiChu() + ")");
             }
         }
 
@@ -98,10 +97,13 @@ public class SessionManager {
 
         public ChiTietOrderDTO addItem(Integer maMonAn, Integer maDonViTinh,
                 Integer soLuong, String ghiChuMon) {
+            if (ghiChuMon == null)
+                ghiChuMon = "";
+
             for (ChiTietOrderDTO i : mOrderItems) {
                 if (i.getMaMonAn() == maMonAn && i.getMaDonViTinh() == maDonViTinh) {
                     i.setSoLuong(i.getSoLuong() + soLuong);
-                    // i.setGhiChu(ghiChuMon);
+                    i.setGhiChu(ghiChuMon);
                     return i;
                 }
             }

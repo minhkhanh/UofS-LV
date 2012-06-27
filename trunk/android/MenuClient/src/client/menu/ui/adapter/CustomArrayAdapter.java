@@ -3,8 +3,6 @@ package client.menu.ui.adapter;
 import java.util.Collection;
 import java.util.List;
 
-import client.menu.db.dto.ChiTietOrderDTO;
-import client.menu.db.dto.NgonNguDTO;
 
 import android.content.Context;
 import android.view.View;

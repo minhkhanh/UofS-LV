@@ -3,8 +3,6 @@ package client.menu.bus.loader;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.Context;
-import android.database.Cursor;
 import client.menu.app.MyAppLocale;
 import client.menu.app.MyApplication;
 import client.menu.dao.DanhMucDAO;

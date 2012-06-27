@@ -3,7 +3,6 @@ package client.menu.bus.loader;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.Context;
 import client.menu.dao.BanDAO;
 import client.menu.db.dto.BanDTO;
 

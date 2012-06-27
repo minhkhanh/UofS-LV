@@ -1,5 +1,6 @@
 package client.menu.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -7,7 +8,11 @@ import org.json.JSONObject;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
+import client.menu.db.dto.MonAnDTO;
+import client.menu.db.dto.MonAnDaNgonNguDTO;
 import client.menu.db.dto.MonLienQuanDTO;
 
 import client.menu.db.util.MyDatabaseHelper;
@@ -17,7 +22,7 @@ public class MonLienQuanDAO extends AbstractDAO {
 
     private static final String GET_ALL_JSON_URL = LOCAL_SERVER_URL
             + "layDanhSachMonLienQuanJson";
-    
+
     private static MonLienQuanDAO mInstance;
 
     public static final void createInstance(MyDatabaseHelper dbHelper) {
@@ -30,11 +35,42 @@ public class MonLienQuanDAO extends AbstractDAO {
         }
         return mInstance;
     }
-    
+
     private List<MonLienQuanDTO> mCached;
 
     private MonLienQuanDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
+    }
+
+    public List<ContentValues> listContentByDishId(Integer languageId, Integer dishId) {
+        List<ContentValues> list = new ArrayList<ContentValues>();
+        SQLiteDatabase db = open();
+
+        SQLiteQueryBuilder query = new SQLiteQueryBuilder();
+        query.setTables(MonLienQuanDTO.TABLE_NAME + " INNER JOIN " + MonAnDTO.TABLE_NAME
+                + " ON (" + MonAnDTO.CL_MA_MON_AN_QN + "="
+                + MonLienQuanDTO.CL_MA_MON_LIEN_QUAN + ") INNER JOIN "
+                + MonAnDaNgonNguDTO.TABLE_NAME + " ON ("
+                + MonLienQuanDTO.CL_MA_MON_LIEN_QUAN + "="
+                + MonAnDaNgonNguDTO.CL_MA_MON_QN + ")");
+
+        String selection = MonLienQuanDTO.CL_MA_MON_QN + "=? and "
+                + MonAnDaNgonNguDTO.CL_MA_NGON_NGU + "=?";
+        String[] selectionArgs = { dishId.toString(), languageId.toString() };
+
+        Cursor cursor = query.query(db, null, selection, selectionArgs, null, null, null);
+        cursor.moveToPosition(-1);
+
+        while (cursor.moveToNext()) {
+            ContentValues c = new ContentValues();
+            DatabaseUtils.cursorRowToContentValues(cursor, c);
+
+            list.add(c);
+        }
+
+        db.close();
+
+        return list;
     }
 
     public boolean syncAll() {

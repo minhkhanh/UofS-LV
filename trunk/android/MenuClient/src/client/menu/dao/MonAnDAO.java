@@ -10,6 +10,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
+import android.util.Base64;
 import client.menu.db.dto.MonAnDTO;
 import client.menu.db.dto.MonAnDaNgonNguDTO;
 
@@ -31,7 +32,7 @@ public final class MonAnDAO extends AbstractDAO {
         }
         return mInstance;
     }
-    
+
     private List<MonAnDTO> mCached;
 
     private MonAnDAO(MyDatabaseHelper dbHelper) {
@@ -39,6 +40,7 @@ public final class MonAnDAO extends AbstractDAO {
     }
 
     public boolean syncAll() {
+        String imgUrlBegin = LOCAL_SERVER_URL + "getImageJson?path=";
         SQLiteDatabase db = open();
         boolean result = true;
 
@@ -51,6 +53,18 @@ public final class MonAnDAO extends AbstractDAO {
             for (int i = 0; i < jsonArray.length(); ++i) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 ContentValues values = MonAnDTO.toContentValues(jsonObj);
+
+                try {
+                    String imgUrl = imgUrlBegin
+                            + values.getAsString(MonAnDTO.CL_HINH_ANH);
+                    String imgData = U.loadGetResponse(imgUrl);
+                    byte[] decodedData = Base64.decode(imgData, Base64.DEFAULT);
+                    values.put(MonAnDTO.CL_HINH_ANH, decodedData);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    values.put(MonAnDTO.CL_HINH_ANH, new byte[] {});
+                }
+
                 db.insert(MonAnDTO.TABLE_NAME, null, values);
             }
 
@@ -72,7 +86,7 @@ public final class MonAnDAO extends AbstractDAO {
             SQLiteDatabase db = open();
 
             ContentValues values = new ContentValues();
-            monAn.to(values);
+            monAn.toContentValues(values);
 
             String where = MonAnDTO.CL_MA_MON_AN + "=?";
             String[] whereArgs = { maMonAn.toString() };

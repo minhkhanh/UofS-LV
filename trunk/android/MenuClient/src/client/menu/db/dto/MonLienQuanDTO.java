@@ -17,6 +17,8 @@ public class MonLienQuanDTO {
     public static final String CL_MA_MON = "MaMonAn";
     public static final String CL_MA_MON_LIEN_QUAN = "MaMonAnLienQuan";
 
+    public static final String CL_MA_MON_QN = TABLE_NAME + "." + "MaMonAn";
+
     private Integer mId;
     private Integer mMaMonAn;
     private Integer mMaMonAnLienQuan;

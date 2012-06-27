@@ -2,7 +2,7 @@ package client.menu.app;
 
 import java.util.Locale;
 
-import android.app.Activity;
+
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;

@@ -11,7 +11,6 @@ import client.menu.db.dto.BanDTO;
 import client.menu.db.dto.ChiTietNhomBan;
 import client.menu.util.U;
 
-import android.content.Context;
 
 public class GetTableGroupsTask extends
         CustomAsyncTask<Integer, Void, List<ChiTietNhomBan>> {

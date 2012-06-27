@@ -10,6 +10,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import client.menu.R;
+import client.menu.app.MyApplication;
 import client.menu.bus.task.CustomAsyncTask;
 import client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import client.menu.bus.task.SyncDbTask;
@@ -63,26 +64,17 @@ public class SyncPrefFragment extends PreferenceFragment implements
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
             Preference preference) {
         if (getString(R.string.key_pref_sync_now).equals(preference.getKey())) {
-
-            new AlertDialog.Builder(getActivity())
-                    .setMessage(R.string.message_confirm_sync_db)
-                    .setPositiveButton(R.string.caption_yes,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                    SyncDbTask task = new SyncDbTask(new ProgressDialog(getActivity()));
-                                    task.setOnPostExecuteListener(SyncPrefFragment.this);
-                                    task.execute();
-                                }
-                            })
-                    .setNegativeButton(R.string.caption_no,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            }).create().show();
+            U.showConfirmDialog(getActivity(), R.string.message_confirm_sync_db,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                            SyncDbTask task = new SyncDbTask(new ProgressDialog(
+                                    getActivity()));
+                            task.setOnPostExecuteListener(SyncPrefFragment.this);
+                            task.execute();
+                        }
+                    });
 
         }
 
@@ -90,14 +82,14 @@ public class SyncPrefFragment extends PreferenceFragment implements
     }
 
     @Override
-    public void onPostExecute(CustomAsyncTask<Void, String, Boolean> task,
-            Boolean result) {
+    public void onPostExecute(CustomAsyncTask<Void, String, Boolean> task, Boolean result) {
         if (result) {
             mWhenSyncDone = System.currentTimeMillis();
             String whenString = U.formatDateTime(C.LONG_DATETIME_FORMAT, mWhenSyncDone);
             mSyncNowPref.setSummary(getString(R.string.message_sync_succeed) + " "
                     + getString(R.string.text_at) + " " + whenString);
         }
+        
     }
 
     @Override

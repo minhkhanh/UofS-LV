@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Chào cả thế giới, MenuClientActivity!</string>
-    <string name="app_name">MenuClient</string>
+    <string name="hello">Chào bạn, hãy chọn một tác vụ</string>
+    <string name="app_name">eMenu client</string>
     <string name="table_list_caption">Chọn bàn</string>
     <string name="caption_main_menu">Thực đơn</string>
     <string name="split_table_caption">Tách bàn</string>
@@ -58,17 +58,18 @@
     <string name="message_sync_failed">Đồng bộ dữ liệu không thành công</string>
     <string name="key_pref_sync_now">key_pref_sync_now</string>
     <string name="key_pref_auto_sync">key_pref_auto_sync</string>
-    <string name="caption_syncing">Đồng bộ dữ liệu</string>
+    <string name="pref_syncing">Đồng bộ dữ liệu</string>
     <string name="text_unsync">Chưa đồng bộ dữ liệu</string>
     <string name="text_at">vào lúc</string>
     <string name="text_loading">Đang tải</string>
     <string name="message_confirm_sync_db">Chuẩn bị đồng bộ dữ liệu với Server</string>
-    <string name="caption_table_map">Danh sách bàn</string>
+    <string name="caption_table_map">Sơ đồ bàn</string>
     <string name="caption_preferences">Thiết lập</string>
     <string name="option_back">Quay lại</string>
     <string name="message_busy_table_grouping_failed">Không thể chọn bàn đang có khách để ghép.</string>
     <string name="message_table_grouping_failed">Ghép bàn không thành công</string>
     <string name="message_table_spliting_failed">Tách bàn không thành công</string>
+    <string name="message_table_spliting_succeed">Tách bàn thành công</string>
     <string name="message_single_table_spliting_failed">Không thể thực hiện tách bàn trên bàn đơn</string>
     <string name="caption_plus_one">+1</string>
     <string name="text_please_select_unit">Chọn giá</string>
@@ -103,6 +104,35 @@
     <string name="message_voucher_comsumed">Đã sử dụng voucher.</string>
     <string name="message_waiting">Vui lòng chờ trong giây lát</string>
     <string name="message_please_check_voucher_again">Vui lòng xem lại chi tiết Voucher</string>
-    <string name="text_null"/>
+    <string name="text_null" />
+    <string name="caption_quick_add">Chọn nhanh</string>
+    <string name="caption_more_details">Xem thêm</string>
+    <string name="caption_add_one">+ 1 suất</string>
+    <string name="text_dish_unit">Đơn giá</string>
+    <string name="caption_edit_order_item">Sửa</string>
+    <string name="caption_tab_unordered_order_items">Chưa Order</string>
+    <string name="caption_tab_ordered_order_items">Đã Order</string>
+    <string name="caption_item_note">Ghi chú</string>
+    <string name="message_log_in_failed">Đăng nhập thất bại</string>
+    <string name="message_log_in_succeed">Đăng nhập thành công</string>
+    <string name="pref_connection">Kết nối mạng</string>
+    <string name="key_pref_server_address">key_pref_server_address</string>
+    <string name="text_server_address">Địa chỉ server</string>
+    <string name="activity_config">Cấu hình</string>
+    <string name="text_select_table_to_split">Chọn bàn để tách khỏi nhóm</string>
+    <string name="context_move_order_to">Chuyển Order</string>
+    <string name="message_move_order_succeed">Chuyển bàn thành công</string>
+    <string name="message_move_order_failed">Chuyển bàn không thành công. Mời chọn bàn lại.</string>
+    <string name="caption_order_splitting">Tách Order</string>
+    <string name="text_select_items">Chọn món</string>
+    <string name="text_old_order">Order cũ</string>
+    <string name="text_new_order">Order mới</string>
+    <string name="action_main_menu_search">Tìm món</string>
+    <string name="activity_main_menu">Thực đơn</string>
+    <string name="activity_table_map">Sơ đồ bàn</string>
+    <string name="activity_order">Order</string>
+    <string name="activity_bill">Hóa đơn</string>
+    <string name="text_related_dishes">Các món khác</string>
+    <string name="text_voucher_usage">Dùng Voucher</string>
 
 </resources>

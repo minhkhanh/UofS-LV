@@ -23,6 +23,8 @@ public class MonAnDTO {
     public static final String CL_MA_DANH_MUC = "MaDanhMuc";
     public static final String CL_NGUNG_BAN = "NgungBan";
 
+    public static final String CL_MA_MON_AN_QN = TABLE_NAME + "." + "MaMonAn";
+
     private Integer mId;
     private Integer mMaMonAn;
     private String mHinhAnh;
@@ -58,7 +60,7 @@ public class MonAnDTO {
         return values;
     }
 
-    public void to(ContentValues values) {
+    public void toContentValues(ContentValues values) {
         values.put(CL_ID, mId);
         values.put(CL_MA_MON_AN, mMaMonAn);
         values.put(CL_HINH_ANH, mHinhAnh);
@@ -68,15 +70,19 @@ public class MonAnDTO {
         values.put(CL_MA_DANH_MUC, mMaDanhMuc);
         values.put(CL_NGUNG_BAN, mNgungBan);
     }
-    
+
     public static List<MonAnDTO> fromArrayCursor(Cursor cursor) {
+        if (cursor == null)
+            return new ArrayList<MonAnDTO>();
+
+        cursor.moveToPosition(-1);
         List<MonAnDTO> list = new ArrayList<MonAnDTO>();
-        
+
         while (cursor.moveToNext()) {
             MonAnDTO obj = MonAnDTO.fromCursor(cursor);
             list.add(obj);
         }
-        
+
         return list;
     }
 

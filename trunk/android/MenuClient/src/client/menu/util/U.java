@@ -32,7 +32,6 @@ import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -40,11 +39,9 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.database.Cursor;
-import android.database.CursorWrapper;
 import android.database.DatabaseUtils;
 import android.os.AsyncTask;
 import android.text.format.DateFormat;
-import android.util.JsonReader;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
@@ -306,6 +303,7 @@ public final class U {
         try {
             return new java.util.Scanner(is, "utf-8").useDelimiter("\\A").next();
         } catch (java.util.NoSuchElementException e) {
+            e.printStackTrace();
             return "";
         }
     }

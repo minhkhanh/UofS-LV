@@ -2,7 +2,6 @@ package client.menu.bus.task;
 
 import client.menu.dao.AbstractDAO;
 import android.app.ProgressDialog;
-import android.content.Context;
 
 public class DataCachingTask extends DataPreparingTask {
 

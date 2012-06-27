@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/miConfirmBill" android:title="@string/caption_payment" android:showAsAction="ifRoom|withText"></item><item android:id="@+id/miEqualSplit" android:title="@string/option_equal_bill_split" android:showAsAction="ifRoom|withText"></item>
+    <item android:id="@+id/miConfirmBill" android:title="@string/option_payment" android:showAsAction="ifRoom|withText"></item><item android:id="@+id/miEqualSplit" android:title="@string/option_equal_bill_split" android:showAsAction="ifRoom|withText"></item>
     <item android:id="@+id/miCustomSplit" android:title="@string/option_custom_bill_split" android:showAsAction="ifRoom|withText"></item>
     <item android:id="@+id/miAddVoucher" android:title="@string/option_add_voucher" android:showAsAction="ifRoom|withText"></item>
     

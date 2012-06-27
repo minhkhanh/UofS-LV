@@ -5,16 +5,6 @@ import java.util.List;
 
 import org.json.JSONException;
 
-import android.app.AlertDialog;
-import android.app.ListActivity;
-import android.app.ProgressDialog;
-import android.content.ContentValues;
-import android.content.DialogInterface;
-import android.database.DataSetObserver;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import client.menu.R;
 import client.menu.bus.SessionManager;
 import client.menu.bus.SessionManager.ServiceOrder;
@@ -24,17 +14,38 @@ import client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import client.menu.bus.task.GetServingOrderItemsTask;
 import client.menu.dao.OrderDAO;
 import client.menu.db.dto.ChiTietOrderDTO;
-import client.menu.ui.adapter.OrderItemsAdapter;
+import client.menu.ui.adapter.OrderAdapter;
+import client.menu.ui.adapter.OrderedAdapter;
+import client.menu.ui.adapter.UnorderedAdapter;
 import client.menu.util.U;
+import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
+import android.app.ActionBar.Tab;
+import android.app.ActionBar.TabListener;
+import android.app.Activity;
+import android.content.ContentValues;
+import android.content.DialogInterface;
+import android.database.DataSetObserver;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.ListView;
 
-public class OrderActivity extends ListActivity {
-    private OrderItemsAdapter mListAdapter;
+public class OrderActivity extends Activity implements TabListener {
+
+    private Tab mUnorderedTab;
+    private Tab mOrderedTab;
+    private OrderAdapter mItemsAdapter;
+    private ListView mItemsList;
     private ProgressDialog mWatingDlg;
 
     private DataSetObserver mOrderObserver = new DataSetObserver() {
         public void onChanged() {
             refreshList();
-        };
+        }
     };
 
     private class PostOrderItemsTask extends CustomAsyncTask<Void, Void, Boolean> {
@@ -79,8 +90,7 @@ public class OrderActivity extends ListActivity {
 
                 // session.unbindOrder();
             }
-        };
-
+        }
     };
 
     private OnPostExecuteListener<Integer, Void, List<ContentValues>> mOnPostGetServingOrderItems = new OnPostExecuteListener<Integer, Void, List<ContentValues>>() {
@@ -88,44 +98,45 @@ public class OrderActivity extends ListActivity {
         public void onPostExecute(
                 CustomAsyncTask<Integer, Void, List<ContentValues>> task,
                 List<ContentValues> result) {
-            mListAdapter.clear();
-            mListAdapter.addAll(result);
-            mListAdapter.notifyDataSetChanged();
+            mItemsAdapter.clear();
+            mItemsAdapter.addAll(result);
+            mItemsAdapter.notifyDataSetChanged();
         }
     };
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    private void initViews() {
+        mItemsList = (ListView) findViewById(R.id.listOrder);
+    }
+
+    private void initActionBar() {
+        ActionBar actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        actionBar.setDisplayShowTitleEnabled(false);
+
+        mUnorderedTab = actionBar.newTab().setText(
+                R.string.caption_tab_unordered_order_items);
+        mOrderedTab = actionBar.newTab()
+                .setText(R.string.caption_tab_ordered_order_items);
+
+        mUnorderedTab.setTabListener(this);
+        mOrderedTab.setTabListener(this);
+
+        actionBar.addTab(mUnorderedTab);
+        actionBar.addTab(mOrderedTab);
     }
 
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         switch (item.getItemId()) {
             case R.id.miConfirmOrder:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage(
-                        this.getResources().getString(R.string.message_confirm_order))
-                        .setCancelable(false)
-                        .setPositiveButton(
-                                this.getResources().getString(R.string.caption_ok),
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        mWatingDlg = ProgressDialog.show(
-                                                OrderActivity.this, "", "Wating...");
-                                        new PostOrderItemsTask().execute();
-                                    }
-                                })
-                        .setNegativeButton(
-                                this.getResources().getString(R.string.caption_cancel),
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-
-                AlertDialog alert = builder.create();
-                alert.show();
+                U.showConfirmDialog(this, R.string.message_confirm_order,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                mWatingDlg = ProgressDialog.show(OrderActivity.this, "",
+                                        "Wating...");
+                                new PostOrderItemsTask().execute();
+                            }
+                        });
 
                 break;
 
@@ -147,13 +158,15 @@ public class OrderActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.layout_order);
+
+        initViews();
+        initActionBar();
 
         ServiceSession session = SessionManager.getInstance().loadCurrentSession();
         ServiceOrder order = session.getOrder();
         order.registerObserver(mOrderObserver);
 
-        mListAdapter = new OrderItemsAdapter(this, new ArrayList<ContentValues>());
-        setListAdapter(mListAdapter);
     }
 
     @Override
@@ -164,8 +177,38 @@ public class OrderActivity extends ListActivity {
     }
 
     private void refreshList() {
-        ServiceSession session = SessionManager.getInstance().loadCurrentSession();
-        new GetServingOrderItemsTask(true).setOnPostExecuteListener(
-                mOnPostGetServingOrderItems).execute(session.getOrderId());
+        ActionBar bar = getActionBar();
+        Tab selTab = bar.getSelectedTab();
+
+        if (selTab == mUnorderedTab) {
+            mItemsAdapter = new UnorderedAdapter(this,
+                    new ArrayList<ContentValues>());
+
+            new GetServingOrderItemsTask(GetServingOrderItemsTask.FLAG_UNORDERED_ONLY)
+                    .setOnPostExecuteListener(mOnPostGetServingOrderItems).execute();
+        } else {
+            mItemsAdapter = new OrderedAdapter(this, new ArrayList<ContentValues>());
+
+            ServiceSession session = SessionManager.getInstance().loadCurrentSession();
+            new GetServingOrderItemsTask(GetServingOrderItemsTask.FLAG_ORDERED_ONLY)
+                    .setOnPostExecuteListener(mOnPostGetServingOrderItems).execute(
+                            session.getOrderId());
+        }
+
+        mItemsList.setAdapter(mItemsAdapter);
+    }
+
+    // ACTION BAR TABS CALLBACKS
+    @Override
+    public void onTabReselected(Tab tab, FragmentTransaction ft) {
+    }
+
+    @Override
+    public void onTabSelected(Tab tab, FragmentTransaction ft) {
+        refreshList();
+    }
+
+    @Override
+    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
     }
 }

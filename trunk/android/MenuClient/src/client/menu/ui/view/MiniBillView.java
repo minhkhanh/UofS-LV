@@ -22,31 +22,31 @@ public class MiniBillView extends LinearLayout {
 
     public MiniBillView(Context context) {
         super(context);
-        prepareViews();
+        initView();
     }
 
     public MiniBillView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         if (!isInEditMode()) {
-            prepareViews();
+            initView();
         }
     }
 
     public MiniBillView(Context context, AttributeSet attrs) {
         super(context, attrs);
         if (!isInEditMode()) {
-            prepareViews();
+            initView();
         }
     }
 
     public MiniBillView clone() {
         MiniBillView newBill = new MiniBillView(getContext());
-        newBill.bindItems(mBillItems);
+        newBill.bindData(mBillItems);
 
         return newBill;
     }
 
-    private void prepareViews() {
+    private void initView() {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.frame_mini_bill, this);
@@ -101,7 +101,7 @@ public class MiniBillView extends LinearLayout {
         mBillTotalText.setText(String.valueOf(mBillAdapter.getBillTotal()));
     }
 
-    public void bindItems(List<ContentValues> items) {
+    public void bindData(List<ContentValues> items) {
         mBillItems.clear();
         if (items != null) {
             mBillItems.addAll(items);

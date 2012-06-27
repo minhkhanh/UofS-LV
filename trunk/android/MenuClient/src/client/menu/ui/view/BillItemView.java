@@ -11,7 +11,6 @@ import client.menu.db.dto.MonAnDaNgonNguDTO;
 import client.menu.util.U;
 import android.content.ContentValues;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.RatingBar;

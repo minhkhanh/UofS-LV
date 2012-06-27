@@ -1,30 +1,10 @@
 package client.menu.bus.task;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
-
 import client.menu.R;
 import client.menu.dao.AbstractDAO;
-import client.menu.dao.BanDAO;
-import client.menu.dao.DanhMucDAO;
-import client.menu.dao.DanhMucDaNgonNguDAO;
-import client.menu.dao.DonViTinhDAO;
-import client.menu.dao.DonViTinhDaNgonNguDAO;
-import client.menu.dao.DonViTinhMonAnDAO;
-import client.menu.dao.KhuVucDAO;
-import client.menu.dao.MonAnDAO;
-import client.menu.dao.MonAnDaNgonNguDAO;
-import client.menu.dao.MonLienQuanDAO;
-import client.menu.dao.NgonNguDAO;
-import client.menu.dao.NhomTaiKhoanDAO;
-import client.menu.dao.TaiKhoanDAO;
-import client.menu.dao.TiGiaDAO;
 import client.menu.util.C;
 import client.menu.util.U;
 

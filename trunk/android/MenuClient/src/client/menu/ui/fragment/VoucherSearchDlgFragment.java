@@ -154,6 +154,7 @@ public class VoucherSearchDlgFragment extends DialogFragment implements OnClickL
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        getDialog().setTitle(R.string.text_voucher_usage);
         return inflater.inflate(R.layout.layout_voucher_search, null);
     }
 

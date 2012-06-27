@@ -1,8 +1,14 @@
 package client.menu.ui.view;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
+import android.content.Context;
+import android.os.AsyncTask;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import client.menu.R;
 import client.menu.bus.task.CustomAsyncTask;
 import client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
@@ -10,14 +16,6 @@ import client.menu.bus.task.LoadChildCategoryListTask;
 import client.menu.db.dto.DanhMucDaNgonNguDTO;
 import client.menu.ui.view.ExpandableCategoryList3.OnCategoryClickListener;
 import client.menu.util.U;
-import android.content.Context;
-import android.os.AsyncTask;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class ExpandableCategoryView extends LinearLayout implements
         OnPostExecuteListener<Integer, Void, List<DanhMucDaNgonNguDTO>> {

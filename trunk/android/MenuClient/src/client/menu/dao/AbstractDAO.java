@@ -6,7 +6,7 @@ import client.menu.db.dto.BanDTO;
 import client.menu.db.util.MyDatabaseHelper;
 
 public abstract class AbstractDAO {
-    public static final String LOCAL_SERVER_URL = "http://192.168.56.1/RestService/LocalService.svc/";
+    public static String LOCAL_SERVER_URL = "http://192.168.56.1/RestService/LocalService.svc/";
 //    public static final String LOCAL_SERVER_URL = "http://10.0.2.2:5252/LocalService.svc/";
 
     private MyDatabaseHelper mDbHelper = null;

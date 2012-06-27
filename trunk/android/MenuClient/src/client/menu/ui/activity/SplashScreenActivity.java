@@ -5,10 +5,11 @@ import client.menu.app.MyApplication;
 import client.menu.bus.task.CustomAsyncTask;
 import client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import client.menu.bus.task.SyncDbTask;
+import client.menu.ui.fragment.HomeNavigationDlgFragment;
 import client.menu.util.C;
+import client.menu.util.U;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,44 +36,26 @@ public class SplashScreenActivity extends Activity implements
                 false);
 
         if (syncFlag) {
-            new AlertDialog.Builder(SplashScreenActivity.this)
-                    .setMessage(R.string.message_confirm_sync_db)
-                    .setCancelable(false)
-                    .setPositiveButton(R.string.caption_yes,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                    SyncDbTask task = new SyncDbTask(new ProgressDialog(
-                                            SplashScreenActivity.this));
-                                    task.setOnPostExecuteListener(SplashScreenActivity.this);
-                                    task.execute();
-                                }
-                            })
-                    .setNegativeButton(R.string.caption_no,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                    // nextScreen();
-                                }
-                            }).create().show();
-
+            U.showConfirmDialog(this, R.string.message_confirm_sync_db,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                            SyncDbTask task = new SyncDbTask(new ProgressDialog(
+                                    SplashScreenActivity.this));
+                            task.setOnPostExecuteListener(SplashScreenActivity.this);
+                            task.execute();
+                        }
+                    });
         }
-        // else {
-        // nextScreen();
-        // }
 
-        Button btnTableMap = (Button) findViewById(R.id.btnTableMap);
-        btnTableMap.setOnClickListener(this);
-        Button btnPreferences = (Button) findViewById(R.id.btnPreferences);
-        btnPreferences.setOnClickListener(this);
+        // Button btnTableMap = (Button) findViewById(R.id.btnTableMap);
+        // btnTableMap.setOnClickListener(this);
+        // Button btnPreferences = (Button) findViewById(R.id.btnPreferences);
+        // btnPreferences.setOnClickListener(this);
+
+        findViewById(android.R.id.content).setOnClickListener(this);
     }
-
-    // private void nextScreen() {
-    // Intent intent = new Intent(this, AppPreferenceActivity.class);
-    // startActivity(intent);
-    // }
 
     @Override
     public void onPostExecute(CustomAsyncTask<Void, String, Boolean> task, Boolean result) {
@@ -82,15 +65,9 @@ public class SplashScreenActivity extends Activity implements
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnTableMap:
-                Intent intent = new Intent(SplashScreenActivity.this,
-                        TableMapActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.btnPreferences:
-                intent = new Intent(SplashScreenActivity.this,
-                        AppPreferenceActivity.class);
-                startActivity(intent);
+            case android.R.id.content:
+                HomeNavigationDlgFragment dlg = new HomeNavigationDlgFragment();
+                U.showDlgFragment(this, dlg, "dlg");
                 break;
 
             default:

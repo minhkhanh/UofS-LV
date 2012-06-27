@@ -10,11 +10,9 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import client.menu.R;
-import client.menu.bus.task.CustomAsyncTask;
+import client.menu.app.MyApplication;
 import client.menu.db.dto.BanDTO;
 import client.menu.db.util.MyDatabaseHelper;
 import client.menu.util.U;
@@ -39,7 +37,9 @@ public class BanDAO extends AbstractDAO {
     public static final BanDAO getInstance() {
         if (mInstance == null) {
             throw new NullPointerException("Singleton instance not created yet.");
+            // mInstance = new BanDAO(MyApplication.getInstance().dbOpener);
         }
+
         return mInstance;
     }
 
@@ -122,6 +122,35 @@ public class BanDAO extends AbstractDAO {
         }
 
         return result;
+    }
+
+    public Boolean getTableSplitting(Integer tableId) {
+        String url = LOCAL_SERVER_URL + "tachBanJson?maBan=" + tableId;
+
+        try {
+            String response = U.loadGetResponse(url);
+            return Boolean.valueOf(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public List<BanDTO> getTableInGroup(Integer groupId) {
+        String url = LOCAL_SERVER_URL + "layDanhSachBanThuocBanChinhJson?maBanChinh="
+                + groupId;
+        List<BanDTO> list = null;
+
+        try {
+            String jsonData = U.loadGetResponse(url);
+            JSONArray jsonArray = new JSONArray(jsonData);
+            list = BanDTO.fromArrayJson(jsonArray);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<BanDTO>();
+        }
+
+        return list;
     }
 
     public List<BanDTO> getByKhuVuc(Integer maKhuVuc) {

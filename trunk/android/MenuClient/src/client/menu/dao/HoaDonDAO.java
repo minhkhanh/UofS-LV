@@ -7,7 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import client.menu.db.dto.ChiTietHoaDonDTO;
 import client.menu.db.dto.ChiTietOrderDTO;

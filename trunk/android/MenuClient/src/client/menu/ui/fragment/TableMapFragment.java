@@ -26,6 +26,7 @@ import client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import client.menu.bus.task.PostTableSelectionTask;
 import client.menu.db.dto.BanDTO;
 import client.menu.ui.adapter.TableListAdapter;
+import client.menu.ui.fragment.TableMapFragment.OnTableClickedListener;
 import client.menu.util.U;
 
 public class TableMapFragment extends TableInAreaFragment implements
@@ -35,13 +36,21 @@ public class TableMapFragment extends TableInAreaFragment implements
     public static final int SEL_STATE_SINGLE_BUSY = 1;
     public static final int SEL_STATE_MANY_FREE = 2;
     public static final int SEL_STATE_MIXED = 3;
-    public static final int SEL_STATE_MANY_BUSY = 4;
+    public static final int SEL_STATE_GROUP_BUSY = 4;
 
     int mCurrSelectionState;
 
     private TableListAdapter mGridAdapter;
     private GridView mTableGrid;
     private ActionMode mActionMode;
+
+    private OnTableClickedListener mTableClickedListener;
+
+    public interface OnTableClickedListener {
+        boolean isInOrderMovingMode();
+
+        void onTableClicked(BanDTO table);
+    }
 
     protected OnPostExecuteListener<Void, Void, Boolean> mOnPostExecuteTableSelecting = new OnPostExecuteListener<Void, Void, Boolean>() {
         @Override
@@ -97,6 +106,8 @@ public class TableMapFragment extends TableInAreaFragment implements
                     break;
 
                 case R.id.miSplitTable:
+                    TableSplittingDlgFragment dlg = new TableSplittingDlgFragment(groupId);
+                    U.showDlgFragment(getActivity(), dlg, "dlg");
                     break;
 
                 default:
@@ -112,54 +123,64 @@ public class TableMapFragment extends TableInAreaFragment implements
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
             BanDTO clickTable = mGridAdapter.getItem(pos);
-            if (!clickTable.getActive()) {
-                for (int i = 0; i < mTableGrid.getCount(); ++i) {
-                    BanDTO ban = mGridAdapter.getItem(i);
-                    if (ban.getMaBanChinh() == clickTable.getMaBanChinh()) {
-                        mTableGrid.setItemChecked(i, mTableGrid.isItemChecked(pos));
-                    } else if (!ban.getActive()) {
-                        mTableGrid.setItemChecked(i, false);
+
+            if (mTableClickedListener != null)
+                mTableClickedListener.onTableClicked(clickTable);
+
+            if (mTableClickedListener == null
+                    || !mTableClickedListener.isInOrderMovingMode()) {
+                if (!clickTable.getActive()) {
+                    for (int i = 0; i < mTableGrid.getCount(); ++i) {
+                        BanDTO ban = mGridAdapter.getItem(i);
+                        if (ban.getMaBanChinh() == clickTable.getMaBanChinh()) {
+                            mTableGrid.setItemChecked(i, mTableGrid.isItemChecked(pos));
+                        } else if (!ban.getActive()) {
+                            mTableGrid.setItemChecked(i, false);
+                        }
                     }
                 }
-            }
 
-            List<BanDTO> tabSelection = getTableSelection();
-            mCurrSelectionState = getSelectionState(tabSelection);
+                List<BanDTO> tabSelection = getTableSelection();
+                mCurrSelectionState = getSelectionState(tabSelection);
 
-            int checkedCount = mTableGrid.getCheckedItemCount();
-            if (checkedCount == 0) {
-                mActionMode.finish();
-            } else if (mActionMode == null) {
-                mActionMode = getActivity().startActionMode(mActionModeCallback);
-            }
+                int checkedCount = mTableGrid.getCheckedItemCount();
+                if (checkedCount == 0) {
+                    mActionMode.finish();
+                } else if (mActionMode == null) {
+                    mActionMode = getActivity().startActionMode(mActionModeCallback);
+                }
 
-            if (mActionMode != null) {
-                Menu menu = mActionMode.getMenu();
-                menu.clear();
-                switch (mCurrSelectionState) {
-                    case SEL_STATE_SINGLE_FREE:
-                    case SEL_STATE_SINGLE_BUSY:
-                        menu.add(Menu.NONE, R.id.miSelectTable, 0,
-                                R.string.context_select_table);
-                        break;
-                    case SEL_STATE_MIXED:
-                    case SEL_STATE_MANY_FREE:
-                        menu.add(Menu.NONE, R.id.miGroupTable, 0,
-                                R.string.option_group_table);
-                        break;
-                    case SEL_STATE_MANY_BUSY:
-                        menu.add(Menu.NONE, R.id.miSelectTable, 0,
-                                R.string.context_select_table);
-                        menu.add(Menu.NONE, R.id.miSplitTable, 0,
-                                R.string.context_table_item_split);
-                        break;
+                if (mActionMode != null) {
+                    Menu menu = mActionMode.getMenu();
+                    menu.clear();
+                    switch (mCurrSelectionState) {
+                        case SEL_STATE_SINGLE_FREE:
+                        case SEL_STATE_SINGLE_BUSY:
+                            menu.add(Menu.NONE, R.id.miSelectTable, 0,
+                                    R.string.context_select_table);
+                            break;
+                        case SEL_STATE_MIXED:
+                        case SEL_STATE_MANY_FREE:
+                            menu.add(Menu.NONE, R.id.miGroupTable, 0,
+                                    R.string.option_group_table);
+                            break;
+                        case SEL_STATE_GROUP_BUSY:
+                            menu.add(Menu.NONE, R.id.miSelectTable, 0,
+                                    R.string.context_select_table);
+                            menu.add(Menu.NONE, R.id.miSplitTable, 0,
+                                    R.string.context_table_item_split);
+                            break;
+                    }
                 }
             }
         }
     };
 
-    public TableMapFragment(Integer areaId, String tenKhuVuc) {
+    public TableMapFragment(OnTableClickedListener onTableClickedListener,
+            Integer areaId, String tenKhuVuc) {
         super(areaId, tenKhuVuc);
+
+        mTableClickedListener = onTableClickedListener;
     }
 
     private Integer findGroupId(List<BanDTO> tabSelection) {
@@ -192,7 +213,7 @@ public class TableMapFragment extends TableInAreaFragment implements
         if (hasFree)
             return SEL_STATE_MANY_FREE;
 
-        return SEL_STATE_MANY_BUSY;
+        return SEL_STATE_GROUP_BUSY;
     }
 
     private List<BanDTO> getTableSelection() {
@@ -267,9 +288,7 @@ public class TableMapFragment extends TableInAreaFragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
 
-        ViewGroup frame = (ViewGroup) inflater.inflate(R.layout.frame_table_grid, null);
-
-        return frame;
+        return inflater.inflate(R.layout.frame_table_grid, null);
     }
 
     @Override

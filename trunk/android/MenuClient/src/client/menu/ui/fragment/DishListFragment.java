@@ -8,7 +8,6 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentValues;
 import android.content.Loader;
 import android.os.Bundle;
-import android.view.View;
 import client.menu.R;
 import client.menu.bus.loader.DishListLoader;
 import client.menu.bus.task.LoadDishUnitsAsyncTask;
@@ -19,7 +18,7 @@ public class DishListFragment extends ListFragment {
 
     private Integer mMaDanhMuc;
     List<LoadDishUnitsAsyncTask> mDishUnitsLoadTaskList = new ArrayList<LoadDishUnitsAsyncTask>();
-    private DishListAdapter mListAdapter;
+    private DishListAdapter mDishesAdapter;
 
     private boolean mHaveExtendPane;
 
@@ -27,16 +26,16 @@ public class DishListFragment extends ListFragment {
 
         @Override
         public void onLoaderReset(Loader<List<ContentValues>> arg0) {
-            mListAdapter.clear();
-            mListAdapter.notifyDataSetChanged();
+            mDishesAdapter.clear();
+            mDishesAdapter.notifyDataSetChanged();
         }
 
         @Override
         public void onLoadFinished(Loader<List<ContentValues>> arg0,
                 List<ContentValues> arg1) {
-            mListAdapter.clear();
-            mListAdapter.addAll(arg1);
-            mListAdapter.notifyDataSetChanged();
+            mDishesAdapter.clear();
+            mDishesAdapter.addAll(arg1);
+            mDishesAdapter.notifyDataSetChanged();
 
             setListShown(true);
         }
@@ -95,16 +94,16 @@ public class DishListFragment extends ListFragment {
             mMaDanhMuc = savedInstanceState.getInt("mMaDanhMuc");
         }
 
-        getView().setBackgroundResource(R.color._55f5f5f5);
+        getView().setBackgroundResource(R.color._ccf5f5f5);
 
         setHasOptionsMenu(true);
 
-        mListAdapter = new DishListAdapter(getActivity(), new ArrayList<ContentValues>());
-        setListAdapter(mListAdapter);
+        mDishesAdapter = new DishListAdapter(getActivity(), new ArrayList<ContentValues>());
+        setListAdapter(mDishesAdapter);
 
-        View orderPreview = getActivity().findViewById(R.id.ExtendPaneHolder);
-        mHaveExtendPane = orderPreview != null
-                && orderPreview.getVisibility() == View.VISIBLE;
+//        View orderPreview = getActivity().findViewById(R.id.ExtendPaneHolder);
+//        mHaveExtendPane = orderPreview != null
+//                && orderPreview.getVisibility() == View.VISIBLE;
     }
     
 }

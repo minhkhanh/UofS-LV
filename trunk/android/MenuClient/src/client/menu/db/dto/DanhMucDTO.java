@@ -1,14 +1,11 @@
 package client.menu.db.dto;
 
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.content.ContentValues;
 import android.database.Cursor;

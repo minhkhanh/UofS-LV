@@ -3,7 +3,6 @@ package client.menu.bus.loader;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.content.Context;
 import client.menu.dao.AbstractDAO;
 import client.menu.db.dto.OrderDTO;

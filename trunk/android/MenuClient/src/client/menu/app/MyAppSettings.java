@@ -1,6 +1,5 @@
 package client.menu.app;
 
-import android.app.Activity;
 import android.app.Application;
 
 public final class MyAppSettings {

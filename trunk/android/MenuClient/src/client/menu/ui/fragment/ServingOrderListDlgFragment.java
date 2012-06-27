@@ -32,18 +32,18 @@ import client.menu.dao.BanDAO;
 import client.menu.db.dto.BanDTO;
 import client.menu.db.dto.OrderDTO;
 import client.menu.ui.activity.MainMenuActivity;
-import client.menu.ui.adapter.BriefOrderListAdapter;
+import client.menu.ui.adapter.BriefOrderAdapter;
 import client.menu.util.U;
 
 public class ServingOrderListDlgFragment extends DialogFragment implements
-        LoaderCallbacks<List<OrderDTO>> {
+        LoaderCallbacks<List<OrderDTO>>, OnClickListener {
 
     private Integer mGroupId;
 
-    private BriefOrderListAdapter mListAdapter;
+    private BriefOrderAdapter mListAdapter;
     private ExpandableListView mOrderList;
 
-    private int mSelectedOrder;
+    private int mSelectedGroup;
 
     private TargetTableLoadingTask mTargetTableLoadingTask;
     private PostNewOrderTask mPostNewOrderTask;
@@ -62,10 +62,11 @@ public class ServingOrderListDlgFragment extends DialogFragment implements
             }
         }
     };
-
+    
     OnGroupExpandListener mOnGroupExpandListener = new OnGroupExpandListener() {
         @Override
         public void onGroupExpand(int groupPosition) {
+            mSelectedGroup = groupPosition;
             if (mListAdapter.getGroup(groupPosition) != null
                     && mListAdapter.getChildrenCount(groupPosition) == 0) {
                 Bundle extras = new Bundle();
@@ -73,7 +74,8 @@ public class ServingOrderListDlgFragment extends DialogFragment implements
 
                 SessionManager.getInstance().loadSession(
                         mListAdapter.getGroup(groupPosition).getMaOrder());
-                GetServingOrderItemsTask task = new GetServingOrderItemsTask(true);
+                GetServingOrderItemsTask task = new GetServingOrderItemsTask(
+                        GetServingOrderItemsTask.FLAG_BOTH);
                 task.setOnPostExecuteListener(mOnPostExecuteGroupExpanding);
                 task.setExtras(extras);
                 task.execute(mListAdapter.getGroup(groupPosition).getMaOrder());
@@ -81,43 +83,14 @@ public class ServingOrderListDlgFragment extends DialogFragment implements
         }
     };
 
-    private OnGroupClickListener mOnGroupClickListener = new OnGroupClickListener() {
-        @Override
-        public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition,
-                long id) {
-            mSelectedOrder = groupPosition;
-            return false;
-        }
-    };
-
-    private OnClickListener mOnClickListener = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.btnOK:
-                    if (mSelectedOrder == 0) {
-                        OrderDTO newOrder = new OrderDTO();
-                        newOrder.setMaBan(mGroupId);
-                        newOrder.setMaTaiKhoan(1);
-
-                        mPostNewOrderTask = new PostNewOrderTask();
-                        mPostNewOrderTask.execute(newOrder);
-                    } else {
-                        OrderDTO order = mListAdapter.getGroup(mSelectedOrder);
-                        SessionManager.getInstance().loadSession(order.getMaOrder());
-                        Intent intent = new Intent(getActivity(), MainMenuActivity.class);
-                        startActivity(intent);
-                    }
-                    break;
-
-                case R.id.btnCancel:
-                    dismiss();
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
+//    private OnGroupClickListener mOnGroupClickListener = new OnGroupClickListener() {
+//        @Override
+//        public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition,
+//                long id) {
+//            mSelectedGroup = groupPosition;
+//            return false;
+//        }
+//    };
 
     class PostNewOrderTask extends CustomAsyncTask<OrderDTO, Void, Integer> {
         @Override
@@ -175,10 +148,6 @@ public class ServingOrderListDlgFragment extends DialogFragment implements
         mGroupId = groupId;
     }
 
-    // private void selectOrder(int groupPosition) {
-    // mSelectedOrder = groupPosition;
-    // }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -194,17 +163,16 @@ public class ServingOrderListDlgFragment extends DialogFragment implements
         mOrderList.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
         // mOrderList.setItemsCanFocus(false);
 
-        mListAdapter = new BriefOrderListAdapter(getActivity(), new ArrayList<OrderDTO>());
+        mListAdapter = new BriefOrderAdapter(getActivity(), new ArrayList<OrderDTO>());
         mOrderList.setAdapter(mListAdapter);
 
         mOrderList.setOnGroupExpandListener(mOnGroupExpandListener);
         // mOrderList.setOnChildClickListener(mOnChildClickListener);
-        mOrderList.setOnGroupClickListener(mOnGroupClickListener);
+//        mOrderList.setOnGroupClickListener(mOnGroupClickListener);
 
-        Button btnOK = (Button) getView().findViewById(R.id.btnOK);
-        btnOK.setOnClickListener(mOnClickListener);
-        Button btnCancel = (Button) getView().findViewById(R.id.btnCancel);
-        btnCancel.setOnClickListener(mOnClickListener);
+        getView().findViewById(R.id.btnSelectOrder).setOnClickListener(this);
+        getView().findViewById(R.id.btnCancel).setOnClickListener(this);
+        getView().findViewById(R.id.btnNewOrder).setOnClickListener(this);
     }
 
     @Override
@@ -232,7 +200,7 @@ public class ServingOrderListDlgFragment extends DialogFragment implements
     @Override
     public void onLoadFinished(Loader<List<OrderDTO>> arg0, List<OrderDTO> arg1) {
         mListAdapter.clearGroup();
-        mListAdapter.addGroup(0, null);
+        // mListAdapter.addGroup(0, null);
         mListAdapter.addGroupAll(arg1);
         mListAdapter.notifyDataSetChanged();
     }
@@ -241,5 +209,31 @@ public class ServingOrderListDlgFragment extends DialogFragment implements
     public void onLoaderReset(Loader<List<OrderDTO>> arg0) {
         mListAdapter.clearGroup();
         mListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnNewOrder:
+                OrderDTO newOrder = new OrderDTO();
+                newOrder.setMaBan(mGroupId);
+                newOrder.setMaTaiKhoan(1);
+
+                mPostNewOrderTask = new PostNewOrderTask();
+                mPostNewOrderTask.execute(newOrder);
+                break;
+            case R.id.btnSelectOrder:
+                OrderDTO order = mListAdapter.getGroup(mSelectedGroup);
+                SessionManager.getInstance().loadSession(order.getMaOrder());
+                Intent intent = new Intent(getActivity(), MainMenuActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.btnCancel:
+                dismiss();
+                break;
+            default:
+                break;
+        }
     }
 }

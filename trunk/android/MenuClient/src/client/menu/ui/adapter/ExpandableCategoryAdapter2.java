@@ -2,16 +2,13 @@ package client.menu.ui.adapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView.LayoutParams;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import client.menu.db.dto.DanhMucDaNgonNguDTO;
 import client.menu.ui.view.ExpandableCategoryList2;
