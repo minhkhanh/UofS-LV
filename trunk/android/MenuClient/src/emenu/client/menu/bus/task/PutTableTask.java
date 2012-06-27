@@ -1,7 +1,7 @@
 package emenu.client.menu.bus.task;
 
+import emenu.client.dao.BanDAO;
 import emenu.client.db.dto.BanDTO;
-import emenu.client.menu.dao.BanDAO;
 
 public class PutTableTask extends CustomAsyncTask<BanDTO, Void, Boolean> {
     @Override

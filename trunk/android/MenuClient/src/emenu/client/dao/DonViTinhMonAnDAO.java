@@ -1,4 +1,4 @@
-package emenu.client.menu.dao;
+package emenu.client.dao;
 
 import java.util.List;
 
@@ -9,31 +9,31 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import emenu.client.db.dto.DanhMucDaNgonNguDTO;
+import emenu.client.db.dto.DonViTinhMonAnDTO;
 import emenu.client.db.util.MyDatabaseHelper;
 import emenu.client.menu.util.U;
 
-public class DanhMucDaNgonNguDAO extends AbstractDAO {
+public class DonViTinhMonAnDAO extends AbstractDAO {
 
     private static final String GET_ALL_JSON_URL = LOCAL_SERVER_URL
-            + "layDanhSachDanhMucDaNgonNguJson";
-
-    private static DanhMucDaNgonNguDAO mInstance;
+            + "layDanhSachDonViTinhMonAnJson";
+    
+    private static DonViTinhMonAnDAO mInstance;
 
     public static final void createInstance(MyDatabaseHelper dbHelper) {
-        mInstance = new DanhMucDaNgonNguDAO(dbHelper);
+        mInstance = new DonViTinhMonAnDAO(dbHelper);
     }
 
-    public static final DanhMucDaNgonNguDAO getInstance() {
+    public static final DonViTinhMonAnDAO getInstance() {
         if (mInstance == null) {
             throw new NullPointerException("Singleton instance not created yet.");
         }
         return mInstance;
     }
     
-    private List<DanhMucDaNgonNguDTO> mCached;
+    private List<DonViTinhMonAnDTO> mCached;
 
-    private DanhMucDaNgonNguDAO(MyDatabaseHelper dbHelper) {
+    private DonViTinhMonAnDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
     }
 
@@ -46,11 +46,11 @@ public class DanhMucDaNgonNguDAO extends AbstractDAO {
             JSONArray jsonArray = new JSONArray(jsonData);
 
             db.beginTransaction();
-            db.delete(DanhMucDaNgonNguDTO.TABLE_NAME, "1", null);
+            db.delete(DonViTinhMonAnDTO.TABLE_NAME, "1", null);
             for (int i = 0; i < jsonArray.length(); ++i) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
-                ContentValues values = DanhMucDaNgonNguDTO.toContentValues(jsonObj);
-                db.insert(DanhMucDaNgonNguDTO.TABLE_NAME, null, values);
+                ContentValues values = DonViTinhMonAnDTO.toContentValues(jsonObj);
+                db.insert(DonViTinhMonAnDTO.TABLE_NAME, null, values);
             }
 
             db.setTransactionSuccessful();
@@ -66,11 +66,11 @@ public class DanhMucDaNgonNguDAO extends AbstractDAO {
 
     @Override
     public String getName() {
-        return "Danh mục món";
+        return "Các đơn vị tính của món ăn";
     }
 
     @Override
     protected void createCache(Cursor cursor) {
-        mCached = DanhMucDaNgonNguDTO.fromArrayCursor(cursor);
+        mCached = DonViTinhMonAnDTO.fromArrayCursor(cursor);
     }
 }

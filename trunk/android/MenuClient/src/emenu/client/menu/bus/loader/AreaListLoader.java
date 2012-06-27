@@ -2,7 +2,7 @@ package emenu.client.menu.bus.loader;
 
 import android.app.Activity;
 import android.database.Cursor;
-import emenu.client.menu.dao.KhuVucDAO;
+import emenu.client.dao.KhuVucDAO;
 
 public class AreaListLoader extends CustomAsyncTaskLoader<Cursor> {
     

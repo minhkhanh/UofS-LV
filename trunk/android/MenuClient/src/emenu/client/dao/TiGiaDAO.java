@@ -1,4 +1,4 @@
-package emenu.client.menu.dao;
+package emenu.client.dao;
 
 import java.util.List;
 
@@ -9,31 +9,31 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import emenu.client.db.dto.DonViTinhMonAnDTO;
+import emenu.client.db.dto.TiGiaDTO;
 import emenu.client.db.util.MyDatabaseHelper;
 import emenu.client.menu.util.U;
 
-public class DonViTinhMonAnDAO extends AbstractDAO {
+public class TiGiaDAO extends AbstractDAO {
 
     private static final String GET_ALL_JSON_URL = LOCAL_SERVER_URL
-            + "layDanhSachDonViTinhMonAnJson";
+            + "layDanhSachTiGiaJson";
     
-    private static DonViTinhMonAnDAO mInstance;
+    private static TiGiaDAO mInstance;
 
     public static final void createInstance(MyDatabaseHelper dbHelper) {
-        mInstance = new DonViTinhMonAnDAO(dbHelper);
+        mInstance = new TiGiaDAO(dbHelper);
     }
 
-    public static final DonViTinhMonAnDAO getInstance() {
+    public static final TiGiaDAO getInstance() {
         if (mInstance == null) {
             throw new NullPointerException("Singleton instance not created yet.");
         }
         return mInstance;
     }
     
-    private List<DonViTinhMonAnDTO> mCached;
+    private List<TiGiaDTO> mCached;
 
-    private DonViTinhMonAnDAO(MyDatabaseHelper dbHelper) {
+    private TiGiaDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
     }
 
@@ -46,11 +46,11 @@ public class DonViTinhMonAnDAO extends AbstractDAO {
             JSONArray jsonArray = new JSONArray(jsonData);
 
             db.beginTransaction();
-            db.delete(DonViTinhMonAnDTO.TABLE_NAME, "1", null);
+            db.delete(TiGiaDTO.TABLE_NAME, "1", null);
             for (int i = 0; i < jsonArray.length(); ++i) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
-                ContentValues values = DonViTinhMonAnDTO.toContentValues(jsonObj);
-                db.insert(DonViTinhMonAnDTO.TABLE_NAME, null, values);
+                ContentValues values = TiGiaDTO.toContentValues(jsonObj);
+                db.insert(TiGiaDTO.TABLE_NAME, null, values);
             }
 
             db.setTransactionSuccessful();
@@ -66,11 +66,11 @@ public class DonViTinhMonAnDAO extends AbstractDAO {
 
     @Override
     public String getName() {
-        return "Các đơn vị tính của món ăn";
+        return "Tỉ giá";
     }
 
     @Override
     protected void createCache(Cursor cursor) {
-        mCached = DonViTinhMonAnDTO.fromArrayCursor(cursor);
+        mCached = TiGiaDTO.fromArrayCursor(cursor);
     }
 }
