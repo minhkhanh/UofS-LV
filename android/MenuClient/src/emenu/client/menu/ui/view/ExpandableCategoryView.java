@@ -15,7 +15,7 @@ import emenu.client.bus.task.LoadChildCategoryListTask;
 import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import emenu.client.db.dto.DanhMucDaNgonNguDTO;
 import emenu.client.menu.ui.view.ExpandableCategoryList3.OnCategoryClickListener;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class ExpandableCategoryView extends LinearLayout implements
         OnPostExecuteListener<Integer, Void, List<DanhMucDaNgonNguDTO>> {

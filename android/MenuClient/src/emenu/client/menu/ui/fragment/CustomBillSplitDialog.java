@@ -20,7 +20,7 @@ import emenu.client.bus.SessionManager.ServiceOrder;
 import emenu.client.bus.task.LoadBillItemsTask;
 import emenu.client.menu.R;
 import emenu.client.menu.ui.view.MiniBillView;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class CustomBillSplitDialog extends DialogFragment {
     protected MiniBillView mSubBillView;

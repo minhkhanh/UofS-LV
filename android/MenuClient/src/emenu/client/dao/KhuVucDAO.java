@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import emenu.client.db.dto.KhuVucDTO;
 import emenu.client.db.util.MyDatabaseHelper;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class KhuVucDAO extends AbstractDAO {
     private static final String GET_ALL_JSON_URL = LOCAL_SERVER_URL

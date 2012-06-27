@@ -16,7 +16,7 @@ import emenu.client.db.dto.MonAnDTO;
 import emenu.client.db.dto.MonAnDaNgonNguDTO;
 import emenu.client.db.dto.MonLienQuanDTO;
 import emenu.client.db.util.MyDatabaseHelper;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class MonLienQuanDAO extends AbstractDAO {
 

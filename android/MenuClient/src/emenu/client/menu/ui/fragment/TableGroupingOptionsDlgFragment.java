@@ -11,7 +11,7 @@ import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import emenu.client.db.dto.BanDTO;
 import emenu.client.db.dto.ChiTietNhomBan;
 import emenu.client.menu.ui.adapter.TableGroupsAdapter;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.LoaderManager.LoaderCallbacks;

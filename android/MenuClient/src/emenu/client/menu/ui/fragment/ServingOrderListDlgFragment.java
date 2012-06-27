@@ -33,7 +33,7 @@ import emenu.client.db.dto.BanDTO;
 import emenu.client.db.dto.OrderDTO;
 import emenu.client.menu.ui.activity.MainMenuActivity;
 import emenu.client.menu.ui.adapter.BriefOrderAdapter;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class ServingOrderListDlgFragment extends DialogFragment implements
         LoaderCallbacks<List<OrderDTO>>, OnClickListener {

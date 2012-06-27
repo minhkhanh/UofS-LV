@@ -9,7 +9,7 @@ import org.json.JSONObject;
 import emenu.client.dao.AbstractDAO;
 import emenu.client.db.dto.BanDTO;
 import emenu.client.db.dto.ChiTietNhomBan;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 import android.app.Activity;
 
 public class GetTableGroupsLoader extends CustomAsyncTaskLoader<List<ChiTietNhomBan>> {

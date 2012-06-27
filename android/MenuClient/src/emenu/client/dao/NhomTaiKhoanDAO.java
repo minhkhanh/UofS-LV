@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import emenu.client.db.dto.NhomTaiKhoanDTO;
 import emenu.client.db.util.MyDatabaseHelper;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class NhomTaiKhoanDAO extends AbstractDAO {
 

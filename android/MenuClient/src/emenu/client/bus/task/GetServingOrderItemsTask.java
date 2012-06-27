@@ -14,7 +14,7 @@ import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.db.dto.NgonNguDTO;
 import emenu.client.menu.app.MyAppLocale;
 import emenu.client.menu.app.MenuApplication;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class GetServingOrderItemsTask extends
         CustomAsyncTask<Integer, Void, List<ContentValues>> {

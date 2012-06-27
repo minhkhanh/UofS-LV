@@ -15,7 +15,7 @@ import android.database.sqlite.SQLiteDatabase;
 import emenu.client.db.dto.BanDTO;
 import emenu.client.db.util.MyDatabaseHelper;
 import emenu.client.menu.app.MenuApplication;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class BanDAO extends AbstractDAO {
     private static final String GET_ALL_JSON_URL = LOCAL_SERVER_URL

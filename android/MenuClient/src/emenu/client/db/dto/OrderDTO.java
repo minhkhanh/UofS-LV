@@ -12,7 +12,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.provider.BaseColumns;
-import emenu.client.menu.util.XmlSerializerWrapper;
+import emenu.client.util.XmlSerializerWrapper;
 
 public class OrderDTO {
     public static final String TABLE_NAME = "Order";

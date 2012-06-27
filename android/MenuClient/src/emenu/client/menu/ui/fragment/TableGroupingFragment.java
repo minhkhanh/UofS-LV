@@ -30,7 +30,7 @@ import emenu.client.db.dto.BanDTO;
 import emenu.client.db.dto.YeuCauGhepBan;
 import emenu.client.menu.ui.activity.MainMenuActivity;
 import emenu.client.menu.ui.adapter.TableListAdapter;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class TableGroupingFragment extends TableInAreaFragment implements
         LoaderCallbacks<List<BanDTO>>, OnItemClickListener,

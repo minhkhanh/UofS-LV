@@ -1,4 +1,4 @@
-package emenu.client.menu.util;
+package emenu.client.util;
 
 import java.io.IOException;
 import java.io.InputStream;

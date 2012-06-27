@@ -12,7 +12,7 @@ import emenu.client.bus.loader.DishListLoader;
 import emenu.client.bus.task.LoadDishUnitsAsyncTask;
 import emenu.client.menu.R;
 import emenu.client.menu.ui.adapter.DishListAdapter;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class DishListFragment extends ListFragment {
 

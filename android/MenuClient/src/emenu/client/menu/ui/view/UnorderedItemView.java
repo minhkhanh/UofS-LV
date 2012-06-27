@@ -20,7 +20,7 @@ import emenu.client.db.dto.DonViTinhMonAnDTO;
 import emenu.client.db.dto.MonAnDTO;
 import emenu.client.db.dto.MonAnDaNgonNguDTO;
 import emenu.client.menu.ui.fragment.ItemNoteFragment;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class UnorderedItemView extends RelativeLayout implements View.OnClickListener,
         ContentValuesLayout {

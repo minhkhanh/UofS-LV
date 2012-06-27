@@ -30,7 +30,7 @@ import emenu.client.menu.ui.fragment.CustomBillSplitDialog;
 import emenu.client.menu.ui.fragment.EqualBillSplitDialog;
 import emenu.client.menu.ui.fragment.VoucherSearchDlgFragment;
 import emenu.client.menu.ui.fragment.VoucherSearchDlgFragment.OnUseVoucherListener;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class BillActivity extends Activity implements OnUseVoucherListener {
     private BillAdapter mBillAdapter;

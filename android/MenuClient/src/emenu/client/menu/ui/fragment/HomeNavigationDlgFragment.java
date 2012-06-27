@@ -3,7 +3,7 @@ package emenu.client.menu.ui.fragment;
 import emenu.client.menu.R;
 import emenu.client.menu.ui.activity.AppPreferenceActivity;
 import emenu.client.menu.ui.activity.TableMapActivity;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;

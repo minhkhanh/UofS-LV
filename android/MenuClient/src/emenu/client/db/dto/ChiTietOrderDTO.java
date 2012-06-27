@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import emenu.client.menu.util.XmlSerializerWrapper;
+import emenu.client.util.XmlSerializerWrapper;
 
 import android.content.ContentValues;
 import android.provider.BaseColumns;

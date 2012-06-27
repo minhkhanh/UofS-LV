@@ -14,7 +14,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import emenu.client.db.dto.DanhMucDTO;
 import emenu.client.db.dto.DanhMucDaNgonNguDTO;
 import emenu.client.db.util.MyDatabaseHelper;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class DanhMucDAO extends AbstractDAO {
 

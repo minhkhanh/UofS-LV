@@ -2,7 +2,7 @@ package emenu.client.bus.task;
 
 import emenu.client.dao.AbstractDAO;
 import emenu.client.dao.BanDAO;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class GetTableSplittingTask extends CustomAsyncTask<Integer, Void, Boolean> {
     @Override

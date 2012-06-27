@@ -33,7 +33,7 @@ import emenu.client.menu.app.MyAppLocale;
 import emenu.client.menu.app.MenuApplication;
 import emenu.client.menu.ui.adapter.DishUnitsAdapter;
 import emenu.client.menu.ui.adapter.RelatedDishesAdapter;
-import emenu.client.menu.util.U;
+import emenu.client.util.U;
 
 public class DishDetailDlgFragment extends DialogFragment implements OnClickListener,
         TextWatcher {

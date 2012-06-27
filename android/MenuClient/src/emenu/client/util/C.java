@@ -1,4 +1,4 @@
-package emenu.client.menu.util;
+package emenu.client.util;
 
 public final class C {
     public static final String TAG = "[mylog]";
