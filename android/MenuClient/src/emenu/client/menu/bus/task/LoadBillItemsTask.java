@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.ContentValues;
+import emenu.client.dao.DonViTinhDAO;
 import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.db.dto.NgonNguDTO;
 import emenu.client.menu.app.MyAppLocale;
 import emenu.client.menu.app.MenuApplication;
-import emenu.client.menu.dao.DonViTinhDAO;
 
 public class LoadBillItemsTask extends
         CustomAsyncTask<List<ChiTietOrderDTO>, Void, List<ContentValues>> {

@@ -1,4 +1,4 @@
-package emenu.client.menu.dao;
+package emenu.client.dao;
 
 import java.util.List;
 
@@ -8,31 +8,32 @@ import org.json.JSONObject;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import emenu.client.db.dto.TaiKhoanDTO;
+
+import emenu.client.db.dto.NhomTaiKhoanDTO;
 import emenu.client.db.util.MyDatabaseHelper;
 import emenu.client.menu.util.U;
 
-public class TaiKhoanDAO extends AbstractDAO {
+public class NhomTaiKhoanDAO extends AbstractDAO {
 
     private static final String GET_ALL_JSON_URL = LOCAL_SERVER_URL
-            + "layDanhSachTaiKhoanJson";
+            + "layDanhSachNhomTaiKhoanJson";
     
-    private static TaiKhoanDAO mInstance;
+    private static NhomTaiKhoanDAO mInstance;
 
     public static final void createInstance(MyDatabaseHelper dbHelper) {
-        mInstance = new TaiKhoanDAO(dbHelper);
+        mInstance = new NhomTaiKhoanDAO(dbHelper);
     }
 
-    public static final TaiKhoanDAO getInstance() {
+    public static final NhomTaiKhoanDAO getInstance() {
         if (mInstance == null) {
             throw new NullPointerException("Singleton instance not created yet.");
         }
         return mInstance;
     }
-    
-    private List<TaiKhoanDTO> mCached;
 
-    private TaiKhoanDAO(MyDatabaseHelper dbHelper) {
+    private List<NhomTaiKhoanDTO> mCached;
+
+    private NhomTaiKhoanDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
     }
 
@@ -45,11 +46,11 @@ public class TaiKhoanDAO extends AbstractDAO {
             JSONArray jsonArray = new JSONArray(jsonData);
 
             db.beginTransaction();
-            db.delete(TaiKhoanDTO.TABLE_NAME, "1", null);
+            db.delete(NhomTaiKhoanDTO.TABLE_NAME, "1", null);
             for (int i = 0; i < jsonArray.length(); ++i) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
-                ContentValues values = TaiKhoanDTO.toContentValues(jsonObj);
-                db.insert(TaiKhoanDTO.TABLE_NAME, null, values);
+                ContentValues values = NhomTaiKhoanDTO.toContentValues(jsonObj);
+                db.insert(NhomTaiKhoanDTO.TABLE_NAME, null, values);
             }
 
             db.setTransactionSuccessful();
@@ -65,11 +66,11 @@ public class TaiKhoanDAO extends AbstractDAO {
 
     @Override
     public String getName() {
-        return "Tài khoản";
+        return "Nhóm tài khoản";
     }
 
     @Override
     protected void createCache(Cursor cursor) {
-        mCached = TaiKhoanDTO.fromArrayCursor(cursor);
+        mCached = NhomTaiKhoanDTO.fromArrayCursor(cursor);
     }
 }

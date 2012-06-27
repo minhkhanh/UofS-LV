@@ -1,7 +1,7 @@
 package emenu.client.menu.ui.fragment;
 
+import emenu.client.dao.AbstractDAO;
 import emenu.client.menu.R;
-import emenu.client.menu.dao.AbstractDAO;
 import emenu.client.menu.util.C;
 import android.content.SharedPreferences;
 import android.os.Bundle;

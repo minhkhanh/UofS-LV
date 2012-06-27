@@ -1,4 +1,4 @@
-package emenu.client.menu.dao;
+package emenu.client.dao;
 
 import java.io.StringReader;
 import java.util.ArrayList;

@@ -6,8 +6,8 @@ import java.util.Locale;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import emenu.client.dao.NgonNguDAO;
 import emenu.client.db.dto.NgonNguDTO;
-import emenu.client.menu.dao.NgonNguDAO;
 
 public class MyAppLocale {
 

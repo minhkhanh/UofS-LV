@@ -1,6 +1,6 @@
 package emenu.client.menu.bus.task;
 
-import emenu.client.menu.dao.AbstractDAO;
+import emenu.client.dao.AbstractDAO;
 import android.app.ProgressDialog;
 
 public class DataCachingTask extends DataPreparingTask {

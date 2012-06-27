@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import emenu.client.dao.AbstractDAO;
 import emenu.client.db.dto.OrderDTO;
-import emenu.client.menu.dao.AbstractDAO;
 import emenu.client.menu.util.U;
 
 public class GetServingOrderListLoader extends CustomAsyncTaskLoader<List<OrderDTO>> {

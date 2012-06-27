@@ -6,6 +6,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import emenu.client.menu.R;
+import emenu.client.dao.OrderDAO;
 import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.menu.bus.SessionManager;
 import emenu.client.menu.bus.SessionManager.ServiceOrder;
@@ -13,7 +14,6 @@ import emenu.client.menu.bus.SessionManager.ServiceSession;
 import emenu.client.menu.bus.task.CustomAsyncTask;
 import emenu.client.menu.bus.task.GetServingOrderItemsTask;
 import emenu.client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
-import emenu.client.menu.dao.OrderDAO;
 import emenu.client.menu.ui.adapter.OrderAdapter;
 import emenu.client.menu.ui.adapter.OrderedAdapter;
 import emenu.client.menu.ui.adapter.UnorderedAdapter;

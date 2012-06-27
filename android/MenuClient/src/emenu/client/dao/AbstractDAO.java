@@ -1,4 +1,4 @@
-package emenu.client.menu.dao;
+package emenu.client.dao;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

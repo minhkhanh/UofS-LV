@@ -1,4 +1,4 @@
-package emenu.client.menu.dao;
+package emenu.client.dao;
 
 import java.util.List;
 
@@ -8,32 +8,31 @@ import org.json.JSONObject;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
-import emenu.client.db.dto.TiGiaDTO;
+import emenu.client.db.dto.TaiKhoanDTO;
 import emenu.client.db.util.MyDatabaseHelper;
 import emenu.client.menu.util.U;
 
-public class TiGiaDAO extends AbstractDAO {
+public class TaiKhoanDAO extends AbstractDAO {
 
     private static final String GET_ALL_JSON_URL = LOCAL_SERVER_URL
-            + "layDanhSachTiGiaJson";
+            + "layDanhSachTaiKhoanJson";
     
-    private static TiGiaDAO mInstance;
+    private static TaiKhoanDAO mInstance;
 
     public static final void createInstance(MyDatabaseHelper dbHelper) {
-        mInstance = new TiGiaDAO(dbHelper);
+        mInstance = new TaiKhoanDAO(dbHelper);
     }
 
-    public static final TiGiaDAO getInstance() {
+    public static final TaiKhoanDAO getInstance() {
         if (mInstance == null) {
             throw new NullPointerException("Singleton instance not created yet.");
         }
         return mInstance;
     }
     
-    private List<TiGiaDTO> mCached;
+    private List<TaiKhoanDTO> mCached;
 
-    private TiGiaDAO(MyDatabaseHelper dbHelper) {
+    private TaiKhoanDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
     }
 
@@ -46,11 +45,11 @@ public class TiGiaDAO extends AbstractDAO {
             JSONArray jsonArray = new JSONArray(jsonData);
 
             db.beginTransaction();
-            db.delete(TiGiaDTO.TABLE_NAME, "1", null);
+            db.delete(TaiKhoanDTO.TABLE_NAME, "1", null);
             for (int i = 0; i < jsonArray.length(); ++i) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
-                ContentValues values = TiGiaDTO.toContentValues(jsonObj);
-                db.insert(TiGiaDTO.TABLE_NAME, null, values);
+                ContentValues values = TaiKhoanDTO.toContentValues(jsonObj);
+                db.insert(TaiKhoanDTO.TABLE_NAME, null, values);
             }
 
             db.setTransactionSuccessful();
@@ -66,11 +65,11 @@ public class TiGiaDAO extends AbstractDAO {
 
     @Override
     public String getName() {
-        return "Tỉ giá";
+        return "Tài khoản";
     }
 
     @Override
     protected void createCache(Cursor cursor) {
-        mCached = TiGiaDTO.fromArrayCursor(cursor);
+        mCached = TaiKhoanDTO.fromArrayCursor(cursor);
     }
 }

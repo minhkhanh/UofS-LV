@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.json.JSONArray;
 
+import emenu.client.dao.AbstractDAO;
 import emenu.client.db.dto.BanDTO;
-import emenu.client.menu.dao.AbstractDAO;
 import emenu.client.menu.util.U;
 
 public class PostTableSelectionTask extends CustomAsyncTask<Void, Void, Boolean> {

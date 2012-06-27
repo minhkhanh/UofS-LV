@@ -2,9 +2,9 @@ package emenu.client.menu.bus.loader;
 
 import java.util.List;
 
+import emenu.client.dao.MonAnDAO;
 import emenu.client.menu.app.MyAppLocale;
 import emenu.client.menu.app.MenuApplication;
-import emenu.client.menu.dao.MonAnDAO;
 
 import android.app.Activity;
 import android.content.ContentValues;

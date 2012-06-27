@@ -16,30 +16,30 @@
         android:xlargeScreens="true" />
 
     <application
-        android:name="emenu.client.menu.app.MenuApplication"
+        android:name=".app.MenuApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:logo="@drawable/logo"
         android:theme="@android:style/Theme.Holo.Light"
         android:uiOptions="splitActionBarWhenNarrow" >
         <activity
-            android:name="emenu.client.menu.ui.activity.MainMenuActivity"
+            android:name=".ui.activity.MainMenuActivity"
             android:label="@string/activity_main_menu" >
         </activity>
         <activity
-            android:name="emenu.client.menu.ui.activity.TableMapActivity"
+            android:name=".ui.activity.TableMapActivity"
             android:label="@string/activity_table_map" >
         </activity>
         <activity
-            android:name="emenu.client.menu.ui.activity.OrderActivity"
+            android:name=".ui.activity.OrderActivity"
             android:label="@string/activity_order" >
         </activity>
         <activity
-            android:name="emenu.client.menu.ui.activity.BillActivity"
+            android:name=".ui.activity.BillActivity"
             android:label="@string/activity_bill" >
         </activity>
         <activity
-            android:name="emenu.client.menu.ui.activity.SplashScreenActivity"
+            android:name=".ui.activity.SplashScreenActivity"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,7 +48,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="emenu.client.menu.ui.activity.AppPreferenceActivity"
+            android:name=".ui.activity.AppPreferenceActivity"
             android:label="@string/activity_config" >
         </activity>
     </application>
