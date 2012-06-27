@@ -1,14 +1,14 @@
 package client.menu.dao;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 
+import org.apache.http.client.ClientProtocolException;
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteQueryBuilder;
 
 import client.menu.db.dto.ChiTietOrderDTO;
 import client.menu.db.dto.DonViTinhMonAnDTO;
@@ -35,6 +35,14 @@ public class OrderDAO extends AbstractDAO {
 
     private OrderDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
+    }
+
+    public boolean getMoveOrder(Integer orderId, Integer tableId)
+            throws ClientProtocolException, IOException {
+        String url = LOCAL_SERVER_URL + "chuyenBan?maOrder=" + orderId + "&maBanMoi="
+                + tableId;
+        String response = U.loadGetResponse(url);
+        return Boolean.valueOf(response);
     }
 
     public int queryDonGia(ChiTietOrderDTO c) {

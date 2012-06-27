@@ -13,20 +13,28 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:weightSum="2">
-
+        android:layout_height="wrap_content">
+
         <Button
             android:id="@+id/btnCancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/caption_cancel" android:layout_weight="1"/>
-
+            android:layout_weight="1"
+            android:text="@string/caption_exit" />
+
         <Button
-            android:id="@+id/btnOK"
+            android:id="@+id/btnSelectOrder"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/caption_ok" />
+            android:text="@string/text_select_existing_order" />
+
+        <Button
+            android:id="@+id/btnNewOrder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/text_create_new_order" />
 
     </LinearLayout>
 

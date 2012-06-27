@@ -44,7 +44,7 @@ public class ExpandableCategoryAdapter extends CustomArrayAdapter<CategoryNode> 
         
 //        convertView.setBackgroundResource(R.drawable.activated_background);
         
-        holder.mCategoryName.setPadding(getItem(position).indent * 10 + 10, 5, 5, 5);
+        holder.mCategoryName.setPadding(getItem(position).indent * 20 + 10, 0, 0, 0);
         holder.mCategoryName.setText(getItem(position).danhMuc.getTenDanhMuc());
 
         return convertView;

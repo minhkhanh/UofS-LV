@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
-import android.content.Context;
 import client.menu.dao.AbstractDAO;
 import client.menu.db.dto.BanDTO;
-import client.menu.db.dto.YeuCauGhepBan;
 import client.menu.util.U;
 
 public class PostTableSelectionTask extends CustomAsyncTask<Void, Void, Boolean> {

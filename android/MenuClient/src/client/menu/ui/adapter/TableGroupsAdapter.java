@@ -2,19 +2,14 @@ package client.menu.ui.adapter;
 
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import client.menu.R;
-import client.menu.db.dto.BanDTO;
-import client.menu.db.dto.ChiTietNhomBan;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
-import android.widget.TextView;
+import client.menu.R;
+import client.menu.db.dto.BanDTO;
+import client.menu.db.dto.ChiTietNhomBan;
 
 @Deprecated
 public class TableGroupsAdapter extends CustomArrayAdapter<ChiTietNhomBan> {

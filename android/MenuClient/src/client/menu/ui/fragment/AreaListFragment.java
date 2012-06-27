@@ -8,15 +8,13 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import client.menu.R;
 import client.menu.bus.loader.AreaListLoader;
 import client.menu.db.dto.KhuVucDTO;
+import client.menu.ui.fragment.TableMapFragment.OnTableClickedListener;
 
 public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cursor> {
 
@@ -24,6 +22,7 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
 
     private boolean mIsDualPane;
     private int mSelIndex;
+    private OnTableClickedListener mOnTableClickedListener;
 
     private SimpleCursorAdapter mAreaAdapter;
 
@@ -35,6 +34,10 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
             }
         }
     };
+
+    public AreaListFragment(OnTableClickedListener listener) {
+        mOnTableClickedListener = listener;
+    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -59,7 +62,7 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        getView().setBackgroundResource(R.drawable.wood_white_oak);
+        getView().setBackgroundResource(R.drawable.simple_nine_patch);
         getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
         String[] from = new String[] { KhuVucDTO.CL_TEN_KHU_VUC };
@@ -101,7 +104,7 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
                     R.id.RightPaneHolder);
 
             if (f == null || f.getMaKhuVuc() != areaId) {
-                f = new TableMapFragment(areaId, areaName);
+                f = new TableMapFragment(mOnTableClickedListener, areaId, areaName);
 
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.RightPaneHolder, f);
@@ -110,7 +113,7 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
             }
 
         } else {
-            f = new TableMapFragment(areaId, areaName);
+            f = new TableMapFragment(mOnTableClickedListener, areaId, areaName);
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.LeftPaneHolder, f);

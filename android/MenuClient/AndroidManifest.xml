@@ -5,50 +5,46 @@
     android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="15" />
+
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <supports-screens
+        android:largeScreens="true"
+        android:normalScreens="false"
+        android:requiresSmallestWidthDp="600"
+        android:smallScreens="false"
+        android:xlargeScreens="true" />
 
     <application
         android:name=".app.MyApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo.Light"
-        android:uiOptions="splitActionBarWhenNarrow" >
-        <activity
-            android:name=".ui.activity.MenuClientActivity"
-            android:configChanges="locale"
-            android:label="@string/app_name" >
-        </activity>
+        android:uiOptions="splitActionBarWhenNarrow" android:logo="@drawable/logo">
         <activity
             android:name=".ui.activity.MainMenuActivity"
-            android:configChanges="locale"
-            android:label="@string/main_menu_caption" >
+            android:label="@string/activity_main_menu" >
         </activity>
         <activity
             android:name=".ui.activity.TableMapActivity"
-            android:configChanges="locale"
-            android:label="@string/table_list_caption" ><intent-filter>
+            android:label="@string/activity_table_map" >
+        </activity>
+        <activity android:name=".ui.activity.OrderActivity" android:label="@string/activity_order">
+        </activity>
+        <activity android:name=".ui.activity.BillActivity" android:label="@string/activity_bill">
+        </activity>
+        <activity
+            android:name=".ui.activity.SplashScreenActivity"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" ><intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.SplitTableActivity"
-            android:configChanges="locale"
-            android:label="@string/split_table_caption" >
+            android:name=".ui.activity.AppPreferenceActivity"
+            android:label="@string/activity_config" >
         </activity>
-        <activity android:name=".ui.activity.TestActivity" >
-        </activity>
-        <activity android:name=".ui.activity.OrderActivity" >
-        </activity>
-        <activity android:name=".ui.activity.BillActivity" >
-        </activity>
-        <activity android:name=".ui.activity.CustomBillSplitActivity" >
-        </activity>
-        <activity android:name=".ui.activity.SplashScreenActivity" android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"></activity>
-        <service android:name=".svc.SyncService"></service>
-        <activity android:name=".ui.activity.BeginningActivity"></activity>
-        <activity android:name=".ui.activity.AppPreferenceActivity"></activity>
     </application>
 
 </manifest>

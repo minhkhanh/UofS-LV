@@ -2,7 +2,6 @@ package client.menu.ui.adapter;
 
 import java.util.List;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,8 +14,8 @@ import client.menu.db.dto.DonViTinhDaNgonNguDTO;
 import client.menu.db.dto.DonViTinhMonAnDTO;
 import client.menu.db.dto.MonAnDaNgonNguDTO;
 
-public class MiniBillAdapter extends BillItemsAdapter {
-
+public class MiniBillAdapter extends BillAdapter {
+    
     static class ViewHolder {
         public TextView dishName;
         public TextView unitName;

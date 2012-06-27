@@ -5,11 +5,16 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
-public class CheckMarkView extends ImageView {
+public class CheckMarkView extends ImageView implements CheckableInterface {
 
     private SingleChoiceGroup mGroup;
 
     private boolean mChecked;
+    private OnMarkCheckedListener mOnMarkCheckedListener;
+
+    public interface OnMarkCheckedListener {
+        void onMarkChecked(boolean isChecked);
+    }
 
     public CheckMarkView(Context context) {
         super(context);
@@ -42,6 +47,9 @@ public class CheckMarkView extends ImageView {
     public void setChecked(boolean checked) {
         mChecked = checked;
         setEnabled(mChecked);
+
+        if (mOnMarkCheckedListener != null)
+            mOnMarkCheckedListener.onMarkChecked(mChecked);
     }
 
     public void toggle() {
@@ -51,6 +59,7 @@ public class CheckMarkView extends ImageView {
         }
     }
 
+    @Override
     public void joinGroup(SingleChoiceGroup group) {
         mGroup = group;
         mGroup.addItem(this);
@@ -62,7 +71,8 @@ public class CheckMarkView extends ImageView {
             toggle();
         }
 
-        return super.onTouchEvent(event);
+        // return super.onTouchEvent(event);
+        return false;
     }
 
     @Override
@@ -72,5 +82,13 @@ public class CheckMarkView extends ImageView {
         if (mGroup != null) {
             mGroup.removeItem(this);
         }
+    }
+
+    public OnMarkCheckedListener getOnToggledListener() {
+        return mOnMarkCheckedListener;
+    }
+
+    public void setOnToggledListener(OnMarkCheckedListener onToggledListener) {
+        mOnMarkCheckedListener = onToggledListener;
     }
 }

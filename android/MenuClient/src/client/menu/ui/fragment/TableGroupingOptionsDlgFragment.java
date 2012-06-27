@@ -10,7 +10,6 @@ import client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import client.menu.bus.task.PostTableSelectionTask;
 import client.menu.db.dto.BanDTO;
 import client.menu.db.dto.ChiTietNhomBan;
-import client.menu.db.dto.YeuCauGhepBan;
 import client.menu.ui.adapter.TableGroupsAdapter;
 import client.menu.util.U;
 import android.app.AlertDialog;
@@ -25,7 +24,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TabHost;
 
 public class TableGroupingOptionsDlgFragment extends DialogFragment implements
         LoaderCallbacks<List<ChiTietNhomBan>> {

@@ -25,15 +25,16 @@ import android.app.Application;
 
 public class MyApplication extends Application {
     private static final String EX_MSG_01 = "Can not get MyApplication object from the activity parameter.";
-    
+
     private static MyApplication mInstance;
 
-    private MyAppSettings mSettings;
+    public MyAppSettings settings;
+    public MyDatabaseHelper dbOpener;
 
     public static final MyAppSettings getSettings(Activity activity) {
         MyApplication app = (MyApplication) activity.getApplication();
         if (app != null) {
-            return app.mSettings;
+            return app.settings;
         }
 
         throw new IllegalArgumentException(C.TAG + EX_MSG_01);
@@ -42,36 +43,36 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        
+
         mInstance = this;
 
         initDAOs();
-        
-        mSettings = new MyAppSettings(this);
-        SessionManager.createInstance();
-        
-    }
-    
-    private void initDAOs() {
-        MyDatabaseHelper dbHelper = new MyDatabaseHelper(this);
 
-        BanDAO.createInstance(dbHelper);
-        DanhMucDaNgonNguDAO.createInstance(dbHelper);
-        DanhMucDAO.createInstance(dbHelper);
-        DonViTinhDaNgonNguDAO.createInstance(dbHelper);
-        DonViTinhDAO.createInstance(dbHelper);
-        DonViTinhMonAnDAO.createInstance(dbHelper);
-        KhuVucDAO.createInstance(dbHelper);
-        MonAnDaNgonNguDAO.createInstance(dbHelper);
-        MonAnDAO.createInstance(dbHelper);
-        MonLienQuanDAO.createInstance(dbHelper);
-        NgonNguDAO.createInstance(dbHelper);
-        NhomTaiKhoanDAO.createInstance(dbHelper);
-        TaiKhoanDAO.createInstance(dbHelper);
-        TiGiaDAO.createInstance(dbHelper);
-        OrderDAO.createInstance(dbHelper);
-        HoaDonDAO.createInstance(dbHelper);
-        VoucherDAO.createInstance(dbHelper);
+        settings = new MyAppSettings(this);
+        SessionManager.createInstance();
+
+    }
+
+    private void initDAOs() {
+        dbOpener = new MyDatabaseHelper(this);
+
+        BanDAO.createInstance(dbOpener);
+        DanhMucDaNgonNguDAO.createInstance(dbOpener);
+        DanhMucDAO.createInstance(dbOpener);
+        DonViTinhDaNgonNguDAO.createInstance(dbOpener);
+        DonViTinhDAO.createInstance(dbOpener);
+        DonViTinhMonAnDAO.createInstance(dbOpener);
+        KhuVucDAO.createInstance(dbOpener);
+        MonAnDaNgonNguDAO.createInstance(dbOpener);
+        MonAnDAO.createInstance(dbOpener);
+        MonLienQuanDAO.createInstance(dbOpener);
+        NgonNguDAO.createInstance(dbOpener);
+        NhomTaiKhoanDAO.createInstance(dbOpener);
+        TaiKhoanDAO.createInstance(dbOpener);
+        TiGiaDAO.createInstance(dbOpener);
+        OrderDAO.createInstance(dbOpener);
+        HoaDonDAO.createInstance(dbOpener);
+        VoucherDAO.createInstance(dbOpener);
     }
 
     public static final MyApplication getInstance() {
@@ -79,6 +80,6 @@ public class MyApplication extends Application {
     }
 
     public MyAppSettings getSettings() {
-        return mSettings;
+        return settings;
     }
 }

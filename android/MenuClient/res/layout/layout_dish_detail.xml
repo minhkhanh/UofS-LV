@@ -1,172 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imgDishAvatar"
-        android:layout_toRightOf="@+id/imgDishAvatar"
-        android:padding="5dp" >
-
-        <TextView
-            android:id="@+id/textDishName"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:gravity="top|left"
-            android:maxLines="1"
-            android:text="@string/text_dish_name_sample"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <RatingBar
-            android:id="@+id/rateDish"
-            style="?android:attr/ratingBarStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/textDishName"
-            android:numStars="5" />
-
-        <TextView
-            android:id="@+id/textDishDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/rateDish"
-            android:layout_marginTop="10dp"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:maxLines="4"
-            android:text="@string/sample_long" />
-
-        <EditText
-            android:id="@+id/editDishNote"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/textView2"
-            android:gravity="top|left"
-            android:inputType="textMultiLine"
-            android:lines="4" >
-
-        </EditText>
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/textDishDescription"
-            android:padding="5dp"
-            android:text="@string/text_give_note" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout3"
+    <LinearLayout
+        android:id="@+id/LinearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/imgDishAvatar"
-        android:padding="5dp" >
+        android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:text="@string/text_select_one_unit" />
-
-        <NumberPicker
-            android:id="@+id/npickerQuantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView1"
-            android:layout_centerHorizontal="true" />
-
-        <ListView
-            android:id="@+id/listDishUnits"
+        <LinearLayout
+            android:id="@+id/LinearLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/npickerQuantity"
-            android:layout_alignParentLeft="true"
-            android:layout_alignTop="@+id/npickerQuantity"
-            android:layout_toLeftOf="@+id/TextView01"
-            android:choiceMode="singleChoice" >
-        </ListView>
+            android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/TextView01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/npickerQuantity"
-            android:layout_centerHorizontal="true"
-            android:text="@string/text_adjust_quantity" />
+            <ImageView
+                android:id="@+id/imgDishAvatar"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/avatar_frame"
+                android:scaleType="fitCenter"
+                android:src="@drawable/sample_dish_avatar" />
 
-        <ViewStub
-            android:id="@+id/viewStub1"
-            android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/relativeLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp" >
+
+                <TextView
+                    android:id="@+id/textDishName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top|left"
+                    android:maxLines="1"
+                    android:text="@string/text_dish_name_sample"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <RatingBar
+                    android:id="@+id/rateDish"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/textDishName"
+                    android:numStars="5" />
+
+                <TextView
+                    android:id="@+id/textDishDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/rateDish"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/sample_long" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TableLayout
+            android:id="@+id/tableLayout1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/listDishUnits"
-            android:layout_below="@+id/listDishUnits" />
+            android:padding="8dp" >
+
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_select_one_unit" />
+
+                <Spinner
+                    android:id="@+id/spinUnits"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/TextView01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:text="x" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <EditText
+                        android:id="@+id/editQuantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="2"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="2"
+                        android:selectAllOnFocus="true" >
+
+                        <requestFocus />
+                    </EditText>
+
+                    <Button
+                        android:id="@+id/btnMinus"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_weight="1"
+                        android:text="@string/sign_minus" />
+
+                    <Button
+                        android:id="@+id/btnPlus"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_weight="1"
+                        android:text="@string/sign_plus" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_give_note" />
+
+                <EditText
+                    android:id="@+id/editDishNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="top|left"
+                    android:inputType="textMultiLine"
+                    android:maxLines="2" />
+            </TableRow>
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/caption_cancel" />
+
+            <Button
+                android:id="@+id/btnOK"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/caption_ok" />
+        </LinearLayout>
+
+        <TableLayout
+            android:id="@+id/TableLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/avatar_frame">
 
-        <include
-            android:id="@+id/incSelectedUnit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/listDishUnits"
-            android:layout_alignRight="@+id/listDishUnits"
-            android:layout_below="@+id/listDishUnits"
-            layout="@layout/item_dish_units" />
-
-        <TextView
-            android:id="@+id/textSelectedQuantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/include1"
-            android:layout_alignLeft="@+id/npickerQuantity"
-            android:layout_alignRight="@+id/npickerQuantity"
-            android:layout_below="@+id/npickerQuantity"
-            android:lines="1"
-            android:padding="5dp"
-            android:text="TextView" android:gravity="center_vertical|center_horizontal|center"/>
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:gravity="fill_vertical">
 
-        <Button
-            android:id="@+id/btnOK"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/textView3"
-            android:layout_alignParentRight="true"
-            android:text="@string/caption_ok" />
+                <TextView
+                    android:id="@+id/TextView02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="@string/text_related_dishes"
+                    android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btnCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/textSelectedQuantity"
-            android:layout_alignParentRight="true"
-            android:text="@string/caption_cancel" />
+            </TableRow>
 
-    </RelativeLayout>
+            <Gallery
+                android:id="@+id/gallery1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@id/relativeLayout3" >
+        </TableLayout>
+    </LinearLayout>
 
-    </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/imgDishAvatar"
-        android:layout_width="256dp"
-        android:layout_height="256dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"/>
-
-</RelativeLayout>
+</ScrollView>

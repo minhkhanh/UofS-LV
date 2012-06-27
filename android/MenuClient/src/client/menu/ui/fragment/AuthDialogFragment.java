@@ -87,7 +87,7 @@ public class AuthDialogFragment extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Holo_Dialog);
+//        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Holo_Dialog);
     }
 
     @Override

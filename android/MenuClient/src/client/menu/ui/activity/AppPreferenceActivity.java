@@ -11,6 +11,6 @@ public class AppPreferenceActivity extends PreferenceActivity {
     public void onBuildHeaders(List<Header> target) {
         super.onBuildHeaders(target);
         
-        loadHeadersFromResource(R.xml.preference_headers, target);
+        loadHeadersFromResource(R.xml.preference_header, target);
     }
 }

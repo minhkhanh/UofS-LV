@@ -56,14 +56,14 @@ public class MainMenuActivity extends Activity {
                     startActivity(intent);
                 }
                 break;
-            case R.id.miPayment:
-                if (session.isFinished())
-                    U.toastText(this, R.string.message_your_service_session_finished);
-                else {
-                    Intent intent = new Intent(MainMenuActivity.this, BillActivity.class);
-                    startActivity(intent);
-                }
-                break;
+//            case R.id.miPayment:
+//                if (session.isFinished())
+//                    U.toastText(this, R.string.message_your_service_session_finished);
+//                else {
+//                    Intent intent = new Intent(MainMenuActivity.this, BillActivity.class);
+//                    startActivity(intent);
+//                }
+//                break;
         }
 
         return super.onMenuItemSelected(featureId, item);

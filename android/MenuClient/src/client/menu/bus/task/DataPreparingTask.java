@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import client.menu.dao.AbstractDAO;
 import client.menu.dao.BanDAO;
 import client.menu.dao.DanhMucDAO;

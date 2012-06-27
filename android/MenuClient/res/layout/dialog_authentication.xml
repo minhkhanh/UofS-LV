@@ -2,11 +2,11 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/TableLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TableRow
         android:id="@+id/tableRow1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" android:gravity="center">
 
         <TextView
@@ -28,7 +28,7 @@
 
     <TableRow
         android:id="@+id/tableRow2"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" android:gravity="center">
 
         <TextView
@@ -46,23 +46,22 @@
 
     </TableRow>
 
-    <LinearLayout
+    <TableRow
+        android:id="@+id/tableRow3"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" android:gravity="center_horizontal">
+        android:layout_height="wrap_content" android:gravity="center" android:layout_marginTop="8dp">
 
         <Button
             android:id="@+id/btnCancel"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/caption_cancel" android:layout_margin="10dp"/>
+            android:text="@string/caption_cancel" android:layout_weight="1"/>
 
         <Button
             android:id="@+id/btnOK"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/caption_ok" android:layout_margin="10dp"/>
-
-    </LinearLayout>
+            android:text="@string/caption_ok" android:layout_weight="1"/>
+    </TableRow>
 
 </TableLayout>

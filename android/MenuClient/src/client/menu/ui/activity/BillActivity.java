@@ -24,7 +24,7 @@ import client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import client.menu.bus.task.GetServingOrderItemsTask;
 import client.menu.dao.HoaDonDAO;
 import client.menu.db.dto.HoaDonDTO;
-import client.menu.ui.adapter.BillItemsAdapter;
+import client.menu.ui.adapter.BillAdapter;
 import client.menu.ui.adapter.VoucherItemsAdapter;
 import client.menu.ui.fragment.CustomBillSplitDialog;
 import client.menu.ui.fragment.EqualBillSplitDialog;
@@ -33,7 +33,7 @@ import client.menu.ui.fragment.VoucherSearchDlgFragment.OnUseVoucherListener;
 import client.menu.util.U;
 
 public class BillActivity extends Activity implements OnUseVoucherListener {
-    private BillItemsAdapter mBillAdapter;
+    private BillAdapter mBillAdapter;
     private GetServingOrderItemsTask mGetServingOrderItemsTask;
 
     private TextView mBillTotalText;
@@ -143,7 +143,7 @@ public class BillActivity extends Activity implements OnUseVoucherListener {
         setContentView(R.layout.layout_bill);
 
         ListView listBill = (ListView) findViewById(R.id.listBill);
-        mBillAdapter = new BillItemsAdapter(this, new ArrayList<ContentValues>());
+        mBillAdapter = new BillAdapter(this, new ArrayList<ContentValues>());
         listBill.setAdapter(mBillAdapter);
 
         ListView listVoucher = (ListView) findViewById(R.id.listVoucher);
@@ -166,7 +166,8 @@ public class BillActivity extends Activity implements OnUseVoucherListener {
 
         ServiceSession session = SessionManager.getInstance().loadCurrentSession();
 
-        mGetServingOrderItemsTask = new GetServingOrderItemsTask(false);
+        mGetServingOrderItemsTask = new GetServingOrderItemsTask(
+                GetServingOrderItemsTask.FLAG_ORDERED_ONLY);
         mGetServingOrderItemsTask.setOnPostExecuteListener(
                 mOnPostGettingServingOrderItems).execute(session.getOrderId());
     }

@@ -11,7 +11,6 @@ import client.menu.app.MyApplication;
 import client.menu.dao.AbstractDAO;
 import client.menu.dao.DonViTinhDAO;
 import client.menu.db.dto.ChiTietOrderDTO;
-import client.menu.db.dto.DonViTinhMonAnDTO;
 import client.menu.db.dto.KhuyenMaiDTO;
 import client.menu.db.dto.NgonNguDTO;
 import client.menu.util.U;
@@ -57,7 +56,7 @@ public class GetBillItemsTask extends CustomAsyncTask<Integer, Void, List<Conten
                         + "timKhuyenMaiMonJson?maChiTietOrder=" + c.getMaChiTiet();
 
                 response = U.loadGetResponse(url);
-                if (response != null && response != "") {
+                if (response != null && !response.equals("")) {
                     ContentValues valuesKhuyenMai = KhuyenMaiDTO
                             .toContentValues(new JSONObject(response));
                     v.putAll(valuesKhuyenMai);

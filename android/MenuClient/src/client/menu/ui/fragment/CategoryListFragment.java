@@ -45,7 +45,7 @@ public class CategoryListFragment extends ListFragment implements
             mSelIndex = savedInstanceState.getInt("mSelIndex", 0);
         }
 
-        getView().setBackgroundResource(R.color._55f5f5f5);
+        getView().setBackgroundResource(R.drawable.simple_nine_patch);
 
         mListAdapter = new ExpandableCategoryAdapter(getActivity(),
                 new ArrayList<CategoryNode>());

@@ -18,16 +18,23 @@ import client.menu.util.U;
 
 public class GetServingOrderItemsTask extends
         CustomAsyncTask<Integer, Void, List<ContentValues>> {
-    List<ChiTietOrderDTO> mLocalItems = null;
+    public static final int FLAG_UNORDERED_ONLY = 0;
+    public static final int FLAG_ORDERED_ONLY = 1;
+    public static final int FLAG_BOTH = 2;
 
-    public GetServingOrderItemsTask(boolean includeLocal) {
-        if (includeLocal) {
+    private int mFlag;
+    private List<ChiTietOrderDTO> mLocalItems = null;
+
+    public GetServingOrderItemsTask(int flag) {
+        mFlag = flag;
+
+        if (flag == FLAG_UNORDERED_ONLY || flag == FLAG_BOTH) {
             ServiceSession session = SessionManager.getInstance().loadCurrentSession();
             mLocalItems = session.getOrder().getOrderItems();
         }
     }
 
-    private void addMixedValues(List<ContentValues> listValues,
+    public static void addMixedValues(List<ContentValues> listValues,
             List<ChiTietOrderDTO> listDto, Integer langId) {
         for (ChiTietOrderDTO c : listDto) {
             ContentValues v = new ContentValues();
@@ -41,25 +48,28 @@ public class GetServingOrderItemsTask extends
 
     @Override
     protected List<ContentValues> doInBackground(Integer... params) {
-        String url = AbstractDAO.LOCAL_SERVER_URL
-                + "layDanhSachChiTietOrderJson?maOrder=" + params[0];
-
         NgonNguDTO nn = MyAppLocale.getCurrentLanguage(MyApplication.getInstance());
 
         List<ContentValues> result = new ArrayList<ContentValues>();
         List<ChiTietOrderDTO> list = new ArrayList<ChiTietOrderDTO>();
 
         try {
-            String response = U.loadGetResponse(url);
-            JSONArray jsonArray = new JSONArray(response);
-            list = ChiTietOrderDTO.fromArrayJson(jsonArray);
-            addMixedValues(result, list, nn.getMaNgonNgu());
+            if (mFlag == FLAG_ORDERED_ONLY || mFlag == FLAG_BOTH) {
+                String url = AbstractDAO.LOCAL_SERVER_URL
+                        + "layDanhSachChiTietOrderJson?maOrder=" + params[0];
+                
+                String response = U.loadGetResponse(url);
+                JSONArray jsonArray = new JSONArray(response);
+                list = ChiTietOrderDTO.fromArrayJson(jsonArray);
+                addMixedValues(result, list, nn.getMaNgonNgu());
+            }
 
-            if (mLocalItems != null) {
+            if (mFlag == FLAG_UNORDERED_ONLY || mFlag == FLAG_BOTH) {
                 addMixedValues(result, mLocalItems, nn.getMaNgonNgu());
             }
         } catch (Exception e) {
             e.printStackTrace();
+            return new ArrayList<ContentValues>();
         }
 
         return result;

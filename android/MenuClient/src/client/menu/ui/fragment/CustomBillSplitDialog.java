@@ -2,7 +2,6 @@ package client.menu.ui.fragment;
 
 import java.util.List;
 
-import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.ContentValues;
 import android.os.Bundle;
@@ -20,7 +19,6 @@ import client.menu.R;
 import client.menu.bus.SessionManager;
 import client.menu.bus.SessionManager.ServiceOrder;
 import client.menu.bus.task.LoadBillItemsTask;
-import client.menu.db.dto.ChiTietOrderDTO;
 import client.menu.ui.view.MiniBillView;
 import client.menu.util.U;
 
@@ -34,7 +32,7 @@ public class CustomBillSplitDialog extends DialogFragment {
         protected void onPostExecute(List<ContentValues> result) {
             super.onPostExecute(result);
 
-            mMainBillView.bindItems(result);
+            mMainBillView.bindData(result);
         }
     };
 
@@ -91,7 +89,7 @@ public class CustomBillSplitDialog extends DialogFragment {
                     // newBill.set
                     scrollBill.addView(newBill);
 
-                    mSubBillView.bindItems(null);
+                    mSubBillView.bindData(null);
                 }
             }
         });

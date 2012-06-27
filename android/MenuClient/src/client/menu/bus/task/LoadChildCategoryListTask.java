@@ -2,8 +2,6 @@ package client.menu.bus.task;
 
 import java.util.List;
 
-import android.app.Activity;
-import android.content.Context;
 
 import client.menu.app.MyAppLocale;
 import client.menu.app.MyApplication;

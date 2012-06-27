@@ -3,9 +3,7 @@ package client.menu.bus.task;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.content.ContentValues;
-import android.os.AsyncTask;
 import client.menu.app.MyAppLocale;
 import client.menu.app.MyApplication;
 import client.menu.dao.DonViTinhDAO;
