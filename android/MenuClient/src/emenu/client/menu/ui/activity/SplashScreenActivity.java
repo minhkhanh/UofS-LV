@@ -1,7 +1,7 @@
 package emenu.client.menu.ui.activity;
 
-import client.menu.R;
-import emenu.client.menu.app.MyApplication;
+import emenu.client.menu.R;
+import emenu.client.menu.app.MenuApplication;
 import emenu.client.menu.bus.task.CustomAsyncTask;
 import emenu.client.menu.bus.task.SyncDbTask;
 import emenu.client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
@@ -26,7 +26,7 @@ public class SplashScreenActivity extends Activity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        MyApplication.getSettings(this).getLocale()
+        MenuApplication.getSettings(this).getLocale()
                 .applyLanguage(getApplicationContext());
 
         setContentView(R.layout.layout_splash);

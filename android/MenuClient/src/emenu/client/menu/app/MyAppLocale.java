@@ -14,7 +14,7 @@ public class MyAppLocale {
     MyAppSettings mAppSettings;
     private NgonNguDTO mLanguage = new NgonNguDTO();
 
-    public static final NgonNguDTO getCurrentLanguage(MyApplication myApp) {
+    public static final NgonNguDTO getCurrentLanguage(MenuApplication myApp) {
         MyAppLocale appLocale = MyAppSettings.getCurrentAppLocale(myApp);
         return appLocale.mLanguage;
     }

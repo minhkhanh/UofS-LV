@@ -21,7 +21,7 @@ import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
-import client.menu.R;
+import emenu.client.menu.R;
 import emenu.client.db.dto.BanDTO;
 import emenu.client.db.dto.OrderDTO;
 import emenu.client.menu.bus.SessionManager;

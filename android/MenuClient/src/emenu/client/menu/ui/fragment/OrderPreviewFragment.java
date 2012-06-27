@@ -8,7 +8,7 @@ import java.util.Map;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.widget.SimpleAdapter;
-import client.menu.R;
+import emenu.client.menu.R;
 import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.db.dto.DonViTinhDaNgonNguDTO;
 import emenu.client.db.dto.MonAnDaNgonNguDTO;

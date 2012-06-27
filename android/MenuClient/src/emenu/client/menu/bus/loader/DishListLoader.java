@@ -3,7 +3,7 @@ package emenu.client.menu.bus.loader;
 import java.util.List;
 
 import emenu.client.menu.app.MyAppLocale;
-import emenu.client.menu.app.MyApplication;
+import emenu.client.menu.app.MenuApplication;
 import emenu.client.menu.dao.MonAnDAO;
 
 import android.app.Activity;
@@ -17,7 +17,7 @@ public class DishListLoader extends CustomAsyncTaskLoader<List<ContentValues>> {
     public DishListLoader(Activity context, Integer maDanhMuc) {
         super(context);
         mMaDanhMuc = maDanhMuc;
-        mMaNgonNgu = MyAppLocale.getCurrentLanguage(MyApplication.getInstance())
+        mMaNgonNgu = MyAppLocale.getCurrentLanguage(MenuApplication.getInstance())
                 .getMaNgonNgu();
     }
 

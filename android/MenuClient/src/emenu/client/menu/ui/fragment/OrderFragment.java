@@ -1,6 +1,6 @@
 package emenu.client.menu.ui.fragment;
 
-import client.menu.R;
+import emenu.client.menu.R;
 import emenu.client.menu.ui.adapter.OrderedAdapter;
 import android.app.Fragment;
 import android.os.Bundle;

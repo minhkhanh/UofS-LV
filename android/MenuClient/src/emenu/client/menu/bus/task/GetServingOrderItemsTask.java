@@ -9,7 +9,7 @@ import android.content.ContentValues;
 import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.db.dto.NgonNguDTO;
 import emenu.client.menu.app.MyAppLocale;
-import emenu.client.menu.app.MyApplication;
+import emenu.client.menu.app.MenuApplication;
 import emenu.client.menu.bus.SessionManager;
 import emenu.client.menu.bus.SessionManager.ServiceSession;
 import emenu.client.menu.dao.AbstractDAO;
@@ -48,7 +48,7 @@ public class GetServingOrderItemsTask extends
 
     @Override
     protected List<ContentValues> doInBackground(Integer... params) {
-        NgonNguDTO nn = MyAppLocale.getCurrentLanguage(MyApplication.getInstance());
+        NgonNguDTO nn = MyAppLocale.getCurrentLanguage(MenuApplication.getInstance());
 
         List<ContentValues> result = new ArrayList<ContentValues>();
         List<ChiTietOrderDTO> list = new ArrayList<ChiTietOrderDTO>();

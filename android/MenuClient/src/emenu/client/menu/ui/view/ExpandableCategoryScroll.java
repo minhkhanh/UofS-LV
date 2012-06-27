@@ -1,6 +1,6 @@
 package emenu.client.menu.ui.view;
 
-import client.menu.R;
+import emenu.client.menu.R;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;

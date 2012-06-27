@@ -9,7 +9,7 @@ import android.view.ActionMode.Callback;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import client.menu.R;
+import emenu.client.menu.R;
 import emenu.client.db.dto.BanDTO;
 import emenu.client.menu.bus.task.CustomAsyncTask;
 import emenu.client.menu.dao.OrderDAO;

@@ -1,6 +1,6 @@
 package emenu.client.menu.ui.fragment;
 
-import client.menu.R;
+import emenu.client.menu.R;
 import android.app.DialogFragment;
 import android.content.ContentValues;
 import android.os.Bundle;

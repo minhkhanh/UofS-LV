@@ -19,7 +19,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.TextView;
-import client.menu.R;
+import emenu.client.menu.R;
 import emenu.client.db.dto.BanDTO;
 import emenu.client.menu.bus.loader.TableListLoader;
 import emenu.client.menu.bus.task.CustomAsyncTask;

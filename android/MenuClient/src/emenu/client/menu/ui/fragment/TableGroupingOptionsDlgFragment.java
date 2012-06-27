@@ -3,7 +3,7 @@ package emenu.client.menu.ui.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import client.menu.R;
+import emenu.client.menu.R;
 import emenu.client.db.dto.BanDTO;
 import emenu.client.db.dto.ChiTietNhomBan;
 import emenu.client.menu.bus.loader.GetTableGroupsLoader;

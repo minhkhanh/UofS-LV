@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import client.menu.R;
+import emenu.client.menu.R;
 import emenu.client.db.dto.VoucherDTO;
 import emenu.client.menu.bus.task.CustomAsyncTask;
 import emenu.client.menu.dao.VoucherDAO;

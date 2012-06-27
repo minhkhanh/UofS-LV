@@ -6,7 +6,7 @@ import android.app.Activity;
 import emenu.client.db.dto.DanhMucDaNgonNguDTO;
 import emenu.client.db.dto.NgonNguDTO;
 import emenu.client.menu.app.MyAppLocale;
-import emenu.client.menu.app.MyApplication;
+import emenu.client.menu.app.MenuApplication;
 import emenu.client.menu.dao.DanhMucDAO;
 
 public class CategoryListLoader extends CustomAsyncTaskLoader<List<DanhMucDaNgonNguDTO>> {
@@ -22,7 +22,7 @@ public class CategoryListLoader extends CustomAsyncTaskLoader<List<DanhMucDaNgon
 
     @Override
     public List<DanhMucDaNgonNguDTO> loadInBackground() {
-        NgonNguDTO ngonNgu = MyAppLocale.getCurrentLanguage(MyApplication.getInstance());
+        NgonNguDTO ngonNgu = MyAppLocale.getCurrentLanguage(MenuApplication.getInstance());
         return DanhMucDAO.getInstance().listDanhMucCon(ngonNgu.getMaNgonNgu(),
                 mMaDanhMucCha);
     }

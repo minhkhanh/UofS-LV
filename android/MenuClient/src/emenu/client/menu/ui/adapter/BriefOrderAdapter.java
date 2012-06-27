@@ -7,7 +7,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import client.menu.R;
+import emenu.client.menu.R;
 import emenu.client.db.dto.OrderDTO;
 import emenu.client.menu.ui.view.BriefOrderChildView;
 import emenu.client.menu.ui.view.BriefOrderGroupView;

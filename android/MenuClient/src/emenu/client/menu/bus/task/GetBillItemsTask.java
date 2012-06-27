@@ -10,7 +10,7 @@ import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.db.dto.KhuyenMaiDTO;
 import emenu.client.db.dto.NgonNguDTO;
 import emenu.client.menu.app.MyAppLocale;
-import emenu.client.menu.app.MyApplication;
+import emenu.client.menu.app.MenuApplication;
 import emenu.client.menu.dao.AbstractDAO;
 import emenu.client.menu.dao.DonViTinhDAO;
 import emenu.client.menu.util.U;
@@ -36,7 +36,7 @@ public class GetBillItemsTask extends CustomAsyncTask<Integer, Void, List<Conten
         String url = AbstractDAO.LOCAL_SERVER_URL
                 + "layDanhSachChiTietOrderJson?maOrder=" + params[0];
 
-        NgonNguDTO nn = MyAppLocale.getCurrentLanguage(MyApplication.getInstance());
+        NgonNguDTO nn = MyAppLocale.getCurrentLanguage(MenuApplication.getInstance());
 
         List<ContentValues> result = new ArrayList<ContentValues>();
         List<ChiTietOrderDTO> list = new ArrayList<ChiTietOrderDTO>();
