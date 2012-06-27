@@ -1,76 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/LinearLayout1"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="2" >
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.75" >
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="@string/text_select" android:padding="10dp"/>
-
-        <client.menu.ui.view.MiniBillView
-            android:id="@+id/billMain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/btnSplit" android:layout_margin="5dp">
-
-        </client.menu.ui.view.MiniBillView>
-
-        <client.menu.ui.view.MiniBillView
-            android:id="@+id/billSub"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/btnSplit" android:layout_margin="5dp">
-
-        </client.menu.ui.view.MiniBillView>
-
-        <Button
-            android:id="@+id/btnSplit"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView1"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="23dp"
-            android:text="@string/text_split" />
-
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_splited_bill_part" android:paddingTop="15dp" android:paddingBottom="5dp"/>
-
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.25">
-
-        <LinearLayout
-            android:id="@+id/scrollBill"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal" >
-
-        </LinearLayout>
-    </HorizontalScrollView>
-
-</LinearLayout>
