@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import client.menu.R;
+import emenu.client.menu.R;
 import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.db.dto.DonViTinhDaNgonNguDTO;
 import emenu.client.db.dto.DonViTinhMonAnDTO;

@@ -21,12 +21,12 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import client.menu.R;
+import emenu.client.menu.R;
 import emenu.client.db.dto.DonViTinhDTO;
 import emenu.client.db.dto.MonAnDTO;
 import emenu.client.db.dto.MonAnDaNgonNguDTO;
 import emenu.client.menu.app.MyAppLocale;
-import emenu.client.menu.app.MyApplication;
+import emenu.client.menu.app.MenuApplication;
 import emenu.client.menu.bus.SessionManager;
 import emenu.client.menu.bus.SessionManager.ServiceOrder;
 import emenu.client.menu.bus.task.CustomAsyncTask;
@@ -57,7 +57,7 @@ public class DishDetailDlgFragment extends DialogFragment implements OnClickList
 
     class ListRelatedDishesTask extends
             CustomAsyncTask<Integer, Void, List<ContentValues>> {
-        Integer mLanguageId = MyAppLocale.getCurrentLanguage(MyApplication.getInstance())
+        Integer mLanguageId = MyAppLocale.getCurrentLanguage(MenuApplication.getInstance())
                 .getMaNgonNgu();
 
         @Override

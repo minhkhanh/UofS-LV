@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.json.JSONException;
 
-import client.menu.R;
+import emenu.client.menu.R;
 import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.menu.bus.SessionManager;
 import emenu.client.menu.bus.SessionManager.ServiceOrder;

@@ -5,7 +5,7 @@ import java.util.List;
 import android.content.ContentValues;
 import emenu.client.db.dto.NgonNguDTO;
 import emenu.client.menu.app.MyAppLocale;
-import emenu.client.menu.app.MyApplication;
+import emenu.client.menu.app.MenuApplication;
 import emenu.client.menu.dao.DonViTinhDAO;
 
 public class LoadDishUnitsAsyncTask extends
@@ -13,7 +13,7 @@ public class LoadDishUnitsAsyncTask extends
 
     @Override
     protected List<ContentValues> doInBackground(Integer... params) {
-        NgonNguDTO ngonNgu = MyAppLocale.getCurrentLanguage(MyApplication.getInstance());
+        NgonNguDTO ngonNgu = MyAppLocale.getCurrentLanguage(MenuApplication.getInstance());
         List<ContentValues> list = DonViTinhDAO.getInstance().contentByMaMonAn(
                 ngonNgu.getMaNgonNgu(), params[0]);
 

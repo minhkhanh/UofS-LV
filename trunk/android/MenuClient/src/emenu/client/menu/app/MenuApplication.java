@@ -23,16 +23,16 @@ import emenu.client.menu.util.C;
 import android.app.Activity;
 import android.app.Application;
 
-public class MyApplication extends Application {
+public class MenuApplication extends Application {
     private static final String EX_MSG_01 = "Can not get MyApplication object from the activity parameter.";
 
-    private static MyApplication mInstance;
+    private static MenuApplication mInstance;
 
     public MyAppSettings settings;
     public MyDatabaseHelper dbOpener;
 
     public static final MyAppSettings getSettings(Activity activity) {
-        MyApplication app = (MyApplication) activity.getApplication();
+        MenuApplication app = (MenuApplication) activity.getApplication();
         if (app != null) {
             return app.settings;
         }
@@ -75,7 +75,7 @@ public class MyApplication extends Application {
         VoucherDAO.createInstance(dbOpener);
     }
 
-    public static final MyApplication getInstance() {
+    public static final MenuApplication getInstance() {
         return mInstance;
     }
 

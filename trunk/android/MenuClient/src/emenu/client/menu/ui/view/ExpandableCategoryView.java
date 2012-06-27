@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import client.menu.R;
+import emenu.client.menu.R;
 import emenu.client.db.dto.DanhMucDaNgonNguDTO;
 import emenu.client.menu.bus.task.CustomAsyncTask;
 import emenu.client.menu.bus.task.LoadChildCategoryListTask;

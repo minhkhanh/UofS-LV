@@ -25,7 +25,7 @@ import org.apache.http.util.EntityUtils;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import client.menu.R;
+import emenu.client.menu.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;

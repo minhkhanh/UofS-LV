@@ -2,7 +2,7 @@ package emenu.client.menu.ui.activity;
 
 import java.util.List;
 
-import client.menu.R;
+import emenu.client.menu.R;
 
 import android.preference.PreferenceActivity;
 

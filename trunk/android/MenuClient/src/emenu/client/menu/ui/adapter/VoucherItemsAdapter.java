@@ -3,7 +3,7 @@ package emenu.client.menu.ui.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import client.menu.R;
+import emenu.client.menu.R;
 import emenu.client.db.dto.VoucherDTO;
 
 import android.content.ContentValues;

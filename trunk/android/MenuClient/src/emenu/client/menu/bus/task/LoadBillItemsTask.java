@@ -7,7 +7,7 @@ import android.content.ContentValues;
 import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.db.dto.NgonNguDTO;
 import emenu.client.menu.app.MyAppLocale;
-import emenu.client.menu.app.MyApplication;
+import emenu.client.menu.app.MenuApplication;
 import emenu.client.menu.dao.DonViTinhDAO;
 
 public class LoadBillItemsTask extends
@@ -15,7 +15,7 @@ public class LoadBillItemsTask extends
     @Override
     protected List<ContentValues> doInBackground(List<ChiTietOrderDTO>... params) {
         List<ContentValues> result = new ArrayList<ContentValues>();
-        NgonNguDTO n = MyAppLocale.getCurrentLanguage(MyApplication.getInstance());
+        NgonNguDTO n = MyAppLocale.getCurrentLanguage(MenuApplication.getInstance());
 
         for (ChiTietOrderDTO c : params[0]) {
             ContentValues values = DonViTinhDAO.getInstance().contentByDonViTinhMonAn(

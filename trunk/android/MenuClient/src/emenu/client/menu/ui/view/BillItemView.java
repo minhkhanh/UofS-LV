@@ -1,6 +1,6 @@
 package emenu.client.menu.ui.view;
 
-import client.menu.R;
+import emenu.client.menu.R;
 import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.db.dto.DonViTinhDaNgonNguDTO;
 import emenu.client.db.dto.DonViTinhMonAnDTO;

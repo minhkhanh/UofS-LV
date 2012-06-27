@@ -15,7 +15,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import client.menu.R;
+import emenu.client.menu.R;
 import emenu.client.menu.bus.SessionManager;
 import emenu.client.menu.bus.SessionManager.ServiceOrder;
 import emenu.client.menu.bus.task.LoadBillItemsTask;

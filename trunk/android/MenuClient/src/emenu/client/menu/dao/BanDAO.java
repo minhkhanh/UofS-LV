@@ -14,7 +14,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import emenu.client.db.dto.BanDTO;
 import emenu.client.db.util.MyDatabaseHelper;
-import emenu.client.menu.app.MyApplication;
+import emenu.client.menu.app.MenuApplication;
 import emenu.client.menu.util.U;
 
 public class BanDAO extends AbstractDAO {

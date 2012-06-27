@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import client.menu.R;
+import emenu.client.menu.R;
 import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.db.dto.DonViTinhDTO;
 import emenu.client.db.dto.DonViTinhDaNgonNguDTO;

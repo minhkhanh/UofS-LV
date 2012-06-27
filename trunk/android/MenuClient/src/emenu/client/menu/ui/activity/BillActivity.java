@@ -16,7 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
-import client.menu.R;
+import emenu.client.menu.R;
 import emenu.client.db.dto.HoaDonDTO;
 import emenu.client.menu.bus.SessionManager;
 import emenu.client.menu.bus.SessionManager.ServiceSession;

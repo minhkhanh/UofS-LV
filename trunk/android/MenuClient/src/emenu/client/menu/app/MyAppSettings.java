@@ -7,7 +7,7 @@ public final class MyAppSettings {
     private Application mApplication;
     private MyAppLocale mLocale;
     
-    public static final MyAppLocale getCurrentAppLocale(MyApplication myApp) {
+    public static final MyAppLocale getCurrentAppLocale(MenuApplication myApp) {
         MyAppSettings settings = myApp.getSettings();
         return settings.mLocale;
     }
