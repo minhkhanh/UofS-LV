@@ -3,10 +3,10 @@ package emenu.client.menu.ui.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import emenu.client.bus.task.CustomAsyncTask;
+import emenu.client.bus.task.GetServingOrderItemsTask;
+import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import emenu.client.menu.R;
-import emenu.client.menu.bus.task.CustomAsyncTask;
-import emenu.client.menu.bus.task.GetServingOrderItemsTask;
-import emenu.client.menu.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import emenu.client.menu.ui.adapter.SplittingOrderAdapter;
 import emenu.client.menu.util.U;
 import android.app.DialogFragment;

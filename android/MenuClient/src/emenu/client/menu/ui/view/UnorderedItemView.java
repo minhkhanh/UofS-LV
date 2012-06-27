@@ -11,14 +11,14 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import emenu.client.menu.R;
+import emenu.client.bus.SessionManager;
+import emenu.client.bus.SessionManager.OrderItemId;
 import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.db.dto.DonViTinhDTO;
 import emenu.client.db.dto.DonViTinhDaNgonNguDTO;
 import emenu.client.db.dto.DonViTinhMonAnDTO;
 import emenu.client.db.dto.MonAnDTO;
 import emenu.client.db.dto.MonAnDaNgonNguDTO;
-import emenu.client.menu.bus.SessionManager;
-import emenu.client.menu.bus.SessionManager.OrderItemId;
 import emenu.client.menu.ui.fragment.ItemNoteFragment;
 import emenu.client.menu.util.U;
 

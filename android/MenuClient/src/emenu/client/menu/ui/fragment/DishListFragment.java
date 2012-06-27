@@ -8,9 +8,9 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentValues;
 import android.content.Loader;
 import android.os.Bundle;
+import emenu.client.bus.loader.DishListLoader;
+import emenu.client.bus.task.LoadDishUnitsAsyncTask;
 import emenu.client.menu.R;
-import emenu.client.menu.bus.loader.DishListLoader;
-import emenu.client.menu.bus.task.LoadDishUnitsAsyncTask;
 import emenu.client.menu.ui.adapter.DishListAdapter;
 import emenu.client.menu.util.U;
 

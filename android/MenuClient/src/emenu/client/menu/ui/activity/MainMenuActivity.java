@@ -11,9 +11,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import emenu.client.bus.SessionManager;
+import emenu.client.bus.SessionManager.ServiceSession;
 import emenu.client.menu.R;
-import emenu.client.menu.bus.SessionManager;
-import emenu.client.menu.bus.SessionManager.ServiceSession;
 import emenu.client.menu.ui.fragment.CategoryListFragment;
 import emenu.client.menu.util.U;
 

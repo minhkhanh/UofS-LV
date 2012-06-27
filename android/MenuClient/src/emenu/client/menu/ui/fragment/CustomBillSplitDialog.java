@@ -15,10 +15,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import emenu.client.bus.SessionManager;
+import emenu.client.bus.SessionManager.ServiceOrder;
+import emenu.client.bus.task.LoadBillItemsTask;
 import emenu.client.menu.R;
-import emenu.client.menu.bus.SessionManager;
-import emenu.client.menu.bus.SessionManager.ServiceOrder;
-import emenu.client.menu.bus.task.LoadBillItemsTask;
 import emenu.client.menu.ui.view.MiniBillView;
 import emenu.client.menu.util.U;
 
