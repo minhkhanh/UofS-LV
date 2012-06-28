@@ -70,7 +70,7 @@ namespace LocalServerWeb.Resources.Views.Kitchen {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to BiKhoa.
+        ///   Looks up a localized string similar to Locked.
         /// </summary>
         public static string BiKhoa {
             get {
@@ -79,7 +79,7 @@ namespace LocalServerWeb.Resources.Views.Kitchen {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cook.
+        ///   Looks up a localized string similar to Produce.
         /// </summary>
         public static string CheBien {
             get {
@@ -106,7 +106,7 @@ namespace LocalServerWeb.Resources.Views.Kitchen {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DangCheBien.
+        ///   Looks up a localized string similar to Producing.
         /// </summary>
         public static string DangCheBien {
             get {
@@ -115,7 +115,7 @@ namespace LocalServerWeb.Resources.Views.Kitchen {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DaXong.
+        ///   Looks up a localized string similar to Finished.
         /// </summary>
         public static string DaXong {
             get {
@@ -142,7 +142,7 @@ namespace LocalServerWeb.Resources.Views.Kitchen {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HetCheBien.
+        ///   Looks up a localized string similar to Can&apos;t produce.
         /// </summary>
         public static string HetCheBien {
             get {
@@ -151,7 +151,7 @@ namespace LocalServerWeb.Resources.Views.Kitchen {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Region.
+        ///   Looks up a localized string similar to Area.
         /// </summary>
         public static string KhuVuc {
             get {
@@ -160,7 +160,7 @@ namespace LocalServerWeb.Resources.Views.Kitchen {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MaChiTietOrder.
+        ///   Looks up a localized string similar to Order detail ID.
         /// </summary>
         public static string MaChiTietOrder {
             get {
@@ -169,7 +169,7 @@ namespace LocalServerWeb.Resources.Views.Kitchen {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Order number.
+        ///   Looks up a localized string similar to Order ID.
         /// </summary>
         public static string MaOrder {
             get {
@@ -178,7 +178,7 @@ namespace LocalServerWeb.Resources.Views.Kitchen {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to NhapSoLuongCheBien.
+        ///   Looks up a localized string similar to Produce quantity.
         /// </summary>
         public static string NhapSoLuongCheBien {
             get {
@@ -187,7 +187,7 @@ namespace LocalServerWeb.Resources.Views.Kitchen {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to NhapSoLuongHet.
+        ///   Looks up a localized string similar to Can&apos;t produce quantity.
         /// </summary>
         public static string NhapSoLuongHet {
             get {
@@ -196,7 +196,7 @@ namespace LocalServerWeb.Resources.Views.Kitchen {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to NhapSoLuongXong.
+        ///   Looks up a localized string similar to Finish quantity.
         /// </summary>
         public static string NhapSoLuongXong {
             get {
@@ -205,7 +205,7 @@ namespace LocalServerWeb.Resources.Views.Kitchen {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PhucVu.
+        ///   Looks up a localized string similar to Waiter.
         /// </summary>
         public static string PhucVu {
             get {
@@ -232,6 +232,15 @@ namespace LocalServerWeb.Resources.Views.Kitchen {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kitchen.
+        /// </summary>
+        public static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Option.
         /// </summary>
         public static string TuyChon {
@@ -241,7 +250,7 @@ namespace LocalServerWeb.Resources.Views.Kitchen {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Xong.
+        ///   Looks up a localized string similar to Finish.
         /// </summary>
         public static string Xong {
             get {

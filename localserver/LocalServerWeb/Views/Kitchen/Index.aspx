@@ -3,7 +3,7 @@
 <%@ Import Namespace="LocalServerWeb.Resources.Views.Kitchen" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	Index
+	<%: KitchenString.Title %>
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="PageHeadingContent" runat="server">
