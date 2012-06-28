@@ -92,5 +92,10 @@ namespace LocalServerBUS
 
             return listMonAn;
         }
+
+        public static bool DanhGiaMonAn(int maMonAn, float diemDanhGia)
+        {
+            return MonAnDAO.DanhGiaMonAn(maMonAn, diemDanhGia);
+        }
     }
 }

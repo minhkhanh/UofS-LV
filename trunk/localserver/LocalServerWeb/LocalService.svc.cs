@@ -195,6 +195,19 @@ namespace LocalServerWeb
             return monAn;
         }
 
+        public bool DanhGiaMonAn(int maMonAn, float diemDanhGia, string junk)
+        {
+            try
+            {
+                return MonAnBUS.DanhGiaMonAn(maMonAn, diemDanhGia);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return false;
+        }
+
 
         // Don Vi Tinh
         public List<DonViTinh> LayDanhSachDonViTinh(string junk)
@@ -1166,6 +1179,11 @@ namespace LocalServerWeb
         public List<MonAn> LayDanhSachMonAnJson(string junk)
         {
             return LayDanhSachMonAn(junk);
+        }
+
+        public bool DanhGiaMonAnJson(int maMonAn, float diemDanhGia, string junk)
+        {
+            return DanhGiaMonAn(maMonAn, diemDanhGia, junk);
         }
 
         public List<ChiTietMonAnDaNgonNgu> LayDanhSachChiTietMonAnDaNgonNguJson(string junk)

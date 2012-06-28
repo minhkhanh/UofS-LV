@@ -108,5 +108,24 @@ namespace LocalServerDAO
                     Count() >
                 0)).ToList();
         }
+
+        public static bool DanhGiaMonAn(int maMonAn, float diemDanhGia)
+        {
+            if (diemDanhGia <= 0 || diemDanhGia > 5 )
+                return false;
+
+            MonAn monAn = LayMonAn(maMonAn);
+            if (monAn == null)
+                return false;
+
+            monAn.DiemDanhGia += diemDanhGia;
+            monAn.SoLuotDanhGia++;
+
+            if (CapNhat(monAn))
+                return true;
+
+            return false;
+
+        }
     }
 }

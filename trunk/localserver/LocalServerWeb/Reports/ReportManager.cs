@@ -299,7 +299,6 @@ namespace LocalServerWeb.Reports
                 printReport.AddDataSoruce(new ReportDataSource("RevenuePeriodReportData", listData));
 
 
-
                 List<ReportParameter> listParameter = new List<ReportParameter>();
                 listParameter.Add(new ReportParameter("ThoiDiemLap", thoiDiemLap));
                 listParameter.Add(new ReportParameter("NguoiLap", nguoiLap));
