@@ -50,7 +50,7 @@ namespace LocalServerWeb.Controllers
             string fileName = Guid.NewGuid() + Path.GetFileName(uploadFile.FileName);
             string filePath = Path.Combine(HttpContext.Server.MapPath("../Uploads/FoodImages"), fileName);                           
             
-            // When newly add a Food, there arenot any language details and unit details. So that Food is not available
+            // When newly add a Food, there are no any language details and unit details. So that Food is not available
             // NgungBan = true
             MonAn monAn = new MonAn();
             monAn.DanhMuc = danhMuc;
