@@ -121,22 +121,22 @@
     <value>Table</value>
   </data>
   <data name="DangCheBien" xml:space="preserve">
-    <value>DangCheBien</value>
+    <value>Producing</value>
   </data>
   <data name="DaXong" xml:space="preserve">
-    <value>DaXong</value>
+    <value>Finished</value>
   </data>
   <data name="DonViTinh" xml:space="preserve">
     <value>Unit</value>
   </data>
   <data name="KhuVuc" xml:space="preserve">
-    <value>Region</value>
+    <value>Area</value>
   </data>
   <data name="MaOrder" xml:space="preserve">
-    <value>Order number</value>
+    <value>Order ID</value>
   </data>
   <data name="PhucVu" xml:space="preserve">
-    <value>PhucVu</value>
+    <value>Waiter</value>
   </data>
   <data name="SoLuong" xml:space="preserve">
     <value>Quantity</value>
@@ -148,36 +148,39 @@
     <value>Option</value>
   </data>
   <data name="CheBien" xml:space="preserve">
-    <value>Cook</value>
+    <value>Produce</value>
   </data>
   <data name="GhiChu" xml:space="preserve">
     <value>Note</value>
   </data>
   <data name="MaChiTietOrder" xml:space="preserve">
-    <value>MaChiTietOrder</value>
+    <value>Order detail ID</value>
   </data>
   <data name="NhapSoLuongCheBien" xml:space="preserve">
-    <value>NhapSoLuongCheBien</value>
+    <value>Produce quantity</value>
   </data>
   <data name="Xong" xml:space="preserve">
-    <value>Xong</value>
+    <value>Finish</value>
   </data>
   <data name="HetCheBien" xml:space="preserve">
-    <value>HetCheBien</value>
+    <value>Can't produce</value>
   </data>
   <data name="NhapSoLuongHet" xml:space="preserve">
-    <value>NhapSoLuongHet</value>
+    <value>Can't produce quantity</value>
   </data>
   <data name="NhapSoLuongXong" xml:space="preserve">
-    <value>NhapSoLuongXong</value>
+    <value>Finish quantity</value>
   </data>
   <data name="BiKhoa" xml:space="preserve">
-    <value>BiKhoa</value>
+    <value>Locked</value>
   </data>
   <data name="Choose" xml:space="preserve">
     <value>Choose</value>
   </data>
   <data name="ChooseTitle" xml:space="preserve">
     <value>Choose kitchen</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Kitchen</value>
   </data>
 </root>
