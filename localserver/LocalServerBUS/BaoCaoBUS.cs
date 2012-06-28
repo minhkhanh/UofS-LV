@@ -102,13 +102,18 @@ namespace LocalServerBUS
                 // Ap dung cho 1 ngay
                 BaoCaoThang bc = listBaoCaoThang[listBaoCaoThang.Count - 1];
                 bc.TongSoHoaDon++;
-                bc.TongTien += hoaDon.TongTien;
-                bc.PhuThu += hoaDon.PhuThu.GiaTang;
-                bc.KhuyenMai += HoaDonBUS.LayTongKhuyenMai(hoaDon.MaHoaDon);
 
-                tongTien += bc.TongTien;
-                phuThu += bc.PhuThu;
-                khuyenMai += bc.KhuyenMai;
+                float tempTongTien = hoaDon.TongTien;
+                float tempPhuThu = hoaDon.PhuThu.GiaTang;
+                float tempKhuyenMai = HoaDonBUS.LayTongKhuyenMai(hoaDon.MaHoaDon);
+
+                bc.TongTien += tempTongTien;
+                bc.PhuThu += tempPhuThu;
+                bc.KhuyenMai += tempKhuyenMai;
+
+                tongTien += tempTongTien;
+                phuThu += tempPhuThu;
+                khuyenMai += tempKhuyenMai;
             }
 
 
