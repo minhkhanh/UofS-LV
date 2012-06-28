@@ -8,7 +8,7 @@ using LocalServerWeb.Codes;
 
 namespace LocalServerWeb.Controllers
 {
-    public class AdminConfigController : BaseController
+    public class AdminConfigController : ManagerBaseController
     {
         //
         // GET: /AdminConfig/

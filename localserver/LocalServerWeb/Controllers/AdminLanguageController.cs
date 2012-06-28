@@ -13,7 +13,7 @@ using LocalServerWeb.ViewModels;
 
 namespace LocalServerWeb.Controllers
 {
-    public class AdminLanguageController : BaseController
+    public class AdminLanguageController : ManagerBaseController
     {
         public ActionResult Index()
         {

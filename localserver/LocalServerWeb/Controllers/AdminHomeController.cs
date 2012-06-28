@@ -7,7 +7,7 @@ using LocalServerWeb.Codes;
 
 namespace LocalServerWeb.Controllers
 {
-    public class AdminHomeController : BaseController
+    public class AdminHomeController : UserBaseController
     {
         //
         // GET: /AdminHome/

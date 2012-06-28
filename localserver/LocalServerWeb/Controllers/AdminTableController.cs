@@ -14,7 +14,7 @@ using Webdiyer.WebControls.Mvc;
 
 namespace LocalServerWeb.Controllers
 {
-    public class AdminTableController : BaseController
+    public class AdminTableController : ManagerBaseController
     {
         public ActionResult Index(string page)
         {

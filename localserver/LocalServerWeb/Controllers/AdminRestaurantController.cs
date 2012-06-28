@@ -13,7 +13,7 @@ using Webdiyer.WebControls.Mvc;
 
 namespace LocalServerWeb.Controllers
 {
-    public class AdminRestaurantController : BaseController
+    public class AdminRestaurantController : ManagerBaseController
     {
         public ActionResult Index()
         {

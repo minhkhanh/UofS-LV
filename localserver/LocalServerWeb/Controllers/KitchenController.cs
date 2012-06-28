@@ -9,7 +9,7 @@ using LocalServerWeb.Codes;
 
 namespace LocalServerWeb.Controllers
 {
-    public class KitchenController : BaseController
+    public class KitchenController : KitchenBaseController
     {
         public const int TIMER_TICK = 10000;
 
