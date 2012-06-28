@@ -1071,6 +1071,7 @@
     <Content Include="Views\Shared\RevenueDayReport.ascx" />
     <Content Include="Views\Shared\RevenueMonthReport.ascx" />
     <Content Include="Views\Shared\RevenuePeriodReport.ascx" />
+    <Content Include="Views\Shared\UsernameUserControl.ascx" />
     <Content Include="Views\Shared\WarningMessageTooltip.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
