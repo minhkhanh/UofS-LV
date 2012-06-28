@@ -137,9 +137,8 @@ namespace LocalServerWeb.Controllers
 
         public ActionResult Add()
         {
-
             ViewData["listNhomTaiKhoan"] = NhomTaiKhoanBUS.LayDanhSachNhomTaiKhoan();
-            TempData["tenTaiKhoan"] = "";
+
             if (TempData["checkDic"] == null)
             {
                 TempData["checkDic"] = new Dictionary<string, string>();
@@ -159,6 +158,12 @@ namespace LocalServerWeb.Controllers
             TempData["nhomTaiKhoan"] = nhomTaiKhoan;
             TempData["cmnd"] = cmnd;
 
+            if (TaiKhoanBUS.LayTaiKhoanTheoTenTaiKhoan(tenTaiKhoan) != null)
+            {
+                TempData["errorUsernameExist"] = AdminUserString.ErrorUsernameExist;
+                return RedirectToAction("Add");
+            }
+
             if (picture == null || picture.ContentLength == 0)
             {
                 TempData["errorCannotAdd"] = AdminUserString.ErrorCannotAdd;
@@ -176,13 +181,14 @@ namespace LocalServerWeb.Controllers
             if (tenTaiKhoan == null || !regexTenTaiKhoan.IsMatch(tenTaiKhoan))
             {
                 bCheckOk = false;
-                checkDic.Add("tenTaiKhoan", AdminUserString.Required);
+                checkDic.Add("tenTaiKhoan", AdminUserString.RequiredText);
             }
+
             var regexMatKhau = new Regex("^.{5,50}$");
             if (matKhau == null)
             {
                 bCheckOk = false;
-                checkDic.Add("matKhau", AdminUserString.Required);
+                checkDic.Add("matKhau", AdminUserString.RequiredText);
             } else if (!regexMatKhau.IsMatch(matKhau))
             {
                 bCheckOk = false;
@@ -192,18 +198,21 @@ namespace LocalServerWeb.Controllers
                 bCheckOk = false;
                 checkDic.Add("xacNhanMatKhau", AdminUserString.PasswordNotMatch);                
             }
+
             var regexHoTen = new Regex("^.{5,50}$");
             if (hoTen == null || !regexHoTen.IsMatch(hoTen))
             {
                 bCheckOk = false;
-                checkDic.Add("hoTen", AdminUserString.Required);
+                checkDic.Add("hoTen", AdminUserString.RequiredText);
             }
+
             var regexCmnd = new Regex("[0-9]{9,10}");
             if (cmnd == null || !regexCmnd.IsMatch(cmnd))
             {
                 bCheckOk = false;
-                checkDic.Add("cmnd", AdminUserString.Required);
+                checkDic.Add("cmnd", AdminUserString.RequiredSocialID);
             }
+
             DateTime date = DateTime.Now;
             try
             {
@@ -287,9 +296,8 @@ namespace LocalServerWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int maTaiKhoan, string tenTaiKhoan, string matKhau, string xacNhanMatKhau, string hoTen, int day, int month, int year, int gioiTinh, int nhomTaiKhoan, string cmnd, HttpPostedFileBase picture)
+        public ActionResult Edit(int maTaiKhoan, string matKhau, string xacNhanMatKhau, string hoTen, int day, int month, int year, int gioiTinh, int nhomTaiKhoan, string cmnd, HttpPostedFileBase picture)
         {
-            TempData["tenTaiKhoan"] = tenTaiKhoan;
             TempData["hoTen"] = hoTen;
             TempData["day"] = day;
             TempData["month"] = month;
@@ -298,30 +306,31 @@ namespace LocalServerWeb.Controllers
             TempData["nhomTaiKhoan"] = nhomTaiKhoan;
             TempData["cmnd"] = cmnd;
 
-            if (picture == null || picture.ContentLength == 0)
+            if (picture != null && picture.ContentLength == 0)
             {
                 TempData["errorCannotEdit"] = AdminUserString.ErrorCannotEdit;
                 return RedirectToAction("Edit");
             }
 
-            string fileName = Guid.NewGuid() + Path.GetFileName(picture.FileName);
-            string filePath = Path.Combine(HttpContext.Server.MapPath("../../Uploads/UserImages"), fileName);   
+            string fileName = "";
+            string filePath = "";
 
+            if (picture != null)
+            {
+                fileName = Guid.NewGuid() + Path.GetFileName(picture.FileName);
+                filePath = Path.Combine(HttpContext.Server.MapPath("../../Uploads/UserImages"), fileName);   
+            }
+            
             var checkDic = new Dictionary<string, string>();
             //HashSet<string> checkHash = new HashSet<string>();
 
             bool bCheckOk = true;
-            var regexTenTaiKhoan = new Regex("[a-zA-Z0-9]{5,50}");
-            if (tenTaiKhoan == null || !regexTenTaiKhoan.IsMatch(tenTaiKhoan))
-            {
-                bCheckOk = false;
-                checkDic.Add("tenTaiKhoan", AdminUserString.Required);
-            }
+
             var regexMatKhau = new Regex("^.{5,50}$");
             if (matKhau == null)
             {
                 bCheckOk = false;
-                checkDic.Add("matKhau", AdminUserString.Required);
+                checkDic.Add("matKhau", AdminUserString.RequiredText);
             }
             else if (!regexMatKhau.IsMatch(matKhau))
             {
@@ -337,13 +346,13 @@ namespace LocalServerWeb.Controllers
             if (hoTen == null || !regexHoTen.IsMatch(hoTen))
             {
                 bCheckOk = false;
-                checkDic.Add("hoTen", AdminUserString.Required);
+                checkDic.Add("hoTen", AdminUserString.RequiredText);
             }
             var regexCmnd = new Regex("[0-9]{9,10}");
             if (cmnd == null || !regexCmnd.IsMatch(cmnd))
             {
                 bCheckOk = false;
-                checkDic.Add("cmnd", AdminUserString.Required);
+                checkDic.Add("cmnd", AdminUserString.RequiredSocialID);
             }
             DateTime date = DateTime.Now;
             try
@@ -361,20 +370,24 @@ namespace LocalServerWeb.Controllers
                 {
                     TaiKhoan taiKhoan = TaiKhoanBUS.LayTaiKhoan(maTaiKhoan);
                     taiKhoan.Active = true;
-                    taiKhoan.Avatar = "Uploads/UserImages/" + fileName;
+
+                    if(picture != null)
+                        taiKhoan.Avatar = "Uploads/UserImages/" + fileName;
+
                     taiKhoan.CMND = cmnd;
                     taiKhoan.GioiTinh = gioiTinh;
                     taiKhoan.HoTen = hoTen;
                     taiKhoan.MatKhau = SharedCode.Hash(matKhau);
                     taiKhoan.NgaySinh = date;
                     taiKhoan.NhomTaiKhoan = NhomTaiKhoanBUS.LayNhomTaiKhoanTheoMa(nhomTaiKhoan);
-                    taiKhoan.TenTaiKhoan = tenTaiKhoan;
 
 
                     if (TaiKhoanBUS.CapNhatTaiKhoan(taiKhoan))
                     {
                         TempData["infoEditSuccess"] = AdminUserString.InfoEditSuccess;
-                        picture.SaveAs(filePath);
+
+                        if(picture != null)
+                            picture.SaveAs(filePath);
                         return RedirectToAction("Index", "AdminUser");
                     }
                     else

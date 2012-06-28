@@ -404,7 +404,7 @@ CREATE TABLE [dbo].[TaiKhoan] (
 , [NgaySinh] date  NULL  
 , [GioiTinh] int  NULL  
 , [CMND] nvarchar(50)  NULL  
-, [Avatar] nvarchar(50)  NULL  
+, [Avatar] nvarchar(150)  NULL  
 , [Active] bit  NULL  
 , [MaNhomTaiKhoan] int  NULL  
 )

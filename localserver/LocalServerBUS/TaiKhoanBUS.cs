@@ -24,6 +24,12 @@ namespace LocalServerBUS
             return TaiKhoanDAO.LayTaiKhoan(maTaiKhoan);
         }
 
+        public static TaiKhoan LayTaiKhoanTheoTenTaiKhoan(string tenTaiKhoan)
+        {
+            return TaiKhoanDAO.LayTaiKhoanTheoTenTaiKhoan(tenTaiKhoan);
+        }
+
+
         public static TaiKhoan KiemTraTaiKhoan(string tenDangNhap, string matKhau)
         {
             if (String.IsNullOrEmpty(tenDangNhap)) 

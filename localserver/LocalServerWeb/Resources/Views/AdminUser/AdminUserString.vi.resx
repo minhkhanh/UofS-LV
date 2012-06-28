@@ -168,6 +168,9 @@
   <data name="ErrorCannotLockUnlock" xml:space="preserve">
     <value>Không thể khóa/gỡ khóa</value>
   </data>
+  <data name="ErrorUsernameExist" xml:space="preserve">
+    <value>Tên tài khoản đã tồn tại</value>
+  </data>
   <data name="Female" xml:space="preserve">
     <value>Nữ</value>
   </data>
@@ -224,6 +227,12 @@
   </data>
   <data name="Required" xml:space="preserve">
     <value>Trường này là bắt buộc</value>
+  </data>
+  <data name="RequiredSocialID" xml:space="preserve">
+    <value>Yêu cầu 9-10 ký tự</value>
+  </data>
+  <data name="RequiredText" xml:space="preserve">
+    <value>Yêu cầu 5-50 ký tự</value>
   </data>
   <data name="SocialID" xml:space="preserve">
     <value>CMND</value>
