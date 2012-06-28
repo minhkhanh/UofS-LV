@@ -103,7 +103,7 @@ namespace LocalServerWeb.Codes
         }
         public static bool IsKitchenLogin(HttpSessionStateBase session)
         {
-            if (!IsUserLogin(session) || ((TaiKhoan)session["taiKhoan"]).NhomTaiKhoan.TenNhom != "Kitchen") return false;
+            if (!IsUserLogin(session) || ((TaiKhoan)session["taiKhoan"]).NhomTaiKhoan.TenNhom != "Producer") return false;
             return true;
         }
         public static TaiKhoan GetTaiKhoan(HttpSessionStateBase session)

@@ -96,5 +96,19 @@ namespace LocalServerDAO
 
             return result;
         }
+
+        public static List<BoPhanCheBien> LayDanhSachBoPhanCheBien(int maTaiKhoan)
+        {
+            try
+            {
+                var dsBoPhanCheBien = LayDanhSachBoPhanCheBien();
+                return dsBoPhanCheBien.Where(b => b.TaiKhoan.MaTaiKhoan == maTaiKhoan).ToList();
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.StackTrace);
+            }
+            return new List<BoPhanCheBien>();
+        }
     }
 }

@@ -18,10 +18,20 @@ namespace LocalServerWeb.Controllers
 
         public ActionResult Index(int? maBoPhanCheBien)
         {
-            if (maBoPhanCheBien == null) return RedirectToAction("Index", "Error");
+            if (maBoPhanCheBien == null)
+            {
+                if (!SharedCode.IsKitchenLogin(Session)) return RedirectToAction("Index", "Error");
+                var dsBoPhan = BoPhanCheBienBUS.LayDanhSachBoPhanCheBien(((TaiKhoan) Session["taiKhoan"]).MaTaiKhoan);
+                if (dsBoPhan.Count == 0) return RedirectToAction("Index", "Error");
+                if (dsBoPhan.Count > 1) return RedirectToAction("Index", "Kitchen", new { maBoPhanCheBien = dsBoPhan[0].MaBoPhanCheBien});
+                return RedirectToAction("Index", "Kitchen", new { maBoPhanCheBien = dsBoPhan[0].MaBoPhanCheBien });
+            }
             var boPhanCheBien = BoPhanCheBienBUS.LayBoPhanCheBienTheoMa((int) maBoPhanCheBien);
             if (boPhanCheBien == null) return RedirectToAction("Index", "Error");
-
+            if (Session["taiKhoan"]==null || boPhanCheBien.TaiKhoan.MaTaiKhoan != ((TaiKhoan)Session["taiKhoan"]).MaTaiKhoan)
+            {
+                return RedirectToAction("Index", "Error");
+            }
             ViewData["iTimerTick"] = TIMER_TICK;
             ViewData["boPhanCheBien"] = boPhanCheBien;
             return View();
