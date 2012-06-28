@@ -57,13 +57,15 @@ namespace LocalServerWeb.Controllers
                 if (taiKhoan!=null)
                 {
                     Session["taiKhoan"] = taiKhoan;
-                    if (SharedCode.IsAdminLogin(Session) || SharedCode.IsManagerLogin(Session) || SharedCode.IsKitchenLogin(Session))
+                    if (SharedCode.IsAdminLogin(Session) || SharedCode.IsManagerLogin(Session))
                     {
                         return RedirectToAction("Index", "AdminHome");
                     }
                     if (SharedCode.IsKitchenLogin(Session))
                     {
-                        return RedirectToAction("Index", "Kitchen");
+                        BoPhanCheBien boPhanCheBien = BoPhanCheBienBUS.LayBoPhanCheBienTheoTaiKhoan(taiKhoan);
+                        int maBoPhanCheBien = (boPhanCheBien != null) ? boPhanCheBien.MaBoPhanCheBien : 1;
+                        return RedirectToAction("Index", "Kitchen", new { maBoPhanCheBien = maBoPhanCheBien });
                     }
                     if (!String.IsNullOrEmpty(returnUrl))
                     {
