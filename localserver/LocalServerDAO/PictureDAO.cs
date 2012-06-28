@@ -19,13 +19,32 @@ namespace LocalServerDAO
             string imagePath;
             try
             {
-                imagePath = HostingEnvironment.ApplicationPhysicalPath + path;
+                //imagePath = HostingEnvironment.ApplicationPhysicalPath + path;
+                //imagePath = Path.Combine(HostingEnvironment.ApplicationPhysicalPath, path);
+                //imagePath = Path.Combine(HttpContext.Current.Server.MapPath("/"), path);
+                imagePath = HttpContext.Current.Server.MapPath(path);
 
                 if (File.Exists(imagePath))
                 {
                     MemoryStream memoryStream = new MemoryStream();
                     Bitmap image = new Bitmap(imagePath);
-                    image.Save(memoryStream, ImageFormat.Jpeg);
+
+                    ImageFormat ext = ImageFormat.Jpeg;
+                    if (imagePath.EndsWith(".png"))
+                    {
+                        ext = ImageFormat.Png;
+                    }
+                    else if (imagePath.EndsWith(".bmp"))
+                    {
+                        ext = ImageFormat.Bmp;
+                    }
+                    else if (imagePath.EndsWith(".gif"))
+                    {
+                        ext = ImageFormat.Gif;
+                    }
+
+                    image.Save(memoryStream, ext);
+
                     memoryStream.Position = 0;
 
                     return memoryStream;
@@ -43,7 +62,9 @@ namespace LocalServerDAO
             string imagePath;
             try
             {
-                imagePath = HostingEnvironment.ApplicationPhysicalPath + path;
+
+                //imagePath = HostingEnvironment.ApplicationPhysicalPath + path;
+                imagePath = HttpContext.Current.Server.MapPath(path);
 
                 if (File.Exists(imagePath))
                 {
