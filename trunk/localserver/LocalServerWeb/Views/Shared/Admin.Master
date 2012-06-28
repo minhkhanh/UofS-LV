@@ -67,7 +67,6 @@
 	<!--  start top-search -->
 	<div id="top-search">
         <% Html.RenderPartial("LanguageUserControl"); %>
-        <% Html.RenderPartial("UsernameUserControl"); %>
 	</div>
  	<!--  end top-search -->
  	<div class="clear"></div>
