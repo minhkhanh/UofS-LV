@@ -14,6 +14,11 @@ namespace LocalServerBUS
             return BoPhanCheBienDAO.LayDanhSachBoPhanCheBien();
         }
 
+        public static List<BoPhanCheBien> LayDanhSachBoPhanCheBien(int maTaiKhoan)
+        {
+            return BoPhanCheBienDAO.LayDanhSachBoPhanCheBien(maTaiKhoan);
+        }
+
         public static List<ChiTietOrder> LayDanhSachChiTietOrderCanCheBien(BoPhanCheBien boPhanCheBien)
         {
             var listCTO = BoPhanCheBienDAO.LayDanhSachChiTietOrderCanCheBien(boPhanCheBien);

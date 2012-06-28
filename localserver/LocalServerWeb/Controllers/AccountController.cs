@@ -57,13 +57,13 @@ namespace LocalServerWeb.Controllers
                 if (taiKhoan!=null)
                 {
                     Session["taiKhoan"] = taiKhoan;
-                    if (SharedCode.IsAdminLogin(Session) || SharedCode.IsManagerLogin(Session))
+                    if (SharedCode.IsAdminLogin(Session) || SharedCode.IsManagerLogin(Session) || SharedCode.IsWaiterLogin(Session))
                     {
                         return RedirectToAction("Index", "AdminHome");
                     }
                     if (SharedCode.IsKitchenLogin(Session))
                     {
-                        return RedirectToAction("Choose", "Kitchen");
+                        return RedirectToAction("Index", "Kitchen");
                     }
                     if (!String.IsNullOrEmpty(returnUrl))
                     {
