@@ -81,6 +81,10 @@ namespace LocalServerWeb
         [OperationContract]
         MonAn LayMonAn(int maMonAn, string junk);
 
+        [WebInvoke(Method = "GET", UriTemplate = "danhGiaMonAn?maMonAn={maMonAn}&diemDanhGia={diemDanhGia}&junk={junk}")]
+        [OperationContract]
+        bool DanhGiaMonAn(int maMonAn, float diemDanhGia, string junk);
+
         
         // Don Vi Tinh
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachDonViTinh?junk={junk}")]
@@ -446,6 +450,10 @@ namespace LocalServerWeb
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachMonAnJson?junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         List<MonAn> LayDanhSachMonAnJson(string junk);
+
+        [WebInvoke(Method = "GET", UriTemplate = "danhGiaMonAnJson?maMonAn={maMonAn}&diemDanhGia={diemDanhGia}&junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        bool DanhGiaMonAnJson(int maMonAn, float diemDanhGia, string junk);
 
         // mon an da ngon ngu
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachMonAnDaNgonNguJson?junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
