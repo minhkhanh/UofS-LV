@@ -36,14 +36,9 @@ namespace LocalServerDAO
             return null;
         }
 
-        public static BoPhanCheBien LayBoPhanCheBienTheoTaiKhoan(TaiKhoan taiKhoan)
+        public static List<BoPhanCheBien> LayBoPhanCheBienTheoTaiKhoan(TaiKhoan taiKhoan)
         {
-            var temp = ThucDonDienTu.DataContext.BoPhanCheBiens.Where(b => b.TaiKhoan == taiKhoan);
-            if (temp.Count() > 0)
-            {
-                return temp.First();
-            }
-            return null;
+            return  ThucDonDienTu.DataContext.BoPhanCheBiens.Where(b => b.TaiKhoan == taiKhoan).ToList();
         }
 
         public static bool Xoa(int maBoPhanCheBien)

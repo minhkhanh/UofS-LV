@@ -32,7 +32,7 @@ namespace LocalServerBUS
             return BoPhanCheBienDAO.LayBoPhanCheBienTheoMa(maBoPhanCheBien);
         }
 
-        public static BoPhanCheBien LayBoPhanCheBienTheoTaiKhoan(TaiKhoan taiKhoan)
+        public static List<BoPhanCheBien> LayBoPhanCheBienTheoTaiKhoan(TaiKhoan taiKhoan)
         {
             return BoPhanCheBienDAO.LayBoPhanCheBienTheoTaiKhoan(taiKhoan);
         }

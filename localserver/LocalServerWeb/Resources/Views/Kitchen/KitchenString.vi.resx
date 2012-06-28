@@ -174,4 +174,10 @@
   <data name="BiKhoa" xml:space="preserve">
     <value>Bị khóa</value>
   </data>
+  <data name="Choose" xml:space="preserve">
+    <value>Chọn</value>
+  </data>
+  <data name="ChooseTitle" xml:space="preserve">
+    <value>Chọn bộ phận chế biến </value>
+  </data>
 </root>

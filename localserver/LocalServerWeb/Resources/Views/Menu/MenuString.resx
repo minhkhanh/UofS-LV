@@ -162,6 +162,9 @@
   <data name="ChangeInfo" xml:space="preserve">
     <value>Change my infomation</value>
   </data>
+  <data name="ChooseKitchen" xml:space="preserve">
+    <value>Choose kitchen</value>
+  </data>
   <data name="Config" xml:space="preserve">
     <value>Configuration</value>
   </data>

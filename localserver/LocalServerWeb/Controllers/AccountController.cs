@@ -63,9 +63,7 @@ namespace LocalServerWeb.Controllers
                     }
                     if (SharedCode.IsKitchenLogin(Session))
                     {
-                        BoPhanCheBien boPhanCheBien = BoPhanCheBienBUS.LayBoPhanCheBienTheoTaiKhoan(taiKhoan);
-                        int maBoPhanCheBien = (boPhanCheBien != null) ? boPhanCheBien.MaBoPhanCheBien : 1;
-                        return RedirectToAction("Index", "Kitchen", new { maBoPhanCheBien = maBoPhanCheBien });
+                        return RedirectToAction("Choose", "Kitchen");
                     }
                     if (!String.IsNullOrEmpty(returnUrl))
                     {

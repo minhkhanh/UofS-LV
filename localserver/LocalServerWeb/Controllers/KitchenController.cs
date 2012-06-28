@@ -27,6 +27,16 @@ namespace LocalServerWeb.Controllers
             return View();
         }
 
+        public ActionResult Choose()
+        {
+            TaiKhoan taiKhoan = (TaiKhoan)Session["taiKhoan"];
+            List<BoPhanCheBien> listBoPhanCheBien = new List<BoPhanCheBien>();
+            listBoPhanCheBien = BoPhanCheBienBUS.LayBoPhanCheBienTheoTaiKhoan(taiKhoan);
+            ViewData["listBoPhanCheBien"] = listBoPhanCheBien;
+        
+            return View();
+        }
+
         public ActionResult GetKitchenOrder(int maBoPhanCheBien)
         {
             var boPhanCheBien = BoPhanCheBienBUS.LayBoPhanCheBienTheoMa(maBoPhanCheBien);
