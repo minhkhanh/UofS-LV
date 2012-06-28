@@ -197,13 +197,18 @@ namespace LocalServerWeb.Reports
                     // Ap dung cho 1 ngay
                     RevenueMonthReportData data = listData[listData.Count - 1];
                     data.TongSoHoaDon++;
-                    data.TongTien += hoaDon.TongTien;
-                    data.PhuThu += hoaDon.PhuThu.GiaTang;
-                    data.KhuyenMai += HoaDonBUS.LayTongKhuyenMai(hoaDon.MaHoaDon);
 
-                    tongTien += data.TongTien;
-                    phuThu += data.PhuThu;
-                    khuyenMai += data.KhuyenMai;
+                    float tempTongTien = hoaDon.TongTien;
+                    float tempPhuThu = hoaDon.PhuThu.GiaTang;
+                    float tempKhuyenMai = HoaDonBUS.LayTongKhuyenMai(hoaDon.MaHoaDon);
+
+                    data.TongTien += tempTongTien;
+                    data.PhuThu += tempPhuThu;
+                    data.KhuyenMai += tempKhuyenMai;
+
+                    tongTien += tempTongTien;
+                    phuThu += tempPhuThu;
+                    khuyenMai += tempKhuyenMai;
                 }
 
                 printReport.AddDataSoruce(new ReportDataSource("RevenueMonthReportData", listData));
@@ -277,13 +282,18 @@ namespace LocalServerWeb.Reports
                     // Ap dung cho 1 ngay
                     RevenuePeriodReportData data = listData[listData.Count - 1];
                     data.TongSoHoaDon++;
-                    data.TongTien += hoaDon.TongTien;
-                    data.PhuThu += hoaDon.PhuThu.GiaTang;
-                    data.KhuyenMai += HoaDonBUS.LayTongKhuyenMai(hoaDon.MaHoaDon);
 
-                    tongTien += data.TongTien;
-                    phuThu += data.PhuThu;
-                    khuyenMai += data.KhuyenMai;
+                    float tempTongTien = hoaDon.TongTien;
+                    float tempPhuThu = hoaDon.PhuThu.GiaTang;
+                    float tempKhuyenMai = HoaDonBUS.LayTongKhuyenMai(hoaDon.MaHoaDon);
+
+                    data.TongTien += tempTongTien;
+                    data.PhuThu += tempPhuThu;
+                    data.KhuyenMai += tempKhuyenMai;
+
+                    tongTien += tempTongTien;
+                    phuThu += tempPhuThu;
+                    khuyenMai += tempKhuyenMai;
                 }
 
                 printReport.AddDataSoruce(new ReportDataSource("RevenuePeriodReportData", listData));
