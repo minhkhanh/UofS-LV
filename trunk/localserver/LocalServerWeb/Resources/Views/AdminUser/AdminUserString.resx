@@ -133,7 +133,7 @@
     <value>BOD</value>
   </data>
   <data name="ChangeYourself" xml:space="preserve">
-    <value>You can'nt change your info by yourself.</value>
+    <value>You cannot change your info by yourself.</value>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm Password</value>
@@ -167,6 +167,9 @@
   </data>
   <data name="ErrorCannotLockUnlock" xml:space="preserve">
     <value>Can't lock/unlock</value>
+  </data>
+  <data name="ErrorUsernameExist" xml:space="preserve">
+    <value>Username already existed</value>
   </data>
   <data name="Female" xml:space="preserve">
     <value>Female</value>
@@ -224,6 +227,12 @@
   </data>
   <data name="Required" xml:space="preserve">
     <value>This field is required</value>
+  </data>
+  <data name="RequiredSocialID" xml:space="preserve">
+    <value>Required 9-10 characters</value>
+  </data>
+  <data name="RequiredText" xml:space="preserve">
+    <value>Required 5-10 characters</value>
   </data>
   <data name="SocialID" xml:space="preserve">
     <value>Social Identity</value>

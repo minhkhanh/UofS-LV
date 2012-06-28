@@ -106,7 +106,7 @@ namespace LocalServerWeb.Resources.Views.AdminUser {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can&apos;nt change your info by yourself..
+        ///   Looks up a localized string similar to You cannot change your info by yourself..
         /// </summary>
         public static string ChangeYourself {
             get {
@@ -210,6 +210,15 @@ namespace LocalServerWeb.Resources.Views.AdminUser {
         public static string ErrorCannotLockUnlock {
             get {
                 return ResourceManager.GetString("ErrorCannotLockUnlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username already existed.
+        /// </summary>
+        public static string ErrorUsernameExist {
+            get {
+                return ResourceManager.GetString("ErrorUsernameExist", resourceCulture);
             }
         }
         
@@ -381,6 +390,24 @@ namespace LocalServerWeb.Resources.Views.AdminUser {
         public static string Required {
             get {
                 return ResourceManager.GetString("Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Required 9-10 characters.
+        /// </summary>
+        public static string RequiredSocialID {
+            get {
+                return ResourceManager.GetString("RequiredSocialID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Required 5-10 characters.
+        /// </summary>
+        public static string RequiredText {
+            get {
+                return ResourceManager.GetString("RequiredText", resourceCulture);
             }
         }
         

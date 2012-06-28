@@ -19,6 +19,11 @@
            Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorCannotAdd"]);
        } 
     %>
+    <% if (TempData["errorUsernameExist"] != null)
+       {
+           Html.RenderPartial("ErrorMessageTooltip", model: TempData["errorUsernameExist"]);
+       } 
+    %>
     <% Html.BeginForm("Add", "AdminUser", FormMethod.Post, new { enctype = "multipart/form-data" }); %>
     <!-- start id-form -->
     <table border="0" cellpadding="0" cellspacing="0" id="id-form">

@@ -32,7 +32,7 @@
             </th>
             <td>
                 <input type="text" class="inp-form<%:(((Dictionary<string, string>) TempData["checkDic"]).ContainsKey("tenTaiKhoan") && ((Dictionary<string, string>) TempData["checkDic"])["tenTaiKhoan"]!=null) ? "-error" : ""%>"
-                    name="tenTaiKhoan" value="<%:TempData["tenTaiKhoan"] ?? ""%>" />
+                    name="tenTaiKhoan" value="<%:TempData["tenTaiKhoan"] ?? ""%>" disabled="disabled"/>
             </td>
             <td>
                 <% if (((Dictionary<string, string>)TempData["checkDic"]).ContainsKey("tenTaiKhoan") && ((Dictionary<string, string>)TempData["checkDic"])["tenTaiKhoan"] != null)
