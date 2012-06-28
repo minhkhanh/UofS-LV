@@ -1,5 +1,7 @@
 ﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
 <%@ Import Namespace="LocalServerWeb.Codes" %>
+<%@ Import Namespace="LocalServerDTO" %>
+<%@ Import Namespace="LocalServerWeb.Resources.Views.Shared" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -65,6 +67,7 @@
 	<!--  start top-search -->
 	<div id="top-search">
         <% Html.RenderPartial("LanguageUserControl"); %>
+        <% Html.RenderPartial("UsernameUserControl"); %>
 	</div>
  	<!--  end top-search -->
  	<div class="clear"></div>
