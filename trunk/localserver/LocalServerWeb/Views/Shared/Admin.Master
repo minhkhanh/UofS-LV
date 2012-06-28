@@ -84,6 +84,7 @@
 <div class="nav-outer-repeat"> 
  <% if (SharedCode.IsManagerLogin(new HttpSessionStateWrapper(Session))) Html.RenderPartial("ManagerMenu");
     else if (SharedCode.IsAdminLogin(new HttpSessionStateWrapper(Session))) Html.RenderPartial("AdminMenu");
+    else if (SharedCode.IsKitchenLogin(new HttpSessionStateWrapper(Session))) Html.RenderPartial("KitchenMenu");
     else Html.RenderPartial("UserMenu"); %>
 <!--  start nav-outer -->
 <%--

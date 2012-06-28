@@ -139,7 +139,7 @@
     <value>PhucVu</value>
   </data>
   <data name="SoLuong" xml:space="preserve">
-    <value>Quaty</value>
+    <value>Quantity</value>
   </data>
   <data name="TenMon" xml:space="preserve">
     <value>Food name</value>
@@ -173,5 +173,11 @@
   </data>
   <data name="BiKhoa" xml:space="preserve">
     <value>BiKhoa</value>
+  </data>
+  <data name="Choose" xml:space="preserve">
+    <value>Choose</value>
+  </data>
+  <data name="ChooseTitle" xml:space="preserve">
+    <value>Choose kitchen</value>
   </data>
 </root>
