@@ -14,7 +14,7 @@ using System.IO;
 
 namespace LocalServerWeb.Controllers
 {
-    public class AdminUserController : BaseController
+    public class AdminUserController : ManagerBaseController
     {
         //
         // GET: /AdminUser/

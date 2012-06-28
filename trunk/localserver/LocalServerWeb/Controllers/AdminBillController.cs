@@ -14,7 +14,7 @@ using LocalServerWeb.Resources.Views.Shared;
 
 namespace LocalServerWeb.Controllers
 {
-    public class AdminBillController : BaseController
+    public class AdminBillController : ManagerBaseController
     {
         public ActionResult Index(string page)
         {

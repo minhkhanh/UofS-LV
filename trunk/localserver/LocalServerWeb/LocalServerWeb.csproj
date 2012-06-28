@@ -76,6 +76,9 @@
   <ItemGroup>
     <Compile Include="Codes\AdminBaseController.cs" />
     <Compile Include="Codes\BaseController.cs" />
+    <Compile Include="Codes\UserBaseController.cs" />
+    <Compile Include="Codes\KitchenBaseController.cs" />
+    <Compile Include="Codes\ManagerBaseController.cs" />
     <Compile Include="Codes\LocalizedDisplayNameAttribute.cs" />
     <Compile Include="Codes\MyMembershipProvider.cs" />
     <Compile Include="Codes\SharedCode.cs" />

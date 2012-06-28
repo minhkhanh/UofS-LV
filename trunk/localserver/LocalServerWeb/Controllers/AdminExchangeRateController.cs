@@ -15,7 +15,7 @@ using System.Xml;
 
 namespace LocalServerWeb.Controllers
 {
-    public class AdminExchangeRateController : BaseController 
+    public class AdminExchangeRateController : ManagerBaseController 
     {
         public ActionResult Index(string page)
         {
