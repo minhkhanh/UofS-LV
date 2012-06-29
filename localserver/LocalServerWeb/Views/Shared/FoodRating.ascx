@@ -22,7 +22,7 @@
                 callback: function (value, link) {
                     $.ajax({
                         type: "POST",
-                        url: "/FoodCategory/RateFood",
+                        url: "~/FoodCategory/RateFood",
                         data: $("#rate").serialize(),
                         dataType: "html",
                         success: function (response) {
@@ -33,7 +33,7 @@
                 ' by ' + data.SoLuotDanhGia + ' people');
                             }
                             else {
-                                alert('You have already rated this article');
+                                alert('You have already rated this food');
                             }
                             $('#rater').hide();
                             $('#rated').show();

@@ -118,7 +118,10 @@ namespace LocalServerWeb.Codes
         {
             if (request!=null)
             {
-                return string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, request.ApplicationPath);
+                String addr = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, request.ApplicationPath);
+                if(!addr.EndsWith("/"))
+                    addr = addr + "/";
+                return addr;
             }
             return "";
         }

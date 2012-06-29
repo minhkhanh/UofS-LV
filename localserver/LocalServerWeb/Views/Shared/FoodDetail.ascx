@@ -15,7 +15,7 @@
                         <table>
                             <tr>
                                 <td rowspan="2">
-                                    <img src="<%:SharedCode.GetHostApplicationAddress(Request)+ viewModel.HinhAnh %>"
+                                    <img src="<%:SharedCode.GetHostApplicationAddress(Request) + viewModel.HinhAnh %>"
                                         alt="food_image" />
                                 </td>
                                 <td style="padding-left:5px">
