@@ -13,20 +13,26 @@
                 $('#rater').show();
             });
 
+            $('#rater').mouseout(function () {
+                $('#rater').hide();
+                $('#rated').show();
+            });
+
             $('.auto-submit-star').rating({
                 callback: function (value, link) {
                     $.ajax({
                         type: "POST",
                         url: "/FoodCategory/RateFood",
                         data: $("#rate").serialize(),
-                        dataType: "text/plain",
+                        dataType: "html",
                         success: function (response) {
                             if (response != 'false') {
                                 var data = eval('(' + response + ')');
                                 alert('Your rating has been recorded');
                                 $('#currentlyrated').html('Currently rated ' + data.DiemTrungBinh.toFixed(2) +
                 ' by ' + data.SoLuotDanhGia + ' people');
-                            } else {
+                            }
+                            else {
                                 alert('You have already rated this article');
                             }
                             $('#rater').hide();
@@ -67,7 +73,7 @@
         </div>
         <p id="currentlyrated" style="float: left; padding-left: 20px;">
             <%= Model.DiemTrungBinh > 0 ? "Currently rated " + Model.DiemTrungBinh.ToString("f") + " by " + Model.SoLuotDanhGia + " people" 
-       : "<span style=\"color:red\">Not yet rated.  Be the first to rate this article!</span>"%>
+       : "<span style=\"color:red\">Not yet rated.  Be the first to rate this food!</span>"%>
         </p>
     </div>
     <div style="clear: both">

@@ -150,7 +150,8 @@ namespace LocalServerWeb.Controllers
             }
 
             // Link item dau tien la Index
-            viewModel.Names[0] = FoodCategoryString.Index;
+            if(viewModel.Names.Count > 0 && viewModel.Names[0] != null)
+                viewModel.Names[0] = FoodCategoryString.Index;
 
 
             return viewModel;
@@ -427,6 +428,8 @@ namespace LocalServerWeb.Controllers
         [AcceptVerbs("post")]
         public ActionResult RateFood(FormCollection form)
         {
+            
+
             var rate = Convert.ToInt32(form["score"]);
             var maMonAn = Convert.ToInt32(form["maMonAn"]);
             if (Request.Cookies["rating" + maMonAn] != null)
@@ -444,10 +447,10 @@ namespace LocalServerWeb.Controllers
             }
 
             FoodDetailViewModel viewModel = GetFoodDetailViewModel(maMonAn);
-            if (viewModel.SoLuotDanhGia != 0)
-            {
-                viewModel.DiemTrungBinh = viewModel.DiemDanhGia / viewModel.SoLuotDanhGia;
-            }
+
+            string a = Json(viewModel).Data.ToString();
+            string b = Content("haha").Content.ToString();
+
             return Json(viewModel);
         }
 
