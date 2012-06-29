@@ -11,7 +11,7 @@
                 </td>
                 <td class="green-right">
                     <a class="close-green">
-                        <img src="../../Images/adminimages/table/icon_close_green.gif" alt="" /></a>
+                        <img src="<%:Url.Content("~/Images/adminimages/table/icon_close_green.gif") %>" alt="" /></a>
                 </td>
             </tr>
         </tbody>

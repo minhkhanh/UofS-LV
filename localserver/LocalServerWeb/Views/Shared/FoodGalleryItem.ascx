@@ -6,7 +6,7 @@
 <div id="food_gallery_item" item_num="<%:Model.STT.ToString() %>">
     <!--<a href="/FoodCategory/Food/<%: Model.MaMonAn %>">-->
     <a href = "<%: SharedCode.GetHostApplicationAddress(Request) + "FoodCategory/Food/" + Model.MaMonAn.ToString() %>" >
-        <img src="<%:SharedCode.GetHostApplicationAddress(Request)+ Model.HinhAnh %>" alt="<%:Model.TenMonAn %>" />
+        <img src="<%:Url.Content("~/"+Model.HinhAnh+"")%>" alt="<%:Model.TenMonAn %>" />
     </a>
     <p>
         <%: Model.TenMonAn %></p>

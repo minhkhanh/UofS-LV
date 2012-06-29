@@ -151,7 +151,7 @@
                 </th>
                 <td>
                     <div class="image_food">
-                        <img src="<%:SharedCode.GetHostApplicationAddress(Request)+(ViewData["monAn"] as MonAn).HinhAnh %>"
+                        <img src="<%:Url.Content("~/" + (ViewData["monAn"] as MonAn).HinhAnh +"")%>"
                             alt="" width="100px" height="100px"/></div>
                 </td>
                 <td>
@@ -387,11 +387,11 @@
         });
     </script>
     <!--  styled file upload script -->
-    <script src="../../Scripts/jquery/jquery.filestyle.js" type="text/javascript"></script>
+    <script src="<%:Url.Content("~/Scripts/jquery/jquery.filestyle.js")%>" type="text/javascript"></script>
     <script type="text/javascript" charset="utf-8">
         $(function () {
             $("input.file_1").filestyle({
-                image: "../../Images/adminimages/forms/choose-file.gif",
+                image: '<%:Url.Content("~/Images/adminimages/forms/choose-file.gif") %>',
                 imageheight: 21,
                 imagewidth: 78,
                 width: 310

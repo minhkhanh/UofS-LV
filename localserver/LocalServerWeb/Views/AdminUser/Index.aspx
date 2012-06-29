@@ -143,7 +143,7 @@
                 </td>
                 <td align="center" valign="middle">
                     <div class="image_food">
-                        <img src="<%:SharedCode.GetHostApplicationAddress(Request) + taiKhoan.Avatar %>" alt=""
+                        <img src="<%:Url.Content("~/"+taiKhoan.Avatar+"")%>" alt=""
                             width="50px" height="50px" /></div>
                 </td>
                 <td>

@@ -2,6 +2,7 @@
 <%@ Import Namespace="LocalServerWeb.ViewModels" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.FoodCategory" %>
 <%@ Import Namespace="LocalServerWeb.Controllers" %>
+<%@ Import Namespace="LocalServerWeb.Codes" %>
 
 <div id="food_rating">
     <script type="text/javascript">
@@ -22,7 +23,7 @@
                 callback: function (value, link) {
                     $.ajax({
                         type: "POST",
-                        url: "~/FoodCategory/RateFood",
+                        url: '<%: SharedCode.GetHostApplicationAddress(Request) + "FoodCategory/RateFood" %>',
                         data: $("#rate").serialize(),
                         dataType: "html",
                         success: function (response) {

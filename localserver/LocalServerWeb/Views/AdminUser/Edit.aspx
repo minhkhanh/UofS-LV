@@ -220,8 +220,8 @@
     </script>
     <!--  date picker script -->
     <link rel="stylesheet" href="../../Content/admincss/datePicker.css" type="text/css" />
-    <script src="../../Scripts/jquery/date.js" type="text/javascript"></script>
-    <script src="../../Scripts/jquery/jquery.datePicker.js" type="text/javascript"></script>
+    <script src="<%:Url.Content("~/Scripts/jquery/date.js")%>" type="text/javascript"></script>
+    <script src="<%:Url.Content("~/Scripts/jquery/jquery.datePicker.js")%>" type="text/javascript"></script>
     <script type="text/javascript" charset="utf-8">
     $(function () {
 
@@ -326,11 +326,11 @@
     });    
 //</script>
     <!--  styled file upload script -->
-    <script src="../../Scripts/jquery/jquery.filestyle.js" type="text/javascript"></script>
+    <script src="<%:Url.Content("~/Scripts/jquery/jquery.filestyle.js")%>" type="text/javascript"></script>
     <script type="text/javascript" charset="utf-8">
         $(function () {
             $("input.file_1").filestyle({
-                image: "../../Images/adminimages/forms/choose-file.gif",
+                image: '<%:Url.Content("~/Images/adminimages/forms/choose-file.gif") %>',
                 imageheight: 21,
                 imagewidth: 78,
                 width: 310
