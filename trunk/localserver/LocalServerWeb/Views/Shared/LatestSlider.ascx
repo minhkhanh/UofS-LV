@@ -26,7 +26,8 @@
                        {
                            var food = ((List<FoodGalleryItemViewModel>) ViewData["randomFoods"])[i];
                        %>
-                           <li class="SlideItMoo_element"><a href="/FoodCategory/Food/<%: food.MaMonAn %>">
+                           <li class="SlideItMoo_element">
+                           <a href = "<%: SharedCode.GetHostApplicationAddress(Request) + "FoodCategory/Food/" + food.MaMonAn.ToString() %>" >
                            <img src="<%:SharedCode.GetHostApplicationAddress(Request) + food.HinhAnh %>" alt="<%:food.TenMonAn %>" />
                            </a></li>                           
                     <% } %>
