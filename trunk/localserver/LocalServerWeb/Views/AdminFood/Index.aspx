@@ -100,7 +100,7 @@
                 </td>
                 <td>
                     <div class="image_food">
-                        <img src="<%:SharedCode.GetHostApplicationAddress(Request)+monAn.HinhAnh %>"
+                        <img src="<%:Url.Content("~/"+monAn.HinhAnh+"")%>"
                             alt="" width="50px" height="50px" /></div>
                 </td>
                 <td>
