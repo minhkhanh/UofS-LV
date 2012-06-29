@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../../Content/foodcategorycss/foodgalleryitem.css" type="text/css" />
     <link rel="stylesheet" href="../../Content/foodcategorycss/foodrelate.css" type="text/css" />
     <link rel="stylesheet" href="../../Content/foodcategorycss/jquery.rating.css" type="text/css" />
-    <%--<script type="text/javascript" src="../../Scripts/jquery/jquery-1.7.2.min.js"></script>--%>
+
     <script language="javascript" type="text/javascript" src="../../Scripts/foodcategory/slider.js"></script>
     <script language="javascript" type="text/javascript" src="../../Scripts/foodcategory/jquery.MetaData.js"></script>
     <script language="javascript" type="text/javascript" src="../../Scripts/foodcategory/jquery.rating.js"></script>
