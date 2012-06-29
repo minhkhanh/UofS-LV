@@ -21,7 +21,7 @@ namespace LocalServerWeb.Controllers
 
         public ActionResult Index()
         {
-            return Redirect("/FoodCategory/Category/0");          
+            return RedirectToAction("Category", new { id = 0 });         
         }
 
         public ActionResult Category(int? id, string page)

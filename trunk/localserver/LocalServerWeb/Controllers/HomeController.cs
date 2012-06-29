@@ -12,7 +12,7 @@ namespace LocalServerWeb.Controllers
     {
         public ActionResult Index()
         {
-            return Redirect("/FoodCategory/Category/0");
+            return RedirectToAction("Index", "FoodCategory");
         }
 
         public ActionResult About()
