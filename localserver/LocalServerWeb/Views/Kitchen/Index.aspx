@@ -11,9 +11,10 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
-<!-- Tooltips -->
+<!-- Tooltips
 <script src="../../Scripts/jquery/jquery.tooltip.js" type="text/javascript"></script>
 <script src="../../Scripts/jquery/jquery.dimensions.js" type="text/javascript"></script>
+-->
 
 <script type="text/javascript">
     var iTimerTick = <%:(int)ViewData["iTimerTick"] %> ;
