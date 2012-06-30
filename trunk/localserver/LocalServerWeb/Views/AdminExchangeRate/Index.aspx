@@ -120,7 +120,7 @@
                     </td>
                     <td class="red-right">
                         <a class="close-red">
-                            <img src="../../Images/adminimages/table/icon_close_red.gif" alt="" /></a>
+                            <img src="<%: Url.Content("~/Images/adminimages/table/icon_close_red.gif") %>" alt="" /></a>
                     </td>
                 </tr>
             </tbody>
