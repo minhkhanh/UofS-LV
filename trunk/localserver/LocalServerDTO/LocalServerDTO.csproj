@@ -58,6 +58,7 @@
     <Compile Include="ChiTietOrder.cs" />
     <Compile Include="ChiTietKhongCheBienOrder.cs" />
     <Compile Include="ChiTietVoucher.cs" />
+    <Compile Include="DanhGiaMonAn.cs" />
     <Compile Include="ThamSo.cs" />
     <Compile Include="DanhMuc.cs" />
     <Compile Include="DonViTinh.cs" />

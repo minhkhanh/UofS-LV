@@ -208,6 +208,19 @@ namespace LocalServerWeb
             return false;
         }
 
+        public bool DanhGiaNhieuMonAn(List<DanhGiaMonAn> listDanhGiaMonAn)
+        {
+            try
+            {
+                return MonAnBUS.DanhGiaNhieuMonAn(listDanhGiaMonAn);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return false;
+        }
+
 
         // Don Vi Tinh
         public List<DonViTinh> LayDanhSachDonViTinh(string junk)
