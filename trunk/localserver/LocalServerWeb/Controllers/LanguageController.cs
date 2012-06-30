@@ -8,7 +8,7 @@ using LocalServerWeb.Codes;
 
 namespace LocalServerWeb.Controllers
 {
-    public class LanguageController : ManagerBaseController
+    public class LanguageController : BaseController
     {
         [HttpPost]
         public ActionResult ChangeLanguage(string kiHieuNgonNgu, string returnUrlLanguage)
