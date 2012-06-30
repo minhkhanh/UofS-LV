@@ -97,5 +97,25 @@ namespace LocalServerBUS
         {
             return MonAnDAO.DanhGiaMonAn(maMonAn, diemDanhGia);
         }
+
+        public static bool DanhGiaNhieuMonAn(List<DanhGiaMonAn> listDanhGiaMonAn)
+        {
+            bool ketQua = true;
+            
+            foreach (DanhGiaMonAn dg in listDanhGiaMonAn)
+            {
+                MonAn monAn = MonAnBUS.LayMonAn(dg.MaMonAn);
+                if (monAn != null)
+                {
+                    monAn.SoLuotDanhGia++;
+                    monAn.DiemDanhGia += dg.DiemDanhGia;
+                }
+            }
+
+            MonAnBUS.CapNhat(null);
+
+
+            return ketQua;
+        }
     }
 }

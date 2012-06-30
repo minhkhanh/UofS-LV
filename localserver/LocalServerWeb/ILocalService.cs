@@ -85,6 +85,9 @@ namespace LocalServerWeb
         [OperationContract]
         bool DanhGiaMonAn(int maMonAn, float diemDanhGia, string junk);
 
+        [WebInvoke(Method = "POST", UriTemplate = "danhGiaNhieuMonAn")]
+        [OperationContract]
+        bool DanhGiaNhieuMonAn(List<DanhGiaMonAn> listDanhGiaMonAn);
         
         // Don Vi Tinh
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachDonViTinh?junk={junk}")]
