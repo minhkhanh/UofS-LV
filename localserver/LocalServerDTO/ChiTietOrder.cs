@@ -83,7 +83,10 @@ namespace LocalServerDTO
         [Column(Name = "TinhTrang")]
         public int TinhTrang { get; set; }
 
+        [DataMember(Name = "SoLuongDaCheBien")]
         public int SoLuongDaCheBien { get; set; }
+
+        [DataMember(Name = "SoLuongDangCheBien")]
         public int SoLuongDangCheBien { get; set; }
 
         public string TenTinhTrang { get; set; }
