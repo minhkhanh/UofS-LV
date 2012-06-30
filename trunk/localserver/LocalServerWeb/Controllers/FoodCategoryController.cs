@@ -428,21 +428,6 @@ namespace LocalServerWeb.Controllers
         [AcceptVerbs("post")]
         public ActionResult RateFood(FormCollection form)
         {
-
-            List<DanhGiaMonAn> list = new List<DanhGiaMonAn>();
-            DanhGiaMonAn a = new DanhGiaMonAn();
-            a.MaMonAn = 1;
-            a.DiemDanhGia = 5;
-
-            DanhGiaMonAn b = new DanhGiaMonAn();
-            b.MaMonAn = 1;
-            b.DiemDanhGia = 5;
-
-            list.Add(a);
-            list.Add(b);
-
-            MonAnBUS.DanhGiaNhieuMonAn(list);
-
             var rate = Convert.ToInt32(form["score"]);
             var maMonAn = Convert.ToInt32(form["maMonAn"]);
             if (Request.Cookies["rating" + maMonAn] != null)
