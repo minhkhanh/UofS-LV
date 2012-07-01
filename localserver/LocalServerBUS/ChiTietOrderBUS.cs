@@ -95,5 +95,15 @@ namespace LocalServerBUS
         {
             return ChiTietOrderDAO.LayDanhSachChiTietOrderJson(maOrder);
         }
+
+        public static bool SuaChiTietOrderJson(ChiTietOrder holder)
+        {
+            return ChiTietOrderDAO.SuaChiTietOrderJson(holder);
+        }
+
+        //public static int LaySoLuongChuaCheBien(int maChiTiet)
+        //{
+        //    return ChiTietOrderDAO.LaySoLuongChuaCheBien(maChiTiet);
+        //}
     }
 }

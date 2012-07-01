@@ -70,14 +70,13 @@ namespace LocalServerDAO
             return false;
         }
 
-        public static KhuyenMai TimKhuyenMai(int maChiTietOrder)
+        public static KhuyenMai LayKhuyenMaiApDung(int maMon)
         {
-            var ctOrderList = ThucDonDienTu.DataContext.ChiTietOrders.Where(c => c.MaChiTietOrder == maChiTietOrder);
-            if (ctOrderList.Count() == 0)
+            var varKm = ThucDonDienTu.DataContext.KhuyenMaiMons.Where(k => k.MonAn.MaMonAn == maMon && k.KhuyenMai.BatDau <= DateTime.Now && DateTime.Now <= k.KhuyenMai.KetThuc);
+            if (varKm.Count() == 0)
                 return null;
 
-            ChiTietOrder ctOrder = ctOrderList.First();
-            return LayKhuyenMai(ctOrder.MonAn.MaMonAn);
+            return varKm.First().KhuyenMai;
         }
     }
 }

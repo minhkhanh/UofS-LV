@@ -104,5 +104,10 @@ namespace LocalServerBUS
         {
             return BanDAO.GhepBanJson(listMaBan);
         }
+
+        public static bool TachNhomBanJson(int maBan)
+        {
+            return BanDAO.TachNhomBanJson(maBan);
+        }
     }
 }

@@ -171,17 +171,38 @@ namespace LocalServerDAO
             var temp = ThucDonDienTu.DataContext.Bans.Where(b => b.MaBan == maBan);
             if (temp.Count() == 0)
                 return false;
-            Ban banChinh = temp.First();
-            banChinh.Active = true;
-            banChinh.BanChinh = null;
-
-            //lấy danh sách các bàn trong nhóm
-            var dsBan = ThucDonDienTu.DataContext.Bans.Where(b => b.BanChinh == banChinh);
-            foreach (var ban in dsBan)
+            Ban ban = temp.First();
+            if (ban.MaBan != ban.BanChinh.MaBan)        // ban nay khong phai ban chinh, tach thoai mai
             {
-                ban.BanChinh = null;
                 ban.Active = true;
+                ban.BanChinh = null;
+
+                ThucDonDienTu.DataContext.SubmitChanges();
+                return true;
             }
+
+            // neu no la ban chinh thi tim ban khac de lam ban chinh thay cho no
+            var dsBanPhu = ThucDonDienTu.DataContext.Bans.Where(b => b.BanChinh.MaBan == ban.MaBan && b.MaBan != ban.MaBan);
+            if (dsBanPhu.Count() == 0)
+                return false;
+            Ban banPhu = dsBanPhu.First();
+
+            // chuyen order tu ban chinh sang ban phu thay the
+            var dsOrderChuaThanhToan = ThucDonDienTu.DataContext.Orders.Where(o => o.TinhTrang != 4 && o.Ban.MaBan == ban.MaBan);
+            foreach (Order o in dsOrderChuaThanhToan)
+            {
+                o.Ban = banPhu;
+            }
+
+            // cap nhat ban chinh moi cho ds ban phu
+            foreach (var b in dsBanPhu)
+            {
+                if (b.MaBan != banPhu.MaBan)
+                    b.BanChinh = banPhu;
+            }
+
+            ban.Active = true;
+            ban.BanChinh = null;
 
             //cập nhật csdl
             ThucDonDienTu.DataContext.SubmitChanges();
@@ -223,6 +244,31 @@ namespace LocalServerDAO
             }
 
             ThucDonDienTu.DataContext.SubmitChanges();
+            return true;
+        }
+
+        public static bool TachNhomBanJson(int maBan)
+        {
+            var banTmp = ThucDonDienTu.DataContext.Bans.Where(b => b.MaBan == maBan && b.TinhTrang);
+            if (banTmp.Count() == 0)
+                return false;
+
+            Ban ban = banTmp.First();
+
+            var dsOrderChuaThanhToan = ThucDonDienTu.DataContext.Orders.Where(o => o.TinhTrang != 4 && o.Ban.MaBan == ban.BanChinh.MaBan);
+            if (dsOrderChuaThanhToan.Count() != 0)
+                return false;       // nhom ban nay dang phuc vu order, khong cho phep tach nhom
+
+            // lay ra ds ban trong nhom
+            var listBanTmp = ThucDonDienTu.DataContext.Bans.Where(b => b.BanChinh.MaBan == ban.BanChinh.MaBan);
+            foreach (Ban b in listBanTmp)
+            {
+                b.Active = true;
+                b.BanChinh = null;
+            }
+
+            ThucDonDienTu.DataContext.SubmitChanges();
+
             return true;
         }
     }
