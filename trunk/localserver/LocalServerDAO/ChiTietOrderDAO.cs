@@ -98,5 +98,41 @@ namespace LocalServerDAO
         {
             return ThucDonDienTu.DataContext.ChiTietOrders.Where(m => m.SoLuong != 0 && m.Order.MaOrder == maOrder).ToList();
         }
+
+        public static bool SuaChiTietOrderJson(ChiTietOrder holder)
+        {
+            var varChiTiet = ThucDonDienTu.DataContext.ChiTietOrders.Where(c => c.MaChiTietOrder == holder.MaChiTietOrder);
+            if (varChiTiet.Count() == 0)
+                return false;       // ct order nay khong ton tai
+
+            ChiTietOrder ctOrder = varChiTiet.First();
+            if (ctOrder.Order.TinhTrang == 4)
+                return false;       // order nay da thanh toan
+
+            ctOrder.GhiChu = holder.GhiChu;
+
+            bool result = true;
+            if (holder.SoLuong >= ctOrder.SoLuongDaCheBien + ctOrder.SoLuongDangCheBien)
+                ctOrder.SoLuong = holder.SoLuong;
+            else
+                result = false;     // khong thay doi duoc so luong
+
+            ThucDonDienTu.DataContext.SubmitChanges();
+
+            return result;
+        }
+
+        //public static int LaySoLuongChuaCheBien(int maChiTiet)
+        //{
+        //    var varChiTiet = ThucDonDienTu.DataContext.ChiTietOrders.Where(c => c.MaChiTietOrder == maChiTiet);
+        //    if (varChiTiet.Count() == 0)
+        //        return -1;       // ct order nay khong ton tai
+
+        //    ChiTietOrder ctOrder = varChiTiet.First();
+        //    if (ctOrder.Order.TinhTrang == 4)
+        //        return -1;       // order nay da thanh toan
+           
+        //    return ctOrder.SoLuong - ctOrder.SoLuongDaCheBien - ctOrder.SoLuongDangCheBien;
+        //}
     }
 }

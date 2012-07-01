@@ -83,5 +83,10 @@ namespace LocalServerBUS
 
             return ketQua;
         }
+
+        public static bool ChuyenBanJson(int maOrder, int maBanMoi)
+        {
+            return OrderDAO.ChuyenBanJson(maOrder, maBanMoi);
+        }
     }
 }

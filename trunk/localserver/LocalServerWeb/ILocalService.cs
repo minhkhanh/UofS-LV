@@ -539,10 +539,15 @@ namespace LocalServerWeb
         [OperationContract]
         bool GhepBanJson(List<int> listMaBan);
 
-        // tach ban
-        [WebInvoke(Method = "POST", UriTemplate = "tachBanJson", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        // tach mot ban ra khoi nhom
+        [WebInvoke(Method = "GET", UriTemplate = "tachBanJson?maBan={maBan}&junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        bool TachBanJson(int maBan);
+        bool TachBanJson(int maBan, string junk);
+
+        // tach tat ca cac ban trong nhom
+        [WebInvoke(Method = "GET", UriTemplate = "tachNhomBanJson?maBan={maBan}&junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        bool TachNhomBanJson(int maBan, string junk);
 
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachOrderChuaThanhToanJson?maBan={maBan}&junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
@@ -576,9 +581,9 @@ namespace LocalServerWeb
         [OperationContract]
         List<KhuyenMai> LayDanhSachKhuyenMaiApDungJson(int maOrder);
 
-        [WebInvoke(Method = "GET", UriTemplate = "timKhuyenMaiMonJson?maChiTietOrder={maChiTietOrder}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "GET", UriTemplate = "layKhuyenMaiMonApDungJson?maMon={maMon}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        KhuyenMai TimKhuyenMaiMon(int maChiTietOrder);
+        KhuyenMai LayKhuyenMaiMonApDung(int maMon);
 
         [WebInvoke(Method = "GET", UriTemplate = "checkYeuCauHuyChiTietOrderJson?maChiTiet={maChiTiet}&soLuong={soLuong}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
@@ -601,6 +606,18 @@ namespace LocalServerWeb
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "kiemTraTaiKhoanJson?username={username}&junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         bool KiemTraTaiKhoanJson(string username, string password, string junk);
+
+        [WebInvoke(Method = "GET", UriTemplate = "chuyenBan?maOrder={maOrder}&maBanMoi={maBanMoi}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        bool ChuyenBanJson(int maOrder, int maBanMoi);
+
+        [WebInvoke(Method = "PUT", UriTemplate = "suaChiTietOrderJson", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        bool SuaChiTietOrderJson(ChiTietOrder holder);
+
+        [WebInvoke(Method = "GET", UriTemplate = "layChiTietOrderJson?maChiTiet={maChiTiet}&junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        ChiTietOrder LayChiTietOrderJson(int maChiTiet, string junk);
 
         /*==============END OF JSON SERVICES AREA==============*/
     }

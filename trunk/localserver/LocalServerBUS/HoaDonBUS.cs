@@ -86,7 +86,7 @@ namespace LocalServerBUS
                 //ctHoaDon._maHoaDon = hoaDon.MaHoaDon;
                 ctHoaDon.MonAn = ctOrder.MonAn;
 
-                // Can xem xet lai so luong, vi co the Huy Order, doi mon, doi don vi tinh ... o Bep va Khach
+                // Can xem xet lai so luong, vi co the Huy Order o Bep va Khach
                 ctHoaDon.SoLuong = ctOrder.SoLuong;
                 ctHoaDon.DonViTinh = ctOrder.DonViTinh;
                 // Truong hop donGia = -1, tuc la Mon do ko co Don vi tinh !!!

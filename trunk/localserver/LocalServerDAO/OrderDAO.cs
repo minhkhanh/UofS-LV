@@ -74,5 +74,31 @@ namespace LocalServerDAO
         //{
         //    ThucDonDienTu.DataContext.c
         //}
+
+        public static bool ChuyenBanJson(int maOrder, int maBanMoi)
+        {
+            var varOrder = ThucDonDienTu.DataContext.Orders.Where(o => o.TinhTrang != 4 && o.MaOrder == maOrder);
+            var varBan = ThucDonDienTu.DataContext.Bans.Where(b => b.MaBan == maBanMoi && b.TinhTrang == true);
+            if (varOrder.Count() == 0 || varBan.Count() == 0)
+                return false;
+
+            Order order = varOrder.First();
+            var varOrderBanCu = ThucDonDienTu.DataContext.Orders.Where(o => o.Ban.MaBan == order.Ban.MaBan && o.TinhTrang != 4);
+            if (varOrderBanCu.Count() == 1)
+            {
+                order.Ban.Active = true;
+                order.Ban.BanChinh = null;
+            }
+
+            Ban ban = varBan.First();
+            ban.Active = false;
+            if (ban.BanChinh == null)
+                ban.BanChinh = ban;
+                        
+            order.Ban = ban.BanChinh;
+
+            ThucDonDienTu.DataContext.SubmitChanges();
+            return true;
+        }
     }
 }

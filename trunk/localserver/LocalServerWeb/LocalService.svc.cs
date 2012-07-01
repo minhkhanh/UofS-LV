@@ -1289,7 +1289,7 @@ namespace LocalServerWeb
             return BanBUS.GhepBanJson(listMaBan);
         }
 
-        public bool TachBanJson(int maBan)
+        public bool TachBanJson(int maBan, string junk)
         {
             return BanBUS.TachBanJson(maBan);
         }
@@ -1345,9 +1345,9 @@ namespace LocalServerWeb
             return KhuyenMaiBUS.LayDanhSachKhuyenMaiApDungJson(maOrder);
         }
 
-        public KhuyenMai TimKhuyenMaiMon(int maChiTietOrder)
+        public KhuyenMai LayKhuyenMaiMonApDung(int maMon)
         {
-            return KhuyenMaiMonBUS.TimKhuyenMai(maChiTietOrder);
+            return KhuyenMaiMonBUS.LayKhuyenMaiApDung(maMon);
         }
 
         public Voucher LayVoucherJson(string code, float tongHoaDon)
@@ -1379,6 +1379,31 @@ namespace LocalServerWeb
             }
 
             return true;
+        }
+
+        public bool ChuyenBanJson(int maOrder, int maBanMoi)
+        {
+            return OrderBUS.ChuyenBanJson(maOrder, maBanMoi);
+        }
+
+        public bool TachNhomBanJson(int maBan, string junk)
+        {
+            return BanBUS.TachNhomBanJson(maBan);
+        }
+
+        public bool SuaChiTietOrderJson(ChiTietOrder holder)
+        {
+            return ChiTietOrderBUS.SuaChiTietOrderJson(holder);
+        }
+
+        //public int LaySoLuongChuaCheBien(int maChiTiet)
+        //{
+        //    return ChiTietOrderBUS.LaySoLuongChuaCheBien(maChiTiet);
+        //}
+
+        public ChiTietOrder LayChiTietOrderJson(int maChiTiet, string junk)
+        {
+            return ChiTietOrderBUS.LayChiTietOrder(maChiTiet);
         }
 
         /*END OF JSON SERVICE AREA*/
