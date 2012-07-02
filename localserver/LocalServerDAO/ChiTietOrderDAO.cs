@@ -122,21 +122,39 @@ namespace LocalServerDAO
             return result;
         }
 
-        public static bool CapNhatHuy(ChiTietOrder holder)
+        public static bool CapNhatHuy(int maChiTietOrder, int soLuongYeuCauHuy, string ghiChu)
         {
-            ChiTietOrder ctOrder = LayChiTietOrder(holder.MaChiTietOrder);
+            ChiTietOrder ctOrder = LayChiTietOrder(maChiTietOrder);
             // Khong ton tai
             // hoac da thanh toan
-            if (holder == null || ctOrder.TinhTrang == 4)
+            if (ctOrder == null || ctOrder.TinhTrang == 4)
                 return false;
 
-            ctOrder.SoLuong -= holder.SoLuong;
-            ctOrder.GhiChu = holder.GhiChu;
+            ctOrder.SoLuong -= soLuongYeuCauHuy;
+            ctOrder.GhiChu = ghiChu;
 
             ThucDonDienTu.DataContext.SubmitChanges();
 
             return true;
         }
+
+        public static bool CapNhatKhoa(int maChiTietOrder, int soLuongChuaDungToi)
+        {
+            ChiTietOrder ctOrder = LayChiTietOrder(maChiTietOrder);
+            // Khong ton tai
+            // hoac da thanh toan
+            if (ctOrder == null || ctOrder.TinhTrang == 4)
+                return false;
+
+            ctOrder.SoLuong -= soLuongChuaDungToi;
+            // Khoa, ko dc che bien tiep
+            ctOrder.TinhTrang = 2;
+
+            ThucDonDienTu.DataContext.SubmitChanges();
+
+            return true;
+        }
+
 
         //public static int LaySoLuongChuaCheBien(int maChiTiet)
         //{

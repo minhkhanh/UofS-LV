@@ -154,18 +154,33 @@ namespace LocalServerWeb.Controllers
         public bool PostHetCheBien(int maChiTietOrder, int soLuongHetCheBien)
         {
             if (!Request.IsAjaxRequest()) return false;
-            var chiTietOrder = ChiTietOrderBUS.LayChiTietOrder(maChiTietOrder);
-            if (chiTietOrder == null) return false;
-            var chiTietCheBienOrder = ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder);
-            int iSoLuongCheBienToiDa = chiTietOrder.SoLuong;
-            if (chiTietCheBienOrder != null)
-            {
-                iSoLuongCheBienToiDa -= (chiTietCheBienOrder.SoLuongDaCheBien + chiTietCheBienOrder.SoLuongDangCheBien);
-            }
-            if (soLuongHetCheBien > iSoLuongCheBienToiDa) return false;
 
-            // ok bat dau luu tru
-            return ChiTietKhongCheBienOrderBUS.KhoaCheBienVaTaoThongBaoKhongCheBien(chiTietOrder, soLuongHetCheBien);
+            // Lock toan bo So luong chua dung toi
+            return ChiTietOrderBUS.KhoaCheBien(maChiTietOrder);
+
+            //var chiTietOrder = ChiTietOrderBUS.LayChiTietOrder(maChiTietOrder);
+            //if (chiTietOrder == null) return false;
+            //var chiTietCheBienOrder = ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(chiTietOrder.MaChiTietOrder);
+            //int iSoLuongCheBienToiDa = chiTietOrder.SoLuong;
+            //if (chiTietCheBienOrder != null)
+            //{
+            //    iSoLuongCheBienToiDa -= (chiTietCheBienOrder.SoLuongDaCheBien + chiTietCheBienOrder.SoLuongDangCheBien);
+            //}
+            //if (soLuongHetCheBien > iSoLuongCheBienToiDa) return false;
+
+            //// ok bat dau luu tru
+            //return ChiTietKhongCheBienOrderBUS.KhoaCheBienVaTaoThongBaoKhongCheBien(chiTietOrder, soLuongHetCheBien);
         }
+
+        [HttpPost]
+        public bool KhoaCheBien(int maChiTietOrder)
+        {
+            if (!Request.IsAjaxRequest()) 
+                return false;
+
+            return ChiTietOrderBUS.KhoaCheBien(maChiTietOrder);
+
+        }
+
     }
 }
