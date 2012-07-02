@@ -829,7 +829,7 @@ namespace LocalServerWeb
             return false;
         }
 
-        public int LaySoLuongChoPhepHuyOrder(int maChiTietOrder, string junk)
+        public ChiTietHuyOrder LaySoLuongChoPhepHuyOrder(int maChiTietOrder, string junk)
         {
             try
             {
@@ -839,7 +839,7 @@ namespace LocalServerWeb
             {
                 Console.Error.WriteLine(e.Message);
             }
-            return 0;
+            return null;
         }
 
         public bool YeuCauHuyOrder(int maChiTietOrder, int soLuongYeuCauHuy, string ghiChu)

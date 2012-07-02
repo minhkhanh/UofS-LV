@@ -291,7 +291,7 @@ namespace LocalServerWeb
 
         [WebInvoke(Method = "GET", UriTemplate = "laySoLuongChoPhepHuyOrder?maChiTietOrder={maChiTietOrder}&junk={junk}")]
         [OperationContract]
-        int LaySoLuongChoPhepHuyOrder(int maChiTietOrder, string junk);
+        ChiTietHuyOrder LaySoLuongChoPhepHuyOrder(int maChiTietOrder, string junk);
 
         [WebInvoke(Method = "POST", UriTemplate = "yeuCauHuyOrder?maChiTietOrder={maChiTietOrder}&soLuongYeuCauHuy={soLuongYeuCauHuy}&ghiChu={ghiChu}")]
         [OperationContract]
