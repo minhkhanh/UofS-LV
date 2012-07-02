@@ -94,7 +94,7 @@ namespace LocalServerWeb.ReportsForm
 
                 
                 rvReport.Reset();
-                rvReport.LocalReport.ReportPath = Path.Combine(MapPath("/Reports/RevenuePeriodReport"), "RevenuePeriodReport.rdlc");
+                rvReport.LocalReport.ReportPath = Path.Combine(MapPath("~/Reports/RevenuePeriodReport"), "RevenuePeriodReport.rdlc");
                 rvReport.LocalReport.SetParameters(listParameter);
                 rvReport.LocalReport.DataSources.Clear();
                 rvReport.LocalReport.DataSources.Add(new ReportDataSource("RevenuePeriodReportData", listData));

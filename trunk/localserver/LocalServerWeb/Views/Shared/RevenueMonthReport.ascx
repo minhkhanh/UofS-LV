@@ -1,13 +1,15 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.AdminReport" %>
 <%@ Import Namespace="System.Globalization" %>
+<%@ Import Namespace="LocalServerWeb.Codes" %>
+
 <script type="text/javascript">
     function printMonthPreview() {
         var thang = $('#month_m').val();
         var nam = $('#month_y').val();
         var nguoiLap = '<%: ViewData["nguoiLap"] %>';
 
-        var newwindow = window.open('ReportForms/RevenueMonthReportForm?p=' + nguoiLap + '&m=' + thang + '&y=' + nam + '', 'name', 'height=800,width=750');
+        var newwindow = window.open('<%: SharedCode.GetHostApplicationAddress(Request) + "ReportForms/RevenueMonthReportForm?p=" %>'+ nguoiLap + '&m=' + thang + '&y=' + nam + '', 'name', 'height=800,width=750');
         if (window.focus) {
             newwindow.focus();
         }
