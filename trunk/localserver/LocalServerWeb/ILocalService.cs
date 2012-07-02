@@ -389,6 +389,12 @@ namespace LocalServerWeb
         [WebInvoke(Method = "POST", UriTemplate = "addPicture?path={path}")]
         bool AddPicture(string path, Stream content);
 
+
+        // LayThongTinNhaHang
+        [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "layThongTinNhaHang?junk={junk}")]
+        NhaHang LayThongTinNhaHang(string junk);
+
         
         // Chung Thuc
         [WebInvoke(Method = "POST", UriTemplate = "chungThucMobilePhucVu?tenDangNhap={tenDangNhap}&matKhau={matKhau}")]
