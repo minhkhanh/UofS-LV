@@ -289,6 +289,14 @@ namespace LocalServerWeb
         [OperationContract]
         bool SuaChiTietOrder(ChiTietOrder _chiTietOrder);
 
+        [WebInvoke(Method = "GET", UriTemplate = "laySoLuongChoPhepHuyOrder?maChiTietOrder={maChiTietOrder}&junk={junk}")]
+        [OperationContract]
+        int LaySoLuongChoPhepHuyOrder(int maChiTietOrder, string junk);
+
+        [WebInvoke(Method = "POST", UriTemplate = "yeuCauHuyOrder?maChiTietOrder={maChiTietOrder}&soLuongYeuCauHuy={soLuongYeuCauHuy}&ghiChu={ghiChu}")]
+        [OperationContract]
+        bool YeuCauHuyOrder(int maChiTietOrder, int soLuongYeuCauHuy, string ghiChu);
+
 
         // Chi Tiet Huy Order
         [WebInvoke(Method = "GET", UriTemplate = "layChiTietHuyOrder?maChiTietHuyOrder={maChiTietHuyOrder}&junk={junk}")]

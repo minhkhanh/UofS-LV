@@ -9,9 +9,9 @@ namespace LocalServerDAO
 {
     public class ChiTietKhongCheBienOrderDAO
     {
-        public static ChiTietKhongCheBienOrder LayChiTietKhongCheBienOrder(int maChiTietKhongCheBienOrder)
+        public static ChiTietKhongCheBienOrder LayChiTietKhongCheBienOrder(int maChiTietOrder)
         {
-            var temp = ThucDonDienTu.DataContext.ChiTietKhongCheBienOrders.Where(c => c.ChiTietOrder.MaChiTietOrder == maChiTietKhongCheBienOrder);
+            var temp = ThucDonDienTu.DataContext.ChiTietKhongCheBienOrders.Where(c => c.ChiTietOrder.MaChiTietOrder == maChiTietOrder);
             if (temp.Count() > 0)
             {
                 ChiTietKhongCheBienOrder or = temp.First();
@@ -19,6 +19,8 @@ namespace LocalServerDAO
             }
             return null;
         }
+
+     
 
         public static bool Them(ChiTietKhongCheBienOrder chiTietKhongCheBienOrder)
         {
