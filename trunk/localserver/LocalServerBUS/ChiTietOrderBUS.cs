@@ -109,14 +109,13 @@ namespace LocalServerBUS
 
         public static int LaySoLuongChoPhepHuyOrder(int maChiTietOrder)
         {
-            int soLuong = 0;
+            int soLuongChoPhepHuy = 0;
             int soLuongDaCheBien = 0;
             int soLuongDangCheBien = 0;
-            int soLuongKhongCheBien = 0;
 
             ChiTietOrder ctOrder = LayChiTietOrder(maChiTietOrder);
             if(ctOrder != null)
-                soLuong = ctOrder.SoLuong;
+                soLuongChoPhepHuy = ctOrder.SoLuong;
 
             // Chi tiet che bien order
             ChiTietCheBienOrder ctCheBienOrder = ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(maChiTietOrder);
@@ -126,35 +125,23 @@ namespace LocalServerBUS
                 soLuongDangCheBien = ctCheBienOrder.SoLuongDangCheBien;
             }
 
-            // Chi tiet khong che bien order
-            ChiTietKhongCheBienOrder ctKhongCheBienOrder = ChiTietKhongCheBienOrderBUS.LayChiTietKhongCheBienOrder(maChiTietOrder);
-            if (ctKhongCheBienOrder != null)
-                soLuongKhongCheBien = ctKhongCheBienOrder.SoLuongKhongCheBien;
 
-            soLuong -= soLuongDaCheBien;
-            soLuong -= soLuongDangCheBien;
-            soLuong -= soLuongKhongCheBien;
-            
-            return soLuong;
+            soLuongChoPhepHuy -= soLuongDaCheBien;
+            soLuongChoPhepHuy -= soLuongDangCheBien;
+
+            return soLuongChoPhepHuy;
         }
+
+        
 
         public static bool YeuCauHuyOrder(int maChiTietOrder, int soLuongYeuCauHuy, string ghiChu)
         {
             bool ketQua = true;
             int soLuongChoPhepHuy = LaySoLuongChoPhepHuyOrder(maChiTietOrder);
             if (soLuongYeuCauHuy > soLuongChoPhepHuy)
-                return false;
+                return false;  
 
-            // holder de luu thong tin yeu cau huy
-            ChiTietOrder ctOrderHolder = new ChiTietOrder();
-
-            ctOrderHolder.MaChiTietOrder = maChiTietOrder;
-            // SoLuong nay la soLuongYeuCauHuy
-            ctOrderHolder.SoLuong = soLuongYeuCauHuy;
-            ctOrderHolder.GhiChu = ghiChu;
-            
-
-            if (ChiTietOrderDAO.CapNhatHuy(ctOrderHolder))
+            if (ChiTietOrderDAO.CapNhatHuy(maChiTietOrder, soLuongYeuCauHuy, ghiChu))
             {
                 ketQua = true;
             }
@@ -165,6 +152,13 @@ namespace LocalServerBUS
 
 
             return ketQua;
+        }
+
+        public static bool KhoaCheBien(int maChiTietOrder)
+        {
+            int soLuongChuaDungToi = LaySoLuongChoPhepHuyOrder(maChiTietOrder);
+            return ChiTietOrderDAO.CapNhatKhoa(maChiTietOrder, soLuongChuaDungToi);
+
         }
     }
 }
