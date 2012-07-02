@@ -746,6 +746,8 @@ namespace LocalServerWeb
             return null;
         }
 
+
+
         // Chi Tiet Order
         public ChiTietOrder LayChiTietOrder(int maChiTietOrder, string junk)
         {
@@ -819,6 +821,32 @@ namespace LocalServerWeb
             try
             {
                 return ChiTietOrderBUS.SuaChiTietOrder(_chiTietOrder);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return false;
+        }
+
+        public int LaySoLuongChoPhepHuyOrder(int maChiTietOrder, string junk)
+        {
+            try
+            {
+                return ChiTietOrderBUS.LaySoLuongChoPhepHuyOrder(maChiTietOrder);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return 0;
+        }
+
+        public bool YeuCauHuyOrder(int maChiTietOrder, int soLuongYeuCauHuy, string ghiChu)
+        {
+            try
+            {
+                return ChiTietOrderBUS.YeuCauHuyOrder(maChiTietOrder, soLuongYeuCauHuy, ghiChu);
             }
             catch (Exception e)
             {

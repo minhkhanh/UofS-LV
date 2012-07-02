@@ -105,5 +105,66 @@ namespace LocalServerBUS
         //{
         //    return ChiTietOrderDAO.LaySoLuongChuaCheBien(maChiTiet);
         //}
+
+
+        public static int LaySoLuongChoPhepHuyOrder(int maChiTietOrder)
+        {
+            int soLuong = 0;
+            int soLuongDaCheBien = 0;
+            int soLuongDangCheBien = 0;
+            int soLuongKhongCheBien = 0;
+
+            ChiTietOrder ctOrder = LayChiTietOrder(maChiTietOrder);
+            if(ctOrder != null)
+                soLuong = ctOrder.SoLuong;
+
+            // Chi tiet che bien order
+            ChiTietCheBienOrder ctCheBienOrder = ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(maChiTietOrder);
+            if (ctCheBienOrder != null)
+            {
+                soLuongDaCheBien = ctCheBienOrder.SoLuongDaCheBien;
+                soLuongDangCheBien = ctCheBienOrder.SoLuongDangCheBien;
+            }
+
+            // Chi tiet khong che bien order
+            ChiTietKhongCheBienOrder ctKhongCheBienOrder = ChiTietKhongCheBienOrderBUS.LayChiTietKhongCheBienOrder(maChiTietOrder);
+            if (ctKhongCheBienOrder != null)
+                soLuongKhongCheBien = ctKhongCheBienOrder.SoLuongKhongCheBien;
+
+            soLuong -= soLuongDaCheBien;
+            soLuong -= soLuongDangCheBien;
+            soLuong -= soLuongKhongCheBien;
+            
+            return soLuong;
+        }
+
+        public static bool YeuCauHuyOrder(int maChiTietOrder, int soLuongYeuCauHuy, string ghiChu)
+        {
+            bool ketQua = true;
+            int soLuongChoPhepHuy = LaySoLuongChoPhepHuyOrder(maChiTietOrder);
+            if (soLuongYeuCauHuy > soLuongChoPhepHuy)
+                return false;
+
+            // holder de luu thong tin yeu cau huy
+            ChiTietOrder ctOrderHolder = new ChiTietOrder();
+
+            ctOrderHolder.MaChiTietOrder = maChiTietOrder;
+            // SoLuong nay la soLuongYeuCauHuy
+            ctOrderHolder.SoLuong = soLuongYeuCauHuy;
+            ctOrderHolder.GhiChu = ghiChu;
+            
+
+            if (ChiTietOrderDAO.CapNhatHuy(ctOrderHolder))
+            {
+                ketQua = true;
+            }
+            else
+            {
+                ketQua = false;
+            }
+
+
+            return ketQua;
+        }
     }
 }

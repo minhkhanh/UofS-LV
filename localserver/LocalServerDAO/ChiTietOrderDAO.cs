@@ -122,6 +122,20 @@ namespace LocalServerDAO
             return result;
         }
 
+        public static bool CapNhatHuy(ChiTietOrder holder)
+        {
+            ChiTietOrder ctOrder = LayChiTietOrder(holder.MaChiTietOrder);
+            if (holder == null)
+                return false;
+
+            ctOrder.SoLuong -= holder.SoLuong;
+            ctOrder.GhiChu = holder.GhiChu;
+
+            ThucDonDienTu.DataContext.SubmitChanges();
+
+            return true;
+        }
+
         //public static int LaySoLuongChuaCheBien(int maChiTiet)
         //{
         //    var varChiTiet = ThucDonDienTu.DataContext.ChiTietOrders.Where(c => c.MaChiTietOrder == maChiTiet);

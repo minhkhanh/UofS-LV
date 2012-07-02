@@ -5,9 +5,9 @@ namespace LocalServerBUS
 {
     public class ChiTietKhongCheBienOrderBUS
     {
-        public static ChiTietKhongCheBienOrder LayChiTietCheBienOrder(int maChiTietKhongCheBienOrder)
+        public static ChiTietKhongCheBienOrder LayChiTietKhongCheBienOrder(int maChiTietOrder)
         {
-            return ChiTietKhongCheBienOrderDAO.LayChiTietKhongCheBienOrder(maChiTietKhongCheBienOrder);
+            return ChiTietKhongCheBienOrderDAO.LayChiTietKhongCheBienOrder(maChiTietOrder);
         }
 
         public static bool Them(ChiTietKhongCheBienOrder chiTietCheBienOrder)
