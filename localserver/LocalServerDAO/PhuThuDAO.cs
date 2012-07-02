@@ -93,5 +93,15 @@ namespace LocalServerDAO
 
             return result;
         }
+
+        public static List<PhuThu> LayDanhSachPhuThuCoHieuLucJson()
+        {
+            return ThucDonDienTu.DataContext.PhuThus.Where(p => p.BatDau <= DateTime.Now && DateTime.Now <= p.KetThuc).ToList();
+        }
+
+        public static List<PhuThuKhuVuc> LayDanhSachPhuThuKhuVucCoHieuLucJson()
+        {
+            return ThucDonDienTu.DataContext.PhuThuKhuVucs.Where(p => p.PhuThu.BatDau <= DateTime.Now && DateTime.Now <= p.PhuThu.KetThuc).ToList();
+        }
     }
 }

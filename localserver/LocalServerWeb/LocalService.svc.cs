@@ -1282,14 +1282,14 @@ namespace LocalServerWeb
             return LayDanhSachChiTietMonLienQuan(junk);
         }
 
-        public List<KhuyenMai> LayDanhSachKhuyenMaiJson(string junk)
+        public List<KhuyenMai> LayDanhSachKhuyenMaiCoHieuLucJson(string junk)
         {
-            return LayDanhSachKhuyenMai(junk);
+            return KhuyenMaiBUS.LayDanhSachKhuyenMaiCoHieuLucJson();
         }
 
-        public List<KhuyenMaiKhuVuc> LayDanhSachKhuyenMaiKhuVucJson(string junk)
+        public List<KhuyenMaiMon> LayDanhSachKhuyenMaiMonCoHieuLucJson(string junk)
         {
-            return LayDanhSachKhuyenMaiKhuVuc(junk);
+            return KhuyenMaiMonBUS.LayDanhSachKhuyenMaiMonCoHieuLucJson();
         }
 
         public List<KhuyenMaiDanhMuc> LayDanhSachKhuyenMaiDanhMucJson(string junk)
@@ -1327,14 +1327,14 @@ namespace LocalServerWeb
             return LayDanhSachTiGia(junk);
         }
 
-        public List<PhuThu> LayDanhSachPhuThuJson(string junk)
+        public List<PhuThu> LayDanhSachPhuThuCoHieuLucJson(string junk)
         {
-            return LayDanhSachPhuThu(junk);
+            return PhuThuBUS.LayDanhSachPhuThuCoHieuLucJson();
         }
 
-        public List<PhuThuKhuVuc> LayDanhSachPhuThuKhuVucJson(string junk)
+        public List<PhuThuKhuVuc> LayDanhSachPhuThuKhuVucCoHieuLucJson(string junk)
         {
-            return LayDanhSachPhuThuKhuVuc(junk);
+            return PhuThuBUS.LayDanhSachPhuThuKhuVucCoHieuLucJson();
         }
 
         public HoaDon LapHoaDonJson(int maOrder, List<String> voucherCodes)
@@ -1467,6 +1467,11 @@ namespace LocalServerWeb
         public ChiTietOrder LayChiTietOrderJson(int maChiTiet, string junk)
         {
             return ChiTietOrderBUS.LayChiTietOrder(maChiTiet);
+        }
+
+        public Order LayOrderJson(int maOrder, string junk)
+        {
+            return OrderBUS.LayOrder(maOrder);
         }
 
         /*END OF JSON SERVICE AREA*/

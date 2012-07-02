@@ -38,5 +38,15 @@ namespace LocalServerBUS
         {
             return PhuThuDAO.LayDanhSachPhuThuApDungJson(maOrder);
         }
+
+        public static List<PhuThu> LayDanhSachPhuThuCoHieuLucJson()
+        {
+            return PhuThuDAO.LayDanhSachPhuThuCoHieuLucJson();
+        }
+
+        public static List<PhuThuKhuVuc> LayDanhSachPhuThuKhuVucCoHieuLucJson()
+        {
+            return PhuThuDAO.LayDanhSachPhuThuKhuVucCoHieuLucJson();
+        }
     }
 }

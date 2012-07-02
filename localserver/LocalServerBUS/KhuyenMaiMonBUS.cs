@@ -43,5 +43,10 @@ namespace LocalServerBUS
         {
             return KhuyenMaiMonDAO.LayKhuyenMaiApDung(maMon);
         }
+
+        public static List<KhuyenMaiMon> LayDanhSachKhuyenMaiMonCoHieuLucJson()
+        {
+            return KhuyenMaiMonDAO.LayDanhSachKhuyenMaiMonCoHieuLucJson();
+        }
     }
 }

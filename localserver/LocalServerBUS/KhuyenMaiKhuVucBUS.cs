@@ -18,5 +18,7 @@ namespace LocalServerBUS
         {
             return KhuyenMaiKhuVucDAO.LayDanhSachKhuyenMaiKhuVucTheoMa(maKhuyenMai);
         }
+
+
     }
 }
