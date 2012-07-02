@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
 <%@ Import Namespace="LocalServerWeb.Resources.Views.AdminReport" %>
 <%@ Import Namespace="System.Globalization" %>
+<%@ Import Namespace="LocalServerWeb.Codes" %>
+
 <script type="text/javascript">
     function daysInMonth(month, year) {
         return new Date(year, month, 0).getDate();
@@ -29,7 +31,7 @@
         var namKetThuc = $('#ey').val();
         var nguoiLap = '<%: ViewData["nguoiLap"] %>';
 
-        var period_url = 'ReportForms/RevenuePeriodReportForm?p=' + nguoiLap
+        var period_url = '<%: SharedCode.GetHostApplicationAddress(Request) + "ReportForms/RevenuePeriodReportForm?p=" %>' + nguoiLap
                                          + '&sd=' + ngayBatDau + '&sm=' + thangBatDau + '&sy=' + namBatDau
                                          + '&ed=' + ngayKetThuc + '&em=' + thangKetThuc + '&ey=' + namKetThuc + '';
                                                                     

@@ -28,6 +28,8 @@ namespace LocalServerWeb.ReportsForm
                 int thang = int.Parse(Request.QueryString["m"]);
                 int nam = int.Parse(Request.QueryString["y"]);
 
+     
+
                 DateTime ngayLap = new DateTime(nam, thang, ngay);
 
                 List<RevenueDayReportData> listData = new List<RevenueDayReportData>();
@@ -76,7 +78,7 @@ namespace LocalServerWeb.ReportsForm
                 listParameter.Add(new ReportParameter("DiaChiNhaHang", diaChiNhaHang));
                 
                 rvReport.Reset();
-                rvReport.LocalReport.ReportPath = Path.Combine(MapPath("/Reports/RevenueDayReport"), "RevenueDayReport.rdlc");
+                rvReport.LocalReport.ReportPath = Path.Combine(MapPath("~/Reports/RevenueDayReport"), "RevenueDayReport.rdlc");
                 rvReport.LocalReport.SetParameters(listParameter);
                 rvReport.LocalReport.DataSources.Clear();
                 rvReport.LocalReport.DataSources.Add(new ReportDataSource("RevenueDayReportData", listData));

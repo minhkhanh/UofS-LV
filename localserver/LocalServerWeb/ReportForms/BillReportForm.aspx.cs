@@ -21,8 +21,10 @@ namespace LocalServerWeb.ReportsForm
             try
             {
                 // lay input
+
                 int maHoaDon = int.Parse(Request.QueryString["maHoaDon"]);
                 int maNgonNgu = int.Parse(Request.QueryString["maNgonNgu"]);
+
                 //string reportPath = Request.QueryString["reportPath"];              
 
                 var hoaDon = HoaDonBUS.LayHoaDon(maHoaDon);
@@ -66,7 +68,7 @@ namespace LocalServerWeb.ReportsForm
 
                 
                 rvReport.Reset();
-                rvReport.LocalReport.ReportPath = Path.Combine(MapPath("/Reports/BillReport"), "BillReport.rdlc");  //"LocalServerWeb.Reports.BillReport1.rdlc";//reportPath;
+                rvReport.LocalReport.ReportPath = Path.Combine(MapPath("~/Reports/BillReport"), "BillReport.rdlc");  //"LocalServerWeb.Reports.BillReport1.rdlc";//reportPath;
                 rvReport.LocalReport.SetParameters(listParameter);
                 rvReport.LocalReport.DataSources.Clear();
                 rvReport.LocalReport.DataSources.Add(new ReportDataSource("BillReportData", datas));
