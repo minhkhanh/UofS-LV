@@ -125,7 +125,9 @@ namespace LocalServerDAO
         public static bool CapNhatHuy(ChiTietOrder holder)
         {
             ChiTietOrder ctOrder = LayChiTietOrder(holder.MaChiTietOrder);
-            if (holder == null)
+            // Khong ton tai
+            // hoac da thanh toan
+            if (holder == null || ctOrder.TinhTrang == 4)
                 return false;
 
             ctOrder.SoLuong -= holder.SoLuong;
