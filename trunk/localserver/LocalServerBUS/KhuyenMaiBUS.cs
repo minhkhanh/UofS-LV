@@ -38,5 +38,10 @@ namespace LocalServerBUS
         {
             return KhuyenMaiDAO.LayDanhSachKhuyenMaiApDung(maOrder);
         }
+
+        public static List<KhuyenMai> LayDanhSachKhuyenMaiCoHieuLucJson()
+        {
+            return KhuyenMaiDAO.LayDanhSachKhuyenMaiCoHieuLucJson();
+        }
     }
 }

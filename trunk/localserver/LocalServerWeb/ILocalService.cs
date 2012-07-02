@@ -502,13 +502,13 @@ namespace LocalServerWeb
         List<ChiTietMonLienQuan> LayDanhSachChiTietMonLienQuanJson(string junk);
 
         /* Khuyen mai*/
-        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachKhuyenMaiJson?junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachKhuyenMaiCoHieuLucJson?junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        List<KhuyenMai> LayDanhSachKhuyenMaiJson(string junk);
+        List<KhuyenMai> LayDanhSachKhuyenMaiCoHieuLucJson(string junk);
 
-        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachKhuyenMaiKhuVucJson?junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachKhuyenMaiMonCoHieuLucJson?junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        List<KhuyenMaiKhuVuc> LayDanhSachKhuyenMaiKhuVucJson(string junk);
+        List<KhuyenMaiMon> LayDanhSachKhuyenMaiMonCoHieuLucJson(string junk);
 
         [WebInvoke(Method = "GET", UriTemplate = "layDanhSachKhuyenMaiDanhMucJson?junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
@@ -543,14 +543,14 @@ namespace LocalServerWeb
         List<TiGia> LayDanhSachTiGiaJson(string junk);
 
         // Phu Thu
-        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachPhuThuJson?junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachPhuThuCoHieuLucJson?junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        List<PhuThu> LayDanhSachPhuThuJson(string junk);
+        List<PhuThu> LayDanhSachPhuThuCoHieuLucJson(string junk);
 
         // Phu Thu Khu Vuc
-        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachPhuThuKhuVucJson?junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "GET", UriTemplate = "layDanhSachPhuThuKhuVucCoHieuLucJson?junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        List<PhuThuKhuVuc> LayDanhSachPhuThuKhuVucJson(string junk);
+        List<PhuThuKhuVuc> LayDanhSachPhuThuKhuVucCoHieuLucJson(string junk);
 
         // Hoa Don
         [WebInvoke(Method = "POST", UriTemplate = "lapHoaDonJson?maOrder={maOrder}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
@@ -646,6 +646,10 @@ namespace LocalServerWeb
         [WebInvoke(Method = "GET", UriTemplate = "layChiTietOrderJson?maChiTiet={maChiTiet}&junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         ChiTietOrder LayChiTietOrderJson(int maChiTiet, string junk);
+
+        [WebInvoke(Method = "GET", UriTemplate = "layOrderJson?maOrder={maOrder}&junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        Order LayOrderJson(int maOrder, string junk);
 
         /*==============END OF JSON SERVICES AREA==============*/
     }

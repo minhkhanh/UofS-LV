@@ -128,5 +128,10 @@ namespace LocalServerDAO
 
             return result;
         }
+
+        public static List<KhuyenMai> LayDanhSachKhuyenMaiCoHieuLucJson()
+        {
+            return ThucDonDienTu.DataContext.KhuyenMais.Where(k => k.BatDau <= DateTime.Now && DateTime.Now <= k.KetThuc).ToList();
+        }
     }
 }
