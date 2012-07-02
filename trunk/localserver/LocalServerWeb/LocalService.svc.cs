@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Configuration;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.Text;
+using System.Web;
 using LocalServerBUS;
 using LocalServerDTO;
 using LocalServerWeb.Codes;
@@ -1163,6 +1165,24 @@ namespace LocalServerWeb
         public string AddText()
         {
             return "123";
+        }
+
+        public bool DangNhap(Stream body)
+        {
+            try
+            {
+                string str = new StreamReader(body).ReadToEnd();
+                NameValueCollection nvc = HttpUtility.ParseQueryString(str);
+                TaiKhoan tk = TaiKhoanBUS.KiemTraTaiKhoan(nvc["tenDangNhap"], SharedCode.Hash(nvc["matKhau"]));
+                if (tk == null) return false;
+                
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public int PhepCong(int a, int b)
