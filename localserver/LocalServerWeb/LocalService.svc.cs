@@ -1144,6 +1144,21 @@ namespace LocalServerWeb
         }
 
 
+        // Nha Hang
+        public NhaHang LayThongTinNhaHang(string junk)
+        {
+            try
+            {
+                return NhaHangBUS.LayThongTinNhaHang();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
+
         // Testing purpose
         public string AddText()
         {

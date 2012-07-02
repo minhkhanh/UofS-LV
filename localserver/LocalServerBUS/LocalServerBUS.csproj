@@ -56,6 +56,7 @@
     <Compile Include="ChiTietOrderBUS.cs" />
     <Compile Include="ChiTietKhongCheBienOrderBUS.cs" />
     <Compile Include="ChiTietVoucherBUS.cs" />
+    <Compile Include="NhaHangBUS.cs" />
     <Compile Include="ThamSoBUS.cs" />
     <Compile Include="DanhMucBUS.cs" />
     <Compile Include="DonViTinhBUS.cs" />
