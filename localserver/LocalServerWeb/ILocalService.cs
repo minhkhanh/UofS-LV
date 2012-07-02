@@ -411,6 +411,20 @@ namespace LocalServerWeb
         [OperationContract]
         List<Foo> LayDanhSachFoo();
 
+        // Dang nhap
+        /// <summary>
+        /// Dang nhap dung post voi body dang: tenDangNhap=superadmin&matKhau=1234
+        /// </summary>
+        /// <param name="body"></param>
+        /// <returns></returns>
+        [WebInvoke(Method = "POST", UriTemplate = "dangNhap")]
+        [OperationContract]
+        bool DangNhap(Stream body);
+
+        //[WebInvoke(Method = "POST", UriTemplate = "dangNhapMobileQuanLy?tenDangNhap={tenDangNhap}&matKhau={matKhau}")]
+        //[OperationContract]
+        //TaiKhoan DangNhapMobileQuanLy(string tenDangNhap, string matKhau);
+
         [WebInvoke(Method = "GET", UriTemplate = "cong?a={a}&b={b}")]
         [OperationContract]
         int PhepCong(int a, int b);
