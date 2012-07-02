@@ -107,7 +107,7 @@ namespace LocalServerBUS
         //}
 
 
-        public static int LaySoLuongChoPhepHuyOrder(int maChiTietOrder)
+        public static ChiTietHuyOrder LaySoLuongChoPhepHuyOrder(int maChiTietOrder)
         {
             int soLuongChoPhepHuy = 0;
             int soLuongDaCheBien = 0;
@@ -129,7 +129,11 @@ namespace LocalServerBUS
             soLuongChoPhepHuy -= soLuongDaCheBien;
             soLuongChoPhepHuy -= soLuongDangCheBien;
 
-            return soLuongChoPhepHuy;
+            ChiTietHuyOrder ctHuy = new ChiTietHuyOrder();
+            ctHuy._maChiTietOrder = maChiTietOrder;
+            ctHuy.SoLuongChoPhep = soLuongChoPhepHuy;
+
+            return ctHuy;
         }
 
         
@@ -137,7 +141,12 @@ namespace LocalServerBUS
         public static bool YeuCauHuyOrder(int maChiTietOrder, int soLuongYeuCauHuy, string ghiChu)
         {
             bool ketQua = true;
-            int soLuongChoPhepHuy = LaySoLuongChoPhepHuyOrder(maChiTietOrder);
+
+            int soLuongChoPhepHuy = 0;
+            ChiTietHuyOrder ctHuy = LaySoLuongChoPhepHuyOrder(maChiTietOrder);
+
+            soLuongChoPhepHuy = (ctHuy != null) ? ctHuy.SoLuongChoPhep : 0;
+
             if (soLuongYeuCauHuy > soLuongChoPhepHuy)
                 return false;  
 
@@ -156,7 +165,11 @@ namespace LocalServerBUS
 
         public static bool KhoaCheBien(int maChiTietOrder)
         {
-            int soLuongChuaDungToi = LaySoLuongChoPhepHuyOrder(maChiTietOrder);
+            int soLuongChuaDungToi = 0;
+            ChiTietHuyOrder ctHuy = LaySoLuongChoPhepHuyOrder(maChiTietOrder);
+
+            soLuongChuaDungToi = (ctHuy != null) ? ctHuy.SoLuongChoPhep : 0;
+                
             return ChiTietOrderDAO.CapNhatKhoa(maChiTietOrder, soLuongChuaDungToi);
 
         }
