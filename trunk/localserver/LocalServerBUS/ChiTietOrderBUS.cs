@@ -33,7 +33,22 @@ namespace LocalServerBUS
 
         public static List<ChiTietOrder> LayNhieuChiTietOrderChuaThanhToan(int maBan)
         {
-            return ChiTietOrderDAO.LayNhieuChiTietOrderChuaThanhToan(maBan);
+            List<ChiTietOrder> listCTOrder = ChiTietOrderDAO.LayNhieuChiTietOrderChuaThanhToan(maBan);
+            if (listCTOrder != null)
+            {
+                foreach (ChiTietOrder ct in listCTOrder)
+                {
+                    ChiTietCheBienOrder ctCheBienOrder = ChiTietCheBienOrderBUS.LayChiTietCheBienOrder(ct.MaChiTietOrder);
+                    if (ctCheBienOrder != null)
+                    {
+                        ct.SoLuongDaCheBien = ctCheBienOrder.SoLuongDaCheBien;
+                        ct.SoLuongDangCheBien = ctCheBienOrder.SoLuongDangCheBien;
+                    }
+                }
+            }
+
+
+            return listCTOrder;
         }
 
         public static List<ChiTietOrder> LayDanhSachChiTietOrderChuaThanhToan(int maOrder)
