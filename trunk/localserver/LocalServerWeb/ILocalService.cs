@@ -421,6 +421,10 @@ namespace LocalServerWeb
         [OperationContract]
         bool DangNhap(Stream body);
 
+        [WebInvoke(Method = "GET", UriTemplate = "dangXuat")]
+        [OperationContract]
+        bool DangXuat();
+
         //[WebInvoke(Method = "POST", UriTemplate = "dangNhapMobileQuanLy?tenDangNhap={tenDangNhap}&matKhau={matKhau}")]
         //[OperationContract]
         //TaiKhoan DangNhapMobileQuanLy(string tenDangNhap, string matKhau);
