@@ -112,14 +112,14 @@ namespace LocalServerDAO
                     if (chiTietCheBienOrder != null)
                     {
                         chiTietCheBienOrder.SoLuongDangCheBien += soLuongCheBien;                        
+                    } else
+                    {
+                        chiTietCheBienOrder = new ChiTietCheBienOrder();
+                        chiTietCheBienOrder.ChiTietOrder = chiTietOrder;
+                        chiTietCheBienOrder.SoLuongDaCheBien = 0;
+                        chiTietCheBienOrder.SoLuongDangCheBien = soLuongCheBien;
+                        ThucDonDienTu.DataContext.ChiTietCheBienOrders.InsertOnSubmit(chiTietCheBienOrder);                        
                     }
-
-                    chiTietCheBienOrder = new ChiTietCheBienOrder();
-                    chiTietCheBienOrder.ChiTietOrder = chiTietOrder;
-                    chiTietCheBienOrder.SoLuongDaCheBien = 0;
-                    chiTietCheBienOrder.SoLuongDangCheBien = soLuongCheBien;
-                    ThucDonDienTu.DataContext.ChiTietCheBienOrders.InsertOnSubmit(chiTietCheBienOrder);
-
                     chiTietOrder.TinhTrang = 1;
                     chiTietOrder.Order.TinhTrang = 1;
 
