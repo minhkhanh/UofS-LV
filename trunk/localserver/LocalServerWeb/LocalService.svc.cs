@@ -1113,7 +1113,16 @@ namespace LocalServerWeb
         {
             try
             {
-                return TaiKhoanBUS.ChungThucMobilePhucVu(tenDangNhap, matKhau);
+                TaiKhoan taiKhoan = TaiKhoanBUS.ChungThucMobilePhucVu(tenDangNhap, matKhau);
+                if (taiKhoan != null)
+                {
+                    HttpContext.Current.Session["taiKhoan"] = taiKhoan;
+                    return taiKhoan;
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception)
             {
@@ -1125,7 +1134,16 @@ namespace LocalServerWeb
         {
             try
             {
-                return TaiKhoanBUS.ChungThucMobileQuanLy(tenDangNhap, matKhau);
+                TaiKhoan taiKhoan = TaiKhoanBUS.ChungThucMobileQuanLy(tenDangNhap, matKhau);
+                if (taiKhoan != null)
+                {
+                    HttpContext.Current.Session["taiKhoan"] = taiKhoan;
+                    return taiKhoan;
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception)
             {
@@ -1168,6 +1186,9 @@ namespace LocalServerWeb
             return "123";
         }
 
+
+
+        // DangNhap
         public bool DangNhap(Stream body)
         {
             try
