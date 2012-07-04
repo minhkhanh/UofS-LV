@@ -96,9 +96,9 @@ namespace LocalServerWeb.Codes
             if (!IsUserLogin(session) || ((TaiKhoan)session["taiKhoan"]).NhomTaiKhoan.TenNhom != "Manager") return false;
             return true;
         }
-        public static bool IsWaiterLogin(HttpSessionStateBase session)
+        public static bool IsWaitorLogin(HttpSessionStateBase session)
         {
-            if (!IsUserLogin(session) || ((TaiKhoan)session["taiKhoan"]).NhomTaiKhoan.TenNhom != "Waiter") return false;
+            if (!IsUserLogin(session) || ((TaiKhoan)session["taiKhoan"]).NhomTaiKhoan.TenNhom != "Waitor") return false;
             return true;
         }
         public static bool IsKitchenLogin(HttpSessionStateBase session)
