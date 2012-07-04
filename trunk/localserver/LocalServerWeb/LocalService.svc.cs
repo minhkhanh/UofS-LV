@@ -27,6 +27,7 @@ namespace LocalServerWeb
         // Khu Vuc
         public List<KhuVuc> LayDanhKhuVuc(string junk)
         {
+            if (!SharedCode.IsWaitorLogin(new HttpSessionStateWrapper(HttpContext.Current.Session))) return null;
             return KhuVucBUS.LayDanhSachKhuVuc();
         }
 
@@ -1175,7 +1176,7 @@ namespace LocalServerWeb
                 NameValueCollection nvc = HttpUtility.ParseQueryString(str);
                 TaiKhoan tk = TaiKhoanBUS.KiemTraTaiKhoan(nvc["tenDangNhap"], SharedCode.Hash(nvc["matKhau"]));
                 if (tk == null) return false;
-                
+                HttpContext.Current.Session["taiKhoan"] = tk;
             }
             catch (Exception e)
             {
