@@ -1186,6 +1186,16 @@ namespace LocalServerWeb
             return true;
         }
 
+        public bool DangXuat()
+        {
+            if (HttpContext.Current.Session["taiKhoan"] != null)
+            {
+                HttpContext.Current.Session["taiKhoan"] = null;
+                return true;
+            }
+            return false;
+        }
+
         public int PhepCong(int a, int b)
         {
             return a + b;
