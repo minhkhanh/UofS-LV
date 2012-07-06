@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android1="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/textDishName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:gravity="top|left"
+        android:maxLines="1"
+        android:text="Tôm nướng"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <LinearLayout
+        android1:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textDishName"
+        android:gravity="right|center_vertical" >
+
+        <include
+            android:id="@+id/include1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.00"
+            layout="@layout/item_dish_units" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/letter_x" /><TextView
+            android:id="@+id/textQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="2"
+            android:maxEms="2"
+            android:padding="5dp"
+            android:text="TextView"
+            android:textStyle="bold"
+            android1:lines="1" />
+<TextView
+            android1:id="@+id/textView2"
+            android1:layout_width="wrap_content"
+            android1:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="8dp"
+            android1:text="@string/text_unprocessed_count" />
+
+<TextView
+    android1:id="@+id/textUnprocCount"
+    android1:layout_width="wrap_content"
+    android1:layout_height="wrap_content"
+    android:ems="2"
+    android1:lines="1"
+    android1:maxEms="2"
+    android1:minEms="2"
+    android1:text="TextView"
+    android1:textStyle="bold" />
+
+    </LinearLayout>
+
+</RelativeLayout>

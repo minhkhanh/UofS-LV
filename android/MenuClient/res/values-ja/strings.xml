@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">こんにちは 世界, MenuClientActivity!</string>
+    <string name="app_name">MenuClient</string>
+    <string name="table_list_caption">テーブルを選択</string>
+    <string name="main_menu_caption">メニュー</string>
+    <string name="split_table_caption">別のテーブル</string>
+    <string name="title_dialog_auth">タスクを選択します</string>
+
+</resources>
