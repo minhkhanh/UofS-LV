@@ -37,8 +37,8 @@ public class HomeNavigationDlgFragment extends DialogFragment implements OnClick
                 startActivity(intent);
                 break;
             case R.id.btnPreferences:
-//                AuthDialogFragment dlg = new AuthDialogFragment(AuthDialogFragment.ACT_SELECTING_TABLE);
-//                U.showDlgFragment(getActivity(), dlg, true);
+                AuthDlgFragment dlg = new AuthDlgFragment(AuthDlgFragment.ACT_SELECTING_TABLE);
+                U.showDlgFragment(getActivity(), dlg, true);
                 
                 intent = new Intent(getActivity(), AppPreferenceActivity.class);
                 startActivity(intent);
