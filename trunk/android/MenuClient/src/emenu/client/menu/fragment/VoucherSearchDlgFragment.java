@@ -187,8 +187,11 @@ public class VoucherSearchDlgFragment extends DialogFragment implements OnClickL
 
             case R.id.btnUseVoucher:
                 if (mVoucherValues != null) {
-                    code = mVoucherValues.getAsString(VoucherDTO.CL_EX_VOUCHER_CODE);
-                    new GetVoucherUsedTask().execute(code);
+//                    code = mVoucherValues.getAsString(VoucherDTO.CL_EX_VOUCHER_CODE);
+//                    String voucherCode = mCodeEdit.getText().toString();
+//                    mVoucherValues.put(VoucherDTO.CL_EX_VOUCHER_CODE, voucherCode);
+                    mOnUseVoucher.onVoucherUsed(mVoucherValues);
+//                    new GetVoucherUsedTask().execute(code);
                 } else {
                     U.toastText(getActivity(), R.string.message_please_set_one_voucher);
                 }
