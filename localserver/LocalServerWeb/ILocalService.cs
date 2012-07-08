@@ -441,13 +441,13 @@ namespace LocalServerWeb
         string AddText();
 
         // Check to ensure server work correctly
-        [WebInvoke(Method = "GET", UriTemplate = "testGet")]
+        [WebInvoke(Method = "GET", UriTemplate = "testGet?thamSo={thamSo}")]
         [OperationContract]
-        string TestGET();
+        string TestGET(string thamSo);
 
-        [WebInvoke(Method = "POST", UriTemplate = "testPost")]
+        [WebInvoke(Method = "POST", UriTemplate = "testPost?thamSo={thamSo}")]
         [OperationContract]
-        string TestPOST();
+        string TestPOST(string thamSo);
 
         [WebInvoke(Method = "PUT", UriTemplate = "testPut")]
         [OperationContract]
