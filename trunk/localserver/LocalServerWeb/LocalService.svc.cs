@@ -793,6 +793,19 @@ namespace LocalServerWeb
             return null;
         }
 
+        public bool DuocPhepThanhToan(int maBan)
+        {
+            try
+            {
+                return ChiTietOrderBUS.DuocPhepThanhToan(maBan);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return false;
+        }
+
         public ChiTietOrder ThemChiTietOrder(ChiTietOrder _chiTietOrder)
         {
             try

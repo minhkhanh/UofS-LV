@@ -51,6 +51,24 @@ namespace LocalServerBUS
             return listCTOrder;
         }
 
+        // Kiem tra xem Ban A con mon nao dang che bien hay khong, thong bao cho Khach
+        // Khach co the doi, hoac thanh toan luon
+        public static bool DuocPhepThanhToan(int maBan)
+        {
+            List<ChiTietOrder> listCTOrder = LayNhieuChiTietOrderChuaThanhToan(maBan);
+            if (listCTOrder == null)
+                return false;
+
+            foreach (ChiTietOrder ct in listCTOrder)
+            {
+                //if (ct.SoLuongDaCheBien != ct.SoLuong || ct.SoLuongDangCheBien > 0 || ct.TinhTrang == 3)
+                if (ct.SoLuongDaCheBien != ct.SoLuong)
+                    return false;
+            }
+
+            return true;
+        }
+
         public static List<ChiTietOrder> LayDanhSachChiTietOrderChuaThanhToan(int maOrder)
         {
             return ChiTietOrderDAO.LayDanhSachChiTietOrderChuaThanhToan(maOrder);

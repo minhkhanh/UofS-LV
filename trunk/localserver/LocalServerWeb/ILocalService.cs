@@ -277,6 +277,10 @@ namespace LocalServerWeb
         [OperationContract]
         List<ChiTietOrder> LayNhieuChiTietOrderChuaThanhToan(int maBan, string junk);
 
+        [WebInvoke(Method = "POST", UriTemplate = "duocPhepThanhToan?maBan={maBan}")]
+        [OperationContract]
+        bool DuocPhepThanhToan(int maBan);
+
         [WebInvoke(Method = "POST", UriTemplate = "themChiTietOrder")]
         [OperationContract]
         ChiTietOrder ThemChiTietOrder(ChiTietOrder _chiTietOrder);
