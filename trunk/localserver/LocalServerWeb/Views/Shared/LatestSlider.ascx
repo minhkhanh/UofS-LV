@@ -28,7 +28,7 @@
                        %>
                            <li class="SlideItMoo_element">
                            <a href = "<%: SharedCode.GetHostApplicationAddress(Request) + "FoodCategory/Food/" + food.MaMonAn.ToString() %>" >
-                           <img src="<%:SharedCode.GetHostApplicationAddress(Request) + food.HinhAnh %>" alt="<%:food.TenMonAn %>" />
+                           <img src="<%:Url.Content("~/"+food.HinhAnh+"")%>" alt="<%:food.TenMonAn %>" />
                            </a></li>                           
                     <% } %>
                     </ul>
