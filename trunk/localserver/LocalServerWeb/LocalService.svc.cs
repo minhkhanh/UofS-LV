@@ -1236,19 +1236,19 @@ namespace LocalServerWeb
         }
 
 
-        public string TestGET()
+        public string TestGET(string thamSo)
         {
-            return "GETOK";
+            return "GET OK " + thamSo;
         }
 
-        public string TestPOST()
+        public string TestPOST(string thamSo)
         {
-            return "POSTOK";
+            return "POST OK " + thamSo;
         }
 
         public string TestPUT()
         {
-            return "PUTOK";
+            return "PUT OK ";
         }
 
         public List<Foo> LayDanhSachFoo()
