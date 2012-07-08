@@ -16,20 +16,26 @@ import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import emenu.client.bus.task.GetServingOrderItemsTask;
 import emenu.client.menu.R;
 import emenu.client.menu.adapter.MiniOrderAdapter;
+import emenu.client.menu.fragment.AuthDlgFragment.OnAuthorizedListener;
 import emenu.client.menu.view.DishSwappableListView;
 import emenu.client.util.U;
 
 public class OrderSplittingDlgFragment extends DialogFragment implements
-        OnPostExecuteListener<Integer, Void, List<ContentValues>>, OnClickListener {
+        OnPostExecuteListener<Integer, Void, List<ContentValues>>, OnClickListener,
+        OnAuthorizedListener {
+
+    public static final int ACT_SPLIT_ORDER = 0;
 
     private MiniOrderAdapter mSrcListAdapter;
     private MiniOrderAdapter mDesListAdapter;
     private Integer mOrderId;
-    
+
+    private PostOrderSplittingTask mSplitOrderTask;
+
     public interface OnOrderSplittedListener {
         void onOrderSplitted();
     }
-    
+
     private OnPostExecuteListener<Void, Void, Boolean> mOnPostOrderSplitting = new OnPostExecuteListener<Void, Void, Boolean>() {
         @Override
         public void onPostExecute(CustomAsyncTask<Void, Void, Boolean> task,
@@ -97,10 +103,24 @@ public class OrderSplittingDlgFragment extends DialogFragment implements
                 if (mSrcListAdapter.getCount() == 0 || mDesListAdapter.getCount() == 0) {
                     U.toastText(getActivity(), R.string.message_splitting_orders_empty);
                 } else {
-                    List<ContentValues> desContent = mDesListAdapter.getData();
-                    new PostOrderSplittingTask(desContent).setOnPostExecuteListener(
-                            mOnPostOrderSplitting).execute();
+                    U.showAuthDlg(this, getFragmentManager(), ACT_SPLIT_ORDER, null);
                 }
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onAuthorized(Bundle extras, int action) {
+        switch (action) {
+            case ACT_SPLIT_ORDER:
+                U.cancelAsyncTask(mSplitOrderTask);
+
+                List<ContentValues> desContent = mDesListAdapter.getData();
+                mSplitOrderTask = new PostOrderSplittingTask(desContent);
+                mSplitOrderTask.setOnPostExecuteListener(mOnPostOrderSplitting).execute();
                 break;
 
             default:

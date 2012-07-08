@@ -12,6 +12,7 @@ import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,6 +28,7 @@ import emenu.client.bus.task.CustomAsyncTask;
 import emenu.client.bus.task.GetServingOrderItemsTask;
 import emenu.client.bus.task.LoadSurchargesTask;
 import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
+import emenu.client.bus.task.PostBillTask;
 import emenu.client.dao.HoaDonDAO;
 import emenu.client.db.dto.HoaDonDTO;
 import emenu.client.db.dto.OrderDTO;
@@ -37,6 +39,7 @@ import emenu.client.menu.adapter.SurchargeAdapter;
 import emenu.client.menu.adapter.VoucherAdapter;
 import emenu.client.menu.app.SessionManager;
 import emenu.client.menu.app.SessionManager.ServiceSession;
+import emenu.client.menu.fragment.AuthDlgFragment.OnAuthorizedListener;
 import emenu.client.menu.fragment.CustomBillSplitDlgFragment;
 import emenu.client.menu.fragment.EqualBillSplitDlgFragment;
 import emenu.client.menu.fragment.VoucherSearchDlgFragment;
@@ -45,16 +48,17 @@ import emenu.client.menu.view.BillHeaderView;
 import emenu.client.util.C;
 import emenu.client.util.U;
 
-public class BillActivity extends Activity implements OnVoucherUsedListener, OnItemClickListener {
+public class BillActivity extends Activity implements OnVoucherUsedListener,
+        OnItemClickListener, OnAuthorizedListener {
+    private static final int ACT_CONFIRM_BILL = 0;
+
     private GetServingOrderItemsTask mGetServingOrderItemsTask;
 
     private TextView mBillTotalText;
-    private ProgressDialog mWatingDlg;
-
     private MainBillAdapter mBillAdapter;
     private VoucherAdapter mVoucherAdapter;
     private SurchargeAdapter mSurchargeAdapter;
-
+    private PostBillTask mPostBillTask;
     private MergeAdapter mMergeAdapter;
 
     private OnPostExecuteListener<Integer, Void, List<ContentValues>> mOnPostGetServingOrderItems = new OnPostExecuteListener<Integer, Void, List<ContentValues>>() {
@@ -89,40 +93,24 @@ public class BillActivity extends Activity implements OnVoucherUsedListener, OnI
         }
     };
 
-    private class PostBillTask extends CustomAsyncTask<Integer, Void, HoaDonDTO> {
-
-        List<String> mVoucherCodes;
-
+    private OnPostExecuteListener<Integer, Void, String> mOnPostPostBill = new OnPostExecuteListener<Integer, Void, String>() {
         @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            mVoucherCodes = mVoucherAdapter.getAllVoucherCodes();
-        }
-
-        @Override
-        protected void onPostExecute(HoaDonDTO result) {
-            super.onPostExecute(result);
-            mWatingDlg.cancel();
-
-            if (result != null) {
-                U.toastText(BillActivity.this, BillActivity.this.getResources()
-                        .getString(R.string.message_bill_sent));
+        public void onPostExecute(CustomAsyncTask<Integer, Void, String> task,
+                String result) {
+            if (result != null && result.compareTo("") == 0) {
+                U.toastText(BillActivity.this,
+                        BillActivity.this.getString(R.string.message_bill_sent));
                 SessionManager.getInstance().finishCurrentSession();
 
                 Intent intent = new Intent(BillActivity.this, MainMenuActivity.class);
                 startActivity(intent);
             } else {
-                AlertDialog.Builder builder = new Builder(BillActivity.this)
-                        .setMessage(getResources().getString(
-                                R.string.message_connect_server_failed));
-                builder.create().show();
+                if (result != null)
+                    U.showErrorDialog(BillActivity.this, result);
+                else
+                    U.showErrorDialog(BillActivity.this,
+                            R.string.message_connect_server_failed);
             }
-        }
-
-        @Override
-        protected HoaDonDTO doInBackground(Integer... params) {
-            return HoaDonDAO.getInstance().postLapHoaDon(params[0], mVoucherCodes);
         }
     };
 
@@ -131,7 +119,7 @@ public class BillActivity extends Activity implements OnVoucherUsedListener, OnI
         int voucher = mVoucherAdapter.calcVoucherTotal();
         int surcharge = mSurchargeAdapter.calcSurchargeTotal();
         int total = bill - voucher + surcharge;
-        
+
         mBillTotalText.setText("" + total);
     }
 
@@ -146,7 +134,8 @@ public class BillActivity extends Activity implements OnVoucherUsedListener, OnI
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         switch (item.getItemId()) {
             case R.id.miCustomSplit:
-                CustomBillSplitDlgFragment dlgCustom = new CustomBillSplitDlgFragment(mBillAdapter.getData());
+                CustomBillSplitDlgFragment dlgCustom = new CustomBillSplitDlgFragment(
+                        mBillAdapter.getData());
                 U.showDlgFragment(this, dlgCustom, true);
                 break;
             case R.id.miEqualSplit:
@@ -155,16 +144,7 @@ public class BillActivity extends Activity implements OnVoucherUsedListener, OnI
                 U.showDlgFragment(this, dlgEqual, true);
                 break;
             case R.id.miConfirmBill:
-                U.showConfirmDialog(this, R.string.message_confirm_send_bill,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                mWatingDlg = ProgressDialog.show(BillActivity.this, "",
-                                        getString(R.string.message_waiting));
-                                Integer orderId = SessionManager.getInstance()
-                                        .loadCurrentSession().getOrderId();
-                                new PostBillTask().execute(orderId);
-                            }
-                        });
+                U.showAuthDlg(this, getFragmentManager(), ACT_CONFIRM_BILL, null);
                 break;
             case R.id.miAddVoucher:
                 VoucherSearchDlgFragment dlg = new VoucherSearchDlgFragment(
@@ -248,6 +228,23 @@ public class BillActivity extends Activity implements OnVoucherUsedListener, OnI
                 mVoucherAdapter.remove(values);
                 mVoucherAdapter.notifyDataSetChanged();
             }
+        }
+    }
+
+    @Override
+    public void onAuthorized(Bundle extras, int action) {
+        switch (action) {
+            case ACT_CONFIRM_BILL:
+                U.cancelAsyncTask(mPostBillTask);
+
+                Integer orderId = SessionManager.getInstance().loadCurrentSession()
+                        .getOrderId();
+                mPostBillTask = new PostBillTask(mVoucherAdapter.getAllVoucherCodes());
+                mPostBillTask.setOnPostExecuteListener(mOnPostPostBill).execute(orderId);
+                break;
+
+            default:
+                break;
         }
     }
 }
