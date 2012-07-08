@@ -1,7 +1,21 @@
 package emenu.client.dao;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.DefaultClientConnection;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -16,7 +30,7 @@ public class TaiKhoanDAO extends AbstractDAO {
 
     private static final String GET_ALL_JSON_URL = SERVER_URL_SLASH
             + "layDanhSachTaiKhoanJson";
-    
+
     private static TaiKhoanDAO mInstance;
 
     public static final void createInstance(MyDatabaseHelper dbHelper) {
@@ -29,11 +43,34 @@ public class TaiKhoanDAO extends AbstractDAO {
         }
         return mInstance;
     }
-    
+
     private List<TaiKhoanDTO> mCached;
 
     private TaiKhoanDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
+    }
+
+    public HttpClient postLogIn(String name, String pass) throws ClientProtocolException,
+            IOException {
+        String url = SERVER_URL_SLASH + "dangNhapJson";
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("tenDangNhap", name));
+        nameValuePairs.add(new BasicNameValuePair("matKhau", pass));
+        post.setHeader("Content-Type", "application/x-www-form-urlencoded");
+        post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        HttpResponse response = client.execute(post);
+        if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+            String strResult = EntityUtils.toString(response.getEntity());
+            boolean boolResult = Boolean.valueOf(strResult);
+            if (boolResult)
+                return client;
+            return null;
+        }
+
+        return null;
     }
 
     public boolean syncAll() {

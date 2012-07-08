@@ -152,5 +152,8 @@
     <string name="text_order">Order</string>
     <string name="message_splitting_orders_empty">Không được tách các order rỗng</string>
     <string name="message_order_splitting_failed">Tách order không thành công</string>
+    <string name="message_auth_failed">Xác thực không thành công</string>
+    <string name="caption_connection">Kết nối</string>
+    <string name="message_auto_sync_caution">Đồng bộ tự động không cần phải đăng nhập.</string>
 
 </resources>

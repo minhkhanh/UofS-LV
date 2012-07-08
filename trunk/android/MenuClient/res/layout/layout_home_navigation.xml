@@ -16,8 +16,18 @@
         android:id="@+id/btnPreferences"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:background="@drawable/btn_transparent_background"
         android:drawableTop="@drawable/config_button"
-        android:text="@string/caption_preferences" android:layout_weight="1"/>
+        android:text="@string/caption_preferences" />
+
+    <Button
+        android:id="@+id/btnConnection"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/btn_transparent_background"
+        android:drawableTop="@drawable/connection_icon"
+        android:text="@string/caption_connection" />
 
 </LinearLayout>

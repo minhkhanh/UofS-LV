@@ -1,5 +1,6 @@
 package emenu.client.bus.task;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -20,6 +21,7 @@ public abstract class CustomAsyncTask<Params, Progress, Result> extends
                 Progress... values);
     }
 
+    private ProgressDialog mWaitingDialog;
     private Bundle mExtras;
     private OnPostExecuteListener<Params, Progress, Result> mOnPostExecuteListener;
     private OnPreExecuteListener<Params, Progress, Result> mOnPreExecuteListener;
@@ -35,11 +37,17 @@ public abstract class CustomAsyncTask<Params, Progress, Result> extends
         if (mOnPostExecuteListener != null) {
             mOnPostExecuteListener.onPostExecute(this, result);
         }
+        
+        if (mWaitingDialog != null)
+            mWaitingDialog.dismiss();
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        
+        if (mWaitingDialog != null)
+            mWaitingDialog.show();
 
         if (mOnPreExecuteListener != null) {
             mOnPreExecuteListener.onPreExecute(this);
@@ -80,6 +88,14 @@ public abstract class CustomAsyncTask<Params, Progress, Result> extends
 
     public void setExtras(Bundle extras) {
         mExtras = extras;
+    }
+
+    public ProgressDialog getWaitingDialog() {
+        return mWaitingDialog;
+    }
+
+    public void setWaitingDialog(ProgressDialog waitingDialog) {
+        mWaitingDialog = waitingDialog;
     }
 
 }

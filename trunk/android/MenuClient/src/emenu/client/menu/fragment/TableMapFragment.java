@@ -25,13 +25,20 @@ import emenu.client.bus.task.CustomAsyncTask;
 import emenu.client.bus.task.PostTableSelectionTask;
 import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import emenu.client.db.dto.BanDTO;
+import emenu.client.db.dto.TableSelection;
+import emenu.client.db.dto.TableSelection.SelectionState;
 import emenu.client.menu.adapter.TableListAdapter;
+import emenu.client.menu.fragment.AuthDlgFragment.OnAuthorizedListener;
 import emenu.client.menu.fragment.TableMapFragment.OnTableClickedListener;
 import emenu.client.util.C;
 import emenu.client.util.U;
 
 public class TableMapFragment extends TableInAreaFragment implements
-        LoaderCallbacks<List<BanDTO>>, OnPostExecuteListener<Void, Void, Boolean> {
+        LoaderCallbacks<List<BanDTO>>,
+        OnPostExecuteListener<List<Integer>, Void, Boolean>, OnAuthorizedListener {
+
+    public static final int ACT_GROUP_TABLE = 0;
+    public static final int ACT_SPLIT_TABLE = 1;
 
     public static final int SEL_STATE_SINGLE_FREE = 0;
     public static final int SEL_STATE_SINGLE_BUSY = 1;
@@ -39,11 +46,15 @@ public class TableMapFragment extends TableInAreaFragment implements
     public static final int SEL_STATE_MIXED = 3;
     public static final int SEL_STATE_GROUP_BUSY = 4;
 
-    int mCurrSelectionState;
+    // int mCurrSelectionState;
 
     private TableListAdapter mGridAdapter;
     private GridView mTableGrid;
     private ActionMode mActionMode;
+
+    private TableSelection mCurrTabSel;
+
+    private PostTableSelectionTask mPostTabSelTask;
 
     private OnTableClickedListener mTableClickedListener;
 
@@ -58,12 +69,11 @@ public class TableMapFragment extends TableInAreaFragment implements
         public void onPostExecute(CustomAsyncTask<Void, Void, Boolean> task,
                 Boolean result) {
             if (!result) {
-                new AlertDialog.Builder(getActivity())
-                        .setMessage(R.string.message_select_table_failed).create().show();
+                U.showErrorDialog(getActivity(), R.string.message_select_table_failed);
             } else {
                 Integer groupId = task.getExtras().getInt("groupId");
                 BriefOrderListDlgFragment dlg = new BriefOrderListDlgFragment(groupId);
-                U.showDlgFragment(getActivity(), dlg, true);
+                U.showDlgFragment(getFragmentManager(), dlg, false);
 
                 getLoaderManager().restartLoader(0, null, TableMapFragment.this);
             }
@@ -91,22 +101,25 @@ public class TableMapFragment extends TableInAreaFragment implements
 
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            List<BanDTO> tabSelection = getTableSelection();
-            Integer groupId = findGroupId(tabSelection);
+            // List<BanDTO> tabSelection = getTableSelection();
+            // TableSelection selection = getTableSelection();
+            // Integer groupId = 0;//findGroupId(tabSelection);
 
             switch (item.getItemId()) {
                 case R.id.miGroupTable:
+                    AuthDlgFragment authDlg = new AuthDlgFragment(TableMapFragment.this,
+                            ACT_GROUP_TABLE);
+                    U.showDlgFragment(getFragmentManager(), authDlg, false);
+                    break;
+
                 case R.id.miSelectTable:
-                    PostTableSelectionTask task = new PostTableSelectionTask(tabSelection);
-                    task.getExtras().putInt("groupId", groupId);
-                    task.setOnPostExecuteListener(mOnPostExecuteTableSelecting);
-                    task.execute();
+                    postTableSelection();
 
                     break;
 
                 case R.id.miSplitTable:
-                    TableSplittingDlgFragment dlg = new TableSplittingDlgFragment(groupId);
-                    U.showDlgFragment(getActivity(), dlg, true);
+                    authDlg = new AuthDlgFragment(TableMapFragment.this, ACT_SPLIT_TABLE);
+                    U.showDlgFragment(getFragmentManager(), authDlg, false);
                     break;
 
                 default:
@@ -132,15 +145,16 @@ public class TableMapFragment extends TableInAreaFragment implements
                     for (int i = 0; i < mTableGrid.getCount(); ++i) {
                         BanDTO ban = mGridAdapter.getItem(i);
                         if (ban.getMaBanChinh() == clickTable.getMaBanChinh()) {
-                            mTableGrid.setItemChecked(i, mTableGrid.isItemChecked(pos));
+                            boolean flag = mTableGrid.isItemChecked(pos);
+                            mTableGrid.setItemChecked(i, flag);
                         } else if (!ban.getActive()) {
                             mTableGrid.setItemChecked(i, false);
                         }
                     }
                 }
 
-                List<BanDTO> tabSelection = getTableSelection();
-                mCurrSelectionState = getSelectionState(tabSelection);
+                mCurrTabSel = getTableSelection();
+                SelectionState currState = mCurrTabSel.getState();
 
                 int checkedCount = mTableGrid.getCheckedItemCount();
                 if (checkedCount == 0) {
@@ -152,18 +166,18 @@ public class TableMapFragment extends TableInAreaFragment implements
                 if (mActionMode != null) {
                     Menu menu = mActionMode.getMenu();
                     menu.clear();
-                    switch (mCurrSelectionState) {
-                        case SEL_STATE_SINGLE_FREE:
-                        case SEL_STATE_SINGLE_BUSY:
+                    switch (currState) {
+                        case SingleFree:
+                        case SingleBusy:
                             menu.add(Menu.NONE, R.id.miSelectTable, 0,
                                     R.string.context_select_table);
                             break;
-                        case SEL_STATE_MIXED:
-                        case SEL_STATE_MANY_FREE:
+                        case Mixed:
+                        case MultiFree:
                             menu.add(Menu.NONE, R.id.miGroupTable, 0,
                                     R.string.option_group_table);
                             break;
-                        case SEL_STATE_GROUP_BUSY:
+                        case GroupBusy:
                             menu.add(Menu.NONE, R.id.miSelectTable, 0,
                                     R.string.context_select_table);
                             menu.add(Menu.NONE, R.id.miSplitTable, 0,
@@ -178,6 +192,16 @@ public class TableMapFragment extends TableInAreaFragment implements
     public TableMapFragment() {
     }
 
+    private void postTableSelection() {
+        U.cancelAsyncTask(mPostTabSelTask);
+
+        mPostTabSelTask = new PostTableSelectionTask(mCurrTabSel.getTabIds());
+        mPostTabSelTask.getExtras()
+                .putInt("groupId", mCurrTabSel.getMainTab().getMaBan());
+        mPostTabSelTask.setOnPostExecuteListener(mOnPostExecuteTableSelecting);
+        mPostTabSelTask.execute();
+    }
+
     public TableMapFragment(OnTableClickedListener onTableClickedListener,
             Integer areaId, String tenKhuVuc) {
         super(areaId, tenKhuVuc);
@@ -185,42 +209,45 @@ public class TableMapFragment extends TableInAreaFragment implements
         mTableClickedListener = onTableClickedListener;
     }
 
-    private Integer findGroupId(List<BanDTO> tabSelection) {
-        for (BanDTO b : tabSelection) {
-            if (b.getMaBanChinh() != null) {
-                return b.getMaBanChinh();
-            }
-        }
+    // private Integer findGroupId(List<BanDTO> tabSelection) {
+    // for (BanDTO b : tabSelection) {
+    // if (b.getMaBanChinh() != null) {
+    // return b.getMaBanChinh();
+    // }
+    // }
+    //
+    // return tabSelection.get(0).getMaBan();
+    // }
 
-        return tabSelection.get(0).getMaBan();
-    }
+    // private int getSelectionState() {
+    // List<BanDTO> tabSelection = getTableSelection();
+    // if (tabSelection.size() == 1) {
+    // if (tabSelection.get(0).getMaBanChinh() == null) {
+    // return SEL_STATE_SINGLE_FREE;
+    // }
+    //
+    // return SEL_STATE_SINGLE_BUSY;
+    // }
+    //
+    // boolean hasFree = false;
+    // for (BanDTO b : tabSelection) {
+    // if (b.getMaBanChinh() == null)
+    // hasFree = true;
+    // else if (hasFree)
+    // return SEL_STATE_MIXED;
+    // }
+    //
+    // if (hasFree)
+    // return SEL_STATE_MANY_FREE;
+    //
+    // return SEL_STATE_GROUP_BUSY;
+    // }
 
-    private int getSelectionState(List<BanDTO> tabSelection) {
-        if (tabSelection.size() == 1) {
-            if (tabSelection.get(0).getMaBanChinh() == null) {
-                return SEL_STATE_SINGLE_FREE;
-            }
+    private TableSelection getTableSelection() {
+        TableSelection c = new TableSelection();
 
-            return SEL_STATE_SINGLE_BUSY;
-        }
-
-        boolean hasFree = false;
-        for (BanDTO b : tabSelection) {
-            if (b.getMaBanChinh() == null)
-                hasFree = true;
-            else if (hasFree)
-                return SEL_STATE_MIXED;
-        }
-
-        if (hasFree)
-            return SEL_STATE_MANY_FREE;
-
-        return SEL_STATE_GROUP_BUSY;
-    }
-
-    private List<BanDTO> getTableSelection() {
         SparseBooleanArray chkArray = mTableGrid.getCheckedItemPositions();
-        final List<BanDTO> tableSelection = new ArrayList<BanDTO>();
+        List<BanDTO> tableSelection = new ArrayList<BanDTO>();
         for (int i = 0; i < chkArray.size(); ++i) {
             if (chkArray.valueAt(i)) {
                 int pos = chkArray.keyAt(i);
@@ -229,7 +256,9 @@ public class TableMapFragment extends TableInAreaFragment implements
             }
         }
 
-        return tableSelection;
+        c.setTabList(tableSelection);
+
+        return c;
     }
 
     @Override
@@ -312,7 +341,8 @@ public class TableMapFragment extends TableInAreaFragment implements
     }
 
     @Override
-    public void onPostExecute(CustomAsyncTask<Void, Void, Boolean> task, Boolean result) {
+    public void onPostExecute(CustomAsyncTask<List<Integer>, Void, Boolean> task,
+            Boolean result) {
         if (result) {
             getLoaderManager().restartLoader(0, null, this);
         } else {
@@ -325,6 +355,24 @@ public class TableMapFragment extends TableInAreaFragment implements
                                     dialog.cancel();
                                 }
                             }).create().show();
+        }
+    }
+
+    @Override
+    public void onAuthorized(int action) {
+        switch (action) {
+            case ACT_GROUP_TABLE:
+                postTableSelection();
+                break;
+
+            case ACT_SPLIT_TABLE:
+                TableSplittingDlgFragment dlg = new TableSplittingDlgFragment(mCurrTabSel
+                        .getMainTab().getMaBan());
+                U.showDlgFragment(getFragmentManager(), dlg, false);
+                break;
+
+            default:
+                break;
         }
     }
 }

@@ -1,8 +1,13 @@
 package emenu.client.menu.fragment;
 
+import org.apache.http.client.HttpClient;
+
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,88 +15,59 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import emenu.client.menu.R;
+import emenu.client.bus.task.CustomAsyncTask;
+import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
+import emenu.client.bus.task.PostLogInTask;
 import emenu.client.dao.BanDAO;
 import emenu.client.db.dto.BanDTO;
 import emenu.client.util.U;
 
-public class AuthDlgFragment extends DialogFragment {
+public class AuthDlgFragment extends DialogFragment implements OnClickListener {
 
-    enum AuthAction {
-        Configuration
-    }
-    public static final int ACT_SELECTING_TABLE = 0;
+    public static final String KEY_ACTION = "key_action";
 
-    private Button mBtnOK;
-    private Button mBtnCancel;
+    private EditText mNameEdit;
+    private EditText mPassEdit;
     private int mAction;
-
     private ProgressDialog mWatingDlg;
+    private OnAuthorizedListener mOnAuthorizedListener;
+    private PostLogInTask mLogInTask;
 
-    class PutTableTask extends AsyncTask<BanDTO, Void, Void> {
-
-        boolean mResult;
-
+    private OnPostExecuteListener<Void, Void, HttpClient> mOnPostLogIn = new OnPostExecuteListener<Void, Void, HttpClient>() {
         @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-            mWatingDlg.dismiss();
-
-            if (mResult) {
-//                Intent intent = new Intent(getActivity(), WelcomeActivity.class);
-//                startActivity(intent);
-                dismiss();
+        public void onPostExecute(CustomAsyncTask<Void, Void, HttpClient> task,
+                HttpClient result) {
+            if (result != null) {
+                mOnAuthorizedListener.onAuthorized(mAction);
+                dismiss();                
             } else {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setMessage(getActivity().getResources().getString(
-                        R.string.message_connect_server_failed));
-
-                AlertDialog alert = builder.create();
-                alert.show();
+                U.toastText(getActivity(), R.string.message_auth_failed);
             }
         }
-
-        @Override
-        protected Void doInBackground(BanDTO... params) {
-            mResult = BanDAO.getInstance().putUpdate(params[0]);
-            return null;
-        }
-
     };
 
-    public AuthDlgFragment(int action) {
+    public interface OnAuthorizedListener {
+        void onAuthorized(int action);
+    }
+
+    public AuthDlgFragment(OnAuthorizedListener listener, int action) {
         mAction = action;
+        mOnAuthorizedListener = listener;
     }
 
-    private OnClickListener mOnClickListener = new OnClickListener() {
-
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.btnOK:
-                    U.toastText(getActivity(), "Xác thực thành công!");
-                    if (mAction == ACT_SELECTING_TABLE) {
-//                        BanDTO ban = SessionManager.getInstance().loadCurrentSession()
-//                                .getMaBanChinh();
-//                        ban.setActive(false);
-//
-//                        mWatingDlg = ProgressDialog.show(getActivity(), "", "Wating...");
-//                        new PutTableTask().execute(ban);
-                    }
-
-                    break;
-                case R.id.btnCancel:
-                    dismiss();
-                    break;
-            }
-        }
-    };
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Holo_Dialog);
-    }
+    // @Override
+    // public void onAttach(Activity activity) {
+    // super.onAttach(activity);
+    //
+    // try {
+    // mOnAuthorizedListener = (OnAuthorizedListener) activity;
+    // } catch (ClassCastException e) {
+    // throw new ClassCastException(activity.toString()
+    // + " must implement OnUseVoucherListener");
+    // }
+    // }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -99,7 +75,7 @@ public class AuthDlgFragment extends DialogFragment {
         getDialog().setTitle(getString(R.string.title_dialog_auth));
         getDialog().setCanceledOnTouchOutside(false);
 
-        View layout = inflater.inflate(R.layout.dialog_authentication, container, false);
+        View layout = inflater.inflate(R.layout.layout_auth_dlg, container, false);
 
         return layout;
     }
@@ -108,10 +84,30 @@ public class AuthDlgFragment extends DialogFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mBtnOK = (Button) getView().findViewById(R.id.btnOK);
-        mBtnCancel = (Button) getView().findViewById(R.id.btnCancel);
+        getView().findViewById(R.id.btnOK).setOnClickListener(this);;
+        getView().findViewById(R.id.btnCancel).setOnClickListener(this);
 
-        mBtnOK.setOnClickListener(mOnClickListener);
-        mBtnCancel.setOnClickListener(mOnClickListener);
+        mNameEdit = (EditText) getView().findViewById(R.id.editUsername);
+        mPassEdit = (EditText) getView().findViewById(R.id.editPassword);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnOK:
+                U.cancelAsyncTask(mLogInTask);
+
+                String name = mNameEdit.getText().toString();
+                String pass = mPassEdit.getText().toString();
+                mLogInTask = new PostLogInTask(name, pass);
+                mLogInTask.setOnPostExecuteListener(mOnPostLogIn);
+                mLogInTask.setWaitingDialog(U.createWaitingDialog(getActivity()));
+                mLogInTask.execute();
+
+                break;
+            case R.id.btnCancel:
+                dismiss();
+                break;
+        }
     }
 }

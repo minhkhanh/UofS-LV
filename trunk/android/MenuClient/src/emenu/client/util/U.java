@@ -33,7 +33,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -56,16 +58,13 @@ import android.widget.Toast;
 
 public final class U {
 
-    // public static final ProgressDialog showWaitingDialog(Context context,
-    // String msg) {
-    // ProgressDialog dlg = new ProgressDialog(context);
-    // dlg.setCanceledOnTouchOutside(false);
-    // dlg.setMessage(msg);
-    //
-    // dlg.show
-    //
-    // return dlg;
-    // }
+    public static final ProgressDialog createWaitingDialog(Context context) {
+        ProgressDialog dlg = new ProgressDialog(context);
+        dlg.setCanceledOnTouchOutside(false);
+        dlg.setMessage(context.getString(R.string.message_waiting));
+
+        return dlg;
+    }
 
     public static final long getTimeFromJsonDate(String jsonDate) {
         // /Date(1234567890...+xxxx)/
@@ -84,8 +83,8 @@ public final class U {
             // time zone detected
             String hrOffset = jsonDate.substring(pSign + 1, pSign + 3);
             String minOffset = jsonDate.substring(pSign + 3, pSign + 5);
-            offset = Integer.valueOf(hrOffset) * 3600000
-                    + Integer.valueOf(minOffset) * 60000;
+            offset = Integer.valueOf(hrOffset) * 3600000 + Integer.valueOf(minOffset)
+                    * 60000;
 
             if (jsonDate.charAt(pSign) == '-')
                 offset *= -1;
@@ -203,7 +202,6 @@ public final class U {
 
         try {
             StringEntity postObj = new StringEntity(jsonData, HTTP.UTF_8);
-            // postObj.setContentType("application/json");
             httpPost.setHeader("Content-Type", "application/json; charset=UTF-8");
             httpPost.setEntity(postObj);
 
@@ -351,6 +349,19 @@ public final class U {
         return false;
     }
 
+    public static final int showDlgFragment(FragmentManager fm, DialogFragment dlg,
+            boolean addStack) {
+        FragmentTransaction ft = fm.beginTransaction();
+        Fragment prev = fm.findFragmentByTag(C.DIALOG_FRAGMENT_TAG);
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        if (addStack)
+            ft.addToBackStack(null);
+
+        return dlg.show(ft, C.DIALOG_FRAGMENT_TAG);
+    }
+
     public static final int showDlgFragment(Activity host, DialogFragment dlg,
             boolean addStack) {
         FragmentTransaction ft = host.getFragmentManager().beginTransaction();
@@ -365,7 +376,7 @@ public final class U {
         return dlg.show(ft, C.DIALOG_FRAGMENT_TAG);
     }
 
-    public static final String convertStreamToString(InputStream is) {
+    public static final String toString(InputStream is) {
         try {
             return new java.util.Scanner(is, "utf-8").useDelimiter("\\A").next();
         } catch (java.util.NoSuchElementException e) {
