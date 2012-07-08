@@ -62,7 +62,7 @@ public class HomeNavigationDlgFragment extends DialogFragment implements OnClick
     }
 
     @Override
-    public void onAuthorized(int action) {
+    public void onAuthorized(Bundle extras, int action) {
         switch (action) {
             case ACT_CONFIG:
                 Intent intent = new Intent(getActivity(), AppPreferenceActivity.class);

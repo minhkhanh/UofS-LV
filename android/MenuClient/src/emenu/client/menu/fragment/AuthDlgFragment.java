@@ -31,16 +31,16 @@ public class AuthDlgFragment extends DialogFragment implements OnClickListener {
     private EditText mNameEdit;
     private EditText mPassEdit;
     private int mAction;
-    private ProgressDialog mWatingDlg;
     private OnAuthorizedListener mOnAuthorizedListener;
     private PostLogInTask mLogInTask;
+    private Bundle mExtras = new Bundle();
 
     private OnPostExecuteListener<Void, Void, HttpClient> mOnPostLogIn = new OnPostExecuteListener<Void, Void, HttpClient>() {
         @Override
         public void onPostExecute(CustomAsyncTask<Void, Void, HttpClient> task,
                 HttpClient result) {
             if (result != null) {
-                mOnAuthorizedListener.onAuthorized(mAction);
+                mOnAuthorizedListener.onAuthorized(mExtras, mAction);
                 dismiss();                
             } else {
                 U.toastText(getActivity(), R.string.message_auth_failed);
@@ -49,25 +49,13 @@ public class AuthDlgFragment extends DialogFragment implements OnClickListener {
     };
 
     public interface OnAuthorizedListener {
-        void onAuthorized(int action);
+        void onAuthorized(Bundle extras, int action);
     }
 
     public AuthDlgFragment(OnAuthorizedListener listener, int action) {
         mAction = action;
         mOnAuthorizedListener = listener;
     }
-
-    // @Override
-    // public void onAttach(Activity activity) {
-    // super.onAttach(activity);
-    //
-    // try {
-    // mOnAuthorizedListener = (OnAuthorizedListener) activity;
-    // } catch (ClassCastException e) {
-    // throw new ClassCastException(activity.toString()
-    // + " must implement OnUseVoucherListener");
-    // }
-    // }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -109,5 +97,13 @@ public class AuthDlgFragment extends DialogFragment implements OnClickListener {
                 dismiss();
                 break;
         }
+    }
+
+    public Bundle getExtras() {
+        return mExtras;
+    }
+
+    public void setExtras(Bundle extras) {
+        mExtras = extras;
     }
 }

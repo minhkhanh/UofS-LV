@@ -8,7 +8,6 @@ import org.json.JSONObject;
 
 import android.database.Cursor;
 
-
 import emenu.client.db.dto.ChiTietHoaDonDTO;
 import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.db.dto.HoaDonDTO;
@@ -63,24 +62,15 @@ public class HoaDonDAO extends AbstractDAO {
         return list;
     }
 
-    public HoaDonDTO postLapHoaDon(Integer orderId, List<String> voucherCodes) {
+    public String postLapHoaDon(Integer orderId, List<String> voucherCodes) {
         String url = AbstractDAO.SERVER_URL_SLASH + "lapHoaDonJson?maOrder=" + orderId;
-        HoaDonDTO hoaDon = null;
 
-        try {
-            JSONArray jsonArray = new JSONArray();
-            for (String s : voucherCodes) {
-                jsonArray.put(s);
-            }
-            String response = U.loadPostResponseJson(url, jsonArray.toString());
-            JSONObject jsonObj = new JSONObject(response);
-
-            hoaDon = HoaDonDTO.fromJson(jsonObj);
-        } catch (Exception e) {
-            e.printStackTrace();
+        JSONArray jsonArray = new JSONArray();
+        for (String s : voucherCodes) {
+            jsonArray.put(s);
         }
-
-        return hoaDon;
+        
+        return U.loadPostResponseJson(url, jsonArray.toString());
     }
 
     public HoaDonDTO postHoaDon(HoaDonDTO hoaDon) {

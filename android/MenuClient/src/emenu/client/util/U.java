@@ -28,6 +28,8 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import emenu.client.db.dto.MonAnDTO;
 import emenu.client.menu.R;
+import emenu.client.menu.fragment.AuthDlgFragment;
+import emenu.client.menu.fragment.AuthDlgFragment.OnAuthorizedListener;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -47,6 +49,7 @@ import android.database.DatabaseUtils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -101,6 +104,16 @@ public final class U {
                     imgData.length);
             v.setImageBitmap(decodedBitmap);
         }
+    }
+
+    public static final void showErrorDialog(Context context, String msg) {
+        new AlertDialog.Builder(context).setMessage(msg)
+                .setNeutralButton(R.string.caption_ok, new OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).create().show();
     }
 
     public static final void showErrorDialog(Context context, int msgResId) {
@@ -347,6 +360,21 @@ public final class U {
         }
 
         return false;
+    }
+
+    public static final int showAuthDlg(OnAuthorizedListener listener,
+            FragmentManager fm, int action, Bundle extras) {
+        AuthDlgFragment dlg = new AuthDlgFragment(listener, action);
+        if (extras != null)
+            dlg.getExtras().putAll(extras);
+
+        FragmentTransaction ft = fm.beginTransaction();
+        Fragment prev = fm.findFragmentByTag(C.AUTH_DIALOG_TAG);
+        if (prev != null) {
+            ft.remove(prev);
+        }
+
+        return dlg.show(ft, C.AUTH_DIALOG_TAG);
     }
 
     public static final int showDlgFragment(FragmentManager fm, DialogFragment dlg,

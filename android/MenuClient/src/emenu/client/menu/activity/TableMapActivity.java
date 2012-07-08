@@ -3,6 +3,7 @@ package emenu.client.menu.activity;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.ActionMode;
 import android.view.ActionMode.Callback;
@@ -11,50 +12,27 @@ import android.view.MenuItem;
 import android.view.View;
 import emenu.client.menu.R;
 import emenu.client.bus.task.CustomAsyncTask;
+import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
+import emenu.client.bus.task.GetMoveOrderTask;
 import emenu.client.dao.OrderDAO;
 import emenu.client.db.dto.BanDTO;
 import emenu.client.menu.fragment.AreaListFragment;
+import emenu.client.menu.fragment.AuthDlgFragment.OnAuthorizedListener;
 import emenu.client.menu.fragment.TableMapFragment.OnTableClickedListener;
 import emenu.client.util.U;
 
 public class TableMapActivity extends Activity implements Callback,
-        OnTableClickedListener {
-    public static final String KEY_MOVING_ORDER_ID = "MovingOrderId";
+        OnTableClickedListener, OnPostExecuteListener<Void, Void, Boolean>,
+        OnAuthorizedListener {
+    public static final String KEY_MOVING_ORDER_ID = "KEY_MOVING_ORDER_ID";
+    public static final String KEY_DES_TAB_ID = "KEY_DES_TAB_ID";
+
+    private static final int ACT_MOVE_ORDER = 0;
 
     private ActionMode mOrderMovingMode;
     private Integer mMovingOrderId;
 
-    class GetMoveOrderTask extends CustomAsyncTask<Void, Void, Boolean> {
-
-        private Integer mOrderId;
-        private Integer mTableId;
-
-        public GetMoveOrderTask(Integer orderId, Integer tableId) {
-            mOrderId = orderId;
-            mTableId = tableId;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            try {
-                return OrderDAO.getInstance().getMoveOrder(mOrderId, mTableId);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return false;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Boolean result) {
-            super.onPostExecute(result);
-            if (result) {
-                U.toastText(TableMapActivity.this, R.string.message_move_order_succeed);
-                mOrderMovingMode.finish();
-            } else {
-                U.toastText(TableMapActivity.this, R.string.message_move_order_failed);
-            }
-        }
-    }
+    private GetMoveOrderTask mMoveOrderTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,12 +83,41 @@ public class TableMapActivity extends Activity implements Callback,
     @Override
     public void onTableClicked(BanDTO table) {
         if (mOrderMovingMode != null && mMovingOrderId != -1) {
-            new GetMoveOrderTask(mMovingOrderId, table.getMaBan()).execute();
+            Bundle extras = new Bundle();
+            extras.putInt(KEY_DES_TAB_ID, table.getMaBan());
+            extras.putInt(KEY_MOVING_ORDER_ID, mMovingOrderId);
+            U.showAuthDlg(this, getFragmentManager(), ACT_MOVE_ORDER, extras);
         }
     }
 
     @Override
     public boolean isInOrderMovingMode() {
         return mOrderMovingMode != null;
+    }
+
+    @Override
+    public void onPostExecute(CustomAsyncTask<Void, Void, Boolean> task, Boolean result) {
+        if (result) {
+            U.toastText(TableMapActivity.this, R.string.message_move_order_succeed);
+            mOrderMovingMode.finish();
+        } else {
+            U.toastText(TableMapActivity.this, R.string.message_move_order_failed);
+        }
+    }
+
+    @Override
+    public void onAuthorized(Bundle extras, int action) {
+        switch (action) {
+            case ACT_MOVE_ORDER:
+                U.cancelAsyncTask(mMoveOrderTask);
+
+                mMoveOrderTask = new GetMoveOrderTask(extras.getInt(KEY_MOVING_ORDER_ID),
+                        extras.getInt(KEY_DES_TAB_ID));
+                mMoveOrderTask.setOnPostExecuteListener(this).execute();
+                break;
+
+            default:
+                break;
+        }
     }
 }

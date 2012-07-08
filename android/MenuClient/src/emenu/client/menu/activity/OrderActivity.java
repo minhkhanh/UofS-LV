@@ -9,6 +9,7 @@ import emenu.client.menu.R;
 import emenu.client.bus.task.CustomAsyncTask;
 import emenu.client.bus.task.GetServingOrderItemsTask;
 import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
+import emenu.client.bus.task.PostOrderTask;
 import emenu.client.dao.OrderDAO;
 import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.menu.adapter.OrderAdapter;
@@ -17,6 +18,7 @@ import emenu.client.menu.adapter.UnorderedAdapter;
 import emenu.client.menu.app.SessionManager;
 import emenu.client.menu.app.SessionManager.ServiceOrder;
 import emenu.client.menu.app.SessionManager.ServiceSession;
+import emenu.client.menu.fragment.AuthDlgFragment.OnAuthorizedListener;
 import emenu.client.menu.fragment.OrderedItemEditingDlgFragment;
 import emenu.client.menu.fragment.OrderedItemEditingDlgFragment.OnItemUpdatedListener;
 import emenu.client.util.U;
@@ -40,13 +42,16 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class OrderActivity extends Activity implements TabListener, OnItemClickListener,
-        OnItemUpdatedListener {
+        OnItemUpdatedListener, OnAuthorizedListener,
+        OnPostExecuteListener<Void, Void, Boolean> {
+
+    private static final int ACT_CONFIRM_ORDER = 0;
 
     private Tab mUnorderedTab;
     private Tab mOrderedTab;
     private OrderAdapter mItemsAdapter;
     private ListView mItemsList;
-    private ProgressDialog mWatingDlg;
+    private PostOrderTask mPostOrderTask;
 
     private DataSetObserver mOrderObserver = new DataSetObserver() {
         public void onChanged() {
@@ -54,48 +59,51 @@ public class OrderActivity extends Activity implements TabListener, OnItemClickL
         }
     };
 
-    private class PostOrderItemsTask extends CustomAsyncTask<Void, Void, Boolean> {
-        List<ChiTietOrderDTO> mItems;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            ServiceSession session = SessionManager.getInstance().loadCurrentSession();
-
-            mItems = session.bindOrder().getOrderItems();
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            try {
-                return OrderDAO.getInstance().postArrayChiTietOrder(mItems);
-            } catch (JSONException e) {
-                e.printStackTrace();
-                return false;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Boolean result) {
-            super.onPostExecute(result);
-            ServiceSession session = SessionManager.getInstance().loadCurrentSession();
-
-            mWatingDlg.cancel();
-            if (result) {
-                U.toastText(OrderActivity.this, OrderActivity.this.getResources()
-                        .getString(R.string.message_order_sent));
-
-                session.getOrder().clear();
-
-                refreshList();
-            } else {
-                new AlertDialog.Builder(OrderActivity.this)
-                        .setMessage(R.string.message_connect_server_failed).create()
-                        .show();
-            }
-        }
-    };
+    // private class PostOrderItemsTask extends CustomAsyncTask<Void, Void,
+    // Boolean> {
+    // List<ChiTietOrderDTO> mItems;
+    //
+    // @Override
+    // protected void onPreExecute() {
+    // super.onPreExecute();
+    //
+    // ServiceSession session =
+    // SessionManager.getInstance().loadCurrentSession();
+    //
+    // mItems = session.bindOrder().getOrderItems();
+    // }
+    //
+    // @Override
+    // protected Boolean doInBackground(Void... params) {
+    // try {
+    // return OrderDAO.getInstance().postArrayChiTietOrder(mItems);
+    // } catch (JSONException e) {
+    // e.printStackTrace();
+    // return false;
+    // }
+    // }
+    //
+    // @Override
+    // protected void onPostExecute(Boolean result) {
+    // super.onPostExecute(result);
+    // ServiceSession session =
+    // SessionManager.getInstance().loadCurrentSession();
+    //
+    // mWatingDlg.cancel();
+    // if (result) {
+    // U.toastText(OrderActivity.this, OrderActivity.this.getResources()
+    // .getString(R.string.message_order_sent));
+    //
+    // session.getOrder().clear();
+    //
+    // refreshList();
+    // } else {
+    // new AlertDialog.Builder(OrderActivity.this)
+    // .setMessage(R.string.message_connect_server_failed).create()
+    // .show();
+    // }
+    // }
+    // };
 
     private OnPostExecuteListener<Integer, Void, List<ContentValues>> mOnPostGetServingOrderItems = new OnPostExecuteListener<Integer, Void, List<ContentValues>>() {
         @Override
@@ -134,15 +142,7 @@ public class OrderActivity extends Activity implements TabListener, OnItemClickL
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         switch (item.getItemId()) {
             case R.id.miConfirmOrder:
-                U.showConfirmDialog(this, R.string.message_confirm_order,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                mWatingDlg = ProgressDialog.show(OrderActivity.this, "",
-                                        getString(R.string.message_waiting));
-                                new PostOrderItemsTask().execute();
-                            }
-                        });
-
+                U.showAuthDlg(this, getFragmentManager(), ACT_CONFIRM_ORDER, null);
                 break;
 
             default:
@@ -234,5 +234,37 @@ public class OrderActivity extends Activity implements TabListener, OnItemClickL
     @Override
     public void onItemUpdated() {
         refreshList();
+    }
+
+    @Override
+    public void onAuthorized(Bundle extras, int action) {
+        switch (action) {
+            case ACT_CONFIRM_ORDER:
+                U.cancelAsyncTask(mPostOrderTask);
+
+                mPostOrderTask = new PostOrderTask();
+                mPostOrderTask.setOnPostExecuteListener(this).execute();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onPostExecute(CustomAsyncTask<Void, Void, Boolean> task, Boolean result) {
+        ServiceSession session = SessionManager.getInstance().loadCurrentSession();
+
+        if (result) {
+            U.toastText(OrderActivity.this,
+                    OrderActivity.this.getString(R.string.message_order_sent));
+
+            session.getOrder().clear();
+
+            refreshList();
+        } else {
+            new AlertDialog.Builder(OrderActivity.this)
+                    .setMessage(R.string.message_connect_server_failed).create().show();
+        }
     }
 }
