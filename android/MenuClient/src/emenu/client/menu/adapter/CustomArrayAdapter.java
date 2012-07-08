@@ -18,6 +18,10 @@ public abstract class CustomArrayAdapter<T> extends BaseAdapter {
         mData = data;
         mContext = context;
     }
+    
+    public void remove(T t) {
+        mData.remove(t);
+    }
 
     public void remove(int position) {
         mData.remove(position);

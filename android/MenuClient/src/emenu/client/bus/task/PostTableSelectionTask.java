@@ -10,14 +10,11 @@ import emenu.client.db.dto.BanDTO;
 import emenu.client.util.U;
 
 public class PostTableSelectionTask extends CustomAsyncTask<Void, Void, Boolean> {
-    
+
     List<Integer> mTabIdList;
 
-    public PostTableSelectionTask(List<BanDTO> tabList) {
-        mTabIdList = new ArrayList<Integer>();
-        for (BanDTO b : tabList) {
-            mTabIdList.add(b.getMaBan());
-        }
+    public PostTableSelectionTask(List<Integer> idList) {
+        mTabIdList = idList;
     }
 
     @Override

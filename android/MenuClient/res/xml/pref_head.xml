@@ -5,9 +5,5 @@
         android:fragment="emenu.client.menu.fragment.SyncPrefFragment"
         android:icon="@drawable/sync_pref_icon"
         android:title="@string/pref_syncing" />
-    <header
-        android:fragment="emenu.client.menu.fragment.ConnectionPrefFragment"
-        android:icon="@drawable/connection_pref_icon"
-        android:title="@string/pref_connection" />
 
 </preference-headers>

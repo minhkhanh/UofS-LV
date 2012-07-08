@@ -1,67 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/TableLayout"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/GridLayout1"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <TableRow
-        android:id="@+id/tableRow1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:gravity="center">
-
-        <TextView
-            android:id="@+id/textUsername"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/caption_waiter_username" android:paddingRight="10dp"/>
-
-        <EditText
-            android:id="@+id/editUsername"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:ems="10">
-
-            <requestFocus />
-        </EditText>
-
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/tableRow2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:gravity="center">
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/caption_waiter_password" />
-
-        <EditText
-            android:id="@+id/editPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword" />
-
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/tableRow3"
+    android:layout_height="wrap_content"
+    android:columnCount="2"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:rowCount="3"
+    android:useDefaultMargins="true" >
+
+    <TextView
+        android:id="@+id/textUsername"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:gravity="center" android:layout_marginTop="8dp">
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_row="0"
+        android:text="@string/caption_waiter_username"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <Button
-            android:id="@+id/btnCancel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/caption_cancel" android:layout_weight="1"/>
+    <EditText
+        android:id="@+id/editUsername"
+        android:layout_column="1"
+        android:layout_gravity="fill_horizontal"
+        android:layout_row="0"
+        android:ems="10" >
+    </EditText>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="right"
+        android:layout_row="1"
+        android:text="@string/caption_waiter_password"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <Button
-            android:id="@+id/btnOK"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/caption_ok" android:layout_weight="1"/>
-    </TableRow>
+    <EditText
+        android:id="@+id/editPassword"
+        android:layout_column="1"
+        android:layout_gravity="fill_horizontal"
+        android:layout_row="1"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <include
+        android:layout_column="0"
+        android:layout_columnSpan="2"
+        android:layout_gravity="fill_horizontal"
+        layout="@layout/frame_ok_cancel_buttons" />
 
-</TableLayout>
+
+</GridLayout>

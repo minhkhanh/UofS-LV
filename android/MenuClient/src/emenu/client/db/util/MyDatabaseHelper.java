@@ -30,7 +30,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         InputStream stream = mContext.getResources().openRawResource(R.raw.create_db);
-        String sqlCreate = U.convertStreamToString(stream);
+        String sqlCreate = U.toString(stream);
         db.execSQL(sqlCreate);
         
         try {

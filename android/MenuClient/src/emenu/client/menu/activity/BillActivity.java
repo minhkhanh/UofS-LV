@@ -18,6 +18,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import emenu.client.menu.R;
@@ -29,6 +31,7 @@ import emenu.client.dao.HoaDonDAO;
 import emenu.client.db.dto.HoaDonDTO;
 import emenu.client.db.dto.OrderDTO;
 import emenu.client.db.dto.PhuThuDTO;
+import emenu.client.db.dto.VoucherDTO;
 import emenu.client.menu.adapter.MainBillAdapter;
 import emenu.client.menu.adapter.SurchargeAdapter;
 import emenu.client.menu.adapter.VoucherAdapter;
@@ -42,7 +45,7 @@ import emenu.client.menu.view.BillHeaderView;
 import emenu.client.util.C;
 import emenu.client.util.U;
 
-public class BillActivity extends Activity implements OnVoucherUsedListener {
+public class BillActivity extends Activity implements OnVoucherUsedListener, OnItemClickListener {
     private GetServingOrderItemsTask mGetServingOrderItemsTask;
 
     private TextView mBillTotalText;
@@ -201,6 +204,7 @@ public class BillActivity extends Activity implements OnVoucherUsedListener {
 
         ListView listBill = (ListView) findViewById(R.id.listBill);
         listBill.setAdapter(mMergeAdapter);
+        listBill.setOnItemClickListener(this);
 
         mBillTotalText = (TextView) findViewById(R.id.textBillTotal);
     }
@@ -233,5 +237,17 @@ public class BillActivity extends Activity implements OnVoucherUsedListener {
         mVoucherAdapter.notifyDataSetChanged();
 
         updateBillTotalText();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+        Object item = arg0.getItemAtPosition(arg2);
+        if (item instanceof ContentValues) {
+            ContentValues values = (ContentValues) item;
+            if (values.getAsString(VoucherDTO.CL_EX_VOUCHER_CODE) != null) {
+                mVoucherAdapter.remove(values);
+                mVoucherAdapter.notifyDataSetChanged();
+            }
+        }
     }
 }
