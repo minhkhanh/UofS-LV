@@ -3,6 +3,7 @@ package emenu.client.menu.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.client.HttpClient;
 import org.json.JSONException;
 
 import emenu.client.menu.R;
@@ -237,12 +238,12 @@ public class OrderActivity extends Activity implements TabListener, OnItemClickL
     }
 
     @Override
-    public void onAuthorized(Bundle extras, int action) {
+    public void onAuthorized(HttpClient client, Bundle extras, int action) {
         switch (action) {
             case ACT_CONFIRM_ORDER:
                 U.cancelAsyncTask(mPostOrderTask);
 
-                mPostOrderTask = new PostOrderTask();
+                mPostOrderTask = new PostOrderTask(client);
                 mPostOrderTask.setOnPostExecuteListener(this).execute();
                 break;
 

@@ -19,7 +19,7 @@ import emenu.client.db.dto.MonAnDTO;
 import emenu.client.db.dto.MonAnDaNgonNguDTO;
 import emenu.client.menu.app.SessionManager;
 import emenu.client.menu.app.SessionManager.OrderItemId;
-import emenu.client.menu.fragment.ItemNoteFragment;
+import emenu.client.menu.fragment.ItemNoteDlgFragment;
 import emenu.client.util.C;
 import emenu.client.util.U;
 
@@ -89,7 +89,7 @@ public class UnorderedItemView extends RelativeLayout implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnAddItemNote:
-                ItemNoteFragment f = new ItemNoteFragment(mValues);
+                ItemNoteDlgFragment f = new ItemNoteDlgFragment(mValues);
                 U.showDlgFragment((Activity) getContext(), f, true);
                 break;
             case R.id.btnPlus:

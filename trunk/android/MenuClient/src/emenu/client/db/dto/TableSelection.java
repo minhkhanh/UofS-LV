@@ -3,13 +3,72 @@ package emenu.client.db.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class TableSelection {
+
+    public static class TableIdSelection {
+        private Integer mMainTabId;
+        private List<Integer> mTabIdList;
+
+        public static final String COL_MAINTAB = "MainTabId";
+        public static final String COL_TABLIST = "TabIdList";
+
+        public JSONObject toJson() throws JSONException {
+            JSONObject jsonObject = new JSONObject();
+            if (mMainTabId != null)
+                jsonObject.put(COL_MAINTAB, mMainTabId);
+
+            JSONArray jsonArray = new JSONArray();
+            if (mTabIdList != null) {
+                for (Integer b : mTabIdList) {
+                    jsonArray.put(b);
+                }
+            }
+            jsonObject.put(COL_TABLIST, jsonArray);
+
+            return jsonObject;
+        }
+
+        public Integer getMainTabId() {
+            return mMainTabId;
+        }
+
+        public void setMainTabId(Integer mainTabId) {
+            mMainTabId = mainTabId;
+        }
+
+        public List<Integer> getTabIdList() {
+            return mTabIdList;
+        }
+
+        public void setTabIdList(List<Integer> tabIdList) {
+            mTabIdList = tabIdList;
+        }
+    }
 
     private BanDTO mMainTab;
     private List<BanDTO> mTabList;
 
     public enum SelectionState {
         None, SingleFree, SingleBusy, MultiFree, Mixed, GroupBusy
+    }
+
+    public TableIdSelection createIdSelection() {
+        TableIdSelection idSelection = new TableIdSelection();
+        if (mMainTab != null)
+            idSelection.setMainTabId(mMainTab.getMaBan());
+        if (mTabList != null) {
+            List<Integer> idList = new ArrayList<Integer>();
+            for (BanDTO b : mTabList) {
+                idList.add(b.getMaBan());
+            }
+            idSelection.mTabIdList = idList;
+        }
+
+        return idSelection;
     }
 
     public List<Integer> getTabIds() {
@@ -59,10 +118,10 @@ public class TableSelection {
         return mTabList;
     }
 
-    public void findMainTab() {
+    private void findMainTab() {
         if (mTabList == null || mTabList.size() == 0)
             return;
-        
+
         mMainTab = null;
         for (BanDTO b : mTabList) {
             if (b.getMaBanChinh() != null) {

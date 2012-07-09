@@ -3,6 +3,8 @@ package emenu.client.menu.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.client.HttpClient;
+
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -56,9 +58,10 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
         void onTableClicked(BanDTO table);
     }
 
-    protected OnPostExecuteListener<Void, Void, Boolean> mOnPostExecuteTableSelecting = new OnPostExecuteListener<Void, Void, Boolean>() {
+    protected OnPostExecuteListener<TableSelection.TableIdSelection, Void, Boolean> mOnPostExecuteTableSelecting = new OnPostExecuteListener<TableSelection.TableIdSelection, Void, Boolean>() {
         @Override
-        public void onPostExecute(CustomAsyncTask<Void, Void, Boolean> task,
+        public void onPostExecute(
+                CustomAsyncTask<TableSelection.TableIdSelection, Void, Boolean> task,
                 Boolean result) {
             if (!result) {
                 U.showErrorDialog(getActivity(), R.string.message_select_table_failed);
@@ -100,7 +103,7 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
                     break;
 
                 case R.id.miSelectTable:
-                    postTableSelection();
+                    postTableSelection(null);
 
                     break;
 
@@ -179,14 +182,14 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
     public TableMapFragment() {
     }
 
-    private void postTableSelection() {
+    private void postTableSelection(HttpClient client) {
         U.cancelAsyncTask(mPostTabSelTask);
 
-        mPostTabSelTask = new PostTableSelectionTask(mCurrTabSel.getTabIds());
+        mPostTabSelTask = new PostTableSelectionTask(client);
         mPostTabSelTask.getExtras()
                 .putInt("groupId", mCurrTabSel.getMainTab().getMaBan());
         mPostTabSelTask.setOnPostExecuteListener(mOnPostExecuteTableSelecting);
-        mPostTabSelTask.execute();
+        mPostTabSelTask.execute(mCurrTabSel.createIdSelection());
     }
 
     public TableMapFragment(OnTableClickedListener onTableClickedListener,
@@ -300,23 +303,15 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
         if (result) {
             getLoaderManager().restartLoader(0, null, this);
         } else {
-            new AlertDialog.Builder(getActivity())
-                    .setMessage(R.string.message_table_spliting_failed)
-                    .setNeutralButton(R.string.caption_ok,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            }).create().show();
+            U.showErrorDialog(getActivity(), R.string.message_table_spliting_failed);
         }
     }
 
     @Override
-    public void onAuthorized(Bundle extras, int action) {
+    public void onAuthorized(HttpClient client, Bundle extras, int action) {
         switch (action) {
             case ACT_GROUP_TABLE:
-                postTableSelection();
+                postTableSelection(client);
                 break;
 
             case ACT_SPLIT_TABLE:

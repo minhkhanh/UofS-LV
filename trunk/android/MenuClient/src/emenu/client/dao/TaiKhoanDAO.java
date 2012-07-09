@@ -24,6 +24,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import emenu.client.db.dto.TaiKhoanDTO;
 import emenu.client.db.util.MyDatabaseHelper;
+import emenu.client.util.MyHttpClient;
 import emenu.client.util.U;
 
 public class TaiKhoanDAO extends AbstractDAO {
@@ -53,7 +54,7 @@ public class TaiKhoanDAO extends AbstractDAO {
     public HttpClient postLogIn(String name, String pass) throws ClientProtocolException,
             IOException {
         String url = SERVER_URL_SLASH + "dangNhapJson";
-        HttpClient client = new DefaultHttpClient();
+        HttpClient client = new MyHttpClient();
         HttpPost post = new HttpPost(url);
 
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);

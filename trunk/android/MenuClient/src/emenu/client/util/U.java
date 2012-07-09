@@ -3,6 +3,7 @@ package emenu.client.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -13,8 +14,11 @@ import java.util.Set;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
+import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
@@ -209,8 +213,46 @@ public final class U {
         return Boolean.valueOf(String.valueOf(c.getInt(i)));
     }
 
+    public static final String loadPostResponseForm(String url, List<NameValuePair> data)
+            throws ParseException, IOException {
+        HttpClient httpclient = new MyHttpClient();
+        HttpPost httpPost = new HttpPost(url);
+
+        httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+        httpPost.setEntity(new UrlEncodedFormEntity(data));
+        HttpResponse response = httpclient.execute(httpPost);
+        if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+            return EntityUtils.toString(response.getEntity());
+        }
+
+        return null;
+    }
+
+    public static final String loadPostResponseJson(HttpClient httpClient, String url,
+            String jsonData) {
+        if (httpClient == null)
+            httpClient = new MyHttpClient();
+
+        HttpPost httpPost = new HttpPost(url);
+
+        try {
+            StringEntity postObj = new StringEntity(jsonData, HTTP.UTF_8);
+            httpPost.setHeader("Content-Type", "application/json; charset=UTF-8");
+            httpPost.setEntity(postObj);
+
+            HttpResponse response = httpClient.execute(httpPost);
+            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                return EntityUtils.toString(response.getEntity());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     public static final String loadPostResponseJson(String url, String jsonData) {
-        HttpClient httpclient = new DefaultHttpClient();
+        HttpClient httpclient = new MyHttpClient();
         HttpPost httpPost = new HttpPost(url);
 
         try {
@@ -229,6 +271,7 @@ public final class U {
         return null;
     }
 
+    @Deprecated
     public static final String loadPostResponse(String url, String xmlData) {
         HttpClient httpclient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(url);
@@ -250,28 +293,8 @@ public final class U {
         return null;
     }
 
-    public static final String loadPutResponse(String url, JSONObject jsonObject) {
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpPut httpPut = new HttpPut(url);
-
-        try {
-            StringEntity postObj = new StringEntity(jsonObject.toString(), HTTP.UTF_8);
-            httpPut.setHeader("Content-Type", "application/json; charset=UTF-8");
-            httpPut.setEntity(postObj);
-
-            HttpResponse response = httpclient.execute(httpPut);
-            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-                return EntityUtils.toString(response.getEntity());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
     public static final String loadPutResponseJson(String url, String jsonData) {
-        HttpClient httpclient = new DefaultHttpClient();
+        HttpClient httpclient = new MyHttpClient();
         HttpPut httpPut = new HttpPut(url);
 
         try {
@@ -290,6 +313,7 @@ public final class U {
         return null;
     }
 
+    @Deprecated
     public static final String loadPutResponse(String url, String xmlData) {
         HttpClient httpclient = new DefaultHttpClient();
         HttpPut httpPut = new HttpPut(url);
@@ -314,9 +338,24 @@ public final class U {
         return result;
     }
 
+    public static final String loadGetResponse(HttpClient httpClient, String url)
+            throws ClientProtocolException, IOException {
+        if (httpClient == null)
+            httpClient = new MyHttpClient();
+        
+        HttpGet httpget = new HttpGet(url);
+
+        HttpResponse response = httpClient.execute(httpget);
+        if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+            return EntityUtils.toString(response.getEntity());
+        }
+
+        return null;
+    }
+
     public static final String loadGetResponse(String url)
             throws ClientProtocolException, IOException {
-        HttpClient httpclient = new DefaultHttpClient();
+        HttpClient httpclient = new MyHttpClient();
         HttpGet httpget = new HttpGet(url);
 
         HttpResponse response = httpclient.execute(httpget);
@@ -366,7 +405,7 @@ public final class U {
             FragmentManager fm, int action, Bundle extras) {
         AuthDlgFragment dlg = new AuthDlgFragment(listener, action);
         if (extras != null)
-            dlg.getExtras().putAll(extras);
+            dlg.getArguments().putAll(extras);
 
         FragmentTransaction ft = fm.beginTransaction();
         Fragment prev = fm.findFragmentByTag(C.AUTH_DIALOG_TAG);

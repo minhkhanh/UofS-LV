@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,15 +40,15 @@ public class OrderDAO extends AbstractDAO {
         super(dbHelper);
     }
 
-    public boolean postOrderSplitting(List<Integer> itemIds) {
+    public boolean postOrderSplitting(HttpClient client, List<Integer> itemIds) {
         JSONArray jsonArray = new JSONArray();
         for (Integer i : itemIds) {
             jsonArray.put(i);
         }
 
-        String response = U.loadPostResponseJson(POST_ORDER_SPLITTING,
+        String response = U.loadPostResponseJson(client, POST_ORDER_SPLITTING,
                 jsonArray.toString());
-        
+
         return Boolean.valueOf(response);
     }
 
@@ -81,12 +82,12 @@ public class OrderDAO extends AbstractDAO {
         JSONObject jsonObject = item.toJson();
 
         String url = SERVER_URL_SLASH + "suaChiTietOrderJson";
-        String response = U.loadPutResponse(url, jsonObject);
+        String response = U.loadPutResponseJson(url, jsonObject.toString());
 
         return Boolean.valueOf(response);
     }
 
-    public boolean getMoveOrder(Integer orderId, Integer tableId)
+    public boolean getMoveOrder(HttpClient client, Integer orderId, Integer tableId)
             throws ClientProtocolException, IOException {
         String url = SERVER_URL_SLASH + "chuyenBan?maOrder=" + orderId + "&maBanMoi="
                 + tableId;
@@ -125,11 +126,11 @@ public class OrderDAO extends AbstractDAO {
         return total;
     }
 
-    public boolean postArrayChiTietOrder(List<ChiTietOrderDTO> list) throws JSONException {
+    public boolean postArrayChiTietOrder(HttpClient client, List<ChiTietOrderDTO> list) throws JSONException {
         String url = SERVER_URL_SLASH + "themNhieuChiTietOrderJson";
 
         JSONArray jsonArray = ChiTietOrderDTO.toArrayJson(list);
-        String response = U.loadPostResponseJson(url, jsonArray.toString());
+        String response = U.loadPostResponseJson(client, url, jsonArray.toString());
 
         return Boolean.valueOf(response);
     }

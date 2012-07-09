@@ -3,6 +3,7 @@ package emenu.client.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.client.HttpClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -62,7 +63,7 @@ public class HoaDonDAO extends AbstractDAO {
         return list;
     }
 
-    public String postLapHoaDon(Integer orderId, List<String> voucherCodes) {
+    public String postLapHoaDon(HttpClient client, Integer orderId, List<String> voucherCodes) {
         String url = AbstractDAO.SERVER_URL_SLASH + "lapHoaDonJson?maOrder=" + orderId;
 
         JSONArray jsonArray = new JSONArray();
@@ -70,7 +71,7 @@ public class HoaDonDAO extends AbstractDAO {
             jsonArray.put(s);
         }
         
-        return U.loadPostResponseJson(url, jsonArray.toString());
+        return U.loadPostResponseJson(client, url, jsonArray.toString());
     }
 
     public HoaDonDTO postHoaDon(HoaDonDTO hoaDon) {

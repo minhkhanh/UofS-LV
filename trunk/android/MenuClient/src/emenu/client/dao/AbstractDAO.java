@@ -6,7 +6,20 @@ import emenu.client.db.dto.BanDTO;
 import emenu.client.db.util.MyDatabaseHelper;
 
 public abstract class AbstractDAO {
-    public static String SERVER_URL_SLASH = "http://192.168.56.1/RestService/LocalService.svc"
+//    private static MyHttpClient mHttpClient;
+//
+//    public static void createHttpClient(Context context) {
+//        mHttpClient = new MyHttpClient(context);
+//    }
+//
+//    public static MyHttpClient getHttpClient() {
+//        if (mHttpClient == null)
+//            throw new NullPointerException("Singleton instance not created yet.");
+//
+//        return mHttpClient;
+//    }
+
+    public static String SERVER_URL_SLASH = "https://192.168.56.1/RestService/LocalService.svc"
             + "/";
 
     private MyDatabaseHelper mDbHelper = null;
