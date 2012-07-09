@@ -57,6 +57,7 @@ public class DonViTinhDaNgonNguDAO extends AbstractDAO {
             return false;
         } finally {
             db.endTransaction();
+            close();
         }
 
         return true;

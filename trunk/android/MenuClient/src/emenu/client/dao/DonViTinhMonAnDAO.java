@@ -59,6 +59,7 @@ public class DonViTinhMonAnDAO extends AbstractDAO {
             result = false;
         } finally {
             db.endTransaction();
+            close();
         }
 
         return result;

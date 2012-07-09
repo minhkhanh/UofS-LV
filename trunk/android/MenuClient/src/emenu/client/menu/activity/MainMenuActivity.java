@@ -3,6 +3,8 @@ package emenu.client.menu.activity;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -11,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import emenu.client.menu.R;
 import emenu.client.menu.app.SessionManager;
 import emenu.client.menu.app.SessionManager.ServiceSession;
@@ -27,6 +30,11 @@ public class MainMenuActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.options_main_menu, menu);
+        
+//        SearchView searchView = (SearchView) menu.findItem(R.id.miDishSearch)
+//                .getActionView();
+//        searchView.setIconifiedByDefault(false); // Do not iconify the widget;
+//                                                 // expand it by default
 
         return true;
     }
@@ -48,7 +56,6 @@ public class MainMenuActivity extends Activity {
 
         switch (item.getItemId()) {
             case R.id.miViewOrder:
-
                 if (session.isFinished())
                     U.toastText(this, R.string.message_your_service_session_finished);
                 else {
@@ -56,14 +63,15 @@ public class MainMenuActivity extends Activity {
                     startActivity(intent);
                 }
                 break;
-//            case R.id.miPayment:
-//                if (session.isFinished())
-//                    U.toastText(this, R.string.message_your_service_session_finished);
-//                else {
-//                    Intent intent = new Intent(MainMenuActivity.this, BillActivity.class);
-//                    startActivity(intent);
-//                }
-//                break;
+        // case R.id.miPayment:
+        // if (session.isFinished())
+        // U.toastText(this, R.string.message_your_service_session_finished);
+        // else {
+        // Intent intent = new Intent(MainMenuActivity.this,
+        // BillActivity.class);
+        // startActivity(intent);
+        // }
+        // break;
         }
 
         return super.onMenuItemSelected(featureId, item);
@@ -76,6 +84,13 @@ public class MainMenuActivity extends Activity {
 
         View v = findViewById(android.R.id.content);
         v.setBackgroundResource(R.drawable.french_food_photo_eu030);
+
+//        // Get the intent, verify the action and get the query
+//        Intent intent = getIntent();
+//        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+//            String query = intent.getStringExtra(SearchManager.QUERY);
+//            // doMySearch(query);
+//        }
 
         FragmentManager fm = getFragmentManager();
         CategoryListFragment f = (CategoryListFragment) fm

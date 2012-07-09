@@ -58,6 +58,7 @@ public class KhuVucDAO extends AbstractDAO {
             result = false;
         } finally {
             db.endTransaction();
+            close();
         }
 
         return result;
