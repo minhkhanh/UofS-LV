@@ -323,7 +323,7 @@ namespace LocalServerWeb.Controllers
             List<ChiTietMonAnDonViTinh> listCTMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayDanhSachChiTietMonAnDonViTinhTheoMonAn(monAn.MaMonAn);
             if (listCTMonAnDonViTinh != null && listCTMonAnDonViTinh[0] != null)
             {
-                viewModel.DonGia = listCTMonAnDonViTinh[0].DonGia;
+                viewModel.DonGia = String.Format("{0:#,##0}", listCTMonAnDonViTinh[0].DonGia);
 
                 ChiTietDonViTinhDaNgonNgu ctDonViTinhDaNgonNgu = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(listCTMonAnDonViTinh[0].DonViTinh.MaDonViTinh, maNgonNgu);
                 if (ctDonViTinhDaNgonNgu != null)
@@ -375,12 +375,12 @@ namespace LocalServerWeb.Controllers
                 
                 // Hien thi danh sach don vi tinh
                 viewModel.listTenDonViTinh = new List<string>();
-                viewModel.listDonGia = new List<float>();
+                viewModel.listDonGia = new List<string>();
 
                 List<ChiTietMonAnDonViTinh> listCTMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayDanhSachChiTietMonAnDonViTinhTheoMonAn(monAn.MaMonAn);
                 foreach (ChiTietMonAnDonViTinh ctMonAnDonViTinh in listCTMonAnDonViTinh)
                 {
-                    viewModel.listDonGia.Add(ctMonAnDonViTinh.DonGia);
+                    viewModel.listDonGia.Add(String.Format("{0:#,##0}", ctMonAnDonViTinh.DonGia));
                     ChiTietDonViTinhDaNgonNgu ctDonViTinhDaNgonNgu = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(ctMonAnDonViTinh.DonViTinh.MaDonViTinh, maNgonNgu);
                     if (ctDonViTinhDaNgonNgu != null)
                     {

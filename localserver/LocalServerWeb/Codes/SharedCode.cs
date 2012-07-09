@@ -202,7 +202,7 @@ namespace LocalServerWeb.Codes
             List<ChiTietMonAnDonViTinh> listCTMonAnDonViTinh = ChiTietMonAnDonViTinhBUS.LayDanhSachChiTietMonAnDonViTinhTheoMonAn(monAn.MaMonAn);
             if (listCTMonAnDonViTinh != null && listCTMonAnDonViTinh[0] != null)
             {
-                viewModel.DonGia = listCTMonAnDonViTinh[0].DonGia;
+                viewModel.DonGia = String.Format("{0:#,##0}",listCTMonAnDonViTinh[0].DonGia); 
 
                 ChiTietDonViTinhDaNgonNgu ctDonViTinhDaNgonNgu = ChiTietDonViTinhDaNgonNguBUS.LayChiTietDonViTinhDaNgonNgu(listCTMonAnDonViTinh[0].DonViTinh.MaDonViTinh, maNgonNgu);
                 if (ctDonViTinhDaNgonNgu != null)

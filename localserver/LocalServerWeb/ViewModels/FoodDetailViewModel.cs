@@ -13,7 +13,7 @@ namespace LocalServerWeb.ViewModels
         public string TenMonAn { get; set; }
         public string MoTaMonAn { get; set; }
 
-        public List<float> listDonGia { get; set; }
+        public List<string> listDonGia { get; set; }
         public List<string> listTenDonViTinh { get; set;}
 
         public float DiemDanhGia { get; set; }
