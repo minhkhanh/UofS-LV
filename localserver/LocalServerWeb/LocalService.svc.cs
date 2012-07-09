@@ -1220,7 +1220,7 @@ namespace LocalServerWeb
             return true;
         }
 
-        public bool DangXuat()
+        public bool DangXuat(string junk)
         {
             if (HttpContext.Current.Session["taiKhoan"] != null)
             {
@@ -1236,8 +1236,10 @@ namespace LocalServerWeb
         }
 
 
-        public string TestGET(string thamSo)
+        public string TestGET(string thamSo, string junk)
         {
+            if (!SharedCode.IsWaitorLogin(new HttpSessionStateWrapper(HttpContext.Current.Session)))
+                return "Chua chung thuc";
             return "GET OK " + thamSo;
         }
 

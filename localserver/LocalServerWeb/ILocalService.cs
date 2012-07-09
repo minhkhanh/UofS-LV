@@ -425,9 +425,9 @@ namespace LocalServerWeb
         [OperationContract]
         bool DangNhap(Stream body);
 
-        [WebInvoke(Method = "GET", UriTemplate = "dangXuat")]
+        [WebInvoke(Method = "GET", UriTemplate = "dangXuat?junk={junk}")]
         [OperationContract]
-        bool DangXuat();
+        bool DangXuat(string junk);
 
         //[WebInvoke(Method = "POST", UriTemplate = "dangNhapMobileQuanLy?tenDangNhap={tenDangNhap}&matKhau={matKhau}")]
         //[OperationContract]
@@ -441,9 +441,9 @@ namespace LocalServerWeb
         string AddText();
 
         // Check to ensure server work correctly
-        [WebInvoke(Method = "GET", UriTemplate = "testGet?thamSo={thamSo}")]
+        [WebInvoke(Method = "GET", UriTemplate = "testGet?thamSo={thamSo}&junk={junk}")]
         [OperationContract]
-        string TestGET(string thamSo);
+        string TestGET(string thamSo, string junk);
 
         [WebInvoke(Method = "POST", UriTemplate = "testPost?thamSo={thamSo}")]
         [OperationContract]
