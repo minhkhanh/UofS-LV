@@ -29,18 +29,18 @@
                         success: function (response) {
                             if (response != 'false') {
                                 var data = eval('(' + response + ')');
-                                alert('Your rating has been recorded');
-                                $('#currentlyrated').html('Currently rated ' + data.DiemTrungBinh.toFixed(2) +
-                ' by ' + data.SoLuotDanhGia + ' people');
+                                alert('<%: FoodCategoryString.RatingRecorded %>');
+                                $('#currentlyrated').html('<%: FoodCategoryString.CurrentlyRated %> ' + data.DiemTrungBinh.toFixed(2) +
+                ' <%: FoodCategoryString.By %> ' + data.SoLuotDanhGia + ' <%: FoodCategoryString.People %>');
                             }
                             else {
-                                alert('You have already rated this food');
+                                alert('<%: FoodCategoryString.AlreadyRated %>');
                             }
                             $('#rater').hide();
                             $('#rated').show();
                         },
                         error: function (response) {
-                            alert('There was an error.');
+                            alert('<%: FoodCategoryString.Error %>');
                         }
                     });
                 }
@@ -73,8 +73,9 @@
             </form>
         </div>
         <p id="currentlyrated" style="float: left; padding-left: 20px;">
-            <%= Model.DiemTrungBinh > 0 ? "Currently rated " + Model.DiemTrungBinh.ToString("f") + " by " + Model.SoLuotDanhGia + " people" 
-       : "<span style=\"color:red\">Not yet rated.  Be the first to rate this food!</span>"%>
+            <%= Model.DiemTrungBinh > 0 ? FoodCategoryString.CurrentlyRated + " " + Model.DiemTrungBinh.ToString("f") + " " + FoodCategoryString.By + " "
+                                + Model.SoLuotDanhGia + " " + FoodCategoryString.People
+       : "<span style=\"color:red\">"+FoodCategoryString.NotYetRated+"</span>"%>
         </p>
     </div>
     <div style="clear: both">
@@ -91,7 +92,7 @@
             </form>
         </div>
         <p style="float: left; padding-left: 20px;">
-            Rate Now!
+            <%: FoodCategoryString.RateNow %>
         </p>
     </div>
     <div style="clear: both">
