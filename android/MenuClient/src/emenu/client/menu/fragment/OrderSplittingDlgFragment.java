@@ -3,6 +3,8 @@ package emenu.client.menu.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.client.HttpClient;
+
 import android.app.DialogFragment;
 import android.content.ContentValues;
 import android.os.Bundle;
@@ -113,13 +115,13 @@ public class OrderSplittingDlgFragment extends DialogFragment implements
     }
 
     @Override
-    public void onAuthorized(Bundle extras, int action) {
+    public void onAuthorized(HttpClient client, Bundle extras, int action) {
         switch (action) {
             case ACT_SPLIT_ORDER:
                 U.cancelAsyncTask(mSplitOrderTask);
 
                 List<ContentValues> desContent = mDesListAdapter.getData();
-                mSplitOrderTask = new PostOrderSplittingTask(desContent);
+                mSplitOrderTask = new PostOrderSplittingTask(client, desContent);
                 mSplitOrderTask.setOnPostExecuteListener(mOnPostOrderSplitting).execute();
                 break;
 

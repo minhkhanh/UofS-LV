@@ -1,5 +1,7 @@
 package emenu.client.menu.fragment;
 
+import org.apache.http.client.HttpClient;
+
 import emenu.client.dao.AbstractDAO;
 import emenu.client.menu.R;
 import emenu.client.menu.activity.AppPreferenceActivity;
@@ -62,7 +64,7 @@ public class HomeNavigationDlgFragment extends DialogFragment implements OnClick
     }
 
     @Override
-    public void onAuthorized(Bundle extras, int action) {
+    public void onAuthorized(HttpClient client, Bundle extras, int action) {
         switch (action) {
             case ACT_CONFIG:
                 Intent intent = new Intent(getActivity(), AppPreferenceActivity.class);

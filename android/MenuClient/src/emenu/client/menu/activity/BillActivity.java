@@ -3,6 +3,8 @@ package emenu.client.menu.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.client.HttpClient;
+
 import com.commonsware.cwac.merge.MergeAdapter;
 
 import android.app.Activity;
@@ -232,14 +234,14 @@ public class BillActivity extends Activity implements OnVoucherUsedListener,
     }
 
     @Override
-    public void onAuthorized(Bundle extras, int action) {
+    public void onAuthorized(HttpClient client, Bundle extras, int action) {
         switch (action) {
             case ACT_CONFIRM_BILL:
                 U.cancelAsyncTask(mPostBillTask);
 
                 Integer orderId = SessionManager.getInstance().loadCurrentSession()
                         .getOrderId();
-                mPostBillTask = new PostBillTask(mVoucherAdapter.getAllVoucherCodes());
+                mPostBillTask = new PostBillTask(client, mVoucherAdapter.getAllVoucherCodes());
                 mPostBillTask.setOnPostExecuteListener(mOnPostPostBill).execute(orderId);
                 break;
 

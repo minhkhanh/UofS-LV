@@ -33,14 +33,13 @@ public class AuthDlgFragment extends DialogFragment implements OnClickListener {
     private int mAction;
     private OnAuthorizedListener mOnAuthorizedListener;
     private PostLogInTask mLogInTask;
-    private Bundle mExtras = new Bundle();
 
     private OnPostExecuteListener<Void, Void, HttpClient> mOnPostLogIn = new OnPostExecuteListener<Void, Void, HttpClient>() {
         @Override
         public void onPostExecute(CustomAsyncTask<Void, Void, HttpClient> task,
                 HttpClient result) {
             if (result != null) {
-                mOnAuthorizedListener.onAuthorized(mExtras, mAction);
+                mOnAuthorizedListener.onAuthorized(result, getArguments(), mAction);
                 dismiss();                
             } else {
                 U.toastText(getActivity(), R.string.message_auth_failed);
@@ -49,7 +48,7 @@ public class AuthDlgFragment extends DialogFragment implements OnClickListener {
     };
 
     public interface OnAuthorizedListener {
-        void onAuthorized(Bundle extras, int action);
+        void onAuthorized(HttpClient result, Bundle extras, int action);
     }
 
     public AuthDlgFragment(OnAuthorizedListener listener, int action) {
@@ -97,13 +96,5 @@ public class AuthDlgFragment extends DialogFragment implements OnClickListener {
                 dismiss();
                 break;
         }
-    }
-
-    public Bundle getExtras() {
-        return mExtras;
-    }
-
-    public void setExtras(Bundle extras) {
-        mExtras = extras;
     }
 }

@@ -18,12 +18,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class ItemNoteFragment extends DialogFragment implements OnClickListener {
+public class ItemNoteDlgFragment extends DialogFragment implements OnClickListener {
     EditText mNoteEdit;
     private ContentValues mValues;
     private OrderItemId mItemId;
 
-    public ItemNoteFragment(ContentValues values) {
+    public ItemNoteDlgFragment(ContentValues values) {
         mValues = values;
     }
 

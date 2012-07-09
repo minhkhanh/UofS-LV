@@ -1,5 +1,7 @@
 package emenu.client.menu.activity;
 
+import org.apache.http.client.HttpClient;
+
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -106,13 +108,13 @@ public class TableMapActivity extends Activity implements Callback,
     }
 
     @Override
-    public void onAuthorized(Bundle extras, int action) {
+    public void onAuthorized(HttpClient client, Bundle extras, int action) {
         switch (action) {
             case ACT_MOVE_ORDER:
                 U.cancelAsyncTask(mMoveOrderTask);
 
-                mMoveOrderTask = new GetMoveOrderTask(extras.getInt(KEY_MOVING_ORDER_ID),
-                        extras.getInt(KEY_DES_TAB_ID));
+                mMoveOrderTask = new GetMoveOrderTask(client,
+                        extras.getInt(KEY_MOVING_ORDER_ID), extras.getInt(KEY_DES_TAB_ID));
                 mMoveOrderTask.setOnPostExecuteListener(this).execute();
                 break;
 

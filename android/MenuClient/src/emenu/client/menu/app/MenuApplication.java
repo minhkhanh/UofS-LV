@@ -24,7 +24,9 @@ import emenu.client.dao.TiGiaDAO;
 import emenu.client.dao.VoucherDAO;
 import emenu.client.db.util.MyDatabaseHelper;
 import emenu.client.menu.R;
+import emenu.client.menu.fragment.ServerAddressDlgFragment;
 import emenu.client.util.C;
+import emenu.client.util.MyHttpClient;
 import android.app.Activity;
 import android.app.Application;
 import android.content.SharedPreferences;
@@ -64,8 +66,9 @@ public class MenuApplication extends Application {
 
         SharedPreferences sharedPref = getSharedPreferences(C.SHARED_PREF_FILE, 0);
 
-        String key = getString(R.string.key_pref_server_address);
-        String servAddr = sharedPref.getString(key, AbstractDAO.SERVER_URL_SLASH);
+        String servAddr = sharedPref.getString(
+                ServerAddressDlgFragment.KEY_PREF_CONNECTION,
+                AbstractDAO.SERVER_URL_SLASH);
         AbstractDAO.SERVER_URL_SLASH = servAddr;
 
         BanDAO.createInstance(dbOpener);
@@ -89,6 +92,9 @@ public class MenuApplication extends Application {
         KhuyenMaiMonDAO.createInstance(dbOpener);
         PhuThuDAO.createInstance(dbOpener);
         PhuThuKhuVucDAO.createInstance(dbOpener);
+
+        // AbstractDAO.createHttpClient(getApplicationContext())
+        MyHttpClient.createKeyStore(getApplicationContext());
     }
 
     public static final MenuApplication getInstance() {
