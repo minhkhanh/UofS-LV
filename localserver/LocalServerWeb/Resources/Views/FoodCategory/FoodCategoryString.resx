@@ -117,11 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AlreadyRated" xml:space="preserve">
+    <value>You have already rated this food</value>
+  </data>
+  <data name="By" xml:space="preserve">
+    <value>by</value>
+  </data>
+  <data name="CurrentlyRated" xml:space="preserve">
+    <value>Currently rated</value>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
   <data name="Detail" xml:space="preserve">
     <value>Detail</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>There was an error</value>
   </data>
   <data name="FoodInformation" xml:space="preserve">
     <value>Food information</value>
@@ -129,8 +141,20 @@
   <data name="Index" xml:space="preserve">
     <value>Index</value>
   </data>
+  <data name="NotYetRated" xml:space="preserve">
+    <value>Not yet rated.  Be the first to rate this food!</value>
+  </data>
+  <data name="People" xml:space="preserve">
+    <value>people</value>
+  </data>
   <data name="Price" xml:space="preserve">
     <value>Price</value>
+  </data>
+  <data name="RateNow" xml:space="preserve">
+    <value>Rate now !</value>
+  </data>
+  <data name="RatingRecorded" xml:space="preserve">
+    <value>Your rating has been recorded successfully</value>
   </data>
   <data name="RelatedFood" xml:space="preserve">
     <value>Related food</value>

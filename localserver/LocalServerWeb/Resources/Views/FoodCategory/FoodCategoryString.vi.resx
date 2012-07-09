@@ -117,11 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AlreadyRated" xml:space="preserve">
+    <value>Ban da danh gia mon nay roi</value>
+  </data>
+  <data name="By" xml:space="preserve">
+    <value>bởi</value>
+  </data>
+  <data name="CurrentlyRated" xml:space="preserve">
+    <value>Được đánh giá</value>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>Mô tả</value>
   </data>
   <data name="Detail" xml:space="preserve">
     <value>Chi tiết</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Khong danh gia duoc</value>
   </data>
   <data name="FoodInformation" xml:space="preserve">
     <value>Thông tin món</value>
@@ -129,8 +141,20 @@
   <data name="Index" xml:space="preserve">
     <value>Đầu mục</value>
   </data>
+  <data name="NotYetRated" xml:space="preserve">
+    <value>Món này chưa được đánh giá. Hãy đánh giá ngay</value>
+  </data>
+  <data name="People" xml:space="preserve">
+    <value>người</value>
+  </data>
   <data name="Price" xml:space="preserve">
     <value>Giá</value>
+  </data>
+  <data name="RateNow" xml:space="preserve">
+    <value>Đánh giá !</value>
+  </data>
+  <data name="RatingRecorded" xml:space="preserve">
+    <value>Danh gia thanh cong</value>
   </data>
   <data name="RelatedFood" xml:space="preserve">
     <value>Món liên quan</value>

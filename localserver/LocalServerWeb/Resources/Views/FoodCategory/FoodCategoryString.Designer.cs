@@ -61,6 +61,33 @@ namespace LocalServerWeb.Resources.Views.FoodCategory {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have already rated this food.
+        /// </summary>
+        public static string AlreadyRated {
+            get {
+                return ResourceManager.GetString("AlreadyRated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to by.
+        /// </summary>
+        public static string By {
+            get {
+                return ResourceManager.GetString("By", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currently rated.
+        /// </summary>
+        public static string CurrentlyRated {
+            get {
+                return ResourceManager.GetString("CurrentlyRated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Description {
@@ -75,6 +102,15 @@ namespace LocalServerWeb.Resources.Views.FoodCategory {
         public static string Detail {
             get {
                 return ResourceManager.GetString("Detail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was an error.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
             }
         }
         
@@ -97,11 +133,47 @@ namespace LocalServerWeb.Resources.Views.FoodCategory {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not yet rated.  Be the first to rate this food!.
+        /// </summary>
+        public static string NotYetRated {
+            get {
+                return ResourceManager.GetString("NotYetRated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to people.
+        /// </summary>
+        public static string People {
+            get {
+                return ResourceManager.GetString("People", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Price.
         /// </summary>
         public static string Price {
             get {
                 return ResourceManager.GetString("Price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rate now !.
+        /// </summary>
+        public static string RateNow {
+            get {
+                return ResourceManager.GetString("RateNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your rating has been recorded successfully.
+        /// </summary>
+        public static string RatingRecorded {
+            get {
+                return ResourceManager.GetString("RatingRecorded", resourceCulture);
             }
         }
         
