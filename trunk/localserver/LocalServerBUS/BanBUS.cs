@@ -100,9 +100,9 @@ namespace LocalServerBUS
             return ketQua;
         }
 
-        public static bool GhepBanJson(List<int> listMaBan)
+        public static bool GhepBanJson(TableIdSelection tabSel)
         {
-            return BanDAO.GhepBanJson(listMaBan);
+            return BanDAO.GhepBanJson(tabSel);
         }
 
         public static bool TachNhomBanJson(int maBan)

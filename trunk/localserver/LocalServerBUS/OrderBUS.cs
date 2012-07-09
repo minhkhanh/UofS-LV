@@ -88,5 +88,17 @@ namespace LocalServerBUS
         {
             return OrderDAO.ChuyenBanJson(maOrder, maBanMoi);
         }
+
+        public static bool TachOrder(List<int> dsMaChiTiet)
+        {
+            try
+            {
+                return OrderDAO.TachOrder(dsMaChiTiet);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

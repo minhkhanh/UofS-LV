@@ -330,7 +330,7 @@ namespace LocalServerWeb
 
         [WebInvoke(Method = "POST", UriTemplate = "lapHoaDon?maOrder={maOrder}")]
         [OperationContract]
-        HoaDon LapHoaDon(int maOrder, List<String> voucherCodes);
+        string LapHoaDon(int maOrder, List<String> voucherCodes);
 
         [WebInvoke(Method = "PUT", UriTemplate = "suaHoaDon")]
         [OperationContract]
@@ -563,7 +563,7 @@ namespace LocalServerWeb
         // Hoa Don
         [WebInvoke(Method = "POST", UriTemplate = "lapHoaDonJson?maOrder={maOrder}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        HoaDon LapHoaDonJson(int maOrder, List<String> voucherCodes);
+        string LapHoaDonJson(int maOrder, List<String> voucherCodes);
 
         // Order
         [WebInvoke(Method = "POST", UriTemplate = "lapOrderJson?maTaiKhoan={maTaiKhoan}&maBan={maBan}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
@@ -573,7 +573,7 @@ namespace LocalServerWeb
         // ghep ban
         [WebInvoke(Method = "POST", UriTemplate = "ghepBanJson", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        bool GhepBanJson(List<int> listMaBan);
+        bool GhepBanJson(TableIdSelection tabSel);
 
         // tach mot ban ra khoi nhom
         [WebInvoke(Method = "GET", UriTemplate = "tachBanJson?maBan={maBan}&junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
@@ -604,6 +604,10 @@ namespace LocalServerWeb
         [WebInvoke(Method = "POST", UriTemplate = "themOrderJson", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         int ThemOrderJson(Order _order);
+
+        [WebInvoke(Method = "POST", UriTemplate = "tachOrderJson", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        bool TachOrderJson(List<int> dsMaChiTiet);
 
         [WebInvoke(Method = "POST", UriTemplate = "themNhieuChiTietOrderJson", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
@@ -658,6 +662,20 @@ namespace LocalServerWeb
         [WebInvoke(Method = "GET", UriTemplate = "layOrderJson?maOrder={maOrder}&junk={junk}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         Order LayOrderJson(int maOrder, string junk);
+
+        //dang nhap
+        [WebInvoke(Method = "POST", UriTemplate = "dangNhapJson", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        bool DangNhapJson(Stream body);
+
+        // test GET
+        [WebInvoke(Method = "GET", UriTemplate = "testGetJson", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        Stream TestGetJson();
+
+        [WebInvoke(Method = "GET", UriTemplate = "testTabSel", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        TableIdSelection TestTabSel();
 
         /*==============END OF JSON SERVICES AREA==============*/
     }

@@ -60,6 +60,7 @@
     <Compile Include="ChiTietVoucher.cs" />
     <Compile Include="DanhGiaMonAn.cs" />
     <Compile Include="NhaHang.cs" />
+    <Compile Include="TableSelection.cs" />
     <Compile Include="ThamSo.cs" />
     <Compile Include="DanhMuc.cs" />
     <Compile Include="DonViTinh.cs" />

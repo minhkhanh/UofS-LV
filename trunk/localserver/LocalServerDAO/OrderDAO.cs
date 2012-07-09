@@ -100,5 +100,38 @@ namespace LocalServerDAO
             ThucDonDienTu.DataContext.SubmitChanges();
             return true;
         }
+
+        public static bool TachOrder(List<int> dsMaChiTiet)
+        {
+            List<ChiTietOrder> dsChiTiet = new List<ChiTietOrder>();
+            foreach (int id in dsMaChiTiet)
+            {
+                var varChiTiet = ThucDonDienTu.DataContext.ChiTietOrders.Where(c => c.MaChiTietOrder == id);
+                if (varChiTiet.Count() == 0)
+                    return false;
+
+                dsChiTiet.Add(varChiTiet.First());
+            }
+
+            if (dsChiTiet.Count == 0)
+                return false;
+
+            Order orderCu = dsChiTiet.ElementAt(0).Order;
+            Order orderMoi = new Order();
+            orderMoi.Ban = orderCu.Ban;
+            orderMoi.TaiKhoan = orderCu.TaiKhoan;
+            orderMoi.TinhTrang = orderCu.TinhTrang;
+
+            orderMoi = OrderDAO.ThemOrder(orderMoi);
+            if (orderMoi == null)
+                return false;
+
+            foreach (ChiTietOrder c in dsChiTiet)
+                c.Order = orderMoi;
+
+            ThucDonDienTu.DataContext.SubmitChanges();
+
+            return true;
+        }
     }
 }

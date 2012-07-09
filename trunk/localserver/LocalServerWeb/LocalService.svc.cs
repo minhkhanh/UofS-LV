@@ -12,6 +12,7 @@ using LocalServerBUS;
 using LocalServerDTO;
 using LocalServerWeb.Codes;
 using System.IO;
+using System.ServiceModel.Web;
 
 namespace LocalServerWeb
 {
@@ -942,11 +943,11 @@ namespace LocalServerWeb
             return listHoaDon;
         }
 
-        public HoaDon LapHoaDon(int maOrder, List<String> voucherCodes)
+        public string LapHoaDon(int maOrder, List<String> voucherCodes)
         {
             try
             {
-                return HoaDonBUS.LapHoaDon(maOrder, voucherCodes);
+                return HoaDonBUS.LapHoaDonJson(maOrder, voucherCodes);
             }
             catch (Exception e)
             {
@@ -1384,7 +1385,7 @@ namespace LocalServerWeb
             return PhuThuBUS.LayDanhSachPhuThuKhuVucCoHieuLucJson();
         }
 
-        public HoaDon LapHoaDonJson(int maOrder, List<String> voucherCodes)
+        public string LapHoaDonJson(int maOrder, List<String> voucherCodes)
         {
             return LapHoaDon(maOrder, voucherCodes);
         }
@@ -1394,9 +1395,9 @@ namespace LocalServerWeb
             return LapOrder(maTaiKhoan, maBan, _listChiTietOrder);
         }
 
-        public bool GhepBanJson(List<int> listMaBan)
+        public bool GhepBanJson(TableIdSelection tabSel)
         {
-            return BanBUS.GhepBanJson(listMaBan);
+            return BanBUS.GhepBanJson(tabSel);
         }
 
         public bool TachBanJson(int maBan, string junk)
@@ -1519,6 +1520,32 @@ namespace LocalServerWeb
         public Order LayOrderJson(int maOrder, string junk)
         {
             return OrderBUS.LayOrder(maOrder);
+        }
+
+        public bool TachOrderJson(List<int> dsMaChiTiet)
+        {
+            return OrderBUS.TachOrder(dsMaChiTiet);
+        }
+
+        public bool DangNhapJson(Stream body)
+        {
+            return DangNhap(body);
+        }
+
+        public Stream TestGetJson()
+        {
+            string response = "Hi, time is " + DateTime.Now + " and server's fine.";
+            //WebOperationContext.Current.OutgoingResponse.ContentType = "application/json; charset=utf-8";
+            return new MemoryStream(Encoding.UTF8.GetBytes(response));
+        }
+
+        public TableIdSelection TestTabSel()
+        {
+            TableIdSelection re = new TableIdSelection();
+            re.MainTabId = 1;
+            re.TabIdList = new List<int> { 1, 2, 3};
+
+            return re;
         }
 
         /*END OF JSON SERVICE AREA*/

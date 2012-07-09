@@ -209,23 +209,28 @@ namespace LocalServerDAO
             return true;
         }
 
-        public static bool GhepBanJson(List<int> listMaBan)
+        public static bool GhepBanJson(TableIdSelection tabSel)
         {
-            if (listMaBan.Count < 1) return false;
-                
-            List<Ban> listBan = new List<Ban>();
-            Ban banChinh = null;
-            foreach (int maBan in listMaBan)
+            if (tabSel.TabIdList.Count < 1) return false;
+
+            var varBanChinh = ThucDonDienTu.DataContext.Bans.Where(b => b.MaBan == tabSel.MainTabId);
+            if (varBanChinh.Count() == 0)
+                return false;
+
+            Ban banChinh = varBanChinh.First();
+            if (banChinh.BanChinh != null && banChinh.BanChinh.MaBan != banChinh.MaBan)      // ban chinh nam trong nhom khac
+                return false;
+
+            //banChinh.BanChinh = banChinh;
+    
+            List<Ban> listBan = new List<Ban>();            
+            foreach (int maBan in tabSel.TabIdList)
             {
                 var tmp = ThucDonDienTu.DataContext.Bans.Where(b => b.MaBan == maBan);
                 if (tmp.Count() == 0) return false;
                 Ban ban = tmp.First();
                 if (ban.BanChinh != null)
-                    if (banChinh == null)
-                    {
-                        banChinh = ban.BanChinh;
-                    }
-                    else if (banChinh.MaBan != ban.BanChinh.MaBan) // detect 2 different groups in 1 list
+                    if (banChinh.MaBan != ban.BanChinh.MaBan) // detect 2 different groups in 1 list
                     {
                         return false;
                     }
@@ -233,8 +238,8 @@ namespace LocalServerDAO
                 listBan.Add(ban);
             }
 
-            if (banChinh == null) // tao nhom ban moi
-                banChinh = listBan[0];
+            //if (banChinh == null) // tao nhom ban moi bang cach chon ban chinh la ban dau tien
+            //    banChinh = listBan[0];
 
             foreach (Ban ban in listBan)
             {
