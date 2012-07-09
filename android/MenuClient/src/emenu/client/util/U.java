@@ -67,6 +67,7 @@ public final class U {
 
     public static final ProgressDialog createWaitingDialog(Context context) {
         ProgressDialog dlg = new ProgressDialog(context);
+        dlg.setCancelable(false);
         dlg.setCanceledOnTouchOutside(false);
         dlg.setMessage(context.getString(R.string.message_waiting));
 

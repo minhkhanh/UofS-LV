@@ -139,6 +139,14 @@ CREATE TABLE ChiTietMonAnDaNgonNgu (
     UNIQUE ( MaMonAn, MaNgonNgu ) 
 );
 
+CREATE VIRTUAL TABLE ChiTietMonAnDaNgonNgu_FTS USING fts3 ( 
+    _id,
+    MaMonAn,
+    MaNgonNgu,
+    TenMonAn  TEXT,
+    MoTaMonAn TEXT
+);
+
 
 -- Table: ChiTietMonAnDonViTinh
 CREATE TABLE ChiTietMonAnDonViTinh ( 

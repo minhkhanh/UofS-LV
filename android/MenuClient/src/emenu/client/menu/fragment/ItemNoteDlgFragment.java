@@ -30,6 +30,7 @@ public class ItemNoteDlgFragment extends DialogFragment implements OnClickListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        getDialog().setTitle(mValues.getAsString(MonAnDaNgonNguDTO.CL_TEN_MON));
         return inflater.inflate(R.layout.layout_item_note, null);
     }
 
@@ -42,9 +43,6 @@ public class ItemNoteDlgFragment extends DialogFragment implements OnClickListen
     }
 
     private void bindData() {
-        TextView dishName = (TextView) getView().findViewById(R.id.textDishName);
-        dishName.setText(mValues.getAsString(MonAnDaNgonNguDTO.CL_TEN_MON));
-
         mNoteEdit.setText(mValues.getAsString(ChiTietOrderDTO.CL_GHI_CHU));
     }
 

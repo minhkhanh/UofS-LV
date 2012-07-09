@@ -69,8 +69,8 @@ public class SyncPrefFragment extends PreferenceFragment implements
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.cancel();
-                            SyncDbTask task = new SyncDbTask(new ProgressDialog(
-                                    getActivity()));
+                            SyncDbTask task = new SyncDbTask(getActivity().getApplicationContext());
+                            task.setWaitingDialog(U.createWaitingDialog(getActivity()));
                             task.setOnPostExecuteListener(SyncPrefFragment.this);
                             task.execute();
                         }
@@ -88,7 +88,7 @@ public class SyncPrefFragment extends PreferenceFragment implements
             mSyncNowPref.setSummary(getString(R.string.message_sync_succeed) + " "
                     + getString(R.string.text_at) + " " + whenString);
         }
-        
+
     }
 
     @Override

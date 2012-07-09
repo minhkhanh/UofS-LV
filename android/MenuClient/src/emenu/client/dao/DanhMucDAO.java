@@ -114,6 +114,7 @@ public class DanhMucDAO extends AbstractDAO {
             result = false;
         } finally {
             db.endTransaction();
+            close();
         }
 
         return result;
