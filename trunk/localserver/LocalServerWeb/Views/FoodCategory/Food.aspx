@@ -23,17 +23,17 @@
     <div id="food">
         <table width="100%">
             <tr>
-                <td colspan="2">
+                <td>
                     <h1><%: FoodCategoryString.FoodInformation %></h1>
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td>
                     <% Html.RenderPartial("FoodCategoryLinks"); %>
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td>
                     <% Html.RenderPartial("FoodDetail"); %>
                 </td>
             </tr>

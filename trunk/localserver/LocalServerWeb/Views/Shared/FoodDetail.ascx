@@ -55,6 +55,7 @@
                 <tr>
                     <td>
                         <h2><%: FoodCategoryString.RelatedFood %></h2>
+                        
                         <% Html.RenderPartial("FoodRelate", viewModel.listMonLienQuan); %>
                     </td>
                 </tr>
