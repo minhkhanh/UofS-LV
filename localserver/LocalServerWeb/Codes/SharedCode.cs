@@ -73,6 +73,7 @@ namespace LocalServerWeb.Codes
             var ci = new CultureInfo(ngonNgu.KiHieu);
             Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(ci.Name);
             Thread.CurrentThread.CurrentUICulture = ci;
+
         }
         
         public static void FillAdminMainMenu(ViewDataDictionary viewData, int iMenuMain, int iMenuSub)
