@@ -1236,6 +1236,12 @@ namespace LocalServerWeb
             return a + b;
         }
 
+        // Kiem Tra Server
+        public string KiemTraServer(string thamSo, string junk)
+        {
+            return "FIT HCMUS " + thamSo;
+        }
+
 
         public string TestGET(string thamSo, string junk)
         {
