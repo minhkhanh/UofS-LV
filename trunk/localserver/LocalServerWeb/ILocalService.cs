@@ -433,6 +433,13 @@ namespace LocalServerWeb
         //[OperationContract]
         //TaiKhoan DangNhapMobileQuanLy(string tenDangNhap, string matKhau);
 
+        // Check to ensure server work correctly
+        [WebInvoke(Method = "GET", UriTemplate = "kiemTraServer?thamSo={thamSo}&junk={junk}")]
+        [OperationContract]
+        string KiemTraServer(string thamSo, string junk);
+
+
+        // Nhap
         [WebInvoke(Method = "GET", UriTemplate = "cong?a={a}&b={b}")]
         [OperationContract]
         int PhepCong(int a, int b);
@@ -440,7 +447,6 @@ namespace LocalServerWeb
         [WebInvoke(Method = "POST", UriTemplate = "addText")]
         string AddText();
 
-        // Check to ensure server work correctly
         [WebInvoke(Method = "GET", UriTemplate = "testGet?thamSo={thamSo}&junk={junk}")]
         [OperationContract]
         string TestGET(string thamSo, string junk);
