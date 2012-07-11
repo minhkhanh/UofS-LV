@@ -48,7 +48,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.AppPreferenceActivity"
+            android:name=".activity.ConfigActivity"
             android:label="@string/activity_config" >
         </activity>
     </application>
