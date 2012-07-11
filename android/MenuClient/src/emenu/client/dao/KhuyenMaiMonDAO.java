@@ -104,9 +104,4 @@ public class KhuyenMaiMonDAO extends AbstractDAO {
     public String getName() {
         return "Khuyến mãi món";
     }
-
-    @Override
-    protected void createCache(Cursor cursor) {
-    }
-
 }

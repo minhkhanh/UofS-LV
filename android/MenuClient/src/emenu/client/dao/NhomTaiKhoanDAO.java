@@ -69,9 +69,4 @@ public class NhomTaiKhoanDAO extends AbstractDAO {
     public String getName() {
         return "Nhóm tài khoản";
     }
-
-    @Override
-    protected void createCache(Cursor cursor) {
-        mCached = NhomTaiKhoanDTO.fromArrayCursor(cursor);
-    }
 }

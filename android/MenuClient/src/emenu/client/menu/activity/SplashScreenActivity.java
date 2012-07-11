@@ -1,7 +1,6 @@
 package emenu.client.menu.activity;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,10 +18,7 @@ public class SplashScreenActivity extends Activity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        MenuApplication.getSettings(this).getLocale()
-                .applyLanguage(getApplicationContext());
-
+        MenuApplication.getInstance().customerLocale.apply(getApplication());
         setContentView(R.layout.layout_splash);
 
         SharedPreferences sharedPref = getSharedPreferences(C.SHARED_PREF_FILE, 0);
@@ -50,6 +46,18 @@ public class SplashScreenActivity extends Activity implements OnClickListener {
             case android.R.id.content:
                 HomeNavigationDlgFragment dlg = new HomeNavigationDlgFragment();
                 U.showDlgFragment(this, dlg, true);
+
+                // MenuApplication instance = MenuApplication.getInstance();
+                // NgonNguDTO nn = null;
+                // if
+                // (MyAppLocale.getCurrentLanguage(instance).getKiHieu().equals("vi"))
+                // nn = NgonNguDAO.getInstance().objByName("en");
+                // else
+                // nn = NgonNguDAO.getInstance().objByName("vi");
+                // MyAppSettings.getCurrentAppLocale(MenuApplication.getInstance())
+                // .setLanguage(nn);
+                //
+                // U.restartActivity(this);
                 break;
 
             default:

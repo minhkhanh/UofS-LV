@@ -105,9 +105,4 @@ public class MonLienQuanDAO extends AbstractDAO {
     public String getName() {
         return "Danh sách món ăn";
     }
-
-    @Override
-    protected void createCache(Cursor cursor) {
-        mCached = MonLienQuanDTO.fromArrayCursor(cursor);
-    }
 }

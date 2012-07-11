@@ -9,4 +9,10 @@
     <string name="title_dialog_auth">Choose one task</string>
     <string name="caption_main_menu">Menu</string>
     <string name="caption_payment">Payment</string>
+    <string name="text_welcome_people">Welcome to our Restaurant!</string>
+    <string name="text_splash_screen">ABC Restaurant</string>
+    <string name="text_server_address">Server address</string>
+    <string name="text_auto_sync">Auto sync each time eMenu starts</string>
+    <string name="text_sync_now">Sync now</string>
+
 </resources>

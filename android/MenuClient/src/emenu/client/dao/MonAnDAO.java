@@ -1,6 +1,7 @@
 package emenu.client.dao;
 
 import java.io.IOException;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,13 +12,16 @@ import org.json.JSONObject;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQuery;
 import android.database.sqlite.SQLiteQueryBuilder;
+import android.text.TextUtils;
 import android.util.Base64;
 
 import emenu.client.db.dto.KhuyenMaiDTO;
 import emenu.client.db.dto.KhuyenMaiMonDTO;
 import emenu.client.db.dto.MonAnDTO;
 import emenu.client.db.dto.MonAnDaNgonNguDTO;
+import emenu.client.db.dto.NgonNguDTO;
 import emenu.client.db.util.MyDatabaseHelper;
 import emenu.client.util.U;
 
@@ -91,8 +95,77 @@ public final class MonAnDAO extends AbstractDAO {
         String response = U.loadGetResponse(url);
 
         U.logOwnTag("rate dish: id=" + dishId + " rate=" + rate + " result=" + response);
-
         return Boolean.valueOf(response);
+    }
+
+    private String appendWildcard(String query) {
+        if (TextUtils.isEmpty(query))
+            return query;
+
+        final StringBuilder builder = new StringBuilder();
+        final String[] splits = TextUtils.split(query, " ");
+
+        for (String split : splits)
+            builder.append(split).append("*").append(" ");
+
+        return builder.toString().trim();
+    }
+
+    public List<ContentValues> contentByNameFilter(Integer maNgonNgu, String filterString) {
+        SQLiteDatabase db = open();
+        SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+
+        filterString = appendWildcard(filterString);
+        String ftsSubTab = "(select * from " + MonAnDaNgonNguDTO.TABLE_NAME_FTS
+                + " where " + MonAnDaNgonNguDTO.CL_TEN_MON + " match '" + filterString
+                + " " + MonAnDaNgonNguDTO.CL_MA_NGON_NGU + ":" + maNgonNgu + "')";
+
+        String promSubTab = "(select * from " + KhuyenMaiMonDTO.TABLE_NAME
+                + " inner join " + KhuyenMaiDTO.TABLE_NAME + " on "
+                + KhuyenMaiMonDTO.CL_MA_KM_QN + "=" + KhuyenMaiDTO.CL_MA_KHUYEN_MAI_QN
+                + ")";
+
+        queryBuilder.setTables(ftsSubTab + " as fts inner join "
+                + MonAnDaNgonNguDTO.TABLE_NAME + " on (fts."
+                + MonAnDaNgonNguDTO.CL_MA_MON + "=" + MonAnDaNgonNguDTO.CL_MA_MON_QN
+                + " and fts." + MonAnDaNgonNguDTO.CL_MA_NGON_NGU + "="
+                + MonAnDaNgonNguDTO.CL_MA_NGON_NGU_QN + ") inner join "
+                + MonAnDTO.TABLE_NAME + " on " + MonAnDaNgonNguDTO.CL_MA_MON_QN + "="
+                + MonAnDTO.CL_MA_MON_AN_QN + " left outer join " + promSubTab
+                + " as km on " + MonAnDTO.CL_MA_MON_AN_QN + "=" + "km."
+                + KhuyenMaiMonDTO.CL_MA_MON);
+
+        String[] columns = { MonAnDaNgonNguDTO.CL_ID_QN, MonAnDaNgonNguDTO.CL_MA_MON_QN,
+                MonAnDaNgonNguDTO.CL_MA_NGON_NGU_QN, MonAnDaNgonNguDTO.CL_MO_TA_MON,
+                MonAnDaNgonNguDTO.CL_TEN_MON_QN, MonAnDTO.CL_DIEM_DANH_GIA,
+                MonAnDTO.CL_HINH_ANH, MonAnDTO.CL_MA_DANH_MUC, MonAnDTO.CL_NGUNG_BAN,
+                MonAnDTO.CL_SO_LUOT_RATE, KhuyenMaiDTO.CL_MA_KHUYEN_MAI,
+                KhuyenMaiDTO.CL_BAT_DAU, KhuyenMaiDTO.CL_GIA_GIAM,
+                KhuyenMaiDTO.CL_KET_THUC, KhuyenMaiDTO.CL_TI_LE_GIAM };
+
+        // just in case there are couple of promotions for one dish
+        String groupBy = MonAnDTO.CL_MA_MON_AN_QN;
+
+        Cursor cursor = queryBuilder.query(db, columns, null, null, groupBy, null, null);
+
+        List<ContentValues> list = U.toContentValuesList(cursor);
+        for (ContentValues c : list) {
+            Integer tmpDishId = c.getAsInteger(MonAnDaNgonNguDTO.CL_MA_MON_QN);
+            c.remove(MonAnDaNgonNguDTO.CL_MA_MON_QN);
+            c.put(MonAnDTO.CL_MA_MON_AN, tmpDishId);
+
+            Integer tmpLangId = c.getAsInteger(MonAnDaNgonNguDTO.CL_MA_NGON_NGU_QN);
+            c.remove(MonAnDaNgonNguDTO.CL_MA_NGON_NGU_QN);
+            c.put(NgonNguDTO.CL_MA_NGON_NGU, tmpLangId);
+
+            String tmpDishName = c.getAsString(MonAnDaNgonNguDTO.CL_TEN_MON_QN);
+            c.remove(MonAnDaNgonNguDTO.CL_TEN_MON_QN);
+            c.put(MonAnDaNgonNguDTO.CL_TEN_MON, tmpDishName);
+        }
+
+        cursor.close();
+
+        return list;
     }
 
     public List<ContentValues> contentByCatIdWithProm(Integer maNgonNgu, Integer maDanhMuc) {
@@ -191,10 +264,5 @@ public final class MonAnDAO extends AbstractDAO {
     @Override
     public String getName() {
         return "Danh sách món ăn";
-    }
-
-    @Override
-    protected void createCache(Cursor cursor) {
-        mCached = MonAnDTO.fromArrayCursor(cursor);
     }
 }

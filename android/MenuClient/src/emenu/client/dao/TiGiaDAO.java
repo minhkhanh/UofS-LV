@@ -69,9 +69,4 @@ public class TiGiaDAO extends AbstractDAO {
     public String getName() {
         return "Tỉ giá";
     }
-
-    @Override
-    protected void createCache(Cursor cursor) {
-        mCached = TiGiaDTO.fromArrayCursor(cursor);
-    }
 }

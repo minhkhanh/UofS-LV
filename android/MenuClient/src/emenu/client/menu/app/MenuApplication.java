@@ -1,5 +1,8 @@
 package emenu.client.menu.app;
 
+import android.app.Application;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import emenu.client.dao.AbstractDAO;
 import emenu.client.dao.BanDAO;
 import emenu.client.dao.DanhMucDAO;
@@ -23,29 +26,23 @@ import emenu.client.dao.TaiKhoanDAO;
 import emenu.client.dao.TiGiaDAO;
 import emenu.client.dao.VoucherDAO;
 import emenu.client.db.util.MyDatabaseHelper;
-import emenu.client.menu.R;
 import emenu.client.menu.fragment.ServerAddressDlgFragment;
 import emenu.client.util.C;
 import emenu.client.util.MyHttpClient;
-import android.app.Activity;
-import android.app.Application;
-import android.content.SharedPreferences;
 
 public class MenuApplication extends Application {
-    private static final String EX_MSG_01 = "Can not get MyApplication object from the activity parameter.";
-
     private static MenuApplication mInstance;
 
-    public MyAppSettings settings;
+    public static final MenuApplication getInstance() {
+        return mInstance;
+    }
+
+    public CustomerLocale customerLocale;
     public MyDatabaseHelper dbOpener;
 
-    public static final MyAppSettings getSettings(Activity activity) {
-        MenuApplication app = (MenuApplication) activity.getApplication();
-        if (app != null) {
-            return app.settings;
-        }
-
-        throw new IllegalArgumentException(C.TAG + EX_MSG_01);
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -53,12 +50,11 @@ public class MenuApplication extends Application {
         super.onCreate();
 
         mInstance = this;
+        SessionManager.createInstance();
 
         initDAOs();
 
-        settings = new MyAppSettings(this);
-        SessionManager.createInstance();
-
+        customerLocale = CustomerLocale.getDefaultLocale();
     }
 
     private void initDAOs() {
@@ -95,13 +91,5 @@ public class MenuApplication extends Application {
 
         // AbstractDAO.createHttpClient(getApplicationContext())
         MyHttpClient.createKeyStore(getApplicationContext());
-    }
-
-    public static final MenuApplication getInstance() {
-        return mInstance;
-    }
-
-    public MyAppSettings getSettings() {
-        return settings;
     }
 }

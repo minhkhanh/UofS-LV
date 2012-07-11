@@ -1,5 +1,6 @@
 package emenu.client.menu.activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -18,6 +19,7 @@ import emenu.client.menu.R;
 import emenu.client.menu.app.SessionManager;
 import emenu.client.menu.app.SessionManager.ServiceSession;
 import emenu.client.menu.fragment.CategoryListFragment;
+import emenu.client.menu.fragment.DishListFragment;
 import emenu.client.util.U;
 
 public class MainMenuActivity extends Activity {
@@ -30,12 +32,6 @@ public class MainMenuActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.options_main_menu, menu);
-        
-//        SearchView searchView = (SearchView) menu.findItem(R.id.miDishSearch)
-//                .getActionView();
-//        searchView.setIconifiedByDefault(false); // Do not iconify the widget;
-//                                                 // expand it by default
-
         return true;
     }
 
@@ -63,15 +59,6 @@ public class MainMenuActivity extends Activity {
                     startActivity(intent);
                 }
                 break;
-        // case R.id.miPayment:
-        // if (session.isFinished())
-        // U.toastText(this, R.string.message_your_service_session_finished);
-        // else {
-        // Intent intent = new Intent(MainMenuActivity.this,
-        // BillActivity.class);
-        // startActivity(intent);
-        // }
-        // break;
         }
 
         return super.onMenuItemSelected(featureId, item);
@@ -85,20 +72,25 @@ public class MainMenuActivity extends Activity {
         View v = findViewById(android.R.id.content);
         v.setBackgroundResource(R.drawable.french_food_photo_eu030);
 
-//        // Get the intent, verify the action and get the query
-//        Intent intent = getIntent();
-//        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-//            String query = intent.getStringExtra(SearchManager.QUERY);
-//            // doMySearch(query);
-//        }
+//        ActionBar actionBar = getActionBar();
+//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 
         FragmentManager fm = getFragmentManager();
-        CategoryListFragment f = (CategoryListFragment) fm
-                .findFragmentByTag("CategoryListFragment");
-        if (f == null) {
+        CategoryListFragment catList = (CategoryListFragment) fm
+                .findFragmentById(R.id.LeftPaneHolder);
+        if (catList == null) {
             FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.LeftPaneHolder, new CategoryListFragment(),
-                    "CategoryListFragment");
+            ft.replace(R.id.LeftPaneHolder, new CategoryListFragment());
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.commit();
+        }
+
+        DishListFragment dishList = (DishListFragment) fm
+                .findFragmentById(R.id.RightPaneHolder);
+        if (dishList == null) {
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.RightPaneHolder, new DishListFragment(0));
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
         }
     }

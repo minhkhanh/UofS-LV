@@ -50,8 +50,12 @@ public class HomeNavigationDlgFragment extends DialogFragment implements OnClick
                 startActivity(intent);
                 break;
             case R.id.btnPreferences:
-                AuthDlgFragment authDlg = new AuthDlgFragment(this, ACT_CONFIG);
-                U.showDlgFragment(getActivity(), authDlg, true);
+                // AuthDlgFragment authDlg = new AuthDlgFragment(this,
+                // ACT_CONFIG);
+                // U.showDlgFragment(getActivity(), authDlg, true);
+
+                intent = new Intent(getActivity(), AppPreferenceActivity.class);
+                startActivity(intent);
                 break;
             case R.id.btnConnection:
                 ServerAddressDlgFragment d = new ServerAddressDlgFragment();
@@ -67,8 +71,8 @@ public class HomeNavigationDlgFragment extends DialogFragment implements OnClick
     public void onAuthorized(HttpClient client, Bundle extras, int action) {
         switch (action) {
             case ACT_CONFIG:
-                Intent intent = new Intent(getActivity(), AppPreferenceActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), AppPreferenceActivity.class);
+//                startActivity(intent);
                 break;
 
             default:

@@ -91,10 +91,4 @@ public class HoaDonDAO extends AbstractDAO {
         // TODO Auto-generated method stub
         return null;
     }
-
-    @Override
-    protected void createCache(Cursor cursor) {
-        // TODO Auto-generated method stub
-
-    }
 }

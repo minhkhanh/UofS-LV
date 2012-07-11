@@ -106,9 +106,4 @@ public class TaiKhoanDAO extends AbstractDAO {
     public String getName() {
         return "Tài khoản";
     }
-
-    @Override
-    protected void createCache(Cursor cursor) {
-        mCached = TaiKhoanDTO.fromArrayCursor(cursor);
-    }
 }

@@ -13,7 +13,7 @@ import emenu.client.dao.OrderDAO;
 import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.db.dto.NgonNguDTO;
 import emenu.client.db.dto.OrderDTO;
-import emenu.client.menu.app.MyAppLocale;
+import emenu.client.menu.app.CustomerLocale;
 import emenu.client.menu.app.MenuApplication;
 import emenu.client.menu.app.SessionManager;
 import emenu.client.menu.app.SessionManager.ServiceSession;
@@ -51,7 +51,8 @@ public class GetServingOrderItemsTask extends
 
     @Override
     protected List<ContentValues> doInBackground(Integer... params) {
-        NgonNguDTO nn = MyAppLocale.getCurrentLanguage(MenuApplication.getInstance());
+        Integer langId = MenuApplication.getInstance().customerLocale.getLanguage()
+                .getMaNgonNgu();
 
         List<ContentValues> result = new ArrayList<ContentValues>();
         List<ChiTietOrderDTO> list = new ArrayList<ChiTietOrderDTO>();
@@ -64,7 +65,7 @@ public class GetServingOrderItemsTask extends
                 String response = U.loadGetResponse(url);
                 JSONArray jsonArray = new JSONArray(response);
                 list = ChiTietOrderDTO.fromArrayJson(jsonArray);
-                addMixedValues(result, list, nn.getMaNgonNgu());
+                addMixedValues(result, list, langId);
 
                 OrderDTO order = OrderDAO.getInstance().getOrder(params[0]);
                 ContentValues c = order.toContentValues();
@@ -73,7 +74,7 @@ public class GetServingOrderItemsTask extends
             }
 
             if (mFlag == FLAG_UNORDERED_ONLY || mFlag == FLAG_BOTH) {
-                addMixedValues(result, mLocalItems, nn.getMaNgonNgu());
+                addMixedValues(result, mLocalItems, langId);
             }
         } catch (Exception e) {
             e.printStackTrace();
