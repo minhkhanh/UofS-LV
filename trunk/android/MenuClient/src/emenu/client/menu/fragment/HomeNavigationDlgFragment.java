@@ -4,7 +4,7 @@ import org.apache.http.client.HttpClient;
 
 import emenu.client.dao.AbstractDAO;
 import emenu.client.menu.R;
-import emenu.client.menu.activity.AppPreferenceActivity;
+import emenu.client.menu.activity.ConfigActivity;
 import emenu.client.menu.activity.TableMapActivity;
 import emenu.client.menu.fragment.AuthDlgFragment.OnAuthorizedListener;
 import emenu.client.util.C;
@@ -54,7 +54,7 @@ public class HomeNavigationDlgFragment extends DialogFragment implements OnClick
                 // ACT_CONFIG);
                 // U.showDlgFragment(getActivity(), authDlg, true);
 
-                intent = new Intent(getActivity(), AppPreferenceActivity.class);
+                intent = new Intent(getActivity(), ConfigActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btnConnection:

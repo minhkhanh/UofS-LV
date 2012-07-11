@@ -55,6 +55,7 @@ public class MenuApplication extends Application {
         initDAOs();
 
         customerLocale = CustomerLocale.getDefaultLocale();
+        customerLocale.apply(getApplicationContext());
     }
 
     private void initDAOs() {
