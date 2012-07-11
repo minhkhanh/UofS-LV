@@ -40,10 +40,6 @@ public class VoucherDAO extends AbstractDAO {
         return "";
     }
 
-    @Override
-    protected void createCache(Cursor cursor) {
-    }
-
     public float checkVoucher(String code, Float billTotal)
             throws ClientProtocolException, IOException {
         String url = SERVER_URL_SLASH + "kiemTraVoucherJson?code=" + code

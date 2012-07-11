@@ -3,7 +3,7 @@
 
     <CheckBoxPreference
         android:key="@string/key_pref_auto_sync"
-        android:title="@string/text_auto_sync" android:summary="@string/message_auto_sync_caution"/>
+        android:title="@string/text_auto_sync" />
 
     <Preference
         android:key="@string/key_pref_sync_now"

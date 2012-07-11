@@ -13,7 +13,10 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MenuItem.OnActionExpandListener;
 import android.widget.SearchView;
+import android.widget.SearchView.OnCloseListener;
 import android.widget.SearchView.OnQueryTextListener;
 import emenu.client.bus.loader.DishListLoader;
 import emenu.client.bus.task.LoadDishUnitsTask;
@@ -21,7 +24,8 @@ import emenu.client.menu.R;
 import emenu.client.menu.adapter.DishListAdapter;
 import emenu.client.util.U;
 
-public class DishListFragment extends ListFragment implements OnQueryTextListener {
+public class DishListFragment extends ListFragment implements OnQueryTextListener,
+        OnActionExpandListener {
 
     private Integer mMaDanhMuc;
     List<LoadDishUnitsTask> mDishUnitsLoadTaskList = new ArrayList<LoadDishUnitsTask>();
@@ -70,13 +74,15 @@ public class DishListFragment extends ListFragment implements OnQueryTextListene
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
 
+        MenuItem item = menu.findItem(R.id.miDishSearch);
+        item.setOnActionExpandListener(this);
         // Get the SearchView and set the searchable configuration
-        SearchView searchView = (SearchView) menu.findItem(R.id.miDishSearch)
-                .getActionView();
-//        SearchManager searchManager = (SearchManager) getActivity().getSystemService(
-//                Context.SEARCH_SERVICE);
-//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity()
-//                .getComponentName()));
+        SearchView searchView = (SearchView) item.getActionView();
+        // SearchManager searchManager = (SearchManager)
+        // getActivity().getSystemService(
+        // Context.SEARCH_SERVICE);
+        // searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity()
+        // .getComponentName()));
         searchView.setOnQueryTextListener(this);
         searchView.setSubmitButtonEnabled(false);
     }
@@ -121,11 +127,6 @@ public class DishListFragment extends ListFragment implements OnQueryTextListene
                 new ArrayList<ContentValues>());
         setListAdapter(mDishesAdapter);
         getListView().setTextFilterEnabled(true);
-
-        // View orderPreview =
-        // getActivity().findViewById(R.id.ExtendPaneHolder);
-        // mHaveExtendPane = orderPreview != null
-        // && orderPreview.getVisibility() == View.VISIBLE;
     }
 
     public int getMaDanhMuc() {
@@ -151,4 +152,14 @@ public class DishListFragment extends ListFragment implements OnQueryTextListene
         return false;
     }
 
+    @Override
+    public boolean onMenuItemActionCollapse(MenuItem item) {
+        getLoaderManager().restartLoader(0, null, mLoaderCallbacks);
+        return true;
+    }
+
+    @Override
+    public boolean onMenuItemActionExpand(MenuItem item) {
+        return true;
+    }
 }

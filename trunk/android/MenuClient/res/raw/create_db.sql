@@ -140,11 +140,9 @@ CREATE TABLE ChiTietMonAnDaNgonNgu (
 );
 
 CREATE VIRTUAL TABLE ChiTietMonAnDaNgonNgu_FTS USING fts3 ( 
-    _id,
     MaMonAn,
     MaNgonNgu,
-    TenMonAn  TEXT,
-    MoTaMonAn TEXT
+    TenMonAn  TEXT
 );
 
 

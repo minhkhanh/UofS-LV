@@ -13,6 +13,7 @@ import android.provider.BaseColumns;
 public class MonAnDaNgonNguDTO {
 
     public static final String TABLE_NAME = "ChiTietMonAnDaNgonNgu";
+    public static final String TABLE_NAME_FTS = "ChiTietMonAnDaNgonNgu_FTS";
 
     public static final String CL_ID = BaseColumns._ID;
     public static final String CL_MA_MON = "MaMonAn";
@@ -20,6 +21,7 @@ public class MonAnDaNgonNguDTO {
     public static final String CL_MA_NGON_NGU = "MaNgonNgu";
     public static final String CL_MA_NGON_NGU_QN = TABLE_NAME + ".MaNgonNgu";
     public static final String CL_TEN_MON = "TenMonAn";
+    public static final String CL_TEN_MON_QN = TABLE_NAME + "." + "TenMonAn";
     public static final String CL_MO_TA_MON = "MoTaMonAn";
 
     public static final String CL_ID_QN = TABLE_NAME + "." + BaseColumns._ID;

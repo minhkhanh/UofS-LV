@@ -208,10 +208,4 @@ public class BanDAO extends AbstractDAO {
     public String getName() {
         return "Danh sách bàn";
     }
-
-    @Override
-    protected void createCache(Cursor cursorAll) {
-        mCached = BanDTO.fromArrayCursor(cursorAll);
-    }
-
 }

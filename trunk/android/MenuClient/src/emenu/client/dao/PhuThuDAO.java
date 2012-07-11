@@ -63,9 +63,4 @@ public class PhuThuDAO extends AbstractDAO {
     public String getName() {
         return "Phụ thu";
     }
-
-    @Override
-    protected void createCache(Cursor cursor) {
-    }
-
 }

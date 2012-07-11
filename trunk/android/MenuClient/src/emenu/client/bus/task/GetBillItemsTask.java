@@ -11,13 +11,16 @@ import emenu.client.dao.DonViTinhDAO;
 import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.db.dto.KhuyenMaiDTO;
 import emenu.client.db.dto.NgonNguDTO;
-import emenu.client.menu.app.MyAppLocale;
+import emenu.client.menu.app.CustomerLocale;
 import emenu.client.menu.app.MenuApplication;
 import emenu.client.util.U;
 
 import android.content.ContentValues;
 
 public class GetBillItemsTask extends CustomAsyncTask<Integer, Void, List<ContentValues>> {
+
+    private Integer mLangId = MenuApplication.getInstance().customerLocale.getLanguage()
+            .getMaNgonNgu();
 
     private void addMixedValues(List<ContentValues> listValues,
             List<ChiTietOrderDTO> listDto, Integer langId) {
@@ -36,8 +39,6 @@ public class GetBillItemsTask extends CustomAsyncTask<Integer, Void, List<Conten
         String url = AbstractDAO.SERVER_URL_SLASH
                 + "layDanhSachChiTietOrderJson?maOrder=" + params[0];
 
-        NgonNguDTO nn = MyAppLocale.getCurrentLanguage(MenuApplication.getInstance());
-
         List<ContentValues> result = new ArrayList<ContentValues>();
         List<ChiTietOrderDTO> list = new ArrayList<ChiTietOrderDTO>();
 
@@ -49,8 +50,8 @@ public class GetBillItemsTask extends CustomAsyncTask<Integer, Void, List<Conten
             for (ChiTietOrderDTO c : list) {
                 ContentValues v = new ContentValues();
                 v = c.toContentValues();
-                v.putAll(DonViTinhDAO.getInstance().contentByDishUnitWithProm(
-                        nn.getMaNgonNgu(), c.getMaMonAn(), c.getMaDonViTinh()));
+                v.putAll(DonViTinhDAO.getInstance().contentByDishUnitWithProm(mLangId,
+                        c.getMaMonAn(), c.getMaDonViTinh()));
 
                 // service url may be changed!
                 url = AbstractDAO.SERVER_URL_SLASH

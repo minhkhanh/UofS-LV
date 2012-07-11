@@ -5,7 +5,7 @@ import java.util.List;
 import emenu.client.dao.DanhMucDAO;
 import emenu.client.db.dto.DanhMucDaNgonNguDTO;
 import emenu.client.db.dto.NgonNguDTO;
-import emenu.client.menu.app.MyAppLocale;
+import emenu.client.menu.app.CustomerLocale;
 import emenu.client.menu.app.MenuApplication;
 
 import android.app.Activity;
@@ -13,14 +13,16 @@ import android.app.Activity;
 public class RootCategoryListLoader extends
         CustomAsyncTaskLoader<List<DanhMucDaNgonNguDTO>> {
 
+    private Integer mMaNgonNgu = MenuApplication.getInstance().customerLocale
+            .getLanguage().getMaNgonNgu();
+
     public RootCategoryListLoader(Activity context) {
         super(context);
     }
 
     @Override
     public List<DanhMucDaNgonNguDTO> loadInBackground() {
-        NgonNguDTO ngonNgu = MyAppLocale.getCurrentLanguage(MenuApplication.getInstance());
-        return DanhMucDAO.getInstance().listDanhMucGoc(ngonNgu.getMaNgonNgu());
+        return DanhMucDAO.getInstance().listDanhMucGoc(mMaNgonNgu);
     }
 
 }

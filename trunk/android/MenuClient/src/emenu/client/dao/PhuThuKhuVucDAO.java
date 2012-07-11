@@ -104,9 +104,4 @@ public class PhuThuKhuVucDAO extends AbstractDAO {
     public String getName() {
         return "Phụ thu khu vực";
     }
-
-    @Override
-    protected void createCache(Cursor cursor) {
-    }
-
 }

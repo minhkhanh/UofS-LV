@@ -89,15 +89,15 @@ public class NgonNguDTO {
 
         return null;
     }
-    
+
     public static List<NgonNguDTO> fromArrayCursor(Cursor cursor) {
         List<NgonNguDTO> list = new ArrayList<NgonNguDTO>();
-        
+
         while (cursor.moveToNext()) {
             NgonNguDTO obj = NgonNguDTO.fromCursor(cursor);
             list.add(obj);
         }
-        
+
         return list;
     }
 
@@ -110,7 +110,8 @@ public class NgonNguDTO {
         }
         if ((index = cursor.getColumnIndex(CL_MA_NGON_NGU)) != -1) {
             obj.mMaNgonNgu = cursor.getInt(index);
-        }
+        } else
+            return null;
         if ((index = cursor.getColumnIndex(CL_TEN_NGON_NGU)) != -1) {
             obj.mTenNgonNgu = cursor.getString(index);
         }

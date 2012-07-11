@@ -19,8 +19,7 @@ import emenu.client.db.util.MyDatabaseHelper;
 import emenu.client.util.U;
 
 public final class NgonNguDAO extends AbstractDAO {
-    public static final String GET_ALL_URL = SERVER_URL_SLASH
-            + "layDanhSachNgonNgu";
+    public static final String GET_ALL_URL = SERVER_URL_SLASH + "layDanhSachNgonNgu";
 
     private static final String GET_ALL_JSON_URL = SERVER_URL_SLASH
             + "layDanhSachNgonNguJson";
@@ -72,13 +71,31 @@ public final class NgonNguDAO extends AbstractDAO {
         return result;
     }
 
-    public NgonNguDTO objNgonNguMacDinh() {
-        Cursor cursor = cursorAll();
+    public NgonNguDTO objFirstLang() {
+        SQLiteDatabase db = open();
+
+        String orderBy = NgonNguDTO.CL_MA_NGON_NGU + " asc";
+        Cursor cursor = db.query(NgonNguDTO.TABLE_NAME, null, null, null, null, null,
+                orderBy, null);
         cursor.moveToFirst();
 
         return NgonNguDTO.fromCursor(cursor);
     }
 
+    public NgonNguDTO objByName(String name) {
+        SQLiteDatabase db = open();
+
+        String selection = NgonNguDTO.CL_KI_HIEU + "=?";
+        String[] selectionArgs = { name };
+        // String orderBy = NgonNguDTO.CL_MA_NGON_NGU + " asc";
+        Cursor cursor = db.query(NgonNguDTO.TABLE_NAME, null, selection, selectionArgs, null, null,
+                null, null);
+        cursor.moveToFirst();
+
+        return NgonNguDTO.fromCursor(cursor);
+    }
+
+    @Deprecated
     public List<NgonNguDTO> getAll() {
         List<NgonNguDTO> list = new ArrayList<NgonNguDTO>();
 
@@ -103,26 +120,8 @@ public final class NgonNguDAO extends AbstractDAO {
         return list;
     }
 
-    public List<Map<String, Object>> mapAll() {
-        Cursor cursor = cursorAll();
-
-        return U.toMapList(cursor);
-    }
-
-    public Cursor cursorAll() {
-        SQLiteDatabase db = open();
-        String orderBy = NgonNguDTO.CL_MA_NGON_NGU + " asc";
-        return db.query(NgonNguDTO.TABLE_NAME, null, null, null, null, null,
-                orderBy, null);
-    }
-
     @Override
     public String getName() {
         return "Danh sách ngôn ngữ";
-    }
-
-    @Override
-    protected void createCache(Cursor cursor) {
-        mCached = NgonNguDTO.fromArrayCursor(cursor);
     }
 }

@@ -69,9 +69,4 @@ public class DanhMucDaNgonNguDAO extends AbstractDAO {
     public String getName() {
         return "Danh mục món";
     }
-
-    @Override
-    protected void createCache(Cursor cursor) {
-        mCached = DanhMucDaNgonNguDTO.fromArrayCursor(cursor);
-    }
 }

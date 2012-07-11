@@ -74,9 +74,4 @@ public class KhuVucDAO extends AbstractDAO {
     public String getName() {
         return "Danh sách khu vực";
     }
-
-    @Override
-    protected void createCache(Cursor cursor) {
-        mCached = KhuVucDTO.fromArrayCursor(cursor);
-    }
 }

@@ -35,6 +35,10 @@ import emenu.client.util.U;
 
 public class BriefDishView extends RelativeLayout implements
         OnPostExecuteListener<Integer, Void, List<ContentValues>>, View.OnClickListener {
+    
+    static class DishInfo {
+        
+    }
 
     private ContentValues mValues;
 

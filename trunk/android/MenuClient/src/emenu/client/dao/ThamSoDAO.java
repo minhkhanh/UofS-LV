@@ -60,9 +60,4 @@ public class ThamSoDAO extends AbstractDAO {
     public String getName() {
         return null;
     }
-
-    @Override
-    protected void createCache(Cursor cursor) {
-        mCached = ThamSoDTO.fromArrayCursor(cursor);
-    }
 }

@@ -3,7 +3,6 @@ package emenu.client.menu.adapter;
 import java.util.Collection;
 import java.util.List;
 
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,7 @@ public abstract class CustomArrayAdapter<T> extends BaseAdapter {
         mData = data;
         mContext = context;
     }
-    
+
     public void remove(T t) {
         mData.remove(t);
     }

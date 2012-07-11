@@ -67,9 +67,4 @@ public class DonViTinhDaNgonNguDAO extends AbstractDAO {
     public String getName() {
         return "Các đơn vị tính của món ăn";
     }
-
-    @Override
-    protected void createCache(Cursor cursor) {
-        mCached = DonViTinhDaNgonNguDTO.fromArrayCursor(cursor);
-    }
 }
