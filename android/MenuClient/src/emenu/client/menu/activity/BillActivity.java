@@ -105,6 +105,7 @@ public class BillActivity extends Activity implements OnVoucherUsedListener,
                 SessionManager.getInstance().finishCurrentSession();
 
                 Intent intent = new Intent(BillActivity.this, MainMenuActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             } else {
                 if (result != null)

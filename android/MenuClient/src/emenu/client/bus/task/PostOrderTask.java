@@ -25,7 +25,7 @@ public class PostOrderTask extends CustomAsyncTask<Void, Void, Boolean> {
 
         ServiceSession session = SessionManager.getInstance().loadCurrentSession();
 
-        mItems = session.bindOrder().getOrderItems();
+        mItems = session.bindOrder().getItems();
     }
 
     @Override

@@ -1,8 +1,5 @@
 package emenu.client.menu.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.http.client.HttpClient;
 
 import android.app.ActionBar;
@@ -11,7 +8,6 @@ import android.app.ActionBar.TabListener;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.app.ListActivity;
-import android.content.ContentValues;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,13 +17,10 @@ import android.view.View;
 import android.widget.ListView;
 import emenu.client.bus.task.CustomAsyncTask;
 import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
-import emenu.client.bus.task.GetServingOrderItemsTask;
 import emenu.client.bus.task.GetServingOrderItemsTask.OrderFlag;
 import emenu.client.bus.task.PostOrderTask;
 import emenu.client.menu.R;
-import emenu.client.menu.adapter.OrderAdapter;
 import emenu.client.menu.adapter.OrderedAdapter;
-import emenu.client.menu.adapter.UnorderedAdapter;
 import emenu.client.menu.app.SessionManager;
 import emenu.client.menu.app.SessionManager.ServiceOrder;
 import emenu.client.menu.app.SessionManager.ServiceSession;
@@ -35,7 +28,6 @@ import emenu.client.menu.fragment.AuthDlgFragment.OnAuthorizedListener;
 import emenu.client.menu.fragment.OrderFragment;
 import emenu.client.menu.fragment.OrderedItemEditingDlgFragment;
 import emenu.client.menu.fragment.OrderedItemEditingDlgFragment.OnItemUpdatedListener;
-import emenu.client.util.FragmentTabListener;
 import emenu.client.util.U;
 
 public class OrderActivity extends ListActivity implements TabListener,
@@ -46,7 +38,6 @@ public class OrderActivity extends ListActivity implements TabListener,
 
     private Tab mUnorderedTab;
     private Tab mOrderedTab;
-    private OrderAdapter mItemsAdapter;
     private PostOrderTask mPostOrderTask;
     private Menu mMenu;
     private OrderFragment mOrderFragment;
@@ -54,17 +45,6 @@ public class OrderActivity extends ListActivity implements TabListener,
     private DataSetObserver mOrderObserver = new DataSetObserver() {
         public void onChanged() {
             refreshList(getActionBar().getSelectedTab());
-        }
-    };
-
-    private OnPostExecuteListener<Integer, Void, List<ContentValues>> mOnPostGetServingOrderItems = new OnPostExecuteListener<Integer, Void, List<ContentValues>>() {
-        @Override
-        public void onPostExecute(
-                CustomAsyncTask<Integer, Void, List<ContentValues>> task,
-                List<ContentValues> result) {
-            mItemsAdapter.clear();
-            mItemsAdapter.addAll(result);
-            mItemsAdapter.notifyDataSetChanged();
         }
     };
 
@@ -89,7 +69,10 @@ public class OrderActivity extends ListActivity implements TabListener,
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         switch (item.getItemId()) {
             case R.id.miConfirmOrder:
-                if (mItemsAdapter.getCount() > 0)
+                ServiceSession session = SessionManager.getInstance()
+                        .loadCurrentSession();
+                ServiceOrder order = session.getOrder();
+                if (order.getCount() > 0)
                     U.showAuthDlg(this, getFragmentManager(), ACT_CONFIRM_ORDER, null);
                 else
                     U.toastText(this, R.string.message_null_order_not_allowed);
@@ -160,8 +143,9 @@ public class OrderActivity extends ListActivity implements TabListener,
 
         Tab tab = getActionBar().getSelectedTab();
         if (tab == mOrderedTab) {
+            OrderedAdapter adapter = (OrderedAdapter) mOrderFragment.getListAdapter();
             OrderedItemEditingDlgFragment f = new OrderedItemEditingDlgFragment(
-                    mItemsAdapter.getItem(position));
+                    adapter.getItem(position));
             U.showDlgFragment(this, f, true);
         }
     }

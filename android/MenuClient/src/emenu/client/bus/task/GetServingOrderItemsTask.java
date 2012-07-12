@@ -37,7 +37,7 @@ public class GetServingOrderItemsTask extends
 
         if (flag == OrderFlag.UnorderedOnly || flag == OrderFlag.Both) {
             ServiceSession session = SessionManager.getInstance().loadCurrentSession();
-            mLocalItems = session.getOrder().getOrderItems();
+            mLocalItems = session.getOrder().getItems();
         }
     }
 
