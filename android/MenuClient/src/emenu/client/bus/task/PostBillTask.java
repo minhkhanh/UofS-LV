@@ -19,7 +19,8 @@ public class PostBillTask extends CustomAsyncTask<Integer, Void, String> {
     @Override
     protected String doInBackground(Integer... params) {
         try {
-            return HoaDonDAO.getInstance().postLapHoaDon(mClient, params[0], mVoucherCodes);
+            String response = HoaDonDAO.getInstance().postLapHoaDon(mClient, params[0], mVoucherCodes);
+            return response;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

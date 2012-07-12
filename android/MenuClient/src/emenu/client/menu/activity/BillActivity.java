@@ -212,9 +212,6 @@ public class BillActivity extends Activity implements OnVoucherUsedListener,
 
     @Override
     public void onVoucherUsed(ContentValues values) {
-        // if (mVoucherPane.getVisibility() != View.VISIBLE)
-        // mVoucherPane.setVisibility(View.VISIBLE);
-
         mVoucherAdapter.add(values);
         mVoucherAdapter.notifyDataSetChanged();
 
