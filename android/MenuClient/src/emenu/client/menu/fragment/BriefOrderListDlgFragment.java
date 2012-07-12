@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentValues;
@@ -41,7 +40,7 @@ public class BriefOrderListDlgFragment extends DialogFragment implements
     private BriefOrderAdapter mListAdapter;
     private ExpandableListView mOrderList;
 
-    private int mSelectedGroup;
+//    private int mSelectedGroup;
 
     private TargetTableLoadingTask mTargetTableLoadingTask;
     private PostNewOrderTask mPostNewOrderTask;
@@ -64,7 +63,7 @@ public class BriefOrderListDlgFragment extends DialogFragment implements
     OnGroupExpandListener mOnGroupExpandListener = new OnGroupExpandListener() {
         @Override
         public void onGroupExpand(int groupPosition) {
-            mSelectedGroup = groupPosition;
+//            mSelectedGroup = groupPosition;
             if (mListAdapter.getGroup(groupPosition) != null
                     && mListAdapter.getChildrenCount(groupPosition) == 0) {
                 SessionManager.getInstance().loadSession(

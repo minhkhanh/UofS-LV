@@ -3,7 +3,6 @@ package emenu.client.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -26,14 +25,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
-
-import emenu.client.db.dto.MonAnDTO;
-import emenu.client.menu.R;
-import emenu.client.menu.fragment.AuthDlgFragment;
-import emenu.client.menu.fragment.AuthDlgFragment.OnAuthorizedListener;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -62,6 +55,10 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.Toast;
+import emenu.client.db.dto.MonAnDTO;
+import emenu.client.menu.R;
+import emenu.client.menu.fragment.AuthDlgFragment;
+import emenu.client.menu.fragment.AuthDlgFragment.OnAuthorizedListener;
 
 public final class U {
 

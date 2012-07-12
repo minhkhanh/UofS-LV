@@ -5,19 +5,17 @@ import org.apache.http.client.HttpClient;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.ActionMode;
 import android.view.ActionMode.Callback;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import emenu.client.menu.R;
 import emenu.client.bus.task.CustomAsyncTask;
 import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import emenu.client.bus.task.GetMoveOrderTask;
-import emenu.client.dao.OrderDAO;
 import emenu.client.db.dto.BanDTO;
+import emenu.client.menu.R;
 import emenu.client.menu.fragment.AreaListFragment;
 import emenu.client.menu.fragment.AuthDlgFragment.OnAuthorizedListener;
 import emenu.client.menu.fragment.TableMapFragment.OnTableClickedListener;
@@ -50,14 +48,14 @@ public class TableMapActivity extends Activity implements Callback,
         v.setBackgroundResource(R.drawable.romantic_mood_wallpaper_070);
 
         FragmentManager fm = getFragmentManager();
-        AreaListFragment f = (AreaListFragment) fm.findFragmentByTag("AreaListFragment");
+        AreaListFragment f = (AreaListFragment) fm.findFragmentById(R.id.LeftPaneHolder);
         if (f == null) {
             if (mOrderMovingMode != null)
                 f = new AreaListFragment(this);
             else
                 f = new AreaListFragment(null);
             FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.LeftPaneHolder, f, "AreaListFragment");
+            ft.replace(R.id.LeftPaneHolder, f);
             ft.commit();
         }
     }

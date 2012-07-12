@@ -20,7 +20,6 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
 
     public static final int MSG_LOADER_FINISHED_AREA_LIST = 0;
 
-    private boolean mIsDualPane;
     private int mSelIndex;
     private OnTableClickedListener mOnTableClickedListener;
 
@@ -29,9 +28,7 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if (mIsDualPane) {
-                showDetails(mSelIndex);
-            }
+            showDetails(mSelIndex);
         }
     };
 
@@ -58,6 +55,10 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (savedInstanceState != null) {
+            mSelIndex = savedInstanceState.getInt("mSelIndex", 0);
+        }
+
         setHasOptionsMenu(true);
     }
 
@@ -75,14 +76,6 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
         setListAdapter(mAreaAdapter);
 
         getLoaderManager().initLoader(0, null, this);
-
-        View detailsFrame = getActivity().findViewById(R.id.RightPaneHolder);
-        mIsDualPane = detailsFrame != null
-                && detailsFrame.getVisibility() == View.VISIBLE;
-
-        if (savedInstanceState != null) {
-            mSelIndex = savedInstanceState.getInt("mSelIndex", 0);
-        }
     }
 
     void showDetails(int index) {
@@ -97,30 +90,17 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
         String areaName = cursor.getString(cursor
                 .getColumnIndex(KhuVucDTO.CL_TEN_KHU_VUC));
 
-        if (mIsDualPane) {
-            getListView().setItemChecked(index, true);
-        }
+        getListView().setItemChecked(index, true);
 
         TableMapFragment f;
-        if (mIsDualPane) {
-            f = (TableMapFragment) getFragmentManager().findFragmentById(
-                    R.id.RightPaneHolder);
+        f = (TableMapFragment) getFragmentManager()
+                .findFragmentById(R.id.RightPaneHolder);
 
-            if (f == null || f.getMaKhuVuc() != areaId) {
-                f = new TableMapFragment(mOnTableClickedListener, areaId, areaName);
-
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.RightPaneHolder, f);
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                ft.commit();
-            }
-
-        } else {
+        if (f == null || f.getMaKhuVuc() != areaId) {
             f = new TableMapFragment(mOnTableClickedListener, areaId, areaName);
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.LeftPaneHolder, f);
-            ft.addToBackStack(null);
+            ft.replace(R.id.RightPaneHolder, f);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
         }
