@@ -2,7 +2,6 @@ package emenu.client.menu.view;
 
 import emenu.client.bus.task.CustomAsyncTask;
 import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
-import emenu.client.bus.task.GetDishPromotionTask;
 import emenu.client.db.dto.KhuyenMaiDTO;
 import emenu.client.db.dto.MonAnDTO;
 import emenu.client.db.dto.MonAnDaNgonNguDTO;

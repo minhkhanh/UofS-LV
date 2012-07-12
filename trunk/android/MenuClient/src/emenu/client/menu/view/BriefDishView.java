@@ -19,7 +19,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import emenu.client.menu.R;
 import emenu.client.bus.task.CustomAsyncTask;
-import emenu.client.bus.task.GetDishPromotionTask;
 import emenu.client.bus.task.LoadDishUnitsTask;
 import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import emenu.client.db.dto.DonViTinhDTO;
