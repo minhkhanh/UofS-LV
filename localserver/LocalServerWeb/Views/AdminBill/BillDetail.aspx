@@ -80,7 +80,7 @@
                     <%: ct.GiaTriKhuyenMaiLuuTru %>
                 </td>
                 <td>
-                    <%: ct.KhuyenMai.TenKhuyenMai %>
+                    <%: (ct.KhuyenMai.TenKhuyenMai!=null)?ct.KhuyenMai.TenKhuyenMai:"" %>
                 </td>
                 <td>
                     <%: ct.ThanhTien %>

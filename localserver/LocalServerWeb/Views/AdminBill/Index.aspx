@@ -98,7 +98,7 @@
                     <%: hoaDon.MoTaBanGhep %>
                 </td>
                 <td>
-                    <%: hoaDon.PhuThu.TenPhuThu %>
+                    <%: (hoaDon.PhuThu != null)?hoaDon.PhuThu.TenPhuThu:"" %>
                 </td>
                 <td>
                     <%: (hoaDon.PhuThu.GiaTang != 0)?hoaDon.PhuThu.GiaTang.ToString():hoaDon.PhuThu.TiLeTang.ToString()+"%" %>
