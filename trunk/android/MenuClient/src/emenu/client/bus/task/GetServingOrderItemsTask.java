@@ -25,13 +25,17 @@ public class GetServingOrderItemsTask extends
     public static final int FLAG_ORDERED_ONLY = 1;
     public static final int FLAG_BOTH = 2;
 
-    private int mFlag;
+    private OrderFlag mFlag;
     private List<ChiTietOrderDTO> mLocalItems = null;
 
-    public GetServingOrderItemsTask(int flag) {
+    public enum OrderFlag {
+        UnorderedOnly, OrderedOnly, Both
+    }
+
+    public GetServingOrderItemsTask(OrderFlag flag) {
         mFlag = flag;
 
-        if (flag == FLAG_UNORDERED_ONLY || flag == FLAG_BOTH) {
+        if (flag == OrderFlag.UnorderedOnly || flag == OrderFlag.Both) {
             ServiceSession session = SessionManager.getInstance().loadCurrentSession();
             mLocalItems = session.getOrder().getOrderItems();
         }
@@ -58,7 +62,7 @@ public class GetServingOrderItemsTask extends
         List<ChiTietOrderDTO> list = new ArrayList<ChiTietOrderDTO>();
 
         try {
-            if (mFlag == FLAG_ORDERED_ONLY || mFlag == FLAG_BOTH) {
+            if (mFlag == OrderFlag.OrderedOnly || mFlag == OrderFlag.Both) {
                 String url = AbstractDAO.SERVER_URL_SLASH
                         + "layDanhSachChiTietOrderJson?maOrder=" + params[0];
 
@@ -73,7 +77,7 @@ public class GetServingOrderItemsTask extends
                 b.putParcelable(OrderDTO.TABLE_NAME, c);
             }
 
-            if (mFlag == FLAG_UNORDERED_ONLY || mFlag == FLAG_BOTH) {
+            if (mFlag == OrderFlag.UnorderedOnly || mFlag == OrderFlag.Both) {
                 addMixedValues(result, mLocalItems, langId);
             }
         } catch (Exception e) {
@@ -82,5 +86,13 @@ public class GetServingOrderItemsTask extends
         }
 
         return result;
+    }
+
+    public OrderFlag getFlag() {
+        return mFlag;
+    }
+
+    public void setFlag(OrderFlag flag) {
+        mFlag = flag;
     }
 }

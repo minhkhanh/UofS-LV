@@ -34,6 +34,19 @@ public class CustomerLocale {
         }
     }
 
+    public void apply(NgonNguDTO newLang, Context context) {
+        mLanguage = newLang;
+        apply(context);
+    }
+
+    public Integer getLangId() {
+        return mLanguage.getMaNgonNgu();
+    }
+
+    public String getLangCode() {
+        return mLanguage.getKiHieu();
+    }
+
     public NgonNguDTO getLanguage() {
         return mLanguage;
     }

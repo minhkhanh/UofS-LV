@@ -8,9 +8,11 @@ import org.json.JSONObject;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.provider.BaseColumns;
 
-public class DanhMucDaNgonNguDTO {
+public class DanhMucDaNgonNguDTO implements Parcelable {
     public static final String TABLE_NAME = "ChiTietDanhMucDaNgonNgu";
 
     public static final String CL_ID = BaseColumns._ID;
@@ -87,6 +89,9 @@ public class DanhMucDaNgonNguDTO {
 
         return obj;
     }
+    
+    public DanhMucDaNgonNguDTO() {
+    }
 
     public Integer getId() {
         return mId;
@@ -131,5 +136,37 @@ public class DanhMucDaNgonNguDTO {
     @Override
     public String toString() {
         return getTenDanhMuc();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(mId);
+        dest.writeInt(mMaDanhMuc);
+        dest.writeInt(mMaNgonNgu);
+        dest.writeString(mMoTaDanhMuc);
+        dest.writeString(mTenDanhMuc);
+    }
+
+    public static final Parcelable.Creator<DanhMucDaNgonNguDTO> CREATOR = new Parcelable.Creator<DanhMucDaNgonNguDTO>() {
+        public DanhMucDaNgonNguDTO createFromParcel(Parcel in) {
+            return new DanhMucDaNgonNguDTO(in);
+        }
+
+        public DanhMucDaNgonNguDTO[] newArray(int size) {
+            return new DanhMucDaNgonNguDTO[size];
+        }
+    };
+
+    private DanhMucDaNgonNguDTO(Parcel in) {
+        mId = in.readInt();
+        mMaDanhMuc = in.readInt();
+        mMaNgonNgu = in.readInt();
+        mMoTaDanhMuc = in.readString();
+        mTenDanhMuc = in.readString();
     }
 }

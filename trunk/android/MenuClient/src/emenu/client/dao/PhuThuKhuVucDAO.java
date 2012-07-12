@@ -65,7 +65,7 @@ public class PhuThuKhuVucDAO extends AbstractDAO {
             e.printStackTrace();
             obj = null;
         } finally {
-            close();
+//            close();
         }
 
         return obj;
@@ -94,7 +94,7 @@ public class PhuThuKhuVucDAO extends AbstractDAO {
             return false;
         } finally {
             db.endTransaction();
-            close();
+//            close();
         }
 
         return true;

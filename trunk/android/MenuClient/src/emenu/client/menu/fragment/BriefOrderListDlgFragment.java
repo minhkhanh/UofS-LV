@@ -70,7 +70,7 @@ public class BriefOrderListDlgFragment extends DialogFragment implements
                 SessionManager.getInstance().loadSession(
                         mListAdapter.getGroup(groupPosition).getMaOrder());
                 GetServingOrderItemsTask task = new GetServingOrderItemsTask(
-                        GetServingOrderItemsTask.FLAG_BOTH);
+                        GetServingOrderItemsTask.OrderFlag.Both);
                 task.setOnPostExecuteListener(mOnPostExecuteGroupExpanding);
                 task.getExtras().putInt("groupPosition", groupPosition);
                 task.execute(mListAdapter.getGroup(groupPosition).getMaOrder());

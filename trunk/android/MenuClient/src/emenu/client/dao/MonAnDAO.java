@@ -82,7 +82,7 @@ public final class MonAnDAO extends AbstractDAO {
             result = false;
         } finally {
             db.endTransaction();
-            close();
+            // close();
         }
 
         return result;
@@ -149,6 +149,7 @@ public final class MonAnDAO extends AbstractDAO {
         Cursor cursor = queryBuilder.query(db, columns, null, null, groupBy, null, null);
 
         List<ContentValues> list = U.toContentValuesList(cursor);
+        cursor.close();
         for (ContentValues c : list) {
             Integer tmpDishId = c.getAsInteger(MonAnDaNgonNguDTO.CL_MA_MON_QN);
             c.remove(MonAnDaNgonNguDTO.CL_MA_MON_QN);
@@ -162,8 +163,6 @@ public final class MonAnDAO extends AbstractDAO {
             c.remove(MonAnDaNgonNguDTO.CL_TEN_MON_QN);
             c.put(MonAnDaNgonNguDTO.CL_TEN_MON, tmpDishName);
         }
-
-        cursor.close();
 
         return list;
     }
@@ -203,7 +202,7 @@ public final class MonAnDAO extends AbstractDAO {
 
         List<ContentValues> list = U.toContentValuesList(cursor);
 
-        db.close();
+        // db.close();
 
         return list;
     }
@@ -255,7 +254,7 @@ public final class MonAnDAO extends AbstractDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            close();
+            // close();
         }
 
         return list;

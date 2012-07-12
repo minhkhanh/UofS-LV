@@ -45,7 +45,7 @@ public class ThamSoDAO extends AbstractDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            close();
+//            close();
         }
 
         return obj;

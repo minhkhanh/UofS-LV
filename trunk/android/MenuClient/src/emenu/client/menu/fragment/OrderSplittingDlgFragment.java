@@ -80,7 +80,7 @@ public class OrderSplittingDlgFragment extends DialogFragment implements
 
         listSrc.pair(listDes);
 
-        new GetServingOrderItemsTask(GetServingOrderItemsTask.FLAG_ORDERED_ONLY)
+        new GetServingOrderItemsTask(GetServingOrderItemsTask.OrderFlag.OrderedOnly)
                 .setOnPostExecuteListener(this).execute(mOrderId);
 
         getView().findViewById(R.id.btnSplitOrder).setOnClickListener(this);

@@ -53,7 +53,7 @@ public class PhuThuDAO extends AbstractDAO {
             return false;
         } finally {
             db.endTransaction();
-            close();
+//            close();
         }
 
         return true;

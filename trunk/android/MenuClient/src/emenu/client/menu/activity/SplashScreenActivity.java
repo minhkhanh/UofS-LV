@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import emenu.client.bus.task.SyncDbTask;
 import emenu.client.menu.R;
-import emenu.client.menu.app.MenuApplication;
 import emenu.client.menu.fragment.HomeNavigationDlgFragment;
 import emenu.client.util.C;
 import emenu.client.util.U;
@@ -18,7 +17,6 @@ public class SplashScreenActivity extends Activity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        MenuApplication.getInstance().customerLocale.apply(getApplicationContext());
         setContentView(R.layout.layout_splash);
 
         SharedPreferences sharedPref = getSharedPreferences(C.SHARED_PREF_FILE, 0);
@@ -51,7 +49,5 @@ public class SplashScreenActivity extends Activity implements OnClickListener {
             default:
                 break;
         }
-
     }
-
 }

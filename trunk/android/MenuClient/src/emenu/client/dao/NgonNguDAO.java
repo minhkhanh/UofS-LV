@@ -65,10 +65,17 @@ public final class NgonNguDAO extends AbstractDAO {
             result = false;
         } finally {
             db.endTransaction();
-            close();
+//            close();
         }
 
         return result;
+    }
+
+    public List<NgonNguDTO> listAll() {
+        SQLiteDatabase db = open();
+        Cursor cursor = db.query(NgonNguDTO.TABLE_NAME, null, null, null, null, null,
+                null);
+        return NgonNguDTO.fromArrayCursor(cursor);
     }
 
     public NgonNguDTO objFirstLang() {
@@ -88,8 +95,8 @@ public final class NgonNguDAO extends AbstractDAO {
         String selection = NgonNguDTO.CL_KI_HIEU + "=?";
         String[] selectionArgs = { name };
         // String orderBy = NgonNguDTO.CL_MA_NGON_NGU + " asc";
-        Cursor cursor = db.query(NgonNguDTO.TABLE_NAME, null, selection, selectionArgs, null, null,
-                null, null);
+        Cursor cursor = db.query(NgonNguDTO.TABLE_NAME, null, selection, selectionArgs,
+                null, null, null, null);
         cursor.moveToFirst();
 
         return NgonNguDTO.fromCursor(cursor);

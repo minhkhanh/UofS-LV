@@ -25,7 +25,7 @@ public class SyncPrefFragment extends PreferenceFragment implements
 
     SharedPreferences mSharedPref;
 
-    long mWhenSyncDone;
+    long mWhenSyncDone = -1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class SyncPrefFragment extends PreferenceFragment implements
         mWhenSyncDone = mSharedPref.getLong(key, -1);
         if (mWhenSyncDone != -1) {
             mSyncNowPref.setSummary(getString(R.string.message_sync_succeed) + " "
-                    + getString(R.string.text_at) + " "
+                    + getString(R.string.text_at_time) + " "
                     + U.formatDateTime(C.LONG_DATETIME_FORMAT, mWhenSyncDone));
         } else {
             mSyncNowPref.setSummary(R.string.text_unsync);
@@ -69,7 +69,8 @@ public class SyncPrefFragment extends PreferenceFragment implements
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.cancel();
-                            SyncDbTask task = new SyncDbTask(getActivity().getApplicationContext());
+                            SyncDbTask task = new SyncDbTask(getActivity()
+                                    .getApplicationContext());
                             task.setWaitingDialog(U.createWaitingDialog(getActivity()));
                             task.setOnPostExecuteListener(SyncPrefFragment.this);
                             task.execute();
@@ -86,7 +87,7 @@ public class SyncPrefFragment extends PreferenceFragment implements
             mWhenSyncDone = System.currentTimeMillis();
             String whenString = U.formatDateTime(C.LONG_DATETIME_FORMAT, mWhenSyncDone);
             mSyncNowPref.setSummary(getString(R.string.message_sync_succeed) + " "
-                    + getString(R.string.text_at) + " " + whenString);
+                    + getString(R.string.text_at_time) + " " + whenString);
         }
 
     }
@@ -100,6 +101,12 @@ public class SyncPrefFragment extends PreferenceFragment implements
         String key = getString(R.string.key_pref_auto_sync);
         boolean syncFlag = mAutoSyncPref.isChecked();
         editor.putBoolean(key, syncFlag);
+
+//        if (mWhenSyncDone != -1) {
+//            key = getString(R.string.key_pref_sync_now);
+//            editor.putLong(key, mWhenSyncDone);
+//        }
+
         editor.commit();
     }
 }

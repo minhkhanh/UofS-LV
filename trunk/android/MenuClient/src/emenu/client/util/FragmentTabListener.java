@@ -25,8 +25,8 @@ public class FragmentTabListener implements TabListener {
         if (mIsInitDone) {
             ft.attach(mContent);
         } else {
-            mIsInitDone = true;
             ft.add(android.R.id.content, mContent, mTag);
+            mIsInitDone = true;
         }
     }
 

@@ -58,6 +58,9 @@ public class DishListFragment extends ListFragment implements OnQueryTextListene
         }
     };
 
+    public DishListFragment() {
+    }
+
     public DishListFragment(Integer maDanhMuc) {
         mMaDanhMuc = maDanhMuc;
     }
@@ -102,12 +105,6 @@ public class DishListFragment extends ListFragment implements OnQueryTextListene
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt("mMaDanhMuc", mMaDanhMuc);
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -115,9 +112,6 @@ public class DishListFragment extends ListFragment implements OnQueryTextListene
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState != null) {
-            mMaDanhMuc = savedInstanceState.getInt("mMaDanhMuc");
-        }
 
         setHasOptionsMenu(true);
 
@@ -129,7 +123,7 @@ public class DishListFragment extends ListFragment implements OnQueryTextListene
         getListView().setTextFilterEnabled(true);
     }
 
-    public int getMaDanhMuc() {
+    public Integer getMaDanhMuc() {
         return mMaDanhMuc;
     }
 
@@ -139,11 +133,11 @@ public class DishListFragment extends ListFragment implements OnQueryTextListene
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        if (TextUtils.isEmpty(newText)) {
+        String query = newText.trim();
+        if (TextUtils.isEmpty(query))
             getListView().clearTextFilter();
-        } else {
-            getListView().setFilterText(newText.toString());
-        }
+
+        getListView().setFilterText(query);
         return true;
     }
 
@@ -155,6 +149,7 @@ public class DishListFragment extends ListFragment implements OnQueryTextListene
     @Override
     public boolean onMenuItemActionCollapse(MenuItem item) {
         getLoaderManager().restartLoader(0, null, mLoaderCallbacks);
+        getListView().clearTextFilter();
         return true;
     }
 

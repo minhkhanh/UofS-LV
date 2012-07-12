@@ -13,8 +13,7 @@ import android.app.Activity;
 public class RootCategoryListLoader extends
         CustomAsyncTaskLoader<List<DanhMucDaNgonNguDTO>> {
 
-    private Integer mMaNgonNgu = MenuApplication.getInstance().customerLocale
-            .getLanguage().getMaNgonNgu();
+    private Integer mMaNgonNgu = MenuApplication.getInstance().customerLocale.getLangId();
 
     public RootCategoryListLoader(Activity context) {
         super(context);

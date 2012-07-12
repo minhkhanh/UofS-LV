@@ -93,10 +93,14 @@ public class TableSelection {
         }
 
         boolean hasFree = false;
+        boolean hasBusy = false;
         for (BanDTO b : mTabList) {
             if (b.getMaBanChinh() == null)
                 hasFree = true;
-            else if (hasFree)
+            else
+                hasBusy = true;
+
+            if (hasFree && hasBusy)
                 return SelectionState.Mixed;
         }
 

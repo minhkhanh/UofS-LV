@@ -41,9 +41,9 @@ public class ExpandableCategoryAdapter extends CustomArrayAdapter<CategoryNode> 
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        
-//        convertView.setBackgroundResource(R.drawable.activated_background);
-        
+
+        // convertView.setBackgroundResource(R.drawable.activated_background);
+
         holder.mCategoryName.setPadding(getItem(position).indent * 20 + 10, 0, 0, 0);
         holder.mCategoryName.setText(getItem(position).danhMuc.getTenDanhMuc());
 
@@ -72,22 +72,24 @@ public class ExpandableCategoryAdapter extends CustomArrayAdapter<CategoryNode> 
 
     public void expand(int position, int treePosition) {
         getItem(position).state = mTreeData.get(treePosition).state = CategoryNode.EXPANDED;
-        
+        CategoryNode parent = mTreeData.get(treePosition);
+
         int markedIndent = -1;
         for (int i = treePosition + 1; i < mTreeData.size(); ++i) {
-            int treeIndent = mTreeData.get(i).indent;
+            CategoryNode item = mTreeData.get(i);
 
-            if (treeIndent <= mTreeData.get(treePosition).indent) {
-                break;
-            } else if (treeIndent > mTreeData.get(treePosition).indent) {
-                if (mTreeData.get(i).state == CategoryNode.COLLAPSED) {
-                    markedIndent = treeIndent;
-                } else if (markedIndent != -1) {
-                    if (treeIndent > markedIndent) {
-                        continue;
-                    } else {
-                        markedIndent = -1;
-                    }
+            if (item.indent <= parent.indent) {
+                break; // is not a child
+            } else {
+                if (markedIndent == -1) {
+                    if (item.state == CategoryNode.COLLAPSED)
+                        markedIndent = item.indent; // parent node of collapsed
+                                                    // sub tree
+                } else {
+                    if (item.indent > markedIndent)
+                        continue; // child node of collapsed sub tree
+                    else
+                        markedIndent = -1; // out of collapsed sub tree
                 }
 
                 CategoryNode node = mTreeData.get(i);
@@ -99,7 +101,7 @@ public class ExpandableCategoryAdapter extends CustomArrayAdapter<CategoryNode> 
 
     public void expand(int position, int treePosition, List<DanhMucDaNgonNguDTO> addition) {
         getItem(position).state = mTreeData.get(treePosition).state = CategoryNode.EXPANDED;
-        
+
         int indent = getItem(position).indent + 1;
         for (int i = 0; i < addition.size(); ++i) {
             CategoryNode node = new CategoryNode();
@@ -123,7 +125,30 @@ public class ExpandableCategoryAdapter extends CustomArrayAdapter<CategoryNode> 
         getItem(position).state = mTreeData.get(treePosition).state = CategoryNode.COLLAPSED;
     }
 
+    public List<CategoryNode> createCompleteTree() {
+        List<CategoryNode> tree = new ArrayList<CategoryNode>();
+        int markedIndent = -1;
+        for (CategoryNode node : mTreeData) {
+            if (markedIndent == -1) {
+                if (node.state == CategoryNode.COLLAPSED)
+                    markedIndent = node.indent; // parent node of collapsed sub
+                                                // tree
+            } else {
+                if (node.indent > markedIndent)
+                    continue; // child in collapsed sub tree
+                else
+                    markedIndent = -1; // out of collapsed sub tree
+            }
+
+            tree.add(node);
+        }
+
+        return tree;
+    }
+
     public void setTreeData(List<CategoryNode> treeData) {
+        clear();
         mTreeData = treeData;
+        addAll(treeData);
     }
 }

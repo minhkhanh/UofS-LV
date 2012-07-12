@@ -111,7 +111,7 @@ public class OrderDAO extends AbstractDAO {
         if (cursor != null && cursor.moveToFirst()) {
             gia = cursor.getInt(0);
         }
-        close();
+//        close();
 
         return gia;
     }

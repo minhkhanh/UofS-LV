@@ -4,15 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.client.HttpClient;
-import org.json.JSONException;
 
-import emenu.client.menu.R;
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
+import android.app.ActionBar.TabListener;
+import android.app.AlertDialog;
+import android.app.FragmentTransaction;
+import android.app.ListActivity;
+import android.content.ContentValues;
+import android.database.DataSetObserver;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
 import emenu.client.bus.task.CustomAsyncTask;
-import emenu.client.bus.task.GetServingOrderItemsTask;
 import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
+import emenu.client.bus.task.GetServingOrderItemsTask;
+import emenu.client.bus.task.GetServingOrderItemsTask.OrderFlag;
 import emenu.client.bus.task.PostOrderTask;
-import emenu.client.dao.OrderDAO;
-import emenu.client.db.dto.ChiTietOrderDTO;
+import emenu.client.menu.R;
 import emenu.client.menu.adapter.OrderAdapter;
 import emenu.client.menu.adapter.OrderedAdapter;
 import emenu.client.menu.adapter.UnorderedAdapter;
@@ -20,29 +32,13 @@ import emenu.client.menu.app.SessionManager;
 import emenu.client.menu.app.SessionManager.ServiceOrder;
 import emenu.client.menu.app.SessionManager.ServiceSession;
 import emenu.client.menu.fragment.AuthDlgFragment.OnAuthorizedListener;
+import emenu.client.menu.fragment.OrderFragment;
 import emenu.client.menu.fragment.OrderedItemEditingDlgFragment;
 import emenu.client.menu.fragment.OrderedItemEditingDlgFragment.OnItemUpdatedListener;
+import emenu.client.util.FragmentTabListener;
 import emenu.client.util.U;
-import android.app.ActionBar;
-import android.app.AlertDialog;
-import android.app.FragmentTransaction;
-import android.app.ProgressDialog;
-import android.app.ActionBar.Tab;
-import android.app.ActionBar.TabListener;
-import android.app.Activity;
-import android.content.ContentValues;
-import android.content.DialogInterface;
-import android.database.DataSetObserver;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
 
-public class OrderActivity extends Activity implements TabListener, OnItemClickListener,
+public class OrderActivity extends ListActivity implements TabListener,
         OnItemUpdatedListener, OnAuthorizedListener,
         OnPostExecuteListener<Void, Void, Boolean> {
 
@@ -51,60 +47,15 @@ public class OrderActivity extends Activity implements TabListener, OnItemClickL
     private Tab mUnorderedTab;
     private Tab mOrderedTab;
     private OrderAdapter mItemsAdapter;
-    private ListView mItemsList;
     private PostOrderTask mPostOrderTask;
+    private Menu mMenu;
+    private OrderFragment mOrderFragment;
 
     private DataSetObserver mOrderObserver = new DataSetObserver() {
         public void onChanged() {
-            refreshList();
+            refreshList(getActionBar().getSelectedTab());
         }
     };
-
-    // private class PostOrderItemsTask extends CustomAsyncTask<Void, Void,
-    // Boolean> {
-    // List<ChiTietOrderDTO> mItems;
-    //
-    // @Override
-    // protected void onPreExecute() {
-    // super.onPreExecute();
-    //
-    // ServiceSession session =
-    // SessionManager.getInstance().loadCurrentSession();
-    //
-    // mItems = session.bindOrder().getOrderItems();
-    // }
-    //
-    // @Override
-    // protected Boolean doInBackground(Void... params) {
-    // try {
-    // return OrderDAO.getInstance().postArrayChiTietOrder(mItems);
-    // } catch (JSONException e) {
-    // e.printStackTrace();
-    // return false;
-    // }
-    // }
-    //
-    // @Override
-    // protected void onPostExecute(Boolean result) {
-    // super.onPostExecute(result);
-    // ServiceSession session =
-    // SessionManager.getInstance().loadCurrentSession();
-    //
-    // mWatingDlg.cancel();
-    // if (result) {
-    // U.toastText(OrderActivity.this, OrderActivity.this.getResources()
-    // .getString(R.string.message_order_sent));
-    //
-    // session.getOrder().clear();
-    //
-    // refreshList();
-    // } else {
-    // new AlertDialog.Builder(OrderActivity.this)
-    // .setMessage(R.string.message_connect_server_failed).create()
-    // .show();
-    // }
-    // }
-    // };
 
     private OnPostExecuteListener<Integer, Void, List<ContentValues>> mOnPostGetServingOrderItems = new OnPostExecuteListener<Integer, Void, List<ContentValues>>() {
         @Override
@@ -116,11 +67,6 @@ public class OrderActivity extends Activity implements TabListener, OnItemClickL
             mItemsAdapter.notifyDataSetChanged();
         }
     };
-
-    private void initViews() {
-        mItemsList = (ListView) findViewById(R.id.listOrder);
-        mItemsList.setOnItemClickListener(this);
-    }
 
     private void initActionBar() {
         ActionBar actionBar = getActionBar();
@@ -143,7 +89,10 @@ public class OrderActivity extends Activity implements TabListener, OnItemClickL
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         switch (item.getItemId()) {
             case R.id.miConfirmOrder:
-                U.showAuthDlg(this, getFragmentManager(), ACT_CONFIRM_ORDER, null);
+                if (mItemsAdapter.getCount() > 0)
+                    U.showAuthDlg(this, getFragmentManager(), ACT_CONFIRM_ORDER, null);
+                else
+                    U.toastText(this, R.string.message_null_order_not_allowed);
                 break;
 
             default:
@@ -158,52 +107,29 @@ public class OrderActivity extends Activity implements TabListener, OnItemClickL
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.options_order, menu);
 
+        mMenu = menu;
+
         return true;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_order);
-
-        initViews();
-        initActionBar();
 
         ServiceSession session = SessionManager.getInstance().loadCurrentSession();
         ServiceOrder order = session.getOrder();
         order.registerObserver(mOrderObserver);
+
+        mOrderFragment = new OrderFragment();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(android.R.id.content, mOrderFragment);
+        ft.commit();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        refreshList();
-    }
-
-    private Tab getCurrentTab() {
-        ActionBar bar = getActionBar();
-        return bar.getSelectedTab();
-    }
-
-    private void refreshList() {
-        Tab selTab = getCurrentTab();
-
-        if (selTab == mUnorderedTab) {
-            mItemsAdapter = new UnorderedAdapter(this, new ArrayList<ContentValues>());
-
-            new GetServingOrderItemsTask(GetServingOrderItemsTask.FLAG_UNORDERED_ONLY)
-                    .setOnPostExecuteListener(mOnPostGetServingOrderItems).execute();
-        } else {
-            mItemsAdapter = new OrderedAdapter(this, new ArrayList<ContentValues>());
-
-            ServiceSession session = SessionManager.getInstance().loadCurrentSession();
-            new GetServingOrderItemsTask(GetServingOrderItemsTask.FLAG_ORDERED_ONLY)
-                    .setOnPostExecuteListener(mOnPostGetServingOrderItems).execute(
-                            session.getOrderId());
-        }
-
-        mItemsList.setAdapter(mItemsAdapter);
+        initActionBar();
     }
 
     // ACTION BAR TABS CALLBACKS
@@ -213,7 +139,13 @@ public class OrderActivity extends Activity implements TabListener, OnItemClickL
 
     @Override
     public void onTabSelected(Tab tab, FragmentTransaction ft) {
-        refreshList();
+        refreshList(tab);
+
+        if (mMenu != null)
+            if (tab == mOrderedTab)
+                mMenu.findItem(R.id.miConfirmOrder).setEnabled(false);
+            else
+                mMenu.findItem(R.id.miConfirmOrder).setEnabled(true);
     }
 
     @Override
@@ -223,18 +155,27 @@ public class OrderActivity extends Activity implements TabListener, OnItemClickL
     // END OF ACTION BAR TABS CALLBACKS
 
     @Override
-    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-        Tab tab = getCurrentTab();
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        Tab tab = getActionBar().getSelectedTab();
         if (tab == mOrderedTab) {
             OrderedItemEditingDlgFragment f = new OrderedItemEditingDlgFragment(
-                    mItemsAdapter.getItem(arg2));
+                    mItemsAdapter.getItem(position));
             U.showDlgFragment(this, f, true);
         }
     }
 
     @Override
     public void onItemUpdated() {
-        refreshList();
+        refreshList(getActionBar().getSelectedTab());
+    }
+
+    private void refreshList(Tab selTab) {
+        if (selTab == mUnorderedTab)
+            mOrderFragment.refreshList(OrderFlag.UnorderedOnly);
+        else
+            mOrderFragment.refreshList(OrderFlag.OrderedOnly);
     }
 
     @Override
@@ -262,7 +203,7 @@ public class OrderActivity extends Activity implements TabListener, OnItemClickL
 
             session.getOrder().clear();
 
-            refreshList();
+            refreshList(getActionBar().getSelectedTab());
         } else {
             new AlertDialog.Builder(OrderActivity.this)
                     .setMessage(R.string.message_connect_server_failed).create().show();
