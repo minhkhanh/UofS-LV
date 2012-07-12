@@ -5,10 +5,8 @@ import java.util.List;
 
 import org.apache.http.client.HttpClient;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.DialogInterface;
 import android.content.Loader;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
@@ -180,6 +178,8 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
     };
 
     public TableMapFragment() {
+        mTenKhuVuc = "";
+        mAreaId = 0;
     }
 
     private void postTableSelection(HttpClient client) {
@@ -227,10 +227,6 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (savedInstanceState != null) {
-            mAreaId = savedInstanceState.getInt("mMaKhuVuc");
-        }
 
         mGridAdapter = new TableListAdapter(getActivity(), new ArrayList<BanDTO>());
     }
