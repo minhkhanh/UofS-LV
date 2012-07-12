@@ -151,7 +151,7 @@ namespace LocalServerWeb.Controllers
         }
 
         [HttpPost]
-        public bool PostHetCheBien(int maChiTietOrder, int soLuongHetCheBien)
+        public bool PostHetCheBien(int maChiTietOrder, int? soLuongHetCheBien)
         {
             if (!Request.IsAjaxRequest()) return false;
 
