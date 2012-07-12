@@ -75,7 +75,7 @@ namespace LocalServerDAO
                     if (chiTietCheBienOrder.ChiTietOrder.SoLuong == chiTietCheBienOrder.SoLuongDaCheBien)
                     {
                         // da che bien xong
-                        chiTietCheBienOrder.ChiTietOrder.TinhTrang = 1;
+                        chiTietCheBienOrder.ChiTietOrder.TinhTrang = 3;
                         //ChiTietOrderBUS.SuaChiTietOrder(chiTietOrder);
                     }
                     ThucDonDienTu.DataContext.SubmitChanges();

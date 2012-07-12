@@ -147,8 +147,12 @@ namespace LocalServerDAO
                 return false;
 
             ctOrder.SoLuong -= soLuongChuaDungToi;
-            // Khoa, ko dc che bien tiep
-            ctOrder.TinhTrang = 2;
+            // Doi trang thai sang lam xong neu da xong
+            ChiTietCheBienOrder ctCheBien = ChiTietCheBienOrderDAO.LayChiTietCheBienOrder(ctOrder.MaChiTietOrder);
+            if (ctCheBien!=null && ctCheBien.SoLuongDangCheBien == 0)
+            {
+                ctOrder.TinhTrang = 3;
+            }            
 
             ThucDonDienTu.DataContext.SubmitChanges();
 
