@@ -40,8 +40,6 @@ public class BriefOrderListDlgFragment extends DialogFragment implements
     private BriefOrderAdapter mListAdapter;
     private ExpandableListView mOrderList;
 
-//    private int mSelectedGroup;
-
     private TargetTableLoadingTask mTargetTableLoadingTask;
     private PostNewOrderTask mPostNewOrderTask;
 
