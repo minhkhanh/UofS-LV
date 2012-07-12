@@ -94,7 +94,7 @@ public class KhuyenMaiMonDAO extends AbstractDAO {
             return false;
         } finally {
             db.endTransaction();
-            close();
+//            close();
         }
 
         return true;

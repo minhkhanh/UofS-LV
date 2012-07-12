@@ -53,7 +53,7 @@ public class KhuyenMaiDAO extends AbstractDAO {
             return false;
         } finally {
             db.endTransaction();
-            close();
+//            close();
         }
 
         return true;

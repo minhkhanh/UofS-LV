@@ -68,7 +68,7 @@ public class MonLienQuanDAO extends AbstractDAO {
             list.add(c);
         }
 
-        db.close();
+//        db.close();
 
         return list;
     }
@@ -95,7 +95,7 @@ public class MonLienQuanDAO extends AbstractDAO {
             result = false;
         } finally {
             db.endTransaction();
-            close();
+//            close();
         }
 
         return result;

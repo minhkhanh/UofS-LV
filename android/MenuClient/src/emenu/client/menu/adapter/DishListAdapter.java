@@ -1,5 +1,6 @@
 package emenu.client.menu.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.ContentValues;
@@ -12,6 +13,7 @@ import android.widget.Filterable;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import emenu.client.dao.MonAnDAO;
+import emenu.client.menu.app.MenuApplication;
 import emenu.client.menu.view.BriefDishView;
 
 public class DishListAdapter extends CustomArrayAdapter<ContentValues> implements
@@ -44,23 +46,27 @@ public class DishListAdapter extends CustomArrayAdapter<ContentValues> implement
     @Override
     public Filter getFilter() {
         return new Filter() {
-
+            @SuppressWarnings("unchecked")
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                List<ContentValues> list = (List<ContentValues>) results.values;
-                if (list != null) {
-                    clear();
-                    addAll(list);
-                    notifyDataSetChanged();
-                }
+                clear();
+                addAll((List<ContentValues>) results.values);
+                notifyDataSetChanged();
             }
 
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults results = new FilterResults();
-                List<ContentValues> list = MonAnDAO.getInstance().contentByNameFilter(1,
-                        constraint.toString());
-                results.values = list;
+                String query = constraint.toString().trim();
+                if (!TextUtils.isEmpty(query)) {
+                    Integer langId = MenuApplication.getInstance().customerLocale
+                            .getLangId();
+                    List<ContentValues> list = MonAnDAO.getInstance()
+                            .contentByNameFilter(langId, query);
+                    results.values = list;
+                } else {
+                    results.values = new ArrayList<ContentValues>();
+                }
 
                 return results;
             }

@@ -28,7 +28,7 @@ public class LanguageSpinner extends Spinner {
         super(context);
     }
 
-    public void selectItem(NgonNguDTO ngonNgu) {
+    public void selectLanguage(NgonNguDTO ngonNgu) {
         SpinnerAdapter adapter = getAdapter();
         for (int i = 0; i < adapter.getCount(); ++i) {
             if (adapter.getItem(i) instanceof NgonNguDTO) {

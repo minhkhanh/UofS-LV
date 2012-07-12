@@ -8,25 +8,37 @@ import android.app.ListFragment;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Loader;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.ListView;
-import emenu.client.menu.R;
 import emenu.client.bus.loader.RootCategoryListLoader;
 import emenu.client.bus.task.CustomAsyncTask;
-import emenu.client.bus.task.LoadChildCategoryListTask;
 import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
+import emenu.client.bus.task.LoadChildCategoryListTask;
+import emenu.client.bus.task.RestoreCategoryTreeTask;
+import emenu.client.db.dto.DanhMucDTO;
 import emenu.client.db.dto.DanhMucDaNgonNguDTO;
+import emenu.client.menu.R;
 import emenu.client.menu.adapter.ExpandableCategoryAdapter;
+import emenu.client.menu.fragment.CategoryListFragment.CategoryNode;
 
 public class CategoryListFragment extends ListFragment implements
         LoaderCallbacks<List<DanhMucDaNgonNguDTO>>,
         OnPostExecuteListener<Integer, Void, List<DanhMucDaNgonNguDTO>> {
-    private int mSelIndex;
-    private boolean mIsDualPane;
+    public static final String KEY_CAT_INDENT_LIST = "KEY_CAT_INDENT_LIST";
+    public static final String KEY_CAT_STATE_LIST = "KEY_CAT_STATE_LIST";
+    public static final String KEY_CAT_ID_LIST = "KEY_CAT_ID_LIST";
 
+    public static final String KEY_SEL_CAT = "KEY_SEL_CAT";
+    private static final String KEY_CAT_TREE = "KEY_CAT_TREE";
+
+    private int mSelIndex = -1;
+    private RestoreCategoryTreeTask mRestoreCatTreeTask;
+    private List<CategoryNode> mCategoryTree;
     private ExpandableCategoryAdapter mListAdapter;
 
-    public static class CategoryNode {
+    public static class CategoryNode implements Parcelable {
         public static final int EXPANDED = 1;
         public static final int COLLAPSED = -1;
         public static final int NORMAL = 0;
@@ -34,30 +46,94 @@ public class CategoryListFragment extends ListFragment implements
         public DanhMucDaNgonNguDTO danhMuc;
         public int indent = 0;
         public int state = NORMAL;
+
+        public CategoryNode() {
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(danhMuc.getMaDanhMuc());
+            dest.writeInt(indent);
+            dest.writeInt(state);
+        }
+
+        public static final Parcelable.Creator<CategoryNode> CREATOR = new Parcelable.Creator<CategoryNode>() {
+            public CategoryNode createFromParcel(Parcel in) {
+                return new CategoryNode(in);
+            }
+
+            public CategoryNode[] newArray(int size) {
+                return new CategoryNode[size];
+            }
+        };
+
+        private CategoryNode(Parcel in) {
+            danhMuc = new DanhMucDaNgonNguDTO();
+            danhMuc.setMaDanhMuc(in.readInt());
+            indent = in.readInt();
+            state = in.readInt();
+        }
     }
 
-    private List<CategoryNode> mCategoryTree = new ArrayList<CategoryListFragment.CategoryNode>();
+    private OnPostExecuteListener<Void, Void, List<CategoryNode>> mOnPostRestoreTree = new OnPostExecuteListener<Void, Void, List<CategoryNode>>() {
+        @Override
+        public void onPostExecute(CustomAsyncTask<Void, Void, List<CategoryNode>> task,
+                List<CategoryNode> result) {
+            if (result.size() > 0) {
+                mCategoryTree.clear();
+                mCategoryTree.addAll(result);
+                mListAdapter.setTreeData(mCategoryTree);
+                mListAdapter.notifyDataSetChanged();
+
+                if (mSelIndex != -1)
+                    showDetails(mListAdapter.getItem(mSelIndex).danhMuc.getMaDanhMuc());
+            }
+        }
+    };
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mCategoryTree = new ArrayList<CategoryNode>();
+
+        if (savedInstanceState != null) {
+            mSelIndex = savedInstanceState.getInt(KEY_SEL_CAT, -1);
+
+            Parcelable[] tree = savedInstanceState.getParcelableArray(KEY_CAT_TREE);
+            if (tree != null) {
+                List<CategoryNode> savedTree = new ArrayList<CategoryListFragment.CategoryNode>();
+                for (Parcelable p : tree) {
+                    savedTree.add((CategoryNode) p);
+                }
+
+                mRestoreCatTreeTask = new RestoreCategoryTreeTask(savedTree);
+                mRestoreCatTreeTask.setOnPostExecuteListener(mOnPostRestoreTree)
+                        .execute();
+            }
+        }
+
+        mListAdapter = new ExpandableCategoryAdapter(getActivity(),
+                new ArrayList<CategoryNode>());
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState != null) {
-            mSelIndex = savedInstanceState.getInt("mSelIndex", 0);
-        }
 
-        getView().setBackgroundResource(R.drawable.simple_nine_patch);
-
-        mListAdapter = new ExpandableCategoryAdapter(getActivity(),
-                new ArrayList<CategoryNode>());
         setListAdapter(mListAdapter);
         getListView().setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
         getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-//        getListView().setSelector(R.drawable.activated_background);
 
-        getLoaderManager().initLoader(0, null, this);
-
-        View dishList = getActivity().findViewById(R.id.RightPaneHolder);
-        mIsDualPane = dishList != null && dishList.getVisibility() == View.VISIBLE;
+        if (mSelIndex == -1) {
+            getLoaderManager().initLoader(0, null, this);
+            showDetails(0);
+        }
     }
 
     @Override
@@ -79,7 +155,6 @@ public class CategoryListFragment extends ListFragment implements
         }
 
         mListAdapter.clear();
-        mListAdapter.addAll(mCategoryTree);
         mListAdapter.setTreeData(mCategoryTree);
         mListAdapter.notifyDataSetChanged();
     }
@@ -92,7 +167,8 @@ public class CategoryListFragment extends ListFragment implements
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        
+
+        mSelIndex = position;
         DanhMucDaNgonNguDTO danhMucCha = mListAdapter.getItem(position).danhMuc;
         int treePosition = mListAdapter.getTreePosition(danhMucCha.getMaDanhMuc());
 
@@ -116,28 +192,28 @@ public class CategoryListFragment extends ListFragment implements
     }
 
     void showDetails(Integer maDanhMuc) {
-        if (mIsDualPane) {
-            DishListFragment dishList = (DishListFragment) getFragmentManager()
-                    .findFragmentById(R.id.RightPaneHolder);
+        DishListFragment dishList = (DishListFragment) getFragmentManager()
+                .findFragmentById(R.id.paneDishList);
 
-            if (dishList == null || dishList.getMaDanhMuc() != maDanhMuc) {
-                dishList = new DishListFragment(maDanhMuc);
-
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.RightPaneHolder, dishList);
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                ft.commit();
-            }
-
-        } else {
-            DishListFragment dishList = new DishListFragment(maDanhMuc);
+        if (dishList == null || dishList.getMaDanhMuc() == null
+                || dishList.getMaDanhMuc() != maDanhMuc) {
+            dishList = new DishListFragment(maDanhMuc);
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.LeftPaneHolder, dishList);
-            ft.addToBackStack(null);
+            ft.replace(R.id.paneDishList, dishList);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        List<CategoryNode> completeTree = mListAdapter.createCompleteTree();
+        outState.putInt(KEY_SEL_CAT, mSelIndex);
+        outState.putParcelableArray(KEY_CAT_TREE,
+                completeTree.toArray(new Parcelable[] {}));
     }
 
     @Override

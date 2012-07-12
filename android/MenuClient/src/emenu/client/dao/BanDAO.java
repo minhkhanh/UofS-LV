@@ -85,7 +85,7 @@ public class BanDAO extends AbstractDAO {
             e.printStackTrace();
             ban = null;
         } finally {
-            close();
+//            close();
         }
 
         return ban;
@@ -132,7 +132,7 @@ public class BanDAO extends AbstractDAO {
             result = false;
         } finally {
             db.endTransaction();
-            close();
+//            close();
         }
 
         return result;

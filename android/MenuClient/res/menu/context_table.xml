@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/miSelectTable" android:title="@string/context_select_table"></item>
-    <item android:id="@+id/miSplitTable" android:title="@string/context_table_item_split"></item>
-    <item android:id="@+id/miGroupTable" android:title="@string/option_group_table"></item>
-    
+
+    <item
+        android:id="@+id/miSelectTable"
+        android:title="@string/context_select_table">
+    </item>
+    <item
+        android:id="@+id/miGroupTable"
+        android:title="@string/option_group_table">
+    </item>
+    <item
+        android:id="@+id/miSplitTable"
+        android:title="@string/context_table_item_split">
+    </item>
 
 </menu>

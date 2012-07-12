@@ -59,7 +59,7 @@ public class DanhMucDaNgonNguDAO extends AbstractDAO {
             result = false;
         } finally {
             db.endTransaction();
-            close();
+//            close();
         }
 
         return result;

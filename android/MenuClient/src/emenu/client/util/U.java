@@ -343,7 +343,7 @@ public final class U {
             throws ClientProtocolException, IOException {
         if (httpClient == null)
             httpClient = new MyHttpClient();
-        
+
         HttpGet httpget = new HttpGet(url);
 
         HttpResponse response = httpClient.execute(httpget);

@@ -55,10 +55,9 @@ public class DanhMucDAO extends AbstractDAO {
         cursor = query.query(db, DanhMucDaNgonNguDTO.allColumns(), selection,
                 selectionArgs, null, null, null);
 
-        List<DanhMucDaNgonNguDTO> list = new ArrayList<DanhMucDaNgonNguDTO>();
-        while (cursor.moveToNext()) {
-            list.add(DanhMucDaNgonNguDTO.fromCursor(cursor));
-        }
+        List<DanhMucDaNgonNguDTO> list = DanhMucDaNgonNguDTO.fromArrayCursor(cursor);
+
+        cursor.close();
 
         return list;
     }
@@ -114,7 +113,7 @@ public class DanhMucDAO extends AbstractDAO {
             result = false;
         } finally {
             db.endTransaction();
-            close();
+            // close();
         }
 
         return result;
@@ -151,7 +150,7 @@ public class DanhMucDAO extends AbstractDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            close();
+            // close();
         }
 
         return list;
@@ -160,5 +159,21 @@ public class DanhMucDAO extends AbstractDAO {
     @Override
     public String getName() {
         return "Danh muc món";
+    }
+
+    public DanhMucDaNgonNguDTO objByCategoryId(Integer catId, Integer langId) {
+        SQLiteDatabase db = open();
+
+        String selection = DanhMucDaNgonNguDTO.CL_MA_DANH_MUC + "=? and "
+                + DanhMucDaNgonNguDTO.CL_MA_NGON_NGU + "=?";
+        String[] selectionArgs = { catId.toString(), langId.toString() };
+
+        Cursor cursor = db.query(DanhMucDaNgonNguDTO.TABLE_NAME, null, selection,
+                selectionArgs, null, null, null);
+        cursor.moveToFirst();
+        DanhMucDaNgonNguDTO cateogry = DanhMucDaNgonNguDTO.fromCursor(cursor);
+        cursor.close();
+
+        return cateogry;
     }
 }

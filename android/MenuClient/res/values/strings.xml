@@ -60,7 +60,7 @@
     <string name="key_pref_auto_sync">key_pref_auto_sync</string>
     <string name="pref_syncing">Đồng bộ dữ liệu</string>
     <string name="text_unsync">Chưa đồng bộ dữ liệu</string>
-    <string name="text_at">vào lúc</string>
+    <string name="text_at_time">vào lúc</string>
     <string name="text_loading">Đang tải</string>
     <string name="message_confirm_sync_db">Chuẩn bị đồng bộ dữ liệu với Server</string>
     <string name="caption_table_map">Sơ đồ bàn</string>
@@ -155,5 +155,8 @@
     <string name="message_auth_failed">Xác thực không thành công</string>
     <string name="caption_connection">Kết nối</string>
     <string name="text_dish_search_hint">Tìm tên món ăn</string>
+    <string name="message_test_connection_ok">Kiểm tra kết nối thành công</string>
+    <string name="message_test_connection_failed">Kiểm tra kết nối KHÔNG thành công</string>
+    <string name="message_null_order_not_allowed">Order chưa có món nào</string>
 
 </resources>

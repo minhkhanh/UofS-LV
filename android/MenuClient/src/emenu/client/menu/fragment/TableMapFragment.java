@@ -91,6 +91,7 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
 
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            mode.getMenuInflater().inflate(R.menu.context_table, menu);
             return true;
         }
 
@@ -143,35 +144,34 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
                     }
                 }
 
-                mCurrTabSel = getTableSelection();
-                SelectionState currState = mCurrTabSel.getState();
-
                 int checkedCount = mTableGrid.getCheckedItemCount();
-                if (checkedCount == 0) {
+                if (checkedCount == 0) { // end selecting
                     mActionMode.finish();
-                } else if (mActionMode == null) {
-                    mActionMode = getActivity().startActionMode(mActionModeCallback);
-                }
+                } else {
+                    if (mActionMode == null) // start selecting
+                        mActionMode = getActivity().startActionMode(mActionModeCallback);
 
-                if (mActionMode != null) {
+                    // selecting
+                    mCurrTabSel = getTableSelection();
+                    SelectionState currState = mCurrTabSel.getState();
                     Menu menu = mActionMode.getMenu();
-                    menu.clear();
                     switch (currState) {
                         case SingleFree:
                         case SingleBusy:
-                            menu.add(Menu.NONE, R.id.miSelectTable, 0,
-                                    R.string.context_select_table);
+                            menu.findItem(R.id.miSelectTable).setEnabled(true);
+                            menu.findItem(R.id.miGroupTable).setEnabled(false);
+                            menu.findItem(R.id.miSplitTable).setEnabled(false);
                             break;
                         case Mixed:
                         case MultiFree:
-                            menu.add(Menu.NONE, R.id.miGroupTable, 0,
-                                    R.string.option_group_table);
+                            menu.findItem(R.id.miSelectTable).setEnabled(true);
+                            menu.findItem(R.id.miGroupTable).setEnabled(true);
+                            menu.findItem(R.id.miSplitTable).setEnabled(false);
                             break;
                         case GroupBusy:
-                            menu.add(Menu.NONE, R.id.miSelectTable, 0,
-                                    R.string.context_select_table);
-                            menu.add(Menu.NONE, R.id.miSplitTable, 0,
-                                    R.string.context_table_item_split);
+                            menu.findItem(R.id.miSelectTable).setEnabled(true);
+                            menu.findItem(R.id.miGroupTable).setEnabled(false);
+                            menu.findItem(R.id.miSplitTable).setEnabled(true);
                             break;
                     }
                 }

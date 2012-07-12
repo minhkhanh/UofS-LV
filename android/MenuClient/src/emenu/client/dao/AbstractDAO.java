@@ -32,9 +32,9 @@ public abstract class AbstractDAO {
         return mDbHelper.getWritableDatabase();
     }
 
-    protected void close() {
-        mDbHelper.close();
-    }
+//    protected void close() {
+//        mDbHelper.close();
+//    }
 
     public Cursor cursorAll(String tableName) {
         SQLiteDatabase db = open();
@@ -45,25 +45,4 @@ public abstract class AbstractDAO {
 
     public abstract String getName();
 
-//    protected abstract void createCache(Cursor cursor);
-
-//    public boolean loadCachedData() {
-//        boolean flag = true;
-//        SQLiteDatabase db = null;
-//        try {
-//            db = open();
-//            Cursor cursorAll = db.query(BanDTO.TABLE_NAME, null, null, null, null, null,
-//                    null, null);
-//            createCache(cursorAll);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            flag = false;
-//        } finally {
-//            if (db != null) {
-//                db.close();
-//            }
-//        }
-//
-//        return flag;
-//    }
 }

@@ -205,7 +205,7 @@ public class BillActivity extends Activity implements OnVoucherUsedListener,
         ServiceSession session = SessionManager.getInstance().loadCurrentSession();
 
         mGetServingOrderItemsTask = new GetServingOrderItemsTask(
-                GetServingOrderItemsTask.FLAG_ORDERED_ONLY);
+                GetServingOrderItemsTask.OrderFlag.OrderedOnly);
         mGetServingOrderItemsTask.setOnPostExecuteListener(mOnPostGetServingOrderItems)
                 .execute(session.getOrderId());
     }
@@ -241,7 +241,8 @@ public class BillActivity extends Activity implements OnVoucherUsedListener,
 
                 Integer orderId = SessionManager.getInstance().loadCurrentSession()
                         .getOrderId();
-                mPostBillTask = new PostBillTask(client, mVoucherAdapter.getAllVoucherCodes());
+                mPostBillTask = new PostBillTask(client,
+                        mVoucherAdapter.getAllVoucherCodes());
                 mPostBillTask.setOnPostExecuteListener(mOnPostPostBill).execute(orderId);
                 break;
 

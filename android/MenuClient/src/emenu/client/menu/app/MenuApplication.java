@@ -3,6 +3,7 @@ package emenu.client.menu.app;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.util.Log;
 import emenu.client.dao.AbstractDAO;
 import emenu.client.dao.BanDAO;
 import emenu.client.dao.DanhMucDAO;
@@ -43,6 +44,7 @@ public class MenuApplication extends Application {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        Log.d(C.TAG, "config changed");
     }
 
     @Override
