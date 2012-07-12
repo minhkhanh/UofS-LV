@@ -14,6 +14,8 @@ using LocalServerDTO;
 using LocalServerWeb.Codes;
 using LocalServerWeb.Models;
 using LocalServerWeb.Resources.Views.Account;
+using LocalServerWeb.Resources.Views.AdminUser;
+using LocalServerWeb.Resources.Views.Shared;
 using LocalServerWeb.ViewModels;
 
 namespace LocalServerWeb.Controllers
@@ -130,7 +132,42 @@ namespace LocalServerWeb.Controllers
         //    ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
         //    return View(model);
         //}
+        public ActionResult Edit(int? id)
+        {
+            if (id == null || id <= 0)
+            {
+                TempData["error"] = SharedString.InputWrong;
+                return RedirectToAction("Index", "Error");
+            }
 
+            TaiKhoan taiKhoan = TaiKhoanBUS.LayTaiKhoan(id ?? 0);
+            if (taiKhoan == null || !SharedCode.IsUserLogin(Session) || ((TaiKhoan)Session["taiKhoan"]).MaTaiKhoan!=taiKhoan.MaTaiKhoan)
+            {
+                TempData["errorNotFound"] = AdminUserString.Error;
+                return RedirectToAction("Index", "Error");
+            }
+            else
+            {
+                TempData["tenTaiKhoan"] = taiKhoan.TenTaiKhoan;
+                TempData["matKhau"] = taiKhoan.MatKhau;
+                TempData["hoTen"] = taiKhoan.HoTen;
+                TempData["day"] = taiKhoan.NgaySinh.Day;
+                TempData["month"] = taiKhoan.NgaySinh.Month;
+                TempData["year"] = taiKhoan.NgaySinh.Year;
+                TempData["gioiTinh"] = taiKhoan.GioiTinh;
+                TempData["nhomTaiKhoan"] = taiKhoan.NhomTaiKhoan.MaNhomTaiKhoan;
+                TempData["cmnd"] = taiKhoan.CMND;
+
+                ViewData["listNhomTaiKhoan"] = NhomTaiKhoanBUS.LayDanhSachNhomTaiKhoan();
+                if (TempData["checkDic"] == null)
+                {
+                    TempData["checkDic"] = new Dictionary<string, string>();
+                }
+
+            }
+
+            return View();
+        }
         // **************************************
         // URL: /Account/ChangePassword
         // **************************************

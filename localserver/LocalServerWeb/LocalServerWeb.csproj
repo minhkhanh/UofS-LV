@@ -994,6 +994,7 @@
     <Content Include="Scripts\mootools-1.2.1-core.js" />
     <Content Include="Scripts\myScript.js" />
     <Content Include="Scripts\slideitmoo-1.1.js" />
+    <Content Include="Views\Account\Edit.aspx" />
     <Content Include="Views\AdminArea\Add.aspx" />
     <Content Include="Views\AdminArea\Edit.aspx" />
     <Content Include="Views\AdminArea\Index.aspx" />
