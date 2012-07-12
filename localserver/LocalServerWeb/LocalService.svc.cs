@@ -28,7 +28,7 @@ namespace LocalServerWeb
         // Khu Vuc
         public List<KhuVuc> LayDanhKhuVuc(string junk)
         {
-            if (!SharedCode.IsWaitorLogin(new HttpSessionStateWrapper(HttpContext.Current.Session))) return null;
+            //if (!SharedCode.IsWaitorLogin(new HttpSessionStateWrapper(HttpContext.Current.Session))) return null;
             return KhuVucBUS.LayDanhSachKhuVuc();
         }
 
@@ -943,19 +943,6 @@ namespace LocalServerWeb
             return listHoaDon;
         }
 
-        public string LapHoaDon(int maOrder, List<String> voucherCodes)
-        {
-            try
-            {
-                return HoaDonBUS.LapHoaDonJson(maOrder, voucherCodes);
-            }
-            catch (Exception e)
-            {
-                Console.Error.WriteLine(e.Message);
-            }
-            return null;
-        }
-
         public HoaDon ThemHoaDon(HoaDon _hoaDon)
         {
             try
@@ -1391,9 +1378,17 @@ namespace LocalServerWeb
             return PhuThuBUS.LayDanhSachPhuThuKhuVucCoHieuLucJson();
         }
 
-        public string LapHoaDonJson(int maOrder, List<String> voucherCodes)
+        public Stream LapHoaDonJson(int maOrder, List<String> voucherCodes)
         {
-            return LapHoaDon(maOrder, voucherCodes);
+            try
+            {
+                return HoaDonBUS.LapHoaDonJson(maOrder, voucherCodes);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return null;
         }
 
         public List<ChiTietOrder> LapOrderJson(int maTaiKhoan, int maBan,  List<ChiTietOrder> _listChiTietOrder)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using LocalServerDAO;
 using LocalServerDTO;
+using System.IO;
 
 
 namespace LocalServerBUS
@@ -45,11 +46,15 @@ namespace LocalServerBUS
             return HoaDonDAO.SuaHoaDon(_hoaDon);
         }
 
-        public static string LapHoaDonJson(int maOrder, List<String> voucherCodes)
+        public static Stream LapHoaDonJson(int maOrder, List<String> voucherCodes)
         {
+            string response;
             Order order = OrderBUS.LayOrder(maOrder);
             if (order == null || order.TinhTrang == 2)
-                return "Không tìm thấy order";
+            {
+                response = "Không tìm thấy order";
+                return new MemoryStream(Encoding.UTF8.GetBytes(response));
+            }
             
             // B1: Tao Hoa don moi
             HoaDon hoaDon = new HoaDon();
@@ -127,7 +132,10 @@ namespace LocalServerBUS
             {
                 ChiTietVoucher c = ChiTietVoucherBUS.LayChiTietSanSang(code);
                 if (c == null)
-                    return "Không dùng voucher được. Mã voucher: " + code;
+                {
+                    response = "Không dùng voucher được. Mã voucher: " + code;
+                    return new MemoryStream(Encoding.UTF8.GetBytes(response));
+                }
 
                 //if (ChiTietVoucherBUS.SuDungVoucher(code) == false)
                 //    return null;
@@ -137,7 +145,10 @@ namespace LocalServerBUS
             }
 
             if (HoaDonBUS.ThemHoaDon(hoaDon) == null)
-                return "Không lập hóa đơn được";
+            {
+                response = "Không lập hóa đơn được";
+                return new MemoryStream(Encoding.UTF8.GetBytes(response));
+            }
 
             foreach (ChiTietHoaDon c in listCTHoaDon)
                 c.HoaDon = hoaDon;
@@ -148,7 +159,8 @@ namespace LocalServerBUS
             // B8: Them nhieu ct Hoa don
             if (ChiTietHoaDonDAO.ThemNhieuChiTietHoaDon(listCTHoaDon) == null)
             {
-                return "Không lập hóa đơn được";
+                response = "Không lập hóa đơn được";
+                return new MemoryStream(Encoding.UTF8.GetBytes(response));
             }
             //ChiTietHoaDonBUS.ThemNhieuChiTietHoaDon(listCTHoaDon);
 
@@ -161,7 +173,8 @@ namespace LocalServerBUS
 
             ThucDonDienTu.DataContext.SubmitChanges();
 
-            return "";
+            response = "";
+            return new MemoryStream(Encoding.UTF8.GetBytes(response));;
         }
 
         public static float LayTongKhuyenMai(int maHoaDon)

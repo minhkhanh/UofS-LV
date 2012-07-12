@@ -328,10 +328,6 @@ namespace LocalServerWeb
         [OperationContract]
         HoaDon ThemHoaDon(HoaDon _hoaDon);
 
-        [WebInvoke(Method = "POST", UriTemplate = "lapHoaDon?maOrder={maOrder}")]
-        [OperationContract]
-        string LapHoaDon(int maOrder, List<String> voucherCodes);
-
         [WebInvoke(Method = "PUT", UriTemplate = "suaHoaDon")]
         [OperationContract]
         bool SuaHoaDon(HoaDon _hoaDon);
@@ -569,7 +565,7 @@ namespace LocalServerWeb
         // Hoa Don
         [WebInvoke(Method = "POST", UriTemplate = "lapHoaDonJson?maOrder={maOrder}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        string LapHoaDonJson(int maOrder, List<String> voucherCodes);
+        Stream LapHoaDonJson(int maOrder, List<String> voucherCodes);
 
         // Order
         [WebInvoke(Method = "POST", UriTemplate = "lapOrderJson?maTaiKhoan={maTaiKhoan}&maBan={maBan}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
