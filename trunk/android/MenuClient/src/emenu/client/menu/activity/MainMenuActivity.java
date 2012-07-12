@@ -52,8 +52,6 @@ public class MainMenuActivity extends Activity implements OnItemSelectedListener
         }
     };
     private LoadAllLanguageTask mLoadLangTask;
-    private CategoryListFragment mCatList;
-    private DishListFragment mDishList;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -64,6 +62,11 @@ public class MainMenuActivity extends Activity implements OnItemSelectedListener
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.options_main_menu, menu);
+
+        MenuItem item = menu.findItem(R.id.miDishSearch);
+        SearchView searchView = (SearchView) item.getActionView();
+        searchView.setIconifiedByDefault(true);
+
         return true;
     }
 
@@ -125,13 +128,6 @@ public class MainMenuActivity extends Activity implements OnItemSelectedListener
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
         }
-
-//        f = fm.findFragmentById(R.id.paneDishList);
-//        if (f == null) {
-//            ft.replace(R.id.paneDishList, new DishListFragment(0));
-//            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-//        }
-//        ft.commit();
     }
 
     @Override
@@ -142,13 +138,6 @@ public class MainMenuActivity extends Activity implements OnItemSelectedListener
         if (currLang.getKiHieu().compareTo(newLang.getKiHieu()) != 0) {
             locale.setLanguage(newLang);
             U.restartActivity(this);
-            // locale.apply(newLang, this);
-            //
-            // FragmentTransaction ft =
-            // mCatList.getFragmentManager().beginTransaction();
-            // ft.remove(mCatList);
-            // ft.add(R.id.paneCatList, mCatList);
-            // ft.commit();
         }
     }
 

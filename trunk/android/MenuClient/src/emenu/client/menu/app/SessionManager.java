@@ -8,7 +8,7 @@ import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.util.U;
 
 public class SessionManager {
-    
+
     private static SessionManager mInstance;
 
     public static class OrderItemId {
@@ -36,7 +36,7 @@ public class SessionManager {
     }
 
     public class ServiceOrder extends DataSetObservable {
-        
+
         private List<ChiTietOrderDTO> mOrderItems = new ArrayList<ChiTietOrderDTO>();
 
         public void clear() {
@@ -71,8 +71,11 @@ public class SessionManager {
             }
         }
 
-        public List<ChiTietOrderDTO> getOrderItems() {
+        public int getCount() {
+            return mOrderItems.size();
+        }
 
+        public List<ChiTietOrderDTO> getItems() {
             return mOrderItems;
         }
 

@@ -26,10 +26,8 @@ public class OrderFragment extends ListFragment implements
     private UnorderedAdapter mUnorderedAdapter;
 
     private GetServingOrderItemsTask mGetOrderListTask;
-    private OrderFlag mFlag;
 
     public void refreshList(OrderFlag flag) {
-        mFlag = flag;
         setListShown(false);
 
         U.cancelAsyncTask(mGetOrderListTask);

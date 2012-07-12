@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ListFragment;
-import android.app.SearchManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Loader;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,7 +14,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnActionExpandListener;
 import android.widget.SearchView;
-import android.widget.SearchView.OnCloseListener;
 import android.widget.SearchView.OnQueryTextListener;
 import emenu.client.bus.loader.DishListLoader;
 import emenu.client.bus.task.LoadDishUnitsTask;
@@ -32,6 +29,7 @@ public class DishListFragment extends ListFragment implements OnQueryTextListene
     private DishListAdapter mDishesAdapter;
 
     private boolean mHaveExtendPane;
+    private SearchView mSearchView;
 
     private LoaderCallbacks<List<ContentValues>> mLoaderCallbacks = new LoaderCallbacks<List<ContentValues>>() {
 
@@ -59,6 +57,7 @@ public class DishListFragment extends ListFragment implements OnQueryTextListene
     };
 
     public DishListFragment() {
+        mMaDanhMuc = 0;
     }
 
     public DishListFragment(Integer maDanhMuc) {
@@ -74,20 +73,28 @@ public class DishListFragment extends ListFragment implements OnQueryTextListene
     }
 
     @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+
+        MenuItem item = menu.findItem(R.id.miDishSearch);
+        item.collapseActionView();
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
 
         MenuItem item = menu.findItem(R.id.miDishSearch);
         item.setOnActionExpandListener(this);
         // Get the SearchView and set the searchable configuration
-        SearchView searchView = (SearchView) item.getActionView();
+        mSearchView = (SearchView) item.getActionView();
         // SearchManager searchManager = (SearchManager)
         // getActivity().getSystemService(
         // Context.SEARCH_SERVICE);
         // searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity()
         // .getComponentName()));
-        searchView.setOnQueryTextListener(this);
-        searchView.setSubmitButtonEnabled(false);
+        mSearchView.setOnQueryTextListener(this);
+        mSearchView.setSubmitButtonEnabled(false);
     }
 
     @Override
@@ -134,10 +141,11 @@ public class DishListFragment extends ListFragment implements OnQueryTextListene
     @Override
     public boolean onQueryTextChange(String newText) {
         String query = newText.trim();
+        getListView().setFilterText(query);
+
         if (TextUtils.isEmpty(query))
             getListView().clearTextFilter();
 
-        getListView().setFilterText(query);
         return true;
     }
 
