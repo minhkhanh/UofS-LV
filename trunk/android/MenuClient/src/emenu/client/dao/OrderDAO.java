@@ -41,12 +41,12 @@ public class OrderDAO extends AbstractDAO {
         super(dbHelper);
     }
 
-    public boolean postOrderSplitting(HttpClient client, List<SplittingOrderItem> itemIds)
+    public boolean postOrderSplitting(HttpClient client, List<Integer> itemIds)
             throws JSONException {
         JSONArray jsonArray = new JSONArray();
-        for (SplittingOrderItem i : itemIds) {
-            JSONObject jsonObject = i.toJson();
-            jsonArray.put(jsonObject);
+        for (Integer i : itemIds) {
+//            JSONObject jsonObject = i.toJson();
+            jsonArray.put(i);
         }
 
         String response = U.loadPostResponseJson(client, POST_ORDER_SPLITTING,
