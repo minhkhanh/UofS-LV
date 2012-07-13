@@ -7,25 +7,29 @@ import org.apache.http.client.HttpClient;
 
 import emenu.client.dao.OrderDAO;
 import emenu.client.db.dto.ChiTietOrderDTO;
+import emenu.client.db.dto.SplittingOrderItem;
 
 import android.content.ContentValues;
 
 public class PostOrderSplittingTask extends CustomAsyncTask<Void, Void, Boolean> {
-    List<Integer> mItemIds;
+    List<SplittingOrderItem> mItems;
     HttpClient mClient;
 
     public PostOrderSplittingTask(HttpClient client, List<ContentValues> listContent) {
         mClient = client;
-        mItemIds = new ArrayList<Integer>();
+        mItems = new ArrayList<SplittingOrderItem>();
         for (ContentValues c : listContent) {
-            mItemIds.add(c.getAsInteger(ChiTietOrderDTO.CL_MA_CHI_TIET));
+            SplittingOrderItem item = new SplittingOrderItem();
+            item.ItemId = c.getAsInteger(ChiTietOrderDTO.CL_MA_CHI_TIET);
+            item.QuantityToSplit = c.getAsInteger(ChiTietOrderDTO.CL_SO_LUONG);
+            mItems.add(item);
         }
     }
 
     @Override
     protected Boolean doInBackground(Void... params) {
         try {
-            return OrderDAO.getInstance().postOrderSplitting(mClient, mItemIds);
+            return OrderDAO.getInstance().postOrderSplitting(mClient, mItems);
         } catch (Exception e) {
             e.printStackTrace();
             return false;

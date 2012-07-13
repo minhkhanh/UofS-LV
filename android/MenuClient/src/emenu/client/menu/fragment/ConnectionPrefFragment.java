@@ -55,9 +55,6 @@ public class ConnectionPrefFragment extends PreferenceFragment implements
         if (!TextUtils.isEmpty(servAddr)) {
             if (!servAddr.endsWith("/"))
                 servAddr += "/";
-            if (!servAddr.startsWith(C.SERVER_PREFIX)) {
-                servAddr = C.SERVER_PREFIX + servAddr;
-            }
 
             return servAddr;
         }

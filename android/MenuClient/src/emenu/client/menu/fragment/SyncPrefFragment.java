@@ -1,7 +1,5 @@
 package emenu.client.menu.fragment;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,10 +8,9 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import emenu.client.bus.task.CustomAsyncTask;
-import emenu.client.bus.task.SyncDbTask;
 import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
+import emenu.client.bus.task.SyncDbTask;
 import emenu.client.menu.R;
-import emenu.client.menu.app.MenuApplication;
 import emenu.client.util.C;
 import emenu.client.util.U;
 
@@ -69,9 +66,7 @@ public class SyncPrefFragment extends PreferenceFragment implements
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.cancel();
-                            SyncDbTask task = new SyncDbTask(getActivity()
-                                    .getApplicationContext());
-                            task.setWaitingDialog(U.createWaitingDialog(getActivity()));
+                            SyncDbTask task = new SyncDbTask(getActivity());
                             task.setOnPostExecuteListener(SyncPrefFragment.this);
                             task.execute();
                         }
@@ -102,10 +97,10 @@ public class SyncPrefFragment extends PreferenceFragment implements
         boolean syncFlag = mAutoSyncPref.isChecked();
         editor.putBoolean(key, syncFlag);
 
-//        if (mWhenSyncDone != -1) {
-//            key = getString(R.string.key_pref_sync_now);
-//            editor.putLong(key, mWhenSyncDone);
-//        }
+        // if (mWhenSyncDone != -1) {
+        // key = getString(R.string.key_pref_sync_now);
+        // editor.putLong(key, mWhenSyncDone);
+        // }
 
         editor.commit();
     }

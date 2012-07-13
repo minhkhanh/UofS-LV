@@ -73,6 +73,10 @@ public class TableMapActivity extends Activity implements Callback,
     @Override
     public void onDestroyActionMode(ActionMode mode) {
         mOrderMovingMode = null;
+        FragmentManager fm = getFragmentManager();
+        AreaListFragment f = (AreaListFragment) fm.findFragmentById(R.id.LeftPaneHolder);
+        if (f != null)
+            f.showSelection();
     }
 
     @Override

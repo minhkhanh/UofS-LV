@@ -50,6 +50,10 @@ public class OrderSplittingDlgFragment extends DialogFragment implements
             }
         }
     };
+    
+    public OrderSplittingDlgFragment() {
+        mOrderId = 0;
+    }
 
     public OrderSplittingDlgFragment(Integer orderId) {
         mOrderId = orderId;

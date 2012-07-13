@@ -77,6 +77,10 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
 
         getLoaderManager().initLoader(0, null, this);
     }
+    
+    public void showSelection() {
+        showDetails(mSelIndex);
+    }
 
     void showDetails(int index) {
         mSelIndex = index;
