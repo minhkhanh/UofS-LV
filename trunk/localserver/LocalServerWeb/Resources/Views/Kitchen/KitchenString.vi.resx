@@ -157,13 +157,13 @@
     <value>Mã chi tiết</value>
   </data>
   <data name="NhapSoLuongCheBien" xml:space="preserve">
-    <value>Nhập số lượng chế biến</value>
+    <value>Không chế biến</value>
   </data>
   <data name="Xong" xml:space="preserve">
     <value>Xong</value>
   </data>
   <data name="HetCheBien" xml:space="preserve">
-    <value>Hết chế biên</value>
+    <value>Không chế biến</value>
   </data>
   <data name="NhapSoLuongHet" xml:space="preserve">
     <value>Nhập số lượng hết</value>
@@ -184,6 +184,6 @@
     <value>Bộ phận chế biến</value>
   </data>
   <data name="ThongBaoKhongCheBien" xml:space="preserve">
-    <value>Bạn chắc không thể chế biến số lượng còn lại</value>
+    <value>Không thể chế biến số lượng còn lại</value>
   </data>
 </root>

@@ -166,7 +166,7 @@
     <value>Can't produce</value>
   </data>
   <data name="NhapSoLuongHet" xml:space="preserve">
-    <value>Can't produce quantity</value>
+    <value>Can't produce</value>
   </data>
   <data name="NhapSoLuongXong" xml:space="preserve">
     <value>Finish quantity</value>
@@ -184,6 +184,6 @@
     <value>Kitchen</value>
   </data>
   <data name="ThongBaoKhongCheBien" xml:space="preserve">
-    <value>Are you sure, kitchen do'nt to process</value>
+    <value>Can't produce the remaining amount</value>
   </data>
 </root>
