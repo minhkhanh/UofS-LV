@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using LocalServerDTO;
+using System.IO;
 
 namespace LocalServerDAO
 {
@@ -101,22 +102,100 @@ namespace LocalServerDAO
             return true;
         }
 
-        public static bool TachOrder(List<int> dsMaChiTiet)
+        public static bool TachOrder(List<SplittingOrderItem> dsMaChiTiet)
         {
-            List<ChiTietOrder> dsChiTiet = new List<ChiTietOrder>();
-            foreach (int id in dsMaChiTiet)
+            List<ChiTietOrder> dsChiTietChuyen = new List<ChiTietOrder>();  // nhung chi tiet order chuyen toan bo
+            List<ChiTietOrder> dsChiTietMoi = new List<ChiTietOrder>();    // nhung chi tiet order chuyen di, la mot phan cua chi tiet order cu
+            List<ChiTietOrder> dsChiTietCu = new List<ChiTietOrder>();    // nhung chi tiet order goc, can update sau khi chuyen mot phan sang order khac
+            foreach (SplittingOrderItem item in dsMaChiTiet)
             {
+                int id = item.ItemId;
                 var varChiTiet = ThucDonDienTu.DataContext.ChiTietOrders.Where(c => c.MaChiTietOrder == id);
                 if (varChiTiet.Count() == 0)
                     return false;
 
-                dsChiTiet.Add(varChiTiet.First());
+                ChiTietOrder chiTietCu = varChiTiet.First();
+                if (chiTietCu.SoLuong == item.QuantityToSplit)
+                    dsChiTietChuyen.Add(varChiTiet.First());        // tach toan bo chi tiet order => tro chi tiet order sang mot order moi
+                else if (chiTietCu.SoLuong > item.QuantityToSplit)
+                {
+                    // tach mot phan chi tiet order, di chuyen so luong
+
+                    int slMoi = chiTietCu.SoLuong - item.QuantityToSplit;
+                    int slChuyenDaCheBien = 0;
+                    int slChuyenDangCheBien = 0;
+                    int slCoDinh = chiTietCu.SoLuongDaCheBien + chiTietCu.SoLuongDangCheBien;
+                    if (slCoDinh > slMoi)
+                    {
+                        if (chiTietCu.SoLuongDaCheBien >= slMoi)
+                        {
+                            // đưa số lượng đã chế biến vượt mức sang chi tiết order mới
+                            slChuyenDaCheBien = chiTietCu.SoLuongDaCheBien - slMoi;
+                            chiTietCu.SoLuongDaCheBien = slMoi;
+
+                            // đưa toàn bộ số lượng đang chế biến sang chi tiết order mới
+                            slChuyenDangCheBien = chiTietCu.SoLuongDangCheBien;
+                            chiTietCu.SoLuongDangCheBien = 0;
+                        }
+                        else
+                        {
+                            chiTietCu.SoLuongDangCheBien = slMoi - chiTietCu.SoLuongDaCheBien;
+                            slChuyenDangCheBien = slCoDinh - slMoi;
+
+                            // chiTiet.SoLuongDaCheBien ko thay doi
+                            // va slChuyenDaCheBien = 0
+                        }
+                    }
+
+                    chiTietCu.SoLuong = slMoi;
+
+                    // clone một số thuộc tính từ chi tiết cũ sang chi tiết mới
+                    ChiTietOrder chiTietMoi = new ChiTietOrder();
+                    chiTietMoi.BoPhanCheBien = chiTietCu.BoPhanCheBien;
+                    chiTietMoi.DonViTinh = chiTietCu.DonViTinh;
+                    chiTietMoi.GhiChu = chiTietCu.GhiChu;
+                    chiTietMoi.MonAn = chiTietCu.MonAn;
+                    chiTietMoi.SoLuong = item.QuantityToSplit;
+
+                    chiTietMoi.SoLuongDaCheBien = slChuyenDaCheBien;
+                    chiTietMoi.SoLuongDangCheBien = slChuyenDangCheBien;
+                    chiTietMoi.TenTinhTrang = chiTietCu.TenTinhTrang;
+                    chiTietMoi.TinhTrang = chiTietCu.TinhTrang;
+
+                    dsChiTietMoi.Add(chiTietMoi);
+                    dsChiTietCu.Add(chiTietCu);
+                }
+                else // (chiTiet.SoLuong < item.QuantityToSplit)
+                    return false;       // ngoai le
             }
 
-            if (dsChiTiet.Count == 0)
+            if (dsChiTietChuyen.Count + dsChiTietCu.Count == 0)
                 return false;
 
-            Order orderCu = dsChiTiet.ElementAt(0).Order;
+            MyLogger.Log("dsChiTietChuyen");
+            foreach (ChiTietOrder ct in dsChiTietChuyen)
+            {
+                MyLogger.Log(ct.MaChiTietOrder + "," + ct.SoLuong);
+            }
+            MyLogger.Log("dsChiTietCu");
+            foreach (ChiTietOrder ct in dsChiTietCu)
+            {
+                MyLogger.Log(ct.MaChiTietOrder + "," + ct.SoLuong);
+            }
+            MyLogger.Log("dsChiTietMoi");
+            foreach (ChiTietOrder ct in dsChiTietMoi)
+            {
+                MyLogger.Log(ct.MaChiTietOrder + "," + ct.SoLuong);
+            }
+
+            Order orderCu;
+            if (dsChiTietChuyen.Count > 0)
+                orderCu = dsChiTietChuyen.ElementAt(0).Order;
+            else
+                orderCu = dsChiTietCu.ElementAt(0).Order;
+
+            MyLogger.Log(orderCu.MaOrder.ToString());
+
             Order orderMoi = new Order();
             orderMoi.Ban = orderCu.Ban;
             orderMoi.TaiKhoan = orderCu.TaiKhoan;
@@ -126,10 +205,17 @@ namespace LocalServerDAO
             if (orderMoi == null)
                 return false;
 
-            foreach (ChiTietOrder c in dsChiTiet)
-                c.Order = orderMoi;
+            MyLogger.Log(orderMoi.MaOrder.ToString());
 
-            ThucDonDienTu.DataContext.SubmitChanges();
+            foreach (ChiTietOrder ctc in dsChiTietChuyen)
+                ctc.Order = orderMoi;
+
+            ThucDonDienTu.DataContext.SubmitChanges();      // submit cho dsChiTietChuyen va dsChiTietCu
+
+            foreach (ChiTietOrder ctt in dsChiTietMoi)
+                ctt.Order = orderMoi;
+
+            ChiTietOrderDAO.ThemNhieuChiTietOrder(dsChiTietMoi);
 
             return true;
         }

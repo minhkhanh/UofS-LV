@@ -12,6 +12,7 @@ using LocalServerBUS;
 using LocalServerDTO;
 using LocalServerWeb.Resources.Views.Shared;
 using LocalServerWeb.ViewModels;
+using System.IO;
 
 namespace LocalServerWeb.Codes
 {
