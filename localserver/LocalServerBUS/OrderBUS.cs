@@ -89,7 +89,7 @@ namespace LocalServerBUS
             return OrderDAO.ChuyenBanJson(maOrder, maBanMoi);
         }
 
-        public static bool TachOrder(List<int> dsMaChiTiet)
+        public static bool TachOrder(List<SplittingOrderItem> dsMaChiTiet)
         {
             try
             {

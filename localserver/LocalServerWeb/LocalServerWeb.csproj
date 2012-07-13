@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="Codes\AdminBaseController.cs" />
     <Compile Include="Codes\BaseController.cs" />
+    <Compile Include="Codes\MyLogger.cs" />
     <Compile Include="Codes\UserBaseController.cs" />
     <Compile Include="Codes\KitchenBaseController.cs" />
     <Compile Include="Codes\ManagerBaseController.cs" />

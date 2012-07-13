@@ -609,7 +609,7 @@ namespace LocalServerWeb
 
         [WebInvoke(Method = "POST", UriTemplate = "tachOrderJson", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        bool TachOrderJson(List<int> dsMaChiTiet);
+        bool TachOrderJson(List<SplittingOrderItem> dsMaChiTiet);
 
         [WebInvoke(Method = "POST", UriTemplate = "themNhieuChiTietOrderJson", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]

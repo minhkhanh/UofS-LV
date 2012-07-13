@@ -1536,10 +1536,10 @@ namespace LocalServerWeb
             return OrderBUS.LayOrder(maOrder);
         }
 
-        public bool TachOrderJson(List<int> dsMaChiTiet)
+        public bool TachOrderJson(List<SplittingOrderItem> dsMaChiTiet)
         {
-            if (!SharedCode.IsWaitorLogin(new HttpSessionStateWrapper(HttpContext.Current.Session)))
-                return false;
+            //if (!SharedCode.IsWaitorLogin(new HttpSessionStateWrapper(HttpContext.Current.Session)))
+            //    return false;
 
             try
             {
@@ -1547,7 +1547,9 @@ namespace LocalServerWeb
             }
             catch (Exception ex)
             {
+                MyLogger.Log(ex.Message);
                 return false;
+                
             }
         }
 
