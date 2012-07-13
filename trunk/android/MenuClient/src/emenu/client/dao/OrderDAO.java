@@ -16,6 +16,7 @@ import android.database.sqlite.SQLiteDatabase;
 import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.db.dto.DonViTinhMonAnDTO;
 import emenu.client.db.dto.OrderDTO;
+import emenu.client.db.dto.SplittingOrderItem;
 import emenu.client.db.util.MyDatabaseHelper;
 import emenu.client.util.U;
 
@@ -40,10 +41,12 @@ public class OrderDAO extends AbstractDAO {
         super(dbHelper);
     }
 
-    public boolean postOrderSplitting(HttpClient client, List<Integer> itemIds) {
+    public boolean postOrderSplitting(HttpClient client, List<SplittingOrderItem> itemIds)
+            throws JSONException {
         JSONArray jsonArray = new JSONArray();
-        for (Integer i : itemIds) {
-            jsonArray.put(i);
+        for (SplittingOrderItem i : itemIds) {
+            JSONObject jsonObject = i.toJson();
+            jsonArray.put(jsonObject);
         }
 
         String response = U.loadPostResponseJson(client, POST_ORDER_SPLITTING,

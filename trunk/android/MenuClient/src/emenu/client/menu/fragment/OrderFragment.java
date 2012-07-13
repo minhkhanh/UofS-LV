@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ListFragment;
+import android.app.ActionBar.Tab;
 import android.content.ContentValues;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.BaseAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import emenu.client.bus.task.CustomAsyncTask;
 import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
@@ -65,5 +68,17 @@ public class OrderFragment extends ListFragment implements
         adapter.notifyDataSetChanged();
 
         setListShown(true);
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        ListAdapter adapter = l.getAdapter();
+        if (adapter instanceof OrderedAdapter) {
+            OrderedItemEditingDlgFragment f = new OrderedItemEditingDlgFragment(
+                    mOrderedAdapter.getItem(position));
+            U.showDlgFragment(getActivity(), f, true);
+        }
     }
 }

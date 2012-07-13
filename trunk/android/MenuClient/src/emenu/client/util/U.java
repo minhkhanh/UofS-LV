@@ -402,8 +402,11 @@ public final class U {
     public static final int showAuthDlg(OnAuthorizedListener listener,
             FragmentManager fm, int action, Bundle extras) {
         AuthDlgFragment dlg = new AuthDlgFragment(listener, action);
-        if (extras != null)
-            dlg.getArguments().putAll(extras);
+        if (extras != null) {
+//            Bundle args = new Bundle();
+//            args.putAll(extras);
+            dlg.setArguments(extras);
+        }
 
         FragmentTransaction ft = fm.beginTransaction();
         Fragment prev = fm.findFragmentByTag(C.AUTH_DIALOG_TAG);
