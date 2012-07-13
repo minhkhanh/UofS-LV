@@ -1436,6 +1436,9 @@ namespace LocalServerWeb
 
         public bool ThemNhieuChiTietOrderJson(List<ChiTietOrder> _listChiTietOrder)
         {
+            if (!SharedCode.IsWaitorLogin(new HttpSessionStateWrapper(HttpContext.Current.Session)))
+                return false;
+
             List<ChiTietOrder> result = ChiTietOrderBUS.ThemNhieuChiTietOrder(_listChiTietOrder);
             if (result == null) return false;
 
@@ -1495,7 +1498,17 @@ namespace LocalServerWeb
 
         public bool ChuyenBanJson(int maOrder, int maBanMoi)
         {
-            return OrderBUS.ChuyenBanJson(maOrder, maBanMoi);
+            //if (!SharedCode.IsWaitorLogin(new HttpSessionStateWrapper(HttpContext.Current.Session)))
+            //    return false;
+
+            try
+            {
+                return OrderBUS.ChuyenBanJson(maOrder, maBanMoi);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         public bool TachNhomBanJson(int maBan, string junk)
@@ -1525,7 +1538,17 @@ namespace LocalServerWeb
 
         public bool TachOrderJson(List<int> dsMaChiTiet)
         {
-            return OrderBUS.TachOrder(dsMaChiTiet);
+            if (!SharedCode.IsWaitorLogin(new HttpSessionStateWrapper(HttpContext.Current.Session)))
+                return false;
+
+            try
+            {
+                return OrderBUS.TachOrder(dsMaChiTiet);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         public bool DangNhapJson(Stream body)
@@ -1547,6 +1570,42 @@ namespace LocalServerWeb
             re.TabIdList = new List<int> { 1, 2, 3};
 
             return re;
+        }
+
+        public int LayDoanhThuNgay(int ngay, int thang, int nam)
+        {
+            int doanhThu = 0;
+            try
+            {
+                DateTime date = new DateTime(nam, thang, ngay);
+                List<HoaDon> list = HoaDonBUS.LayDanhSachHoaDonTheoNgay(date);
+                foreach (HoaDon h in list)
+                    doanhThu += (int) h.TongTien;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+
+            return doanhThu;
+        }
+
+        public int LayDoanhThuThang(int thang, int nam)
+        {
+            int doanhThu = 0;
+            try
+            {
+                DateTime date = new DateTime(nam, thang, 1);
+                List<HoaDon> list = HoaDonBUS.LayDanhSachHoaDonTheoThang(date);
+                foreach (HoaDon h in list)
+                    doanhThu += (int)h.TongTien;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+
+            return doanhThu + thang * 100 - thang * 10;
         }
 
         /*END OF JSON SERVICE AREA*/

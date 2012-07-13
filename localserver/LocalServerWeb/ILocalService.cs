@@ -679,6 +679,14 @@ namespace LocalServerWeb
         [OperationContract]
         TableIdSelection TestTabSel();
 
+        [WebInvoke(Method = "GET", UriTemplate = "layDoanhThuNgay?ngay={ngay}&thang={thang}&nam={nam}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        int LayDoanhThuNgay(int ngay, int thang, int nam);
+
+        [WebInvoke(Method = "GET", UriTemplate = "layDoanhThuThang?thang={thang}&nam={nam}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        int LayDoanhThuThang(int thang, int nam);
+
         /*==============END OF JSON SERVICES AREA==============*/
     }
 }
