@@ -23,7 +23,7 @@
            { %>
                
           
-		<tr <%: (iCount++%2==0)?"":"class=alternate-row" %> <%= (chiTietOrder.TinhTrang==2)?"style='border-style: solid; border-color: red;'":(chiTietOrder.TinhTrang==3)?"style='border-style: solid; border-color: blue;'":"" %> >
+		<tr <%: (iCount++%2==0)?"":"class=alternate-row" %> <%= (chiTietOrder.TinhTrang==2)?"style='border-style: solid; border-color: red;'":(chiTietOrder.TinhTrang==3)?"style='border-style: solid; border-color: green;'":"" %> >
             <td class="ma-chi-tiet-order"><%: chiTietOrder.MaChiTietOrder %></td>
 			<td><%: chiTietOrder.TenKhuVuc %></td>
 			<td><%: chiTietOrder.TenBan %></td>
