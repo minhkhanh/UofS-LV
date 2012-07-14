@@ -101,7 +101,10 @@
                     <%: (hoaDon.PhuThu != null)?hoaDon.PhuThu.TenPhuThu:"" %>
                 </td>
                 <td>
-                    <%: (hoaDon.PhuThu.GiaTang != 0)?hoaDon.PhuThu.GiaTang.ToString():hoaDon.PhuThu.TiLeTang.ToString()+"%" %>
+                    <%if (hoaDon.PhuThu != null)
+                      { %>
+                    <%: (hoaDon.PhuThu.GiaTang != 0) ? hoaDon.PhuThu.GiaTang.ToString() : hoaDon.PhuThu.TiLeTang.ToString() + "%"%>
+                    <%} %>
                 </td>
                 <td class="options-width">
                     <%:Html.ActionLink(" ", "BillDetail", "AdminBill", new { id = hoaDon.MaHoaDon }, new { title = AdminBillString.DetailTitle, Class = "icon-3 info-tooltip" })%>
