@@ -4,15 +4,12 @@ import java.io.IOException;
 import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.db.dto.DonViTinhMonAnDTO;
 import emenu.client.db.dto.OrderDTO;
@@ -41,15 +38,15 @@ public class OrderDAO extends AbstractDAO {
         super(dbHelper);
     }
 
-    public boolean postOrderSplitting(HttpClient client, List<Integer> itemIds)
+    public boolean postOrderSplitting(List<SplittingOrderItem> items)
             throws JSONException {
         JSONArray jsonArray = new JSONArray();
-        for (Integer i : itemIds) {
-//            JSONObject jsonObject = i.toJson();
-            jsonArray.put(i);
+        for (SplittingOrderItem i : items) {
+            JSONObject jsonObject = i.toJson();
+            jsonArray.put(jsonObject);
         }
 
-        String response = U.loadPostResponseJson(client, POST_ORDER_SPLITTING,
+        String response = U.loadPostResponseJson(POST_ORDER_SPLITTING,
                 jsonArray.toString());
 
         return Boolean.valueOf(response);
@@ -90,7 +87,7 @@ public class OrderDAO extends AbstractDAO {
         return Boolean.valueOf(response);
     }
 
-    public boolean getMoveOrder(HttpClient client, Integer orderId, Integer tableId)
+    public boolean getMoveOrder(Integer orderId, Integer tableId)
             throws ClientProtocolException, IOException {
         String url = SERVER_URL_SLASH + "chuyenBan?maOrder=" + orderId + "&maBanMoi="
                 + tableId;
@@ -114,7 +111,7 @@ public class OrderDAO extends AbstractDAO {
         if (cursor != null && cursor.moveToFirst()) {
             gia = cursor.getInt(0);
         }
-//        close();
+        // close();
 
         return gia;
     }
@@ -129,22 +126,14 @@ public class OrderDAO extends AbstractDAO {
         return total;
     }
 
-    public boolean postArrayChiTietOrder(HttpClient client, List<ChiTietOrderDTO> list) throws JSONException {
+    public boolean postArrayChiTietOrder(List<ChiTietOrderDTO> list) throws JSONException {
         String url = SERVER_URL_SLASH + "themNhieuChiTietOrderJson";
 
         JSONArray jsonArray = ChiTietOrderDTO.toArrayJson(list);
-        String response = U.loadPostResponseJson(client, url, jsonArray.toString());
+        String response = U.loadPostResponseJson(url, jsonArray.toString());
 
         return Boolean.valueOf(response);
     }
-
-    // public OrderDTO postNewOrder(OrderDTO order) {
-    // String jsonData = order.toJson().toString();
-    // String response = U.loadPostResponseJson(POST_NEW_ORDER, jsonData);
-    // JSONObject jsonObject = new JSONObject(response);
-    //
-    // return OrderDTO.fromJson(jsonObject);
-    // }
 
     @Override
     public boolean syncAll() {

@@ -41,7 +41,8 @@ import emenu.client.menu.adapter.SurchargeAdapter;
 import emenu.client.menu.adapter.VoucherAdapter;
 import emenu.client.menu.app.SessionManager;
 import emenu.client.menu.app.SessionManager.ServiceSession;
-import emenu.client.menu.fragment.AuthDlgFragment.OnAuthorizedListener;
+import emenu.client.menu.fragment.AuthDlgFragment;
+import emenu.client.menu.fragment.AuthDlgFragment.OnAuthDlgDismissedListener;
 import emenu.client.menu.fragment.CustomBillSplitDlgFragment;
 import emenu.client.menu.fragment.EqualBillSplitDlgFragment;
 import emenu.client.menu.fragment.VoucherSearchDlgFragment;
@@ -51,7 +52,7 @@ import emenu.client.util.C;
 import emenu.client.util.U;
 
 public class BillActivity extends Activity implements OnVoucherUsedListener,
-        OnItemClickListener, OnAuthorizedListener {
+        OnItemClickListener, OnAuthDlgDismissedListener {
     private static final int ACT_CONFIRM_BILL = 0;
 
     private GetServingOrderItemsTask mGetServingOrderItemsTask;
@@ -232,20 +233,20 @@ public class BillActivity extends Activity implements OnVoucherUsedListener,
     }
 
     @Override
-    public void onAuthorized(HttpClient client, Bundle extras, int action) {
-        switch (action) {
-            case ACT_CONFIRM_BILL:
-                U.cancelAsyncTask(mPostBillTask);
-
-                Integer orderId = SessionManager.getInstance().loadCurrentSession()
-                        .getOrderId();
-                mPostBillTask = new PostBillTask(client,
-                        mVoucherAdapter.getAllVoucherCodes());
-                mPostBillTask.setOnPostExecuteListener(mOnPostPostBill).execute(orderId);
-                break;
-
-            default:
-                break;
-        }
+    public void onAuthDlgDismissed(boolean authenticated) {
+        // switch (action) {
+        // case ACT_CONFIRM_BILL:
+        // U.cancelAsyncTask(mPostBillTask);
+        //
+        // Integer orderId = SessionManager.getInstance().loadCurrentSession()
+        // .getOrderId();
+        // mPostBillTask = new PostBillTask(client,
+        // mVoucherAdapter.getAllVoucherCodes());
+        // mPostBillTask.setOnPostExecuteListener(mOnPostPostBill).execute(orderId);
+        // break;
+        //
+        // default:
+        // break;
+        // }
     }
 }

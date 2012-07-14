@@ -8,6 +8,7 @@ import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -30,30 +31,39 @@ public class AuthDlgFragment extends DialogFragment implements OnClickListener {
 
     private EditText mNameEdit;
     private EditText mPassEdit;
-    private int mAction;
-    private OnAuthorizedListener mOnAuthorizedListener;
+    private OnAuthDlgDismissedListener mOnAuthorizedListener;
     private PostLogInTask mLogInTask;
+    private boolean mAuthenticated;
 
-    private OnPostExecuteListener<Void, Void, HttpClient> mOnPostLogIn = new OnPostExecuteListener<Void, Void, HttpClient>() {
+    private OnPostExecuteListener<Void, Void, Boolean> mOnPostLogIn = new OnPostExecuteListener<Void, Void, Boolean>() {
         @Override
-        public void onPostExecute(CustomAsyncTask<Void, Void, HttpClient> task,
-                HttpClient result) {
-            if (result != null) {
-                mOnAuthorizedListener.onAuthorized(result, getArguments(), mAction);
-                dismiss();                
+        public void onPostExecute(CustomAsyncTask<Void, Void, Boolean> task,
+                Boolean result) {
+            mAuthenticated = result;
+            if (result) {
+                dismiss();
             } else {
                 U.toastText(getActivity(), R.string.message_auth_failed);
             }
         }
     };
 
-    public interface OnAuthorizedListener {
-        void onAuthorized(HttpClient result, Bundle extras, int action);
+    public interface OnAuthDlgDismissedListener {
+        void onAuthDlgDismissed(boolean authenticated);
     }
 
-    public AuthDlgFragment(OnAuthorizedListener listener, int action) {
-        mAction = action;
+    public AuthDlgFragment() {
+    }
+
+    public AuthDlgFragment(OnAuthDlgDismissedListener listener) {
         mOnAuthorizedListener = listener;
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+
+        mOnAuthorizedListener.onAuthDlgDismissed(mAuthenticated);
     }
 
     @Override

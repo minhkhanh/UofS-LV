@@ -1,10 +1,8 @@
 package emenu.client.bus.task;
 
-import org.apache.http.client.HttpClient;
-
 import emenu.client.dao.TaiKhoanDAO;
 
-public class PostLogInTask extends CustomAsyncTask<Void, Void, HttpClient> {
+public class PostLogInTask extends CustomAsyncTask<Void, Void, Boolean> {
 
     private String mName;
     private String mPass;
@@ -15,7 +13,7 @@ public class PostLogInTask extends CustomAsyncTask<Void, Void, HttpClient> {
     }
 
     @Override
-    protected HttpClient doInBackground(Void... params) {
+    protected Boolean doInBackground(Void... params) {
         try {
             return TaiKhoanDAO.getInstance().postLogIn(mName, mPass);
         } catch (Exception e) {

@@ -1,10 +1,15 @@
 package emenu.client.menu.activity;
 
+import java.util.Date;
+import java.util.List;
+
 import org.apache.http.client.HttpClient;
+import org.apache.http.cookie.Cookie;
 
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.ActionMode;
 import android.view.ActionMode.Callback;
@@ -16,14 +21,16 @@ import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import emenu.client.bus.task.GetMoveOrderTask;
 import emenu.client.db.dto.BanDTO;
 import emenu.client.menu.R;
+import emenu.client.menu.app.AuthenticationManager;
 import emenu.client.menu.fragment.AreaListFragment;
-import emenu.client.menu.fragment.AuthDlgFragment.OnAuthorizedListener;
+import emenu.client.menu.fragment.AuthDlgFragment.OnAuthDlgDismissedListener;
 import emenu.client.menu.fragment.TableMapFragment.OnTableClickedListener;
+import emenu.client.util.MyHttpClient;
 import emenu.client.util.U;
 
 public class TableMapActivity extends Activity implements Callback,
         OnTableClickedListener, OnPostExecuteListener<Void, Void, Boolean>,
-        OnAuthorizedListener {
+        OnAuthDlgDismissedListener {
     public static final String KEY_MOVING_ORDER_ID = "KEY_MOVING_ORDER_ID";
     public static final String KEY_DES_TAB_ID = "KEY_DES_TAB_ID";
 
@@ -61,6 +68,18 @@ public class TableMapActivity extends Activity implements Callback,
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+    }
+
+    @Override
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
         return true;
     }
@@ -87,10 +106,9 @@ public class TableMapActivity extends Activity implements Callback,
     @Override
     public void onTableClicked(BanDTO table) {
         if (mOrderMovingMode != null && mMovingOrderId != -1) {
-            Bundle extras = new Bundle();
-            extras.putInt(KEY_DES_TAB_ID, table.getMaBan());
-            extras.putInt(KEY_MOVING_ORDER_ID, mMovingOrderId);
-            U.showAuthDlg(this, getFragmentManager(), ACT_MOVE_ORDER, extras);
+            U.cancelAsyncTask(mMoveOrderTask);
+            mMoveOrderTask = new GetMoveOrderTask(mMovingOrderId, table.getMaBan());
+            mMoveOrderTask.setOnPostExecuteListener(this).execute();
         }
     }
 
@@ -110,18 +128,10 @@ public class TableMapActivity extends Activity implements Callback,
     }
 
     @Override
-    public void onAuthorized(HttpClient client, Bundle extras, int action) {
-        switch (action) {
-            case ACT_MOVE_ORDER:
-                U.cancelAsyncTask(mMoveOrderTask);
-
-                mMoveOrderTask = new GetMoveOrderTask(client,
-                        extras.getInt(KEY_MOVING_ORDER_ID), extras.getInt(KEY_DES_TAB_ID));
-                mMoveOrderTask.setOnPostExecuteListener(this).execute();
-                break;
-
-            default:
-                break;
+    public void onAuthDlgDismissed(boolean authenticated) {
+        if (!authenticated) {
+            Intent intent = new Intent(this, SplashScreenActivity.class);
+            startActivity(intent);
         }
     }
 }

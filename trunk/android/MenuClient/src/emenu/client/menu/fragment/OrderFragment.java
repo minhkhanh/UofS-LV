@@ -76,7 +76,7 @@ public class OrderFragment extends ListFragment implements
 
         ListAdapter adapter = l.getAdapter();
         if (adapter instanceof OrderedAdapter) {
-            OrderedItemEditingDlgFragment f = new OrderedItemEditingDlgFragment(
+            EditOrderedItemDlgFragment f = new EditOrderedItemDlgFragment(
                     mOrderedAdapter.getItem(position));
             U.showDlgFragment(getActivity(), f, true);
         }

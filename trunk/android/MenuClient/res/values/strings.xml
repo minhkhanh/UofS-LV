@@ -158,5 +158,6 @@
     <string name="message_test_connection_ok">Kiểm tra kết nối thành công</string>
     <string name="message_test_connection_failed">Kiểm tra kết nối KHÔNG thành công</string>
     <string name="message_null_order_not_allowed">Order chưa có món nào</string>
+    <string name="message_press_back_one_more_time">Nhấn thêm lần nữa để thoát khỏi Thực Đơn</string>
 
 </resources>
