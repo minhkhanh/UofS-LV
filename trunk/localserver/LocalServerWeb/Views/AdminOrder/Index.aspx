@@ -56,7 +56,7 @@
                     <%:order.MaOrder %>
                 </td>
                 <td>
-                    <%:order.TaiKhoan.TenTaiKhoan %>
+                    <%: (order.TaiKhoan !=null)?order.TaiKhoan.TenTaiKhoan:"" %>
                 </td>
                 <td>
                     <%:order.Ban.TenBan %>
