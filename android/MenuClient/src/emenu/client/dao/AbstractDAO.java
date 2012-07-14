@@ -6,21 +6,16 @@ import emenu.client.db.dto.BanDTO;
 import emenu.client.db.util.MyDatabaseHelper;
 
 public abstract class AbstractDAO {
-//    private static MyHttpClient mHttpClient;
-//
-//    public static void createHttpClient(Context context) {
-//        mHttpClient = new MyHttpClient(context);
-//    }
-//
-//    public static MyHttpClient getHttpClient() {
-//        if (mHttpClient == null)
-//            throw new NullPointerException("Singleton instance not created yet.");
-//
-//        return mHttpClient;
-//    }
 
     public static String SERVER_URL_SLASH = "https://192.168.56.1/RestService/LocalService.svc"
-            + "/";
+            + "/"; // always has ended slash
+
+    public static final String getServerDomain() {
+        int i = SERVER_URL_SLASH.indexOf("://") + 3;
+        int j = SERVER_URL_SLASH.indexOf('/', i);
+
+        return SERVER_URL_SLASH.substring(i, j);
+    }
 
     private MyDatabaseHelper mDbHelper = null;
 
@@ -32,9 +27,9 @@ public abstract class AbstractDAO {
         return mDbHelper.getWritableDatabase();
     }
 
-//    protected void close() {
-//        mDbHelper.close();
-//    }
+    // protected void close() {
+    // mDbHelper.close();
+    // }
 
     public Cursor cursorAll(String tableName) {
         SQLiteDatabase db = open();

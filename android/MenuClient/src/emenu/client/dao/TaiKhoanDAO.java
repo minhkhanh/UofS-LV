@@ -1,7 +1,6 @@
 package emenu.client.dao;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,21 +8,18 @@ import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.conn.DefaultClientConnection;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.content.ContentValues;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import emenu.client.db.dto.TaiKhoanDTO;
 import emenu.client.db.util.MyDatabaseHelper;
+import emenu.client.menu.app.AuthenticationManager;
 import emenu.client.util.MyHttpClient;
 import emenu.client.util.U;
 
@@ -51,10 +47,10 @@ public class TaiKhoanDAO extends AbstractDAO {
         super(dbHelper);
     }
 
-    public HttpClient postLogIn(String name, String pass) throws ClientProtocolException,
+    public boolean postLogIn(String name, String pass) throws ClientProtocolException,
             IOException {
         String url = SERVER_URL_SLASH + "dangNhapJson";
-        HttpClient client = new MyHttpClient();
+        MyHttpClient client = new MyHttpClient();
         HttpPost post = new HttpPost(url);
 
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
@@ -66,12 +62,18 @@ public class TaiKhoanDAO extends AbstractDAO {
         if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
             String strResult = EntityUtils.toString(response.getEntity());
             boolean boolResult = Boolean.valueOf(strResult);
-            if (boolResult)
-                return client;
-            return null;
+            if (boolResult) {
+                AuthenticationManager.getInstance().setCookieStore(
+                        client.getCookieStore());
+//                AuthenticationManager.getInstance().setExpired(false);
+
+                return true;
+            }
+
+            return false;
         }
 
-        return null;
+        return false;
     }
 
     public boolean syncAll() {
@@ -96,7 +98,7 @@ public class TaiKhoanDAO extends AbstractDAO {
             result = false;
         } finally {
             db.endTransaction();
-//            close();
+            // close();
         }
 
         return result;

@@ -13,26 +13,23 @@ import android.content.ContentValues;
 
 public class PostOrderSplittingTask extends CustomAsyncTask<Void, Void, Boolean> {
     List<SplittingOrderItem> mItems;
-    List<Integer> mItemIds;
-    HttpClient mClient;
 
-    public PostOrderSplittingTask(HttpClient client, List<ContentValues> listContent) {
-        mClient = client;
+    public PostOrderSplittingTask(List<ContentValues> listContent) {
         mItems = new ArrayList<SplittingOrderItem>();
         for (ContentValues c : listContent) {
-//            SplittingOrderItem item = new SplittingOrderItem();
-//            item.ItemId = c.getAsInteger(ChiTietOrderDTO.CL_MA_CHI_TIET);
-//            item.QuantityToSplit = c.getAsInteger(ChiTietOrderDTO.CL_SO_LUONG);
-//            mItems.add(item);
-            
-            mItemIds.add(c.getAsInteger(ChiTietOrderDTO.CL_MA_CHI_TIET));
+            SplittingOrderItem item = new SplittingOrderItem();
+            item.ItemId = c.getAsInteger(ChiTietOrderDTO.CL_MA_CHI_TIET);
+            item.QuantityToSplit = c.getAsInteger(ChiTietOrderDTO.CL_SO_LUONG);
+            mItems.add(item);
+
+            // mItemIds.add(c.getAsInteger(ChiTietOrderDTO.CL_MA_CHI_TIET));
         }
     }
 
     @Override
     protected Boolean doInBackground(Void... params) {
         try {
-            return OrderDAO.getInstance().postOrderSplitting(mClient, mItemIds);
+            return OrderDAO.getInstance().postOrderSplitting(mItems);
         } catch (Exception e) {
             e.printStackTrace();
             return false;

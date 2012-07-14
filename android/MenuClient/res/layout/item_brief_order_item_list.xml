@@ -3,26 +3,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:weightSum="3" android:padding="5dp">
-
+    android:paddingBottom="8dp"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp"
+    android:paddingTop="8dp" >
+
     <TextView
         android:id="@+id/textDishName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1.5"
+        android:layout_weight="1"
         android:text="TextView" />
-
+
     <TextView
         android:id="@+id/textQuantity"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.5"
+        android:ems="3"
+        android:maxLength="3"
         android:text="TextView" />
-
+
     <TextView
         android:id="@+id/textUnitName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView" android:layout_weight="1"/>
+        android:layout_weight="0.5"
+        android:text="TextView" />
 
 </LinearLayout>

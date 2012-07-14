@@ -3,20 +3,30 @@ package emenu.client.util;
 import java.io.InputStream;
 import java.security.KeyStore;
 
+import org.apache.http.client.CookieStore;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.cookie.Cookie;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.SingleClientConnManager;
+import org.apache.http.impl.cookie.BasicClientCookie;
 
+import emenu.client.db.dto.TaiKhoanDTO;
 import emenu.client.menu.R;
+import emenu.client.menu.app.AuthenticationManager;
 
 import android.content.Context;
 
 public class MyHttpClient extends DefaultHttpClient {
     private static KeyStore mKeyStore;
+
+    public MyHttpClient() {
+        setCookieStore(AuthenticationManager.getInstance().getCookieStore());
+    }
 
     public static void createKeyStore(Context context) {
         try {

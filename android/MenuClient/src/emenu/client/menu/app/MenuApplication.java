@@ -40,20 +40,12 @@ public class MenuApplication extends Application {
     }
 
     public CustomerLocale customerLocale;
-    public MyDatabaseHelper dbOpener;
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        Log.d(C.TAG, "config changed");
-    }
 
     @Override
     public void onCreate() {
         super.onCreate();
 
         mInstance = this;
-        SessionManager.createInstance();
 
         initDAOs();
 
@@ -62,7 +54,7 @@ public class MenuApplication extends Application {
     }
 
     private void initDAOs() {
-        dbOpener = new MyDatabaseHelper(this);
+        MyDatabaseHelper dbOpener = new MyDatabaseHelper(this);
 
         SharedPreferences sharedPref = getSharedPreferences(C.SHARED_PREF_FILE, 0);
 

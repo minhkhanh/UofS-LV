@@ -18,13 +18,12 @@ import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import emenu.client.bus.task.GetServingOrderItemsTask;
 import emenu.client.menu.R;
 import emenu.client.menu.adapter.MiniOrderAdapter;
-import emenu.client.menu.fragment.AuthDlgFragment.OnAuthorizedListener;
+import emenu.client.menu.fragment.AuthDlgFragment.OnAuthDlgDismissedListener;
 import emenu.client.menu.view.DishSwappableListView;
 import emenu.client.util.U;
 
 public class OrderSplittingDlgFragment extends DialogFragment implements
-        OnPostExecuteListener<Integer, Void, List<ContentValues>>, OnClickListener,
-        OnAuthorizedListener {
+        OnPostExecuteListener<Integer, Void, List<ContentValues>>, OnClickListener {
 
     public static final int ACT_SPLIT_ORDER = 0;
 
@@ -50,7 +49,7 @@ public class OrderSplittingDlgFragment extends DialogFragment implements
             }
         }
     };
-    
+
     public OrderSplittingDlgFragment() {
         mOrderId = 0;
     }
@@ -64,6 +63,21 @@ public class OrderSplittingDlgFragment extends DialogFragment implements
             Bundle savedInstanceState) {
         getDialog().setTitle(R.string.caption_order_splitting);
         return inflater.inflate(R.layout.layout_order_splitting, null);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null)
+            mOrderId = savedInstanceState.getInt("mOrderId", 0);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("mOrderId", mOrderId);
     }
 
     @Override
@@ -109,24 +123,13 @@ public class OrderSplittingDlgFragment extends DialogFragment implements
                 if (mSrcListAdapter.getCount() == 0 || mDesListAdapter.getCount() == 0) {
                     U.toastText(getActivity(), R.string.message_splitting_orders_empty);
                 } else {
-                    U.showAuthDlg(this, getFragmentManager(), ACT_SPLIT_ORDER, null);
+                    U.cancelAsyncTask(mSplitOrderTask);
+
+                    List<ContentValues> desContent = mDesListAdapter.getData();
+                    mSplitOrderTask = new PostOrderSplittingTask(desContent);
+                    mSplitOrderTask.setOnPostExecuteListener(mOnPostOrderSplitting)
+                            .execute();
                 }
-                break;
-
-            default:
-                break;
-        }
-    }
-
-    @Override
-    public void onAuthorized(HttpClient client, Bundle extras, int action) {
-        switch (action) {
-            case ACT_SPLIT_ORDER:
-                U.cancelAsyncTask(mSplitOrderTask);
-
-                List<ContentValues> desContent = mDesListAdapter.getData();
-                mSplitOrderTask = new PostOrderSplittingTask(client, desContent);
-                mSplitOrderTask.setOnPostExecuteListener(mOnPostOrderSplitting).execute();
                 break;
 
             default:

@@ -24,7 +24,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class OrderedItemEditingDlgFragment extends DialogFragment implements
+public class EditOrderedItemDlgFragment extends DialogFragment implements
         OnClickListener, TextWatcher {
     private EditText mVarQuantityEdit;
     private EditText mNoteEdit;
@@ -76,7 +76,7 @@ public class OrderedItemEditingDlgFragment extends DialogFragment implements
         }
     };
 
-    public OrderedItemEditingDlgFragment(ContentValues values) {
+    public EditOrderedItemDlgFragment(ContentValues values) {
         mValues = values;
     }
     

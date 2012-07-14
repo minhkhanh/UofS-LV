@@ -5,7 +5,7 @@ import emenu.client.db.dto.ChiTietOrderDTO;
 import emenu.client.db.dto.DonViTinhDaNgonNguDTO;
 import emenu.client.db.dto.DonViTinhMonAnDTO;
 import emenu.client.db.dto.MonAnDaNgonNguDTO;
-import emenu.client.menu.fragment.OrderedItemEditingDlgFragment;
+import emenu.client.menu.fragment.EditOrderedItemDlgFragment;
 import emenu.client.util.C;
 import emenu.client.util.U;
 import android.app.Activity;

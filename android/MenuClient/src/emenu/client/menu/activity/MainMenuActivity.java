@@ -40,6 +40,9 @@ import emenu.client.util.U;
 public class MainMenuActivity extends Activity implements OnItemSelectedListener {
 
     private LanguageListAdapter mLangAdapter;
+    private LoadAllLanguageTask mLoadLangTask;
+    private long mBackFirstTime = 0;
+
     private OnPostExecuteListener<Void, Void, List<NgonNguDTO>> mOnPostLoadLang = new OnPostExecuteListener<Void, Void, List<NgonNguDTO>>() {
         @Override
         public void onPostExecute(CustomAsyncTask<Void, Void, List<NgonNguDTO>> task,
@@ -51,7 +54,6 @@ public class MainMenuActivity extends Activity implements OnItemSelectedListener
             }
         }
     };
-    private LoadAllLanguageTask mLoadLangTask;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -72,13 +74,13 @@ public class MainMenuActivity extends Activity implements OnItemSelectedListener
 
     @Override
     public void onBackPressed() {
-        U.showConfirmDialog(this, R.string.message_you_are_leaving_main_menu,
-                new OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        MainMenuActivity.super.onBackPressed();
-                    }
-                });
+        long current = System.currentTimeMillis();
+        if (mBackFirstTime == 0 || current - mBackFirstTime > 3000) {
+            U.toastText(this, R.string.message_press_back_one_more_time, 3000);
+            mBackFirstTime = current;
+        } else {
+            onBackPressed();
+        }
     }
 
     @Override

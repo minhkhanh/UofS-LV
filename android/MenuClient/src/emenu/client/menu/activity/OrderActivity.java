@@ -1,7 +1,5 @@
 package emenu.client.menu.activity;
 
-import org.apache.http.client.HttpClient;
-
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
@@ -24,15 +22,13 @@ import emenu.client.menu.adapter.OrderedAdapter;
 import emenu.client.menu.app.SessionManager;
 import emenu.client.menu.app.SessionManager.ServiceOrder;
 import emenu.client.menu.app.SessionManager.ServiceSession;
-import emenu.client.menu.fragment.AuthDlgFragment.OnAuthorizedListener;
 import emenu.client.menu.fragment.OrderFragment;
-import emenu.client.menu.fragment.OrderedItemEditingDlgFragment;
-import emenu.client.menu.fragment.OrderedItemEditingDlgFragment.OnItemUpdatedListener;
+import emenu.client.menu.fragment.EditOrderedItemDlgFragment;
+import emenu.client.menu.fragment.EditOrderedItemDlgFragment.OnItemUpdatedListener;
 import emenu.client.util.U;
 
 public class OrderActivity extends ListActivity implements TabListener,
-        OnItemUpdatedListener, OnAuthorizedListener,
-        OnPostExecuteListener<Void, Void, Boolean> {
+        OnItemUpdatedListener, OnPostExecuteListener<Void, Void, Boolean> {
 
     private static final int ACT_CONFIRM_ORDER = 0;
 
@@ -72,8 +68,12 @@ public class OrderActivity extends ListActivity implements TabListener,
                 ServiceSession session = SessionManager.getInstance()
                         .loadCurrentSession();
                 ServiceOrder order = session.getOrder();
-                if (order.getCount() > 0)
-                    U.showAuthDlg(this, getFragmentManager(), ACT_CONFIRM_ORDER, null);
+                if (order.getCount() > 0) {
+                    U.cancelAsyncTask(mPostOrderTask);
+
+                    mPostOrderTask = new PostOrderTask();
+                    mPostOrderTask.setOnPostExecuteListener(this).execute();
+                }
                 else
                     U.toastText(this, R.string.message_null_order_not_allowed);
                 break;
@@ -144,7 +144,7 @@ public class OrderActivity extends ListActivity implements TabListener,
         Tab tab = getActionBar().getSelectedTab();
         if (tab == mOrderedTab) {
             OrderedAdapter adapter = (OrderedAdapter) mOrderFragment.getListAdapter();
-            OrderedItemEditingDlgFragment f = new OrderedItemEditingDlgFragment(
+            EditOrderedItemDlgFragment f = new EditOrderedItemDlgFragment(
                     adapter.getItem(position));
             U.showDlgFragment(this, f, true);
         }
@@ -160,21 +160,6 @@ public class OrderActivity extends ListActivity implements TabListener,
             mOrderFragment.refreshList(OrderFlag.UnorderedOnly);
         else
             mOrderFragment.refreshList(OrderFlag.OrderedOnly);
-    }
-
-    @Override
-    public void onAuthorized(HttpClient client, Bundle extras, int action) {
-        switch (action) {
-            case ACT_CONFIRM_ORDER:
-                U.cancelAsyncTask(mPostOrderTask);
-
-                mPostOrderTask = new PostOrderTask(client);
-                mPostOrderTask.setOnPostExecuteListener(this).execute();
-                break;
-
-            default:
-                break;
-        }
     }
 
     @Override

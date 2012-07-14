@@ -29,11 +29,11 @@ import emenu.client.db.dto.TableSelection;
 import emenu.client.db.dto.TableSelection.SelectionState;
 import emenu.client.menu.R;
 import emenu.client.menu.adapter.TableListAdapter;
-import emenu.client.menu.fragment.AuthDlgFragment.OnAuthorizedListener;
+import emenu.client.menu.fragment.AuthDlgFragment.OnAuthDlgDismissedListener;
 import emenu.client.util.U;
 
 public class TableMapFragment extends Fragment implements LoaderCallbacks<List<BanDTO>>,
-        OnPostExecuteListener<List<Integer>, Void, Boolean>, OnAuthorizedListener {
+        OnPostExecuteListener<List<Integer>, Void, Boolean>, OnAuthDlgDismissedListener {
 
     public static final int ACT_GROUP_TABLE = 0;
     public static final int ACT_SPLIT_TABLE = 1;
@@ -304,21 +304,21 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
     }
 
     @Override
-    public void onAuthorized(HttpClient client, Bundle extras, int action) {
-        switch (action) {
-            case ACT_GROUP_TABLE:
-                postTableSelection(client);
-                break;
-
-            case ACT_SPLIT_TABLE:
-                TableSplittingDlgFragment dlg = new TableSplittingDlgFragment(mCurrTabSel
-                        .getMainTab().getMaBan());
-                U.showDlgFragment(getFragmentManager(), dlg, false);
-                break;
-
-            default:
-                break;
-        }
+    public void onAuthDlgDismissed(boolean authenticated) {
+//        switch (action) {
+//            case ACT_GROUP_TABLE:
+//                postTableSelection(client);
+//                break;
+//
+//            case ACT_SPLIT_TABLE:
+//                TableSplittingDlgFragment dlg = new TableSplittingDlgFragment(mCurrTabSel
+//                        .getMainTab().getMaBan());
+//                U.showDlgFragment(getFragmentManager(), dlg, false);
+//                break;
+//
+//            default:
+//                break;
+//        }
     }
 
     public int getMaKhuVuc() {

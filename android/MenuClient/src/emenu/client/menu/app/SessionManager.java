@@ -11,6 +11,13 @@ public class SessionManager {
 
     private static SessionManager mInstance;
 
+    public static final SessionManager getInstance() {
+        if (mInstance == null)
+            mInstance = new SessionManager();
+        
+        return mInstance;
+    }
+
     public static class OrderItemId {
         public static final OrderItemId fromOrderItem(ChiTietOrderDTO c) {
             return new OrderItemId(c.getMaMonAn(), c.getMaDonViTinh());
@@ -166,14 +173,6 @@ public class SessionManager {
     int mLastFinishedPos = -1;
 
     private SessionManager() {
-    }
-
-    public static final void createInstance() {
-        mInstance = new SessionManager();
-    }
-
-    public static final SessionManager getInstance() {
-        return mInstance;
     }
 
     public void finishCurrentSession() {

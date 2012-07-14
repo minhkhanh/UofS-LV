@@ -58,7 +58,7 @@ import android.widget.Toast;
 import emenu.client.db.dto.MonAnDTO;
 import emenu.client.menu.R;
 import emenu.client.menu.fragment.AuthDlgFragment;
-import emenu.client.menu.fragment.AuthDlgFragment.OnAuthorizedListener;
+import emenu.client.menu.fragment.AuthDlgFragment.OnAuthDlgDismissedListener;
 
 public final class U {
 
@@ -399,12 +399,10 @@ public final class U {
         return false;
     }
 
-    public static final int showAuthDlg(OnAuthorizedListener listener,
+    public static final int showAuthDlg(OnAuthDlgDismissedListener listener,
             FragmentManager fm, int action, Bundle extras) {
-        AuthDlgFragment dlg = new AuthDlgFragment(listener, action);
+        AuthDlgFragment dlg = new AuthDlgFragment(listener);
         if (extras != null) {
-//            Bundle args = new Bundle();
-//            args.putAll(extras);
             dlg.setArguments(extras);
         }
 
@@ -455,6 +453,10 @@ public final class U {
 
     public static final void logOwnTag(String msg) {
         Log.d(C.TAG, msg);
+    }
+
+    public static final void toastText(Context context, int resId, int duration) {
+        Toast.makeText(context, resId, duration).show();
     }
 
     public static final void toastText(Context context, int resId) {

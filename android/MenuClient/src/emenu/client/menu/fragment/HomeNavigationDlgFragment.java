@@ -6,7 +6,7 @@ import emenu.client.dao.AbstractDAO;
 import emenu.client.menu.R;
 import emenu.client.menu.activity.ConfigActivity;
 import emenu.client.menu.activity.TableMapActivity;
-import emenu.client.menu.fragment.AuthDlgFragment.OnAuthorizedListener;
+import emenu.client.menu.fragment.AuthDlgFragment.OnAuthDlgDismissedListener;
 import emenu.client.util.C;
 import emenu.client.util.U;
 import android.app.AlertDialog;
@@ -22,7 +22,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 public class HomeNavigationDlgFragment extends DialogFragment implements OnClickListener,
-        OnAuthorizedListener {
+        OnAuthDlgDismissedListener {
 
     public static final int ACT_CONFIG = 0;
 
@@ -68,15 +68,15 @@ public class HomeNavigationDlgFragment extends DialogFragment implements OnClick
     }
 
     @Override
-    public void onAuthorized(HttpClient client, Bundle extras, int action) {
-        switch (action) {
-            case ACT_CONFIG:
-//                Intent intent = new Intent(getActivity(), AppPreferenceActivity.class);
-//                startActivity(intent);
-                break;
-
-            default:
-                break;
-        }
+    public void onAuthDlgDismissed(boolean authenticated) {
+//        switch (action) {
+//            case ACT_CONFIG:
+////                Intent intent = new Intent(getActivity(), AppPreferenceActivity.class);
+////                startActivity(intent);
+//                break;
+//
+//            default:
+//                break;
+//        }
     }
 }
