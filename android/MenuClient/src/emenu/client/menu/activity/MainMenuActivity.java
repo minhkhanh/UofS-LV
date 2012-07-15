@@ -79,7 +79,7 @@ public class MainMenuActivity extends Activity implements OnItemSelectedListener
             U.toastText(this, R.string.message_press_back_one_more_time, 3000);
             mBackFirstTime = current;
         } else {
-            onBackPressed();
+            super.onBackPressed();
         }
     }
 

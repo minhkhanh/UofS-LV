@@ -144,7 +144,8 @@
     <string name="text_to">Đến</string>
     <string name="text_processed_quantity">Đã chế biến</string>
     <string name="text_unprocessed_count">Chưa chế biến</string>
-    <string name="message_request_completed">Yêu cầu của bạn đã được thực hiện.</string>
+    <string name="message_request_completed">Yêu cầu đã được thực hiện.</string>
+    <string name="message_request_failed">Yêu cầu không thực hiện được.</string>
     <string name="message_ordered_item_not_updated">Không thể sửa order theo yêu cầu.</string>
     <string name="message_new_quantity_lt_processed_item">Giảm quá số lượng cho phép</string>
     <string name="text_voucher_list">Danh sách Voucher</string>
@@ -153,11 +154,13 @@
     <string name="message_splitting_orders_empty">Không được tách các order rỗng</string>
     <string name="message_order_splitting_failed">Tách order không thành công</string>
     <string name="message_auth_failed">Xác thực không thành công</string>
+    <string name="message_auth_succeed">Xác thực thành công</string>
     <string name="caption_connection">Kết nối</string>
     <string name="text_dish_search_hint">Tìm tên món ăn</string>
     <string name="message_test_connection_ok">Kiểm tra kết nối thành công</string>
     <string name="message_test_connection_failed">Kiểm tra kết nối KHÔNG thành công</string>
     <string name="message_null_order_not_allowed">Order chưa có món nào</string>
     <string name="message_press_back_one_more_time">Nhấn thêm lần nữa để thoát khỏi Thực Đơn</string>
+    <string name="text_select_des_table">Chọn bàn mới</string>
 
 </resources>

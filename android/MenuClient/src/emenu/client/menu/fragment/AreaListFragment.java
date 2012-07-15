@@ -11,17 +11,15 @@ import android.os.Message;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import emenu.client.menu.R;
 import emenu.client.bus.loader.AreaListLoader;
 import emenu.client.db.dto.KhuVucDTO;
-import emenu.client.menu.fragment.TableMapFragment.OnTableClickedListener;
+import emenu.client.menu.R;
 
 public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cursor> {
 
     public static final int MSG_LOADER_FINISHED_AREA_LIST = 0;
 
     private int mSelIndex;
-    private OnTableClickedListener mOnTableClickedListener;
 
     private SimpleCursorAdapter mAreaAdapter;
 
@@ -33,10 +31,6 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
     };
 
     public AreaListFragment() {
-    }
-
-    public AreaListFragment(OnTableClickedListener listener) {
-        mOnTableClickedListener = listener;
     }
 
     @Override
@@ -77,10 +71,6 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
 
         getLoaderManager().initLoader(0, null, this);
     }
-    
-    public void showSelection() {
-        showDetails(mSelIndex);
-    }
 
     void showDetails(int index) {
         mSelIndex = index;
@@ -101,7 +91,7 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
                 .findFragmentById(R.id.RightPaneHolder);
 
         if (f == null || f.getMaKhuVuc() != areaId) {
-            f = new TableMapFragment(mOnTableClickedListener, areaId, areaName);
+            f = new TableMapFragment(areaId, areaName);
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.RightPaneHolder, f);
