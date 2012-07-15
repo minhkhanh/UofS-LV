@@ -4,7 +4,6 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.client.HttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,18 +16,14 @@ import android.database.sqlite.SQLiteDatabase;
 import emenu.client.db.dto.BanDTO;
 import emenu.client.db.dto.TableSelection;
 import emenu.client.db.util.MyDatabaseHelper;
-import emenu.client.menu.app.MenuApplication;
 import emenu.client.util.U;
 
 public class BanDAO extends AbstractDAO {
     private static final String GET_ALL_JSON_URL = SERVER_URL_SLASH
             + "layDanhSachBanJson";
-    private static final String PUT_URL = SERVER_URL_SLASH + "capNhatBan";
     public static final String POST_GROUP_TABLE = SERVER_URL_SLASH + "ghepBanJson";
 
     private static BanDAO mInstance;
-
-    private List<BanDTO> mCached;
 
     private BanDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
@@ -47,25 +42,11 @@ public class BanDAO extends AbstractDAO {
         return mInstance;
     }
 
-    public boolean postGroupTable(HttpClient client, TableSelection.TableIdSelection idSel)
+    public boolean postGroupTable(TableSelection.TableIdSelection idSel)
             throws JSONException {
         JSONObject jsonObject = idSel.toJson();
-        String response = U.loadPostResponseJson(client, POST_GROUP_TABLE,
+        String response = U.loadPostResponseJson(POST_GROUP_TABLE,
                 jsonObject.toString());
-
-        return Boolean.valueOf(response);
-    }
-
-    public boolean put(BanDTO ban) {
-        String response = null;
-
-        try {
-            JSONObject jsonObj = ban.toJson();
-            response = U.loadPutResponse(PUT_URL, jsonObj.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
 
         return Boolean.valueOf(response);
     }
@@ -101,13 +82,6 @@ public class BanDAO extends AbstractDAO {
                 null, null);
 
         return cursor;
-    }
-
-    public boolean putUpdate(BanDTO ban) {
-        String xmlData = ban.toXml();
-        String respString = U.loadPutResponse(PUT_URL, xmlData);
-
-        return U.deserializeXml(respString);
     }
 
     public boolean syncAll() {

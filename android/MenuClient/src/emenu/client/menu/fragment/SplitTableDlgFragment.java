@@ -3,20 +3,8 @@ package emenu.client.menu.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import emenu.client.menu.R;
-import emenu.client.bus.loader.TableListLoader;
-import emenu.client.bus.task.CustomAsyncTask;
-import emenu.client.bus.task.GetTableInGroupTask;
-import emenu.client.bus.task.GetTableSplittingAllTask;
-import emenu.client.bus.task.GetTableSplittingTask;
-import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
-import emenu.client.db.dto.BanDTO;
-import emenu.client.menu.adapter.TableListAdapter;
-import emenu.client.util.U;
 import android.app.DialogFragment;
-import android.app.Fragment;
-import android.app.LoaderManager.LoaderCallbacks;
-import android.content.Loader;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,14 +13,23 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
-import android.widget.ListAdapter;
+import emenu.client.bus.task.CustomAsyncTask;
+import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
+import emenu.client.bus.task.GetTableInGroupTask;
+import emenu.client.bus.task.GetSplitAllTableTask;
+import emenu.client.bus.task.GetSplitTableTask;
+import emenu.client.db.dto.BanDTO;
+import emenu.client.menu.R;
+import emenu.client.menu.adapter.TableListAdapter;
+import emenu.client.util.U;
 
-public class TableSplittingDlgFragment extends DialogFragment implements
-        OnItemClickListener, OnClickListener {
+public class SplitTableDlgFragment extends DialogFragment implements OnItemClickListener,
+        OnClickListener {
     private Integer mGroupId;
     private GridView mTableGrid;
     private TableListAdapter mGridAdapter;
     private GetTableInGroupTask mRefreshTask;
+    private GetSplitAllTableTask mSplitAllTask;
 
     private OnPostExecuteListener<Integer, Void, List<BanDTO>> mOnPostGetTableInGroup = new OnPostExecuteListener<Integer, Void, List<BanDTO>>() {
         @Override
@@ -44,7 +41,7 @@ public class TableSplittingDlgFragment extends DialogFragment implements
         }
     };
 
-    private OnPostExecuteListener<Integer, Void, Boolean> mOnPostGetTableSplittingAll = new OnPostExecuteListener<Integer, Void, Boolean>() {
+    private OnPostExecuteListener<Integer, Void, Boolean> mOnPostSplitAllTable = new OnPostExecuteListener<Integer, Void, Boolean>() {
         @Override
         public void onPostExecute(CustomAsyncTask<Integer, Void, Boolean> task,
                 Boolean result) {
@@ -70,8 +67,13 @@ public class TableSplittingDlgFragment extends DialogFragment implements
             }
         }
     };
+    private GetSplitTableTask mSplitTableTask;
 
-    public TableSplittingDlgFragment(Integer groupId) {
+    public SplitTableDlgFragment() {
+        mGroupId = 0;
+    }
+
+    public SplitTableDlgFragment(Integer groupId) {
         mGroupId = groupId;
     }
 
@@ -106,8 +108,10 @@ public class TableSplittingDlgFragment extends DialogFragment implements
     @Override
     public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
         BanDTO clickTable = mGridAdapter.getItem(arg2);
-        new GetTableSplittingTask().setOnPostExecuteListener(mOnPostGetTableSplitting)
-                .execute(clickTable.getMaBan());
+        U.cancelAsyncTask(mSplitTableTask);
+        mSplitTableTask = new GetSplitTableTask();
+        mSplitTableTask.setOnPostExecuteListener(mOnPostGetTableSplitting).execute(
+                clickTable.getMaBan());
     }
 
     @Override
@@ -118,8 +122,10 @@ public class TableSplittingDlgFragment extends DialogFragment implements
                 break;
 
             case R.id.btnSplitAll:
-                new GetTableSplittingAllTask().setOnPostExecuteListener(
-                        mOnPostGetTableSplittingAll).execute(mGroupId);
+                U.cancelAsyncTask(mSplitAllTask);
+                mSplitAllTask = new GetSplitAllTableTask();
+                mSplitAllTask.setOnPostExecuteListener(mOnPostSplitAllTable).execute(
+                        mGroupId);
                 break;
             default:
                 break;

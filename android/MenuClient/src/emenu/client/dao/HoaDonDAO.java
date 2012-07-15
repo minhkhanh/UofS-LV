@@ -3,15 +3,10 @@ package emenu.client.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.client.HttpClient;
 import org.json.JSONArray;
-import org.json.JSONObject;
-
-import android.database.Cursor;
 
 import emenu.client.db.dto.ChiTietHoaDonDTO;
 import emenu.client.db.dto.ChiTietOrderDTO;
-import emenu.client.db.dto.HoaDonDTO;
 import emenu.client.db.util.MyDatabaseHelper;
 import emenu.client.util.U;
 
@@ -37,13 +32,6 @@ public class HoaDonDAO extends AbstractDAO {
         super(dbHelper);
     }
 
-    public List<ChiTietHoaDonDTO> postChiTietHoaDonArray(List<ChiTietHoaDonDTO> list) {
-        String xmlData = ChiTietHoaDonDTO.toXmlArray(list);
-        String respString = U.loadPostResponse(POST_BILL_ITEMS, xmlData);
-
-        return ChiTietHoaDonDTO.fromXmlArray(respString);
-    }
-
     public List<ChiTietHoaDonDTO> createListChiTietHoaDon(
             List<ChiTietOrderDTO> orderItems, Integer maHoaDon) {
         List<ChiTietHoaDonDTO> list = new ArrayList<ChiTietHoaDonDTO>();
@@ -63,22 +51,15 @@ public class HoaDonDAO extends AbstractDAO {
         return list;
     }
 
-    public String postLapHoaDon(HttpClient client, Integer orderId, List<String> voucherCodes) {
+    public String postLapHoaDon(Integer orderId, List<String> voucherCodes) {
         String url = AbstractDAO.SERVER_URL_SLASH + "lapHoaDonJson?maOrder=" + orderId;
 
         JSONArray jsonArray = new JSONArray();
         for (String s : voucherCodes) {
             jsonArray.put(s);
         }
-        
-        return U.loadPostResponseJson(client, url, jsonArray.toString());
-    }
 
-    public HoaDonDTO postHoaDon(HoaDonDTO hoaDon) {
-        String xmlData = hoaDon.toXml();
-        String respString = U.loadPostResponse(POST_BILL, xmlData);
-
-        return HoaDonDTO.fromXml(respString);
+        return U.loadPostResponseJson(url, jsonArray.toString());
     }
 
     @Override
@@ -88,7 +69,6 @@ public class HoaDonDAO extends AbstractDAO {
 
     @Override
     public String getName() {
-        // TODO Auto-generated method stub
         return null;
     }
 }

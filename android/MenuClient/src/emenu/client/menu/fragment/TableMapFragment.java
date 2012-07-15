@@ -3,8 +3,6 @@ package emenu.client.menu.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.client.HttpClient;
-
 import android.app.Fragment;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Loader;
@@ -29,11 +27,10 @@ import emenu.client.db.dto.TableSelection;
 import emenu.client.db.dto.TableSelection.SelectionState;
 import emenu.client.menu.R;
 import emenu.client.menu.adapter.TableListAdapter;
-import emenu.client.menu.fragment.AuthDlgFragment.OnAuthDlgDismissedListener;
 import emenu.client.util.U;
 
 public class TableMapFragment extends Fragment implements LoaderCallbacks<List<BanDTO>>,
-        OnPostExecuteListener<List<Integer>, Void, Boolean>, OnAuthDlgDismissedListener {
+        OnPostExecuteListener<List<Integer>, Void, Boolean> {
 
     public static final int ACT_GROUP_TABLE = 0;
     public static final int ACT_SPLIT_TABLE = 1;
@@ -97,18 +94,18 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.miGroupTable:
-                    U.showAuthDlg(TableMapFragment.this, getFragmentManager(),
-                            ACT_GROUP_TABLE, null);
+                    postTableSelection();
                     break;
 
                 case R.id.miSelectTable:
-                    postTableSelection(null);
+                    postTableSelection();
 
                     break;
 
                 case R.id.miSplitTable:
-                    U.showAuthDlg(TableMapFragment.this, getFragmentManager(),
-                            ACT_SPLIT_TABLE, null);
+                    SplitTableDlgFragment dlg = new SplitTableDlgFragment(mCurrTabSel
+                            .getMainTab().getMaBan());
+                    U.showDlgFragment(getFragmentManager(), dlg, false);
                     break;
 
                 default:
@@ -182,10 +179,10 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
         mAreaId = 0;
     }
 
-    private void postTableSelection(HttpClient client) {
+    private void postTableSelection() {
         U.cancelAsyncTask(mPostTabSelTask);
 
-        mPostTabSelTask = new PostTableSelectionTask(client);
+        mPostTabSelTask = new PostTableSelectionTask();
         mPostTabSelTask.getExtras()
                 .putInt("groupId", mCurrTabSel.getMainTab().getMaBan());
         mPostTabSelTask.setOnPostExecuteListener(mOnPostExecuteTableSelecting);
@@ -301,24 +298,6 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
         } else {
             U.showErrorDialog(getActivity(), R.string.message_table_spliting_failed);
         }
-    }
-
-    @Override
-    public void onAuthDlgDismissed(boolean authenticated) {
-//        switch (action) {
-//            case ACT_GROUP_TABLE:
-//                postTableSelection(client);
-//                break;
-//
-//            case ACT_SPLIT_TABLE:
-//                TableSplittingDlgFragment dlg = new TableSplittingDlgFragment(mCurrTabSel
-//                        .getMainTab().getMaBan());
-//                U.showDlgFragment(getFragmentManager(), dlg, false);
-//                break;
-//
-//            default:
-//                break;
-//        }
     }
 
     public int getMaKhuVuc() {
