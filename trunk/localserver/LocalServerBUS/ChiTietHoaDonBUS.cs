@@ -48,7 +48,8 @@ namespace LocalServerBUS
             if (ChiTietOrderBUS.ThayDoiTinhTrangDaThanhToan(maBan) == false)
                 ketQua = 2;
 
-            
+            // if ketQua OK
+            // in hoa don
 
             return ketQua;
         }
