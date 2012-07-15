@@ -15,6 +15,7 @@ import emenu.client.bus.task.CustomAsyncTask;
 import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import emenu.client.bus.task.GetServingOrderItemsTask;
 import emenu.client.bus.task.GetServingOrderItemsTask.OrderFlag;
+import emenu.client.menu.R;
 import emenu.client.menu.adapter.OrderAdapter;
 import emenu.client.menu.adapter.OrderedAdapter;
 import emenu.client.menu.adapter.UnorderedAdapter;
@@ -29,6 +30,13 @@ public class OrderFragment extends ListFragment implements
     private UnorderedAdapter mUnorderedAdapter;
 
     private GetServingOrderItemsTask mGetOrderListTask;
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        getView().setBackgroundResource(R.color._ccf5f5f5);
+    }
 
     public void refreshList(OrderFlag flag) {
         setListShown(false);

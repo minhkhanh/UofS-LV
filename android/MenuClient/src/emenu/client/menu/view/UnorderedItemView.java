@@ -53,15 +53,10 @@ public class UnorderedItemView extends RelativeLayout implements View.OnClickLis
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.item_unordered_list, this);
 
-        Button btnPlus = (Button) findViewById(R.id.btnPlus);
-        Button btnMinus = (Button) findViewById(R.id.btnMinus);
-        Button btnAddNote = (Button) findViewById(R.id.btnAddItemNote);
-        Button btnRemove = (Button) findViewById(R.id.btnRemoveItem);
-
-        btnPlus.setOnClickListener(this);
-        btnMinus.setOnClickListener(this);
-        btnAddNote.setOnClickListener(this);
-        btnRemove.setOnClickListener(this);
+        findViewById(R.id.imgDown).setOnClickListener(this);
+        findViewById(R.id.imgUp).setOnClickListener(this);
+        findViewById(R.id.imgRemove).setOnClickListener(this);
+        findViewById(R.id.imgNote).setOnClickListener(this);
 
         mTextQuantity = (TextView) findViewById(R.id.textQuantity);
     }
@@ -88,18 +83,18 @@ public class UnorderedItemView extends RelativeLayout implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnAddItemNote:
+            case R.id.imgNote:
                 ItemNoteDlgFragment f = new ItemNoteDlgFragment(mValues);
                 U.showDlgFragment((Activity) getContext(), f, true);
                 break;
-            case R.id.btnPlus:
+            case R.id.imgUp:
                 int quantity = Integer.valueOf(mTextQuantity.getText().toString()) + 1;
                 mTextQuantity.setText(quantity + "");
                 SessionManager.getInstance().loadCurrentSession().getOrder()
                         .getItem(mItemId).setSoLuong(quantity);
                 break;
 
-            case R.id.btnMinus:
+            case R.id.imgDown:
                 quantity = Integer.valueOf(mTextQuantity.getText().toString()) - 1;
                 if (quantity > 0) {
                     mTextQuantity.setText(quantity + "");
@@ -108,7 +103,7 @@ public class UnorderedItemView extends RelativeLayout implements View.OnClickLis
                 }
                 break;
 
-            case R.id.btnRemoveItem:
+            case R.id.imgRemove:
                 U.showConfirmDialog(getContext(),
                         R.string.message_confirm_order_item_deletion,
                         new DialogInterface.OnClickListener() {

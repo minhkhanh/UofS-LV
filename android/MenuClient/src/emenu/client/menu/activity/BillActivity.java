@@ -13,6 +13,7 @@ import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -104,6 +105,7 @@ public class BillActivity extends Activity implements OnVoucherUsedListener,
                         BillActivity.this.getString(R.string.message_bill_sent));
                 SessionManager.getInstance().finishCurrentSession();
 
+                finish();
                 Intent intent = new Intent(BillActivity.this, MainMenuActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -147,12 +149,20 @@ public class BillActivity extends Activity implements OnVoucherUsedListener,
                 U.showDlgFragment(this, dlgEqual, true);
                 break;
             case R.id.miConfirmBill:
-                U.cancelAsyncTask(mPostBillTask);
+                U.showConfirmDialog(this, R.string.message_confirm_send_bill,
+                        new OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                U.cancelAsyncTask(mPostBillTask);
 
-                Integer orderId = SessionManager.getInstance().loadCurrentSession()
-                        .getOrderId();
-                mPostBillTask = new PostBillTask(mVoucherAdapter.getAllVoucherCodes());
-                mPostBillTask.setOnPostExecuteListener(mOnPostBill).execute(orderId);
+                                Integer orderId = SessionManager.getInstance()
+                                        .loadCurrentSession().getOrderId();
+                                mPostBillTask = new PostBillTask(mVoucherAdapter
+                                        .getAllVoucherCodes());
+                                mPostBillTask.setOnPostExecuteListener(mOnPostBill)
+                                        .execute(orderId);
+                            }
+                        });
                 break;
             case R.id.miAddVoucher:
                 VoucherSearchDlgFragment dlg = new VoucherSearchDlgFragment(

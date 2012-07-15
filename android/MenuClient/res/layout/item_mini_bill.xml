@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/letter_x" />
-
+
         <TextView
             android:id="@+id/textQuantity"
             android:layout_width="wrap_content"
@@ -41,16 +41,18 @@
             android:gravity="right"
             android:lines="1"
             android:text="TextView"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textStyle="bold" />
-
+
         <TextView
             android:id="@+id/textItemProm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:gravity="right|center_vertical"
-            android:text="TextView" />
-
+            android:text="TextView"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
         <TextView
             android:id="@+id/textItemTotal"
             android:layout_width="0dp"
@@ -58,7 +60,8 @@
             android:layout_weight="4"
             android:gravity="right"
             android:lines="1"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </LinearLayout>
 

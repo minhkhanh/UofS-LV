@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp" xmlns:android="http://schemas.android.com/apk/res/android">
-
+
     <TextView
         android:id="@+id/textDishName"
         android:layout_width="fill_parent"
@@ -12,7 +12,8 @@
         android:gravity="top|left"
         android:maxLines="1"
         android:text="Tôm nướng"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="bold" />
 
     <LinearLayout
         android1:id="@+id/linearLayout1"
@@ -28,40 +29,58 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.00"
             layout="@layout/item_dish_units" />
-
+
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:text="@string/letter_x" /><TextView
-            android:id="@+id/textQuantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="2"
-            android:maxEms="2"
-            android:padding="5dp"
-            android:text="TextView"
-            android:textStyle="bold"
-            android1:lines="1" />
+            android:text="@string/letter_x"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
 <TextView
-            android1:id="@+id/textView2"
-            android1:layout_width="wrap_content"
-            android1:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp"
-            android1:text="@string/text_unprocessed_count" />
-
-<TextView
-    android1:id="@+id/textUnprocCount"
-    android1:layout_width="wrap_content"
-    android1:layout_height="wrap_content"
+    android:id="@+id/textQuantity"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:ems="2"
-    android1:lines="1"
-    android1:maxEms="2"
-    android1:minEms="2"
-    android1:text="TextView"
-    android1:textStyle="bold" />
+    android:maxEms="2"
+    android:padding="5dp"
+    android:text="TextView"
+    android:textAppearance="?android:attr/textAppearanceMedium"
+    android:textStyle="bold"
+    android1:lines="1" />
+
+<LinearLayout
+    android:id="@+id/paneUnproc"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:layout_marginLeft="16dp"
+    android:background="@drawable/btn_default_focused_holo_light"
+    android:visibility="invisible" >
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:text="@string/text_unprocessed_count"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+<TextView
+                android:id="@+id/textUnprocCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="3"
+                android:lines="1"
+                android:maxEms="3"
+                android:maxLength="3"
+                android:minEms="3"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
+
+</LinearLayout>
 
     </LinearLayout>
 

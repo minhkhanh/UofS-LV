@@ -52,7 +52,7 @@ public class BriefOrderListDlgFragment extends DialogFragment implements
                 List<ContentValues> result) {
             Bundle extras = task.getExtras();
             int groupPosition = extras.getInt("groupPosition", -1);
-            if (groupPosition != -1) {
+            if (groupPosition != -1 && groupPosition < mListAdapter.getGroupCount()) {
                 mListAdapter.clearChildren(groupPosition);
                 mListAdapter.addChildAll(groupPosition, result);
                 mListAdapter.notifyDataSetChanged();

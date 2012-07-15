@@ -71,8 +71,11 @@ public class OrderedItemView extends RelativeLayout implements OnClickListener,
                 - values.getAsInteger(ChiTietOrderDTO.CL_EX_PROCESSED)
                 - values.getAsInteger(ChiTietOrderDTO.CL_EX_PROCESSING);
 
-        TextView textProcessed = (TextView) findViewById(R.id.textUnprocCount);
-        textProcessed.setText(unprocessed.toString());
+        if (unprocessed > 0) {
+            findViewById(R.id.paneUnproc).setVisibility(View.VISIBLE);
+            TextView textProcessed = (TextView) findViewById(R.id.textUnprocCount);
+            textProcessed.setText(unprocessed.toString());
+        }
     }
 
     @Override

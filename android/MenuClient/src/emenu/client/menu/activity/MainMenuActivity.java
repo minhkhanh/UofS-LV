@@ -115,8 +115,8 @@ public class MainMenuActivity extends Activity implements OnItemSelectedListener
         mLoadLangTask = new LoadAllLanguageTask();
         mLoadLangTask.setOnPostExecuteListener(mOnPostLoadLang).execute();
 
-        View v = findViewById(android.R.id.content);
-        v.setBackgroundResource(R.drawable.french_food_photo_eu030);
+//        View v = findViewById(android.R.id.content);
+//        v.setBackgroundResource(R.drawable.french_food_photo_eu030);
 
         createFragments();
     }

@@ -25,7 +25,7 @@ public class TableMapActivity extends Activity implements OnAuthDlgDismissedList
         setContentView(R.layout.layout_two_panes);
 
         View v = findViewById(android.R.id.content);
-        v.setBackgroundResource(R.drawable.romantic_mood_wallpaper_070);
+        v.setBackgroundResource(R.drawable.bitmap_table_map_background);
 
         FragmentManager fm = getFragmentManager();
         AreaListFragment f = (AreaListFragment) fm.findFragmentById(R.id.LeftPaneHolder);
