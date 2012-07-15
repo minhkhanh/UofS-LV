@@ -386,11 +386,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>KitchenString.vi.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Views\Kitchen\KitchenString.vi1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>KitchenString.vi.resx</DependentUpon>
-    </Compile>
     <Compile Include="Resources\Views\Menu\MenuString.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

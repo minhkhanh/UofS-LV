@@ -260,16 +260,19 @@ namespace LocalServerDAO
 
             Ban ban = banTmp.First();
 
-            var dsOrderChuaThanhToan = ThucDonDienTu.DataContext.Orders.Where(o => o.TinhTrang != 4 && o.Ban.MaBan == ban.BanChinh.MaBan);
-            if (dsOrderChuaThanhToan.Count() != 0)
-                return false;       // nhom ban nay dang phuc vu order, khong cho phep tach nhom
+            //var dsOrderChuaThanhToan = ThucDonDienTu.DataContext.Orders.Where(o => o.TinhTrang != 4 && o.Ban.MaBan == ban.BanChinh.MaBan);
+            //if (dsOrderChuaThanhToan.Count() != 0)
+            //    return false;       // nhom ban nay dang phuc vu order, khong cho phep tach nhom
 
             // lay ra ds ban trong nhom
             var listBanTmp = ThucDonDienTu.DataContext.Bans.Where(b => b.BanChinh.MaBan == ban.BanChinh.MaBan);
             foreach (Ban b in listBanTmp)
             {
-                b.Active = true;
-                b.BanChinh = null;
+                if (b.BanChinh != b)        // tach tat ca, tru ban chinh
+                {
+                    b.Active = true;
+                    b.BanChinh = null;
+                }
             }
 
             ThucDonDienTu.DataContext.SubmitChanges();

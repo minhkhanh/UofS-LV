@@ -174,7 +174,7 @@ namespace LocalServerBUS
             ThucDonDienTu.DataContext.SubmitChanges();
 
             response = "";
-            return new MemoryStream(Encoding.UTF8.GetBytes(response));;
+            return new MemoryStream(Encoding.UTF8.GetBytes(response));
         }
 
         public static float LayTongKhuyenMai(int maHoaDon)

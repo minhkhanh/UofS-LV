@@ -1194,15 +1194,23 @@ namespace LocalServerWeb
         {
             try
             {
+                //MyLogger.Log(HttpContext.Current.Request.Cookies.Get("c1").Value);
+                //MyLogger.Log(HttpContext.Current.Request.Cookies.Get("MatKhau").Name);
+
                 string str = new StreamReader(body).ReadToEnd();
                 NameValueCollection nvc = HttpUtility.ParseQueryString(str);
                 TaiKhoan tk = TaiKhoanBUS.KiemTraTaiKhoan(nvc["tenDangNhap"], SharedCode.Hash(nvc["matKhau"]));
                 if (tk == null) return false;
                 HttpContext.Current.Session["taiKhoan"] = tk;
+
+                //HttpCookie c = new HttpCookie("loggedin", "true");
+                //c.Expires = DateTime.Now.AddSeconds(30);
+                
             }
             catch (Exception e)
             {
-                return false;
+                MyLogger.Log(e.StackTrace);
+                return false;                
             }
 
             return true;
@@ -1382,13 +1390,16 @@ namespace LocalServerWeb
         {
             try
             {
+                if (!SharedCode.IsWaitorLogin(new HttpSessionStateWrapper(HttpContext.Current.Session), HttpContext.Current.Request.Cookies))
+                    return new MemoryStream(Encoding.UTF8.GetBytes("Không xác thực được yêu cầu."));
+
                 return HoaDonBUS.LapHoaDonJson(maOrder, voucherCodes);
             }
             catch (Exception e)
             {
                 Console.Error.WriteLine(e.Message);
+                return new MemoryStream(Encoding.UTF8.GetBytes("Lỗi server"));
             }
-            return null;
         }
 
         public List<ChiTietOrder> LapOrderJson(int maTaiKhoan, int maBan,  List<ChiTietOrder> _listChiTietOrder)
@@ -1436,7 +1447,7 @@ namespace LocalServerWeb
 
         public bool ThemNhieuChiTietOrderJson(List<ChiTietOrder> _listChiTietOrder)
         {
-            if (!SharedCode.IsWaitorLogin(new HttpSessionStateWrapper(HttpContext.Current.Session)))
+            if (!SharedCode.IsWaitorLogin(new HttpSessionStateWrapper(HttpContext.Current.Session), HttpContext.Current.Request.Cookies))
                 return false;
 
             List<ChiTietOrder> result = ChiTietOrderBUS.ThemNhieuChiTietOrder(_listChiTietOrder);
@@ -1498,8 +1509,8 @@ namespace LocalServerWeb
 
         public bool ChuyenBanJson(int maOrder, int maBanMoi)
         {
-            //if (!SharedCode.IsWaitorLogin(new HttpSessionStateWrapper(HttpContext.Current.Session)))
-            //    return false;
+            if (!SharedCode.IsWaitorLogin(new HttpSessionStateWrapper(HttpContext.Current.Session), HttpContext.Current.Request.Cookies))
+                return false;
 
             try
             {
@@ -1513,12 +1524,32 @@ namespace LocalServerWeb
 
         public bool TachNhomBanJson(int maBan, string junk)
         {
-            return BanBUS.TachNhomBanJson(maBan);
+            try
+            {
+                if (!SharedCode.IsWaitorLogin(new HttpSessionStateWrapper(HttpContext.Current.Session), HttpContext.Current.Request.Cookies))
+                    return false;
+
+                return BanBUS.TachNhomBanJson(maBan);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         public bool SuaChiTietOrderJson(ChiTietOrder holder)
         {
-            return ChiTietOrderBUS.SuaChiTietOrderJson(holder);
+            try
+            {
+                if (!SharedCode.IsWaitorLogin(new HttpSessionStateWrapper(HttpContext.Current.Session), HttpContext.Current.Request.Cookies))
+                    return false;
+
+                return ChiTietOrderBUS.SuaChiTietOrderJson(holder);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         //public int LaySoLuongChuaCheBien(int maChiTiet)
@@ -1538,9 +1569,9 @@ namespace LocalServerWeb
 
         public bool TachOrderJson(List<SplittingOrderItem> dsMaChiTiet)
         {
-            //if (!SharedCode.IsWaitorLogin(new HttpSessionStateWrapper(HttpContext.Current.Session)))
-            //    return false;
-
+            if (!SharedCode.IsWaitorLogin(new HttpSessionStateWrapper(HttpContext.Current.Session), HttpContext.Current.Request.Cookies))
+                return false;
+            
             try
             {
                 return OrderBUS.TachOrder(dsMaChiTiet);
