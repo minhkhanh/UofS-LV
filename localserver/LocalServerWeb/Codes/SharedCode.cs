@@ -135,7 +135,11 @@ namespace LocalServerWeb.Codes
         }
         public static NgonNgu GetCurrentLanguage(HttpSessionStateBase session)
         {
-            return session["ngonNgu"] as NgonNgu;
+            if (session["ngonNgu"]!=null)
+            {
+                return session["ngonNgu"] as NgonNgu;
+            }
+            return NgonNguBUS.LayDanhSachNgonNgu().First();
         }
         public static string GetHostApplicationAddress(HttpRequest request)
         {
