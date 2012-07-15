@@ -6,6 +6,8 @@ import android.app.ActionBar.TabListener;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.app.ListActivity;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.view.Menu;
@@ -67,12 +69,18 @@ public class OrderActivity extends ListActivity implements TabListener,
                         .loadCurrentSession();
                 ServiceOrder order = session.getOrder();
                 if (order.getCount() > 0) {
-                    U.cancelAsyncTask(mPostOrderTask);
+                    U.showConfirmDialog(this, R.string.message_confirm_order,
+                            new OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    U.cancelAsyncTask(mPostOrderTask);
 
-                    mPostOrderTask = new PostOrderTask();
-                    mPostOrderTask.setOnPostExecuteListener(this).execute();
-                }
-                else
+                                    mPostOrderTask = new PostOrderTask();
+                                    mPostOrderTask.setOnPostExecuteListener(
+                                            OrderActivity.this).execute();
+                                }
+                            });
+                } else
                     U.toastText(this, R.string.message_null_order_not_allowed);
                 break;
 
@@ -97,6 +105,9 @@ public class OrderActivity extends ListActivity implements TabListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        findViewById(android.R.id.content).setBackgroundResource(
+                R.drawable.bitmap_order_background);
+
         ServiceSession session = SessionManager.getInstance().loadCurrentSession();
         ServiceOrder order = session.getOrder();
         order.registerObserver(mOrderObserver);
@@ -105,6 +116,15 @@ public class OrderActivity extends ListActivity implements TabListener,
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(android.R.id.content, mOrderFragment);
         ft.commit();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        ServiceSession session = SessionManager.getInstance().loadCurrentSession();
+        ServiceOrder order = session.getOrder();
+        order.unregisterObserver(mOrderObserver);
     }
 
     @Override

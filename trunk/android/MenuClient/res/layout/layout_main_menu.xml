@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bitmap_main_menu_background"
     android:orientation="horizontal" >
-
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -30,13 +31,12 @@
                 android:layout_weight="0.5" />
         </LinearLayout>
     </LinearLayout>
-
+
     <FrameLayout
         android:id="@+id/paneDishList"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1.5" >
-
     </FrameLayout>
 
 </LinearLayout>

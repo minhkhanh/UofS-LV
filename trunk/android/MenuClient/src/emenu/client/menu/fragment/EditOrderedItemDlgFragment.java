@@ -28,7 +28,7 @@ public class EditOrderedItemDlgFragment extends DialogFragment implements
         OnClickListener, TextWatcher {
     private EditText mVarQuantityEdit;
     private EditText mNoteEdit;
-    private TextView mDishName;
+//    private TextView mDishName;
     private TextView mUnprocCountText;
 
     private ContentValues mValues;
@@ -79,11 +79,11 @@ public class EditOrderedItemDlgFragment extends DialogFragment implements
     public EditOrderedItemDlgFragment(ContentValues values) {
         mValues = values;
     }
-    
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        
+
         try {
             mUpdateListener = (OnItemUpdatedListener) activity;
         } catch (ClassCastException e) {
@@ -103,6 +103,7 @@ public class EditOrderedItemDlgFragment extends DialogFragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        getDialog().setTitle(mValues.getAsString(MonAnDaNgonNguDTO.CL_TEN_MON));
         return inflater.inflate(R.layout.layout_ordered_item_editing, null);
     }
 
@@ -124,7 +125,7 @@ public class EditOrderedItemDlgFragment extends DialogFragment implements
     }
 
     private void bindData() {
-        mDishName.setText(mValues.getAsString(MonAnDaNgonNguDTO.CL_TEN_MON));
+//        mDishName.setText(mValues.getAsString(MonAnDaNgonNguDTO.CL_TEN_MON));
         mUnprocCountText.setText(calcUnprocessedCount() + "");
         mVarQuantityEdit.setText(mVarQuantity + "");
         mNoteEdit.setText(mValues.getAsString(ChiTietOrderDTO.CL_GHI_CHU));
@@ -140,7 +141,7 @@ public class EditOrderedItemDlgFragment extends DialogFragment implements
         mVarQuantityEdit.addTextChangedListener(this);
 
         mNoteEdit = (EditText) getView().findViewById(R.id.editItemNote);
-        mDishName = (TextView) getView().findViewById(R.id.textDishName);
+//        mDishName = (TextViewC) getView().findViewById(R.id.textDishName);
         mUnprocCountText = (TextView) getView().findViewById(R.id.textUnprocCount);
     }
 

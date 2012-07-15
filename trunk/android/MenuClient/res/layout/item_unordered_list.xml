@@ -20,15 +20,17 @@
             android:gravity="top|left"
             android:maxLines="1"
             android:text="Tôm nướng"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <Button
-            android:id="@+id/btnRemoveItem"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="@string/caption_remove" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/imgRemove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_transparent_background"
+            android:clickable="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/button_stop" />
     </LinearLayout>
 
     <LinearLayout
@@ -49,36 +51,46 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:text="@string/letter_x" />
+            android:text="@string/letter_x"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:id="@+id/textQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
+            android:layout_marginRight="8dp"
+            android:ems="3"
+            android:maxLength="3"
             android:text="TextView"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btnMinus"
-            style="?android:attr/buttonStyleSmall"
+        <ImageView
+            android:id="@+id/imgDown"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="@string/sign_minus" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_transparent_background"
+            android:clickable="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/arrow_down" />
 
-        <Button
-            android:id="@+id/btnPlus"
-            style="?android:attr/buttonStyleSmall"
+        <ImageView
+            android:id="@+id/imgUp"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="@string/sign_plus" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_transparent_background"
+            android:clickable="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/arrow_up" />
 
-        <Button
-            android:id="@+id/btnAddItemNote"
-            style="?android:attr/buttonStyleSmall"
+        <ImageView
+            android:id="@+id/imgNote"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="@string/caption_item_note" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_transparent_background"
+            android:clickable="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/filetypes" />
     </LinearLayout>
 
 </LinearLayout>
