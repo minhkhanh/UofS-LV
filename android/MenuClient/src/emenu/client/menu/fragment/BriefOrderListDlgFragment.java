@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import android.app.DialogFragment;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import emenu.client.db.dto.BanDTO;
 import emenu.client.db.dto.OrderDTO;
 import emenu.client.menu.R;
 import emenu.client.menu.activity.MainMenuActivity;
+import emenu.client.menu.activity.TableMapActivity;
 import emenu.client.menu.adapter.BriefOrderAdapter;
 import emenu.client.menu.app.SessionManager;
 import emenu.client.util.U;
@@ -61,7 +63,6 @@ public class BriefOrderListDlgFragment extends DialogFragment implements
     OnGroupExpandListener mOnGroupExpandListener = new OnGroupExpandListener() {
         @Override
         public void onGroupExpand(int groupPosition) {
-//            mSelectedGroup = groupPosition;
             if (mListAdapter.getGroup(groupPosition) != null
                     && mListAdapter.getChildrenCount(groupPosition) == 0) {
                 SessionManager.getInstance().loadSession(
@@ -75,17 +76,6 @@ public class BriefOrderListDlgFragment extends DialogFragment implements
         }
     };
 
-    // private OnGroupClickListener mOnGroupClickListener = new
-    // OnGroupClickListener() {
-    // @Override
-    // public boolean onGroupClick(ExpandableListView parent, View v, int
-    // groupPosition,
-    // long id) {
-    // mSelectedGroup = groupPosition;
-    // return false;
-    // }
-    // };
-    
     class PostNewOrderTask extends CustomAsyncTask<OrderDTO, Void, Integer> {
         @Override
         protected Integer doInBackground(OrderDTO... params) {
@@ -136,14 +126,28 @@ public class BriefOrderListDlgFragment extends DialogFragment implements
         }
     }
 
+    public BriefOrderListDlgFragment() {
+        mGroupId = 0;
+    }
+
     public BriefOrderListDlgFragment(Integer groupId) {
         mGroupId = groupId;
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+
+        TableMapActivity host = (TableMapActivity) getActivity();
+        if (host != null)
+            host.refreshGrid();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         getDialog().setCancelable(false);
+        // getDialog().setOnDismissListener(mDismissListener);
         return inflater.inflate(R.layout.layout_brief_order_list, null);
     }
 

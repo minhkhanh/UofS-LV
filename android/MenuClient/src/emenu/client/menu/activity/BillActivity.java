@@ -53,7 +53,6 @@ import emenu.client.util.U;
 
 public class BillActivity extends Activity implements OnVoucherUsedListener,
         OnItemClickListener {
-    private static final int ACT_CONFIRM_BILL = 0;
 
     private GetServingOrderItemsTask mGetServingOrderItemsTask;
 
@@ -96,7 +95,7 @@ public class BillActivity extends Activity implements OnVoucherUsedListener,
         }
     };
 
-    private OnPostExecuteListener<Integer, Void, String> mOnPostPostBill = new OnPostExecuteListener<Integer, Void, String>() {
+    private OnPostExecuteListener<Integer, Void, String> mOnPostBill = new OnPostExecuteListener<Integer, Void, String>() {
         @Override
         public void onPostExecute(CustomAsyncTask<Integer, Void, String> task,
                 String result) {
@@ -106,7 +105,7 @@ public class BillActivity extends Activity implements OnVoucherUsedListener,
                 SessionManager.getInstance().finishCurrentSession();
 
                 Intent intent = new Intent(BillActivity.this, MainMenuActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             } else {
                 if (result != null)
@@ -153,7 +152,7 @@ public class BillActivity extends Activity implements OnVoucherUsedListener,
                 Integer orderId = SessionManager.getInstance().loadCurrentSession()
                         .getOrderId();
                 mPostBillTask = new PostBillTask(mVoucherAdapter.getAllVoucherCodes());
-                mPostBillTask.setOnPostExecuteListener(mOnPostPostBill).execute(orderId);
+                mPostBillTask.setOnPostExecuteListener(mOnPostBill).execute(orderId);
                 break;
             case R.id.miAddVoucher:
                 VoucherSearchDlgFragment dlg = new VoucherSearchDlgFragment(

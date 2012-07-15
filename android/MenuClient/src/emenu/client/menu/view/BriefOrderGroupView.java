@@ -6,7 +6,7 @@ import emenu.client.menu.activity.BillActivity;
 import emenu.client.menu.activity.MainMenuActivity;
 import emenu.client.menu.activity.TableMapActivity;
 import emenu.client.menu.app.SessionManager;
-import emenu.client.menu.fragment.OrderSplittingDlgFragment;
+import emenu.client.menu.fragment.SplitOrderDlgFragment;
 import emenu.client.util.C;
 import emenu.client.util.U;
 import android.app.Activity;
@@ -112,7 +112,7 @@ public class BriefOrderGroupView extends CheckableLayout implements OnClickListe
                 break;
 
             case R.id.imgSplitOrder:
-                OrderSplittingDlgFragment dlg = new OrderSplittingDlgFragment(
+                SplitOrderDlgFragment dlg = new SplitOrderDlgFragment(
                         mOrder.getMaOrder());
                 U.showDlgFragment((Activity) getContext(), dlg, true);
                 break;

@@ -1,10 +1,5 @@
 package emenu.client.menu.view;
 
-import java.util.Enumeration;
-
-import emenu.client.db.dto.ChiTietOrderDTO;
-import emenu.client.menu.adapter.CustomArrayAdapter;
-import emenu.client.menu.adapter.IDishSwappableAdapter;
 import android.content.ContentValues;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -12,6 +7,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import emenu.client.db.dto.ChiTietOrderDTO;
+import emenu.client.menu.adapter.IDishSwappableAdapter;
 
 public class DishSwappableListView extends ListView implements
         android.widget.AdapterView.OnItemClickListener {
@@ -101,13 +98,15 @@ public class DishSwappableListView extends ListView implements
                         .getAsInteger(ChiTietOrderDTO.CL_MA_MON_AN)
                         && c.getAsInteger(ChiTietOrderDTO.CL_MA_DON_VI_TINH) == values
                                 .getAsInteger(ChiTietOrderDTO.CL_MA_DON_VI_TINH)) {
+
                     Integer soLuongSub = c.getAsInteger(ChiTietOrderDTO.CL_SO_LUONG) + 1;
                     c.put(ChiTietOrderDTO.CL_SO_LUONG, soLuongSub);
-
                     break;
+
                 }
             }
 
+            // create new record in "the order" list
             if (i == mTheOther.mAdapter.getCount()) {
                 ContentValues c = new ContentValues();
                 c.putAll(values);

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.DialogFragment;
-import android.os.AsyncTask;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +20,7 @@ import emenu.client.bus.task.GetSplitAllTableTask;
 import emenu.client.bus.task.GetSplitTableTask;
 import emenu.client.db.dto.BanDTO;
 import emenu.client.menu.R;
+import emenu.client.menu.activity.TableMapActivity;
 import emenu.client.menu.adapter.TableListAdapter;
 import emenu.client.util.U;
 
@@ -30,6 +31,7 @@ public class SplitTableDlgFragment extends DialogFragment implements OnItemClick
     private TableListAdapter mGridAdapter;
     private GetTableInGroupTask mRefreshTask;
     private GetSplitAllTableTask mSplitAllTask;
+    private GetSplitTableTask mSplitTableTask;
 
     private OnPostExecuteListener<Integer, Void, List<BanDTO>> mOnPostGetTableInGroup = new OnPostExecuteListener<Integer, Void, List<BanDTO>>() {
         @Override
@@ -55,7 +57,7 @@ public class SplitTableDlgFragment extends DialogFragment implements OnItemClick
         }
     };
 
-    private OnPostExecuteListener<Integer, Void, Boolean> mOnPostGetTableSplitting = new OnPostExecuteListener<Integer, Void, Boolean>() {
+    private OnPostExecuteListener<Integer, Void, Boolean> mOnPostSplitTable = new OnPostExecuteListener<Integer, Void, Boolean>() {
         @Override
         public void onPostExecute(CustomAsyncTask<Integer, Void, Boolean> task,
                 Boolean result) {
@@ -67,7 +69,6 @@ public class SplitTableDlgFragment extends DialogFragment implements OnItemClick
             }
         }
     };
-    private GetSplitTableTask mSplitTableTask;
 
     public SplitTableDlgFragment() {
         mGroupId = 0;
@@ -75,6 +76,15 @@ public class SplitTableDlgFragment extends DialogFragment implements OnItemClick
 
     public SplitTableDlgFragment(Integer groupId) {
         mGroupId = groupId;
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+
+        TableMapActivity host = (TableMapActivity) getActivity();
+        if (host != null)
+            host.refreshGrid();
     }
 
     @Override
@@ -110,7 +120,7 @@ public class SplitTableDlgFragment extends DialogFragment implements OnItemClick
         BanDTO clickTable = mGridAdapter.getItem(arg2);
         U.cancelAsyncTask(mSplitTableTask);
         mSplitTableTask = new GetSplitTableTask();
-        mSplitTableTask.setOnPostExecuteListener(mOnPostGetTableSplitting).execute(
+        mSplitTableTask.setOnPostExecuteListener(mOnPostSplitTable).execute(
                 clickTable.getMaBan());
     }
 

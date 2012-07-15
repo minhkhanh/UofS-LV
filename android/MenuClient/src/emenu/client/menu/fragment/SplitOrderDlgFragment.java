@@ -3,8 +3,6 @@ package emenu.client.menu.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.client.HttpClient;
-
 import android.app.DialogFragment;
 import android.content.ContentValues;
 import android.os.Bundle;
@@ -13,16 +11,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import emenu.client.bus.task.CustomAsyncTask;
-import emenu.client.bus.task.PostOrderSplittingTask;
 import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import emenu.client.bus.task.GetServingOrderItemsTask;
+import emenu.client.bus.task.PostOrderSplittingTask;
 import emenu.client.menu.R;
 import emenu.client.menu.adapter.MiniOrderAdapter;
-import emenu.client.menu.fragment.AuthDlgFragment.OnAuthDlgDismissedListener;
 import emenu.client.menu.view.DishSwappableListView;
 import emenu.client.util.U;
 
-public class OrderSplittingDlgFragment extends DialogFragment implements
+public class SplitOrderDlgFragment extends DialogFragment implements
         OnPostExecuteListener<Integer, Void, List<ContentValues>>, OnClickListener {
 
     public static final int ACT_SPLIT_ORDER = 0;
@@ -50,11 +47,11 @@ public class OrderSplittingDlgFragment extends DialogFragment implements
         }
     };
 
-    public OrderSplittingDlgFragment() {
+    public SplitOrderDlgFragment() {
         mOrderId = 0;
     }
 
-    public OrderSplittingDlgFragment(Integer orderId) {
+    public SplitOrderDlgFragment(Integer orderId) {
         mOrderId = orderId;
     }
 
@@ -110,6 +107,7 @@ public class OrderSplittingDlgFragment extends DialogFragment implements
         if (result.size() > 0) {
             mSrcListAdapter.clear();
             mSrcListAdapter.addAll(result);
+//            mSrcListAdapter.gather();
             mSrcListAdapter.notifyDataSetChanged();
         } else {
             U.toastText(getActivity(), R.string.message_connect_server_failed);
