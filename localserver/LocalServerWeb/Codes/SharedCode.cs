@@ -103,6 +103,27 @@ namespace LocalServerWeb.Codes
             if (!IsUserLogin(session) || ((TaiKhoan)session["taiKhoan"]).NhomTaiKhoan.TenNhom != "Waitor") return false;
             return true;
         }
+        public static bool IsWaitorLogin(HttpSessionStateBase session, HttpCookieCollection cookies)
+        {
+            if (!IsUserLogin(session) || ((TaiKhoan)session["taiKhoan"]).NhomTaiKhoan.TenNhom != "Waitor")
+            {
+                HttpCookie cookieAccount = cookies.Get("TenDangNhap");
+                HttpCookie cookiePassword = cookies.Get("MatKhau");
+                if (cookieAccount == null || cookiePassword == null)
+                    return false;
+
+                TaiKhoan tk = TaiKhoanBUS.KiemTraTaiKhoan(cookieAccount.Value, SharedCode.Hash(cookiePassword.Value));
+                if (tk == null || tk.NhomTaiKhoan.TenNhom != "Waitor") return false;
+
+                session["taiKhoan"] = tk;
+
+                MyLogger.Log("waitor logged in");
+                return true;
+            }
+
+            MyLogger.Log("waitor logged in");
+            return true;
+        }
         public static bool IsKitchenLogin(HttpSessionStateBase session)
         {
             if (!IsUserLogin(session) || ((TaiKhoan)session["taiKhoan"]).NhomTaiKhoan.TenNhom != "Producer") return false;
