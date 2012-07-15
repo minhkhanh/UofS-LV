@@ -41,8 +41,6 @@ public class TaiKhoanDAO extends AbstractDAO {
         return mInstance;
     }
 
-    private List<TaiKhoanDTO> mCached;
-
     private TaiKhoanDAO(MyDatabaseHelper dbHelper) {
         super(dbHelper);
     }
@@ -65,8 +63,6 @@ public class TaiKhoanDAO extends AbstractDAO {
             if (boolResult) {
                 AuthenticationManager.getInstance().setCookieStore(
                         client.getCookieStore());
-//                AuthenticationManager.getInstance().setExpired(false);
-
                 return true;
             }
 
