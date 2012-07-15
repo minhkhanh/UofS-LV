@@ -71,6 +71,7 @@ public class AuthDlgFragment extends DialogFragment implements OnClickListener {
             Bundle savedInstanceState) {
         getDialog().setTitle(getString(R.string.title_dialog_auth));
         getDialog().setCanceledOnTouchOutside(false);
+        setCancelable(false);
 
         View layout = inflater.inflate(R.layout.layout_auth_dlg, container, false);
 

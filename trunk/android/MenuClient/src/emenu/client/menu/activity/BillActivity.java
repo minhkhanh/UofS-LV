@@ -52,7 +52,7 @@ import emenu.client.util.C;
 import emenu.client.util.U;
 
 public class BillActivity extends Activity implements OnVoucherUsedListener,
-        OnItemClickListener, OnAuthDlgDismissedListener {
+        OnItemClickListener {
     private static final int ACT_CONFIRM_BILL = 0;
 
     private GetServingOrderItemsTask mGetServingOrderItemsTask;
@@ -148,7 +148,12 @@ public class BillActivity extends Activity implements OnVoucherUsedListener,
                 U.showDlgFragment(this, dlgEqual, true);
                 break;
             case R.id.miConfirmBill:
-                U.showAuthDlg(this, getFragmentManager(), ACT_CONFIRM_BILL, null);
+                U.cancelAsyncTask(mPostBillTask);
+
+                Integer orderId = SessionManager.getInstance().loadCurrentSession()
+                        .getOrderId();
+                mPostBillTask = new PostBillTask(mVoucherAdapter.getAllVoucherCodes());
+                mPostBillTask.setOnPostExecuteListener(mOnPostPostBill).execute(orderId);
                 break;
             case R.id.miAddVoucher:
                 VoucherSearchDlgFragment dlg = new VoucherSearchDlgFragment(
@@ -230,23 +235,5 @@ public class BillActivity extends Activity implements OnVoucherUsedListener,
                 mVoucherAdapter.notifyDataSetChanged();
             }
         }
-    }
-
-    @Override
-    public void onAuthDlgDismissed(boolean authenticated) {
-        // switch (action) {
-        // case ACT_CONFIRM_BILL:
-        // U.cancelAsyncTask(mPostBillTask);
-        //
-        // Integer orderId = SessionManager.getInstance().loadCurrentSession()
-        // .getOrderId();
-        // mPostBillTask = new PostBillTask(client,
-        // mVoucherAdapter.getAllVoucherCodes());
-        // mPostBillTask.setOnPostExecuteListener(mOnPostPostBill).execute(orderId);
-        // break;
-        //
-        // default:
-        // break;
-        // }
     }
 }

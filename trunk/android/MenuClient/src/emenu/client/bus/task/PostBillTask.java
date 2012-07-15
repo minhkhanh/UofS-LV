@@ -8,18 +8,17 @@ import emenu.client.dao.HoaDonDAO;
 
 public class PostBillTask extends CustomAsyncTask<Integer, Void, String> {
 
-    List<String> mVoucherCodes;
-    HttpClient mClient;
+    private List<String> mVoucherCodes;
 
-    public PostBillTask(HttpClient client, List<String> voucherCodes) {
+    public PostBillTask(List<String> voucherCodes) {
         mVoucherCodes = voucherCodes;
-        mClient = client;
     }
 
     @Override
     protected String doInBackground(Integer... params) {
         try {
-            String response = HoaDonDAO.getInstance().postLapHoaDon(mClient, params[0], mVoucherCodes);
+            String response = HoaDonDAO.getInstance().postLapHoaDon(params[0],
+                    mVoucherCodes);
             return response;
         } catch (Exception e) {
             e.printStackTrace();

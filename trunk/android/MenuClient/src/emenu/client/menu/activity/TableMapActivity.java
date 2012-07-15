@@ -1,11 +1,5 @@
 package emenu.client.menu.activity;
 
-import java.util.Date;
-import java.util.List;
-
-import org.apache.http.client.HttpClient;
-import org.apache.http.cookie.Cookie;
-
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -21,11 +15,9 @@ import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import emenu.client.bus.task.GetMoveOrderTask;
 import emenu.client.db.dto.BanDTO;
 import emenu.client.menu.R;
-import emenu.client.menu.app.AuthenticationManager;
 import emenu.client.menu.fragment.AreaListFragment;
 import emenu.client.menu.fragment.AuthDlgFragment.OnAuthDlgDismissedListener;
 import emenu.client.menu.fragment.TableMapFragment.OnTableClickedListener;
-import emenu.client.util.MyHttpClient;
 import emenu.client.util.U;
 
 public class TableMapActivity extends Activity implements Callback,
@@ -33,8 +25,6 @@ public class TableMapActivity extends Activity implements Callback,
         OnAuthDlgDismissedListener {
     public static final String KEY_MOVING_ORDER_ID = "KEY_MOVING_ORDER_ID";
     public static final String KEY_DES_TAB_ID = "KEY_DES_TAB_ID";
-
-    private static final int ACT_MOVE_ORDER = 0;
 
     private ActionMode mOrderMovingMode;
     private Integer mMovingOrderId;
@@ -70,13 +60,12 @@ public class TableMapActivity extends Activity implements Callback,
     @Override
     protected void onResume() {
         super.onResume();
-
+        U.showAuthDlg(this, getFragmentManager(), null);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
     }
 
     @Override
