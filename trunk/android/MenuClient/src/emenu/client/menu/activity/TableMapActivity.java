@@ -37,6 +37,13 @@ public class TableMapActivity extends Activity implements OnAuthDlgDismissedList
         }
     }
 
+    public void refreshGrid() {
+        FragmentManager fm = getFragmentManager();
+        AreaListFragment f = (AreaListFragment) fm.findFragmentById(R.id.LeftPaneHolder);
+        if (f != null)
+            f.showSelection();
+    }
+
     @Override
     protected void onResume() {
         super.onResume();

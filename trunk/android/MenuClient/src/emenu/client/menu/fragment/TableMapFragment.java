@@ -32,7 +32,7 @@ import emenu.client.menu.adapter.TableListAdapter;
 import emenu.client.util.U;
 
 public class TableMapFragment extends Fragment implements LoaderCallbacks<List<BanDTO>>,
-        OnPostExecuteListener<List<Integer>, Void, Boolean> {
+        OnItemClickListener {
 
     private String mTenKhuVuc;
     private Integer mAreaId;
@@ -43,14 +43,13 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
     private TableSelection mCurrTabSel;
 
     private PostTableSelectionTask mPostTabSelTask;
-    // private Integer mMovingOrderId;
 
     private GetMoveOrderTask mMoveOrderTask;
 
     private ActionMode mBrowseTableMode;
     protected ActionMode mMoveOrderMode;
 
-    protected OnPostExecuteListener<TableSelection.TableIdSelection, Void, Boolean> mOnPostExecuteTableSelecting = new OnPostExecuteListener<TableSelection.TableIdSelection, Void, Boolean>() {
+    protected OnPostExecuteListener<TableSelection.TableIdSelection, Void, Boolean> mOnPostSelectTable = new OnPostExecuteListener<TableSelection.TableIdSelection, Void, Boolean>() {
         @Override
         public void onPostExecute(
                 CustomAsyncTask<TableSelection.TableIdSelection, Void, Boolean> task,
@@ -142,66 +141,6 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
         }
     };
 
-    private OnItemClickListener mOnItemClick = new OnItemClickListener() {
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
-            BanDTO clickTable = mGridAdapter.getItem(pos);
-
-            if (getMovingOrderId() == -1) {
-                if (!clickTable.getActive()) {
-                    for (int i = 0; i < mTableGrid.getCount(); ++i) {
-                        BanDTO ban = mGridAdapter.getItem(i);
-                        if (ban.getMaBanChinh() == clickTable.getMaBanChinh()) {
-                            boolean flag = mTableGrid.isItemChecked(pos);
-                            mTableGrid.setItemChecked(i, flag);
-                        } else if (!ban.getActive()) {
-                            mTableGrid.setItemChecked(i, false);
-                        }
-                    }
-                }
-
-                int checkedCount = mTableGrid.getCheckedItemCount();
-                if (checkedCount == 0) { // end selecting
-                    mBrowseTableMode.finish();
-                } else {
-                    if (mBrowseTableMode == null) // start selecting
-                        mBrowseTableMode = getActivity().startActionMode(
-                                mActionModeCallback);
-
-                    // selecting
-                    mCurrTabSel = getTableSelection();
-                    SelectionState currState = mCurrTabSel.getState();
-                    Menu menu = mBrowseTableMode.getMenu();
-                    switch (currState) {
-                        case SingleFree:
-                        case SingleBusy:
-                            menu.findItem(R.id.miSelectTable).setEnabled(true);
-                            menu.findItem(R.id.miGroupTable).setEnabled(false);
-                            menu.findItem(R.id.miSplitTable).setEnabled(false);
-                            break;
-                        case Mixed:
-                        case MultiFree:
-                            menu.findItem(R.id.miSelectTable).setEnabled(true);
-                            menu.findItem(R.id.miGroupTable).setEnabled(true);
-                            menu.findItem(R.id.miSplitTable).setEnabled(false);
-                            break;
-                        case GroupBusy:
-                            menu.findItem(R.id.miSelectTable).setEnabled(true);
-                            menu.findItem(R.id.miGroupTable).setEnabled(false);
-                            menu.findItem(R.id.miSplitTable).setEnabled(true);
-                            break;
-                    }
-                }
-            } else {
-                U.cancelAsyncTask(mMoveOrderTask);
-                mMoveOrderTask = new GetMoveOrderTask(getMovingOrderId(),
-                        clickTable.getMaBan());
-                mMoveOrderTask.setOnPostExecuteListener(mOnPostMoveOrder).execute();
-            }
-        }
-    };
-
     public TableMapFragment() {
         mTenKhuVuc = "";
         mAreaId = 0;
@@ -214,12 +153,16 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
 
     private Integer getMovingOrderId() {
         TableMapActivity host = (TableMapActivity) getActivity();
+        if (host == null)
+            return -1;
+
         return host.getMovingOrderId();
     }
 
     private void setMovingOrderId(Integer id) {
         TableMapActivity host = (TableMapActivity) getActivity();
-        host.setMovingOrderId(id);
+        if (host != null)
+            host.setMovingOrderId(id);
     }
 
     private void postTableSelection() {
@@ -228,7 +171,7 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
         mPostTabSelTask = new PostTableSelectionTask();
         mPostTabSelTask.getExtras()
                 .putInt("groupId", mCurrTabSel.getMainTab().getMaBan());
-        mPostTabSelTask.setOnPostExecuteListener(mOnPostExecuteTableSelecting);
+        mPostTabSelTask.setOnPostExecuteListener(mOnPostSelectTable);
         mPostTabSelTask.execute(mCurrTabSel.createIdSelection());
     }
 
@@ -288,7 +231,7 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
 
         mTableGrid = (GridView) getView().findViewById(R.id.gridTable);
         mTableGrid.setAdapter(mGridAdapter);
-        mTableGrid.setOnItemClickListener(mOnItemClick);
+        mTableGrid.setOnItemClickListener(this);
         mTableGrid.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE);
 
         TextView areaName = (TextView) getView().findViewById(R.id.textAreaName);
@@ -323,17 +266,83 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
         mGridAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void onPostExecute(CustomAsyncTask<List<Integer>, Void, Boolean> task,
-            Boolean result) {
-        if (result) {
-            getLoaderManager().restartLoader(0, null, this);
-        } else {
-            U.showErrorDialog(getActivity(), R.string.message_table_spliting_failed);
-        }
-    }
-
     public int getMaKhuVuc() {
         return mAreaId;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
+        BanDTO clickTable = mGridAdapter.getItem(pos);
+
+        if (getMovingOrderId() == -1) {
+            if (mCurrTabSel != null) {
+                switch (mCurrTabSel.getState()) {
+                    case SingleFree:
+                    case SingleBusy:
+                    case GroupBusy:
+                        if (mCurrTabSel.findTableById(clickTable.getMaBan()) != null) {
+                            postTableSelection();
+                            if (mBrowseTableMode != null)
+                                mBrowseTableMode.finish();
+                            return;
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            if (!clickTable.getActive()) {
+                for (int i = 0; i < mTableGrid.getCount(); ++i) {
+                    BanDTO ban = mGridAdapter.getItem(i);
+                    if (ban.getMaBanChinh() == clickTable.getMaBanChinh()) {
+                        boolean flag = mTableGrid.isItemChecked(pos);
+                        mTableGrid.setItemChecked(i, flag);
+                    } else if (!ban.getActive()) {
+                        mTableGrid.setItemChecked(i, false);
+                    }
+                }
+            }
+
+            int checkedCount = mTableGrid.getCheckedItemCount();
+            // end selecting
+            if (checkedCount == 0) {
+                mBrowseTableMode.finish();
+            } else {
+                // start selecting
+                if (mBrowseTableMode == null)
+                    mBrowseTableMode = getActivity().startActionMode(mActionModeCallback);
+
+                // selecting
+                mCurrTabSel = getTableSelection();
+                SelectionState currState = mCurrTabSel.getState();
+                Menu menu = mBrowseTableMode.getMenu();
+                switch (currState) {
+                    case SingleFree:
+                    case SingleBusy:
+                        menu.findItem(R.id.miSelectTable).setEnabled(true);
+                        menu.findItem(R.id.miGroupTable).setEnabled(false);
+                        menu.findItem(R.id.miSplitTable).setEnabled(false);
+                        break;
+                    case Mixed:
+                    case MultiFree:
+                        menu.findItem(R.id.miSelectTable).setEnabled(true);
+                        menu.findItem(R.id.miGroupTable).setEnabled(true);
+                        menu.findItem(R.id.miSplitTable).setEnabled(false);
+                        break;
+                    case GroupBusy:
+                        menu.findItem(R.id.miSelectTable).setEnabled(true);
+                        menu.findItem(R.id.miGroupTable).setEnabled(false);
+                        menu.findItem(R.id.miSplitTable).setEnabled(true);
+                        break;
+                }
+            }
+        } else {
+            U.cancelAsyncTask(mMoveOrderTask);
+            mMoveOrderTask = new GetMoveOrderTask(getMovingOrderId(),
+                    clickTable.getMaBan());
+            mMoveOrderTask.setOnPostExecuteListener(mOnPostMoveOrder).execute();
+        }
     }
 }

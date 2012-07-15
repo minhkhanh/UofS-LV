@@ -72,7 +72,11 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
         getLoaderManager().initLoader(0, null, this);
     }
 
-    void showDetails(int index) {
+    public void showSelection() {
+        showDetails(mSelIndex);
+    }
+
+    private void showDetails(int index) {
         mSelIndex = index;
 
         Cursor cursor = ((SimpleCursorAdapter) getListAdapter()).getCursor();
@@ -87,17 +91,16 @@ public class AreaListFragment extends ListFragment implements LoaderCallbacks<Cu
         getListView().setItemChecked(index, true);
 
         TableMapFragment f;
-        f = (TableMapFragment) getFragmentManager()
-                .findFragmentById(R.id.RightPaneHolder);
+        // f = (TableMapFragment) getFragmentManager()
+        // .findFragmentById(R.id.RightPaneHolder);
+        // if (f == null || f.getMaKhuVuc() != areaId) {
+        f = new TableMapFragment(areaId, areaName);
 
-        if (f == null || f.getMaKhuVuc() != areaId) {
-            f = new TableMapFragment(areaId, areaName);
-
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.RightPaneHolder, f);
-            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            ft.commit();
-        }
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.RightPaneHolder, f);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit();
+        // }
     }
 
     @Override

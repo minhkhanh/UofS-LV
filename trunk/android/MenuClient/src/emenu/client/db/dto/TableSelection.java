@@ -56,6 +56,15 @@ public class TableSelection {
         None, SingleFree, SingleBusy, MultiFree, Mixed, GroupBusy
     }
 
+    public BanDTO findTableById(Integer id) {
+        for (BanDTO b : mTabList) {
+            if (b.getMaBan() == id)
+                return b;
+        }
+
+        return null;
+    }
+
     public TableIdSelection createIdSelection() {
         TableIdSelection idSelection = new TableIdSelection();
         if (mMainTab != null)
@@ -69,15 +78,6 @@ public class TableSelection {
         }
 
         return idSelection;
-    }
-
-    public List<Integer> getTabIds() {
-        List<Integer> list = new ArrayList<Integer>();
-        for (BanDTO b : mTabList) {
-            list.add(b.getMaBan());
-        }
-
-        return list;
     }
 
     public SelectionState getState() {

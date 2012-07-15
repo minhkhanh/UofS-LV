@@ -30,8 +30,6 @@ import emenu.client.util.U;
 public class OrderActivity extends ListActivity implements TabListener,
         OnItemUpdatedListener, OnPostExecuteListener<Void, Void, Boolean> {
 
-    private static final int ACT_CONFIRM_ORDER = 0;
-
     private Tab mUnorderedTab;
     private Tab mOrderedTab;
     private PostOrderTask mPostOrderTask;
