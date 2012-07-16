@@ -1,5 +1,6 @@
 package emenu.client.menu.fragment;
 
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -42,11 +43,11 @@ public class AuthDlgFragment extends DialogFragment implements OnClickListener {
         void onAuthDlgDismissed(boolean authenticated);
     }
 
-    public AuthDlgFragment() {
-    }
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
 
-    public AuthDlgFragment(OnAuthDlgDismissedListener listener) {
-        mOnAuthorizedListener = listener;
+        mOnAuthorizedListener = (OnAuthDlgDismissedListener) activity;
     }
 
     @Override

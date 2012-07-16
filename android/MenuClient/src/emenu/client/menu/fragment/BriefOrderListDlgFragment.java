@@ -135,6 +135,13 @@ public class BriefOrderListDlgFragment extends DialogFragment implements
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("mGroupId", mGroupId);
+    }
+
+    @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
 
@@ -144,10 +151,17 @@ public class BriefOrderListDlgFragment extends DialogFragment implements
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null)
+            mGroupId = savedInstanceState.getInt("mGroupId", 0);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         getDialog().setCancelable(false);
-        // getDialog().setOnDismissListener(mDismissListener);
         return inflater.inflate(R.layout.layout_brief_order_list, null);
     }
 

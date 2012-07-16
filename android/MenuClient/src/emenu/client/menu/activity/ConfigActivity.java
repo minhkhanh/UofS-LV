@@ -2,13 +2,9 @@ package emenu.client.menu.activity;
 
 import java.util.List;
 
-import emenu.client.dao.NgonNguDAO;
-import emenu.client.db.dto.NgonNguDTO;
-import emenu.client.menu.R;
-import emenu.client.menu.app.MenuApplication;
-
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import emenu.client.menu.R;
 
 public class ConfigActivity extends PreferenceActivity {
 

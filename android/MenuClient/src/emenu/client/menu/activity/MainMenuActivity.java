@@ -3,15 +3,10 @@ package emenu.client.menu.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.SearchManager;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,12 +15,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.FrameLayout;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import emenu.client.bus.task.CustomAsyncTask;
-import emenu.client.bus.task.LoadAllLanguageTask;
 import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
+import emenu.client.bus.task.LoadAllLanguageTask;
 import emenu.client.db.dto.NgonNguDTO;
 import emenu.client.menu.R;
 import emenu.client.menu.adapter.LanguageListAdapter;
@@ -34,7 +28,6 @@ import emenu.client.menu.app.MenuApplication;
 import emenu.client.menu.app.SessionManager;
 import emenu.client.menu.app.SessionManager.ServiceSession;
 import emenu.client.menu.fragment.CategoryListFragment;
-import emenu.client.menu.fragment.DishListFragment;
 import emenu.client.util.U;
 
 public class MainMenuActivity extends Activity implements OnItemSelectedListener {
