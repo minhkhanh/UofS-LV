@@ -1014,15 +1014,29 @@ namespace LocalServerWeb
 
         public int ThemNhieuChiTietHoaDon(List<ChiTietHoaDon> _listChiTietHoaDon)
         {
+            int ketQua = 0;
             try
             {
-                return ChiTietHoaDonBUS.ThemNhieuChiTietHoaDon(_listChiTietHoaDon);
+                ketQua = ChiTietHoaDonBUS.ThemNhieuChiTietHoaDon(_listChiTietHoaDon);
             }
             catch (Exception e)
             {
                 Console.Error.WriteLine(e.Message);
             }
-            return 1;
+
+            // Neu them nhieu ct hoa don thanh cong
+            if (ketQua == 0)
+            {
+                if(_listChiTietHoaDon != null && _listChiTietHoaDon.Count > 0 && _listChiTietHoaDon[0] != null && _listChiTietHoaDon[0].HoaDon != null)
+                {
+                    int maHoaDon = _listChiTietHoaDon[0].HoaDon.MaHoaDon;
+                    Reports.ReportManager.PrintBill(maHoaDon, SharedCode.GetCurrentLanguage(new HttpSessionStateWrapper(HttpContext.Current.Session)).MaNgonNgu);
+                    //Reports.ReportManager.PrintBill(maHoaDon, 1);
+                }
+                
+            }
+
+            return ketQua;
         }
 
         public bool SuaChiTietHoaDon(ChiTietHoaDon _chiTietHoaDon)
