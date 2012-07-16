@@ -13,12 +13,17 @@ import emenu.client.util.U;
 
 public class TableMapActivity extends Activity implements OnAuthDlgDismissedListener {
     public static final String KEY_MOVING_ORDER_ID = "KEY_MOVING_ORDER_ID";
+    private static final String KEY_SAVED_FLAG = "KEY_SAVED_FLAG";
 
     private Integer mMovingOrderId;
+    private Boolean mSavedFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null)
+            mSavedFlag = savedInstanceState.getBoolean(KEY_SAVED_FLAG, false);
 
         mMovingOrderId = getIntent().getIntExtra(KEY_MOVING_ORDER_ID, -1);
 
@@ -45,10 +50,18 @@ public class TableMapActivity extends Activity implements OnAuthDlgDismissedList
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        mSavedFlag = true;
+        outState.putBoolean(KEY_SAVED_FLAG, mSavedFlag);
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
 
-        if (mMovingOrderId == -1)
+        if (mMovingOrderId == -1 && !mSavedFlag)
             U.showAuthDlg(this, getFragmentManager(), null);
     }
 
@@ -56,6 +69,7 @@ public class TableMapActivity extends Activity implements OnAuthDlgDismissedList
     public void onAuthDlgDismissed(boolean authenticated) {
         if (!authenticated) {
             Intent intent = new Intent(this, SplashScreenActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
     }

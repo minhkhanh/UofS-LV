@@ -401,7 +401,7 @@ public final class U {
 
     public static final int showAuthDlg(OnAuthDlgDismissedListener listener,
             FragmentManager fm, Bundle extras) {
-        AuthDlgFragment dlg = new AuthDlgFragment(listener);
+        AuthDlgFragment dlg = new AuthDlgFragment();
         dlg.setArguments(extras);
 
         FragmentTransaction ft = fm.beginTransaction();

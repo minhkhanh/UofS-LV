@@ -29,7 +29,7 @@ public class SplashScreenActivity extends Activity implements OnClickListener {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
-                            SyncDbTask task = new SyncDbTask(getApplicationContext());
+                            SyncDbTask task = new SyncDbTask(SplashScreenActivity.this);
                             task.execute();
                         }
                     });

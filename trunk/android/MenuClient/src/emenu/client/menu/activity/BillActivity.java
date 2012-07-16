@@ -3,53 +3,42 @@ package emenu.client.menu.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.client.HttpClient;
-
-import com.commonsware.cwac.merge.MergeAdapter;
-
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
-import emenu.client.menu.R;
+
+import com.commonsware.cwac.merge.MergeAdapter;
+
 import emenu.client.bus.task.CustomAsyncTask;
+import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import emenu.client.bus.task.GetServingOrderItemsTask;
 import emenu.client.bus.task.LoadSurchargesTask;
-import emenu.client.bus.task.CustomAsyncTask.OnPostExecuteListener;
 import emenu.client.bus.task.PostBillTask;
-import emenu.client.dao.HoaDonDAO;
-import emenu.client.db.dto.HoaDonDTO;
 import emenu.client.db.dto.OrderDTO;
 import emenu.client.db.dto.PhuThuDTO;
 import emenu.client.db.dto.VoucherDTO;
+import emenu.client.menu.R;
 import emenu.client.menu.adapter.MainBillAdapter;
 import emenu.client.menu.adapter.SurchargeAdapter;
 import emenu.client.menu.adapter.VoucherAdapter;
 import emenu.client.menu.app.SessionManager;
 import emenu.client.menu.app.SessionManager.ServiceSession;
-import emenu.client.menu.fragment.AuthDlgFragment;
-import emenu.client.menu.fragment.AuthDlgFragment.OnAuthDlgDismissedListener;
 import emenu.client.menu.fragment.CustomBillSplitDlgFragment;
 import emenu.client.menu.fragment.EqualBillSplitDlgFragment;
 import emenu.client.menu.fragment.VoucherSearchDlgFragment;
 import emenu.client.menu.fragment.VoucherSearchDlgFragment.OnVoucherUsedListener;
 import emenu.client.menu.view.BillHeaderView;
-import emenu.client.util.C;
 import emenu.client.util.U;
 
 public class BillActivity extends Activity implements OnVoucherUsedListener,
