@@ -13,6 +13,7 @@ using LocalServerDTO;
 using LocalServerWeb.Codes;
 using System.IO;
 using System.ServiceModel.Web;
+using LocalServerWeb.Reports;
 
 namespace LocalServerWeb
 {
@@ -1427,7 +1428,18 @@ namespace LocalServerWeb
                 if (!SharedCode.IsWaitorLogin(new HttpSessionStateWrapper(HttpContext.Current.Session), HttpContext.Current.Request.Cookies))
                     return new MemoryStream(Encoding.UTF8.GetBytes("Khong xac thuc duoc yeu cau."));
 
-                return HoaDonBUS.LapHoaDonJson(maOrder, voucherCodes);
+                Stream result = HoaDonBUS.LapHoaDonJson(maOrder, voucherCodes);
+                StreamReader reader = new StreamReader(result);
+
+                int outResult = -1;
+                if (int.TryParse(reader.ReadToEnd(), out outResult))
+                {
+                    MyLogger.Log(outResult.ToString());
+                    Reports.ReportManager.PrintBill(outResult, SharedCode.GetCurrentLanguage(new HttpSessionStateWrapper(HttpContext.Current.Session)).MaNgonNgu);
+                    return new MemoryStream(Encoding.UTF8.GetBytes(""));
+                }
+                else
+                    return result;
             }
             catch (Exception e)
             {

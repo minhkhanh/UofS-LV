@@ -192,7 +192,7 @@ namespace LocalServerBUS
 
             ThucDonDienTu.DataContext.SubmitChanges();
 
-            response = "";
+            response = hoaDon.MaHoaDon.ToString();
             return new MemoryStream(Encoding.UTF8.GetBytes(response));
         }
 
