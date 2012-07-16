@@ -85,10 +85,17 @@ namespace LocalServerDAO
 
             Order order = varOrder.First();
             var varOrderBanCu = ThucDonDienTu.DataContext.Orders.Where(o => o.Ban.MaBan == order.Ban.MaBan && o.TinhTrang != 4);
-            if (varOrderBanCu.Count() == 1)
+            if (varOrderBanCu.Count() == 1)     // order chuyen di la order cuoi cung
             {
-                order.Ban.Active = true;
-                order.Ban.BanChinh = null;
+                var varBanCu = ThucDonDienTu.DataContext.Bans.Where(b => b.BanChinh.MaBan == order.Ban.MaBan);
+                if (varBanCu.Count() == 0)
+                    return false;
+
+                foreach (Ban b in varBanCu)
+                {
+                    b.Active = true;
+                    b.BanChinh = null;
+                }
             }
 
             Ban ban = varBan.First();

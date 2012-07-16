@@ -28,8 +28,15 @@ namespace LocalServerWeb
         // Khu Vuc
         public List<KhuVuc> LayDanhKhuVuc(string junk)
         {
-            //if (!SharedCode.IsWaitorLogin(new HttpSessionStateWrapper(HttpContext.Current.Session))) return null;
-            return KhuVucBUS.LayDanhSachKhuVuc();
+            try
+            {
+                return KhuVucBUS.LayDanhSachKhuVuc();
+            }
+            catch (Exception ex)
+            {
+                MyLogger.Log(ex.StackTrace);
+                return null;
+            }
         }
 
         
@@ -1213,7 +1220,10 @@ namespace LocalServerWeb
 
                 string str = new StreamReader(body).ReadToEnd();
                 NameValueCollection nvc = HttpUtility.ParseQueryString(str);
-                TaiKhoan tk = TaiKhoanBUS.KiemTraTaiKhoan(nvc["tenDangNhap"], SharedCode.Hash(nvc["matKhau"]));
+                string ten = nvc["tenDangNhap"];
+                string ma = nvc["matKhau"];
+                MyLogger.Log(ten + " " + ma);
+                TaiKhoan tk = TaiKhoanBUS.KiemTraTaiKhoan(ten, SharedCode.Hash(ma));
                 if (tk == null) return false;
                 HttpContext.Current.Session["taiKhoan"] = tk;
 
@@ -1292,7 +1302,17 @@ namespace LocalServerWeb
 
         public List<KhuVuc> LayDanhSachKhuVucJson(string junk)
         {
-            return LayDanhKhuVuc(junk);
+            MyLogger.Log("synkhuvucjson");
+            try
+            {
+                return LayDanhKhuVuc(junk);
+            }
+            catch (Exception ex)
+            {
+                MyLogger.Log(ex.StackTrace);
+                return null;
+            }
+
         }
 
         public List<DanhMuc> LayDanhSachDanhMucJson(string junk)
@@ -1405,14 +1425,14 @@ namespace LocalServerWeb
             try
             {
                 if (!SharedCode.IsWaitorLogin(new HttpSessionStateWrapper(HttpContext.Current.Session), HttpContext.Current.Request.Cookies))
-                    return new MemoryStream(Encoding.UTF8.GetBytes("Không xác thực được yêu cầu."));
+                    return new MemoryStream(Encoding.UTF8.GetBytes("Khong xac thuc duoc yeu cau."));
 
                 return HoaDonBUS.LapHoaDonJson(maOrder, voucherCodes);
             }
             catch (Exception e)
             {
                 Console.Error.WriteLine(e.Message);
-                return new MemoryStream(Encoding.UTF8.GetBytes("Lỗi server"));
+                return new MemoryStream(Encoding.UTF8.GetBytes("Loi server"));
             }
         }
 
@@ -1423,7 +1443,17 @@ namespace LocalServerWeb
 
         public bool GhepBanJson(TableIdSelection tabSel)
         {
-            return BanBUS.GhepBanJson(tabSel);
+            try
+            {
+                MyLogger.Log(tabSel.MainTabId.ToString());
+                MyLogger.Log(tabSel.TabIdList.Count.ToString());
+                return BanBUS.GhepBanJson(tabSel);
+            }
+            catch (Exception ex)
+            {
+                MyLogger.Log(ex.StackTrace);
+                return false;
+            }
         }
 
         public bool TachBanJson(int maBan, string junk)
@@ -1464,7 +1494,7 @@ namespace LocalServerWeb
             if (!SharedCode.IsWaitorLogin(new HttpSessionStateWrapper(HttpContext.Current.Session), HttpContext.Current.Request.Cookies))
                 return false;
 
-            List<ChiTietOrder> result = ChiTietOrderBUS.ThemNhieuChiTietOrder(_listChiTietOrder);
+            List<ChiTietOrder> result = ChiTietOrderBUS.ThemNhieuChiTietOrderJson(_listChiTietOrder);
             if (result == null) return false;
 
             return true;
@@ -1605,6 +1635,7 @@ namespace LocalServerWeb
 
         public Stream TestGetJson()
         {
+            MyLogger.Log("testgetjson");
             string response = "Hi, time is " + DateTime.Now + " and server's fine.";
             //WebOperationContext.Current.OutgoingResponse.ContentType = "application/json; charset=utf-8";
             return new MemoryStream(Encoding.UTF8.GetBytes(response));
@@ -1652,7 +1683,7 @@ namespace LocalServerWeb
                 return 0;
             }
 
-            return doanhThu + thang * 100 - thang * 10;
+            return doanhThu;
         }
 
         /*END OF JSON SERVICE AREA*/

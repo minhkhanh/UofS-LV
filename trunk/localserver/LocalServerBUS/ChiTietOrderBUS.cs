@@ -206,5 +206,10 @@ namespace LocalServerBUS
             return ChiTietOrderDAO.CapNhatKhoa(maChiTietOrder, soLuongChuaDungToi);
 
         }
+
+        public static List<ChiTietOrder> ThemNhieuChiTietOrderJson(List<ChiTietOrder> _listChiTietOrder)
+        {
+            return ChiTietOrderDAO.ThemNhieuChiTietOrderJson(_listChiTietOrder);
+        }
     }
 }

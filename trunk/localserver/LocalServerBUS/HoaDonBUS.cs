@@ -52,7 +52,7 @@ namespace LocalServerBUS
             Order order = OrderBUS.LayOrder(maOrder);
             if (order == null || order.TinhTrang == 2)
             {
-                response = "Không tìm thấy order";
+                response = "Khong tim thay order";
                 return new MemoryStream(Encoding.UTF8.GetBytes(response));
             }
             
@@ -133,7 +133,7 @@ namespace LocalServerBUS
                 ChiTietVoucher c = ChiTietVoucherBUS.LayChiTietSanSang(code);
                 if (c == null)
                 {
-                    response = "Không dùng voucher được. Mã voucher: " + code;
+                    response = "Khong dung voucher duoc. Ma voucher: " + code;
                     return new MemoryStream(Encoding.UTF8.GetBytes(response));
                 }
 
@@ -141,12 +141,12 @@ namespace LocalServerBUS
                 //    return null;
 
                 hoaDon.TongTien -= c.Voucher.GiaGiam;
-                c.Active = false;
+                //c.Active = false;
             }
 
             if (HoaDonBUS.ThemHoaDon(hoaDon) == null)
             {
-                response = "Không lập hóa đơn được";
+                response = "Khong lap hoa don duoc";
                 return new MemoryStream(Encoding.UTF8.GetBytes(response));
             }
 
@@ -159,7 +159,7 @@ namespace LocalServerBUS
             // B8: Them nhieu ct Hoa don
             if (ChiTietHoaDonDAO.ThemNhieuChiTietHoaDon(listCTHoaDon) == null)
             {
-                response = "Không lập hóa đơn được";
+                response = "Khong lap hoa don duoc";
                 return new MemoryStream(Encoding.UTF8.GetBytes(response));
             }
             //ChiTietHoaDonBUS.ThemNhieuChiTietHoaDon(listCTHoaDon);
@@ -169,7 +169,26 @@ namespace LocalServerBUS
 
             // cap nhat tinh trang Order: da thanh toan
             order.TinhTrang = 4;
-            OrderBUS.SuaOrder(order);
+            //OrderBUS.SuaOrder(order);
+
+            //ThucDonDienTu.DataContext.SubmitChanges();  // submit here to change for later query
+
+            var varOrderBanCu = ThucDonDienTu.DataContext.Orders.Where(o => o._maBan == order._maBan && o.TinhTrang != 4);
+            MyLogger.Log(varOrderBanCu.Count().ToString());
+            if (varOrderBanCu.Count() == 1)     // order chuyen di la order cuoi cung
+            {
+                var varBanCu = ThucDonDienTu.DataContext.Bans.Where(b => b.BanChinh.MaBan == order.Ban.MaBan);
+                if (varBanCu.Count() == 0)
+                    return new MemoryStream(Encoding.UTF8.GetBytes("Lỗi server."));
+
+                foreach (Ban b in varBanCu)
+                {
+                    b.Active = true;
+                    b.BanChinh = null;
+                }
+            }
+
+            MyLogger.Log("table after payment: " + order.Ban.Active);
 
             ThucDonDienTu.DataContext.SubmitChanges();
 

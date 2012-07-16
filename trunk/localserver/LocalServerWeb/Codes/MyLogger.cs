@@ -10,9 +10,14 @@ namespace LocalServerWeb.Codes
     {
         public static void Log(string msg)
         {
-            StreamWriter sw = new StreamWriter("c:\\slog.txt", true);
-            sw.WriteLine("[" + DateTime.Now + "]" + msg);
-            sw.Close();
+            try
+            {
+                StreamWriter sw = new StreamWriter("c:\\slog.txt", true);
+                sw.WriteLine("[" + DateTime.Now + "]" + msg);
+                sw.Close();
+            }
+            catch (Exception ex)
+            { }
         }
     }
 }

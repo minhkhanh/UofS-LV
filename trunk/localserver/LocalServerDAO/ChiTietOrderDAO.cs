@@ -59,6 +59,50 @@ namespace LocalServerDAO
             return _listChiTietOrder;
         }
 
+        public static List<ChiTietOrder> ThemNhieuChiTietOrderJson(List<ChiTietOrder> _listChiTietOrder)
+        {
+            if (_listChiTietOrder.Count == 0)
+                return null;
+
+            int? maOrder = _listChiTietOrder.ElementAt(0)._maOrder;
+            if (maOrder == null)
+                return null;
+
+            List<ChiTietOrder> dsChiTietTrongOrder = ThucDonDienTu.DataContext.ChiTietOrders.Where(c => c.Order.MaOrder == maOrder).ToList();
+            foreach (ChiTietOrder ctCu in dsChiTietTrongOrder)
+            {
+                for (int i = 0; i < _listChiTietOrder.Count; )
+                {
+                    ChiTietOrder ctMoi = _listChiTietOrder.ElementAt(i);
+                    if (ctMoi._maMonAn == ctCu._maMonAn
+                        && ctMoi._maDonViTinh == ctCu._maDonViTinh)
+                    {
+                        ctCu.SoLuong += ctMoi.SoLuong;
+                        _listChiTietOrder.RemoveAt(i);
+                        break;
+                    }
+                    else
+                    {
+                        ++i;
+                    }
+                }
+
+            }
+            
+            ThucDonDienTu.DataContext.ChiTietOrders.InsertAllOnSubmit(_listChiTietOrder);
+            try
+            {
+                ThucDonDienTu.DataContext.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                _listChiTietOrder = null;
+                MyLogger.Log(e.Message);
+            }
+
+            return _listChiTietOrder;
+        }
+
         public static bool SuaChiTietOrder(ChiTietOrder _chiTietOrder)
         {
             bool result = false;
