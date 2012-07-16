@@ -55,11 +55,11 @@ namespace LocalServerBUS
             if (ctVoucher == null || ctVoucher.Active == false)
                 return false;
 
-            ctVoucher.Active = false;
-            if (ChiTietVoucherBUS.CapNhat(ctVoucher))
-                return true;
+            //ctVoucher.Active = false;
+            //if (ChiTietVoucherBUS.CapNhat(ctVoucher))
+            //    return true;
 
-            return false;
+            return true;
         }
     }
 }
