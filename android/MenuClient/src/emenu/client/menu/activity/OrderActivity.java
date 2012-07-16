@@ -76,6 +76,8 @@ public class OrderActivity extends ListActivity implements TabListener,
                                     U.cancelAsyncTask(mPostOrderTask);
 
                                     mPostOrderTask = new PostOrderTask();
+                                    mPostOrderTask.setWaitingDialog(U
+                                            .createWaitingDialog(OrderActivity.this));
                                     mPostOrderTask.setOnPostExecuteListener(
                                             OrderActivity.this).execute();
                                 }

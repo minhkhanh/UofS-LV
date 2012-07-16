@@ -47,7 +47,7 @@
     <string name="message_order_sent">Gửi order thành công!</string>
     <string name="text_bill_total">Tổng tiền</string>
     <string name="message_bill_sent">Thanh toán thành công! Vui lòng chờ nhận hóa đơn!</string>
-    <string name="text_splash_screen">Nhà hàng ABC.</string>
+    <string name="text_splash_screen">Nhà hàng Android Food</string>
     <string name="text_splited_bill_part">Các khẩu phần đã chia:</string>
     <string name="title_dialog_bill_split">Chia hóa đơn</string>
     <string name="message_confirm_send_bill">Bạn có chắc chắn muốn thanh toán bây giờ không?</string>

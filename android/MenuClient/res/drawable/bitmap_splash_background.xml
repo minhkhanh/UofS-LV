@@ -2,6 +2,6 @@
 <bitmap xmlns:android="http://schemas.android.com/apk/res/android"
     android:gravity="center"
     android:src="@drawable/foods_on_table_hv199_350a_wallcoo"
-    android:tileMode="disabled" >
+    android:tileMode="clamp" >
 
 </bitmap>

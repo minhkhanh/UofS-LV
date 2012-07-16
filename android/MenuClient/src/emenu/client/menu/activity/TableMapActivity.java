@@ -22,10 +22,13 @@ public class TableMapActivity extends Activity implements OnAuthDlgDismissedList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (savedInstanceState != null)
+        mMovingOrderId = getIntent().getIntExtra(KEY_MOVING_ORDER_ID, -1);
+        if (savedInstanceState != null) {
             mSavedFlag = savedInstanceState.getBoolean(KEY_SAVED_FLAG, false);
 
-        mMovingOrderId = getIntent().getIntExtra(KEY_MOVING_ORDER_ID, -1);
+            if (mMovingOrderId == -1)
+                mMovingOrderId = savedInstanceState.getInt("mMovingOrderId", -1);
+        }
 
         setContentView(R.layout.layout_two_panes);
 
@@ -55,6 +58,8 @@ public class TableMapActivity extends Activity implements OnAuthDlgDismissedList
 
         mSavedFlag = true;
         outState.putBoolean(KEY_SAVED_FLAG, mSavedFlag);
+
+        outState.putInt("mMovingOrderId", mMovingOrderId);
     }
 
     @Override

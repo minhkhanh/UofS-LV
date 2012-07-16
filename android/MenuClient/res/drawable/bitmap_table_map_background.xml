@@ -2,6 +2,6 @@
 <bitmap xmlns:android="http://schemas.android.com/apk/res/android"
     android:gravity="right"
     android:src="@drawable/romantic_mood_wallpaper_070"
-    android:tileMode="disabled" >
+    android:tileMode="clamp" >
 
 </bitmap>
