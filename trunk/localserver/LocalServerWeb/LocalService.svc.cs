@@ -1032,17 +1032,26 @@ namespace LocalServerWeb
                 Console.Error.WriteLine(e.Message);
             }
 
-            // Neu them nhieu ct hoa don thanh cong
-            if (ketQua == 0)
+
+            try
             {
-                if(_listChiTietHoaDon != null && _listChiTietHoaDon.Count > 0 && _listChiTietHoaDon[0] != null && _listChiTietHoaDon[0].HoaDon != null)
+                // Neu them nhieu ct hoa don thanh cong
+                if (ketQua == 0)
                 {
-                    int maHoaDon = _listChiTietHoaDon[0].HoaDon.MaHoaDon;
-                    Reports.ReportManager.PrintBill(maHoaDon, SharedCode.GetCurrentLanguage(new HttpSessionStateWrapper(HttpContext.Current.Session)).MaNgonNgu);
-                    //Reports.ReportManager.PrintBill(maHoaDon, 1);
+                    if (_listChiTietHoaDon != null && _listChiTietHoaDon.Count > 0 && _listChiTietHoaDon[0] != null && _listChiTietHoaDon[0].HoaDon != null)
+                    {
+
+                        int maHoaDon = _listChiTietHoaDon[0].HoaDon.MaHoaDon;
+                        //Reports.ReportManager.PrintBill(maHoaDon, SharedCode.GetCurrentLanguage(new HttpSessionStateWrapper(HttpContext.Current.Session)).MaNgonNgu);
+                        Reports.ReportManager.PrintBill(maHoaDon, 1);
+                    }
                 }
-                
             }
+            catch
+            {
+
+            }
+            
 
             return ketQua;
         }
