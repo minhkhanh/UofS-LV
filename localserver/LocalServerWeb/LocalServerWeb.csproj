@@ -1372,7 +1372,7 @@
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>5252</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/LocalServerWeb</IISUrl>
+          <IISUrl>http://localhost:81/LocalServerWeb</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
