@@ -148,6 +148,8 @@ public class BillActivity extends Activity implements OnVoucherUsedListener,
                                         .loadCurrentSession().getOrderId();
                                 mPostBillTask = new PostBillTask(mVoucherAdapter
                                         .getAllVoucherCodes());
+                                mPostBillTask.setWaitingDialog(U
+                                        .createWaitingDialog(BillActivity.this));
                                 mPostBillTask.setOnPostExecuteListener(mOnPostBill)
                                         .execute(orderId);
                             }

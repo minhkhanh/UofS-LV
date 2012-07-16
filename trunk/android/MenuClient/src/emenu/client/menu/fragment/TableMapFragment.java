@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Loader;
 import android.os.Bundle;
@@ -79,7 +80,6 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
                 mBrowseTableMode = null;
             else if (mode == mMoveOrderMode) {
                 mMoveOrderMode = null;
-                setMovingOrderId(-1);
             }
 
             U.uncheckAllItems(mTableGrid);
@@ -106,7 +106,6 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
 
                     case R.id.miSelectTable:
                         postTableSelection();
-
                         break;
 
                     case R.id.miSplitTable:
@@ -133,6 +132,7 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
             if (result) {
                 U.toastText(getActivity(), R.string.message_move_order_succeed);
                 mMoveOrderMode.finish();
+                setMovingOrderId(-1);
 
                 getLoaderManager().restartLoader(0, null, TableMapFragment.this);
             } else {
@@ -172,6 +172,7 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
         mPostTabSelTask.getExtras()
                 .putInt("groupId", mCurrTabSel.getMainTab().getMaBan());
         mPostTabSelTask.setOnPostExecuteListener(mOnPostSelectTable);
+        mPostTabSelTask.setWaitingDialog(U.createWaitingDialog(getActivity()));
         mPostTabSelTask.execute(mCurrTabSel.createIdSelection());
     }
 
@@ -218,6 +219,9 @@ public class TableMapFragment extends Fragment implements LoaderCallbacks<List<B
 
         if (mBrowseTableMode != null) {
             mBrowseTableMode.finish();
+        }
+        if (mMoveOrderMode != null) {
+            mMoveOrderMode.finish();
         }
     }
 

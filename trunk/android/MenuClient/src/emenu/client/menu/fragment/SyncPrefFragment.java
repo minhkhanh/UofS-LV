@@ -84,7 +84,6 @@ public class SyncPrefFragment extends PreferenceFragment implements
             mSyncNowPref.setSummary(getString(R.string.message_sync_succeed) + " "
                     + getString(R.string.text_at_time) + " " + whenString);
         }
-
     }
 
     @Override
